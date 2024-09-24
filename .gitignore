@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+dist-lib
 *.local
 
 # Editor directories and files
@@ -22,3 +23,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# tsbuildinfo
+tsconfig.lib.tsbuildinfo
+tsconfig.app.tsbuildinfo
+tsconfig.node.tsbuildinfo

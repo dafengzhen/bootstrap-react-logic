@@ -1,29 +1,75 @@
 {
   "name": "bootstrap-react",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A simple logic library using React to operate Bootstrap UI",
+  "author": "dafengzhen",
+  "license": "MIT",
   "type": "module",
+  "files": [
+    "dist-lib"
+  ],
+  "main": "./dist-lib/bootstrap-react.umd.cjs",
+  "module": "./dist-lib/bootstrap-react.js",
+  "types": "./dist-lib/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist-lib/bootstrap-react.js",
+      "require": "./dist-lib/bootstrap-react.umd.cjs"
+    }
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --config vite.config.ts --mode app",
+    "build:lib": "tsc -b tsconfig.lib.json && vite build --config vite.config.lib.ts --mode lib",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "browserslist": "npx browserslist"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "bootstrap": "^5.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@types/node": "^20",
     "@types/react": "^18.3.9",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "bootstrap": "^5.3.3",
     "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
+    "postcss": "^8.4.47",
+    "prettier": "3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass-embedded": "^1.79.3",
+    "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.7.0",
-    "vite": "^5.4.7"
-  }
+    "vite": "^5.4.7",
+    "vite-plugin-dts": "^4.2.2"
+  },
+  "packageManager": "npm@10.8.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dafengzhen/bootstrap-react.git"
+  },
+  "keywords": [
+    "bootstrap",
+    "react"
+  ],
+  "bugs": {
+    "url": "https://github.com/dafengzhen/bootstrap-react/issues"
+  },
+  "homepage": "https://github.com/dafengzhen/bootstrap-react#readme"
 }
