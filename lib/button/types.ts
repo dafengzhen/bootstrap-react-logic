@@ -1,49 +1,58 @@
-import type { ElementType, MouseEventHandler, ReactNode } from 'react';
-import type { ReactRef } from '@lib/tools';
+import type {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  ElementType,
+  ReactNode,
+} from 'react';
 
-export interface Props {
-  /**
-   * Ref to the DOM node.
-   */
-  ref?: ReactRef<HTMLButtonElement | null>;
-  /**
-   * Whether the button should display a ripple effect on press.
-   * @default false
-   */
-  disableRipple?: boolean;
-  /**
-   * The button start content.
-   */
-  startContent?: ReactNode;
-  /**
-   * The button end content.
-   */
-  endContent?: ReactNode;
-  /**
-   * Spinner to display when loading.
-   * @see https://nextui.org/components/spinner
-   */
-  spinner?: ReactNode;
-  /**
-   * The spinner placement.
-   * @default "start"
-   */
-  spinnerPlacement?: 'start' | 'end';
-  /**
-   * Whether the button should display a loading spinner.
-   * @default false
-   */
-  isLoading?: boolean;
-  /**
-   * The native button click event handler.
-   * use `onPress` instead.
-   */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+interface Variables {
+  color?: string;
+  paddingY?: string;
+  paddingX?: string;
+  fontFamily?: string;
+  fontSize?: string;
+  lineHeight?: string;
+  whiteSpace?: string | null;
+  paddingYSm?: string;
+  paddingXSm?: string;
+  fontSizeSm?: string;
+  paddingYLg?: string;
+  paddingXLg?: string;
+  fontSizeLg?: string;
+  borderWidth?: string;
+  fontWeight?: string;
+  boxShadow?: string;
+  focusWidth?: string;
+  focusBoxShadow?: string;
+  disabledOpacity?: number;
+  activeBoxShadow?: string;
+  linkColor?: string;
+  linkHoverColor?: string;
+  linkDisabledColor?: string;
+  linkFocusShadowRgb?: string;
+  borderRadius?: string;
+  borderRadiusSm?: string;
+  borderRadiusLg?: string;
+  transition?: string;
+  hoverBgShadeAmount?: string;
+  hoverBgTintAmount?: string;
+  hoverBorderShadeAmount?: string;
+  hoverBorderTintAmount?: string;
+  activeBgShadeAmount?: string;
+  activeBgTintAmount?: string;
+  activeBorderShadeAmount?: string;
+  activeBorderTintAmount?: string;
+}
 
+export interface Props
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   /**
-   * className.
+   * as.
    */
-  className?: string | undefined;
+  as?: ElementType;
 
   /**
    * variant.
@@ -60,7 +69,48 @@ export interface Props {
     | 'link';
 
   /**
-   * as.
+   * outline.
    */
-  as?: ElementType;
+  outline?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'info'
+    | 'warning'
+    | 'danger'
+    | 'light'
+    | 'dark';
+
+  /**
+   * size.
+   */
+  size?:
+    | 'lg'
+    | 'sm'
+    | {
+        paddingY?: string;
+        paddingX?: string;
+        fontSize?: string;
+      };
+
+  /**
+   * variables.
+   */
+  variables?: Variables | string;
+
+  /**
+   * The button start content.
+   */
+  startContent?: ReactNode;
+
+  /**
+   * The button end content.
+   */
+  endContent?: ReactNode;
+
+  /**
+   * Whether the button should display a loading spinner.
+   * @default false
+   */
+  isLoading?: boolean;
 }
