@@ -6,7 +6,7 @@ const VARIABLE_BS_PREFIX = '--bs';
 /**
  * variable bs btn prefix.
  */
-const VARIABLE_BS_BTN_PREFIX = '--bs-btn';
+const VARIABLE_BS_BTN_PREFIX = `${VARIABLE_BS_PREFIX}-btn`;
 
 /**
  * variable btn map.
@@ -30,7 +30,7 @@ const VARIABLE_BTN_MAP = {
   boxShadow: 'btn-box-shadow',
   focusWidth: 'btn-focus-width',
   focusBoxShadow: 'btn-focus-box-shadow',
-  disabledOpacity: 0.65, // 固定值
+  disabledOpacity: 0.65,
   activeBoxShadow: 'btn-active-box-shadow',
   linkColor: 'btn-link-color',
   linkHoverColor: 'btn-link-hover-color',

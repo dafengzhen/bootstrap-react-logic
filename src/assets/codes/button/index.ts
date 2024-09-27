@@ -44,6 +44,51 @@ const buttonCodes = {
 </Button>
       `,
   },
+  disabledState: {
+    code: `
+<Button variant="primary" disabled>
+  Primary
+</Button>
+<Button variant="secondary" disabled>
+  Secondary
+</Button>
+<Button as="a" href="#" variant="success" disabled>
+  Link
+</Button>
+    `,
+  },
+  blockButton: {
+    code: `
+<div class="d-grid gap-2">
+  <Button variant="primary">Primary</Button>
+  <Button variant="primary">Primary</Button>
+</div>
+
+<div class="d-grid gap-2 d-md-flex">
+  <Button variant="primary">Primary</Button>
+  <Button variant="primary">Primary</Button>
+</div>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+  <Button variant="primary">Primary</Button>
+  <Button variant="primary">Primary</Button>
+</div>
+    `,
+  },
+  toggleState: {
+    code: `
+<Button class="active">Primary</Button>
+<Button class="active" disabled>
+  Primary
+</Button>
+<Button variant="primary" class="active">
+  Primary
+</Button>
+<Button variant="primary" class="active" disabled>
+  Primary
+</Button>
+    `,
+  },
 };
 
 export default buttonCodes;

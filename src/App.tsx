@@ -19,6 +19,18 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
+    disabledState: {
+      openCode: boolean;
+      code?: string;
+    };
+    blockButton: {
+      openCode: boolean;
+      code?: string;
+    };
+    toggleState: {
+      openCode: boolean;
+      code?: string;
+    };
   };
 }
 
@@ -47,8 +59,22 @@ function App() {
         openCode: false,
         code: buttonCodes.size.code.trim(),
       },
+      disabledState: {
+        openCode: false,
+        code: buttonCodes.disabledState.code.trim(),
+      },
+      blockButton: {
+        openCode: false,
+        code: buttonCodes.blockButton.code.trim(),
+      },
+      toggleState: {
+        openCode: false,
+        code: buttonCodes.toggleState.code.trim(),
+      },
     },
   });
+
+  const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
   useEffect(() => {
     document.querySelectorAll('pre code').forEach((el) => {
@@ -101,10 +127,18 @@ function App() {
     }
   }
 
+  function onClickUpdateSizeTest() {
+    if (mySize === 'sm') {
+      setMySize('lg');
+    } else {
+      setMySize('sm');
+    }
+  }
+
   return (
     <div className="container-fluid p-4">
       <div className="row">
-        <div className="col col-2">
+        <div className="col-4 col-sm-2">
           <div className="list-group">
             <button
               type="button"
@@ -115,7 +149,7 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="col col=10">
+        <div className="col-8 col-sm-10">
           <div className="d-flex flex-column gap-3">
             <div className="card">
               <div className="card-header">
@@ -140,7 +174,7 @@ function App() {
                 </div>
               </div>
               <div className="card-body">
-                <div className="d-flex gap-2">
+                <div className="d-flex flex-wrap gap-2">
                   <Button variant="primary">Primary</Button>
                   <Button variant="secondary">Secondary</Button>
                   <Button variant="success">Success</Button>
@@ -188,7 +222,7 @@ function App() {
                 </div>
               </div>
               <div className="card-body">
-                <div className="d-flex gap-2">
+                <div className="d-flex flex-wrap gap-2">
                   <Button outline="primary">Primary</Button>
                   <Button outline="secondary">Secondary</Button>
                   <Button outline="success">Success</Button>
@@ -235,7 +269,7 @@ function App() {
                 </div>
               </div>
               <div className="card-body">
-                <div className="d-flex align-items-center gap-2">
+                <div className="d-flex flex-wrap align-items-center gap-2">
                   <div>
                     <Button variant="primary" size="lg">
                       Large
@@ -271,6 +305,194 @@ function App() {
                     {states.button.size.code ?? 'TODO'}
                   </code>
                 </pre>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-header">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div>禁止状态</div>
+                  <div className="d-flex gap-2">
+                    <i
+                      className="bi bi-code tw-cursor-pointer"
+                      onClick={() =>
+                        onClickUpdateState(
+                          'button.disabledState.openCode',
+                          !states.button.disabledState.openCode,
+                        )
+                      }
+                    ></i>
+
+                    <i
+                      className="bi bi-clipboard2 tw-cursor-pointer"
+                      onClick={() =>
+                        onClickClipboard('button.disabledState.code')
+                      }
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="d-flex flex-wrap align-items-center gap-2">
+                  <div>
+                    <Button variant="primary" disabled>
+                      Primary
+                    </Button>
+                  </div>
+                  <div>
+                    <Button variant="secondary" disabled>
+                      Secondary
+                    </Button>
+                  </div>
+                  <div>
+                    <Button as="a" href="#" variant="success" disabled>
+                      Link
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={clsx('card-footer', {
+                  'd-none': !states.button.disabledState.openCode,
+                })}
+              >
+                <pre>
+                  <code className="language-html">
+                    {states.button.disabledState.code ?? 'TODO'}
+                  </code>
+                </pre>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-header">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div>块状按钮</div>
+                  <div className="d-flex gap-2">
+                    <i
+                      className="bi bi-code tw-cursor-pointer"
+                      onClick={() =>
+                        onClickUpdateState(
+                          'button.blockButton.openCode',
+                          !states.button.blockButton.openCode,
+                        )
+                      }
+                    ></i>
+
+                    <i
+                      className="bi bi-clipboard2 tw-cursor-pointer"
+                      onClick={() =>
+                        onClickClipboard('button.blockButton.code')
+                      }
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="d-flex flex-wrap flex-column gap-4">
+                  <div className="d-grid gap-2">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="primary">Primary</Button>
+                  </div>
+
+                  <div className="d-grid gap-2 d-md-flex">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="primary">Primary</Button>
+                  </div>
+
+                  <div className="d-grid gap-2 col-6 mx-auto">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="primary">Primary</Button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={clsx('card-footer', {
+                  'd-none': !states.button.blockButton.openCode,
+                })}
+              >
+                <pre>
+                  <code className="language-html">
+                    {states.button.blockButton.code ?? 'TODO'}
+                  </code>
+                </pre>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-header">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div>切换状态</div>
+                  <div className="d-flex gap-2">
+                    <i
+                      className="bi bi-code tw-cursor-pointer"
+                      onClick={() =>
+                        onClickUpdateState(
+                          'button.toggleState.openCode',
+                          !states.button.toggleState.openCode,
+                        )
+                      }
+                    ></i>
+
+                    <i
+                      className="bi bi-clipboard2 tw-cursor-pointer"
+                      onClick={() =>
+                        onClickClipboard('button.toggleState.code')
+                      }
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="d-flex flex-wrap gap-2">
+                  <div>
+                    <Button className="active">Primary</Button>
+                  </div>
+                  <div>
+                    <Button className="active" disabled>
+                      Primary
+                    </Button>
+                  </div>
+                </div>
+                <div className="d-flex flex-wrap gap-2 mt-2">
+                  <div>
+                    <Button variant="primary" className="active">
+                      Primary
+                    </Button>
+                  </div>
+                  <div>
+                    <Button variant="primary" className="active" disabled>
+                      Primary
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={clsx('card-footer', {
+                  'd-none': !states.button.toggleState.openCode,
+                })}
+              >
+                <pre>
+                  <code className="language-html">
+                    {states.button.toggleState.code ?? 'TODO'}
+                  </code>
+                </pre>
+              </div>
+            </div>
+            <div className="card text-bg-light">
+              <div className="card-header">测试</div>
+              <div className="card-body">
+                <div className="d-flex flex-wrap gap-2">
+                  <div>
+                    <Button
+                      size={mySize}
+                      variant="primary"
+                      onClick={onClickUpdateSizeTest}
+                    >
+                      Click Update Button Size ({mySize})
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

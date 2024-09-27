@@ -1,4 +1,5 @@
 import type {
+  AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   ElementType,
@@ -12,7 +13,7 @@ interface Variables {
   fontFamily?: string;
   fontSize?: string;
   lineHeight?: string;
-  whiteSpace?: string | null;
+  whiteSpace?: string;
   paddingYSm?: string;
   paddingXSm?: string;
   fontSizeSm?: string;
@@ -42,17 +43,26 @@ interface Variables {
   activeBgTintAmount?: string;
   activeBorderShadeAmount?: string;
   activeBorderTintAmount?: string;
+  [key: string]: string | number | undefined;
 }
 
-export interface Props
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+type ButtonProps<T extends ElementType = 'button'> = T extends 'a'
+  ? DetailedHTMLProps<
+      AnchorHTMLAttributes<HTMLAnchorElement>,
+      HTMLAnchorElement
+    > & {
+      disabled?: boolean | undefined;
+    }
+  : DetailedHTMLProps<
+      ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >;
+
+export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
   /**
    * as.
    */
-  as?: ElementType;
+  as?: T;
 
   /**
    * variant.
@@ -96,7 +106,7 @@ export interface Props
   /**
    * variables.
    */
-  variables?: Variables | string;
+  variables?: Variables;
 
   /**
    * The button start content.
@@ -113,4 +123,4 @@ export interface Props
    * @default false
    */
   isLoading?: boolean;
-}
+};

@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// A type alias that allows either a value or a function returning a value.
+type MaybeFunction<T> = T | (() => T);
+
 /**
  * Checks if a value is a plain object.
  *
@@ -172,6 +175,24 @@ const parseJson = (
   return callback ? callback(result, isString) || result : result;
 };
 
+/**
+ * A utility function that returns the first parameter if it's not undefined.
+ * If the first parameter is undefined, it returns the second parameter.
+ * If either of the parameters is a function, it evaluates the function
+ * and uses its return value to make the comparison.
+ *
+ * @param param1 - The first parameter, can be a value or a function returning a value.
+ * @param param2 - The second parameter, can be a value or a function returning a value.
+ * @returns The first parameter if it's defined, otherwise the second parameter.
+ */
+const getValue = <T>(param1: MaybeFunction<T>, param2: MaybeFunction<T>): T => {
+  const resolve = (val: MaybeFunction<T>): T =>
+    typeof val === 'function' ? (val as () => T)() : val;
+
+  const resolvedParam1 = resolve(param1);
+  return resolvedParam1 !== undefined ? resolvedParam1 : resolve(param2);
+};
+
 export {
   isPlainObject,
   mapAndFilterStyles,
@@ -179,4 +200,5 @@ export {
   filterAndTransformProperties,
   camelToKebab,
   parseJson,
+  getValue,
 };

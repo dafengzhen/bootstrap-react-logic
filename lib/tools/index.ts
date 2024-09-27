@@ -13,4 +13,5 @@ export {
   filterAndTransformProperties,
   camelToKebab,
   parseJson,
+  getValue,
 } from './tools';
