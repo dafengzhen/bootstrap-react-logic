@@ -8,7 +8,7 @@ $bootstrap-icons-font-dir: '../../node_modules/bootstrap-icons/font/fonts';
 
 /// === tailwindcss ===
 
-@tailwind base;
+// @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -189,6 +189,9 @@ pre code.hljs {
     format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-//body {
-//  font-family: 'Raleway', serif;
-//}
+/// === custom ===
+
+* {
+  font-size: 16px;
+  // font-family: 'Raleway', serif;
+}
