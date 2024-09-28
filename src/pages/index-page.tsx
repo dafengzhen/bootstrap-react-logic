@@ -49,7 +49,10 @@ export default function IndexPage() {
             <div className="d-flex gap-2">
               <div className="user-select-none">#</div>
               <pre>
-                <code>npm install bootstrap-react-logic</code>
+                <code className="nohighlight">
+                  npm <span className="text-danger">install&nbsp;</span>
+                  bootstrap-react-logic
+                </code>
               </pre>
             </div>
           </div>

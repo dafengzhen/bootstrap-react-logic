@@ -2,10 +2,10 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '@assets/styles/main.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from '@/App.tsx';
 import ErrorPage from '@pages/error-page.tsx';
 import ButtonPage from '@pages/button-page.tsx';
 import IndexPage from '@pages/index-page.tsx';
+import App from '@src/App.tsx';
 
 const router = createBrowserRouter([
   {

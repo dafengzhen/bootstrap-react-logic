@@ -4,16 +4,9 @@ import { useState } from 'react';
 import buttonCodes from '@assets/codes/button';
 import { useNavigation } from 'react-router-dom';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
+import type { NestedKeys } from '@src/types';
 
-type NestedKeys<T> = T extends object
-  ? {
-      [K in keyof T]-?: K extends string
-        ? `${K}` | `${K}.${Exclude<NestedKeys<T[K]>, `${string}.`>}`
-        : never;
-    }[keyof T]
-  : '';
-
-export interface IStates {
+interface IStates {
   button: {
     variant: {
       openCode: boolean;
@@ -42,7 +35,7 @@ export interface IStates {
   };
 }
 
-export type ButtonKeys = NestedKeys<IStates>;
+type ButtonKeys = NestedKeys<IStates>;
 
 export default function ButtonPage() {
   const [states, setStates] = useState<IStates>({

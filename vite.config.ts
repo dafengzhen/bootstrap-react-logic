@@ -1,10 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    visualizer({
+      emitFile: true,
+      filename: 'stats.html',
+    }),
+  ],
   css: {
     preprocessorOptions: {
       scss: {
@@ -13,10 +20,29 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('highlight.js')) {
+            return 'highlight';
+          } else if (id.includes('react-dom')) {
+            return 'react-dom';
+          } else if (
+            id.includes('@remix-run') ||
+            id.includes('react-router-dom') ||
+            id.includes('react-router')
+          ) {
+            return 'react-router';
+          }
+        },
+      },
+    },
+  },
   resolve: {
     alias: [
       {
-        find: '@',
+        find: '@src',
         replacement: resolve(__dirname, 'src'),
       },
       {
@@ -34,6 +60,10 @@ export default defineConfig({
       {
         find: '@pages',
         replacement: resolve(__dirname, 'src/pages'),
+      },
+      {
+        find: '@types',
+        replacement: resolve(__dirname, 'src/types'),
       },
       {
         find: '@store',

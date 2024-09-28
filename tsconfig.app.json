@@ -18,10 +18,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["./src/*"],
+      "@src/*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@types/*": ["./src/types/*"],
       "@pages/*": ["./src/pages/*"],
       "@store/*": ["./src/store/*"],
       "@tools/*": ["./src/tools/*"],

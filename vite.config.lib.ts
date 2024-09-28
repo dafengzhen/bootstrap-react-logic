@@ -19,16 +19,52 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
-      name: 'BootstrapReact',
+      name: 'BRL',
     },
     rollupOptions: {
       external: ['react', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
-          'react/jsx-runtime': 'jsxRuntime',
+          'react/jsx-runtime': 'ReactJsxRuntime',
         },
       },
     },
+  },
+  resolve: {
+    alias: [
+      {
+        find: '@lib',
+        replacement: resolve(__dirname, 'lib'),
+      },
+      {
+        find: '@assets',
+        replacement: resolve(__dirname, 'lib/assets'),
+      },
+      {
+        find: '@components',
+        replacement: resolve(__dirname, 'lib/components'),
+      },
+      {
+        find: '@hooks',
+        replacement: resolve(__dirname, 'lib/hooks'),
+      },
+      {
+        find: '@pages',
+        replacement: resolve(__dirname, 'lib/pages'),
+      },
+      {
+        find: '@types',
+        replacement: resolve(__dirname, 'lib/types'),
+      },
+      {
+        find: '@store',
+        replacement: resolve(__dirname, 'lib/store'),
+      },
+      {
+        find: '@tools',
+        replacement: resolve(__dirname, 'lib/tools'),
+      },
+    ],
   },
 });
