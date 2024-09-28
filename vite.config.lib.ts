@@ -62,6 +62,10 @@ export default defineConfig({
         replacement: resolve(__dirname, 'lib/store'),
       },
       {
+        find: '@contexts',
+        replacement: resolve(__dirname, 'lib/contexts'),
+      },
+      {
         find: '@tools',
         replacement: resolve(__dirname, 'lib/tools'),
       },

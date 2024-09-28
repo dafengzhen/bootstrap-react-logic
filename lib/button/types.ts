@@ -5,46 +5,16 @@ import type {
   ElementType,
   ReactNode,
 } from 'react';
+import type {
+  OutlineEnum,
+  RoundedClassEnum,
+  VariableEnum,
+  VariantEnum,
+} from '@lib/tools';
 
-interface Variables {
-  color?: string;
-  paddingY?: string;
-  paddingX?: string;
-  fontFamily?: string;
-  fontSize?: string;
-  lineHeight?: string;
-  whiteSpace?: string;
-  paddingYSm?: string;
-  paddingXSm?: string;
-  fontSizeSm?: string;
-  paddingYLg?: string;
-  paddingXLg?: string;
-  fontSizeLg?: string;
-  borderWidth?: string;
-  fontWeight?: string;
-  boxShadow?: string;
-  focusWidth?: string;
-  focusBoxShadow?: string;
-  disabledOpacity?: number;
-  activeBoxShadow?: string;
-  linkColor?: string;
-  linkHoverColor?: string;
-  linkDisabledColor?: string;
-  linkFocusShadowRgb?: string;
-  borderRadius?: string;
-  borderRadiusSm?: string;
-  borderRadiusLg?: string;
-  transition?: string;
-  hoverBgShadeAmount?: string;
-  hoverBgTintAmount?: string;
-  hoverBorderShadeAmount?: string;
-  hoverBorderTintAmount?: string;
-  activeBgShadeAmount?: string;
-  activeBgTintAmount?: string;
-  activeBorderShadeAmount?: string;
-  activeBorderTintAmount?: string;
-  [key: string]: string | number | undefined;
-}
+type Variables = {
+  [key in keyof typeof VariableEnum]?: string | number;
+};
 
 type ButtonProps<T extends ElementType = 'button'> = T extends 'a'
   ? DetailedHTMLProps<
@@ -60,39 +30,27 @@ type ButtonProps<T extends ElementType = 'button'> = T extends 'a'
 
 export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
   /**
-   * as.
+   * The 'as' prop allows for specifying a different HTML element type (e.g., 'a' for anchor tag)
    */
   as?: T;
 
   /**
-   * variant.
+   * Optional 'variant' prop based on 'VariantEnum'
    */
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'info'
-    | 'warning'
-    | 'danger'
-    | 'light'
-    | 'dark'
-    | 'link';
+  variant?: keyof typeof VariantEnum;
 
   /**
-   * outline.
+   * Optional 'outline' prop based on 'OutlineEnum'
    */
-  outline?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'info'
-    | 'warning'
-    | 'danger'
-    | 'light'
-    | 'dark';
+  outline?: keyof typeof OutlineEnum;
 
   /**
-   * size.
+   * Optional 'rounded' prop, either from 'RoundedClassEnum' or a boolean value
+   */
+  rounded?: keyof typeof RoundedClassEnum | boolean;
+
+  /**
+   * Optional 'size' prop for setting predefined sizes ('lg', 'sm') or custom size properties
    */
   size?:
     | 'lg'
@@ -104,23 +62,33 @@ export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
       };
 
   /**
-   * variables.
+   * Optional 'active' prop for indicating if the button is in an active state
+   */
+  active?: boolean;
+
+  /**
+   * Optional 'variables' prop for dynamic variable support using the 'Variables' type
    */
   variables?: Variables;
 
   /**
-   * The button start content.
+   * Optional 'isLoading' prop to indicate a loading state
+   */
+  isLoading?: boolean;
+
+  /**
+   * Optional 'startContent' prop for placing content (e.g., icon) at the beginning of the button
    */
   startContent?: ReactNode;
 
   /**
-   * The button end content.
+   * Optional 'endContent' prop for placing content at the end of the button
    */
   endContent?: ReactNode;
 
   /**
-   * Whether the button should display a loading spinner.
-   * @default false
+   * Optional 'dropOldClass' prop to specify if old CSS classes should be removed
+   * (Clear original class names)
    */
-  isLoading?: boolean;
+  dropOldClass?: boolean;
 };

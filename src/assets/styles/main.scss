@@ -8,9 +8,10 @@ $bootstrap-icons-font-dir: '../../node_modules/bootstrap-icons/font/fonts';
 
 /// === tailwindcss ===
 
-// @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
 
 /// === highlight js ===
 

@@ -5,32 +5,51 @@ import {
   filterAndTransformProperties,
   getValue,
   mapAndFilterStyles,
+  RoundedClassEnum,
   VARIABLE_BS_BTN_PREFIX,
   VARIABLE_BS_PREFIX,
-  VARIABLE_BTN_MAP,
+  VariableEnum,
 } from '@lib/tools';
 
+function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
+  if (key !== undefined) {
+    if (typeof key === 'boolean') {
+      return key ? 'rounded' : false;
+    } else {
+      return `rounded-${RoundedClassEnum[key]}`;
+    }
+  }
+}
+
 function getClassNames({
+  active,
   variant,
   outline,
   size,
   disabled,
   Component,
   className,
+  rounded,
+  dropOldClass,
 }: {
+  active?: boolean;
   variant?: string;
   outline?: string;
   size?: Props['size'];
   disabled?: boolean;
   Component: ElementType;
   className?: string;
+  rounded?: Props['rounded'];
+  dropOldClass?: boolean;
 }) {
   return clsx(
-    'btn',
+    !dropOldClass && 'btn',
+    active && 'active',
     variant && `btn-${variant}`,
     outline && `btn-outline-${outline}`,
     typeof size === 'string' && `btn-${size}`,
     Component === 'a' && disabled && 'disabled',
+    rounded && getRoundedValue(rounded),
     className,
   );
 }
@@ -42,7 +61,7 @@ function getStyles(
 ) {
   return {
     ...filterAndTransformProperties(variables, (_, key) => {
-      const _key = VARIABLE_BTN_MAP[key];
+      const _key = VariableEnum[key];
       return {
         include: !!_key,
         transformedKey: `${VARIABLE_BS_PREFIX}-${_key}`,
@@ -64,29 +83,38 @@ export default function Button<T extends ElementType = 'button'>(
   props: Props<T>,
 ) {
   const {
-    as: Component = 'button',
-    variant,
-    outline,
-    size,
-    className,
-    style,
-    variables,
-    children,
-    disabled,
-    role,
-    tabIndex,
+    rounded,
     'aria-disabled': ariaDisabled,
     'aria-pressed': ariaPressed,
+    active,
+    as: Component = 'button',
+    children,
+    className,
+    disabled,
+    isLoading,
+    outline,
+    role,
+    size,
+    style,
+    tabIndex,
+    variables,
+    variant,
+    startContent,
+    endContent,
+    dropOldClass,
     ...rest
   } = props;
 
   const classNames = getClassNames({
-    variant,
-    outline,
-    size,
-    disabled,
     Component,
+    active,
     className,
+    disabled,
+    outline,
+    rounded,
+    size,
+    variant,
+    dropOldClass,
   });
   const combinedStyles = getStyles(variables, size, style);
   const finalRole = getValue(role, Component === 'a' ? 'button' : undefined);
@@ -120,7 +148,20 @@ export default function Button<T extends ElementType = 'button'>(
       tabIndex={finalTabIndex}
       aria-pressed={finalAriaPressed}
     >
+      {isLoading && !startContent && (
+        <>
+          <span
+            className="spinner-border spinner-border-sm me-1"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden" role="status">
+            Loading...
+          </span>
+        </>
+      )}
+      {startContent && startContent}
       {children}
+      {endContent && endContent}
     </Component>
   );
 }

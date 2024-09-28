@@ -37,7 +37,7 @@ const buttonCodes = {
   size={{
     paddingY: '0.25rem',
     paddingX: '0.5rem',
-    fontSize: '0.75rem',
+    fontSize: '0.75rem'
   }}
 >
   Custom
@@ -59,17 +59,17 @@ const buttonCodes = {
   },
   blockButton: {
     code: `
-<div class="d-grid gap-2">
+<div className="d-grid gap-2">
   <Button variant="primary">Primary</Button>
   <Button variant="primary">Primary</Button>
 </div>
 
-<div class="d-grid gap-2 d-md-flex">
+<div className="d-grid gap-2 d-md-flex">
   <Button variant="primary">Primary</Button>
   <Button variant="primary">Primary</Button>
 </div>
 
-<div class="d-grid gap-2 col-6 mx-auto">
+<div className="d-grid gap-2 col-6 mx-auto">
   <Button variant="primary">Primary</Button>
   <Button variant="primary">Primary</Button>
 </div>
@@ -77,15 +77,96 @@ const buttonCodes = {
   },
   toggleState: {
     code: `
-<Button class="active">Primary</Button>
-<Button class="active" disabled>
+<Button active>Button</Button>
+<Button active disabled>
+  Button
+</Button>
+<Button variant="primary" active>
   Primary
 </Button>
-<Button variant="primary" class="active">
+<Button variant="primary" active disabled>
   Primary
 </Button>
-<Button variant="primary" class="active" disabled>
+    `,
+  },
+  isLoading: {
+    code: `
+<Button variant="primary" isLoading>
   Primary
+</Button>
+<Button variant="secondary" isLoading>
+  Secondary
+</Button>
+    `,
+  },
+  rounded: {
+    code: `
+<Button outline="primary" rounded>
+  Primary
+</Button>
+<Button outline="secondary" rounded="sm">
+  Secondary
+</Button>
+<Button outline="success" rounded="md">
+  Success
+</Button>
+<Button outline="danger" rounded="lg">
+  Danger
+</Button>
+<Button outline="warning" rounded="xl">
+  Warning
+</Button>
+<Button outline="info" rounded="xxl">
+  Info
+</Button>
+<Button outline="info" rounded="circle">
+  C
+</Button>
+<Button outline="info" rounded="pill">
+  Pill
+</Button>
+    `,
+  },
+  icon: {
+    code: `
+<Button
+  variant="primary"
+  startContent={<i className="bi bi-arrow-up me-1"></i>}
+>
+  Up
+</Button>
+<Button
+  variant="secondary"
+  endContent={<i className="bi bi-arrow-down ms-1"></i>}
+>
+  Down
+</Button>
+<Button variant="success">
+  <i className="bi bi-arrow-left"></i>
+</Button>
+    `,
+  },
+  customStyle: {
+    code: `
+<Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">
+  Custom
+</Button>
+    `,
+  },
+  example: {
+    code: `
+const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
+
+function onClickChangeSizeTest() {
+  setMySize(mySize === 'sm' ? 'lg' : 'sm');
+}
+
+<Button
+  size={mySize}
+  variant="primary"
+  onClick={onClickChangeSizeTest}
+>
+  Click Change Button Size ({mySize})
 </Button>
     `,
   },

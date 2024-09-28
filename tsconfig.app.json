@@ -25,6 +25,7 @@
       "@types/*": ["./src/types/*"],
       "@pages/*": ["./src/pages/*"],
       "@store/*": ["./src/store/*"],
+      "@contexts/*": ["./src/contexts/*"],
       "@tools/*": ["./src/tools/*"],
       "@lib/*": ["./lib/*"]
     }

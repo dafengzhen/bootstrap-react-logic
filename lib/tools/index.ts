@@ -1,10 +1,13 @@
 export type { ReactRef } from './refs';
 
+export { VARIABLE_BS_PREFIX, VARIABLE_BS_BTN_PREFIX } from './constants';
+
 export {
-  VARIABLE_BS_PREFIX,
-  VARIABLE_BS_BTN_PREFIX,
-  VARIABLE_BTN_MAP,
-} from './constants';
+  VariableEnum,
+  RoundedClassEnum,
+  VariantEnum,
+  OutlineEnum,
+} from './enums';
 
 export {
   isPlainObject,

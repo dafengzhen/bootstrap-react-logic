@@ -70,6 +70,10 @@ export default defineConfig({
         replacement: resolve(__dirname, 'src/store'),
       },
       {
+        find: '@contexts',
+        replacement: resolve(__dirname, 'src/contexts'),
+      },
+      {
         find: '@tools',
         replacement: resolve(__dirname, 'src/tools'),
       },

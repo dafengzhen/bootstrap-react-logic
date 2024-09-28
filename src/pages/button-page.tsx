@@ -1,10 +1,11 @@
 import { Button } from '@lib/button';
-import clsx from 'clsx';
 import { useState } from 'react';
 import buttonCodes from '@assets/codes/button';
 import { useNavigation } from 'react-router-dom';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
 import type { NestedKeys } from '@src/types';
+import CustomSimpleCard from '@src/components/custom-simple-card';
+import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 
 interface IStates {
   button: {
@@ -32,12 +33,35 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
+    isLoading: {
+      openCode: boolean;
+      code?: string;
+    };
+    rounded: {
+      openCode: boolean;
+      code?: string;
+    };
+    icon: {
+      openCode: boolean;
+      code?: string;
+    };
+    customStyle: {
+      openCode: boolean;
+      code?: string;
+    };
+    example: {
+      openCode: boolean;
+      code?: string;
+    };
   };
 }
 
 type ButtonKeys = NestedKeys<IStates>;
 
 export default function ButtonPage() {
+  useHighlightCode();
+  const navigation = useNavigation();
+
   const [states, setStates] = useState<IStates>({
     button: {
       variant: {
@@ -64,14 +88,29 @@ export default function ButtonPage() {
         openCode: false,
         code: buttonCodes.toggleState.code.trim(),
       },
+      isLoading: {
+        openCode: false,
+        code: buttonCodes.isLoading.code.trim(),
+      },
+      rounded: {
+        openCode: false,
+        code: buttonCodes.rounded.code.trim(),
+      },
+      icon: {
+        openCode: false,
+        code: buttonCodes.icon.code.trim(),
+      },
+      customStyle: {
+        openCode: false,
+        code: buttonCodes.customStyle.code.trim(),
+      },
+      example: {
+        openCode: false,
+        code: buttonCodes.example.code.trim(),
+      },
     },
   });
-
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
-
-  useHighlightCode();
-
-  const navigation = useNavigation();
 
   function onClickUpdateState(k: ButtonKeys, v: unknown, c?: () => void) {
     setStates((prev) => {
@@ -93,34 +132,8 @@ export default function ButtonPage() {
     c?.();
   }
 
-  function onClickClipboard(k: ButtonKeys, c?: () => void) {
-    const code = k.split('.').reduce((acc: any, key) => acc[key], states) as
-      | string
-      | undefined;
-
-    if (typeof code === 'string' && code !== '') {
-      const _code = code.trim();
-      navigator.clipboard
-        .writeText(_code)
-        .then(() => {
-          alert('Code copied to clipboard');
-        })
-        .catch((e) => {
-          console.error('Failed to copy code: ', e);
-          alert('Failed to copy code: ' + e?.message);
-        })
-        .finally(() => {
-          c?.();
-        });
-    }
-  }
-
-  function onClickUpdateSizeTest() {
-    if (mySize === 'sm') {
-      setMySize('lg');
-    } else {
-      setMySize('sm');
-    }
+  function onClickChangeSizeTest() {
+    setMySize(mySize === 'sm' ? 'lg' : 'sm');
   }
 
   if (navigation.state === 'loading') {
@@ -129,341 +142,561 @@ export default function ButtonPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <div className="card">
-        <div className="card-header">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>变体</div>
-            <div className="d-flex gap-2">
-              <i
-                className="bi bi-code tw-cursor-pointer"
-                onClick={() =>
-                  onClickUpdateState(
-                    'button.variant.openCode',
-                    !states.button.variant.openCode,
-                  )
-                }
-              ></i>
+      <CustomSimpleCard
+        title="变体"
+        hash="variant"
+        isOpen={states.button.variant.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.variant.openCode',
+            !states.button.variant.openCode,
+          )
+        }
+        code={states.button.variant.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="success">Success</Button>
+          <Button variant="danger">Danger</Button>
+          <Button variant="warning">Warning</Button>
+          <Button variant="info">Info</Button>
+          <Button variant="light">Light</Button>
+          <Button variant="dark">Dark</Button>
+          <Button variant="link">Link</Button>
+        </div>
+      </CustomSimpleCard>
 
-              <i
-                className="bi bi-clipboard2 tw-cursor-pointer"
-                onClick={() => onClickClipboard('button.variant.code')}
-              ></i>
-            </div>
+      <CustomSimpleCard
+        title="轮廓"
+        hash="outline"
+        isOpen={states.button.outline.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.outline.openCode',
+            !states.button.outline.openCode,
+          )
+        }
+        code={states.button.outline.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button outline="primary">Primary</Button>
+          <Button outline="secondary">Secondary</Button>
+          <Button outline="success">Success</Button>
+          <Button outline="danger">Danger</Button>
+          <Button outline="warning">Warning</Button>
+          <Button outline="info">Info</Button>
+          <Button outline="light">Light</Button>
+          <Button outline="dark">Dark</Button>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="圆形"
+        hash="rounded"
+        isOpen={states.button.rounded.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.rounded.openCode',
+            !states.button.rounded.openCode,
+          )
+        }
+        code={states.button.rounded.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button outline="primary" rounded>
+            Primary
+          </Button>
+          <Button outline="secondary" rounded="sm">
+            Secondary
+          </Button>
+          <Button outline="success" rounded="md">
+            Success
+          </Button>
+          <Button outline="danger" rounded="lg">
+            Danger
+          </Button>
+          <Button outline="warning" rounded="xl">
+            Warning
+          </Button>
+          <Button outline="info" rounded="xxl">
+            Info
+          </Button>
+          <Button outline="info" rounded="circle">
+            C
+          </Button>
+          <Button outline="info" rounded="pill">
+            Pill
+          </Button>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="大小"
+        hash="size"
+        isOpen={states.button.size.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.size.openCode',
+            !states.button.size.openCode,
+          )
+        }
+        code={states.button.size.code}
+      >
+        <div className="d-flex flex-wrap align-items-center gap-2">
+          <div>
+            <Button variant="primary" size="lg">
+              Large
+            </Button>
+          </div>
+          <div>
+            <Button variant="secondary" size="sm">
+              Small
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="secondary"
+              size={{
+                paddingY: '0.25rem',
+                paddingX: '0.5rem',
+                fontSize: '0.75rem',
+              }}
+            >
+              Custom
+            </Button>
           </div>
         </div>
-        <div className="card-body">
-          <div className="d-flex flex-wrap gap-2">
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="禁止状态"
+        hash="disabledState"
+        isOpen={states.button.disabledState.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.disabledState.openCode',
+            !states.button.disabledState.openCode,
+          )
+        }
+        code={states.button.disabledState.code}
+      >
+        <div className="d-flex flex-wrap align-items-center gap-2">
+          <div>
+            <Button variant="primary" disabled>
+              Primary
+            </Button>
+          </div>
+          <div>
+            <Button variant="secondary" disabled>
+              Secondary
+            </Button>
+          </div>
+          <div>
+            <Button as="a" href="#" variant="success" disabled>
+              Link
+            </Button>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="块状按钮"
+        hash="blockButton"
+        isOpen={states.button.blockButton.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.blockButton.openCode',
+            !states.button.blockButton.openCode,
+          )
+        }
+        code={states.button.blockButton.code}
+      >
+        <div className="d-flex flex-wrap flex-column gap-4">
+          <div className="d-grid gap-2">
             <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="success">Success</Button>
-            <Button variant="danger">Danger</Button>
-            <Button variant="warning">Warning</Button>
-            <Button variant="info">Info</Button>
-            <Button variant="light">Light</Button>
-            <Button variant="dark">Dark</Button>
-            <Button variant="link">Link</Button>
+            <Button variant="primary">Primary</Button>
+          </div>
+
+          <div className="d-grid gap-2 d-md-flex">
+            <Button variant="primary">Primary</Button>
+            <Button variant="primary">Primary</Button>
+          </div>
+
+          <div className="d-grid gap-2 col-6 mx-auto">
+            <Button variant="primary">Primary</Button>
+            <Button variant="primary">Primary</Button>
           </div>
         </div>
+      </CustomSimpleCard>
 
-        <div
-          className={clsx('card-footer', {
-            'd-none': !states.button.variant.openCode,
-          })}
-        >
-          <pre>
-            <code className="language-html">
-              {states.button.variant.code ?? 'TODO'}
-            </code>
-          </pre>
+      <CustomSimpleCard
+        title="切换状态"
+        hash="toggleState"
+        isOpen={states.button.toggleState.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.toggleState.openCode',
+            !states.button.toggleState.openCode,
+          )
+        }
+        code={states.button.toggleState.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <div>
+            <Button active>Button</Button>
+          </div>
+          <div>
+            <Button active disabled>
+              Button
+            </Button>
+          </div>
         </div>
-      </div>
+        <div className="d-flex flex-wrap gap-2 mt-2">
+          <div>
+            <Button variant="primary" active>
+              Primary
+            </Button>
+          </div>
+          <div>
+            <Button variant="primary" active disabled>
+              Primary
+            </Button>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="加载状态"
+        hash="isLoading"
+        isOpen={states.button.isLoading.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.isLoading.openCode',
+            !states.button.isLoading.openCode,
+          )
+        }
+        code={states.button.isLoading.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button variant="primary" isLoading>
+            Primary
+          </Button>
+          <Button variant="secondary" isLoading>
+            Secondary
+          </Button>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="图标"
+        hash="icon"
+        isOpen={states.button.icon.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.icon.openCode',
+            !states.button.icon.openCode,
+          )
+        }
+        code={states.button.icon.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button
+            variant="primary"
+            startContent={<i className="bi bi-arrow-up me-1"></i>}
+          >
+            Up
+          </Button>
+          <Button
+            variant="secondary"
+            endContent={<i className="bi bi-arrow-down ms-1"></i>}
+          >
+            Down
+          </Button>
+          <Button variant="success">
+            <i className="bi bi-arrow-left"></i>
+          </Button>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="自定义样式"
+        hash="customStyle"
+        isOpen={states.button.customStyle.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.customStyle.openCode',
+            !states.button.customStyle.openCode,
+          )
+        }
+        code={states.button.customStyle.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">
+            Custom
+          </Button>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="示例"
+        hash="example"
+        isOpen={states.button.example.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'button.example.openCode',
+            !states.button.example.openCode,
+          )
+        }
+        code={states.button.example.code}
+        codeLanguage="typescript"
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <div>
+            <Button
+              size={mySize}
+              variant="primary"
+              onClick={onClickChangeSizeTest}
+            >
+              Click Change Button Size ({mySize})
+            </Button>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
       <div className="card">
         <div className="card-header">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>轮廓</div>
-            <div className="d-flex gap-2">
-              <i
-                className="bi bi-code tw-cursor-pointer"
-                onClick={() =>
-                  onClickUpdateState(
-                    'button.outline.openCode',
-                    !states.button.outline.openCode,
-                  )
-                }
-              ></i>
-
-              <i
-                className="bi bi-clipboard2 tw-cursor-pointer"
-                onClick={() => onClickClipboard('button.outline.code')}
-              ></i>
-            </div>
-          </div>
+          <CustomSimpleCardLink title="组件属性" hash="componentProps" />
         </div>
         <div className="card-body">
-          <div className="d-flex flex-wrap gap-2">
-            <Button outline="primary">Primary</Button>
-            <Button outline="secondary">Secondary</Button>
-            <Button outline="success">Success</Button>
-            <Button outline="danger">Danger</Button>
-            <Button outline="warning">Warning</Button>
-            <Button outline="info">Info</Button>
-            <Button outline="light">Light</Button>
-            <Button outline="dark">Dark</Button>
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>as</td>
+                  <td>
+                    <span className="badge text-bg-secondary">button | a</span>
+                  </td>
+                  <td></td>
+                  <td>
+                    <span className="badge text-bg-secondary">button</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>variant</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      primary | secondary | success | info | warning | danger |
+                      light | dark | link
+                    </span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>outline</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      primary | secondary | success | info | warning | danger |
+                      light | dark | link
+                    </span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>
+                    <span className="badge text-bg-secondary">lg | sm</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>active</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>variables</td>
+                  <td>
+                    <span className="badge text-bg-secondary">object</span>
+                  </td>
+                  <td>Style variables</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>isLoading</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>rounded</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      none | sm | md | lg | xl | xxl
+                    </span>
+                    <span className="badge text-bg-secondary ms-1">
+                      boolean
+                    </span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>startContent</td>
+                  <td>
+                    <span className="badge text-bg-secondary">ReactNode</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>endContent</td>
+                  <td>
+                    <span className="badge text-bg-secondary">ReactNode</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>dropOldClass</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Clear original class names</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-
-        <div
-          className={clsx('card-footer', {
-            'd-none': !states.button.outline.openCode,
-          })}
-        >
-          <pre>
-            <code className="language-html">
-              {states.button.outline.code ?? 'TODO'}
-            </code>
-          </pre>
+        <div className="card-header border-top rounded-top">
+          <CustomSimpleCardLink title="通用属性" hash="generalProps" />
+        </div>
+        <div className="card-body">
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>className</td>
+                  <td>
+                    <span className="badge text-bg-secondary">string</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>style</td>
+                  <td>
+                    <span className="badge text-bg-secondary">object</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="card-header border-top rounded-top">
+          <CustomSimpleCardLink title="通用事件" hash="generalProps" />
+        </div>
+        <div className="card-body">
+          <div className="table-responsive">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>onClick</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      MouseEventHandler
+                    </span>
+                  </td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>...</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+
       <div className="card">
         <div className="card-header">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>大小</div>
-            <div className="d-flex gap-2">
-              <i
-                className="bi bi-code tw-cursor-pointer"
-                onClick={() =>
-                  onClickUpdateState(
-                    'button.size.openCode',
-                    !states.button.size.openCode,
-                  )
-                }
-              ></i>
-
-              <i
-                className="bi bi-clipboard2 tw-cursor-pointer"
-                onClick={() => onClickClipboard('button.size.code')}
-              ></i>
-            </div>
-          </div>
+          <CustomSimpleCardLink title="其他" hash="other" />
         </div>
         <div className="card-body">
-          <div className="d-flex flex-wrap align-items-center gap-2">
-            <div>
-              <Button variant="primary" size="lg">
-                Large
-              </Button>
-            </div>
-            <div>
-              <Button variant="secondary" size="sm">
-                Small
-              </Button>
-            </div>
-            <div>
-              <Button
-                variant="secondary"
-                size={{
-                  paddingY: '0.25rem',
-                  paddingX: '0.5rem',
-                  fontSize: '0.75rem',
-                }}
+          <div>
+            <p className="small">表格中的 "-" 代表着未定义该值</p>
+            <p className="small">
+              表格中的 "..." 代表着还有其他通用属性或事件，具体可以参考 React
+              JSX 的类型提示
+            </p>
+            <p
+              className="small"
+              dangerouslySetInnerHTML={{
+                __html: `如果上述组件属性无法达到你想要的效果，可以结合使用
+            <code>className</code>、<code>style</code> 和自定义 JS
+            逻辑来完成`,
+              }}
+            ></p>
+            <p className="small">
+              如果有更好的实现方式或者其他问题，欢迎提交
+              <a
+                href="https://github.com/dafengzhen/bootstrap-react-logic/issues"
+                target="_blank"
+                className="small"
               >
-                Custom
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={clsx('card-footer', {
-            'd-none': !states.button.size.openCode,
-          })}
-        >
-          <pre>
-            <code className="language-html">
-              {states.button.size.code ?? 'TODO'}
-            </code>
-          </pre>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-header">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>禁止状态</div>
-            <div className="d-flex gap-2">
-              <i
-                className="bi bi-code tw-cursor-pointer"
-                onClick={() =>
-                  onClickUpdateState(
-                    'button.disabledState.openCode',
-                    !states.button.disabledState.openCode,
-                  )
-                }
-              ></i>
-
-              <i
-                className="bi bi-clipboard2 tw-cursor-pointer"
-                onClick={() => onClickClipboard('button.disabledState.code')}
-              ></i>
-            </div>
-          </div>
-        </div>
-        <div className="card-body">
-          <div className="d-flex flex-wrap align-items-center gap-2">
-            <div>
-              <Button variant="primary" disabled>
-                Primary
-              </Button>
-            </div>
-            <div>
-              <Button variant="secondary" disabled>
-                Secondary
-              </Button>
-            </div>
-            <div>
-              <Button as="a" href="#" variant="success" disabled>
-                Link
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={clsx('card-footer', {
-            'd-none': !states.button.disabledState.openCode,
-          })}
-        >
-          <pre>
-            <code className="language-html">
-              {states.button.disabledState.code ?? 'TODO'}
-            </code>
-          </pre>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-header">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>块状按钮</div>
-            <div className="d-flex gap-2">
-              <i
-                className="bi bi-code tw-cursor-pointer"
-                onClick={() =>
-                  onClickUpdateState(
-                    'button.blockButton.openCode',
-                    !states.button.blockButton.openCode,
-                  )
-                }
-              ></i>
-
-              <i
-                className="bi bi-clipboard2 tw-cursor-pointer"
-                onClick={() => onClickClipboard('button.blockButton.code')}
-              ></i>
-            </div>
-          </div>
-        </div>
-        <div className="card-body">
-          <div className="d-flex flex-wrap flex-column gap-4">
-            <div className="d-grid gap-2">
-              <Button variant="primary">Primary</Button>
-              <Button variant="primary">Primary</Button>
-            </div>
-
-            <div className="d-grid gap-2 d-md-flex">
-              <Button variant="primary">Primary</Button>
-              <Button variant="primary">Primary</Button>
-            </div>
-
-            <div className="d-grid gap-2 col-6 mx-auto">
-              <Button variant="primary">Primary</Button>
-              <Button variant="primary">Primary</Button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={clsx('card-footer', {
-            'd-none': !states.button.blockButton.openCode,
-          })}
-        >
-          <pre>
-            <code className="language-html">
-              {states.button.blockButton.code ?? 'TODO'}
-            </code>
-          </pre>
-        </div>
-      </div>
-      <div className="card">
-        <div className="card-header">
-          <div className="d-flex align-items-center justify-content-between">
-            <div>切换状态</div>
-            <div className="d-flex gap-2">
-              <i
-                className="bi bi-code tw-cursor-pointer"
-                onClick={() =>
-                  onClickUpdateState(
-                    'button.toggleState.openCode',
-                    !states.button.toggleState.openCode,
-                  )
-                }
-              ></i>
-
-              <i
-                className="bi bi-clipboard2 tw-cursor-pointer"
-                onClick={() => onClickClipboard('button.toggleState.code')}
-              ></i>
-            </div>
-          </div>
-        </div>
-        <div className="card-body">
-          <div className="d-flex flex-wrap gap-2">
-            <div>
-              <Button className="active">Primary</Button>
-            </div>
-            <div>
-              <Button className="active" disabled>
-                Primary
-              </Button>
-            </div>
-          </div>
-          <div className="d-flex flex-wrap gap-2 mt-2">
-            <div>
-              <Button variant="primary" className="active">
-                Primary
-              </Button>
-            </div>
-            <div>
-              <Button variant="primary" className="active" disabled>
-                Primary
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className={clsx('card-footer', {
-            'd-none': !states.button.toggleState.openCode,
-          })}
-        >
-          <pre>
-            <code className="language-html">
-              {states.button.toggleState.code ?? 'TODO'}
-            </code>
-          </pre>
-        </div>
-      </div>
-      <div className="card text-bg-light">
-        <div className="card-header">测试</div>
-        <div className="card-body">
-          <div className="d-flex flex-wrap gap-2">
-            <div>
-              <Button
-                size={mySize}
-                variant="primary"
-                onClick={onClickUpdateSizeTest}
-              >
-                Click Update Button Size ({mySize})
-              </Button>
-            </div>
+                &nbsp;issues
+              </a>
+            </p>
           </div>
         </div>
       </div>
