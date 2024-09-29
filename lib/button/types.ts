@@ -91,4 +91,6 @@ export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
    * (Clear original class names)
    */
   dropOldClass?: boolean;
+
+  options?: Omit<Props<T>, 'as' | 'options' | keyof ButtonProps<T>>;
 };
