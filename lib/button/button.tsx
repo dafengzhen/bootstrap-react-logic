@@ -1,9 +1,12 @@
-import { type CSSProperties, type ElementType } from 'react';
-import type { Props } from '@lib/button/types.ts';
+import { type CSSProperties, type ElementType, memo } from 'react';
+import type { Props, RenderOptions } from '@lib/button/types.ts';
 import clsx from 'clsx';
 import {
+  deepMerge,
   filterAndTransformProperties,
+  filterOptions,
   getValue,
+  isValueValid,
   mapAndFilterStyles,
   RoundedClassEnum,
   VARIABLE_BS_BTN_PREFIX,
@@ -76,10 +79,10 @@ function getStyles(
       size,
     ),
     ...style,
-  };
+  } as CSSProperties;
 }
 
-export default function Button<T extends ElementType = 'button'>(
+const Button = memo(function Button<T extends ElementType = 'button'>(
   props: Props<T>,
 ) {
   const {
@@ -102,8 +105,9 @@ export default function Button<T extends ElementType = 'button'>(
     startContent,
     endContent,
     dropOldClass,
+    render,
     ...rest
-  } = props;
+  } = deepMerge(props, props.options, (path) => !path.includes('options'));
 
   const classNames = getClassNames({
     Component,
@@ -135,19 +139,23 @@ export default function Button<T extends ElementType = 'button'>(
     className?.includes('active') ? 'true' : undefined,
   );
 
-  return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    <Component
-      {...rest}
-      className={classNames}
-      style={combinedStyles}
-      role={finalRole}
-      disabled={finalDisabled}
-      aria-disabled={finalAriaDisabled}
-      tabIndex={finalTabIndex}
-      aria-pressed={finalAriaPressed}
-    >
+  const renderOptions: RenderOptions = filterOptions(
+    {
+      'aria-disabled': finalAriaDisabled,
+      'aria-pressed': finalAriaPressed,
+      className: classNames,
+      disabled: finalDisabled,
+      role: finalRole,
+      style: combinedStyles,
+      tabIndex: finalTabIndex,
+    },
+    isValueValid,
+  );
+
+  const renderContent = render ? (
+    render(renderOptions)
+  ) : (
+    <>
       {isLoading && !startContent && (
         <>
           <span
@@ -162,6 +170,18 @@ export default function Button<T extends ElementType = 'button'>(
       {startContent && startContent}
       {children}
       {endContent && endContent}
+    </>
+  );
+
+  return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    <Component {...rest} {...renderOptions}>
+      {renderContent}
     </Component>
   );
-}
+});
+
+Button.displayName = 'Button';
+
+export default Button;

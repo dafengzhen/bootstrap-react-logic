@@ -11,10 +11,15 @@ export {
 
 export {
   isPlainObject,
+  isArray,
+  isSpecialObject,
   mapAndFilterStyles,
   filterTransformAndExcludeProperties,
   filterAndTransformProperties,
   camelToKebab,
   parseJson,
   getValue,
+  deepMerge,
+  filterOptions,
+  isValueValid,
 } from './tools';

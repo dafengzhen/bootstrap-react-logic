@@ -144,6 +144,10 @@ const buttonCodes = {
 <Button variant="success">
   <i className="bi bi-arrow-left"></i>
 </Button>
+<Button
+  variant="success"
+  render={() => <i className="bi bi-arrow-right"></i>}
+></Button>
     `,
   },
   customStyle: {

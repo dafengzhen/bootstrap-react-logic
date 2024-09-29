@@ -416,6 +416,10 @@ export default function ButtonPage() {
           <Button variant="success">
             <i className="bi bi-arrow-left"></i>
           </Button>
+          <Button
+            variant="success"
+            render={() => <i className="bi bi-arrow-right"></i>}
+          ></Button>
         </div>
       </CustomSimpleCard>
 
@@ -589,6 +593,26 @@ export default function ButtonPage() {
                   <td>Clear original class names</td>
                   <td>-</td>
                 </tr>
+                <tr>
+                  <td>render</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      (renderOptions) =&gt; ReactNode
+                    </span>
+                  </td>
+                  <td>Customize the rendering logic of child elements</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      Omit&lt;object, as | render | options&gt;
+                    </span>
+                  </td>
+                  <td>Custom property wrapper layer of components</td>
+                  <td>-</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -683,10 +707,14 @@ export default function ButtonPage() {
               className="small"
               dangerouslySetInnerHTML={{
                 __html: `如果上述组件属性无法达到你想要的效果，可以结合使用
-            <code>className</code>、<code>style</code> 和自定义 JS
+            <code>className</code>、<code>style</code>、<code>render</code> 自定义 JS
             逻辑来完成`,
               }}
             ></p>
+            <p className="small">
+              如果用例是需要高度复杂的，则可以考虑 Fork
+              一份，重新构建或者寻找更好的第三方库或其他方案
+            </p>
             <p className="small">
               如果有更好的实现方式或者其他问题，欢迎提交
               <a

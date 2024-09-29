@@ -1,9 +1,8 @@
 # Bootstrap React Logic
 
-Bootstrap React Logic (BRL) 是一个专为 [React](https://react.dev)
-应用设计的逻辑操作库，旨在与 [Bootstrap](https://getbootstrap.com) 样式无缝结合，帮助开发者轻松构建丰富的交互式用户界面
-BRL 提供了一系列强大且灵活的逻辑组件，简化了状态管理和事件处理，使得创建动态、响应迅速的 UI
-变得更加高效。无论是复杂的表单处理、数据展示还是用户交互，BRL 都能提供流畅的体验，助力开发者快速实现创意设计，提升开发效率
+Bootstrap React Logic (BRL) 是一个专为 [React](https://react.dev) 应用设计的逻辑操作库，旨在与 [Bootstrap](https://getbootstrap.com) 样式无缝结合，帮助开发者轻松构建丰富的交互式用户界面
+
+BRL 提供了一系列强大且灵活的逻辑组件，简化了状态管理和事件处理，使得创建动态、响应迅速的 UI 变得更加高效。无论是复杂的表单处理、数据展示还是用户交互，BRL 都能提供流畅的体验，助力开发者快速实现创意设计，提升开发效率
 
 ## Installation
 

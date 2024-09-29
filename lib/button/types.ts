@@ -28,6 +28,16 @@ type ButtonProps<T extends ElementType = 'button'> = T extends 'a'
       HTMLButtonElement
     >;
 
+export type RenderOptions = {
+  className?: Props['className'];
+  style?: Props['style'];
+  role?: Props['role'];
+  disabled?: Props['disabled'];
+  'aria-disabled'?: Props['aria-disabled'];
+  tabIndex?: Props['tabIndex'];
+  'aria-pressed'?: Props['aria-pressed'];
+};
+
 export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
   /**
    * The 'as' prop allows for specifying a different HTML element type (e.g., 'a' for anchor tag)
@@ -92,5 +102,19 @@ export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
    */
   dropOldClass?: boolean;
 
-  options?: Omit<Props<T>, 'as' | 'options' | keyof ButtonProps<T>>;
+  /**
+   * Optional 'render' prop that allows for custom rendering logic of child elements.
+   * This function can return any valid ReactNode, enabling flexible control over
+   * the component's inner structure and content. Use this to define how children
+   * should be rendered, allowing for dynamic layouts or conditional rendering
+   * based on props.
+   */
+  render?: (renderOptions: RenderOptions) => ReactNode;
+
+  /**
+   * Optional 'options' prop that allows passing additional properties to the component.
+   * This prop omits the 'as', 'render', 'options', and all properties from ButtonProps<T>
+   * to prevent conflicts and ensure only custom properties are passed.
+   */
+  options?: Omit<Props<T>, 'as' | 'render' | 'options' | keyof ButtonProps<T>>;
 };

@@ -4,17 +4,73 @@
 type MaybeFunction<T> = T | (() => T);
 
 /**
+ * Type definition for the deepMerge function.
+ * This generic type allows merging two objects of types T and U.
+ * Optionally, a custom function (shouldAssign) can be passed to control
+ * whether a specific key should be assigned or not during the merge process.
+ *
+ * @template T - Type of the first object to merge.
+ * @template U - Type of the second object to merge.
+ * @param obj1 - The first object to merge.
+ * @param obj2 - The second object to merge.
+ * @param shouldAssign - Optional function to control whether a specific key
+ *                       should be merged based on the key's path and values.
+ * @returns A merged object that combines properties from both obj1 and obj2.
+ */
+type MergeFn = <T, U>(
+  obj1: T,
+  obj2: U,
+  shouldAssign?: (path: string, value1: any, value2: any) => boolean,
+) => T & U;
+
+/**
  * Checks if a value is a plain object.
  *
  * @param value - The value to check.
  * @returns True if the value is a plain object, otherwise false.
  */
-const isPlainObject = (value: any) => {
+const isPlainObject = (value: any): boolean => {
   return (
     typeof value === 'object' &&
     value !== null &&
     Object.prototype.toString.call(value) === '[object Object]'
   );
+};
+
+/**
+ * Checks if the given value is an array.
+ *
+ * This utility function utilizes the built-in Array.isArray method
+ * to determine if the input is an array. It returns true if the input
+ * is an array, and false otherwise.
+ *
+ * @param obj - The value to check.
+ * @returns True if the value is an array; otherwise, false.
+ */
+const isArray = (obj: any): boolean => {
+  return Array.isArray(obj);
+};
+
+/**
+ * Determines if the given value is a function or a class instance.
+ * Functions and class instances are copied directly, without merging.
+ *
+ * @param obj - The value to check.
+ * @returns True if the value is a function or a class instance, otherwise false.
+ */
+const isFunctionOrClass = (obj: any): boolean => {
+  return typeof obj === 'function' || obj.constructor !== Object;
+};
+
+/**
+ * Checks if an object is a special object (either a Date or a RegExp instance).
+ * This function takes an object as input and determines if it is an instance of the Date class or the RegExp class.
+ *
+ * @param {any} obj - The object to be checked.
+ * @returns {boolean} Returns true if the object is a Date or RegExp instance, otherwise false.
+ */
+const isSpecialObject = (obj: any): boolean => {
+  return obj instanceof Date || obj instanceof RegExp;
 };
 
 /**
@@ -49,6 +105,7 @@ const mapAndFilterStyles = (
 
   return result;
 };
+
 /**
  * Filters, transforms, and excludes key-value pairs from the source object based on conditions,
  * with an optional transformation function that handles both filtering and value transformation.
@@ -193,12 +250,129 @@ const getValue = <T>(param1: MaybeFunction<T>, param2: MaybeFunction<T>): T => {
   return resolvedParam1 !== undefined ? resolvedParam1 : resolve(param2);
 };
 
+/**
+ * Recursively merges two objects, handling nested objects and arrays.
+ * This function can also handle functions and class instances by directly copying them,
+ * instead of attempting to merge their internal structure.
+ * Optionally, the merging behavior for specific keys can be customized via the shouldAssign function.
+ *
+ * @param obj1 - The first object to merge.
+ * @param obj2 - The second object to merge.
+ * @param shouldAssign - Optional function that takes the key's path and the corresponding values from both
+ *                       objects. It returns a boolean that determines whether the key should be assigned.
+ *                       By default, it always returns true (all keys are merged).
+ * @returns A new object containing the merged properties of obj1 and obj2.
+ */
+const deepMerge: MergeFn = (obj1, obj2, shouldAssign = () => true) => {
+  if (!isPlainObject(obj1) || !isPlainObject(obj2)) {
+    return obj1 || {};
+  }
+
+  const mergeArrays = (
+    targetArr: any[],
+    sourceArr: any[],
+    path: string,
+  ): any[] => {
+    return sourceArr.map((sourceValue, index) => {
+      const targetValue = targetArr[index];
+      const newPath = `${path}[${index}]`;
+
+      if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
+        return mergeObjects(targetValue, sourceValue, newPath);
+      } else if (isArray(sourceValue)) {
+        return mergeArrays(targetValue || [], sourceValue, newPath);
+      } else {
+        return sourceValue;
+      }
+    });
+  };
+
+  const mergeObjects = (target: any, source: any, path: string = '') => {
+    for (const key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        const targetValue = target[key];
+        const sourceValue = source[key];
+        const newPath = path ? `${path}.${key}` : key;
+
+        if (!shouldAssign(newPath, targetValue, sourceValue)) {
+          continue;
+        }
+
+        if (isSpecialObject(sourceValue)) {
+          target[key] = new sourceValue.constructor(sourceValue);
+        } else if (isFunctionOrClass(sourceValue)) {
+          target[key] = sourceValue;
+        } else if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
+          target[key] = mergeObjects(targetValue, sourceValue, newPath);
+        } else if (isArray(targetValue) && isArray(sourceValue)) {
+          target[key] = mergeArrays(targetValue, sourceValue, newPath);
+        } else {
+          target[key] = sourceValue;
+        }
+      }
+    }
+    return target;
+  };
+
+  return mergeObjects(obj1, obj2);
+};
+
+/**
+ * Filters the given options based on the provided filter function.
+ *
+ * @param options - An object containing options to be filtered.
+ * @param filterFn - A function that determines whether a key-value pair should be included in the result.
+ *                   It receives the value and its corresponding key of the options object, and returns a boolean.
+ *                   Defaults to a function that returns true for all key-value pairs.
+ * @returns A new object containing only the key-value pairs from the options that pass the filter function.
+ *
+ * @template T - The type of the options object.
+ */
+const filterOptions = <T extends Record<string, any>>(
+  options: T,
+  filterFn: (value: T[keyof T], key: keyof T) => boolean = () => true,
+): Partial<T> => {
+  const filteredOptions: Partial<T> = {};
+
+  for (const key in options) {
+    if (Object.prototype.hasOwnProperty.call(options, key)) {
+      const value = options[key];
+      if (filterFn(value, key as keyof T)) {
+        filteredOptions[key] = value;
+      }
+    }
+  }
+
+  return filteredOptions;
+};
+
+/**
+ * Checks if the provided value is valid.
+ * A value is considered valid if:
+ * 1. It is not undefined or null.
+ * 2. If it is an object, it should not be an empty object.
+ *
+ * @param {any} value - The value to check.
+ * @returns {boolean} - Returns true if the value is valid, otherwise false.
+ */
+const isValueValid = (value: any): boolean => {
+  if (value !== undefined && value !== null) {
+    return !(typeof value === 'object' && Object.keys(value).length === 0);
+  }
+  return false;
+};
+
 export {
-  isPlainObject,
-  mapAndFilterStyles,
-  filterTransformAndExcludeProperties,
-  filterAndTransformProperties,
   camelToKebab,
-  parseJson,
+  deepMerge,
+  filterAndTransformProperties,
+  filterTransformAndExcludeProperties,
   getValue,
+  isArray,
+  isPlainObject,
+  isSpecialObject,
+  mapAndFilterStyles,
+  parseJson,
+  filterOptions,
+  isValueValid,
 };

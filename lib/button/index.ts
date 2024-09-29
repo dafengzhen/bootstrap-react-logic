@@ -1,7 +1,7 @@
 import Button from './button';
 
 // types
-export type { Props as ButtonProps } from './types.ts';
+export type { Props as ButtonProps, RenderOptions } from './types.ts';
 
 // hooks
 

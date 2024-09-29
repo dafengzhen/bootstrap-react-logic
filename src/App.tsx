@@ -27,7 +27,7 @@ function App() {
 
   return (
     <GlobalContext.Provider value={{ fullscreen, theme }}>
-      <div className="container-fluid p-4">
+      <div className="container-fluid p-2 p-sm-4">
         <div className="row g-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">
