@@ -21,6 +21,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'lib/main.ts'),
       name: 'BRL',
     },
+    cssCodeSplit: true,
     rollupOptions: {
       external: ['react', 'react/jsx-runtime'],
       output: {
