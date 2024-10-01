@@ -6,6 +6,7 @@ import useHighlightCode from '@hooks/use-highlight-code.ts';
 import type { NestedKeys } from '@src/types';
 import CustomSimpleCard from '@src/components/custom-simple-card';
 import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
+import AboutComponent from '@components/about-component.tsx';
 
 interface IStates {
   button: {
@@ -495,6 +496,34 @@ export default function ButtonPage() {
                   </td>
                 </tr>
                 <tr>
+                  <td>dropOldClass</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Clear original class names</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>render</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      (renderOptions) =&gt; ReactNode
+                    </span>
+                  </td>
+                  <td>Customize the rendering logic of child elements</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      Omit&lt;Props, as | render | options&gt;
+                    </span>
+                  </td>
+                  <td>Custom property wrapper layer of components</td>
+                  <td>-</td>
+                </tr>
+                <tr>
                   <td>variant</td>
                   <td>
                     <span className="badge text-bg-secondary">
@@ -517,14 +546,6 @@ export default function ButtonPage() {
                   <td>-</td>
                 </tr>
                 <tr>
-                  <td>size</td>
-                  <td>
-                    <span className="badge text-bg-secondary">lg | sm</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
                   <td>disabled</td>
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
@@ -541,17 +562,17 @@ export default function ButtonPage() {
                   <td>-</td>
                 </tr>
                 <tr>
-                  <td>variables</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td>Style variables</td>
-                  <td>-</td>
-                </tr>
-                <tr>
                   <td>isLoading</td>
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>size</td>
+                  <td>
+                    <span className="badge text-bg-secondary">lg | sm</span>
                   </td>
                   <td></td>
                   <td>-</td>
@@ -586,31 +607,11 @@ export default function ButtonPage() {
                   <td>-</td>
                 </tr>
                 <tr>
-                  <td>dropOldClass</td>
+                  <td>variables</td>
                   <td>
-                    <span className="badge text-bg-secondary">boolean</span>
+                    <span className="badge text-bg-secondary">object</span>
                   </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>render</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      (renderOptions) =&gt; ReactNode
-                    </span>
-                  </td>
-                  <td>Customize the rendering logic of child elements</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>options</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      Omit&lt;object, as | render | options&gt;
-                    </span>
-                  </td>
-                  <td>Custom property wrapper layer of components</td>
+                  <td>Style variables</td>
                   <td>-</td>
                 </tr>
               </tbody>
@@ -692,42 +693,7 @@ export default function ButtonPage() {
         </div>
       </div>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink title="其他" hash="other" />
-        </div>
-        <div className="card-body">
-          <div>
-            <p className="small">表格中的 "-" 代表着未定义该值</p>
-            <p className="small">
-              表格中的 "..." 代表着还有其他通用属性或事件，具体可以参考 React
-              JSX 的类型提示
-            </p>
-            <p
-              className="small"
-              dangerouslySetInnerHTML={{
-                __html: `如果上述组件属性无法达到你想要的效果，可以结合使用
-            <code>className</code>、<code>style</code>、<code>render</code> 自定义 JS
-            逻辑来完成`,
-              }}
-            ></p>
-            <p className="small">
-              如果用例是需要高度复杂的，则可以考虑 Fork
-              一份，重新构建或者寻找更好的第三方库或其他方案
-            </p>
-            <p className="small">
-              如果有更好的实现方式或者其他问题，欢迎提交
-              <a
-                href="https://github.com/dafengzhen/bootstrap-react-logic/issues"
-                target="_blank"
-                className="small"
-              >
-                &nbsp;issues
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
+      <AboutComponent />
     </div>
   );
 }

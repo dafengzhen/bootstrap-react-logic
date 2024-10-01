@@ -6,7 +6,7 @@ BRL 提供了一系列强大且灵活的逻辑组件，简化了状态管理和�
 
 ## Installation
 
-前提条件：在安装之前请确保已经存在 bootstrap 依赖
+在安装之前请确保已经存在 bootstrap 依赖
 
 使用 npm 安装 BRL：
 

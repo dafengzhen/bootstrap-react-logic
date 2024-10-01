@@ -1,6 +1,10 @@
 export type { ReactRef } from './refs';
 
-export { VARIABLE_BS_PREFIX, VARIABLE_BS_BTN_PREFIX } from './constants';
+export {
+  VARIABLE_BS_PREFIX,
+  VARIABLE_BS_BTN_PREFIX,
+  DEVELOPMENT,
+} from './constants';
 
 export {
   VariableEnum,
@@ -22,4 +26,7 @@ export {
   deepMerge,
   filterOptions,
   isValueValid,
+  createLogger,
+  checkObjectProperties,
+  isDefined,
 } from './tools';

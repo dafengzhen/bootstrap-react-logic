@@ -46,7 +46,7 @@ export default function IndexPage() {
           <div className="h5 mb-4">一、安装</div>
           <div className="mb-4">
             <div className="mb-4">
-              前提条件：在安装之前请确保已经存在 <code>bootstrap</code> 依赖
+              在安装之前请确保已经存在 <code>bootstrap</code> 依赖
             </div>
 
             <div className="mb-2">使用 npm 安装 BRL：</div>

@@ -17,6 +17,10 @@ $bootstrap-icons-font-dir: '../../node_modules/bootstrap-icons/font/fonts';
 
 @import 'highlight.js/scss/github';
 
+@include color-mode(dark) {
+  @import 'highlight.js/scss/github-dark';
+}
+
 pre code.hljs {
   padding: 0;
 }

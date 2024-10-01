@@ -8,4 +8,9 @@ const VARIABLE_BS_PREFIX = '--bs';
  */
 const VARIABLE_BS_BTN_PREFIX = `${VARIABLE_BS_PREFIX}-btn`;
 
-export { VARIABLE_BS_PREFIX, VARIABLE_BS_BTN_PREFIX };
+/**
+ * development.
+ */
+const DEVELOPMENT = 'development';
+
+export { VARIABLE_BS_PREFIX, VARIABLE_BS_BTN_PREFIX, DEVELOPMENT };

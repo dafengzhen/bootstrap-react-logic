@@ -1,5 +1,5 @@
-import { type CSSProperties, type ElementType, memo } from 'react';
-import type { Props, RenderOptions } from '@lib/button/types.ts';
+import { type CSSProperties, type ElementType, useMemo } from 'react';
+import type { Props } from '@lib/button/types.ts';
 import clsx from 'clsx';
 import {
   deepMerge,
@@ -24,65 +24,7 @@ function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   }
 }
 
-function getClassNames({
-  active,
-  variant,
-  outline,
-  size,
-  disabled,
-  Component,
-  className,
-  rounded,
-  dropOldClass,
-}: {
-  active?: boolean;
-  variant?: string;
-  outline?: string;
-  size?: Props['size'];
-  disabled?: boolean;
-  Component: ElementType;
-  className?: string;
-  rounded?: Props['rounded'];
-  dropOldClass?: boolean;
-}) {
-  return clsx(
-    !dropOldClass && 'btn',
-    active && 'active',
-    variant && `btn-${variant}`,
-    outline && `btn-outline-${outline}`,
-    typeof size === 'string' && `btn-${size}`,
-    Component === 'a' && disabled && 'disabled',
-    rounded && getRoundedValue(rounded),
-    className,
-  );
-}
-
-function getStyles(
-  variables: Props['variables'],
-  size: Props['size'],
-  style: CSSProperties | undefined,
-) {
-  return {
-    ...filterAndTransformProperties(variables, (_, key) => {
-      const _key = VariableEnum[key];
-      return {
-        include: !!_key,
-        transformedKey: `${VARIABLE_BS_PREFIX}-${_key}`,
-      };
-    }),
-    ...mapAndFilterStyles(
-      {
-        [`${VARIABLE_BS_BTN_PREFIX}-padding-y`]: 'paddingY',
-        [`${VARIABLE_BS_BTN_PREFIX}-padding-x`]: 'paddingX',
-        [`${VARIABLE_BS_BTN_PREFIX}-font-size`]: 'fontSize',
-      },
-      size,
-    ),
-    ...style,
-  } as CSSProperties;
-}
-
-const Button = memo(function Button<T extends ElementType = 'button'>(
+const Button = function Button<T extends ElementType = 'button'>(
   props: Props<T>,
 ) {
   const {
@@ -109,48 +51,82 @@ const Button = memo(function Button<T extends ElementType = 'button'>(
     ...rest
   } = deepMerge(props, props.options, (path) => !path.includes('options'));
 
-  const classNames = getClassNames({
+  const renderOptions = useMemo(() => {
+    const finalClass = clsx(
+      !dropOldClass && 'btn',
+      active && 'active',
+      variant && `btn-${variant}`,
+      outline && `btn-outline-${outline}`,
+      size && `btn-${size}`,
+      Component === 'a' && disabled && 'disabled',
+      rounded && getRoundedValue(rounded),
+      className,
+    );
+    const finalStyle = {
+      ...filterAndTransformProperties(variables, (_, key) => {
+        const _key = VariableEnum[key];
+        return {
+          include: !!_key,
+          transformedKey: `${VARIABLE_BS_PREFIX}-${_key}`,
+        };
+      }),
+      ...mapAndFilterStyles(
+        {
+          [`${VARIABLE_BS_BTN_PREFIX}-padding-y`]: 'paddingY',
+          [`${VARIABLE_BS_BTN_PREFIX}-padding-x`]: 'paddingX',
+          [`${VARIABLE_BS_BTN_PREFIX}-font-size`]: 'fontSize',
+        },
+        size,
+      ),
+      ...style,
+    } as CSSProperties;
+    const finalRole = getValue(role, Component === 'a' ? 'button' : undefined);
+    const finalDisabled = getValue(
+      Component === 'button' && disabled,
+      Component === 'a' ? undefined : disabled,
+    );
+    const finalAriaDisabled = getValue(
+      ariaDisabled,
+      disabled ? 'true' : undefined,
+    );
+    const finalAriaPressed = getValue(
+      ariaPressed,
+      className?.includes('active') ? 'true' : undefined,
+    );
+    const finalTabIndex = getValue(
+      tabIndex,
+      Component === 'a' && disabled ? -1 : undefined,
+    );
+
+    return filterOptions(
+      {
+        className: finalClass,
+        style: finalStyle,
+        role: finalRole,
+        disabled: finalDisabled,
+        tabIndex: finalTabIndex,
+        'aria-disabled': finalAriaDisabled,
+        'aria-pressed': finalAriaPressed,
+      },
+      isValueValid,
+    );
+  }, [
     Component,
     active,
+    ariaDisabled,
+    ariaPressed,
     className,
     disabled,
+    dropOldClass,
     outline,
+    role,
     rounded,
     size,
-    variant,
-    dropOldClass,
-  });
-  const combinedStyles = getStyles(variables, size, style);
-  const finalRole = getValue(role, Component === 'a' ? 'button' : undefined);
-  const finalDisabled = getValue(
-    Component === 'button' && disabled,
-    Component === 'a' ? undefined : disabled,
-  );
-  const finalAriaDisabled = getValue(
-    ariaDisabled,
-    disabled ? 'true' : undefined,
-  );
-  const finalTabIndex = getValue(
+    style,
     tabIndex,
-    Component === 'a' && disabled ? -1 : undefined,
-  );
-  const finalAriaPressed = getValue(
-    ariaPressed,
-    className?.includes('active') ? 'true' : undefined,
-  );
-
-  const renderOptions: RenderOptions = filterOptions(
-    {
-      'aria-disabled': finalAriaDisabled,
-      'aria-pressed': finalAriaPressed,
-      className: classNames,
-      disabled: finalDisabled,
-      role: finalRole,
-      style: combinedStyles,
-      tabIndex: finalTabIndex,
-    },
-    isValueValid,
-  );
+    variables,
+    variant,
+  ]);
 
   const renderContent = render ? (
     render(renderOptions)
@@ -180,8 +156,8 @@ const Button = memo(function Button<T extends ElementType = 'button'>(
       {renderContent}
     </Component>
   );
-});
+};
 
-Button.displayName = 'Button';
+Button.displayName = 'BRL.Button';
 
 export default Button;

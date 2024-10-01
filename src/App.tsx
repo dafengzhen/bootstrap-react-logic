@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { GlobalContext } from '@contexts/global-context.ts';
 
 interface IMenu {
-  name: 'Button';
-  to: '/pages/button';
+  name: 'Button' | 'ButtonGroup';
+  to: '/pages/button' | '/pages/button-group';
 }
 
 function App() {
@@ -18,6 +18,10 @@ function App() {
     {
       name: 'Button',
       to: '/pages/button',
+    },
+    {
+      name: 'ButtonGroup',
+      to: '/pages/button-group',
     },
   ]);
 

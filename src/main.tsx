@@ -6,6 +6,7 @@ import ErrorPage from '@pages/error-page.tsx';
 import ButtonPage from '@pages/button-page.tsx';
 import IndexPage from '@pages/index-page.tsx';
 import App from '@src/App.tsx';
+import ButtonGroupPage from '@pages/button-group-page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
           {
             path: 'pages/button',
             element: <ButtonPage />,
+          },
+          {
+            path: 'pages/button-group',
+            element: <ButtonGroupPage />,
           },
         ],
       },

@@ -234,20 +234,27 @@ const parseJson = (
 
 /**
  * A utility function that returns the first parameter if it's not undefined.
- * If the first parameter is undefined, it returns the second parameter.
+ * If the first parameter is undefined, it returns the second parameter if provided.
  * If either of the parameters is a function, it evaluates the function
  * and uses its return value to make the comparison.
  *
  * @param param1 - The first parameter, can be a value or a function returning a value.
- * @param param2 - The second parameter, can be a value or a function returning a value.
- * @returns The first parameter if it's defined, otherwise the second parameter.
+ * @param param2 - The optional second parameter, can be a value or a function returning a value.
+ * @returns The first parameter if it's defined, otherwise the second parameter if provided.
  */
-const getValue = <T>(param1: MaybeFunction<T>, param2: MaybeFunction<T>): T => {
+const getValue = <T>(
+  param1: MaybeFunction<T>,
+  param2?: MaybeFunction<T>,
+): T => {
   const resolve = (val: MaybeFunction<T>): T =>
     typeof val === 'function' ? (val as () => T)() : val;
 
   const resolvedParam1 = resolve(param1);
-  return resolvedParam1 !== undefined ? resolvedParam1 : resolve(param2);
+  return resolvedParam1 !== undefined
+    ? resolvedParam1
+    : param2
+      ? resolve(param2)
+      : resolvedParam1;
 };
 
 /**
@@ -352,14 +359,140 @@ const filterOptions = <T extends Record<string, any>>(
  * 1. It is not undefined or null.
  * 2. If it is an object, it should not be an empty object.
  *
- * @param {any} value - The value to check.
+ * @param {unknown} value - The value to check.
  * @returns {boolean} - Returns true if the value is valid, otherwise false.
  */
-const isValueValid = (value: any): boolean => {
-  if (value !== undefined && value !== null) {
-    return !(typeof value === 'object' && Object.keys(value).length === 0);
+const isValueValid = (value: unknown): boolean => {
+  return (
+    value !== undefined &&
+    value !== null &&
+    !(typeof value === 'object' && Object.keys(value).length === 0)
+  );
+};
+
+/**
+ * Creates a logger with a given project name.
+ * This logger provides methods to output warning messages for missing parameters.
+ *
+ * @param {string} [projectName='BRL'] - The name of the project.
+ * @returns {{ warnMissingParam: (options: {
+ *   propertyName: string;
+ *   componentName: string;
+ *   expectedType?: string;
+ *   level?: 'warn' | 'error' | 'info';
+ *   currentValue?: any;
+ * }) => void }} - An object containing the logging methods.
+ */
+const createLogger = (
+  projectName: string = 'BRL',
+): {
+  warnMissingParam: (options: {
+    propertyName: string;
+    componentName: string;
+    expectedType?: string;
+    currentValue?: any;
+    level?: 'warn' | 'error' | 'info';
+  }) => void;
+} => {
+  /**
+   * Gets the current date and time in ISO string format.
+   *
+   * @returns {string} - The current date and time in ISO format.
+   */
+  const getCurrentDateTime = (): string => new Date().toISOString();
+
+  /**
+   * Logs a message when a parameter is missing or invalid.
+   * Can log at 'warn', 'error', or 'info' levels.
+   *
+   * @param {object} options - Options object for the warning.
+   * @param {string} options.propertyName - The name of the missing property.
+   * @param {string} options.componentName - The name of the component where the issue occurred.
+   * @param {string} [options.expectedType='string'] - The expected data type of the property.
+   * @param {'warn' | 'error' | 'info'} [options.level='warn'] - The log level for the message.
+   * @param {any} [options.currentValue] - The current value of the property to be logged.
+   */
+  const warnMissingParam = ({
+    propertyName,
+    componentName,
+    expectedType = 'string',
+    level = 'warn',
+    currentValue,
+  }: {
+    propertyName: string;
+    componentName: string;
+    expectedType?: string;
+    currentValue?: any;
+    level?: 'warn' | 'error' | 'info';
+  }) => {
+    const dateTime = getCurrentDateTime();
+    const currentValStr =
+      currentValue !== undefined ? `, current value is "${currentValue}"` : '';
+    const message = `[${projectName}] ${dateTime} ${level.toUpperCase()} ${componentName}: The parameter "${propertyName}" is missing${expectedType ? `, expected type is "${expectedType}"` : ''}${currentValStr}.`;
+
+    switch (level) {
+      case 'error':
+        console.error(message);
+        break;
+      case 'info':
+        console.info(message);
+        break;
+      case 'warn':
+      default:
+        console.warn(message);
+        break;
+    }
+  };
+
+  return { warnMissingParam };
+};
+
+/**
+ * Checks the properties of an object based on provided keys and a predicate function.
+ * If the predicate returns false, it triggers the callback function.
+ *
+ * @template T
+ * @param {T} obj - The object whose properties need to be checked.
+ * @param {keyof T | (keyof T)[]} keys - A single key or an array of keys to check.
+ * @param {(value: T[keyof T]) => boolean} [predicate=() => true] - A function to evaluate the validity of a property's value.
+ * @param {(propertyName: string, value: any) => void} callback - A callback function to handle invalid properties.
+ * @returns {boolean} - Returns true if all properties satisfy the predicate; otherwise, false.
+ */
+const checkObjectProperties = <T extends object>(
+  obj: T,
+  keys: keyof T | (keyof T)[],
+  predicate: (value: T[keyof T]) => boolean = () => true,
+  callback: (propertyName: string, value: any) => void,
+): boolean => {
+  const checkKey = (key: keyof T) => {
+    const value = obj[key];
+    const isValid = predicate(value);
+
+    if (!isValid) {
+      callback(String(key), value);
+    }
+
+    return isValid;
+  };
+
+  if (Array.isArray(keys)) {
+    return keys.every((key) => checkKey(key));
+  } else {
+    return checkKey(keys);
   }
-  return false;
+};
+
+/**
+ * Checks if a value is defined (not undefined, null, or an empty string).
+ *
+ * @param {any} value - The value to check.
+ * @param {boolean} [checkEmptyString=false] - Whether to consider an empty string as undefined.
+ * @returns {boolean} - Returns true if the value is neither undefined, null, nor an empty string (if checked); otherwise, false.
+ */
+const isDefined = (value: any, checkEmptyString: boolean = false): boolean => {
+  return (
+    value !== undefined && value !== null && (!checkEmptyString || value !== '')
+  );
 };
 
 export {
@@ -375,4 +508,7 @@ export {
   parseJson,
   filterOptions,
   isValueValid,
+  createLogger,
+  checkObjectProperties,
+  isDefined,
 };
