@@ -510,7 +510,15 @@ export default function ButtonPage() {
                       (renderOptions) =&gt; ReactNode
                     </span>
                   </td>
-                  <td>Customize the rendering logic of child elements</td>
+                  <td>Customize rendering logic</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>skipCompWrap</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Skip component wrapper</td>
                   <td>-</td>
                 </tr>
                 <tr>

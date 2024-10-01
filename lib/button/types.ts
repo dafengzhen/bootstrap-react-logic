@@ -38,83 +38,82 @@ export type RenderOptions = {
   'aria-pressed'?: Props['aria-pressed'];
 };
 
+// Main props for the button component, extending ButtonProps
 export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
   /**
-   * The 'as' prop allows for specifying a different HTML element type (e.g., 'a' for anchor tag)
+   * Determines which element type to render as (e.g., button or anchor).
    */
   as?: T;
 
   /**
-   * Optional 'variant' prop based on 'VariantEnum'
+   * Flag to indicate whether to drop old class names.
+   */
+  dropOldClass?: boolean;
+
+  /**
+   * Custom render function to customize the rendering of the component.
+   */
+  render?: (renderOptions: RenderOptions) => ReactNode;
+
+  /**
+   * Flag to skip wrapping the component in an additional element.
+   */
+  skipCompWrap?: boolean;
+
+  /**
+   * Options for additional props, excluding specific keys.
+   */
+  options?: Omit<Props<T>, 'as' | 'render' | 'options' | keyof ButtonProps<T>>;
+
+  /**
+   * Button variant type based on keys in VariantEnum.
    */
   variant?: keyof typeof VariantEnum;
 
   /**
-   * Optional 'outline' prop based on 'OutlineEnum'
+   * Outline style based on keys in OutlineEnum.
    */
   outline?: keyof typeof OutlineEnum;
 
   /**
-   * Optional 'rounded' prop, either from 'RoundedClassEnum' or a boolean value
+   * Rounded style based on keys in RoundedClassEnum or boolean.
    */
   rounded?: keyof typeof RoundedClassEnum | boolean;
 
   /**
-   * Optional 'size' prop for setting predefined sizes ('lg', 'sm') or custom size properties
+   * Size of the button, can be large, small, or an object specifying padding and font size.
    */
   size?:
     | 'lg'
     | 'sm'
     | {
-        paddingY?: string;
-        paddingX?: string;
-        fontSize?: string;
+        paddingY?: string; // Vertical padding
+        paddingX?: string; // Horizontal padding
+        fontSize?: string; // Font size
       };
 
   /**
-   * Optional 'active' prop for indicating if the button is in an active state
+   * Indicates if the button is currently active.
    */
   active?: boolean;
 
   /**
-   * Optional 'variables' prop for dynamic variable support using the 'Variables' type
-   */
-  variables?: Variables;
-
-  /**
-   * Optional 'isLoading' prop to indicate a loading state
+   * Indicates if the button is in a loading state.
    */
   isLoading?: boolean;
 
   /**
-   * Optional 'startContent' prop for placing content (e.g., icon) at the beginning of the button
+   * Additional variable properties based on the Variables type.
+   */
+  variables?: Variables;
+
+  /**
+   * Content to render at the start of the button.
    */
   startContent?: ReactNode;
 
   /**
-   * Optional 'endContent' prop for placing content at the end of the button
+   * Content to render at the end of the button.
    */
   endContent?: ReactNode;
-
-  /**
-   * Optional 'dropOldClass' prop to specify if old CSS classes should be removed
-   * (Clear original class names)
-   */
-  dropOldClass?: boolean;
-
-  /**
-   * Optional 'render' prop that allows for custom rendering logic of child elements.
-   * This function can return any valid ReactNode, enabling flexible control over
-   * the component's inner structure and content. Use this to define how children
-   * should be rendered, allowing for dynamic layouts or conditional rendering
-   * based on props.
-   */
-  render?: (renderOptions: RenderOptions) => ReactNode;
-
-  /**
-   * Optional 'options' prop that allows passing additional properties to the component.
-   * This prop omits the 'as', 'render', 'options', and all properties from ButtonProps<T>
-   * to prevent conflicts and ensure only custom properties are passed.
-   */
-  options?: Omit<Props<T>, 'as' | 'render' | 'options' | keyof ButtonProps<T>>;
 };

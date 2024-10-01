@@ -29,21 +29,34 @@ function App() {
     navigate(-1);
   }
 
+  function onClickHouse() {
+    navigate('/');
+  }
+
   return (
     <GlobalContext.Provider value={{ fullscreen, theme }}>
       <div className="container-fluid p-2 p-sm-4">
-        <div className="row g-4">
+        <div className="row g-2 g-sm-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">
               {location.pathname !== '/' && (
-                <button
-                  type="button"
-                  className="btn btn-light mb-2"
-                  onClick={onClickReturn}
-                >
-                  <i className="bi bi-chevron-left me-2"></i>
-                  <span>Back</span>
-                </button>
+                <div className="d-flex gap-2 mb-2">
+                  <button
+                    type="button"
+                    className="btn btn-light"
+                    onClick={onClickHouse}
+                  >
+                    <i className="bi bi-house-door-fill"></i>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn btn-light w-100"
+                    onClick={onClickReturn}
+                  >
+                    <i className="bi bi-chevron-left"></i>
+                  </button>
+                </div>
               )}
 
               <div className="list-group">
@@ -53,7 +66,7 @@ function App() {
                       key={item.name}
                       className={({ isActive, isPending }) => {
                         return clsx(
-                          'list-group-item list-group-item-action',
+                          'list-group-item list-group-item-action text-truncate',
                           isActive && 'active',
                           isPending && 'pending',
                         );

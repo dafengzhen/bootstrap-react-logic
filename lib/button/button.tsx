@@ -48,6 +48,7 @@ const Button = function Button<T extends ElementType = 'button'>(
     endContent,
     dropOldClass,
     render,
+    skipCompWrap,
     ...rest
   } = deepMerge(props, props.options, (path) => !path.includes('options'));
 
@@ -128,8 +129,12 @@ const Button = function Button<T extends ElementType = 'button'>(
     variant,
   ]);
 
+  if (render && skipCompWrap) {
+    return render({ ...rest, ...renderOptions });
+  }
+
   const renderContent = render ? (
-    render(renderOptions)
+    render({ ...rest, ...renderOptions })
   ) : (
     <>
       {isLoading && !startContent && (

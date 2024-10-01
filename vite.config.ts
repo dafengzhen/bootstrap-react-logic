@@ -58,6 +58,10 @@ export default defineConfig({
         replacement: resolve(__dirname, 'src/hooks'),
       },
       {
+        find: '@hocs',
+        replacement: resolve(__dirname, 'src/hocs'),
+      },
+      {
         find: '@pages',
         replacement: resolve(__dirname, 'src/pages'),
       },

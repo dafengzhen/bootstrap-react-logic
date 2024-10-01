@@ -22,6 +22,7 @@
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@hocs/*": ["./src/hocs/*"],
       "@types/*": ["./src/types/*"],
       "@pages/*": ["./src/pages/*"],
       "@store/*": ["./src/store/*"],

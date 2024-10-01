@@ -29,6 +29,7 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'button'>(
     size,
     vertical,
     render,
+    skipCompWrap,
     ...rest
   } = deepMerge(props, props.options, (path) => !path.includes('options'));
 
@@ -85,7 +86,13 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'button'>(
     ariaLabel,
   ]);
 
-  const renderContent = render ? render(renderOptions) : children;
+  if (render && skipCompWrap) {
+    return render({ ...rest, ...renderOptions });
+  }
+
+  const renderContent = render
+    ? render({ ...rest, ...renderOptions })
+    : children;
 
   return (
     <Component {...rest} {...renderOptions}>

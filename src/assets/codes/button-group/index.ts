@@ -108,31 +108,31 @@ const buttonGroupCodes = {
   },
   toolbar: {
     code: `
-<div className="d-flex flex-column gap-4">
+<div className="d-flex flex-column gap-2">
   <div>
-    <ButtonGroup toolbar>
-      <ButtonGroup className="me-2">
+    <ButtonGroup toolbar className="gap-2">
+      <ButtonGroup>
         <Button variant="primary">1</Button>
         <Button variant="primary">2</Button>
         <Button variant="primary">3</Button>
         <Button variant="primary">4</Button>
       </ButtonGroup>
 
-      <ButtonGroup className="me-2">
+      <ButtonGroup>
         <Button variant="secondary">5</Button>
         <Button variant="secondary">6</Button>
         <Button variant="secondary">7</Button>
       </ButtonGroup>
 
-      <ButtonGroup className="me-2">
+      <ButtonGroup>
         <Button variant="info">8</Button>
       </ButtonGroup>
     </ButtonGroup>
   </div>
 
   <div>
-    <ButtonGroup toolbar>
-      <ButtonGroup className="me-2">
+    <ButtonGroup toolbar className="gap-2">
+      <ButtonGroup>
         <Button outline="secondary">1</Button>
         <Button outline="secondary">2</Button>
         <Button outline="secondary">3</Button>
@@ -155,8 +155,8 @@ const buttonGroupCodes = {
   </div>
 
   <div>
-    <ButtonGroup toolbar className="justify-content-between">
-      <ButtonGroup className="me-2">
+    <ButtonGroup toolbar className="justify-content-between gap-2">
+      <ButtonGroup>
         <Button outline="secondary">1</Button>
         <Button outline="secondary">2</Button>
         <Button outline="secondary">3</Button>

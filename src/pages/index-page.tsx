@@ -8,7 +8,7 @@ export default function IndexPage() {
       <div className="card">
         <div className="card-header">
           <div className="d-flex align-items-center justify-content-between">
-            <div>Docs</div>
+            <div>Getting started</div>
             <div className="d-flex gap-2">
               <a
                 href="https://github.com/dafengzhen/bootstrap-react-logic"

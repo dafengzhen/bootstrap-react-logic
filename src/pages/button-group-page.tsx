@@ -177,37 +177,39 @@ export default function ButtonGroupPage() {
         }
         code={states.buttonGroup.checkbox.code}
       >
-        <ButtonGroup>
-          <input
-            type="checkbox"
-            className="btn-check"
-            id="btncheck1"
-            autoComplete="off"
-          />
-          <label className="btn btn-outline-primary" htmlFor="btncheck1">
-            Checkbox 1
-          </label>
+        <div className="overflow-x-auto text-nowrap">
+          <ButtonGroup>
+            <input
+              type="checkbox"
+              className="btn-check"
+              id="btncheck1"
+              autoComplete="off"
+            />
+            <label className="btn btn-outline-primary" htmlFor="btncheck1">
+              Checkbox 1
+            </label>
 
-          <input
-            type="checkbox"
-            className="btn-check"
-            id="btncheck2"
-            autoComplete="off"
-          />
-          <label className="btn btn-outline-primary" htmlFor="btncheck2">
-            Checkbox 2
-          </label>
+            <input
+              type="checkbox"
+              className="btn-check"
+              id="btncheck2"
+              autoComplete="off"
+            />
+            <label className="btn btn-outline-primary" htmlFor="btncheck2">
+              Checkbox 2
+            </label>
 
-          <input
-            type="checkbox"
-            className="btn-check"
-            id="btncheck3"
-            autoComplete="off"
-          />
-          <label className="btn btn-outline-primary" htmlFor="btncheck3">
-            Checkbox 3
-          </label>
-        </ButtonGroup>
+            <input
+              type="checkbox"
+              className="btn-check"
+              id="btncheck3"
+              autoComplete="off"
+            />
+            <label className="btn btn-outline-primary" htmlFor="btncheck3">
+              Checkbox 3
+            </label>
+          </ButtonGroup>
+        </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
@@ -222,41 +224,43 @@ export default function ButtonGroupPage() {
         }
         code={states.buttonGroup.radio.code}
       >
-        <ButtonGroup>
-          <input
-            type="radio"
-            className="btn-check"
-            name="btnradio"
-            id="btnradio1"
-            autoComplete="off"
-            defaultChecked
-          />
-          <label className="btn btn-outline-primary" htmlFor="btnradio1">
-            Radio 1
-          </label>
+        <div className="overflow-x-auto text-nowrap">
+          <ButtonGroup>
+            <input
+              type="radio"
+              className="btn-check"
+              name="btnradio"
+              id="btnradio1"
+              autoComplete="off"
+              defaultChecked
+            />
+            <label className="btn btn-outline-primary" htmlFor="btnradio1">
+              Radio 1
+            </label>
 
-          <input
-            type="radio"
-            className="btn-check"
-            name="btnradio"
-            id="btnradio2"
-            autoComplete="off"
-          />
-          <label className="btn btn-outline-primary" htmlFor="btnradio2">
-            Radio 2
-          </label>
+            <input
+              type="radio"
+              className="btn-check"
+              name="btnradio"
+              id="btnradio2"
+              autoComplete="off"
+            />
+            <label className="btn btn-outline-primary" htmlFor="btnradio2">
+              Radio 2
+            </label>
 
-          <input
-            type="radio"
-            className="btn-check"
-            name="btnradio"
-            id="btnradio3"
-            autoComplete="off"
-          />
-          <label className="btn btn-outline-primary" htmlFor="btnradio3">
-            Radio 3
-          </label>
-        </ButtonGroup>
+            <input
+              type="radio"
+              className="btn-check"
+              name="btnradio"
+              id="btnradio3"
+              autoComplete="off"
+            />
+            <label className="btn btn-outline-primary" htmlFor="btnradio3">
+              Radio 3
+            </label>
+          </ButtonGroup>
+        </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
@@ -273,29 +277,29 @@ export default function ButtonGroupPage() {
       >
         <div className="d-flex flex-column gap-2">
           <div>
-            <ButtonGroup toolbar>
-              <ButtonGroup className="me-2">
+            <ButtonGroup toolbar className="gap-2">
+              <ButtonGroup>
                 <Button variant="primary">1</Button>
                 <Button variant="primary">2</Button>
                 <Button variant="primary">3</Button>
                 <Button variant="primary">4</Button>
               </ButtonGroup>
 
-              <ButtonGroup className="me-2">
+              <ButtonGroup>
                 <Button variant="secondary">5</Button>
                 <Button variant="secondary">6</Button>
                 <Button variant="secondary">7</Button>
               </ButtonGroup>
 
-              <ButtonGroup className="me-2">
+              <ButtonGroup>
                 <Button variant="info">8</Button>
               </ButtonGroup>
             </ButtonGroup>
           </div>
 
           <div>
-            <ButtonGroup toolbar>
-              <ButtonGroup className="me-2">
+            <ButtonGroup toolbar className="gap-2">
+              <ButtonGroup>
                 <Button outline="secondary">1</Button>
                 <Button outline="secondary">2</Button>
                 <Button outline="secondary">3</Button>
@@ -318,8 +322,8 @@ export default function ButtonGroupPage() {
           </div>
 
           <div>
-            <ButtonGroup toolbar className="justify-content-between">
-              <ButtonGroup className="me-2">
+            <ButtonGroup toolbar className="justify-content-between gap-2">
+              <ButtonGroup>
                 <Button outline="secondary">1</Button>
                 <Button outline="secondary">2</Button>
                 <Button outline="secondary">3</Button>
@@ -355,7 +359,7 @@ export default function ButtonGroupPage() {
         }
         code={states.buttonGroup.size.code}
       >
-        <div className="d-flex flex-column gap-2">
+        <div className="d-flex flex-column gap-2 overflow-x-auto text-nowrap">
           <div>
             <ButtonGroup size="lg">
               <Button outline="primary">Left</Button>
@@ -453,7 +457,7 @@ export default function ButtonGroupPage() {
         code={states.buttonGroup.example.code}
         codeLanguage="typescript"
       >
-        <div className="d-flex flex-wrap gap-2">
+        <div className="d-flex flex-wrap gap-2 overflow-x-auto text-nowrap">
           <div>
             <ButtonGroup size={mySize}>
               <Button variant="primary" onClick={onClickChangeSizeTest}>
@@ -511,7 +515,15 @@ export default function ButtonGroupPage() {
                       (renderOptions) =&gt; ReactNode
                     </span>
                   </td>
-                  <td>Customize the rendering logic of child elements</td>
+                  <td>Customize rendering logic</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>skipCompWrap</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Skip component wrapper</td>
                   <td>-</td>
                 </tr>
                 <tr>

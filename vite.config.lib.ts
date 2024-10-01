@@ -51,6 +51,10 @@ export default defineConfig({
         replacement: resolve(__dirname, 'lib/hooks'),
       },
       {
+        find: '@hocs',
+        replacement: resolve(__dirname, 'lib/hocs'),
+      },
+      {
         find: '@pages',
         replacement: resolve(__dirname, 'lib/pages'),
       },

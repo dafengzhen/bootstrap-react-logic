@@ -16,31 +16,30 @@ export type RenderOptions = {
   'aria-label'?: Props['aria-label'];
 };
 
+// Main props for the ButtonGroup component, extending ButtonGroupProps
 export type Props<T extends ElementType = 'div'> = ButtonGroupProps<T> & {
   /**
-   * The 'as' prop allows for specifying a different HTML element type (e.g., 'a' for anchor tag)
+   * Determines which element type to render as (e.g., div or other).
    */
   as?: T;
 
   /**
-   * Optional 'dropOldClass' prop to specify if old CSS classes should be removed
-   * (Clear original class names)
+   * Flag to indicate whether to drop old class names.
    */
   dropOldClass?: boolean;
 
   /**
-   * Optional 'render' prop that allows for custom rendering logic of child elements.
-   * This function can return any valid ReactNode, enabling flexible control over
-   * the component's inner structure and content. Use this to define how children
-   * should be rendered, allowing for dynamic layouts or conditional rendering
-   * based on props.
+   * Custom render function to customize the rendering of the component.
    */
   render?: (renderOptions: RenderOptions) => ReactNode;
 
   /**
-   * Optional 'options' prop that allows passing additional properties to the component.
-   * This prop omits the 'as', 'render', 'options', and all properties from ButtonProps<T>
-   * to prevent conflicts and ensure only custom properties are passed.
+   * Flag to skip wrapping the component in an additional element.
+   */
+  skipCompWrap?: boolean;
+
+  /**
+   * Options for additional props, excluding specific keys.
    */
   options?: Omit<
     Props<T>,
@@ -48,17 +47,17 @@ export type Props<T extends ElementType = 'div'> = ButtonGroupProps<T> & {
   >;
 
   /**
-   * toolbar.
+   * Flag to indicate if the button group should be displayed as a toolbar.
    */
   toolbar?: boolean;
 
   /**
-   * size.
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * vertical.
+   * Flag to indicate if the button group should be arranged vertically.
    */
   vertical?: boolean;
+
+  /**
+   * Size of the button group, can be large or small.
+   */
+  size?: 'lg' | 'sm';
 };
