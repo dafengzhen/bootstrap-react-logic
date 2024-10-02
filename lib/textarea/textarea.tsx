@@ -1,9 +1,10 @@
-import React, { type ElementType, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
+  type IntrinsicElements,
   isValueValid,
   TextareaVariablesEnum,
   VARIABLE_BS_PREFIX,
@@ -53,10 +54,7 @@ const Textarea = function Textarea<T extends ElementType>(props: Props<T>) {
     : children;
 
   return (
-    <Component
-      {...(rest as React.JSX.IntrinsicElements['textarea'])}
-      {...renderOptions}
-    >
+    <Component {...(rest as IntrinsicElements['textarea'])} {...renderOptions}>
       {renderContent}
     </Component>
   );

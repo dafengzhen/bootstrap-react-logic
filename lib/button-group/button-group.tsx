@@ -1,4 +1,4 @@
-import React, { type ElementType, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   ButtonGroupVariablesEnum,
@@ -8,6 +8,7 @@ import {
   DEVELOPMENT,
   filterAndTransformProperties,
   filterOptions,
+  type IntrinsicElements,
   isDefined,
   isValueValid,
   VARIABLE_BS_PREFIX,
@@ -102,10 +103,7 @@ const ButtonGroup = function ButtonGroup<T extends ElementType>(
     : children;
 
   return (
-    <Component
-      {...(rest as React.JSX.IntrinsicElements['div'])}
-      {...renderOptions}
-    >
+    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
       {renderContent}
     </Component>
   );

@@ -1,9 +1,10 @@
-import React, { type ElementType, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
+  type IntrinsicElements,
   isValueValid,
   TextVariablesEnum,
   VARIABLE_BS_PREFIX,
@@ -53,10 +54,7 @@ const Text = function Text<T extends ElementType>(props: Props<T>) {
     : children;
 
   return (
-    <Component
-      {...(rest as React.JSX.IntrinsicElements['div'])}
-      {...renderOptions}
-    >
+    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
       {renderContent}
     </Component>
   );

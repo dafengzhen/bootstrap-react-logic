@@ -1,9 +1,10 @@
-import React, { type ElementType, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
+  type IntrinsicElements,
   isValueValid,
   LabelVariablesEnum,
   VARIABLE_BS_PREFIX,
@@ -57,10 +58,7 @@ const Label = function Label<T extends ElementType>(props: Props<T>) {
     : children;
 
   return (
-    <Component
-      {...(rest as React.JSX.IntrinsicElements['label'])}
-      {...renderOptions}
-    >
+    <Component {...(rest as IntrinsicElements['label'])} {...renderOptions}>
       {renderContent}
     </Component>
   );

@@ -1,4 +1,4 @@
-import React, {
+import {
   type AnchorHTMLAttributes,
   type ButtonHTMLAttributes,
   type DetailedHTMLProps,
@@ -8,24 +8,25 @@ import React, {
 } from 'react';
 import type {
   ButtonVariableEnum,
+  IntrinsicElements,
   OutlineEnum,
   RoundedClassEnum,
   VariantEnum,
-} from '@lib/tools';
+} from '../tools';
 
 type Variables = {
   [key in keyof typeof ButtonVariableEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
-  T extends keyof React.JSX.IntrinsicElements
+  T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'button'
-          ? ButtonHTMLAttributes<React.JSX.IntrinsicElements[T]>
+          ? ButtonHTMLAttributes<IntrinsicElements[T]>
           : T extends 'a'
-            ? AnchorHTMLAttributes<React.JSX.IntrinsicElements[T]>
-            : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
-        React.JSX.IntrinsicElements[T]
+            ? AnchorHTMLAttributes<IntrinsicElements[T]>
+            : HTMLAttributes<IntrinsicElements[T]>,
+        IntrinsicElements[T]
       >
     : never;
 

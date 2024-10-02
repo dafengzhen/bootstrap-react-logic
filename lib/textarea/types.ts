@@ -1,23 +1,23 @@
-import React, {
+import {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
   type ReactNode,
   type TextareaHTMLAttributes,
 } from 'react';
-import type { TextareaVariablesEnum } from '@lib/tools';
+import type { IntrinsicElements, TextareaVariablesEnum } from '../tools';
 
 type Variables = {
   [key in keyof typeof TextareaVariablesEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
-  T extends keyof React.JSX.IntrinsicElements
+  T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'textarea'
-          ? TextareaHTMLAttributes<React.JSX.IntrinsicElements[T]>
-          : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
-        React.JSX.IntrinsicElements[T]
+          ? TextareaHTMLAttributes<IntrinsicElements[T]>
+          : HTMLAttributes<IntrinsicElements[T]>,
+        IntrinsicElements[T]
       >
     : never;
 

@@ -1,26 +1,23 @@
-import React, {
+import {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import type { InputVariablesEnum } from '@lib/tools';
+import type { InputVariablesEnum, IntrinsicElements } from '../tools';
 
 type Variables = {
   [key in keyof typeof InputVariablesEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
-  T extends keyof React.JSX.IntrinsicElements
+  T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'input'
-          ? Omit<
-              InputHTMLAttributes<React.JSX.IntrinsicElements[T]>,
-              'size' | 'color'
-            >
-          : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
-        React.JSX.IntrinsicElements[T]
+          ? Omit<InputHTMLAttributes<IntrinsicElements[T]>, 'size' | 'color'>
+          : HTMLAttributes<IntrinsicElements[T]>,
+        IntrinsicElements[T]
       >
     : never;
 

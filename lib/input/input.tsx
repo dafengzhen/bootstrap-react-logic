@@ -1,10 +1,11 @@
-import React, { type ElementType, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   InputVariablesEnum,
+  type IntrinsicElements,
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
@@ -75,10 +76,7 @@ const Input = function Input<T extends ElementType>(props: Props<T>) {
     : children;
 
   return (
-    <Component
-      {...(rest as React.JSX.IntrinsicElements['input'])}
-      {...renderOptions}
-    >
+    <Component {...(rest as IntrinsicElements['input'])} {...renderOptions}>
       {renderContent}
     </Component>
   );

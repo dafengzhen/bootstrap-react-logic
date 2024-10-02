@@ -1,23 +1,23 @@
-import React, {
+import {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
   type LabelHTMLAttributes,
   type ReactNode,
 } from 'react';
-import type { LabelVariablesEnum } from '@lib/tools';
+import type { IntrinsicElements, LabelVariablesEnum } from '../tools';
 
 type Variables = {
   [key in keyof typeof LabelVariablesEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
-  T extends keyof React.JSX.IntrinsicElements
+  T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'label'
-          ? LabelHTMLAttributes<React.JSX.IntrinsicElements[T]>
-          : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
-        React.JSX.IntrinsicElements[T]
+          ? LabelHTMLAttributes<IntrinsicElements[T]>
+          : HTMLAttributes<IntrinsicElements[T]>,
+        IntrinsicElements[T]
       >
     : never;
 

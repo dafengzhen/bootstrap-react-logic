@@ -1,22 +1,22 @@
-import React, {
+import {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
-import type { ButtonGroupVariablesEnum } from '@lib/tools';
+import type { ButtonGroupVariablesEnum, IntrinsicElements } from '../tools';
 
 type Variables = {
   [key in keyof typeof ButtonGroupVariablesEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
-  T extends keyof React.JSX.IntrinsicElements
+  T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'div'
-          ? HTMLAttributes<React.JSX.IntrinsicElements[T]>
-          : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
-        React.JSX.IntrinsicElements[T]
+          ? HTMLAttributes<IntrinsicElements[T]>
+          : HTMLAttributes<IntrinsicElements[T]>,
+        IntrinsicElements[T]
       >
     : never;
 

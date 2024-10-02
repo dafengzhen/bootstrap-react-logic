@@ -1,4 +1,4 @@
-import React, { type CSSProperties, type ElementType, useMemo } from 'react';
+import { type CSSProperties, type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   ButtonVariableEnum,
@@ -6,6 +6,7 @@ import {
   filterAndTransformProperties,
   filterOptions,
   getValue,
+  type IntrinsicElements,
   isValueValid,
   mapAndFilterStyles,
   RoundedClassEnum,
@@ -152,10 +153,7 @@ const Button = function Button<T extends ElementType>(props: Props<T>) {
   );
 
   return (
-    <Component
-      {...(rest as React.JSX.IntrinsicElements['button'])}
-      {...renderOptions}
-    >
+    <Component {...(rest as IntrinsicElements['button'])} {...renderOptions}>
       {renderContent}
     </Component>
   );
