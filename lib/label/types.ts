@@ -5,6 +5,11 @@ import React, {
   type LabelHTMLAttributes,
   type ReactNode,
 } from 'react';
+import type { LabelVariablesEnum } from '@lib/tools';
+
+type Variables = {
+  [key in keyof typeof LabelVariablesEnum]?: string | number;
+};
 
 export type ElementProps<T extends ElementType> =
   T extends keyof React.JSX.IntrinsicElements
@@ -36,6 +41,11 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Flag to skip wrapping the component in an additional element.
    */
   skipCompWrap?: boolean;
+
+  /**
+   * variables.
+   */
+  variables?: Variables;
 
   /**
    * colFormLabel.

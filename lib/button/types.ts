@@ -7,14 +7,14 @@ import React, {
   type ReactNode,
 } from 'react';
 import type {
+  ButtonVariableEnum,
   OutlineEnum,
   RoundedClassEnum,
-  VariableEnum,
   VariantEnum,
 } from '@lib/tools';
 
 type Variables = {
-  [key in keyof typeof VariableEnum]?: string | number;
+  [key in keyof typeof ButtonVariableEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
@@ -49,6 +49,11 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Flag to indicate whether to drop old class names.
    */
   dropOldClass?: boolean;
+
+  /**
+   * Additional variable properties based on the Variables type.
+   */
+  variables?: Variables;
 
   /**
    * Button variant type based on keys in VariantEnum.
@@ -86,11 +91,6 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Indicates if the button is in a loading state.
    */
   isLoading?: boolean;
-
-  /**
-   * Additional variable properties based on the Variables type.
-   */
-  variables?: Variables;
 
   /**
    * Content to render at the start of the button.

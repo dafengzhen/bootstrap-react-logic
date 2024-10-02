@@ -1,6 +1,13 @@
 import React, { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
-import { clsxUnique, filterOptions, isValueValid } from '../tools';
+import {
+  clsxUnique,
+  filterAndTransformProperties,
+  filterOptions,
+  isValueValid,
+  TextVariablesEnum,
+  VARIABLE_BS_PREFIX,
+} from '../tools';
 
 const Text = function Text<T extends ElementType>(props: Props<T>) {
   const {
@@ -8,6 +15,7 @@ const Text = function Text<T extends ElementType>(props: Props<T>) {
     render,
     skipCompWrap,
     dropOldClass,
+    variables,
     children,
     className,
     style,
@@ -16,7 +24,16 @@ const Text = function Text<T extends ElementType>(props: Props<T>) {
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-text', className);
-    const finalStyle = style;
+    const finalStyle = {
+      ...filterAndTransformProperties(variables, (_, key) => {
+        const _value = TextVariablesEnum[key];
+        return {
+          include: true,
+          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
+        };
+      }),
+      ...style,
+    };
 
     return filterOptions(
       {

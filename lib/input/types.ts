@@ -5,12 +5,20 @@ import React, {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
+import type { InputVariablesEnum } from '@lib/tools';
+
+type Variables = {
+  [key in keyof typeof InputVariablesEnum]?: string | number;
+};
 
 export type ElementProps<T extends ElementType> =
   T extends keyof React.JSX.IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'input'
-          ? Omit<InputHTMLAttributes<React.JSX.IntrinsicElements[T]>, 'size'>
+          ? Omit<
+              InputHTMLAttributes<React.JSX.IntrinsicElements[T]>,
+              'size' | 'color'
+            >
           : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
         React.JSX.IntrinsicElements[T]
       >
@@ -36,6 +44,12 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Flag to skip wrapping the component in an additional element.
    */
   skipCompWrap?: boolean;
+
+  /**
+   * variables.
+   */
+  variables?: Variables;
+
   /**
    * size.
    */
@@ -50,4 +64,14 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * readonlyPlainText.
    */
   readonlyPlainText?: boolean;
+
+  /**
+   * color
+   */
+  color?: boolean;
+
+  /**
+   * nativeColor.
+   */
+  nativeColor?: string | undefined;
 };

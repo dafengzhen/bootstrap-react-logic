@@ -1,6 +1,7 @@
 import React, { type CSSProperties, type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
+  ButtonVariableEnum,
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
@@ -8,9 +9,7 @@ import {
   isValueValid,
   mapAndFilterStyles,
   RoundedClassEnum,
-  VARIABLE_BS_BTN_PREFIX,
   VARIABLE_BS_PREFIX,
-  VariableEnum,
 } from '../tools';
 
 function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
@@ -55,24 +54,25 @@ const Button = function Button<T extends ElementType>(props: Props<T>) {
       active && 'active',
       variant && `btn-${variant}`,
       outline && `btn-outline-${outline}`,
-      size && `btn-${size}`,
+      typeof size === 'string' && `btn-${size}`,
       Component === 'a' && disabled && 'disabled',
       rounded && getRoundedValue(rounded),
       className,
     );
+
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _key = VariableEnum[key];
+        const _value = ButtonVariableEnum[key];
         return {
-          include: !!_key,
-          transformedKey: `${VARIABLE_BS_PREFIX}-${_key}`,
+          include: true,
+          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
         };
       }),
       ...mapAndFilterStyles(
         {
-          [`${VARIABLE_BS_BTN_PREFIX}-padding-y`]: 'paddingY',
-          [`${VARIABLE_BS_BTN_PREFIX}-padding-x`]: 'paddingX',
-          [`${VARIABLE_BS_BTN_PREFIX}-font-size`]: 'fontSize',
+          [`${VARIABLE_BS_PREFIX}btn-padding-y`]: 'paddingY',
+          [`${VARIABLE_BS_PREFIX}btn-padding-x`]: 'paddingX',
+          [`${VARIABLE_BS_PREFIX}btn-font-size`]: 'fontSize',
         },
         size,
       ),

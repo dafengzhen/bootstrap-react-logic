@@ -4,6 +4,11 @@ import React, {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
+import type { ButtonGroupVariablesEnum } from '@lib/tools';
+
+type Variables = {
+  [key in keyof typeof ButtonGroupVariablesEnum]?: string | number;
+};
 
 export type ElementProps<T extends ElementType> =
   T extends keyof React.JSX.IntrinsicElements
@@ -35,6 +40,11 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Flag to skip wrapping the component in an additional element.
    */
   skipCompWrap?: boolean;
+
+  /**
+   * variables.
+   */
+  variables?: Variables;
 
   /**
    * Flag to indicate if the button group should be displayed as a toolbar.

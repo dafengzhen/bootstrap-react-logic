@@ -1,16 +1,16 @@
 /**
- * variable bs prefix.
+ * variable prefix.
  */
-const VARIABLE_BS_PREFIX = '--bs';
+const VARIABLE_PREFIX = '--';
 
 /**
- * variable bs btn prefix.
+ * variable bs prefix.
  */
-const VARIABLE_BS_BTN_PREFIX = `${VARIABLE_BS_PREFIX}-btn`;
+const VARIABLE_BS_PREFIX = VARIABLE_PREFIX + 'bs-';
 
 /**
  * development.
  */
 const DEVELOPMENT = 'development';
 
-export { VARIABLE_BS_PREFIX, VARIABLE_BS_BTN_PREFIX, DEVELOPMENT };
+export { VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT };

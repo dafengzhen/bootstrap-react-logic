@@ -4,6 +4,11 @@ import React, {
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
+import type { TextVariablesEnum } from '@lib/tools';
+
+type Variables = {
+  [key in keyof typeof TextVariablesEnum]?: string | number;
+};
 
 export type ElementProps<T extends ElementType> =
   T extends keyof React.JSX.IntrinsicElements
@@ -37,4 +42,9 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Flag to indicate whether to drop old class names.
    */
   dropOldClass?: boolean;
+
+  /**
+   * variables.
+   */
+  variables?: Variables;
 };

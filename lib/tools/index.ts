@@ -1,16 +1,17 @@
 export type { ReactRef } from './refs';
 
-export {
-  VARIABLE_BS_PREFIX,
-  VARIABLE_BS_BTN_PREFIX,
-  DEVELOPMENT,
-} from './constants';
+export { VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT } from './constants';
 
 export {
-  VariableEnum,
+  ButtonVariableEnum,
   RoundedClassEnum,
   VariantEnum,
   OutlineEnum,
+  ButtonGroupVariablesEnum,
+  InputVariablesEnum,
+  LabelVariablesEnum,
+  TextVariablesEnum,
+  TextareaVariablesEnum,
 } from './enums';
 
 export {

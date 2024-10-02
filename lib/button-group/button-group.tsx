@@ -1,13 +1,16 @@
 import React, { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
+  ButtonGroupVariablesEnum,
   checkObjectProperties,
   clsxUnique,
   createLogger,
   DEVELOPMENT,
+  filterAndTransformProperties,
   filterOptions,
   isDefined,
   isValueValid,
+  VARIABLE_BS_PREFIX,
 } from '../tools';
 
 const logger = createLogger();
@@ -17,9 +20,10 @@ const ButtonGroup = function ButtonGroup<T extends ElementType>(
 ) {
   const {
     as: Component = 'div',
-    dropOldClass,
     render,
     skipCompWrap,
+    dropOldClass,
+    variables,
     children,
     className,
     style,
@@ -60,7 +64,16 @@ const ButtonGroup = function ButtonGroup<T extends ElementType>(
       size && `btn-group-${size}`,
       className,
     );
-    const finalStyle = style;
+    const finalStyle = {
+      ...filterAndTransformProperties(variables, (_, key) => {
+        const _value = ButtonGroupVariablesEnum[key];
+        return {
+          include: true,
+          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
+        };
+      }),
+      ...style,
+    };
 
     return filterOptions(
       {

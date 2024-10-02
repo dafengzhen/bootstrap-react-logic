@@ -38,6 +38,18 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
+    file: {
+      openCode: boolean;
+      code?: string;
+    };
+    color: {
+      openCode: boolean;
+      code?: string;
+    };
+    datalist: {
+      openCode: boolean;
+      code?: string;
+    };
   };
 }
 
@@ -70,6 +82,18 @@ export default function InputPage() {
       readonlyPlainText: {
         openCode: false,
         code: inputCodes.readonlyPlainText.code.trim(),
+      },
+      file: {
+        openCode: false,
+        code: inputCodes.file.code.trim(),
+      },
+      color: {
+        openCode: false,
+        code: inputCodes.color.code.trim(),
+      },
+      datalist: {
+        openCode: false,
+        code: inputCodes.datalist.code.trim(),
       },
     },
   });
@@ -329,14 +353,27 @@ export default function InputPage() {
                 />
               </div>
             </div>
-            <div className="row">
-              <Label htmlFor="inputPassword" className="col-sm-2">
-                Password
-              </Label>
-              <div className="col-sm-10">
-                <Input type="password" id="inputPassword" />
+            <form>
+              <div className="row">
+                <Label htmlFor="inputPassword" className="col-sm-2">
+                  Password
+                </Label>
+                <div className="col-sm-10">
+                  <Input
+                    type="text"
+                    name="username"
+                    autoComplete="username"
+                    defaultValue="hiddenUsername"
+                    className="d-none"
+                  />
+                  <Input
+                    type="password"
+                    id="inputPassword"
+                    autoComplete="new-password"
+                  />
+                </div>
               </div>
-            </div>
+            </form>
           </div>
           <div>
             <form className="row g-3">
@@ -350,6 +387,7 @@ export default function InputPage() {
                   readonlyPlainText
                   id="staticEmail2"
                   value="email@example.com"
+                  autoComplete="username"
                 />
               </div>
               <div className="col-auto">
@@ -357,9 +395,17 @@ export default function InputPage() {
                   Password
                 </Label>
                 <Input
+                  type="text"
+                  name="username"
+                  autoComplete="username"
+                  defaultValue="hiddenUsername"
+                  className="d-none"
+                />
+                <Input
                   type="password"
                   id="inputPassword2"
                   placeholder="Password"
+                  autoComplete="new-password"
                 />
               </div>
               <div className="col-auto">
@@ -368,6 +414,100 @@ export default function InputPage() {
                 </Button>
               </div>
             </form>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="文件"
+        hash="readonly"
+        isOpen={states.input.file.openCode}
+        toggleCode={() =>
+          onClickUpdateState('input.file.openCode', !states.input.file.openCode)
+        }
+        code={states.input.file.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <div>
+            <Label htmlFor="formFile">Default file input example</Label>
+            <Input type="file" id="formFile" />
+          </div>
+          <div>
+            <Label htmlFor="formFileMultiple">
+              Multiple files input example
+            </Label>
+            <Input type="file" id="formFileMultiple" multiple />
+          </div>
+          <div>
+            <Label htmlFor="formFileDisabled">
+              Disabled file input example
+            </Label>
+            <Input type="file" id="formFileDisabled" disabled />
+          </div>
+          <div>
+            <Label htmlFor="formFileSm">Small file input example</Label>
+            <Input size="sm" id="formFileSm" type="file" />
+          </div>
+          <div>
+            <Label htmlFor="formFileLg">Large file input example</Label>
+            <Input size="lg" id="formFileLg" type="file" />
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="颜色"
+        hash="color"
+        isOpen={states.input.color.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'input.color.openCode',
+            !states.input.color.openCode,
+          )
+        }
+        code={states.input.color.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <div>
+            <Label htmlFor="exampleColorInput">Color picker</Label>
+            <Input
+              type="color"
+              color
+              id="exampleColorInput"
+              defaultValue="#563d7c"
+              title="Choose your color"
+            />
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="数据列表"
+        hash="datalist"
+        isOpen={states.input.datalist.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'input.datalist.openCode',
+            !states.input.datalist.openCode,
+          )
+        }
+        code={states.input.datalist.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <div>
+            <Label htmlFor="exampleDataList">Datalist example</Label>
+            <Input
+              list="datalistOptions"
+              id="exampleDataList"
+              placeholder="Type to search..."
+            />
+            <datalist id="datalistOptions">
+              <option value="San Francisco"></option>
+              <option value="New York"></option>
+              <option value="Seattle"></option>
+              <option value="Los Angeles"></option>
+              <option value="Chicago"></option>
+            </datalist>
           </div>
         </div>
       </CustomSimpleCard>
@@ -416,6 +556,16 @@ export default function InputPage() {
                   <td>-</td>
                 </tr>
                 <tr>
+                  <td>nativeSize</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      number | undefined
+                    </span>
+                  </td>
+                  <td>HTMLAttributes</td>
+                  <td>-</td>
+                </tr>
+                <tr>
                   <td>disabled</td>
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
@@ -437,6 +587,24 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">boolean</span>
                   </td>
                   <td>Class</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Class</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>nativeColor</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      string | undefined
+                    </span>
+                  </td>
+                  <td>HTMLAttributes</td>
                   <td>-</td>
                 </tr>
               </tbody>

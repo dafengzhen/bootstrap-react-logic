@@ -109,6 +109,57 @@ const inputCodes = {
 <Input type="password" id="inputPassword" />
     `,
   },
+  file: {
+    code: `
+<Label htmlFor="formFile">Default file input example</Label>
+<Input type="file" id="formFile" />
+
+<Label htmlFor="formFileMultiple">
+  Multiple files input example
+</Label>
+<Input type="file" id="formFileMultiple" multiple />
+
+<Label htmlFor="formFileDisabled">
+  Disabled file input example
+</Label>
+<Input type="file" id="formFileDisabled" disabled />
+
+<Label htmlFor="formFileSm">Small file input example</Label>
+<Input size="sm" id="formFileSm" type="file" />
+
+<Label htmlFor="formFileLg">Large file input example</Label>
+<Input size="lg" id="formFileLg" type="file" />
+    `,
+  },
+  color: {
+    code: `
+<Label htmlFor="exampleColorInput">Color picker</Label>
+<Input
+  type="color"
+  color
+  id="exampleColorInput"
+  defaultValue="#563d7c"
+  title="Choose your color"
+/>
+    `,
+  },
+  datalist: {
+    code: `
+<Label htmlFor="exampleDataList">Datalist example</Label>
+<Input
+  list="datalistOptions"
+  id="exampleDataList"
+  placeholder="Type to search..."
+/>
+<datalist id="datalistOptions">
+  <option value="San Francisco"></option>
+  <option value="New York"></option>
+  <option value="Seattle"></option>
+  <option value="Los Angeles"></option>
+  <option value="Chicago"></option>
+</datalist>
+    `,
+  },
 };
 
 export default inputCodes;
