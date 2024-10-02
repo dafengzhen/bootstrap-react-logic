@@ -1,37 +1,35 @@
-import { type ElementType, useMemo } from 'react';
-import type { Props } from '@lib/button-group/types.ts';
-import clsx from 'clsx';
+import React, { type ElementType, useMemo } from 'react';
+import type { ElementProps, Props } from './types.ts';
 import {
   checkObjectProperties,
+  clsxUnique,
   createLogger,
-  deepMerge,
   DEVELOPMENT,
   filterOptions,
-  getValue,
   isDefined,
   isValueValid,
-} from '@lib/tools';
+} from '../tools';
 
 const logger = createLogger();
 
-const ButtonGroup = function ButtonGroup<T extends ElementType = 'button'>(
+const ButtonGroup = function ButtonGroup<T extends ElementType>(
   props: Props<T>,
 ) {
   const {
     as: Component = 'div',
+    dropOldClass,
+    render,
+    skipCompWrap,
     children,
     className,
     style,
     role,
     'aria-label': ariaLabel,
-    dropOldClass,
     toolbar,
-    size,
     vertical,
-    render,
-    skipCompWrap,
+    size,
     ...rest
-  } = deepMerge(props, props.options, (path) => !path.includes('options'));
+  } = props;
 
   /* #__PURE__ */ if (process.env.NODE_ENV === DEVELOPMENT) {
     checkObjectProperties(
@@ -52,7 +50,7 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'button'>(
   }
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsx(
+    const finalClass = clsxUnique(
       !dropOldClass &&
         (vertical
           ? 'btn-group-vertical'
@@ -63,15 +61,11 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'button'>(
       className,
     );
     const finalStyle = style;
-    const finalRole = getValue(role);
-    const finalAriaLabel = getValue(ariaLabel);
 
     return filterOptions(
       {
         className: finalClass,
         style: finalStyle,
-        role: finalRole,
-        'aria-label': finalAriaLabel,
       },
       isValueValid,
     );
@@ -87,15 +81,18 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'button'>(
   ]);
 
   if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions });
+    return render({ ...rest, ...renderOptions } as ElementProps<T>);
   }
 
   const renderContent = render
-    ? render({ ...rest, ...renderOptions })
+    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
     : children;
 
   return (
-    <Component {...rest} {...renderOptions}>
+    <Component
+      {...(rest as React.JSX.IntrinsicElements['div'])}
+      {...renderOptions}
+    >
       {renderContent}
     </Component>
   );

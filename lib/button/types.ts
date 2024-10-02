@@ -1,9 +1,10 @@
-import type {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  ElementType,
-  ReactNode,
+import React, {
+  type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
+  type DetailedHTMLProps,
+  type ElementType,
+  type HTMLAttributes,
+  type ReactNode,
 } from 'react';
 import type {
   OutlineEnum,
@@ -16,44 +17,28 @@ type Variables = {
   [key in keyof typeof VariableEnum]?: string | number;
 };
 
-type ButtonProps<T extends ElementType = 'button'> = T extends 'a'
-  ? DetailedHTMLProps<
-      AnchorHTMLAttributes<HTMLAnchorElement>,
-      HTMLAnchorElement
-    > & {
-      disabled?: boolean | undefined;
-    }
-  : DetailedHTMLProps<
-      ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement
-    >;
+export type ElementProps<T extends ElementType> =
+  T extends keyof React.JSX.IntrinsicElements
+    ? DetailedHTMLProps<
+        T extends 'button'
+          ? ButtonHTMLAttributes<React.JSX.IntrinsicElements[T]>
+          : T extends 'a'
+            ? AnchorHTMLAttributes<React.JSX.IntrinsicElements[T]>
+            : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
+        React.JSX.IntrinsicElements[T]
+      >
+    : never;
 
-export type RenderOptions = {
-  className?: Props['className'];
-  style?: Props['style'];
-  role?: Props['role'];
-  disabled?: Props['disabled'];
-  'aria-disabled'?: Props['aria-disabled'];
-  tabIndex?: Props['tabIndex'];
-  'aria-pressed'?: Props['aria-pressed'];
-};
-
-// Main props for the button component, extending ButtonProps
-export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
+export type Props<T extends ElementType> = ElementProps<T> & {
   /**
    * Determines which element type to render as (e.g., button or anchor).
    */
   as?: T;
 
   /**
-   * Flag to indicate whether to drop old class names.
-   */
-  dropOldClass?: boolean;
-
-  /**
    * Custom render function to customize the rendering of the component.
    */
-  render?: (renderOptions: RenderOptions) => ReactNode;
+  render?: (renderOptions: ElementProps<T>) => ReactNode;
 
   /**
    * Flag to skip wrapping the component in an additional element.
@@ -61,9 +46,9 @@ export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
   skipCompWrap?: boolean;
 
   /**
-   * Options for additional props, excluding specific keys.
+   * Flag to indicate whether to drop old class names.
    */
-  options?: Omit<Props<T>, 'as' | 'render' | 'options' | keyof ButtonProps<T>>;
+  dropOldClass?: boolean;
 
   /**
    * Button variant type based on keys in VariantEnum.
@@ -87,9 +72,9 @@ export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
     | 'lg'
     | 'sm'
     | {
-        paddingY?: string; // Vertical padding
-        paddingX?: string; // Horizontal padding
-        fontSize?: string; // Font size
+        paddingY?: string;
+        paddingX?: string;
+        fontSize?: string;
       };
 
   /**
@@ -116,4 +101,9 @@ export type Props<T extends ElementType = 'button'> = ButtonProps<T> & {
    * Content to render at the end of the button.
    */
   endContent?: ReactNode;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
 };

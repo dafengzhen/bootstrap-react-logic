@@ -42,8 +42,6 @@ interface IStates {
   };
 }
 
-type ButtonGroupKeys = NestedKeys<IStates>;
-
 export default function ButtonGroupPage() {
   useHighlightCode();
   const navigation = useNavigation();
@@ -82,7 +80,11 @@ export default function ButtonGroupPage() {
   });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
-  function onClickUpdateState(k: ButtonGroupKeys, v: unknown, c?: () => void) {
+  function onClickUpdateState(
+    k: NestedKeys<IStates>,
+    v: unknown,
+    c?: () => void,
+  ) {
     setStates((prev) => {
       const keys = k.split('.');
       const newState = { ...prev };
@@ -124,7 +126,7 @@ export default function ButtonGroupPage() {
         }
         code={states.buttonGroup.basic.code}
       >
-        <div className="d-flex flex-column gap-2">
+        <div className="d-flex flex-column gap-2 overflow-x-auto text-nowrap">
           <div>
             <ButtonGroup>
               <Button variant="primary">Left</Button>
@@ -501,14 +503,6 @@ export default function ButtonGroupPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td>dropOldClass</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
-                </tr>
-                <tr>
                   <td>render</td>
                   <td>
                     <span className="badge text-bg-secondary">
@@ -527,13 +521,11 @@ export default function ButtonGroupPage() {
                   <td>-</td>
                 </tr>
                 <tr>
-                  <td>options</td>
+                  <td>dropOldClass</td>
                   <td>
-                    <span className="badge text-bg-secondary">
-                      Omit&lt;Props, as | render | options&gt;
-                    </span>
+                    <span className="badge text-bg-secondary">boolean</span>
                   </td>
-                  <td>Custom property wrapper layer of components</td>
+                  <td>Clear original class names</td>
                   <td>-</td>
                 </tr>
                 <tr>

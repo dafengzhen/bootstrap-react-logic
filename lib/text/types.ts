@@ -10,7 +10,9 @@ export type ElementProps<T extends ElementType> =
     ? DetailedHTMLProps<
         T extends 'div'
           ? HTMLAttributes<React.JSX.IntrinsicElements[T]>
-          : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
+          : T extends 'span'
+            ? HTMLAttributes<React.JSX.IntrinsicElements[T]>
+            : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
         React.JSX.IntrinsicElements[T]
       >
     : never;
@@ -27,27 +29,12 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   render?: (renderOptions: ElementProps<T>) => ReactNode;
 
   /**
-   * Flag to indicate whether to drop old class names.
-   */
-  dropOldClass?: boolean;
-
-  /**
    * Flag to skip wrapping the component in an additional element.
    */
   skipCompWrap?: boolean;
 
   /**
-   * Flag to indicate if the button group should be displayed as a toolbar.
+   * Flag to indicate whether to drop old class names.
    */
-  toolbar?: boolean;
-
-  /**
-   * Flag to indicate if the button group should be arranged vertically.
-   */
-  vertical?: boolean;
-
-  /**
-   * Size of the button group, can be large or small.
-   */
-  size?: 'lg' | 'sm';
+  dropOldClass?: boolean;
 };

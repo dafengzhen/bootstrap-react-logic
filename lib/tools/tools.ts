@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// A type alias that allows either a value or a function returning a value.
+import clsx, { type ClassValue } from 'clsx';
+
+/**
+ * A type that represents either a value of type T or a function returning a value of type T.
+ * This utility type is useful for allowing lazy evaluation, where a value can either be
+ * provided directly or deferred by wrapping it in a function.
+ *
+ * @template T - The type of the value or the return type of the function.
+ */
 type MaybeFunction<T> = T | (() => T);
 
 /**
@@ -495,6 +503,25 @@ const isDefined = (value: any, checkEmptyString: boolean = false): boolean => {
   );
 };
 
+/**
+ * A utility function that wraps the `clsx` function to process class names,
+ * ensures the resulting class names are unique by removing duplicates.
+ *
+ * @param {ClassValue[]} inputs - An array of class values that can include strings,
+ * arrays, objects, or any valid input that `clsx` accepts.
+ *
+ * @returns {string} - A string of unique class names separated by a space.
+ */
+const clsxUnique = (...inputs: ClassValue[]): string => {
+  const classNames = clsx(...inputs);
+
+  const uniqueClassNames = Array.from(
+    new Set(classNames.split(' ').filter(Boolean)),
+  );
+
+  return uniqueClassNames.join(' ');
+};
+
 export {
   camelToKebab,
   deepMerge,
@@ -511,4 +538,5 @@ export {
   createLogger,
   checkObjectProperties,
   isDefined,
+  clsxUnique,
 };

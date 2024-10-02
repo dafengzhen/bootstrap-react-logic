@@ -57,8 +57,6 @@ interface IStates {
   };
 }
 
-type ButtonKeys = NestedKeys<IStates>;
-
 export default function ButtonPage() {
   useHighlightCode();
   const navigation = useNavigation();
@@ -113,7 +111,11 @@ export default function ButtonPage() {
   });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
-  function onClickUpdateState(k: ButtonKeys, v: unknown, c?: () => void) {
+  function onClickUpdateState(
+    k: NestedKeys<IStates>,
+    v: unknown,
+    c?: () => void,
+  ) {
     setStates((prev) => {
       const keys = k.split('.');
       const newState = { ...prev };
@@ -456,7 +458,7 @@ export default function ButtonPage() {
         code={states.button.example.code}
         codeLanguage="typescript"
       >
-        <div className="d-flex flex-wrap gap-2">
+        <div className="d-flex flex-wrap gap-2 overflow-x-auto text-nowrap">
           <div>
             <Button
               size={mySize}
@@ -475,13 +477,21 @@ export default function ButtonPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
               <thead>
                 <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Attr
+                  </th>
+                  <th scope="col" style={{ width: 300 }}>
+                    Type
+                  </th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Desc
+                  </th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Default
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -494,14 +504,6 @@ export default function ButtonPage() {
                   <td>
                     <span className="badge text-bg-secondary">button</span>
                   </td>
-                </tr>
-                <tr>
-                  <td>dropOldClass</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
                 </tr>
                 <tr>
                   <td>render</td>
@@ -522,19 +524,17 @@ export default function ButtonPage() {
                   <td>-</td>
                 </tr>
                 <tr>
-                  <td>options</td>
+                  <td>dropOldClass</td>
                   <td>
-                    <span className="badge text-bg-secondary">
-                      Omit&lt;Props, as | render | options&gt;
-                    </span>
+                    <span className="badge text-bg-secondary">boolean</span>
                   </td>
-                  <td>Custom property wrapper layer of components</td>
+                  <td>Clear original class names</td>
                   <td>-</td>
                 </tr>
                 <tr>
                   <td>variant</td>
                   <td>
-                    <span className="badge text-bg-secondary">
+                    <span className="badge text-bg-secondary tw-whitespace-normal">
                       primary | secondary | success | info | warning | danger |
                       light | dark | link
                     </span>
@@ -545,7 +545,7 @@ export default function ButtonPage() {
                 <tr>
                   <td>outline</td>
                   <td>
-                    <span className="badge text-bg-secondary">
+                    <span className="badge text-bg-secondary tw-whitespace-normal">
                       primary | secondary | success | info | warning | danger |
                       light | dark | link
                     </span>
@@ -631,13 +631,21 @@ export default function ButtonPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
               <thead>
                 <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Attr
+                  </th>
+                  <th scope="col" style={{ width: 300 }}>
+                    Type
+                  </th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Desc
+                  </th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Default
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -672,12 +680,21 @@ export default function ButtonPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
               <thead>
                 <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Attr
+                  </th>
+                  <th scope="col" style={{ width: 300 }}>
+                    Type
+                  </th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Desc
+                  </th>
+                  <th scope="col" style={{ width: 100 }}>
+                    Default
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -688,10 +705,12 @@ export default function ButtonPage() {
                       MouseEventHandler
                     </span>
                   </td>
+                  <td></td>
                   <td>-</td>
                 </tr>
                 <tr>
                   <td>...</td>
+                  <td>-</td>
                   <td>-</td>
                   <td>-</td>
                 </tr>

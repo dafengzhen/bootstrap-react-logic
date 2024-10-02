@@ -2,14 +2,15 @@ import React, {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
+  type LabelHTMLAttributes,
   type ReactNode,
 } from 'react';
 
 export type ElementProps<T extends ElementType> =
   T extends keyof React.JSX.IntrinsicElements
     ? DetailedHTMLProps<
-        T extends 'div'
-          ? HTMLAttributes<React.JSX.IntrinsicElements[T]>
+        T extends 'label'
+          ? LabelHTMLAttributes<React.JSX.IntrinsicElements[T]>
           : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
         React.JSX.IntrinsicElements[T]
       >
@@ -17,7 +18,7 @@ export type ElementProps<T extends ElementType> =
 
 export type Props<T extends ElementType> = ElementProps<T> & {
   /**
-   * Determines which element type to render as (e.g., div or other).
+   * Determines which element type to render as (e.g., label or other).
    */
   as?: T;
 
@@ -37,17 +38,7 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   skipCompWrap?: boolean;
 
   /**
-   * Flag to indicate if the button group should be displayed as a toolbar.
+   * colFormLabel.
    */
-  toolbar?: boolean;
-
-  /**
-   * Flag to indicate if the button group should be arranged vertically.
-   */
-  vertical?: boolean;
-
-  /**
-   * Size of the button group, can be large or small.
-   */
-  size?: 'lg' | 'sm';
+  colFormLabel?: boolean;
 };

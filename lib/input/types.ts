@@ -2,14 +2,15 @@ import React, {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
+  type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
 
 export type ElementProps<T extends ElementType> =
   T extends keyof React.JSX.IntrinsicElements
     ? DetailedHTMLProps<
-        T extends 'div'
-          ? HTMLAttributes<React.JSX.IntrinsicElements[T]>
+        T extends 'input'
+          ? Omit<InputHTMLAttributes<React.JSX.IntrinsicElements[T]>, 'size'>
           : HTMLAttributes<React.JSX.IntrinsicElements[T]>,
         React.JSX.IntrinsicElements[T]
       >
@@ -17,7 +18,7 @@ export type ElementProps<T extends ElementType> =
 
 export type Props<T extends ElementType> = ElementProps<T> & {
   /**
-   * Determines which element type to render as (e.g., div or other).
+   * Determines which element type to render as (e.g., input or other).
    */
   as?: T;
 
@@ -35,19 +36,13 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * Flag to skip wrapping the component in an additional element.
    */
   skipCompWrap?: boolean;
-
   /**
-   * Flag to indicate if the button group should be displayed as a toolbar.
-   */
-  toolbar?: boolean;
-
-  /**
-   * Flag to indicate if the button group should be arranged vertically.
-   */
-  vertical?: boolean;
-
-  /**
-   * Size of the button group, can be large or small.
+   * size.
    */
   size?: 'lg' | 'sm';
+
+  /**
+   * nativeSize.
+   */
+  nativeSize?: number | undefined;
 };

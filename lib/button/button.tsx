@@ -1,8 +1,7 @@
-import { type CSSProperties, type ElementType, useMemo } from 'react';
-import type { Props } from '@lib/button/types.ts';
-import clsx from 'clsx';
+import React, { type CSSProperties, type ElementType, useMemo } from 'react';
+import type { ElementProps, Props } from './types.ts';
 import {
-  deepMerge,
+  clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   getValue,
@@ -12,7 +11,7 @@ import {
   VARIABLE_BS_BTN_PREFIX,
   VARIABLE_BS_PREFIX,
   VariableEnum,
-} from '@lib/tools';
+} from '../tools';
 
 function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   if (key !== undefined) {
@@ -24,36 +23,34 @@ function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   }
 }
 
-const Button = function Button<T extends ElementType = 'button'>(
-  props: Props<T>,
-) {
+const Button = function Button<T extends ElementType>(props: Props<T>) {
   const {
+    as: Component = 'button',
+    dropOldClass,
+    render,
+    skipCompWrap,
+    children,
+    className,
+    style,
     rounded,
     'aria-disabled': ariaDisabled,
     'aria-pressed': ariaPressed,
     active,
-    as: Component = 'button',
-    children,
-    className,
     disabled,
     isLoading,
     outline,
     role,
     size,
-    style,
     tabIndex,
     variables,
     variant,
     startContent,
     endContent,
-    dropOldClass,
-    render,
-    skipCompWrap,
     ...rest
-  } = deepMerge(props, props.options, (path) => !path.includes('options'));
+  } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsx(
+    const finalClass = clsxUnique(
       !dropOldClass && 'btn',
       active && 'active',
       variant && `btn-${variant}`,
@@ -130,11 +127,11 @@ const Button = function Button<T extends ElementType = 'button'>(
   ]);
 
   if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions });
+    return render({ ...rest, ...renderOptions } as ElementProps<T>);
   }
 
   const renderContent = render ? (
-    render({ ...rest, ...renderOptions })
+    render({ ...rest, ...renderOptions } as ElementProps<T>)
   ) : (
     <>
       {isLoading && !startContent && (
@@ -155,9 +152,10 @@ const Button = function Button<T extends ElementType = 'button'>(
   );
 
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    <Component {...rest} {...renderOptions}>
+    <Component
+      {...(rest as React.JSX.IntrinsicElements['button'])}
+      {...renderOptions}
+    >
       {renderContent}
     </Component>
   );

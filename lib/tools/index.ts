@@ -29,4 +29,5 @@ export {
   createLogger,
   checkObjectProperties,
   isDefined,
+  clsxUnique,
 } from './tools';
