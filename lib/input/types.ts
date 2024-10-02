@@ -45,4 +45,9 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * nativeSize.
    */
   nativeSize?: number | undefined;
+
+  /**
+   * readonlyPlainText.
+   */
+  readonlyPlainText?: boolean;
 };

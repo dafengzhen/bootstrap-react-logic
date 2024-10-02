@@ -10,6 +10,7 @@ import { Input } from '@lib/input';
 import { Textarea } from '@lib/textarea';
 import inputCodes from '@assets/codes/input';
 import Text from '../../lib/text/text.tsx';
+import { Button } from '@lib/button';
 
 interface IStates {
   input: {
@@ -22,6 +23,18 @@ interface IStates {
       code?: string;
     };
     text: {
+      openCode: boolean;
+      code?: string;
+    };
+    disabled: {
+      openCode: boolean;
+      code?: string;
+    };
+    readonly: {
+      openCode: boolean;
+      code?: string;
+    };
+    readonlyPlainText: {
       openCode: boolean;
       code?: string;
     };
@@ -46,6 +59,32 @@ export default function InputPage() {
         openCode: false,
         code: inputCodes.text.code.trim(),
       },
+      disabled: {
+        openCode: false,
+        code: inputCodes.disabled.code.trim(),
+      },
+      readonly: {
+        openCode: false,
+        code: inputCodes.readonly.code.trim(),
+      },
+      readonlyPlainText: {
+        openCode: false,
+        code: inputCodes.readonlyPlainText.code.trim(),
+      },
+    },
+  });
+  const [colgroup] = useState({
+    attr: {
+      width: '150px',
+    },
+    type: {
+      width: '350px',
+    },
+    desc: {
+      width: '100px',
+    },
+    default: {
+      width: '100px',
     },
   });
 
@@ -141,7 +180,7 @@ export default function InputPage() {
 
       <CustomSimpleCard
         title="文本"
-        hash="size"
+        hash="text"
         isOpen={states.input.text.openCode}
         toggleCode={() =>
           onClickUpdateState('input.text.openCode', !states.input.text.openCode)
@@ -204,6 +243,135 @@ export default function InputPage() {
         </div>
       </CustomSimpleCard>
 
+      <CustomSimpleCard
+        title="禁止"
+        hash="disabled"
+        isOpen={states.input.disabled.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'input.disabled.openCode',
+            !states.input.disabled.openCode,
+          )
+        }
+        code={states.input.disabled.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <div>
+            <Input
+              type="text"
+              placeholder="Disabled input"
+              aria-label="Disabled input example"
+              disabled
+            />
+          </div>
+
+          <div>
+            <Input
+              type="text"
+              value="Disabled readonly input"
+              aria-label="Disabled input example"
+              disabled
+              readOnly
+            />
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="只读"
+        hash="readonly"
+        isOpen={states.input.readonly.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'input.readonly.openCode',
+            !states.input.readonly.openCode,
+          )
+        }
+        code={states.input.readonly.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <div>
+            <Input
+              type="text"
+              value="Readonly input here..."
+              aria-label="readonly input example"
+              readOnly
+            />
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="只读纯文本"
+        hash="readonly"
+        isOpen={states.input.readonlyPlainText.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'input.readonlyPlainText.openCode',
+            !states.input.readonlyPlainText.openCode,
+          )
+        }
+        code={states.input.readonlyPlainText.code}
+      >
+        <div className="d-flex flex-column gap-3">
+          <div className="d-flex flex-column gap-2">
+            <div className="row">
+              <Label htmlFor="staticEmail" className="col-sm-2">
+                Email
+              </Label>
+              <div className="col-sm-10">
+                <Input
+                  type="text"
+                  readOnly
+                  readonlyPlainText
+                  id="staticEmail"
+                  value="email@example.com"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <Label htmlFor="inputPassword" className="col-sm-2">
+                Password
+              </Label>
+              <div className="col-sm-10">
+                <Input type="password" id="inputPassword" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <form className="row g-3">
+              <div className="col-auto">
+                <Label htmlFor="staticEmail2" className="visually-hidden">
+                  Email
+                </Label>
+                <Input
+                  type="text"
+                  readOnly
+                  readonlyPlainText
+                  id="staticEmail2"
+                  value="email@example.com"
+                />
+              </div>
+              <div className="col-auto">
+                <Label htmlFor="inputPassword2" className="visually-hidden">
+                  Password
+                </Label>
+                <Input
+                  type="password"
+                  id="inputPassword2"
+                  placeholder="Password"
+                />
+              </div>
+              <div className="col-auto">
+                <Button type="button" variant="primary">
+                  Confirm identity
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
       <div className="card">
         <div className="card-header">
           <CustomSimpleCardLink
@@ -213,7 +381,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -241,6 +415,30 @@ export default function InputPage() {
                   <td></td>
                   <td>-</td>
                 </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>readonly</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>readonlyPlainText</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Class</td>
+                  <td>-</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -256,7 +454,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -276,6 +480,22 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">textarea</span>
                   </td>
                 </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>readonly</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -291,7 +511,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -316,7 +542,7 @@ export default function InputPage() {
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
                   </td>
-                  <td></td>
+                  <td>Class</td>
                   <td>-</td>
                 </tr>
               </tbody>
@@ -334,7 +560,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -370,7 +602,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -415,7 +653,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -456,7 +700,13 @@ export default function InputPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>

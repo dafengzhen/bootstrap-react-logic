@@ -78,6 +78,20 @@ export default function ButtonGroupPage() {
       },
     },
   });
+  const [colgroup] = useState({
+    attr: {
+      width: '150px',
+    },
+    type: {
+      width: '350px',
+    },
+    desc: {
+      width: '100px',
+    },
+    default: {
+      width: '100px',
+    },
+  });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
   function onClickUpdateState(
@@ -482,7 +496,13 @@ export default function ButtonGroupPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -561,7 +581,13 @@ export default function ButtonGroupPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
@@ -619,12 +645,19 @@ export default function ButtonGroupPage() {
         </div>
         <div className="card-body">
           <div className="table-responsive">
-            <table className="table">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
                   <th scope="col">Attr</th>
                   <th scope="col">Type</th>
                   <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
                 </tr>
               </thead>
               <tbody>
@@ -635,10 +668,12 @@ export default function ButtonGroupPage() {
                       MouseEventHandler
                     </span>
                   </td>
+                  <td></td>
                   <td>-</td>
                 </tr>
                 <tr>
                   <td>...</td>
+                  <td>-</td>
                   <td>-</td>
                   <td>-</td>
                 </tr>

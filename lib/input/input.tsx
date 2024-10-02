@@ -12,12 +12,14 @@ const Input = function Input<T extends ElementType>(props: Props<T>) {
     style,
     children,
     size,
+    readonlyPlainText,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass && 'form-control',
+      !dropOldClass &&
+        (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
       size && `form-control-${size}`,
       className,
     );
@@ -30,7 +32,7 @@ const Input = function Input<T extends ElementType>(props: Props<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, className, style]);
+  }, [dropOldClass, readonlyPlainText, size, className, style]);
 
   if (render && skipCompWrap) {
     return render({ ...rest, ...renderOptions } as ElementProps<T>);

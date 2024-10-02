@@ -109,6 +109,20 @@ export default function ButtonPage() {
       },
     },
   });
+  const [colgroup] = useState({
+    attr: {
+      width: '150px',
+    },
+    type: {
+      width: '350px',
+    },
+    desc: {
+      width: '100px',
+    },
+    default: {
+      width: '100px',
+    },
+  });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
   function onClickUpdateState(
@@ -478,20 +492,18 @@ export default function ButtonPage() {
         <div className="card-body">
           <div className="table-responsive">
             <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
-                  <th scope="col" style={{ width: 100 }}>
-                    Attr
-                  </th>
-                  <th scope="col" style={{ width: 300 }}>
-                    Type
-                  </th>
-                  <th scope="col" style={{ width: 100 }}>
-                    Desc
-                  </th>
-                  <th scope="col" style={{ width: 100 }}>
-                    Default
-                  </th>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
                 </tr>
               </thead>
               <tbody>
@@ -534,7 +546,7 @@ export default function ButtonPage() {
                 <tr>
                   <td>variant</td>
                   <td>
-                    <span className="badge text-bg-secondary tw-whitespace-normal">
+                    <span className="badge text-bg-secondary">
                       primary | secondary | success | info | warning | danger |
                       light | dark | link
                     </span>
@@ -545,7 +557,7 @@ export default function ButtonPage() {
                 <tr>
                   <td>outline</td>
                   <td>
-                    <span className="badge text-bg-secondary tw-whitespace-normal">
+                    <span className="badge text-bg-secondary">
                       primary | secondary | success | info | warning | danger |
                       light | dark | link
                     </span>
@@ -632,20 +644,18 @@ export default function ButtonPage() {
         <div className="card-body">
           <div className="table-responsive">
             <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
-                  <th scope="col" style={{ width: 100 }}>
-                    Attr
-                  </th>
-                  <th scope="col" style={{ width: 300 }}>
-                    Type
-                  </th>
-                  <th scope="col" style={{ width: 100 }}>
-                    Desc
-                  </th>
-                  <th scope="col" style={{ width: 100 }}>
-                    Default
-                  </th>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
                 </tr>
               </thead>
               <tbody>
@@ -681,20 +691,18 @@ export default function ButtonPage() {
         <div className="card-body">
           <div className="table-responsive">
             <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
               <thead>
                 <tr>
-                  <th scope="col" style={{ width: 100 }}>
-                    Attr
-                  </th>
-                  <th scope="col" style={{ width: 300 }}>
-                    Type
-                  </th>
-                  <th scope="col" style={{ width: 100 }}>
-                    Desc
-                  </th>
-                  <th scope="col" style={{ width: 100 }}>
-                    Default
-                  </th>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
                 </tr>
               </thead>
               <tbody>
