@@ -23,7 +23,9 @@ function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   }
 }
 
-const Button = function Button<T extends ElementType>(props: Props<T>) {
+const Button = function Button<T extends ElementType = 'button'>(
+  props: Props<T>,
+) {
   const {
     as: Component = 'button',
     dropOldClass,

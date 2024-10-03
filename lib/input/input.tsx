@@ -10,7 +10,7 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Input = function Input<T extends ElementType>(props: Props<T>) {
+const Input = function Input<T extends ElementType = 'input'>(props: Props<T>) {
   const {
     as: Component = 'input',
     render,
@@ -62,6 +62,7 @@ const Input = function Input<T extends ElementType>(props: Props<T>) {
     color,
     size,
     className,
+    variables,
     style,
     nativeSize,
     nativeColor,

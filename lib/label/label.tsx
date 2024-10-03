@@ -10,7 +10,7 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Label = function Label<T extends ElementType>(props: Props<T>) {
+const Label = function Label<T extends ElementType = 'label'>(props: Props<T>) {
   const {
     as: Component = 'label',
     render,
@@ -47,7 +47,7 @@ const Label = function Label<T extends ElementType>(props: Props<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, colFormLabel, className, style]);
+  }, [dropOldClass, colFormLabel, className, variables, style]);
 
   if (render && skipCompWrap) {
     return render({ ...rest, ...renderOptions } as ElementProps<T>);

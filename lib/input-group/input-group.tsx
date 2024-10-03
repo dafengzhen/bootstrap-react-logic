@@ -1,73 +1,46 @@
 import { type ElementType, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
-  ButtonGroupVariablesEnum,
-  checkObjectProperties,
   clsxUnique,
-  createLogger,
-  DEVELOPMENT,
   filterAndTransformProperties,
   filterOptions,
+  InputVariablesEnum,
   type IntrinsicElements,
-  isDefined,
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const logger = createLogger();
-
-const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
+const InputGroup = function InputGroup<T extends ElementType = 'input'>(
   props: Props<T>,
 ) {
   const {
-    as: Component = 'div',
+    as: Component = 'input',
     render,
     skipCompWrap,
     dropOldClass,
     variables,
-    children,
     className,
     style,
-    role,
-    'aria-label': ariaLabel,
-    toolbar,
-    vertical,
+    children,
     size,
+    nativeSize,
+    readonlyPlainText,
+    color,
+    nativeColor,
     ...rest
   } = props;
-
-  /* #__PURE__ */ if (process.env.NODE_ENV === DEVELOPMENT) {
-    checkObjectProperties(
-      {
-        role,
-        'aria-label': ariaLabel,
-      },
-      ['role', 'aria-label'],
-      (value) => isDefined(value, true),
-      (propertyName, value) => {
-        logger.warnMissingParam({
-          propertyName,
-          componentName: 'ButtonGroup',
-          currentValue: value,
-        });
-      },
-    );
-  }
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        (vertical
-          ? 'btn-group-vertical'
-          : toolbar
-            ? 'btn-toolbar'
-            : 'btn-group'),
-      size && `btn-group-${size}`,
+        (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
+      color && 'form-control-color',
+      size && `form-control-${size}`,
       className,
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = ButtonGroupVariablesEnum[key];
+        const _value = InputVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
@@ -80,10 +53,22 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
       {
         className: finalClass,
         style: finalStyle,
+        size: nativeSize,
+        color: nativeColor,
       },
       isValueValid,
     );
-  }, [dropOldClass, vertical, toolbar, size, className, variables, style]);
+  }, [
+    dropOldClass,
+    readonlyPlainText,
+    color,
+    size,
+    className,
+    variables,
+    style,
+    nativeSize,
+    nativeColor,
+  ]);
 
   if (render && skipCompWrap) {
     return render({ ...rest, ...renderOptions } as ElementProps<T>);
@@ -94,12 +79,12 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
     : children;
 
   return (
-    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
+    <Component {...(rest as IntrinsicElements['input'])} {...renderOptions}>
       {renderContent}
     </Component>
   );
 };
 
-ButtonGroup.displayName = 'BRL.ButtonGroup';
+InputGroup.displayName = 'BRL.InputGroup';
 
-export default ButtonGroup;
+export default InputGroup;

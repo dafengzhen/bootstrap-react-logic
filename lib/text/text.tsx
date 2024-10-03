@@ -10,7 +10,7 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Text = function Text<T extends ElementType>(props: Props<T>) {
+const Text = function Text<T extends ElementType = 'div'>(props: Props<T>) {
   const {
     as: Component = 'div',
     render,
@@ -43,7 +43,7 @@ const Text = function Text<T extends ElementType>(props: Props<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, className, style]);
+  }, [dropOldClass, className, variables, style]);
 
   if (render && skipCompWrap) {
     return render({ ...rest, ...renderOptions } as ElementProps<T>);

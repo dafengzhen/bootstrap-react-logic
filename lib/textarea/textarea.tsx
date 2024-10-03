@@ -10,7 +10,9 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Textarea = function Textarea<T extends ElementType>(props: Props<T>) {
+const Textarea = function Textarea<T extends ElementType = 'textarea'>(
+  props: Props<T>,
+) {
   const {
     as: Component = 'textarea',
     render,
@@ -43,7 +45,7 @@ const Textarea = function Textarea<T extends ElementType>(props: Props<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, className, style]);
+  }, [dropOldClass, className, variables, style]);
 
   if (render && skipCompWrap) {
     return render({ ...rest, ...renderOptions } as ElementProps<T>);
