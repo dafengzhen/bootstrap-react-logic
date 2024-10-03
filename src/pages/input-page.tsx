@@ -51,6 +51,10 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
+    startEndContent: {
+      openCode: boolean;
+      code?: string;
+    };
   };
 }
 
@@ -95,6 +99,10 @@ export default function InputPage() {
       datalist: {
         openCode: false,
         code: inputCodes.datalist.code.trim(),
+      },
+      startEndContent: {
+        openCode: false,
+        code: inputCodes.startEndContent.code.trim(),
       },
     },
   });
@@ -497,6 +505,40 @@ export default function InputPage() {
         </div>
       </CustomSimpleCard>
 
+      <CustomSimpleCard
+        title="前缀和后缀"
+        hash="startEndContent"
+        isOpen={states.input.startEndContent.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'input.startEndContent.openCode',
+            !states.input.startEndContent.openCode,
+          )
+        }
+        code={states.input.startEndContent.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <Input
+            startContent={<i className="bi bi-person"></i>}
+            placeholder="Username"
+          />
+          <Input
+            endContent={<i className="bi bi-eye"></i>}
+            placeholder="Password"
+          />
+          <Input
+            endContent={
+              <>
+                <i className="bi bi-x"></i>
+                <i className="bi bi-eye ms-1"></i>
+              </>
+            }
+            className="!tw-pe-[3.25rem]"
+            placeholder="Password"
+          />
+        </div>
+      </CustomSimpleCard>
+
       <div className="card">
         <div className="card-header">
           <CustomSimpleCardLink
@@ -590,6 +632,42 @@ export default function InputPage() {
                     </span>
                   </td>
                   <td>HTMLAttributes</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>startContent</td>
+                  <td>
+                    <span className="badge text-bg-secondary">ReactNode</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>endContent</td>
+                  <td>
+                    <span className="badge text-bg-secondary">ReactNode</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>startEndContentClasses</td>
+                  <td>
+                    <div className="d-flex flex-column gap-2">
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : container | start | end | component
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Value : string | ((originalClass: string) =&gt; string
+                          | undefined)
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
                   <td>-</td>
                 </tr>
               </tbody>

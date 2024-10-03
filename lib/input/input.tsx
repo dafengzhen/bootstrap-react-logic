@@ -8,8 +8,10 @@ import {
   type IntrinsicElements,
   isValueValid,
   processClassName,
+  processSlotClasses,
   VARIABLE_BS_PREFIX,
 } from '../tools';
+import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(
   props: Props<T> & {
@@ -31,6 +33,9 @@ const Input = function Input<T extends ElementType = 'input'>(
     color,
     nativeColor,
     type,
+    startContent,
+    endContent,
+    startEndContentClasses,
     ...rest
   } = props;
 
@@ -94,6 +99,42 @@ const Input = function Input<T extends ElementType = 'input'>(
   const renderContent = render
     ? render({ ...rest, ...renderOptions } as ElementProps<T>)
     : children;
+
+  if (startContent || endContent) {
+    const slotClassName = processSlotClasses(startEndContentClasses, {
+      container: 'd-inline-flex align-items-center position-relative',
+      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlInputStart3}`,
+      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlInputEnd3}`,
+      component: clsxUnique(
+        renderOptions.className,
+        startContent && inputStyles.brlInputPs9,
+        endContent && inputStyles.brlInputPe9,
+      ),
+    });
+
+    return (
+      <div data-slot-container="" className={slotClassName.container}>
+        {startContent && (
+          <div data-slot-prefix="" className={slotClassName.start}>
+            {startContent}
+          </div>
+        )}
+        <Component
+          data-slot-component=""
+          {...(rest as IntrinsicElements['input'])}
+          {...renderOptions}
+          className={slotClassName.component}
+        >
+          {renderContent}
+        </Component>
+        {endContent && (
+          <div data-slot-suffix="" className={slotClassName.end}>
+            {endContent}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <Component {...(rest as IntrinsicElements['input'])} {...renderOptions}>

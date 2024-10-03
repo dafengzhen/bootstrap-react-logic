@@ -1,4 +1,4 @@
-export type { IntrinsicElements } from './elements.ts';
+export type { IntrinsicElements, SlotValue } from './elements.ts';
 
 export type { ReactRef } from './refs';
 
@@ -36,4 +36,6 @@ export {
   isDefined,
   clsxUnique,
   processClassName,
+  mergeClassNames,
+  processSlotClasses,
 } from './tools';

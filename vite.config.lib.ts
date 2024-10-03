@@ -25,6 +25,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react/jsx-runtime'],
       output: {
+        assetFileNames: 'bootstrap-react-logic.[ext]',
         globals: {
           react: 'React',
           'react/jsx-runtime': 'ReactJsxRuntime',

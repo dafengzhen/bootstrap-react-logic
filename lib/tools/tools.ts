@@ -554,6 +554,92 @@ const processClassName = (
   return [...new Set(result)].join(' ');
 };
 
+/**
+ * Merges two class name strings into one, removing duplicates.
+ *
+ * @param {string | undefined} originalClass - The original class name string.
+ * It could contain multiple class names separated by spaces, or be undefined.
+ *
+ * @param {string} newClass - The new class name string to be merged.
+ * This also can contain multiple class names separated by spaces.
+ *
+ * @returns {string} - A single string of class names, with no duplicates.
+ * The class names are joined by a single space.
+ */
+const mergeClassNames = (
+  originalClass: string | undefined,
+  newClass: string,
+): string => {
+  const classSet = new Set(
+    [...(originalClass || '').split(' '), ...newClass.split(' ')].filter(
+      Boolean,
+    ),
+  );
+  return Array.from(classSet).join(' ');
+};
+
+/**
+ * This function processes a set of class names (`slotClasses`) for different slots and applies
+ * custom logic to generate the final class names. It takes into account both the provided slot
+ * classes and any original class names that might already exist (`originalClasses`).
+ *
+ * @template T - A record where the keys are slot names and values are either strings or
+ *               functions that process original class names.
+ *
+ * @param {T} [slotClasses] - An optional object where the keys represent slot names and the
+ *                            values can either be a string (class name) or a function that
+ *                            returns a string or `undefined` when given an original class name.
+ * @param {Partial<Record<keyof T, string>>} [originalClasses] - An optional object containing
+ *                                                              the original class names for
+ *                                                              each slot.
+ *
+ * @returns {Partial<{ [K in keyof T]: string }>} - An object where the keys are the same slot
+ *                                                  names from the input, and the values are
+ *                                                  the processed class names based on the
+ *                                                  provided or original class names.
+ */
+const processSlotClasses = <
+  T extends Record<
+    string,
+    string | ((originalClass: string) => string | undefined)
+  >,
+>(
+  slotClasses?: T,
+  originalClasses?: Partial<Record<keyof T, string>>,
+): Partial<{ [K in keyof T]: string }> => {
+  if (!slotClasses || Object.keys(slotClasses).length === 0) {
+    return originalClasses && Object.keys(originalClasses).length > 0
+      ? originalClasses
+      : {};
+  }
+
+  const result: Partial<{ [K in keyof T]: string }> = {};
+  for (const slot in slotClasses) {
+    const originalClass = originalClasses?.[slot as keyof T] || '';
+    const slotClass = slotClasses[slot as keyof T];
+
+    if (typeof slotClass === 'string') {
+      result[slot as keyof T] = slotClass;
+    } else if (typeof slotClass === 'function') {
+      const processedClass = slotClass(originalClass);
+      result[slot as keyof T] =
+        processedClass !== undefined ? processedClass : originalClass;
+    } else {
+      result[slot as keyof T] = originalClass;
+    }
+  }
+
+  if (originalClasses) {
+    for (const key in originalClasses) {
+      if (!(key in result)) {
+        result[key as keyof T] = originalClasses[key as keyof T] || '';
+      }
+    }
+  }
+
+  return result;
+};
+
 export {
   camelToKebab,
   deepMerge,
@@ -572,4 +658,6 @@ export {
   isDefined,
   clsxUnique,
   processClassName,
+  mergeClassNames,
+  processSlotClasses,
 };

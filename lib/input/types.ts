@@ -5,7 +5,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import type { InputVariablesEnum, IntrinsicElements } from '../tools';
+import { InputVariablesEnum, IntrinsicElements, SlotValue } from '../tools';
 
 type Variables = {
   [key in keyof typeof InputVariablesEnum]?: string | number;
@@ -15,7 +15,10 @@ export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
         T extends 'input'
-          ? Omit<InputHTMLAttributes<IntrinsicElements[T]>, 'size' | 'color'>
+          ? Omit<
+              InputHTMLAttributes<IntrinsicElements[T]>,
+              'size' | 'color' | 'prefix'
+            >
           : HTMLAttributes<IntrinsicElements[T]>,
         IntrinsicElements[T]
       >
@@ -71,4 +74,24 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * nativeColor.
    */
   nativeColor?: string | undefined;
+
+  /**
+   * startContent.
+   */
+  startContent?: ReactNode;
+
+  /**
+   * endContent.
+   */
+  endContent?: ReactNode;
+
+  /**
+   * startEndContentClasses.
+   */
+  startEndContentClasses?: {
+    container?: SlotValue;
+    start?: SlotValue;
+    end?: SlotValue;
+    component?: SlotValue;
+  };
 };
