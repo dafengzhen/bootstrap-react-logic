@@ -51,4 +51,9 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    * colFormLabel.
    */
   colFormLabel?: boolean;
+
+  /**
+   * inputGroupText.
+   */
+  inputGroupText?: boolean;
 };

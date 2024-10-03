@@ -2,20 +2,37 @@ import {
   type DetailedHTMLProps,
   type ElementType,
   type HTMLAttributes,
-  type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import type { InputVariablesEnum, IntrinsicElements } from '../tools';
+import {
+  InputGroupTextVariablesEnum,
+  InputGroupVariablesEnum,
+  IntrinsicElements,
+} from '../tools';
 
 type Variables = {
-  [key in keyof typeof InputVariablesEnum]?: string | number;
+  [key in keyof typeof InputGroupVariablesEnum]?: string | number;
+};
+
+type InputGroupTextVariables = {
+  [key in keyof typeof InputGroupTextVariablesEnum]?: string | number;
 };
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements
     ? DetailedHTMLProps<
-        T extends 'input'
-          ? Omit<InputHTMLAttributes<IntrinsicElements[T]>, 'size' | 'color'>
+        T extends 'div'
+          ? HTMLAttributes<IntrinsicElements[T]>
+          : HTMLAttributes<IntrinsicElements[T]>,
+        IntrinsicElements[T]
+      >
+    : never;
+
+export type InputGroupTextElementProps<T extends ElementType> =
+  T extends keyof IntrinsicElements
+    ? DetailedHTMLProps<
+        T extends 'div'
+          ? HTMLAttributes<IntrinsicElements[T]>
           : HTMLAttributes<IntrinsicElements[T]>,
         IntrinsicElements[T]
       >
@@ -48,27 +65,40 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   variables?: Variables;
 
   /**
+   * nowrap.
+   */
+  nowrap?: boolean;
+
+  /**
    * size.
    */
   size?: 'lg' | 'sm';
-
-  /**
-   * nativeSize.
-   */
-  nativeSize?: number | undefined;
-
-  /**
-   * readonlyPlainText.
-   */
-  readonlyPlainText?: boolean;
-
-  /**
-   * color
-   */
-  color?: boolean;
-
-  /**
-   * nativeColor.
-   */
-  nativeColor?: string | undefined;
 };
+
+export type InputGroupTextProps<T extends ElementType> =
+  InputGroupTextElementProps<T> & {
+    /**
+     * Determines which element type to render as (e.g., input or other).
+     */
+    as?: T;
+
+    /**
+     * Custom render function to customize the rendering of the component.
+     */
+    render?: (renderOptions: InputGroupTextElementProps<T>) => ReactNode;
+
+    /**
+     * Flag to indicate whether to drop old class names.
+     */
+    dropOldClass?: boolean;
+
+    /**
+     * Flag to skip wrapping the component in an additional element.
+     */
+    skipCompWrap?: boolean;
+
+    /**
+     * variables.
+     */
+    variables?: InputGroupTextVariables;
+  };

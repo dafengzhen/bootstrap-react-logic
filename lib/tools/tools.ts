@@ -522,6 +522,38 @@ const clsxUnique = (...inputs: ClassValue[]): string => {
   return uniqueClassNames.join(' ');
 };
 
+/**
+ * Processes a given className string by applying a series of processors
+ * that manipulate the list of class names. Each processor is a function
+ * that takes an array of class names and returns either a modified array
+ * or `undefined`.
+ *
+ * @param {string} className - The original className string containing one or more class names separated by spaces.
+ * @param {((classNames: string[]) => string[] | undefined)[]} [processors] - An optional array of functions that process the class names.
+ * Each processor is applied in order, modifying the list of class names.
+ *
+ * @returns {string} - The processed className string with any modifications from the processors, joined back into a single string.
+ * Duplicate class names are removed.
+ */
+const processClassName = (
+  className: string,
+  processors?: ((classNames: string[]) => string[] | undefined)[],
+): string => {
+  if (!processors || processors.length === 0) {
+    return className;
+  }
+
+  let result = className.split(' ').filter(Boolean);
+  for (const processor of processors) {
+    const processed = processor(result);
+    if (isArray(processed)) {
+      result = processed as string[];
+    }
+  }
+
+  return [...new Set(result)].join(' ');
+};
+
 export {
   camelToKebab,
   deepMerge,
@@ -539,4 +571,5 @@ export {
   checkObjectProperties,
   isDefined,
   clsxUnique,
+  processClassName,
 };

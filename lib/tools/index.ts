@@ -14,6 +14,8 @@ export {
   LabelVariablesEnum,
   TextVariablesEnum,
   TextareaVariablesEnum,
+  InputGroupVariablesEnum,
+  InputGroupTextVariablesEnum,
 } from './enums';
 
 export {
@@ -33,4 +35,5 @@ export {
   checkObjectProperties,
   isDefined,
   clsxUnique,
+  processClassName,
 } from './tools';

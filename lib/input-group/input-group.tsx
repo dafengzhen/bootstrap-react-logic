@@ -9,12 +9,13 @@ import {
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
+import InputGroupText from './input-group-text.tsx';
 
-const InputGroup = function InputGroup<T extends ElementType = 'input'>(
+const InputGroup = function InputGroup<T extends ElementType = 'div'>(
   props: Props<T>,
 ) {
   const {
-    as: Component = 'input',
+    as: Component = 'div',
     render,
     skipCompWrap,
     dropOldClass,
@@ -22,20 +23,16 @@ const InputGroup = function InputGroup<T extends ElementType = 'input'>(
     className,
     style,
     children,
+    nowrap,
     size,
-    nativeSize,
-    readonlyPlainText,
-    color,
-    nativeColor,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass &&
-        (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
-      color && 'form-control-color',
-      size && `form-control-${size}`,
+      !dropOldClass && 'input-group',
+      nowrap && 'flex-nowrap',
+      size && `input-group-${size}`,
       className,
     );
     const finalStyle = {
@@ -53,22 +50,10 @@ const InputGroup = function InputGroup<T extends ElementType = 'input'>(
       {
         className: finalClass,
         style: finalStyle,
-        size: nativeSize,
-        color: nativeColor,
       },
       isValueValid,
     );
-  }, [
-    dropOldClass,
-    readonlyPlainText,
-    color,
-    size,
-    className,
-    variables,
-    style,
-    nativeSize,
-    nativeColor,
-  ]);
+  }, [dropOldClass, nowrap, size, className, variables, style]);
 
   if (render && skipCompWrap) {
     return render({ ...rest, ...renderOptions } as ElementProps<T>);
@@ -79,11 +64,13 @@ const InputGroup = function InputGroup<T extends ElementType = 'input'>(
     : children;
 
   return (
-    <Component {...(rest as IntrinsicElements['input'])} {...renderOptions}>
+    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
       {renderContent}
     </Component>
   );
 };
+
+InputGroup.Text = InputGroupText;
 
 InputGroup.displayName = 'BRL.InputGroup';
 

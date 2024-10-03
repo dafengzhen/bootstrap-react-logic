@@ -7,6 +7,7 @@ import type { NestedKeys } from '@src/types';
 import CustomSimpleCard from '@src/components/custom-simple-card';
 import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import AboutComponent from '@components/about-component.tsx';
+import { updateState } from '@src/tools';
 
 interface IStates {
   button: {
@@ -130,23 +131,7 @@ export default function ButtonPage() {
     v: unknown,
     c?: () => void,
   ) {
-    setStates((prev) => {
-      const keys = k.split('.');
-      const newState = { ...prev };
-
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      keys.reduce((acc: any, key, index) => {
-        if (index === keys.length - 1) {
-          acc[key] = v;
-        } else {
-          acc[key] = { ...acc[key] };
-        }
-        return acc[key];
-      }, newState);
-
-      return newState;
-    });
-    c?.();
+    updateState(setStates, k, v, c);
   }
 
   function onClickChangeSizeTest() {
@@ -544,6 +529,14 @@ export default function ButtonPage() {
                   <td>-</td>
                 </tr>
                 <tr>
+                  <td>variables</td>
+                  <td>
+                    <span className="badge text-bg-secondary">object</span>
+                  </td>
+                  <td>Style variables</td>
+                  <td>-</td>
+                </tr>
+                <tr>
                   <td>variant</td>
                   <td>
                     <span className="badge text-bg-secondary">
@@ -624,14 +617,6 @@ export default function ButtonPage() {
                     <span className="badge text-bg-secondary">ReactNode</span>
                   </td>
                   <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>variables</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td>Style variables</td>
                   <td>-</td>
                 </tr>
               </tbody>

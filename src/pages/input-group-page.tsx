@@ -7,14 +7,20 @@ import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import AboutComponent from '@components/about-component.tsx';
 import { Label } from '@lib/label';
 import { Input } from '@lib/input';
-import { Textarea } from '@lib/textarea';
-import inputCodes from '@assets/codes/input';
+import inputGroupCodes from '@assets/codes/input-group';
 import Text from '../../lib/text/text.tsx';
+import { InputGroup, InputGroupText } from '@lib/input-group';
+import { Textarea } from '@lib/textarea';
+import { updateState } from '@src/tools';
 import { Button } from '@lib/button';
 
 interface IStates {
-  input: {
+  inputGroup: {
     basic: {
+      openCode: boolean;
+      code?: string;
+    };
+    nowrap: {
       openCode: boolean;
       code?: string;
     };
@@ -22,31 +28,27 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
-    text: {
+    checkboxAndRadio: {
       openCode: boolean;
       code?: string;
     };
-    disabled: {
+    multipleInput: {
       openCode: boolean;
       code?: string;
     };
-    readonly: {
+    multipleAddons: {
       openCode: boolean;
       code?: string;
     };
-    readonlyPlainText: {
+    buttonAddons: {
       openCode: boolean;
       code?: string;
     };
-    file: {
+    customSelect: {
       openCode: boolean;
       code?: string;
     };
-    color: {
-      openCode: boolean;
-      code?: string;
-    };
-    datalist: {
+    customFileInput: {
       openCode: boolean;
       code?: string;
     };
@@ -58,42 +60,42 @@ export default function InputGroupPage() {
   const navigation = useNavigation();
 
   const [states, setStates] = useState<IStates>({
-    input: {
+    inputGroup: {
       basic: {
         openCode: false,
-        code: inputCodes.basic.code.trim(),
+        code: inputGroupCodes.basic.code.trim(),
+      },
+      nowrap: {
+        openCode: false,
+        code: inputGroupCodes.nowrap.code.trim(),
       },
       size: {
         openCode: false,
-        code: inputCodes.size.code.trim(),
+        code: inputGroupCodes.size.code.trim(),
       },
-      text: {
+      checkboxAndRadio: {
         openCode: false,
-        code: inputCodes.text.code.trim(),
+        code: inputGroupCodes.checkboxAndRadio.code.trim(),
       },
-      disabled: {
+      multipleInput: {
         openCode: false,
-        code: inputCodes.disabled.code.trim(),
+        code: inputGroupCodes.multipleInput.code.trim(),
       },
-      readonly: {
+      multipleAddons: {
         openCode: false,
-        code: inputCodes.readonly.code.trim(),
+        code: inputGroupCodes.multipleAddons.code.trim(),
       },
-      readonlyPlainText: {
+      buttonAddons: {
         openCode: false,
-        code: inputCodes.readonlyPlainText.code.trim(),
+        code: inputGroupCodes.buttonAddons.code.trim(),
       },
-      file: {
+      customSelect: {
         openCode: false,
-        code: inputCodes.file.code.trim(),
+        code: inputGroupCodes.customSelect.code.trim(),
       },
-      color: {
+      customFileInput: {
         openCode: false,
-        code: inputCodes.color.code.trim(),
-      },
-      datalist: {
-        openCode: false,
-        code: inputCodes.datalist.code.trim(),
+        code: inputGroupCodes.customFileInput.code.trim(),
       },
     },
   });
@@ -117,23 +119,7 @@ export default function InputGroupPage() {
     v: unknown,
     c?: () => void,
   ) {
-    setStates((prev) => {
-      const keys = k.split('.');
-      const newState = { ...prev };
-
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      keys.reduce((acc: any, key, index) => {
-        if (index === keys.length - 1) {
-          acc[key] = v;
-        } else {
-          acc[key] = { ...acc[key] };
-        }
-        return acc[key];
-      }, newState);
-
-      return newState;
-    });
-    c?.();
+    updateState(setStates, k, v, c);
   }
 
   if (navigation.state === 'loading') {
@@ -145,378 +131,439 @@ export default function InputGroupPage() {
       <CustomSimpleCard
         title="基本"
         hash="basic"
-        isOpen={states.input.basic.openCode}
+        isOpen={states.inputGroup.basic.openCode}
         toggleCode={() =>
           onClickUpdateState(
-            'input.basic.openCode',
-            !states.input.basic.openCode,
+            'inputGroup.basic.openCode',
+            !states.inputGroup.basic.openCode,
           )
         }
-        code={states.input.basic.code}
+        code={states.inputGroup.basic.code}
       >
         <div className="d-flex flex-column gap-2">
-          <div>
-            <Label htmlFor="exampleFormControlInput1">Email address</Label>
+          <InputGroup>
+            <InputGroupText id="basic-addon1">@</InputGroupText>
             <Input
-              type="email"
-              id="exampleFormControlInput1"
-              placeholder="name@example.com"
-            ></Input>
-          </div>
+              type="text"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <Input
+              type="text"
+              placeholder="Recipient's username"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <InputGroupText id="basic-addon2">@example.com</InputGroupText>
+          </InputGroup>
+
           <div>
-            <Label htmlFor="exampleFormControlTextarea1">
-              Example textarea
-            </Label>
-            <Textarea id="exampleFormControlTextarea1" rows={3}></Textarea>
+            <Label htmlFor="basic-url">Your vanity URL</Label>
+            <InputGroup>
+              <InputGroupText id="basic-addon3">
+                https://example.com/users/
+              </InputGroupText>
+              <Input
+                type="text"
+                id="basic-url"
+                aria-describedby="basic-addon3 basic-addon4"
+              />
+            </InputGroup>
+            <Text id="basic-addon4">
+              Example help text goes outside the input group.
+            </Text>
           </div>
+
+          <InputGroup>
+            <InputGroupText>$</InputGroupText>
+            <Input type="text" aria-label="Amount (to the nearest dollar)" />
+            <InputGroupText>.00</InputGroupText>
+          </InputGroup>
+
+          <InputGroup>
+            <Input type="text" placeholder="Username" aria-label="Username" />
+            <InputGroupText>@</InputGroupText>
+            <Input type="text" placeholder="Server" aria-label="Server" />
+          </InputGroup>
+
+          <InputGroup>
+            <InputGroupText>With textarea</InputGroupText>
+            <Textarea aria-label="With textarea"></Textarea>
+          </InputGroup>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title="不换行"
+        hash="nowrap"
+        isOpen={states.inputGroup.nowrap.openCode}
+        toggleCode={() =>
+          onClickUpdateState(
+            'inputGroup.nowrap.openCode',
+            !states.inputGroup.nowrap.openCode,
+          )
+        }
+        code={states.inputGroup.nowrap.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <InputGroup nowrap>
+            <InputGroupText id="addon-wrapping">@</InputGroupText>
+            <Input
+              type="text"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="addon-wrapping"
+            />
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
         title="大小"
         hash="size"
-        isOpen={states.input.size.openCode}
+        isOpen={states.inputGroup.size.openCode}
         toggleCode={() =>
-          onClickUpdateState('input.size.openCode', !states.input.size.openCode)
+          onClickUpdateState(
+            'inputGroup.size.openCode',
+            !states.inputGroup.size.openCode,
+          )
         }
-        code={states.input.size.code}
+        code={states.inputGroup.size.code}
       >
         <div className="d-flex flex-column gap-2">
-          <Input
-            size="lg"
-            type="text"
-            placeholder=".form-control-lg"
-            aria-label=".form-control-lg example"
-          />
-          <Input
-            type="text"
-            placeholder="Default input"
-            aria-label="default input example"
-          />
-          <Input
-            size="sm"
-            type="text"
-            placeholder=".form-control-sm"
-            aria-label=".form-control-sm example"
-          />
+          <InputGroup size="sm">
+            <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
+            <Input
+              type="text"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm"
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <InputGroupText id="inputGroup-sizing-default">
+              Default
+            </InputGroupText>
+            <Input
+              type="text"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </InputGroup>
+
+          <InputGroup size="lg">
+            <InputGroupText id="inputGroup-sizing-lg">Large</InputGroupText>
+            <Input
+              type="text"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-lg"
+            />
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="文本"
-        hash="text"
-        isOpen={states.input.text.openCode}
+        title="选项框和单选框"
+        hash="checkboxAndRadio"
+        isOpen={states.inputGroup.checkboxAndRadio.openCode}
         toggleCode={() =>
-          onClickUpdateState('input.text.openCode', !states.input.text.openCode)
+          onClickUpdateState(
+            'inputGroup.checkboxAndRadio.openCode',
+            !states.inputGroup.checkboxAndRadio.openCode,
+          )
         }
-        code={states.input.text.code}
+        code={states.inputGroup.checkboxAndRadio.code}
       >
         <div className="d-flex flex-column gap-2">
-          <div>
-            <form>
-              <Label htmlFor="inputPassword5">Password</Label>
+          <InputGroup>
+            <InputGroupText as="div">
               <Input
-                type="text"
-                name="username"
-                autoComplete="username"
-                defaultValue="hiddenUsername"
-                className="d-none"
+                className="form-check-input mt-0"
+                type="checkbox"
+                readOnly
+                aria-label="Checkbox for following text input"
               />
+            </InputGroupText>
+            <Input type="text" aria-label="Text input with checkbox" />
+          </InputGroup>
+
+          <InputGroup>
+            <InputGroupText as="div">
               <Input
-                type="password"
-                id="inputPassword5"
-                aria-describedby="passwordHelpBlock"
-                autoComplete="new-password"
+                className="form-check-input mt-0"
+                type="radio"
+                readOnly
+                aria-label="Radio button for following text input"
               />
-              <Text>
-                Your password must be 8-20 characters long, contain letters and
-                numbers, and must not contain spaces, special characters, or
-                emoji.
-              </Text>
-            </form>
-          </div>
-          <div>
-            <form>
-              <div className="row g-3 align-items-center">
-                <div className="col-auto">
-                  <Label htmlFor="inputPassword6" colFormLabel>
-                    Password
-                  </Label>
-                </div>
-                <div className="col-auto">
-                  <Input
-                    type="text"
-                    name="username"
-                    autoComplete="username"
-                    defaultValue="hiddenUsername"
-                    className="d-none"
-                  />
-                  <Input
-                    type="password"
-                    id="inputPassword6"
-                    aria-describedby="passwordHelpInline"
-                    autoComplete="new-password"
-                  />
-                </div>
-                <div className="col-auto">
-                  <Text as="span">Must be 8-20 characters long.</Text>
-                </div>
-              </div>
-            </form>
-          </div>
+            </InputGroupText>
+            <Input type="text" aria-label="Text input with radio button" />
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="禁止"
-        hash="disabled"
-        isOpen={states.input.disabled.openCode}
+        title="多个输入框"
+        hash="multipleInput"
+        isOpen={states.inputGroup.multipleInput.openCode}
         toggleCode={() =>
           onClickUpdateState(
-            'input.disabled.openCode',
-            !states.input.disabled.openCode,
+            'inputGroup.multipleInput.openCode',
+            !states.inputGroup.multipleInput.openCode,
           )
         }
-        code={states.input.disabled.code}
+        code={states.inputGroup.multipleInput.code}
       >
         <div className="d-flex flex-column gap-2">
-          <div>
-            <Input
-              type="text"
-              placeholder="Disabled input"
-              aria-label="Disabled input example"
-              disabled
-            />
-          </div>
-
-          <div>
-            <Input
-              type="text"
-              value="Disabled readonly input"
-              aria-label="Disabled input example"
-              disabled
-              readOnly
-            />
-          </div>
+          <InputGroup>
+            <InputGroupText className="input-group-text">
+              First and last name
+            </InputGroupText>
+            <Input type="text" aria-label="First name" />
+            <Input type="text" aria-label="Last name" />
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="只读"
-        hash="readonly"
-        isOpen={states.input.readonly.openCode}
+        title="多个附加组件"
+        hash="multipleAddons"
+        isOpen={states.inputGroup.multipleAddons.openCode}
         toggleCode={() =>
           onClickUpdateState(
-            'input.readonly.openCode',
-            !states.input.readonly.openCode,
+            'inputGroup.multipleAddons.openCode',
+            !states.inputGroup.multipleAddons.openCode,
           )
         }
-        code={states.input.readonly.code}
+        code={states.inputGroup.multipleAddons.code}
       >
         <div className="d-flex flex-column gap-2">
-          <div>
+          <InputGroup>
+            <InputGroupText>$</InputGroupText>
+            <InputGroupText>0.00</InputGroupText>
             <Input
               type="text"
-              value="Readonly input here..."
-              aria-label="readonly input example"
-              readOnly
+              aria-label="Dollar amount (with dot and two decimal places)"
             />
-          </div>
+          </InputGroup>
+          <InputGroup>
+            <Input
+              type="text"
+              aria-label="Dollar amount (with dot and two decimal places)"
+            />
+            <InputGroupText>$</InputGroupText>
+            <InputGroupText>0.00</InputGroupText>
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="只读纯文本"
-        hash="readonly"
-        isOpen={states.input.readonlyPlainText.openCode}
+        title="按钮"
+        hash="buttonAddons"
+        isOpen={states.inputGroup.buttonAddons.openCode}
         toggleCode={() =>
           onClickUpdateState(
-            'input.readonlyPlainText.openCode',
-            !states.input.readonlyPlainText.openCode,
+            'inputGroup.buttonAddons.openCode',
+            !states.inputGroup.buttonAddons.openCode,
           )
         }
-        code={states.input.readonlyPlainText.code}
+        code={states.inputGroup.buttonAddons.code}
       >
-        <div className="d-flex flex-column gap-3">
-          <div className="d-flex flex-column gap-2">
-            <div className="row">
-              <Label htmlFor="staticEmail" className="col-sm-2">
-                Email
-              </Label>
-              <div className="col-sm-10">
-                <Input
-                  type="text"
-                  readOnly
-                  readonlyPlainText
-                  id="staticEmail"
-                  value="email@example.com"
-                />
-              </div>
-            </div>
-            <form>
-              <div className="row">
-                <Label htmlFor="inputPassword" className="col-sm-2">
-                  Password
-                </Label>
-                <div className="col-sm-10">
-                  <Input
-                    type="text"
-                    name="username"
-                    autoComplete="username"
-                    defaultValue="hiddenUsername"
-                    className="d-none"
-                  />
-                  <Input
-                    type="password"
-                    id="inputPassword"
-                    autoComplete="new-password"
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-          <div>
-            <form className="row g-3">
-              <div className="col-auto">
-                <Label htmlFor="staticEmail2" className="visually-hidden">
-                  Email
-                </Label>
-                <Input
-                  type="text"
-                  readOnly
-                  readonlyPlainText
-                  id="staticEmail2"
-                  value="email@example.com"
-                  autoComplete="username"
-                />
-              </div>
-              <div className="col-auto">
-                <Label htmlFor="inputPassword2" className="visually-hidden">
-                  Password
-                </Label>
-                <Input
-                  type="text"
-                  name="username"
-                  autoComplete="username"
-                  defaultValue="hiddenUsername"
-                  className="d-none"
-                />
-                <Input
-                  type="password"
-                  id="inputPassword2"
-                  placeholder="Password"
-                  autoComplete="new-password"
-                />
-              </div>
-              <div className="col-auto">
-                <Button type="button" variant="primary">
-                  Confirm identity
-                </Button>
-              </div>
-            </form>
-          </div>
+        <div className="d-flex flex-column gap-2">
+          <InputGroup>
+            <Button outline="secondary" type="button" id="button-addon1">
+              Button
+            </Button>
+            <Input
+              type="text"
+              placeholder=""
+              aria-label="Example text with button addon"
+              aria-describedby="button-addon1"
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <Input
+              type="text"
+              placeholder="Recipient's username"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <Button outline="secondary" type="button" id="button-addon2">
+              Button
+            </Button>
+          </InputGroup>
+
+          <InputGroup>
+            <Button outline="secondary" type="button">
+              Button
+            </Button>
+            <Button outline="secondary" type="button">
+              Button
+            </Button>
+            <Input
+              type="text"
+              placeholder=""
+              aria-label="Example text with two button addons"
+            />
+          </InputGroup>
+
+          <InputGroup>
+            <Input
+              type="text"
+              placeholder="Recipient's username"
+              aria-label="Recipient's username with two button addons"
+            />
+            <Button outline="secondary" type="button">
+              Button
+            </Button>
+            <Button outline="secondary" type="button">
+              Button
+            </Button>
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="文件"
-        hash="readonly"
-        isOpen={states.input.file.openCode}
+        title="选择框"
+        hash="customSelect"
+        isOpen={states.inputGroup.customSelect.openCode}
         toggleCode={() =>
-          onClickUpdateState('input.file.openCode', !states.input.file.openCode)
+          onClickUpdateState(
+            'inputGroup.customSelect.openCode',
+            !states.inputGroup.customSelect.openCode,
+          )
         }
-        code={states.input.file.code}
+        code={states.inputGroup.customSelect.code}
       >
         <div className="d-flex flex-column gap-2">
-          <div>
-            <Label htmlFor="formFile">Default file input example</Label>
-            <Input type="file" id="formFile" />
-          </div>
-          <div>
-            <Label htmlFor="formFileMultiple">
-              Multiple files input example
+          <InputGroup>
+            <Label inputGroupText htmlFor="inputGroupSelect01">
+              Options
             </Label>
-            <Input type="file" id="formFileMultiple" multiple />
-          </div>
-          <div>
-            <Label htmlFor="formFileDisabled">
-              Disabled file input example
+            <select className="form-select" id="inputGroupSelect01">
+              <option defaultValue="">Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </InputGroup>
+
+          <InputGroup>
+            <select className="form-select" id="inputGroupSelect02">
+              <option defaultValue="">Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <Label inputGroupText htmlFor="inputGroupSelect02">
+              Options
             </Label>
-            <Input type="file" id="formFileDisabled" disabled />
-          </div>
-          <div>
-            <Label htmlFor="formFileSm">Small file input example</Label>
-            <Input size="sm" id="formFileSm" type="file" />
-          </div>
-          <div>
-            <Label htmlFor="formFileLg">Large file input example</Label>
-            <Input size="lg" id="formFileLg" type="file" />
-          </div>
+          </InputGroup>
+
+          <InputGroup>
+            <Button outline="secondary" type="button">
+              Button
+            </Button>
+            <select
+              className="form-select"
+              id="inputGroupSelect03"
+              aria-label="Example select with button addon"
+            >
+              <option defaultValue="">Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </InputGroup>
+
+          <InputGroup>
+            <select
+              className="form-select"
+              id="inputGroupSelect04"
+              aria-label="Example select with button addon"
+            >
+              <option defaultValue="">Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <Button outline="secondary" type="button">
+              Button
+            </Button>
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="颜色"
-        hash="color"
-        isOpen={states.input.color.openCode}
+        title="文件框"
+        hash="customFileInput"
+        isOpen={states.inputGroup.customFileInput.openCode}
         toggleCode={() =>
           onClickUpdateState(
-            'input.color.openCode',
-            !states.input.color.openCode,
+            'inputGroup.customFileInput.openCode',
+            !states.inputGroup.customFileInput.openCode,
           )
         }
-        code={states.input.color.code}
+        code={states.inputGroup.customFileInput.code}
       >
         <div className="d-flex flex-column gap-2">
-          <div>
-            <Label htmlFor="exampleColorInput">Color picker</Label>
-            <Input
-              type="color"
-              color
-              id="exampleColorInput"
-              defaultValue="#563d7c"
-              title="Choose your color"
-            />
-          </div>
-        </div>
-      </CustomSimpleCard>
+          <InputGroup>
+            <Label inputGroupText htmlFor="inputGroupFile01">
+              Upload
+            </Label>
+            <Input type="file" id="inputGroupFile01" />
+          </InputGroup>
 
-      <CustomSimpleCard
-        title="数据列表"
-        hash="datalist"
-        isOpen={states.input.datalist.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.datalist.openCode',
-            !states.input.datalist.openCode,
-          )
-        }
-        code={states.input.datalist.code}
-      >
-        <div className="d-flex flex-column gap-2">
-          <div>
-            <Label htmlFor="exampleDataList">Datalist example</Label>
+          <InputGroup>
+            <Input type="file" id="inputGroupFile02" />
+            <Label inputGroupText htmlFor="inputGroupFile02">
+              Upload
+            </Label>
+          </InputGroup>
+
+          <InputGroup>
+            <Button
+              outline="secondary"
+              type="button"
+              id="inputGroupFileAddon03"
+            >
+              Button
+            </Button>
             <Input
-              list="datalistOptions"
-              id="exampleDataList"
-              placeholder="Type to search..."
+              type="file"
+              id="inputGroupFile03"
+              aria-describedby="inputGroupFileAddon03"
+              aria-label="Upload"
             />
-            <datalist id="datalistOptions">
-              <option value="San Francisco"></option>
-              <option value="New York"></option>
-              <option value="Seattle"></option>
-              <option value="Los Angeles"></option>
-              <option value="Chicago"></option>
-            </datalist>
-          </div>
+          </InputGroup>
+
+          <InputGroup>
+            <Input
+              type="file"
+              id="inputGroupFile04"
+              aria-describedby="inputGroupFileAddon04"
+              aria-label="Upload"
+            />
+            <Button
+              outline="secondary"
+              type="button"
+              id="inputGroupFileAddon04"
+            >
+              Button
+            </Button>
+          </InputGroup>
         </div>
       </CustomSimpleCard>
 
       <div className="card">
         <div className="card-header">
           <CustomSimpleCardLink
-            title="Input 组件属性"
-            hash="inputComponentProps"
+            title="InputGroup 组件属性"
+            hash="inputGroupComponentProps"
           />
         </div>
         <div className="card-body">
@@ -540,12 +587,20 @@ export default function InputGroupPage() {
                 <tr>
                   <td>as</td>
                   <td>
-                    <span className="badge text-bg-secondary">input</span>
+                    <span className="badge text-bg-secondary">div</span>
                   </td>
                   <td></td>
                   <td>
-                    <span className="badge text-bg-secondary">input</span>
+                    <span className="badge text-bg-secondary">div</span>
                   </td>
+                </tr>
+                <tr>
+                  <td>nowrap</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
                 </tr>
                 <tr>
                   <td>size</td>
@@ -555,58 +610,6 @@ export default function InputGroupPage() {
                   <td></td>
                   <td>-</td>
                 </tr>
-                <tr>
-                  <td>nativeSize</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      number | undefined
-                    </span>
-                  </td>
-                  <td>HTMLAttributes</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>readonly</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>readonlyPlainText</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>color</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>nativeColor</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      string | undefined
-                    </span>
-                  </td>
-                  <td>HTMLAttributes</td>
-                  <td>-</td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -616,114 +619,8 @@ export default function InputGroupPage() {
       <div className="card">
         <div className="card-header">
           <CustomSimpleCardLink
-            title="Textarea 组件属性"
-            hash="textareaComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">textarea</span>
-                  </td>
-                  <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">textarea</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>readonly</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Label 组件属性"
-            hash="labelComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">label</span>
-                  </td>
-                  <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">label</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>colFormLabel</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Text 组件属性"
-            hash="textComponentProps"
+            title="InputGroupText 组件属性"
+            hash="inputGroupTextComponentProps"
           />
         </div>
         <div className="card-body">
@@ -752,7 +649,7 @@ export default function InputGroupPage() {
                   </td>
                   <td></td>
                   <td>
-                    <span className="badge text-bg-secondary">div</span>
+                    <span className="badge text-bg-secondary">span</span>
                   </td>
                 </tr>
               </tbody>
@@ -809,7 +706,15 @@ export default function InputGroupPage() {
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
                   </td>
-                  <td>Clear original class names</td>
+                  <td>Clear original className names</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>variables</td>
+                  <td>
+                    <span className="badge text-bg-secondary">object</span>
+                  </td>
+                  <td>Style variables</td>
                   <td>-</td>
                 </tr>
               </tbody>

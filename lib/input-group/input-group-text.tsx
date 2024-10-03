@@ -1,18 +1,20 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import { InputGroupTextElementProps, InputGroupTextProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
+  InputVariablesEnum,
   type IntrinsicElements,
   isValueValid,
-  LabelVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Label = function Label<T extends ElementType = 'label'>(props: Props<T>) {
+const InputGroupText = function InputGroupText<T extends ElementType = 'span'>(
+  props: InputGroupTextProps<T>,
+) {
   const {
-    as: Component = 'label',
+    as: Component = 'span',
     render,
     skipCompWrap,
     dropOldClass,
@@ -20,22 +22,17 @@ const Label = function Label<T extends ElementType = 'label'>(props: Props<T>) {
     className,
     style,
     children,
-    colFormLabel,
-    inputGroupText,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass &&
-        !inputGroupText &&
-        (colFormLabel ? 'col-form-label' : 'form-label'),
-      inputGroupText && 'input-group-text',
+      !dropOldClass && 'input-group-text',
       className,
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = LabelVariablesEnum[key];
+        const _value = InputVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
@@ -51,23 +48,26 @@ const Label = function Label<T extends ElementType = 'label'>(props: Props<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, colFormLabel, className, variables, style]);
+  }, [dropOldClass, className, variables, style]);
 
   if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
+    return render({
+      ...rest,
+      ...renderOptions,
+    } as InputGroupTextElementProps<T>);
   }
 
   const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
+    ? render({ ...rest, ...renderOptions } as InputGroupTextElementProps<T>)
     : children;
 
   return (
-    <Component {...(rest as IntrinsicElements['label'])} {...renderOptions}>
+    <Component {...(rest as IntrinsicElements['span'])} {...renderOptions}>
       {renderContent}
     </Component>
   );
 };
 
-Label.displayName = 'BRL.Label';
+InputGroupText.displayName = 'BRL.InputGroupText';
 
-export default Label;
+export default InputGroupText;

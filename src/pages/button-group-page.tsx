@@ -8,6 +8,7 @@ import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import { ButtonGroup } from '@lib/button-group';
 import buttonGroupCodes from '@assets/codes/button-group';
 import AboutComponent from '@components/about-component.tsx';
+import { updateState } from '@src/tools';
 
 interface IStates {
   buttonGroup: {
@@ -99,23 +100,7 @@ export default function ButtonGroupPage() {
     v: unknown,
     c?: () => void,
   ) {
-    setStates((prev) => {
-      const keys = k.split('.');
-      const newState = { ...prev };
-
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      keys.reduce((acc: any, key, index) => {
-        if (index === keys.length - 1) {
-          acc[key] = v;
-        } else {
-          acc[key] = { ...acc[key] };
-        }
-        return acc[key];
-      }, newState);
-
-      return newState;
-    });
-    c?.();
+    updateState(setStates, k, v, c);
   }
 
   function onClickChangeSizeTest() {
@@ -549,6 +534,14 @@ export default function ButtonGroupPage() {
                   <td>-</td>
                 </tr>
                 <tr>
+                  <td>variables</td>
+                  <td>
+                    <span className="badge text-bg-secondary">object</span>
+                  </td>
+                  <td>Style variables</td>
+                  <td>-</td>
+                </tr>
+                <tr>
                   <td>toolbar</td>
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
@@ -611,23 +604,6 @@ export default function ButtonGroupPage() {
                     <span className="badge text-bg-secondary">object</span>
                   </td>
                   <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>children</td>
-                  <td>
-                    <span className="badge text-bg-secondary">Button</span>
-                    <span className="badge text-bg-secondary ms-1">
-                      ReactNode
-                    </span>
-                  </td>
-                  <td>
-                    <CustomSimpleCardLink
-                      underline
-                      title="Button"
-                      href="/pages/button"
-                    />
-                  </td>
                   <td>-</td>
                 </tr>
                 <tr>

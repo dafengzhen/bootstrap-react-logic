@@ -1,4 +1,4 @@
-import { type ElementType, useMemo } from 'react';
+import { type ElementType, type HTMLInputTypeAttribute, useMemo } from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
@@ -7,10 +7,15 @@ import {
   InputVariablesEnum,
   type IntrinsicElements,
   isValueValid,
+  processClassName,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Input = function Input<T extends ElementType = 'input'>(props: Props<T>) {
+const Input = function Input<T extends ElementType = 'input'>(
+  props: Props<T> & {
+    type?: HTMLInputTypeAttribute | undefined;
+  },
+) {
   const {
     as: Component = 'input',
     render,
@@ -25,16 +30,28 @@ const Input = function Input<T extends ElementType = 'input'>(props: Props<T>) {
     readonlyPlainText,
     color,
     nativeColor,
+    type,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
-      !dropOldClass &&
-        (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
-      color && 'form-control-color',
-      size && `form-control-${size}`,
-      className,
+    const finalClass = processClassName(
+      clsxUnique(
+        !dropOldClass &&
+          (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
+        color && 'form-control-color',
+        size && `form-control-${size}`,
+        className,
+      ),
+      [
+        (classNames) => {
+          if (type === 'checkbox' || type === 'radio') {
+            return classNames.filter(
+              (className) => className !== 'form-control',
+            );
+          }
+        },
+      ],
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
@@ -53,6 +70,7 @@ const Input = function Input<T extends ElementType = 'input'>(props: Props<T>) {
         style: finalStyle,
         size: nativeSize,
         color: nativeColor,
+        type,
       },
       isValueValid,
     );
@@ -66,6 +84,7 @@ const Input = function Input<T extends ElementType = 'input'>(props: Props<T>) {
     style,
     nativeSize,
     nativeColor,
+    type,
   ]);
 
   if (render && skipCompWrap) {

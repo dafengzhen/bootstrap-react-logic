@@ -136,6 +136,17 @@ enum TextVariablesEnum {
 
 enum TextareaVariablesEnum {}
 
+enum InputGroupVariablesEnum {
+  inputGroupAddonPaddingY = 'input-group-addon-padding-y',
+  inputGroupAddonPaddingX = 'input-group-addon-padding-x',
+  inputGroupAddonFontWeight = 'input-group-addon-font-weight',
+  inputGroupAddonColor = 'input-group-addon-color',
+  inputGroupAddonBg = 'input-group-addon-bg',
+  inputGroupAddonBorderColor = 'input-group-addon-border-color',
+}
+
+enum InputGroupTextVariablesEnum {}
+
 export {
   ButtonVariableEnum,
   RoundedClassEnum,
@@ -146,4 +157,6 @@ export {
   TextVariablesEnum,
   TextareaVariablesEnum,
   ButtonGroupVariablesEnum,
+  InputGroupVariablesEnum,
+  InputGroupTextVariablesEnum,
 };

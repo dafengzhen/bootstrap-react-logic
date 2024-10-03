@@ -11,6 +11,7 @@ import { Textarea } from '@lib/textarea';
 import inputCodes from '@assets/codes/input';
 import Text from '../../lib/text/text.tsx';
 import { Button } from '@lib/button';
+import { updateState } from '@src/tools';
 
 interface IStates {
   input: {
@@ -117,23 +118,7 @@ export default function InputPage() {
     v: unknown,
     c?: () => void,
   ) {
-    setStates((prev) => {
-      const keys = k.split('.');
-      const newState = { ...prev };
-
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      keys.reduce((acc: any, key, index) => {
-        if (index === keys.length - 1) {
-          acc[key] = v;
-        } else {
-          acc[key] = { ...acc[key] };
-        }
-        return acc[key];
-      }, newState);
-
-      return newState;
-    });
-    c?.();
+    updateState(setStates, k, v, c);
   }
 
   if (navigation.state === 'loading') {
@@ -713,6 +698,14 @@ export default function InputPage() {
                   <td>Class</td>
                   <td>-</td>
                 </tr>
+                <tr>
+                  <td>inputGroupText</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td>Class</td>
+                  <td>-</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -810,6 +803,14 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">boolean</span>
                   </td>
                   <td>Clear original class names</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>variables</td>
+                  <td>
+                    <span className="badge text-bg-secondary">object</span>
+                  </td>
+                  <td>Style variables</td>
                   <td>-</td>
                 </tr>
               </tbody>
