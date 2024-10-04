@@ -1,4 +1,10 @@
-import { type ElementType, type HTMLInputTypeAttribute, useMemo } from 'react';
+import {
+  ElementRef,
+  type ElementType,
+  type HTMLInputTypeAttribute,
+  LegacyRef,
+  useMemo,
+} from 'react';
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
@@ -36,6 +42,7 @@ const Input = function Input<T extends ElementType = 'input'>(
     startContent,
     endContent,
     startEndContentClasses,
+    onRef,
     ...rest
   } = props;
 
@@ -137,7 +144,11 @@ const Input = function Input<T extends ElementType = 'input'>(
   }
 
   return (
-    <Component {...(rest as IntrinsicElements['input'])} {...renderOptions}>
+    <Component
+      ref={onRef as LegacyRef<ElementRef<'input'>>}
+      {...(rest as IntrinsicElements['input'])}
+      {...renderOptions}
+    >
       {renderContent}
     </Component>
   );

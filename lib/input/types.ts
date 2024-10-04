@@ -1,8 +1,10 @@
 import {
   type DetailedHTMLProps,
+  ElementRef,
   type ElementType,
   type HTMLAttributes,
   type InputHTMLAttributes,
+  LegacyRef,
   type ReactNode,
 } from 'react';
 import { InputVariablesEnum, IntrinsicElements, SlotValue } from '../tools';
@@ -94,4 +96,9 @@ export type Props<T extends ElementType> = ElementProps<T> & {
     end?: SlotValue;
     component?: SlotValue;
   };
+
+  /**
+   * onRef.
+   */
+  onRef?: LegacyRef<ElementRef<T>>;
 };

@@ -12,6 +12,7 @@ import inputCodes from '@assets/codes/input';
 import Text from '../../lib/text/text.tsx';
 import { Button } from '@lib/button';
 import { updateState } from '@src/tools';
+import { InputOtp } from '@lib/input-otp';
 
 interface IStates {
   input: {
@@ -52,6 +53,10 @@ interface IStates {
       code?: string;
     };
     startEndContent: {
+      openCode: boolean;
+      code?: string;
+    };
+    otp: {
       openCode: boolean;
       code?: string;
     };
@@ -103,6 +108,10 @@ export default function InputPage() {
       startEndContent: {
         openCode: false,
         code: inputCodes.startEndContent.code.trim(),
+      },
+      otp: {
+        openCode: false,
+        code: inputCodes.otp.code.trim(),
       },
     },
   });
@@ -539,6 +548,29 @@ export default function InputPage() {
         </div>
       </CustomSimpleCard>
 
+      <CustomSimpleCard
+        title="密码框"
+        hash="otp"
+        isOpen={states.input.otp.openCode}
+        toggleCode={() =>
+          onClickUpdateState('input.otp.openCode', !states.input.otp.openCode)
+        }
+        code={states.input.otp.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <div className="tw-w-full sm:tw-w-1/4">
+            <InputOtp></InputOtp>
+          </div>
+          <div className="tw-w-full sm:tw-w-1/4">
+            <InputOtp
+              inputProps={{
+                disabled: true,
+              }}
+            ></InputOtp>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
       <div className="card">
         <div className="card-header">
           <CustomSimpleCardLink
@@ -573,6 +605,16 @@ export default function InputPage() {
                   <td>
                     <span className="badge text-bg-secondary">input</span>
                   </td>
+                </tr>
+                <tr>
+                  <td>onRef</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      RefCallback&lt;input&gt;
+                    </span>
+                  </td>
+                  <td>Input</td>
+                  <td>-</td>
                 </tr>
                 <tr>
                   <td>size</td>
@@ -666,6 +708,65 @@ export default function InputPage() {
                         </span>
                       </div>
                     </div>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <CustomSimpleCardLink
+            title="InputOtp 组件属性"
+            hash="inputOtpComponentProps"
+          />
+        </div>
+        <div className="card-body">
+          <div className="table-responsive">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>as</td>
+                  <td>
+                    <span className="badge text-bg-secondary">div</span>
+                  </td>
+                  <td></td>
+                  <td>
+                    <span className="badge text-bg-secondary">div</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>length</td>
+                  <td>
+                    <span className="badge text-bg-secondary">number</span>
+                  </td>
+                  <td></td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>inputProps</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      InputProps&lt;input&gt;
+                    </span>
                   </td>
                   <td></td>
                   <td>-</td>

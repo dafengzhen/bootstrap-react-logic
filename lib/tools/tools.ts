@@ -640,6 +640,53 @@ const processSlotClasses = <
   return result;
 };
 
+/**
+ * Generates a random string of the specified length.
+ * The string consists of uppercase and lowercase letters, as well as digits.
+ *
+ * @param {number} [length=18] - The length of the random string to generate. Default is 18.
+ * @returns {string} A random string of the specified length.
+ */
+const generateRandomId = (length: number = 18): string => {
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+};
+
+/**
+ * Merges two objects' properties, where properties from the second object
+ * will overwrite those in the first object.
+ *
+ * @template T - The type representing the first object's structure, which should be a record type.
+ * @template R - The type representing the second object's structure, which should be a partial type of the first object.
+ * @param {T} [props] - The first object to merge, defaults to undefined.
+ * @param {R} [replacement] - The second object to merge, defaults to undefined.
+ * @returns {T & R} - A new object containing the merged properties.
+ */
+const mergeProps = <T extends Record<string, any>, R extends Partial<T>>(
+  props?: T,
+  replacement?: R,
+): T & R => {
+  if (!props || Object.keys(props).length === 0) {
+    return (replacement || {}) as T & R;
+  }
+
+  if (!replacement) {
+    return { ...props } as T & R;
+  }
+
+  const merged = { ...props } as T & R;
+  for (const key in replacement) {
+    merged[key] = replacement[key] as any;
+  }
+
+  return merged;
+};
+
 export {
   camelToKebab,
   deepMerge,
@@ -660,4 +707,6 @@ export {
   processClassName,
   mergeClassNames,
   processSlotClasses,
+  generateRandomId,
+  mergeProps,
 };

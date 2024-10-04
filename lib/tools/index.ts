@@ -11,6 +11,7 @@ export {
   OutlineEnum,
   ButtonGroupVariablesEnum,
   InputVariablesEnum,
+  InputOtpVariablesEnum,
   LabelVariablesEnum,
   TextVariablesEnum,
   TextareaVariablesEnum,
@@ -38,4 +39,6 @@ export {
   processClassName,
   mergeClassNames,
   processSlotClasses,
+  generateRandomId,
+  mergeProps,
 } from './tools';

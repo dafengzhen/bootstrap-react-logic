@@ -118,6 +118,8 @@ enum InputVariablesEnum {
   formFileButtonHoverBg = 'form-file-button-hover-bg',
 }
 
+enum InputOtpVariablesEnum {}
+
 enum LabelVariablesEnum {
   formLabelMarginBottom = 'form-label-margin-bottom',
   formLabelFontSize = 'form-label-font-size',
@@ -153,6 +155,7 @@ export {
   VariantEnum,
   OutlineEnum,
   InputVariablesEnum,
+  InputOtpVariablesEnum,
   LabelVariablesEnum,
   TextVariablesEnum,
   TextareaVariablesEnum,

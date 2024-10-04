@@ -182,6 +182,17 @@ const inputCodes = {
 />
     `,
   },
+  otp: {
+    code: `
+<InputOtp></InputOtp>
+
+<InputOtp
+  inputProps={{
+    disabled: true
+  }}
+></InputOtp>
+    `,
+  },
 };
 
 export default inputCodes;
