@@ -149,6 +149,46 @@ enum InputGroupVariablesEnum {
 
 enum InputGroupTextVariablesEnum {}
 
+enum SelectVariablesEnum {
+  formSelectPaddingY = 'form-select-padding-y',
+  formSelectPaddingX = 'form-select-padding-x',
+  formSelectFontFamily = 'form-select-font-family',
+  formSelectFontSize = 'form-select-font-size',
+  formSelectIndicatorPadding = 'form-select-indicator-padding',
+  formSelectFontWeight = 'form-select-font-weight',
+  formSelectLineHeight = 'form-select-line-height',
+  formSelectColor = 'form-select-color',
+  formSelectBg = 'form-select-bg',
+  formSelectDisabledColor = 'form-select-disabled-color',
+  formSelectDisabledBg = 'form-select-disabled-bg',
+  formSelectDisabledBorderColor = 'form-select-disabled-border-color',
+  formSelectBgPosition = 'form-select-bg-position',
+  formSelectBgSize = 'form-select-bg-size',
+  formSelectIndicatorColor = 'form-select-indicator-color',
+  formSelectIndicator = 'form-select-indicator',
+  formSelectFeedbackIconPaddingEnd = 'form-select-feedback-icon-padding-end',
+  formSelectFeedbackIconPosition = 'form-select-feedback-icon-position',
+  formSelectFeedbackIconSize = 'form-select-feedback-icon-size',
+  formSelectBorderWidth = 'form-select-border-width',
+  formSelectBorderColor = 'form-select-border-color',
+  formSelectBorderRadius = 'form-select-border-radius',
+  formSelectBoxShadow = 'form-select-box-shadow',
+  formSelectFocusBorderColor = 'form-select-focus-border-color',
+  formSelectFocusWidth = 'form-select-focus-width',
+  formSelectFocusBoxShadow = 'form-select-focus-box-shadow',
+  formSelectPaddingYSm = 'form-select-padding-y-sm',
+  formSelectPaddingXSm = 'form-select-padding-x-sm',
+  formSelectFontSizeSm = 'form-select-font-size-sm',
+  formSelectBorderRadiusSm = 'form-select-border-radius-sm',
+  formSelectPaddingYLg = 'form-select-padding-y-lg',
+  formSelectPaddingXLg = 'form-select-padding-x-lg',
+  formSelectFontSizeLg = 'form-select-font-size-lg',
+  formSelectBorderRadiusLg = 'form-select-border-radius-lg',
+  formSelectTransition = 'form-select-transition',
+}
+
+enum SelectOptionVariablesEnum {}
+
 export {
   ButtonVariableEnum,
   RoundedClassEnum,
@@ -162,4 +202,6 @@ export {
   ButtonGroupVariablesEnum,
   InputGroupVariablesEnum,
   InputGroupTextVariablesEnum,
+  SelectVariablesEnum,
+  SelectOptionVariablesEnum,
 };

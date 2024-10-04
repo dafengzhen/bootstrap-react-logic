@@ -4,12 +4,13 @@ import clsx from 'clsx';
 import { GlobalContext } from '@contexts/global-context.ts';
 
 interface IMenu {
-  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup';
+  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select';
   to:
     | '/pages/button'
     | '/pages/button-group'
     | '/pages/input'
-    | '/pages/input-group';
+    | '/pages/input-group'
+    | '/pages/select';
 }
 
 function App() {
@@ -34,6 +35,10 @@ function App() {
     {
       name: 'InputGroup',
       to: '/pages/input-group',
+    },
+    {
+      name: 'Select',
+      to: '/pages/select',
     },
   ]);
 

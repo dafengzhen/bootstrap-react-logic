@@ -9,6 +9,7 @@ import App from '@src/App.tsx';
 import ButtonGroupPage from '@pages/button-group-page.tsx';
 import InputPage from '@pages/input-page.tsx';
 import InputGroupPage from '@pages/input-group-page.tsx';
+import SelectPage from '@pages/select-page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
           {
             path: 'pages/input-group',
             element: <InputGroupPage />,
+          },
+          {
+            path: 'pages/select',
+            element: <SelectPage />,
           },
         ],
       },

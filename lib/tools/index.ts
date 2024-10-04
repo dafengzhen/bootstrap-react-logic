@@ -17,6 +17,8 @@ export {
   TextareaVariablesEnum,
   InputGroupVariablesEnum,
   InputGroupTextVariablesEnum,
+  SelectVariablesEnum,
+  SelectOptionVariablesEnum,
 } from './enums';
 
 export {
