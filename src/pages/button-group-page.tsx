@@ -503,9 +503,7 @@ export default function ButtonGroupPage() {
                     <span className="badge text-bg-secondary">div</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">button</span>
-                  </td>
+                  <td>div</td>
                 </tr>
                 <tr>
                   <td>render</td>

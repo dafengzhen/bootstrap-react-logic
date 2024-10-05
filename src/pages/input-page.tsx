@@ -602,9 +602,7 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">input</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">input</span>
-                  </td>
+                  <td>input</td>
                 </tr>
                 <tr>
                   <td>onRef</td>
@@ -749,9 +747,7 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">div</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                  </td>
+                  <td>div</td>
                 </tr>
                 <tr>
                   <td>length</td>
@@ -808,9 +804,7 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">textarea</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">textarea</span>
-                  </td>
+                  <td>textarea</td>
                 </tr>
                 <tr>
                   <td>disabled</td>
@@ -865,9 +859,7 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary">label</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">label</span>
-                  </td>
+                  <td>label</td>
                 </tr>
                 <tr>
                   <td>colFormLabel</td>
@@ -923,9 +915,7 @@ export default function InputPage() {
                     <span className="badge text-bg-secondary ms-1">span</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                  </td>
+                  <td>div</td>
                 </tr>
               </tbody>
             </table>

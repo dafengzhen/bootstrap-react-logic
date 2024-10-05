@@ -498,9 +498,7 @@ export default function ButtonPage() {
                     <span className="badge text-bg-secondary">button | a</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">button</span>
-                  </td>
+                  <td>button</td>
                 </tr>
                 <tr>
                   <td>render</td>

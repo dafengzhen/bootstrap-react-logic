@@ -590,9 +590,7 @@ export default function InputGroupPage() {
                     <span className="badge text-bg-secondary">div</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                  </td>
+                  <td>div</td>
                 </tr>
                 <tr>
                   <td>nowrap</td>
@@ -648,9 +646,7 @@ export default function InputGroupPage() {
                     <span className="badge text-bg-secondary ms-1">span</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">span</span>
-                  </td>
+                  <td>span</td>
                 </tr>
               </tbody>
             </table>

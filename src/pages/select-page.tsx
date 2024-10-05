@@ -220,9 +220,7 @@ export default function SelectPage() {
                     <span className="badge text-bg-secondary">select</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">select</span>
-                  </td>
+                  <td>select</td>
                 </tr>
                 <tr>
                   <td>size</td>
@@ -287,9 +285,7 @@ export default function SelectPage() {
                     <span className="badge text-bg-secondary">option</span>
                   </td>
                   <td></td>
-                  <td>
-                    <span className="badge text-bg-secondary">option</span>
-                  </td>
+                  <td>option</td>
                 </tr>
                 <tr>
                   <td>disabled</td>

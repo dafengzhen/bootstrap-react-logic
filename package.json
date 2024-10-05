@@ -36,22 +36,24 @@
     "react-dom": "^18.3.1"
   },
   "dependencies": {
-    "clsx": "^2.1.1"
+    "@popperjs/core": "^2.11.8",
+    "clsx": "^2.1.1",
+    "react-popper": "^2.3.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
+    "@eslint/js": "^9.12.0",
     "@types/node": "^20",
-    "@types/react": "^18.3.10",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
-    "eslint": "^9.11.1",
+    "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
-    "globals": "^15.9.0",
+    "globals": "^15.10.0",
     "highlight.js": "^11.10.0",
     "postcss": "^8.4.47",
     "prettier": "3.3.3",
@@ -66,7 +68,7 @@
     "vite": "^5.4.8",
     "vite-plugin-dts": "^4.2.3"
   },
-  "packageManager": "npm@10.8.3",
+  "packageManager": "npm@10.9.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dafengzhen/bootstrap-react.git"
