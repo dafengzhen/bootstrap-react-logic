@@ -2,7 +2,12 @@ export type { IntrinsicElements, SlotValue } from './elements.ts';
 
 export type { ReactRef } from './refs';
 
-export { VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT } from './constants';
+export {
+  VARIABLE_PREFIX,
+  VARIABLE_BS_PREFIX,
+  DEVELOPMENT,
+  EMPTY_GROUP_FLAG,
+} from './constants';
 
 export {
   ButtonVariableEnum,
@@ -22,25 +27,28 @@ export {
 } from './enums';
 
 export {
-  isPlainObject,
-  isArray,
-  isSpecialObject,
-  mapAndFilterStyles,
-  filterTransformAndExcludeProperties,
-  filterAndTransformProperties,
   camelToKebab,
-  parseJson,
-  getValue,
-  deepMerge,
-  filterOptions,
-  isValueValid,
-  createLogger,
   checkObjectProperties,
-  isDefined,
   clsxUnique,
-  processClassName,
-  mergeClassNames,
-  processSlotClasses,
+  clsxWithOptions,
+  createLogger,
+  deepMerge,
+  filterAndTransformProperties,
+  filterOptions,
+  filterTransformAndExcludeProperties,
   generateRandomId,
+  getValue,
+  groupByProperty,
+  isArray,
+  isDefined,
+  isPlainObject,
+  isSpecialObject,
+  isValueValid,
+  mapAndFilterStyles,
+  mergeClassNames,
   mergeProps,
+  parseJson,
+  pickObjectProperties,
+  processClassName,
+  processSlotClasses,
 } from './tools';

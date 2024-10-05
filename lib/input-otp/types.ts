@@ -53,7 +53,12 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   length?: number;
 
   /**
+   * defaultValue.
+   */
+  defaultValue?: (string | number)[];
+
+  /**
    * inputProps.
    */
-  inputProps?: Omit<InputProps<'input'>, 'key' | 'value'>;
+  inputProps?: Omit<InputProps<'input'>, 'key' | 'value' | 'defaultValue'>;
 };

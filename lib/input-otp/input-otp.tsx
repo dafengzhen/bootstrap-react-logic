@@ -16,6 +16,7 @@ import {
   generateRandomId,
   InputVariablesEnum,
   type IntrinsicElements,
+  isArray,
   isValueValid,
   mergeProps,
   VARIABLE_BS_PREFIX,
@@ -40,14 +41,15 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
     className,
     style,
     length = 4,
+    defaultValue,
     inputProps,
     ...rest
   } = props;
 
   const [otp, setOtp] = useState<IOtp[]>(() =>
-    Array.from({ length }, () => ({
+    Array.from({ length }).map((_, index) => ({
       id: generateRandomId(),
-      value: '',
+      value: isArray(defaultValue) ? String(defaultValue[index]) : '',
     })),
   );
 
@@ -96,15 +98,19 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
 
   const handleChange = useCallback(
     (index: number, value: string) => {
-      const newOtp = [...otp];
-      newOtp[index].value = value;
-      setOtp(newOtp);
+      setOtp((prevOtp) => {
+        const newOtp = prevOtp.map((otpItem, idx) =>
+          idx === index ? { ...otpItem, value } : otpItem,
+        );
 
-      if (value && index < otp.length - 1) {
-        focusInput(index + 1);
-      }
+        if (value && index < newOtp.length - 1) {
+          focusInput(index + 1);
+        }
+
+        return newOtp;
+      });
     },
-    [otp, focusInput],
+    [focusInput],
   );
 
   const handleKeyDown = useCallback(
@@ -154,8 +160,6 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
 
             return (
               <Input
-                key={item.id}
-                value={item.value}
                 maxLength={1}
                 className="text-center"
                 {...mergeProps(_inputProps, {
@@ -176,6 +180,8 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
                     _inputProps?.onFocus?.();
                   },
                 })}
+                key={item.id}
+                value={item.value}
               />
             );
           })}

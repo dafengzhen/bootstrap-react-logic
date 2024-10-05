@@ -8,6 +8,7 @@ import {
 import type { ElementProps, Props } from './types.ts';
 import {
   clsxUnique,
+  clsxWithOptions,
   filterAndTransformProperties,
   filterOptions,
   InputVariablesEnum,
@@ -112,7 +113,8 @@ const Input = function Input<T extends ElementType = 'input'>(
       container: 'd-inline-flex align-items-center position-relative',
       start: `position-absolute top-50 translate-middle-y ${inputStyles.brlInputStart3}`,
       end: `position-absolute top-50 translate-middle-y ${inputStyles.brlInputEnd3}`,
-      component: clsxUnique(
+      component: clsxWithOptions(
+        null,
         renderOptions.className,
         startContent && inputStyles.brlInputPs9,
         endContent && inputStyles.brlInputPe9,
@@ -127,9 +129,9 @@ const Input = function Input<T extends ElementType = 'input'>(
           </div>
         )}
         <Component
-          data-slot-component=""
           {...(rest as IntrinsicElements['input'])}
           {...renderOptions}
+          data-slot-component=""
           className={slotClassName.component}
         >
           {renderContent}
@@ -145,9 +147,9 @@ const Input = function Input<T extends ElementType = 'input'>(
 
   return (
     <Component
-      ref={onRef as LegacyRef<ElementRef<'input'>>}
       {...(rest as IntrinsicElements['input'])}
       {...renderOptions}
+      ref={onRef as LegacyRef<ElementRef<'input'>>}
     >
       {renderContent}
     </Component>

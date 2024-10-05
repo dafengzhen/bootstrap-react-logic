@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import clsx, { type ClassValue } from 'clsx';
+import { EMPTY_GROUP_FLAG } from '@lib/tools/constants.ts';
 
 /**
  * A type that represents either a value of type T or a function returning a value of type T.
@@ -34,10 +35,20 @@ type MergeFn = <T, U>(
 /**
  * Checks if a value is a plain object.
  *
+ * A plain object is defined as an object created by the Object constructor
+ * or one with a prototype of null.
+ *
  * @param value - The value to check.
- * @returns True if the value is a plain object, otherwise false.
+ * @returns True if the value is a plain object; otherwise, false.
+ *
+ * @example
+ * const obj = { key: 'value' };
+ * const result = isPlainObject(obj); // result is true
+ * const result2 = isPlainObject([]); // result2 is false
+ * const result3 = isPlainObject(null); // result3 is false
+ * const result4 = isPlainObject('string'); // result4 is false
  */
-const isPlainObject = (value: any): boolean => {
+const isPlainObject = (value: any): value is { [key: string]: any } => {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -46,16 +57,17 @@ const isPlainObject = (value: any): boolean => {
 };
 
 /**
- * Checks if the given value is an array.
+ * Checks if the given object is an array.
  *
- * This utility function utilizes the built-in Array.isArray method
- * to determine if the input is an array. It returns true if the input
- * is an array, and false otherwise.
+ * @param obj - The object to check.
+ * @returns True if the object is an array; otherwise, false.
  *
- * @param obj - The value to check.
- * @returns True if the value is an array; otherwise, false.
+ * @template T - The type of the input object.
+ * @example
+ * const result = isArray([1, 2, 3]); // result is true
+ * const result2 = isArray('not an array'); // result2 is false
  */
-const isArray = (obj: any): boolean => {
+const isArray = <T>(obj: T): obj is T & Array<any> => {
   return Array.isArray(obj);
 };
 
@@ -64,20 +76,43 @@ const isArray = (obj: any): boolean => {
  * Functions and class instances are copied directly, without merging.
  *
  * @param obj - The value to check.
- * @returns True if the value is a function or a class instance, otherwise false.
+ * @returns True if the value is a function or a class instance; otherwise, false.
+ *
+ * @example
+ * const func = () => {};
+ * const classInstance = new (class MyClass {})();
+ * const notFuncOrClass = { key: 'value' };
+ *
+ * console.log(isFunctionOrClass(func)); // true
+ * console.log(isFunctionOrClass(classInstance)); // true
+ * console.log(isFunctionOrClass(notFuncOrClass)); // false
  */
-const isFunctionOrClass = (obj: any): boolean => {
-  return typeof obj === 'function' || obj.constructor !== Object;
+const isFunctionOrClass = (
+  obj: unknown,
+): obj is (...args: any[]) => any | object => {
+  return (
+    typeof obj === 'function' ||
+    (typeof obj === 'object' && obj !== null && obj.constructor !== Object)
+  );
 };
 
 /**
  * Checks if an object is a special object (either a Date or a RegExp instance).
  * This function takes an object as input and determines if it is an instance of the Date class or the RegExp class.
  *
- * @param {any} obj - The object to be checked.
- * @returns {boolean} Returns true if the object is a Date or RegExp instance, otherwise false.
+ * @param obj - The object to be checked.
+ * @returns True if the object is a Date or RegExp instance; otherwise, false.
+ *
+ * @example
+ * const dateObj = new Date();
+ * const regExpObj = /abc/;
+ * const plainObj = { key: 'value' };
+ *
+ * console.log(isSpecialObject(dateObj)); // true
+ * console.log(isSpecialObject(regExpObj)); // true
+ * console.log(isSpecialObject(plainObj)); // false
  */
-const isSpecialObject = (obj: any): boolean => {
+const isSpecialObject = (obj: any): obj is Date | RegExp => {
   return obj instanceof Date || obj instanceof RegExp;
 };
 
@@ -314,7 +349,10 @@ const deepMerge: MergeFn = (obj1, obj2, shouldAssign = () => true) => {
         }
 
         if (isSpecialObject(sourceValue)) {
-          target[key] = new sourceValue.constructor(sourceValue);
+          const Constructor = sourceValue.constructor as new (
+            ...args: any[]
+          ) => typeof sourceValue;
+          target[key] = new Constructor(sourceValue);
         } else if (isFunctionOrClass(sourceValue)) {
           target[key] = sourceValue;
         } else if (isPlainObject(targetValue) && isPlainObject(sourceValue)) {
@@ -383,13 +421,7 @@ const isValueValid = (value: unknown): boolean => {
  * This logger provides methods to output warning messages for missing parameters.
  *
  * @param {string} [projectName='BRL'] - The name of the project.
- * @returns {{ warnMissingParam: (options: {
- *   propertyName: string;
- *   componentName: string;
- *   expectedType?: string;
- *   level?: 'warn' | 'error' | 'info';
- *   currentValue?: any;
- * }) => void }} - An object containing the logging methods.
+ * @returns {{ warnMissingParam: (options: { propertyName: string; componentName: string; expectedType?: string; level?: 'warn' | 'error' | 'info'; currentValue?: any; }) => void }} - An object containing the logging methods.
  */
 const createLogger = (
   projectName: string = 'BRL',
@@ -398,10 +430,18 @@ const createLogger = (
     propertyName: string;
     componentName: string;
     expectedType?: string;
-    currentValue?: any;
     level?: 'warn' | 'error' | 'info';
+    currentValue?: any;
   }) => void;
 } => {
+  type WarnOptions = {
+    propertyName: string;
+    componentName: string;
+    expectedType?: string;
+    level?: 'warn' | 'error' | 'info';
+    currentValue?: any;
+  };
+
   /**
    * Gets the current date and time in ISO string format.
    *
@@ -411,14 +451,8 @@ const createLogger = (
 
   /**
    * Logs a message when a parameter is missing or invalid.
-   * Can log at 'warn', 'error', or 'info' levels.
    *
-   * @param {object} options - Options object for the warning.
-   * @param {string} options.propertyName - The name of the missing property.
-   * @param {string} options.componentName - The name of the component where the issue occurred.
-   * @param {string} [options.expectedType='string'] - The expected data type of the property.
-   * @param {'warn' | 'error' | 'info'} [options.level='warn'] - The log level for the message.
-   * @param {any} [options.currentValue] - The current value of the property to be logged.
+   * @param {WarnOptions} options - Options object for the warning.
    */
   const warnMissingParam = ({
     propertyName,
@@ -426,30 +460,13 @@ const createLogger = (
     expectedType = 'string',
     level = 'warn',
     currentValue,
-  }: {
-    propertyName: string;
-    componentName: string;
-    expectedType?: string;
-    currentValue?: any;
-    level?: 'warn' | 'error' | 'info';
-  }) => {
+  }: WarnOptions) => {
     const dateTime = getCurrentDateTime();
     const currentValStr =
       currentValue !== undefined ? `, current value is "${currentValue}"` : '';
     const message = `[${projectName}] ${dateTime} ${level.toUpperCase()} ${componentName}: The parameter "${propertyName}" is missing${expectedType ? `, expected type is "${expectedType}"` : ''}${currentValStr}.`;
 
-    switch (level) {
-      case 'error':
-        console.error(message);
-        break;
-      case 'info':
-        console.info(message);
-        break;
-      case 'warn':
-      default:
-        console.warn(message);
-        break;
-    }
+    console[level](message);
   };
 
   return { warnMissingParam };
@@ -497,7 +514,10 @@ const checkObjectProperties = <T extends object>(
  * @param {boolean} [checkEmptyString=false] - Whether to consider an empty string as undefined.
  * @returns {boolean} - Returns true if the value is neither undefined, null, nor an empty string (if checked); otherwise, false.
  */
-const isDefined = (value: any, checkEmptyString: boolean = false): boolean => {
+const isDefined = <T>(
+  value: T,
+  checkEmptyString: boolean = false,
+): value is Exclude<T, undefined | null> => {
   return (
     value !== undefined && value !== null && (!checkEmptyString || value !== '')
   );
@@ -520,6 +540,25 @@ const clsxUnique = (...inputs: ClassValue[]): string => {
   );
 
   return uniqueClassNames.join(' ');
+};
+
+/**
+ * A utility function that wraps the `clsx` function to process class names,
+ * and ensures the resulting class names are unique or not based on options.
+ *
+ * @param {Object | null | undefined} [options] - Optional configuration options for class name processing.
+ * @param {boolean} [options.dedupe=false] - Whether to remove duplicate class names. Defaults to false.
+ * @param {ClassValue[]} inputs - An array of class values that can include strings,
+ * arrays, objects, or any valid input that `clsx` accepts.
+ *
+ * @returns {string} - A string of class names separated by a space, with duplicates removed if `dedupe` is true.
+ */
+const clsxWithOptions = (
+  options?: { dedupe?: boolean } | null | undefined,
+  ...inputs: ClassValue[]
+): string => {
+  const dedupe = options?.dedupe ?? false;
+  return dedupe ? clsxUnique(...inputs) : clsx(...inputs);
 };
 
 /**
@@ -647,14 +686,12 @@ const processSlotClasses = <
  * @param {number} [length=18] - The length of the random string to generate. Default is 18.
  * @returns {string} A random string of the specified length.
  */
-const generateRandomId = (length: number = 18): string => {
+const generateRandomId = (length: number = 6): string => {
   const chars =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
+  return Array.from({ length }, () =>
+    chars.charAt(Math.floor(Math.random() * chars.length)),
+  ).join('');
 };
 
 /**
@@ -663,50 +700,125 @@ const generateRandomId = (length: number = 18): string => {
  *
  * @template T - The type representing the first object's structure, which should be a record type.
  * @template R - The type representing the second object's structure, which should be a partial type of the first object.
- * @param {T} [props] - The first object to merge, defaults to undefined.
- * @param {R} [replacement] - The second object to merge, defaults to undefined.
+ * @param {T} [props={}] - The first object to merge, defaults to an empty object.
+ * @param {R} [replacement={}] - The second object to merge, defaults to an empty object.
  * @returns {T & R} - A new object containing the merged properties.
  */
 const mergeProps = <T extends Record<string, any>, R extends Partial<T>>(
-  props?: T,
-  replacement?: R,
+  props: T = {} as T,
+  replacement: R = {} as R,
 ): T & R => {
-  if (!props || Object.keys(props).length === 0) {
-    return (replacement || {}) as T & R;
+  return { ...props, ...replacement } as T & R;
+};
+
+/**
+ * Groups an array of objects by a specified property and records the index of each item.
+ *
+ * @param arr - The array of objects to be grouped.
+ * @param propertyName - The name of the property by which to group the objects. Must be a key of the object type T.
+ * @returns An object containing the grouped data and an array of keys. The grouped data is represented as a record where keys are strings and values are arrays of objects with the original item and its index in the original array.
+ */
+const groupByProperty = <T>(
+  arr: T[],
+  propertyName: keyof T,
+): {
+  groupedData: Record<string, { item: T; index: number }[]>;
+  keys: string[];
+} => {
+  const groupedData = arr.reduce(
+    (acc, item, index) => {
+      const propertyValue = item[propertyName];
+      const key =
+        propertyValue === null ||
+        propertyValue === undefined ||
+        propertyValue === ''
+          ? EMPTY_GROUP_FLAG
+          : propertyValue.toString();
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push({ item, index });
+      return acc;
+    },
+    {} as Record<string, { item: T; index: number }[]>,
+  );
+
+  return {
+    groupedData,
+    keys: Object.keys(groupedData),
+  };
+};
+
+/**
+ * A utility function that either picks specific properties from a given object or excludes specific properties to generate a new object.
+ * If the input object is null or undefined, an empty object is returned.
+ * The third parameter is optional. When set to true, the array of keys is treated as keys to be excluded.
+ *
+ * @template T The type of the input object, which must be an extension of the object type.
+ * @template K The type of the keys of the input object.
+ *
+ * @param {T | null | undefined} inputObj The input object.
+ * @param {K[]} propertyKeys The array of keys to be picked or excluded.
+ * @param {boolean} isExcludeKeys Optional flag. Default is false. If true, propertyKeys are treated as keys to be excluded.
+ *
+ * @returns {Pick<T, K> | Omit<T, K>} The new object generated according to the parameters. If the input object is null or undefined, an empty object is returned.
+ */
+const pickObjectProperties = <T extends object, K extends keyof T>(
+  inputObj: T | null | undefined,
+  propertyKeys: K[],
+  isExcludeKeys: boolean = false,
+): Omit<T, K> | Pick<T, K> => {
+  const result: Partial<
+    typeof isExcludeKeys extends true ? Omit<T, K> : Pick<T, K>
+  > = {};
+
+  if (!inputObj) {
+    return result as typeof isExcludeKeys extends true
+      ? Omit<T, K>
+      : Pick<T, K>;
   }
 
-  if (!replacement) {
-    return { ...props } as T & R;
+  if (isExcludeKeys) {
+    const allKeys = Object.keys(inputObj) as K[];
+    for (const key of allKeys) {
+      if (!propertyKeys.includes(key)) {
+        result[key] = inputObj[key];
+      }
+    }
+  } else {
+    for (const key of propertyKeys) {
+      if (key in inputObj) {
+        result[key] = inputObj[key];
+      }
+    }
   }
 
-  const merged = { ...props } as T & R;
-  for (const key in replacement) {
-    merged[key] = replacement[key] as any;
-  }
-
-  return merged;
+  return result as typeof isExcludeKeys extends true ? Omit<T, K> : Pick<T, K>;
 };
 
 export {
   camelToKebab,
+  checkObjectProperties,
+  clsxUnique,
+  clsxWithOptions,
+  createLogger,
   deepMerge,
   filterAndTransformProperties,
+  filterOptions,
   filterTransformAndExcludeProperties,
+  generateRandomId,
   getValue,
+  groupByProperty,
   isArray,
+  isDefined,
   isPlainObject,
   isSpecialObject,
-  mapAndFilterStyles,
-  parseJson,
-  filterOptions,
   isValueValid,
-  createLogger,
-  checkObjectProperties,
-  isDefined,
-  clsxUnique,
-  processClassName,
+  mapAndFilterStyles,
   mergeClassNames,
-  processSlotClasses,
-  generateRandomId,
   mergeProps,
+  parseJson,
+  pickObjectProperties,
+  processClassName,
+  processSlotClasses,
 };

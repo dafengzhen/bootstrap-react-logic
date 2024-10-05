@@ -7,7 +7,9 @@ import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import AboutComponent from '@components/about-component.tsx';
 import { updateState } from '@src/tools';
 import selectCodes from '@assets/codes/select';
+import selectComponentPropsCodes from '@assets/codes/select/component-props';
 import { Select, SelectOption } from '@lib/select';
+import { SelectMultiple } from '@lib/select-multiple';
 
 interface IStates {
   select: {
@@ -24,6 +26,15 @@ interface IStates {
       code?: string;
     };
     disabled: {
+      openCode: boolean;
+      code?: string;
+    };
+  };
+}
+
+interface IComponentPropsStates {
+  select: {
+    selectComponentProps: {
       openCode: boolean;
       code?: string;
     };
@@ -54,6 +65,15 @@ export default function SelectPage() {
       },
     },
   });
+  const [componentPropsStates, setComponentPropsStates] =
+    useState<IComponentPropsStates>({
+      select: {
+        selectComponentProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.selectComponentProps.code.trim(),
+        },
+      },
+    });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -75,6 +95,14 @@ export default function SelectPage() {
     c?: () => void,
   ) {
     updateState(setStates, k, v, c);
+  }
+
+  function onClickUpdateComponentPropsState(
+    k: NestedKeys<IComponentPropsStates>,
+    v: unknown,
+    c?: () => void,
+  ) {
+    updateState(setComponentPropsStates, k, v, c);
   }
 
   if (navigation.state === 'loading') {
@@ -164,6 +192,209 @@ export default function SelectPage() {
             <SelectOption value="2">Two</SelectOption>
             <SelectOption value="3">Three</SelectOption>
           </Select>
+
+          <SelectMultiple
+            placeholder="Please select"
+            options={[
+              {
+                label: 'Primary',
+                value: 1,
+              },
+              {
+                label: 'Secondary',
+                value: 1,
+              },
+              {
+                label: 'Success',
+                value: 1,
+              },
+              {
+                label: 'Danger',
+                value: 2,
+              },
+              {
+                label: 'Warning',
+                value: 3,
+              },
+              {
+                label: 'Info',
+                value: 4,
+              },
+            ]}
+          ></SelectMultiple>
+
+          <SelectMultiple disabled placeholder="Please select"></SelectMultiple>
+
+          <SelectMultiple
+            single
+            placeholder="Please select"
+            options={[
+              {
+                label: 'Primary',
+                value: 1,
+              },
+              {
+                label: 'Secondary',
+                value: 1,
+                active: true,
+              },
+              {
+                label: 'Success',
+                value: 1,
+                disabled: true,
+              },
+              {
+                label: 'Danger',
+                value: 2,
+              },
+              {
+                label: 'Warning',
+                value: 3,
+              },
+              {
+                label: 'Info',
+                value: 4,
+              },
+            ]}
+          ></SelectMultiple>
+
+          <SelectMultiple
+            placeholder="Please select"
+            options={[
+              {
+                label: 'Primary',
+                value: 1,
+              },
+              {
+                label: 'Secondary',
+                value: 1,
+                active: true,
+              },
+              {
+                label: 'Success',
+                value: 1,
+              },
+              {
+                label: 'Danger',
+                value: 2,
+                active: true,
+              },
+              {
+                label: 'Warning',
+                value: 3,
+              },
+              {
+                label: 'Info',
+                value: 4,
+              },
+            ]}
+          ></SelectMultiple>
+
+          <SelectMultiple
+            placeholder="Please select"
+            options={[
+              {
+                label: 'Primary',
+                value: 1,
+              },
+              {
+                label: 'Secondary',
+                value: 1,
+                active: true,
+              },
+              {
+                label: 'Success',
+                value: 1,
+              },
+              {
+                divider: 'top',
+                label: 'Danger',
+                value: 2,
+              },
+              {
+                label: 'Warning',
+                value: 3,
+                divider: 'bottom',
+              },
+              {
+                label: 'Info',
+                value: 4,
+              },
+            ]}
+          ></SelectMultiple>
+
+          <SelectMultiple
+            placeholder="Please select"
+            options={[
+              {
+                header: 'Status and Importance',
+                label: 'Primary',
+                value: 1,
+              },
+              {
+                header: 'Status and Importance',
+                label: 'Secondary',
+                value: 1,
+                active: true,
+              },
+              {
+                header: 'Status and Importance',
+                label: 'Success',
+                value: 1,
+              },
+              {
+                header: 'Status and Importance',
+                label: 'Danger',
+                value: 2,
+                active: true,
+              },
+              {
+                header: 'Warning and Information',
+                label: 'Warning',
+                value: 3,
+              },
+              {
+                header: 'Warning and Information',
+                label: 'Info',
+                value: 4,
+              },
+            ]}
+          ></SelectMultiple>
+
+          <SelectMultiple
+            hideActiveOptions
+            selectableCount={4}
+            placeholder="Please select"
+            options={[
+              {
+                label: 'Primary',
+                value: 1,
+              },
+              {
+                label: 'Secondary',
+                value: 1,
+                active: true,
+              },
+              {
+                label: 'Success',
+                value: 1,
+                active: true,
+              },
+              {
+                label: 'Danger',
+                value: 2,
+                active: true,
+              },
+              {
+                label: 'Warning',
+                value: 3,
+              },
+              {
+                label: 'Info',
+                value: 4,
+              },
+            ]}
+          ></SelectMultiple>
         </div>
       </CustomSimpleCard>
 
@@ -189,70 +420,49 @@ export default function SelectPage() {
         </div>
       </CustomSimpleCard>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Select 组件属性"
-            hash="selectComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">select</span>
-                  </td>
-                  <td></td>
-                  <td>select</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>
-                    <span className="badge text-bg-secondary">lg | sm</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>nativeSize</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      number | undefined
-                    </span>
-                  </td>
-                  <td>HTMLAttributes</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="Select 组件属性"
+        hash="selectComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.select.selectComponentProps.openCode}
+        code={componentPropsStates.select.selectComponentProps.code}
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'select.selectComponentProps.openCode',
+            !componentPropsStates.select.selectComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'as',
+            type: <span className="badge text-bg-secondary">select</span>,
+            desc: '',
+            default: 'select',
+          },
+          {
+            attr: 'size',
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
+            desc: '',
+            default: 'select',
+          },
+          {
+            attr: 'nativeSize',
+            type: (
+              <span className="badge text-bg-secondary">
+                number | undefined
+              </span>
+            ),
+            desc: 'HTMLAttributes',
+            default: 'select',
+          },
+          {
+            attr: 'disabled',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: '',
+            default: 'select',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
       <div className="card">
         <div className="card-header">
@@ -291,6 +501,214 @@ export default function SelectPage() {
                   <td>disabled</td>
                   <td>
                     <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <CustomSimpleCardLink
+            title="SelectMultiple 组件属性"
+            hash="selectMultipleComponentProps"
+          />
+        </div>
+        <div className="card-body">
+          <div className="table-responsive">
+            <table className="table tw-table-fixed">
+              <colgroup>
+                <col style={colgroup.attr} />
+                <col style={colgroup.type} />
+                <col style={colgroup.desc} />
+                <col style={colgroup.default} />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">Attr</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Desc</th>
+                  <th scope="col">Default</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>as</td>
+                  <td>
+                    <span className="badge text-bg-secondary">div</span>
+                  </td>
+                  <td></td>
+                  <td>div</td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>single</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>hideActiveOptions</td>
+                  <td>
+                    <span className="badge text-bg-secondary">boolean</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td>
+                    <span className="badge text-bg-secondary">string</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>selectableCount</td>
+                  <td>
+                    <span className="badge text-bg-secondary">number</span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td>
+                    <div className="d-flex flex-column">
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          id?: string | number
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          value?: string | number
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          active?: boolean;
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          disabled?: boolean
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          divider?: top | bottom
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          header?: string
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          label: string
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>contentClasses</td>
+                  <td>
+                    <div className="d-flex flex-column">
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : mainContainer
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : optionsContainer
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : placeholder
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : activeOption
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : clearIcon
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : countDisplay
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : floatingMenu
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : header
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : topDivider
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : optionItem
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : selectButton
+                        </span>
+                      </div>
+                      <div>
+                        <span className="badge text-bg-secondary">
+                          Key : bottomDivider
+                        </span>
+                        <div>
+                          <span className="badge text-bg-secondary">
+                            Value : string | ((originalClass: string) =&gt;
+                            string | undefined)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>onChange</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      (value: (string | number)[]) =&gt; void
+                    </span>
                   </td>
                   <td></td>
                   <td>-</td>

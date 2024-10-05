@@ -184,6 +184,8 @@ const inputCodes = {
   },
   otp: {
     code: `
+<InputOtp defaultValue={['1', '2', '3', '4']}></InputOtp>
+
 <InputOtp></InputOtp>
 
 <InputOtp

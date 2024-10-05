@@ -559,6 +559,9 @@ export default function InputPage() {
       >
         <div className="d-flex flex-column gap-2">
           <div className="tw-w-full sm:tw-w-1/4">
+            <InputOtp defaultValue={['1', '2', '3', '4']}></InputOtp>
+          </div>
+          <div className="tw-w-full sm:tw-w-1/4">
             <InputOtp></InputOtp>
           </div>
           <div className="tw-w-full sm:tw-w-1/4">
@@ -756,6 +759,16 @@ export default function InputPage() {
                   </td>
                   <td></td>
                   <td>4</td>
+                </tr>
+                <tr>
+                  <td>defaultValue</td>
+                  <td>
+                    <span className="badge text-bg-secondary">
+                      (string | number)[]
+                    </span>
+                  </td>
+                  <td></td>
+                  <td>-</td>
                 </tr>
                 <tr>
                   <td>inputProps</td>
