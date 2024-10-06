@@ -1,4 +1,5 @@
 import type {
+  CSSProperties,
   DetailedHTMLProps,
   ElementType,
   HTMLAttributes,
@@ -14,11 +15,11 @@ import {
 
 type Variables = {
   [key in keyof typeof SelectVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 type SelectOptionVariables = {
   [key in keyof typeof SelectOptionVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements
@@ -80,7 +81,7 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   nativeSize?: number | undefined;
 
   /**
-   * disabled,
+   * disabled.
    */
   disabled?: boolean;
 };

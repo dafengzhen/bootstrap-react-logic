@@ -3,13 +3,13 @@ import { useNavigation } from 'react-router-dom';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
 import type { NestedKeys } from '@src/types';
 import CustomSimpleCard from '@src/components/custom-simple-card';
-import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import AboutComponent from '@components/about-component.tsx';
 import { updateState } from '@src/tools';
 import selectCodes from '@assets/codes/select';
 import selectComponentPropsCodes from '@assets/codes/select/component-props';
 import { Select, SelectOption } from '@lib/select';
 import { SelectMultiple } from '@lib/select-multiple';
+import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
 
 interface IStates {
   select: {
@@ -35,6 +35,26 @@ interface IStates {
 interface IComponentPropsStates {
   select: {
     selectComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    selectOptionComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    selectMultipleComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    generalComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    generalProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    generalEvents: {
       openCode: boolean;
       code?: string;
     };
@@ -71,6 +91,26 @@ export default function SelectPage() {
         selectComponentProps: {
           openCode: false,
           code: selectComponentPropsCodes.selectComponentProps.code.trim(),
+        },
+        selectOptionComponentProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.selectOptionComponentProps.code.trim(),
+        },
+        selectMultipleComponentProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.selectMultipleComponentProps.code.trim(),
+        },
+        generalComponentProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.generalComponentProps.code.trim(),
+        },
+        generalProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.generalProps.code.trim(),
+        },
+        generalEvents: {
+          openCode: false,
+          code: selectComponentPropsCodes.generalEvents.code.trim(),
         },
       },
     });
@@ -426,6 +466,8 @@ export default function SelectPage() {
         colgroup={colgroup}
         isOpen={componentPropsStates.select.selectComponentProps.openCode}
         code={componentPropsStates.select.selectComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
         toggleCode={() =>
           onClickUpdateComponentPropsState(
             'select.selectComponentProps.openCode',
@@ -443,7 +485,7 @@ export default function SelectPage() {
             attr: 'size',
             type: <span className="badge text-bg-secondary">lg | sm</span>,
             desc: '',
-            default: 'select',
+            default: '',
           },
           {
             attr: 'nativeSize',
@@ -453,421 +495,239 @@ export default function SelectPage() {
               </span>
             ),
             desc: 'HTMLAttributes',
-            default: 'select',
+            default: '',
           },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
             desc: '',
-            default: 'select',
+            default: '',
           },
         ]}
       ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="SelectOption 组件属性"
-            hash="selectOptionComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">option</span>
-                  </td>
-                  <td></td>
-                  <td>option</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="SelectOption 组件属性"
+        hash="selectOptionComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.select.selectOptionComponentProps.openCode}
+        code={componentPropsStates.select.selectOptionComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'select.selectOptionComponentProps.openCode',
+            !componentPropsStates.select.selectOptionComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'as',
+            type: <span className="badge text-bg-secondary">option</span>,
+            desc: '',
+            default: 'option',
+          },
+          {
+            attr: 'disabled',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: '',
+            default: '',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="SelectMultiple 组件属性"
-            hash="selectMultipleComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                  </td>
-                  <td></td>
-                  <td>div</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>single</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>hideActiveOptions</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>placeholder</td>
-                  <td>
-                    <span className="badge text-bg-secondary">string</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>selectableCount</td>
-                  <td>
-                    <span className="badge text-bg-secondary">number</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>options</td>
-                  <td>
-                    <div className="d-flex flex-column">
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          id?: string | number
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          value?: string | number
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          active?: boolean;
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          disabled?: boolean
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          divider?: top | bottom
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          header?: string
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          label: string
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>contentClasses</td>
-                  <td>
-                    <div className="d-flex flex-column">
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : mainContainer
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : optionsContainer
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : placeholder
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : activeOption
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : clearIcon
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : countDisplay
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : floatingMenu
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : header
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : topDivider
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : optionItem
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : selectButton
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : bottomDivider
-                        </span>
-                        <div>
-                          <span className="badge text-bg-secondary">
-                            Value : string | ((originalClass: string) =&gt;
-                            string | undefined)
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>onChange</td>
-                  <td>
+      <CustomSimpleCard.ComponentProps
+        title="SelectMultiple 组件属性"
+        hash="selectMultipleComponentProps"
+        colgroup={colgroup}
+        isOpen={
+          componentPropsStates.select.selectMultipleComponentProps.openCode
+        }
+        code={componentPropsStates.select.selectMultipleComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'select.selectMultipleComponentProps.openCode',
+            !componentPropsStates.select.selectMultipleComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'as',
+            type: <span className="badge text-bg-secondary">div</span>,
+            desc: '',
+            default: 'div',
+          },
+          {
+            attr: 'disabled',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'single',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'hideActiveOptions',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'placeholder',
+            type: <span className="badge text-bg-secondary">string</span>,
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'selectableCount',
+            type: <span className="badge text-bg-secondary">number</span>,
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'options',
+            type: (
+              <div className="d-flex flex-column">
+                <div>
+                  <span className="badge text-bg-secondary">
+                    id?: string | number
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    value?: string | number
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    active?: boolean;
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    disabled?: boolean
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    divider?: top | bottom
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    header?: string
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">label: string</span>
+                </div>
+              </div>
+            ),
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'contentClasses',
+            type: (
+              <div className="d-flex flex-column">
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : mainContainer
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : optionsContainer
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : placeholder
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : activeOption
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : clearIcon
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : countDisplay
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : floatingMenu
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">Key : header</span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : topDivider
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : optionItem
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : selectButton
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : bottomDivider
+                  </span>
+                  <div>
                     <span className="badge text-bg-secondary">
-                      (value: (string | number)[]) =&gt; void
+                      Value : string | ((originalClass: string) =&gt; string |
+                      undefined)
                     </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+                  </div>
+                </div>
+              </div>
+            ),
+            desc: '',
+            default: '',
+          },
+          {
+            attr: 'onChange',
+            type: (
+              <span className="badge text-bg-secondary">
+                (value: (string | number)[]) =&gt; void
+              </span>
+            ),
+            desc: '',
+            default: '',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="通用组件属性"
-            hash="generalComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>render</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      (renderOptions) =&gt; ReactNode
-                    </span>
-                  </td>
-                  <td>Customize rendering logic</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>skipCompWrap</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Skip component wrapper</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>dropOldClass</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>variables</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td>Style variables</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用属性" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>className</td>
-                  <td>
-                    <span className="badge text-bg-secondary">string</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>style</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用事件" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>onClick</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      MouseEventHandler
-                    </span>
-                  </td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <GeneralComponentPropsCard
+        colgroup={colgroup}
+        isOpen={componentPropsStates.select.generalComponentProps.openCode}
+        code={componentPropsStates.select.generalComponentProps.code}
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'select.generalComponentProps.openCode',
+            !componentPropsStates.select.generalComponentProps.openCode,
+          )
+        }
+      ></GeneralComponentPropsCard>
 
       <AboutComponent />
     </div>

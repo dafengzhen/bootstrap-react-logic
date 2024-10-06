@@ -1,17 +1,18 @@
-import {
-  type DetailedHTMLProps,
+import type {
+  CSSProperties,
+  DetailedHTMLProps,
   ElementRef,
-  type ElementType,
-  type HTMLAttributes,
-  type InputHTMLAttributes,
+  ElementType,
+  HTMLAttributes,
+  InputHTMLAttributes,
   LegacyRef,
-  type ReactNode,
+  ReactNode,
 } from 'react';
 import { InputVariablesEnum, IntrinsicElements, SlotValue } from '../tools';
 
 type Variables = {
   [key in keyof typeof InputVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements

@@ -1,15 +1,16 @@
-import {
-  type DetailedHTMLProps,
-  type ElementType,
-  type HTMLAttributes,
-  type LabelHTMLAttributes,
-  type ReactNode,
+import type {
+  CSSProperties,
+  DetailedHTMLProps,
+  ElementType,
+  HTMLAttributes,
+  LabelHTMLAttributes,
+  ReactNode,
 } from 'react';
 import type { IntrinsicElements, LabelVariablesEnum } from '../tools';
 
 type Variables = {
   [key in keyof typeof LabelVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements

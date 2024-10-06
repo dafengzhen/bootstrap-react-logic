@@ -1,8 +1,9 @@
-import {
-  type DetailedHTMLProps,
-  type ElementType,
-  type HTMLAttributes,
-  type ReactNode,
+import type {
+  CSSProperties,
+  DetailedHTMLProps,
+  ElementType,
+  HTMLAttributes,
+  ReactNode,
 } from 'react';
 import {
   InputGroupTextVariablesEnum,
@@ -12,11 +13,11 @@ import {
 
 type Variables = {
   [key in keyof typeof InputGroupVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 type InputGroupTextVariables = {
   [key in keyof typeof InputGroupTextVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements

@@ -1,4 +1,5 @@
 import type {
+  CSSProperties,
   DetailedHTMLProps,
   ElementType,
   HTMLAttributes,
@@ -8,7 +9,21 @@ import { IntrinsicElements, SelectVariablesEnum, SlotValue } from '../tools';
 
 type Variables = {
   [key in keyof typeof SelectVariablesEnum]?: string | number;
-};
+} & CSSProperties;
+
+type SlotValueKeys =
+  | 'mainContainer'
+  | 'optionsContainer'
+  | 'placeholder'
+  | 'activeOption'
+  | 'clearIcon'
+  | 'countDisplay'
+  | 'floatingMenu'
+  | 'header'
+  | 'topDivider'
+  | 'optionItem'
+  | 'selectButton'
+  | 'bottomDivider';
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements
@@ -89,20 +104,7 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   /**
    * contentClasses.
    */
-  contentClasses?: {
-    mainContainer?: SlotValue;
-    optionsContainer?: SlotValue;
-    placeholder?: SlotValue;
-    activeOption?: SlotValue;
-    clearIcon?: SlotValue;
-    countDisplay?: SlotValue;
-    floatingMenu?: SlotValue;
-    header?: SlotValue;
-    topDivider?: SlotValue;
-    optionItem?: SlotValue;
-    selectButton?: SlotValue;
-    bottomDivider?: SlotValue;
-  };
+  contentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
 
   /**
    * onChange.

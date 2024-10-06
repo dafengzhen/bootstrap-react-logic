@@ -128,6 +128,7 @@ const ComponentProps = ({
   title,
   hash,
   children,
+  headerClassName,
   customBody,
   colgroup,
   items = [],
@@ -135,11 +136,14 @@ const ComponentProps = ({
   toggleCode,
   code,
   codeLanguage,
+  codeDisplayMode,
+  customCaption,
 }: {
   title: string;
   hash: string;
   children?: ReactNode;
   customBody?: boolean;
+  headerClassName?: string;
   colgroup: {
     attr: CSSProperties;
     type: CSSProperties;
@@ -156,6 +160,8 @@ const ComponentProps = ({
   toggleCode: () => void;
   code?: string;
   codeLanguage?: 'html' | 'javascript' | 'typescript' | string;
+  codeDisplayMode?: 'direct' | 'indirectly';
+  customCaption?: ReactNode;
 }) => {
   const globalContext = useContext(GlobalContext);
   const fullscreenState = globalContext.fullscreen;
@@ -165,80 +171,101 @@ const ComponentProps = ({
 
   return (
     <div className="card">
-      <div className="card-header">
-        <div className="d-flex align-items-center justify-content-between">
-          <div>
-            <CustomSimpleCardLink title={title} hash={hash} />
-          </div>
-          <div className="d-flex gap-2">
-            <i
-              className={clsx(
-                'bi tw-cursor-pointer',
-                isOpen ? 'bi-code-slash text-primary' : 'bi-code',
-              )}
-              onClick={toggleCode}
-            ></i>
-            <i
-              className="bi bi-clipboard2 tw-cursor-pointer"
-              onClick={() => onClickClipboard(code)}
-            ></i>
-            <i
-              className={clsx(
-                'bi tw-cursor-pointer',
-                fullscreen
-                  ? 'bi-fullscreen-exit text-primary'
-                  : 'bi-fullscreen',
-              )}
-              onClick={() => onClickFullscreen(fullscreenState)}
-            ></i>
-
-            <i
-              className={clsx(
-                'bi tw-cursor-pointer',
-                dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high',
-              )}
-              onClick={() => onClickTheme(themeState)}
-            ></i>
-          </div>
-        </div>
-      </div>
       {customBody && children ? (
         children
       ) : (
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item, index) => {
-                  return (
-                    <tr key={typeof item.attr === 'string' ? item.attr : index}>
-                      <td>{item.attr}</td>
-                      <td>{item.type}</td>
-                      <td>{item.desc}</td>
-                      <td>{item.default ?? '-'}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+        <>
+          <div className={clsx('card-header', headerClassName)}>
+            <div className="d-flex align-items-center justify-content-between">
+              <div>
+                <CustomSimpleCardLink title={title} hash={hash} />
+              </div>
+              <div className="d-flex gap-2">
+                <i
+                  className={clsx(
+                    'bi tw-cursor-pointer',
+                    isOpen ? 'bi-code-slash text-primary' : 'bi-code',
+                  )}
+                  onClick={toggleCode}
+                ></i>
+                <i
+                  className="bi bi-clipboard2 tw-cursor-pointer"
+                  onClick={() => onClickClipboard(code)}
+                ></i>
+                <i
+                  className={clsx(
+                    'bi tw-cursor-pointer',
+                    fullscreen
+                      ? 'bi-fullscreen-exit text-primary'
+                      : 'bi-fullscreen',
+                  )}
+                  onClick={() => onClickFullscreen(fullscreenState)}
+                ></i>
+
+                <i
+                  className={clsx(
+                    'bi tw-cursor-pointer',
+                    dark
+                      ? 'bi-moon-stars-fill text-primary'
+                      : 'bi-brightness-high',
+                  )}
+                  onClick={() => onClickTheme(themeState)}
+                ></i>
+              </div>
+            </div>
           </div>
-        </div>
+          <div
+            className={clsx(
+              'card-body',
+              codeDisplayMode === 'direct' && isOpen && 'd-none',
+            )}
+          >
+            <div className="table-responsive">
+              <table className="table tw-table-fixed">
+                <colgroup>
+                  <col style={colgroup.attr} />
+                  <col style={colgroup.type} />
+                  <col style={colgroup.desc} />
+                  <col style={colgroup.default} />
+                </colgroup>
+                {customCaption && <caption>{customCaption}</caption>}
+                <thead>
+                  <tr>
+                    <th scope="col">Attr</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Desc</th>
+                    <th scope="col">Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((item, index) => {
+                    return (
+                      <tr
+                        key={typeof item.attr === 'string' ? item.attr : index}
+                      >
+                        <td>{item.attr}</td>
+                        <td>{item.type}</td>
+                        <td>{item.desc}</td>
+                        <td>{item.default || '-'}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
       )}
-      <div className={clsx('card-footer', { 'd-none': !isOpen })}>
+
+      <div
+        className={clsx(
+          'card-footer',
+          codeDisplayMode === 'direct' && isOpen && 'border-top-0',
+          {
+            'd-none': !isOpen,
+          },
+        )}
+      >
         <pre>
           <code
             className={clsx(

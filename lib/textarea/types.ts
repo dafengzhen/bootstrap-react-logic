@@ -1,15 +1,16 @@
-import {
-  type DetailedHTMLProps,
-  type ElementType,
-  type HTMLAttributes,
-  type ReactNode,
-  type TextareaHTMLAttributes,
+import type {
+  CSSProperties,
+  DetailedHTMLProps,
+  ElementType,
+  HTMLAttributes,
+  ReactNode,
+  TextareaHTMLAttributes,
 } from 'react';
 import type { IntrinsicElements, TextareaVariablesEnum } from '../tools';
 
 type Variables = {
   [key in keyof typeof TextareaVariablesEnum]?: string | number;
-};
+} & CSSProperties;
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements

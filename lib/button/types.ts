@@ -1,10 +1,11 @@
-import {
-  type AnchorHTMLAttributes,
-  type ButtonHTMLAttributes,
-  type DetailedHTMLProps,
-  type ElementType,
-  type HTMLAttributes,
-  type ReactNode,
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  CSSProperties,
+  DetailedHTMLProps,
+  ElementType,
+  HTMLAttributes,
+  ReactNode,
 } from 'react';
 import type {
   ButtonVariableEnum,
@@ -16,7 +17,7 @@ import type {
 
 type Variables = {
   [key in keyof typeof ButtonVariableEnum]?: string | number;
-};
+} & CSSProperties;
 
 export type ElementProps<T extends ElementType> =
   T extends keyof IntrinsicElements
