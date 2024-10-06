@@ -1,0 +1,21 @@
+{
+  "desc": {
+    "disabled": "Disabled",
+    "single": "Single selection",
+    "hideActiveOptions": "Hide selected options",
+    "placeholder": "Placeholder",
+    "selectableCount": "Maximum selectable count",
+    "options": "List data",
+    "contentClasses": "Set slot class names",
+    "onChange": "Receive data"
+  },
+  "options": {
+    "id": "Optional. Defaults to index",
+    "value": "Value",
+    "active": "Selected or not",
+    "disabled": "Disabled",
+    "divider": "Divider",
+    "header": "Group name",
+    "label": "Label"
+  }
+}

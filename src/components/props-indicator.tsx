@@ -6,7 +6,7 @@ export default function PropsIndicator() {
         className="bi bi-arrow-right-short text-secondary"
         style={{ fontSize: 14 }}
       ></i>
-      <div className="small text-secondary">Component Props</div>
+      <div className="small text-secondary text-center">Component Props</div>
       <i
         className="bi bi-arrow-left-short text-secondary"
         style={{ fontSize: 14 }}

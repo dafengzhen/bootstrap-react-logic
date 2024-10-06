@@ -1,7 +1,11 @@
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import clsx from 'clsx';
-import { GlobalContext } from '@contexts/global-context.ts';
+import {
+  GlobalContext,
+  type Layout,
+  type Theme,
+} from '@contexts/global-context.ts';
 
 interface IMenu {
   name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select';
@@ -17,7 +21,9 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const fullscreen = useState(false);
-  const theme = useState<'light' | 'dark'>('light');
+  const layout = useState<Layout>('default');
+  const theme = useState<Theme>('light');
+  const isCenter = layout[0] === 'center';
   const isFullscreen = fullscreen[0] && location.pathname !== '/';
   const [menus] = useState<IMenu[]>([
     {
@@ -51,8 +57,10 @@ function App() {
   }
 
   return (
-    <GlobalContext.Provider value={{ fullscreen, theme }}>
-      <div className="container-fluid p-2 p-sm-4">
+    <GlobalContext.Provider value={{ fullscreen, theme, layout }}>
+      <div
+        className={clsx('container-fluid p-2 p-sm-4', isCenter && 'container')}
+      >
         <div className="row g-2 g-sm-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">

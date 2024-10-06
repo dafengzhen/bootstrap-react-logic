@@ -11,6 +11,8 @@ import { Select, SelectOption } from '@lib/select';
 import { SelectMultiple } from '@lib/select-multiple';
 import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import { useTranslation } from 'react-i18next';
+import OptionRow from '@components/option-row.tsx';
 
 interface IStates {
   select: {
@@ -65,6 +67,14 @@ interface IComponentPropsStates {
 export default function SelectPage() {
   useHighlightCode();
   const navigation = useNavigation();
+  const { t: tSelectMultipleComponentProps } = useTranslation([
+    'selectMultipleComponentProps',
+  ]);
+  const { t: tSelectOptionComponentProps } = useTranslation([
+    'selectOptionComponentProps',
+  ]);
+  const { t: tSelectComponentProps } = useTranslation(['selectComponentProps']);
+  const { t: tSelectPage } = useTranslation(['selectPage']);
 
   const [states, setStates] = useState<IStates>({
     select: {
@@ -153,7 +163,7 @@ export default function SelectPage() {
   return (
     <div className="d-flex flex-column gap-3">
       <CustomSimpleCard
-        title="基本"
+        title={tSelectPage('basic')}
         hash="basic"
         isOpen={states.select.basic.openCode}
         toggleCode={() =>
@@ -179,7 +189,7 @@ export default function SelectPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="大小"
+        title={tSelectPage('size')}
         hash="size"
         isOpen={states.select.size.openCode}
         toggleCode={() =>
@@ -208,7 +218,7 @@ export default function SelectPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="多选"
+        title={tSelectPage('multiple')}
         hash="multiple"
         isOpen={states.select.multiple.openCode}
         toggleCode={() =>
@@ -440,7 +450,7 @@ export default function SelectPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="禁止"
+        title={tSelectPage('disabled')}
         hash="disabled"
         isOpen={states.select.disabled.openCode}
         toggleCode={() =>
@@ -464,7 +474,7 @@ export default function SelectPage() {
       <PropsIndicator />
 
       <CustomSimpleCard.ComponentProps
-        title="Select 组件属性"
+        title="Select"
         hash="selectComponentProps"
         colgroup={colgroup}
         isOpen={componentPropsStates.select.selectComponentProps.openCode}
@@ -481,7 +491,7 @@ export default function SelectPage() {
           {
             attr: 'size',
             type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: '',
+            desc: tSelectComponentProps('desc.size'),
             default: '',
           },
           {
@@ -491,20 +501,20 @@ export default function SelectPage() {
                 number | undefined
               </span>
             ),
-            desc: 'HTMLAttributes',
+            desc: tSelectComponentProps('desc.nativeSize'),
             default: '',
           },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: '',
+            desc: tSelectComponentProps('desc.disabled'),
             default: '',
           },
         ]}
       ></CustomSimpleCard.ComponentProps>
 
       <CustomSimpleCard.ComponentProps
-        title="SelectOption 组件属性"
+        title="SelectOption"
         hash="selectOptionComponentProps"
         colgroup={colgroup}
         isOpen={componentPropsStates.select.selectOptionComponentProps.openCode}
@@ -521,14 +531,14 @@ export default function SelectPage() {
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: '',
+            desc: tSelectOptionComponentProps('desc.disabled'),
             default: '',
           },
         ]}
       ></CustomSimpleCard.ComponentProps>
 
       <CustomSimpleCard.ComponentProps
-        title="SelectMultiple 组件属性"
+        title="SelectMultiple"
         hash="selectMultipleComponentProps"
         colgroup={colgroup}
         isOpen={
@@ -547,73 +557,68 @@ export default function SelectPage() {
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.disabled'),
             default: '',
           },
           {
             attr: 'single',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.single'),
             default: '',
           },
           {
             attr: 'hideActiveOptions',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.hideActiveOptions'),
             default: '',
           },
           {
             attr: 'placeholder',
             type: <span className="badge text-bg-secondary">string</span>,
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.placeholder'),
             default: '',
           },
           {
             attr: 'selectableCount',
             type: <span className="badge text-bg-secondary">number</span>,
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.selectableCount'),
             default: '',
           },
           {
             attr: 'options',
             type: (
-              <div className="d-flex flex-column">
-                <div>
-                  <span className="badge text-bg-secondary">
-                    id?: string | number
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">
-                    value?: string | number
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">
-                    active?: boolean;
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">
-                    disabled?: boolean
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">
-                    divider?: top | bottom
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">
-                    header?: string
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">label: string</span>
-                </div>
+              <div className="d-flex flex-column gap-1">
+                <OptionRow
+                  label="id?: string | number"
+                  value={tSelectMultipleComponentProps('options.id')}
+                />
+                <OptionRow
+                  label="value?: string | number"
+                  value={tSelectMultipleComponentProps('options.value')}
+                />
+                <OptionRow
+                  label="active?: boolean"
+                  value={tSelectMultipleComponentProps('options.active')}
+                />
+                <OptionRow
+                  label="disabled?: boolean"
+                  value={tSelectMultipleComponentProps('options.disabled')}
+                />
+                <OptionRow
+                  label="divider?: top | bottom"
+                  value={tSelectMultipleComponentProps('options.divider')}
+                />
+                <OptionRow
+                  label="header?: string"
+                  value={tSelectMultipleComponentProps('options.header')}
+                />
+                <OptionRow
+                  label="label: string"
+                  value={tSelectMultipleComponentProps('options.label')}
+                />
               </div>
             ),
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.options'),
             default: '',
           },
           {
@@ -686,7 +691,7 @@ export default function SelectPage() {
                 </div>
               </div>
             ),
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.contentClasses'),
             default: '',
           },
           {
@@ -696,7 +701,7 @@ export default function SelectPage() {
                 (value: (string | number)[]) =&gt; void
               </span>
             ),
-            desc: '',
+            desc: tSelectMultipleComponentProps('desc.onChange'),
             default: '',
           },
         ]}

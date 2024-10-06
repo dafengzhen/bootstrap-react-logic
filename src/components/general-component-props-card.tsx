@@ -1,10 +1,13 @@
 import CustomSimpleCard from '@components/custom-simple-card.tsx';
+import { Trans, useTranslation } from 'react-i18next';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function GeneralComponentPropsCard(props: any) {
+  const { t } = useTranslation(['genericComponentProps']);
+
   return (
     <CustomSimpleCard.ComponentProps
-      title="Generic Component Props"
+      title={t('genericComponentProps')}
       hash="generalComponentProps"
       customBody
       codeLanguage="typescript"
@@ -17,25 +20,25 @@ export default function GeneralComponentPropsCard(props: any) {
               (renderOptions) =&gt; ReactNode
             </span>
           ),
-          desc: 'Customize rendering logic',
+          desc: t('desc.render'),
           default: '',
         },
         {
           attr: 'skipCompWrap',
           type: <span className="badge text-bg-secondary">boolean</span>,
-          desc: 'Skip component wrapper',
+          desc: t('desc.skipCompWrap'),
           default: '',
         },
         {
           attr: 'dropOldClass',
           type: <span className="badge text-bg-secondary">boolean</span>,
-          desc: 'Clear original class names',
+          desc: t('desc.dropOldClass'),
           default: '',
         },
         {
           attr: 'variables',
           type: <span className="badge text-bg-secondary">object</span>,
-          desc: 'Style variables',
+          desc: t('desc.variables'),
           default: '',
         },
       ]}
@@ -47,12 +50,10 @@ export default function GeneralComponentPropsCard(props: any) {
           <div className="d-flex flex-column gap-2">
             <div className="d-flex flex-column gap-2">
               <div>
-                The use of the render and skipCompWrap properties isn't very
-                meaningful.
+                <Trans t={t} i18nKey="p1"></Trans>
               </div>
               <div>
-                Just think about it, the purpose of using a component library is
-                to simplify development, not to rewrite components.
+                <Trans t={t} i18nKey="p2"></Trans>
               </div>
             </div>
 
@@ -60,17 +61,13 @@ export default function GeneralComponentPropsCard(props: any) {
 
             <div className="d-flex flex-column gap-2">
               <div>
-                On the other hand, the dropOldClass and variables properties are
-                more practical.
+                <Trans t={t} i18nKey="p3"></Trans>
               </div>
               <div>
-                The dropOldClass property can remove the base class names. For
-                example, &lt;Button className="btn btn-info"&gt; would be
-                modified to &lt;Button className="btn-info"&gt;.
+                <Trans t={t} i18nKey="p4"></Trans>
               </div>
               <div>
-                Meanwhile, the variables property allows us to customize CSS
-                variables, enhancing the flexibility of styles.
+                <Trans t={t} i18nKey="p5"></Trans>
               </div>
             </div>
           </div>

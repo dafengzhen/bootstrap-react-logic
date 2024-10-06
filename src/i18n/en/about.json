@@ -1,0 +1,8 @@
+{
+  "other": "Other",
+  "p1": "In the table, \"-\" represents an undefined value.",
+  "p2": "In the table, \"...\" indicates that there are other common properties or events. For more details, you can refer to the React JSX type hints.",
+  "p3": "If the component properties above do not achieve the desired effect, you can use a combination of <0>className</0>, <1>style</1>, <2>slot</2>, and custom JS logic to accomplish it.",
+  "p4": "If the use case requires a high level of complexity, you might consider forking a copy, rebuilding it, or looking for a better third-party library or alternative solution.",
+  "p5": "If you have a better implementation approach or other questions, feel free to submit an <0>issue</0>."
+}

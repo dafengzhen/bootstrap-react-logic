@@ -10,6 +10,7 @@ import ButtonGroupPage from '@pages/button-group-page.tsx';
 import InputPage from '@pages/input-page.tsx';
 import InputGroupPage from '@pages/input-group-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
+import '@src/i18n';
 
 const router = createBrowserRouter([
   {

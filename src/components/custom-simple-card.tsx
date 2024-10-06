@@ -1,7 +1,8 @@
-import { CSSProperties, type ReactNode, useContext } from 'react';
+import { type CSSProperties, type ReactNode, useContext } from 'react';
 import clsx from 'clsx';
 import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import { GlobalContext } from '@contexts/global-context.ts';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const onClickClipboard = (code?: string) => {
@@ -37,6 +38,13 @@ const onClickFullscreen = (fullscreenState: any) => {
   }
 };
 
+const onClickLayout = (layoutState: any) => {
+  if (layoutState !== undefined) {
+    const layout = layoutState[0];
+    layoutState[1](layout === 'center' ? 'fullscreen' : 'center');
+  }
+};
+
 const onClickTheme = (themeState: any) => {
   if (themeState !== undefined) {
     const setTheme = themeState[1];
@@ -44,6 +52,11 @@ const onClickTheme = (themeState: any) => {
     setTheme(value);
     document.documentElement.setAttribute('data-bs-theme', value);
   }
+};
+
+const onClickLanguage = (i18n: any) => {
+  const language = i18n.language;
+  i18n.changeLanguage(language === 'en' ? 'zh' : 'en');
 };
 
 const CustomSimpleCard = ({
@@ -66,8 +79,12 @@ const CustomSimpleCard = ({
   const globalContext = useContext(GlobalContext);
   const fullscreenState = globalContext.fullscreen;
   const fullscreen = fullscreenState?.[0];
+  const layoutState = globalContext.layout;
+  const center = layoutState?.[0] === 'center';
   const themeState = globalContext.theme;
   const dark = themeState?.[0] === 'dark';
+  const { i18n } = useTranslation();
+  const language = i18n.language;
 
   return (
     <div className="card">
@@ -78,6 +95,7 @@ const CustomSimpleCard = ({
           </div>
           <div className="d-flex gap-2">
             <i
+              title="Code"
               className={clsx(
                 'bi tw-cursor-pointer',
                 isOpen ? 'bi-code-slash text-primary' : 'bi-code',
@@ -85,10 +103,12 @@ const CustomSimpleCard = ({
               onClick={toggleCode}
             ></i>
             <i
+              title="Clipboard"
               className="bi bi-clipboard2 tw-cursor-pointer"
               onClick={() => onClickClipboard(code)}
             ></i>
             <i
+              title="Full / Full Exit"
               className={clsx(
                 'bi tw-cursor-pointer',
                 fullscreen
@@ -97,19 +117,41 @@ const CustomSimpleCard = ({
               )}
               onClick={() => onClickFullscreen(fullscreenState)}
             ></i>
+            <i
+              title="Center / Full"
+              className={clsx(
+                'bi tw-cursor-pointer',
+                center
+                  ? 'bi-fullscreen-exit text-primary'
+                  : 'bi-arrows-fullscreen',
+              )}
+              onClick={() => onClickLayout(layoutState)}
+            ></i>
 
             <i
+              title="Light / Dark"
               className={clsx(
                 'bi tw-cursor-pointer',
                 dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high',
               )}
               onClick={() => onClickTheme(themeState)}
             ></i>
+
+            <i
+              title="En / Zh"
+              className={clsx(
+                'bi tw-cursor-pointer',
+                language !== 'en'
+                  ? 'bi-translate text-primary'
+                  : 'bi-translate',
+              )}
+              onClick={() => onClickLanguage(i18n)}
+            ></i>
           </div>
         </div>
       </div>
       <div className="card-body">{children}</div>
-      <div className={clsx('card-footer', { 'd-none': !isOpen })}>
+      <div className={clsx('card-footer', !isOpen && 'd-none')}>
         <pre>
           <code
             className={clsx(
@@ -166,8 +208,12 @@ const ComponentProps = ({
   const globalContext = useContext(GlobalContext);
   const fullscreenState = globalContext.fullscreen;
   const fullscreen = fullscreenState?.[0];
+  const layoutState = globalContext.layout;
+  const center = layoutState?.[0] === 'center';
   const themeState = globalContext.theme;
   const dark = themeState?.[0] === 'dark';
+  const { i18n } = useTranslation();
+  const language = i18n.language;
 
   return (
     <div className="card">
@@ -182,6 +228,7 @@ const ComponentProps = ({
               </div>
               <div className="d-flex gap-2">
                 <i
+                  title="Code"
                   className={clsx(
                     'bi tw-cursor-pointer',
                     isOpen ? 'bi-code-slash text-primary' : 'bi-code',
@@ -189,10 +236,12 @@ const ComponentProps = ({
                   onClick={toggleCode}
                 ></i>
                 <i
+                  title="Clipboard"
                   className="bi bi-clipboard2 tw-cursor-pointer"
                   onClick={() => onClickClipboard(code)}
                 ></i>
                 <i
+                  title="Full / Full Exit"
                   className={clsx(
                     'bi tw-cursor-pointer',
                     fullscreen
@@ -201,8 +250,19 @@ const ComponentProps = ({
                   )}
                   onClick={() => onClickFullscreen(fullscreenState)}
                 ></i>
+                <i
+                  title="Center / Full"
+                  className={clsx(
+                    'bi tw-cursor-pointer',
+                    center
+                      ? 'bi-fullscreen-exit text-primary'
+                      : 'bi-arrows-fullscreen',
+                  )}
+                  onClick={() => onClickLayout(layoutState)}
+                ></i>
 
                 <i
+                  title="Light / Dark"
                   className={clsx(
                     'bi tw-cursor-pointer',
                     dark
@@ -210,6 +270,17 @@ const ComponentProps = ({
                       : 'bi-brightness-high',
                   )}
                   onClick={() => onClickTheme(themeState)}
+                ></i>
+
+                <i
+                  title="En / Zh"
+                  className={clsx(
+                    'bi tw-cursor-pointer',
+                    language !== 'en'
+                      ? 'bi-translate text-primary'
+                      : 'bi-translate',
+                  )}
+                  onClick={() => onClickLanguage(i18n)}
                 ></i>
               </div>
             </div>

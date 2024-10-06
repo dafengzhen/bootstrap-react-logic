@@ -1,0 +1,14 @@
+{
+  "genericComponentProps": "通用组件属性",
+  "desc": {
+    "render": "自定义渲染子元素",
+    "skipCompWrap": "跳过组件包装",
+    "dropOldClass": "移除基础类名",
+    "variables": "自定义 CSS 变量"
+  },
+  "p1": "render 和 skipCompWrap 这两个属性的使用意义不大",
+  "p2": "想象一下，我们使用组件库的目的是为了简化开发，而不是重新编写组件",
+  "p3": "dropOldClass 和 variables 属性则更加实用",
+  "p4": "dropOldClass 属性可以移除基础类名，例如 <Button className=\"btn btn-info\">; 会修改为 <Button className=\"btn-info\">",
+  "p5": "而 variables 属性允许我们自定义 CSS 变量，提升样式的灵活性"
+}
