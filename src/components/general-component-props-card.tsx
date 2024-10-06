@@ -4,7 +4,7 @@ import CustomSimpleCard from '@components/custom-simple-card.tsx';
 export default function GeneralComponentPropsCard(props: any) {
   return (
     <CustomSimpleCard.ComponentProps
-      title="通用组件属性"
+      title="Generic Component Props"
       hash="generalComponentProps"
       customBody
       codeLanguage="typescript"
@@ -40,35 +40,37 @@ export default function GeneralComponentPropsCard(props: any) {
         },
       ]}
       customCaption={
-        <div className="card mt-4">
-          <div className="card-footer border-top-0 text-secondary">
-            <div className="px-2 py-2 lh-lg">
-              <div className="d-flex gap-2">
-                <div>
-                  <i className="bi bi-info-circle"></i>
-                </div>
-                <div className="d-flex flex-column gap-2">
-                  <div className="d-flex flex-column gap-2">
-                    <div>render 和 skipCompWrap 这两个属性的使用意义不大</div>
-                    <div>
-                      想象一下，我们使用组件库的目的是为了简化开发，而不是重新编写组件
-                    </div>
-                  </div>
+        <div className="d-flex gap-2">
+          <div>
+            <i className="bi bi-info-circle text-info"></i>
+          </div>
+          <div className="d-flex flex-column gap-2">
+            <div className="d-flex flex-column gap-2">
+              <div>
+                The use of the render and skipCompWrap properties isn't very
+                meaningful.
+              </div>
+              <div>
+                Just think about it, the purpose of using a component library is
+                to simplify development, not to rewrite components.
+              </div>
+            </div>
 
-                  <hr className="w-50" />
+            <hr className="w-50" />
 
-                  <div className="d-flex flex-column gap-2">
-                    <div>dropOldClass 和 variables 属性则更加实用</div>
-                    <div>
-                      dropOldClass 属性可以移除基础类名，例如 &lt;Button
-                      className="btn btn-info"&gt; 会修改为 &lt;Button
-                      className="btn-info"&gt;
-                    </div>
-                    <div>
-                      而 variables 属性允许我们自定义 CSS 变量，提升样式的灵活性
-                    </div>
-                  </div>
-                </div>
+            <div className="d-flex flex-column gap-2">
+              <div>
+                On the other hand, the dropOldClass and variables properties are
+                more practical.
+              </div>
+              <div>
+                The dropOldClass property can remove the base class names. For
+                example, &lt;Button className="btn btn-info"&gt; would be
+                modified to &lt;Button className="btn-info"&gt;.
+              </div>
+              <div>
+                Meanwhile, the variables property allows us to customize CSS
+                variables, enhancing the flexibility of styles.
               </div>
             </div>
           </div>

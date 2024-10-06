@@ -228,7 +228,15 @@ const ComponentProps = ({
                   <col style={colgroup.desc} />
                   <col style={colgroup.default} />
                 </colgroup>
-                {customCaption && <caption>{customCaption}</caption>}
+                {customCaption && (
+                  <caption>
+                    <div className="card mt-4">
+                      <div className="card-footer border-top-0 text-secondary">
+                        <div className="px-2 py-2 lh-lg">{customCaption}</div>
+                      </div>
+                    </div>
+                  </caption>
+                )}
                 <thead>
                   <tr>
                     <th scope="col">Attr</th>

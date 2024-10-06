@@ -4,36 +4,40 @@ export default function AboutComponent() {
   return (
     <div className="card">
       <div className="card-header">
-        <CustomSimpleCardLink title="其他" hash="other" />
+        <CustomSimpleCardLink title="Other" hash="other" />
       </div>
       <div className="card-body">
         <div>
-          <p className="small">表格中的 "-" 代表着未定义该值</p>
           <p className="small">
-            表格中的 "..." 代表着还有其他通用属性或事件，具体可以参考 React JSX
-            的类型提示
-          </p>
-          <p
-            className="small"
-            dangerouslySetInnerHTML={{
-              __html: `如果上述组件属性无法达到你想要的效果，可以结合使用
-            <code>className</code>、<code>style</code>、<code>render</code> 自定义 JS
-            逻辑来完成`,
-            }}
-          ></p>
-          <p className="small">
-            如果用例是需要高度复杂的，则可以考虑 Fork
-            一份，重新构建或者寻找更好的第三方库或其他方案
+            In the table, "-" represents an undefined value.
           </p>
           <p className="small">
-            如果有更好的实现方式或者其他问题，欢迎提交
+            In the table, "..." indicates that there are other common properties
+            or events. For more details, you can refer to the React JSX type
+            hints.
+          </p>
+          <p className="small">
+            If the component properties above do not achieve the desired effect,
+            you can use a combination of <code>className</code>,{' '}
+            <code>style</code>, <code>slot</code>, and custom JS logic to
+            accomplish it.
+          </p>
+          <p className="small">
+            If the use case requires a high level of complexity, you might
+            consider forking a copy, rebuilding it, or looking for a better
+            third-party library or alternative solution.
+          </p>
+          <p className="small">
+            If you have a better implementation approach or other questions,
+            feel free to submit an{' '}
             <a
               href="https://github.com/dafengzhen/bootstrap-react-logic/issues"
               target="_blank"
               className="small"
             >
-              &nbsp;issues
+              issue
             </a>
+            .
           </p>
         </div>
       </div>

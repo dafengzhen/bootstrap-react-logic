@@ -10,6 +10,7 @@ import selectComponentPropsCodes from '@assets/codes/select/component-props';
 import { Select, SelectOption } from '@lib/select';
 import { SelectMultiple } from '@lib/select-multiple';
 import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 
 interface IStates {
   select: {
@@ -460,6 +461,8 @@ export default function SelectPage() {
         </div>
       </CustomSimpleCard>
 
+      <PropsIndicator />
+
       <CustomSimpleCard.ComponentProps
         title="Select 组件属性"
         hash="selectComponentProps"
@@ -475,12 +478,6 @@ export default function SelectPage() {
           )
         }
         items={[
-          {
-            attr: 'as',
-            type: <span className="badge text-bg-secondary">select</span>,
-            desc: '',
-            default: 'select',
-          },
           {
             attr: 'size',
             type: <span className="badge text-bg-secondary">lg | sm</span>,
@@ -522,12 +519,6 @@ export default function SelectPage() {
         }
         items={[
           {
-            attr: 'as',
-            type: <span className="badge text-bg-secondary">option</span>,
-            desc: '',
-            default: 'option',
-          },
-          {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
             desc: '',
@@ -553,12 +544,6 @@ export default function SelectPage() {
           )
         }
         items={[
-          {
-            attr: 'as',
-            type: <span className="badge text-bg-secondary">div</span>,
-            desc: '',
-            default: 'div',
-          },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
