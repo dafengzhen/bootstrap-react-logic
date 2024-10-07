@@ -1,23 +1,20 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { InputGroupProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   InputVariablesEnum,
-  type IntrinsicElements,
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 import InputGroupText from './input-group-text.tsx';
 
 const InputGroup = function InputGroup<T extends ElementType = 'div'>(
-  props: Props<T>,
+  props: InputGroupProps<T>,
 ) {
   const {
     as: Component = 'div',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
@@ -55,17 +52,9 @@ const InputGroup = function InputGroup<T extends ElementType = 'div'>(
     );
   }, [dropOldClass, nowrap, size, className, variables, style]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
-
   return (
-    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

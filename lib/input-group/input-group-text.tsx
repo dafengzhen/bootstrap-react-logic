@@ -1,11 +1,10 @@
 import { type ElementType, useMemo } from 'react';
-import { InputGroupTextElementProps, InputGroupTextProps } from './types.ts';
+import type { InputGroupTextProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   InputVariablesEnum,
-  type IntrinsicElements,
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
@@ -15,8 +14,6 @@ const InputGroupText = function InputGroupText<T extends ElementType = 'span'>(
 ) {
   const {
     as: Component = 'span',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
@@ -50,20 +47,9 @@ const InputGroupText = function InputGroupText<T extends ElementType = 'span'>(
     );
   }, [dropOldClass, className, variables, style]);
 
-  if (render && skipCompWrap) {
-    return render({
-      ...rest,
-      ...renderOptions,
-    } as InputGroupTextElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as InputGroupTextElementProps<T>)
-    : children;
-
   return (
-    <Component {...(rest as IntrinsicElements['span'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

@@ -1,5 +1,5 @@
 import {
-  ChangeEvent,
+  type ChangeEvent,
   type ElementType,
   type KeyboardEvent,
   useCallback,
@@ -8,14 +8,13 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { InputOtpProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   generateRandomId,
   InputVariablesEnum,
-  type IntrinsicElements,
   isArray,
   isValueValid,
   mergeProps,
@@ -29,15 +28,12 @@ interface IOtp {
 }
 
 const InputOtp = function InputOtp<T extends ElementType = 'div'>(
-  props: Props<T>,
+  props: InputOtpProps<T>,
 ) {
   const {
     as: Component = 'div',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
-    children,
     className,
     style,
     length = 4,
@@ -114,7 +110,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
   );
 
   const handleKeyDown = useCallback(
-    (index: number, e: KeyboardEvent<IntrinsicElements['input']>) => {
+    (index: number, e: KeyboardEvent<HTMLInputElement>) => {
       const key = e.key;
       if (key === 'Backspace' && !otp[index].value && index > 0) {
         focusInput(index - 1);
@@ -138,59 +134,47 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
     [otp],
   );
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : (children ?? (
-        <>
-          {otp.map((item, index) => {
-            const onRef = (instance: HTMLInputElement | null | undefined) =>
-              otpRefs.current.set(item.id, instance);
-            const onChange = (e: ChangeEvent<IntrinsicElements['input']>) =>
-              handleChange(index, e.target.value as string);
-            const onKeyDown = (e: KeyboardEvent<IntrinsicElements['input']>) =>
-              handleKeyDown(index, e);
-            const onFocus = () => handleFocus(index);
-
-            /* eslint-disable @typescript-eslint/no-explicit-any */
-            const _inputProps = inputProps as any;
-
-            return (
-              <Input
-                maxLength={1}
-                className="text-center"
-                {...mergeProps(_inputProps, {
-                  onRef: (instance: HTMLInputElement | null | undefined) => {
-                    onRef(instance);
-                    _inputProps?.onRef?.(instance);
-                  },
-                  onChange: (e: ChangeEvent<IntrinsicElements['input']>) => {
-                    onChange(e);
-                    _inputProps?.onChange?.(e);
-                  },
-                  onKeyDown: (e: KeyboardEvent<IntrinsicElements['input']>) => {
-                    onKeyDown(e);
-                    _inputProps?.onKeyDown?.(e);
-                  },
-                  onFocus: () => {
-                    onFocus();
-                    _inputProps?.onFocus?.();
-                  },
-                })}
-                key={item.id}
-                value={item.value}
-              />
-            );
-          })}
-        </>
-      ));
-
   return (
-    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {otp.map((item, index) => {
+        const onRef = (instance: HTMLInputElement | null | undefined) =>
+          otpRefs.current.set(item.id, instance);
+        const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+          handleChange(index, e.target.value as string);
+        const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) =>
+          handleKeyDown(index, e);
+        const onFocus = () => handleFocus(index);
+
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const _inputProps = inputProps as any;
+
+        return (
+          <Input
+            maxLength={1}
+            className="text-center"
+            {...mergeProps(_inputProps, {
+              onRef: (instance: HTMLInputElement | null | undefined) => {
+                onRef(instance);
+                _inputProps?.onRef?.(instance);
+              },
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                onChange(e);
+                _inputProps?.onChange?.(e);
+              },
+              onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
+                onKeyDown(e);
+                _inputProps?.onKeyDown?.(e);
+              },
+              onFocus: () => {
+                onFocus();
+                _inputProps?.onFocus?.();
+              },
+            })}
+            key={item.id}
+            value={item.value}
+          />
+        );
+      })}
     </Component>
   );
 };

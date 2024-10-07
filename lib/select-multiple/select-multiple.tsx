@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import type { ElementProps, IOption, Props } from './types.ts';
+import type { IOption, SelectMultipleProps } from './types.ts';
 import {
   clsxUnique,
   clsxWithOptions,
@@ -14,7 +14,6 @@ import {
   filterOptions,
   groupByProperty,
   InputVariablesEnum,
-  type IntrinsicElements,
   isDefined,
   isValueValid,
   pickObjectProperties,
@@ -32,17 +31,14 @@ import {
 import selectMultipleStyles from './select-multiple.module.scss';
 
 const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
-  props: Props<T>,
+  props: SelectMultipleProps<T>,
 ) {
   const {
     as: Component = 'div',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
     style,
-    children,
     disabled,
     single,
     hideActiveOptions,
@@ -175,10 +171,6 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
     );
   }, [getActiveOptions, onChange]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
   const slotClassName = processSlotClasses(noParamContentClasses, {
     mainContainer: clsxWithOptions(
       null,
@@ -208,159 +200,142 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
     bottomDivider: 'dropdown-divider',
   });
 
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : (children ?? (
-        <>
-          <div
-            data-slot-main-container=""
-            className={slotClassName.mainContainer}
-          >
-            <div
-              data-slot-options-container=""
-              className={slotClassName.optionsContainer}
-            >
-              {placeholder && getActiveOptions.length === 0 ? (
-                <div
-                  data-slot-placeholder=""
-                  className={slotClassName.placeholder}
-                >
-                  {placeholder}
-                </div>
-              ) : (
-                getActiveOptions.map((item) => {
-                  return (
-                    <div
-                      data-slot-active-option=""
-                      key={item.id}
-                      className={slotClassName.activeOption}
-                    >
-                      {item.label}
-                      <i
-                        data-slot-clear-icon=""
-                        tabIndex={-1}
-                        className={slotClassName.clearIcon}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onClickClearOption(item);
-                        }}
-                      ></i>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-
-            {typeof selectableCount === 'number' && (
-              <div
-                data-slot-count-display=""
-                className={slotClassName.countDisplay}
-              >{`${getActiveOptionsLength} / ${selectableCount}`}</div>
-            )}
-          </div>
-
-          {isOpen && (
-            <FloatingPortal>
-              <ul
-                data-slot-floating-menu=""
-                ref={refs.setFloating}
-                {...getFloatingProps()}
-                className={slotClassName.floatingMenu}
-                style={floatingStyles}
-              >
-                {getOptionsByHeader.keys.map((key) => {
-                  return (
-                    <Fragment key={key}>
-                      {showGroupFlag && (
-                        <li key={key}>
-                          <h6
-                            data-slot-header=""
-                            className={slotClassName.header}
-                          >
-                            {key}
-                          </h6>
-                        </li>
-                      )}
-
-                      {getOptionsByHeader.groupedData[key].map(
-                        ({ item, index }) => {
-                          const paramSlotClassName = processSlotClasses(
-                            paramContentClasses,
-                            {
-                              optionItem: clsxWithOptions(
-                                null,
-                                item.active &&
-                                  hideActiveOptions &&
-                                  'visually-hidden',
-                              ),
-                              selectButton: clsxWithOptions(
-                                null,
-                                'dropdown-item',
-                                item.active && 'active',
-                                (item.disabled ||
-                                  selectableCount === getActiveOptionsLength) &&
-                                  'disabled',
-                              ),
-                            },
-                          );
-
-                          return (
-                            <Fragment key={item.id}>
-                              {item.divider === 'top' && (
-                                <li>
-                                  <hr
-                                    data-slot-top-divider=""
-                                    className={slotClassName.topDivider}
-                                  />
-                                </li>
-                              )}
-
-                              <li
-                                data-slot-option-item=""
-                                className={paramSlotClassName.optionItem}
-                              >
-                                <button
-                                  data-slot-select-button=""
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    onClickSelectOption(index);
-                                  }}
-                                  className={paramSlotClassName.selectButton}
-                                  type="button"
-                                >
-                                  {item.label}
-                                </button>
-                              </li>
-
-                              {item.divider === 'bottom' && (
-                                <li>
-                                  <hr
-                                    data-slot-bottom-divider=""
-                                    className={slotClassName.bottomDivider}
-                                  />
-                                </li>
-                              )}
-                            </Fragment>
-                          );
-                        },
-                      )}
-                    </Fragment>
-                  );
-                })}
-              </ul>
-            </FloatingPortal>
-          )}
-        </>
-      ));
-
   return (
     <Component
       {...getReferenceProps()}
-      {...(rest as IntrinsicElements['div'])}
+      {...rest}
       {...renderOptions}
       ref={refs.setReference}
     >
-      {renderContent}
+      <div data-slot-main-container="" className={slotClassName.mainContainer}>
+        <div
+          data-slot-options-container=""
+          className={slotClassName.optionsContainer}
+        >
+          {placeholder && getActiveOptions.length === 0 ? (
+            <div data-slot-placeholder="" className={slotClassName.placeholder}>
+              {placeholder}
+            </div>
+          ) : (
+            getActiveOptions.map((item) => {
+              return (
+                <div
+                  data-slot-active-option=""
+                  key={item.id}
+                  className={slotClassName.activeOption}
+                >
+                  {item.label}
+                  <i
+                    data-slot-clear-icon=""
+                    tabIndex={-1}
+                    className={slotClassName.clearIcon}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClickClearOption(item);
+                    }}
+                  ></i>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {typeof selectableCount === 'number' && (
+          <div
+            data-slot-count-display=""
+            className={slotClassName.countDisplay}
+          >{`${getActiveOptionsLength} / ${selectableCount}`}</div>
+        )}
+      </div>
+
+      {isOpen && (
+        <FloatingPortal>
+          <ul
+            data-slot-floating-menu=""
+            ref={refs.setFloating}
+            {...getFloatingProps()}
+            className={slotClassName.floatingMenu}
+            style={floatingStyles}
+          >
+            {getOptionsByHeader.keys.map((key) => {
+              return (
+                <Fragment key={key}>
+                  {showGroupFlag && (
+                    <li key={key}>
+                      <h6 data-slot-header="" className={slotClassName.header}>
+                        {key}
+                      </h6>
+                    </li>
+                  )}
+
+                  {getOptionsByHeader.groupedData[key].map(
+                    ({ item, index }) => {
+                      const paramSlotClassName = processSlotClasses(
+                        paramContentClasses,
+                        {
+                          optionItem: clsxWithOptions(
+                            null,
+                            item.active &&
+                              hideActiveOptions &&
+                              'visually-hidden',
+                          ),
+                          selectButton: clsxWithOptions(
+                            null,
+                            'dropdown-item',
+                            item.active && 'active',
+                            (item.disabled ||
+                              selectableCount === getActiveOptionsLength) &&
+                              'disabled',
+                          ),
+                        },
+                      );
+
+                      return (
+                        <Fragment key={item.id}>
+                          {item.divider === 'top' && (
+                            <li>
+                              <hr
+                                data-slot-top-divider=""
+                                className={slotClassName.topDivider}
+                              />
+                            </li>
+                          )}
+
+                          <li
+                            data-slot-option-item=""
+                            className={paramSlotClassName.optionItem}
+                          >
+                            <button
+                              data-slot-select-button=""
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onClickSelectOption(index);
+                              }}
+                              className={paramSlotClassName.selectButton}
+                              type="button"
+                            >
+                              {item.label}
+                            </button>
+                          </li>
+
+                          {item.divider === 'bottom' && (
+                            <li>
+                              <hr
+                                data-slot-bottom-divider=""
+                                className={slotClassName.bottomDivider}
+                              />
+                            </li>
+                          )}
+                        </Fragment>
+                      );
+                    },
+                  )}
+                </Fragment>
+              );
+            })}
+          </ul>
+        </FloatingPortal>
+      )}
     </Component>
   );
 };

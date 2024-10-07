@@ -5,9 +5,12 @@ import { useNavigation } from 'react-router-dom';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
 import type { NestedKeys } from '@src/types';
 import CustomSimpleCard from '@src/components/custom-simple-card';
-import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import AboutComponent from '@components/about-component.tsx';
 import { updateState } from '@src/tools';
+import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
+import selectComponentPropsCodes from '@assets/codes/select/component-props.ts';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { useTranslation } from 'react-i18next';
 
 interface IStates {
   button: {
@@ -58,9 +61,24 @@ interface IStates {
   };
 }
 
+interface IComponentPropsStates {
+  button: {
+    buttonComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    generalComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+  };
+}
+
 export default function ButtonPage() {
   useHighlightCode();
   const navigation = useNavigation();
+  const { t: tButtonComponentProps } = useTranslation(['buttonComponentProps']);
+  const { t: tButtonPage } = useTranslation(['buttonPage']);
 
   const [states, setStates] = useState<IStates>({
     button: {
@@ -110,6 +128,19 @@ export default function ButtonPage() {
       },
     },
   });
+  const [componentPropsStates, setComponentPropsStates] =
+    useState<IComponentPropsStates>({
+      button: {
+        buttonComponentProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.selectComponentProps.code.trim(),
+        },
+        generalComponentProps: {
+          openCode: false,
+          code: selectComponentPropsCodes.generalComponentProps.code.trim(),
+        },
+      },
+    });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -133,6 +164,13 @@ export default function ButtonPage() {
   ) {
     updateState(setStates, k, v, c);
   }
+  function onClickUpdateComponentPropsState(
+    k: NestedKeys<IComponentPropsStates>,
+    v: unknown,
+    c?: () => void,
+  ) {
+    updateState(setComponentPropsStates, k, v, c);
+  }
 
   function onClickChangeSizeTest() {
     setMySize(mySize === 'sm' ? 'lg' : 'sm');
@@ -145,7 +183,7 @@ export default function ButtonPage() {
   return (
     <div className="d-flex flex-column gap-3">
       <CustomSimpleCard
-        title="变体"
+        title={tButtonPage('variant')}
         hash="variant"
         isOpen={states.button.variant.openCode}
         toggleCode={() =>
@@ -170,7 +208,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="轮廓"
+        title={tButtonPage('outline')}
         hash="outline"
         isOpen={states.button.outline.openCode}
         toggleCode={() =>
@@ -194,7 +232,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="圆形"
+        title={tButtonPage('rounded')}
         hash="rounded"
         isOpen={states.button.rounded.openCode}
         toggleCode={() =>
@@ -234,7 +272,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="大小"
+        title={tButtonPage('size')}
         hash="size"
         isOpen={states.button.size.openCode}
         toggleCode={() =>
@@ -272,7 +310,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="禁止状态"
+        title={tButtonPage('disabledState')}
         hash="disabledState"
         isOpen={states.button.disabledState.openCode}
         toggleCode={() =>
@@ -303,7 +341,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="块状按钮"
+        title={tButtonPage('blockButton')}
         hash="blockButton"
         isOpen={states.button.blockButton.openCode}
         toggleCode={() =>
@@ -333,7 +371,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="切换状态"
+        title={tButtonPage('toggleState')}
         hash="toggleState"
         isOpen={states.button.toggleState.openCode}
         toggleCode={() =>
@@ -369,7 +407,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="加载状态"
+        title={tButtonPage('isLoading')}
         hash="isLoading"
         isOpen={states.button.isLoading.openCode}
         toggleCode={() =>
@@ -391,7 +429,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="图标"
+        title={tButtonPage('icon')}
         hash="icon"
         isOpen={states.button.icon.openCode}
         toggleCode={() =>
@@ -418,15 +456,11 @@ export default function ButtonPage() {
           <Button variant="success">
             <i className="bi bi-arrow-left"></i>
           </Button>
-          <Button
-            variant="success"
-            render={() => <i className="bi bi-arrow-right"></i>}
-          ></Button>
         </div>
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="自定义样式"
+        title={tButtonPage('customStyle')}
         hash="customStyle"
         isOpen={states.button.customStyle.openCode}
         toggleCode={() =>
@@ -445,7 +479,7 @@ export default function ButtonPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="示例"
+        title={tButtonPage('example')}
         hash="example"
         isOpen={states.button.example.openCode}
         toggleCode={() =>
@@ -470,246 +504,122 @@ export default function ButtonPage() {
         </div>
       </CustomSimpleCard>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink title="组件属性" hash="componentProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">button | a</span>
-                  </td>
-                  <td></td>
-                  <td>button</td>
-                </tr>
-                <tr>
-                  <td>render</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      (renderOptions) =&gt; ReactNode
-                    </span>
-                  </td>
-                  <td>Customize rendering logic</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>skipCompWrap</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Skip component wrapper</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>dropOldClass</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>variables</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td>Style variables</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>variant</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      primary | secondary | success | info | warning | danger |
-                      light | dark | link
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>outline</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      primary | secondary | success | info | warning | danger |
-                      light | dark | link
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>active</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>isLoading</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>
-                    <span className="badge text-bg-secondary">lg | sm</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>rounded</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      none | sm | md | lg | xl | xxl
-                    </span>
-                    <span className="badge text-bg-secondary ms-1">
-                      boolean
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>startContent</td>
-                  <td>
-                    <span className="badge text-bg-secondary">ReactNode</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>endContent</td>
-                  <td>
-                    <span className="badge text-bg-secondary">ReactNode</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用属性" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>className</td>
-                  <td>
-                    <span className="badge text-bg-secondary">string</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>style</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用事件" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>onClick</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      MouseEventHandler
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <PropsIndicator />
+
+      <CustomSimpleCard.ComponentProps
+        title="Button"
+        hash="buttonComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.button.buttonComponentProps.openCode}
+        code={componentPropsStates.button.buttonComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'button.buttonComponentProps.openCode',
+            !componentPropsStates.button.buttonComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'variant',
+            type: (
+              <div className="d-flex flex-column">
+                {[
+                  'primary',
+                  'secondary',
+                  'success',
+                  'info',
+                  'warning',
+                  'danger',
+                  'light',
+                  'dark',
+                  'link',
+                ].map((item) => {
+                  return (
+                    <div key={item}>
+                      <span className="badge text-bg-secondary">{item}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ),
+            desc: tButtonComponentProps('desc.variant'),
+            default: '',
+          },
+          {
+            attr: 'outline',
+            type: (
+              <span>
+                Reference <span className="fw-bold">variant</span>
+              </span>
+            ),
+            desc: tButtonComponentProps('desc.outline'),
+            default: '',
+          },
+          {
+            attr: 'disabled',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonComponentProps('desc.disabled'),
+            default: '',
+          },
+          {
+            attr: 'active',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonComponentProps('desc.active'),
+            default: '',
+          },
+          {
+            attr: 'isLoading',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonComponentProps('desc.isLoading'),
+            default: '',
+          },
+          {
+            attr: 'size',
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
+            desc: tButtonComponentProps('desc.size'),
+            default: '',
+          },
+          {
+            attr: 'rounded',
+            type: (
+              <>
+                <span className="badge text-bg-secondary">
+                  xs | sm | md | lg | xl | xxl | circle | pill
+                </span>
+                <span className="badge text-bg-secondary ms-1">boolean</span>
+              </>
+            ),
+            desc: tButtonComponentProps('desc.rounded'),
+            default: '',
+          },
+          {
+            attr: 'startContent',
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tButtonComponentProps('desc.startContent'),
+            default: '',
+          },
+          {
+            attr: 'endContent',
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tButtonComponentProps('desc.endContent'),
+            default: '',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
+
+      <GeneralComponentPropsCard
+        colgroup={colgroup}
+        isOpen={componentPropsStates.button.generalComponentProps.openCode}
+        code={componentPropsStates.button.generalComponentProps.code}
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'button.generalComponentProps.openCode',
+            !componentPropsStates.button.generalComponentProps.openCode,
+          )
+        }
+      ></GeneralComponentPropsCard>
 
       <AboutComponent />
     </div>

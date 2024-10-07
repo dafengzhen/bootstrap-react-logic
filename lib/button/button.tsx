@@ -1,17 +1,16 @@
 import { type CSSProperties, type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
 import {
   ButtonVariableEnum,
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   getValue,
-  type IntrinsicElements,
   isValueValid,
   mapAndFilterStyles,
   RoundedClassEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
+import type { ButtonProps } from './types.ts';
 
 function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   if (key !== undefined) {
@@ -23,14 +22,12 @@ function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   }
 }
 
-const Button = function Button<T extends ElementType = 'button'>(
-  props: Props<T>,
+const Button = function Button<T extends ElementType = 'button' | 'a'>(
+  props: ButtonProps<T>,
 ) {
   const {
     as: Component = 'button',
     dropOldClass,
-    render,
-    skipCompWrap,
     children,
     className,
     style,
@@ -129,14 +126,8 @@ const Button = function Button<T extends ElementType = 'button'>(
     variant,
   ]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render ? (
-    render({ ...rest, ...renderOptions } as ElementProps<T>)
-  ) : (
-    <>
+  return (
+    <Component {...rest} {...renderOptions}>
       {isLoading && !startContent && (
         <>
           <span
@@ -151,12 +142,6 @@ const Button = function Button<T extends ElementType = 'button'>(
       {startContent && startContent}
       {children}
       {endContent && endContent}
-    </>
-  );
-
-  return (
-    <Component {...(rest as IntrinsicElements['button'])} {...renderOptions}>
-      {renderContent}
     </Component>
   );
 };

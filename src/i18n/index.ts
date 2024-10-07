@@ -14,6 +14,10 @@ import selectComponentPropsEn from './en/component/select-component-props.json';
 import selectComponentPropsZh from './zh/component/select-component-props.json';
 import selectPageEn from './en/component/select-page.json';
 import selectPageZh from './zh/component/select-page.json';
+import buttonComponentPropsEn from './en/component/button-component-props.json';
+import buttonComponentPropsZh from './zh/component/button-component-props.json';
+import buttonPageEn from './en/component/button-page.json';
+import buttonPageZh from './zh/component/button-page.json';
 
 const resources = {
   en: {
@@ -24,6 +28,8 @@ const resources = {
     selectOptionComponentProps: selectOptionComponentPropsEn,
     selectComponentProps: selectComponentPropsEn,
     selectPage: selectPageEn,
+    buttonComponentProps: buttonComponentPropsEn,
+    buttonPage: buttonPageEn,
   },
   zh: {
     index: indexEn,
@@ -33,6 +39,8 @@ const resources = {
     selectOptionComponentProps: selectOptionComponentPropsZh,
     selectComponentProps: selectComponentPropsZh,
     selectPage: selectPageZh,
+    buttonComponentProps: buttonComponentPropsZh,
+    buttonPage: buttonPageZh,
   },
 };
 

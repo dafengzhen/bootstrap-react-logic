@@ -14,19 +14,9 @@ export default function GeneralComponentPropsCard(props: any) {
       codeDisplayMode="direct"
       items={[
         {
-          attr: 'render',
-          type: (
-            <span className="badge text-bg-secondary">
-              (renderOptions) =&gt; ReactNode
-            </span>
-          ),
-          desc: t('desc.render'),
-          default: '',
-        },
-        {
-          attr: 'skipCompWrap',
-          type: <span className="badge text-bg-secondary">boolean</span>,
-          desc: t('desc.skipCompWrap'),
+          attr: 'as',
+          type: <span className="badge text-bg-secondary">ElementType</span>,
+          desc: t('desc.as'),
           default: '',
         },
         {
@@ -37,7 +27,7 @@ export default function GeneralComponentPropsCard(props: any) {
         },
         {
           attr: 'variables',
-          type: <span className="badge text-bg-secondary">object</span>,
+          type: <span className="badge text-bg-secondary">CSSProperties</span>,
           desc: t('desc.variables'),
           default: '',
         },
@@ -50,10 +40,10 @@ export default function GeneralComponentPropsCard(props: any) {
           <div className="d-flex flex-column gap-2">
             <div className="d-flex flex-column gap-2">
               <div>
-                <Trans t={t} i18nKey="p1"></Trans>
+                <Trans t={t} i18nKey="p0"></Trans>
               </div>
               <div>
-                <Trans t={t} i18nKey="p2"></Trans>
+                <Trans t={t} i18nKey="p1"></Trans>
               </div>
             </div>
 
@@ -61,13 +51,13 @@ export default function GeneralComponentPropsCard(props: any) {
 
             <div className="d-flex flex-column gap-2">
               <div>
-                <Trans t={t} i18nKey="p3"></Trans>
-              </div>
-              <div>
                 <Trans t={t} i18nKey="p4"></Trans>
               </div>
               <div>
                 <Trans t={t} i18nKey="p5"></Trans>
+              </div>
+              <div>
+                <Trans t={t} i18nKey="p6"></Trans>
               </div>
             </div>
           </div>

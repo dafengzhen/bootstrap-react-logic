@@ -1,20 +1,19 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { LabelProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
-  type IntrinsicElements,
   isValueValid,
   LabelVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Label = function Label<T extends ElementType = 'label'>(props: Props<T>) {
+const Label = function Label<T extends ElementType = 'label'>(
+  props: LabelProps<T>,
+) {
   const {
     as: Component = 'label',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
@@ -51,19 +50,11 @@ const Label = function Label<T extends ElementType = 'label'>(props: Props<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, colFormLabel, className, variables, style]);
-
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
+  }, [dropOldClass, inputGroupText, colFormLabel, className, variables, style]);
 
   return (
-    <Component {...(rest as IntrinsicElements['label'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

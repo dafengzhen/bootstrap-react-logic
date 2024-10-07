@@ -1,7 +1,7 @@
 import Label from './label.tsx';
 
 // types
-export type { Props as LabelProps } from './types.ts';
+export type { LabelProps } from './types.ts';
 
 // hooks
 

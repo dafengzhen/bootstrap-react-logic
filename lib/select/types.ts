@@ -1,75 +1,12 @@
+import type { ElementType } from 'react';
 import type {
-  CSSProperties,
-  DetailedHTMLProps,
-  ElementType,
-  HTMLAttributes,
-  OptionHTMLAttributes,
-  ReactNode,
-  SelectHTMLAttributes,
-} from 'react';
-import {
-  IntrinsicElements,
+  BaseProps,
+  PropsWithoutRef,
   SelectOptionVariablesEnum,
   SelectVariablesEnum,
 } from '../tools';
 
-type Variables = {
-  [key in keyof typeof SelectVariablesEnum]?: string | number;
-} & CSSProperties;
-
-type SelectOptionVariables = {
-  [key in keyof typeof SelectOptionVariablesEnum]?: string | number;
-} & CSSProperties;
-
-export type ElementProps<T extends ElementType> =
-  T extends keyof IntrinsicElements
-    ? DetailedHTMLProps<
-        T extends 'select'
-          ? Omit<
-              SelectHTMLAttributes<IntrinsicElements[T]>,
-              'size' | 'disabled'
-            >
-          : HTMLAttributes<IntrinsicElements[T]>,
-        IntrinsicElements[T]
-      >
-    : never;
-
-export type SelectOptionElementProps<T extends ElementType> =
-  T extends keyof IntrinsicElements
-    ? DetailedHTMLProps<
-        T extends 'option'
-          ? Omit<OptionHTMLAttributes<IntrinsicElements[T]>, 'disabled'>
-          : HTMLAttributes<IntrinsicElements[T]>,
-        IntrinsicElements[T]
-      >
-    : never;
-
-export type Props<T extends ElementType> = ElementProps<T> & {
-  /**
-   * Determines which element type to render as (e.g., input or other).
-   */
-  as?: T;
-
-  /**
-   * Custom render function to customize the rendering of the component.
-   */
-  render?: (renderOptions: ElementProps<T>) => ReactNode;
-
-  /**
-   * Flag to indicate whether to drop old class names.
-   */
-  dropOldClass?: boolean;
-
-  /**
-   * Flag to skip wrapping the component in an additional element.
-   */
-  skipCompWrap?: boolean;
-
-  /**
-   * variables.
-   */
-  variables?: Variables;
-
+type Props<T extends ElementType> = BaseProps<T, typeof SelectVariablesEnum> & {
   /**
    * size.
    */
@@ -86,35 +23,24 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   disabled?: boolean;
 };
 
-export type SelectOptionProps<T extends ElementType> =
-  SelectOptionElementProps<T> & {
-    /**
-     * Determines which element type to render as (e.g., input or other).
-     */
-    as?: T;
+type OptionProps<T extends ElementType> = BaseProps<
+  T,
+  typeof SelectOptionVariablesEnum
+> & {
+  /**
+   * disabled,
+   */
+  disabled?: boolean;
+};
 
-    /**
-     * Custom render function to customize the rendering of the component.
-     */
-    render?: (renderOptions: SelectOptionElementProps<T>) => ReactNode;
+export type SelectProps<T extends ElementType> = PropsWithoutRef<
+  Props<T>,
+  T,
+  typeof SelectVariablesEnum
+>;
 
-    /**
-     * Flag to indicate whether to drop old class names.
-     */
-    dropOldClass?: boolean;
-
-    /**
-     * Flag to skip wrapping the component in an additional element.
-     */
-    skipCompWrap?: boolean;
-
-    /**
-     * variables.
-     */
-    variables?: SelectOptionVariables;
-
-    /**
-     * disabled,
-     */
-    disabled?: boolean;
-  };
+export type SelectOptionProps<T extends ElementType> = PropsWithoutRef<
+  OptionProps<T>,
+  T,
+  typeof SelectOptionVariablesEnum
+>;

@@ -1,5 +1,5 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { ButtonGroupProps } from './types.ts';
 import {
   ButtonGroupVariablesEnum,
   checkObjectProperties,
@@ -8,7 +8,6 @@ import {
   DEVELOPMENT,
   filterAndTransformProperties,
   filterOptions,
-  type IntrinsicElements,
   isDefined,
   isValueValid,
   VARIABLE_BS_PREFIX,
@@ -17,12 +16,10 @@ import {
 const logger = createLogger();
 
 const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
-  props: Props<T>,
+  props: ButtonGroupProps<T>,
 ) {
   const {
     as: Component = 'div',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     children,
@@ -85,17 +82,9 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
     );
   }, [dropOldClass, vertical, toolbar, size, className, variables, style]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
-
   return (
-    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

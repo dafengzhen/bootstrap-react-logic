@@ -1,18 +1,17 @@
 import {
-  ElementRef,
+  type ElementRef,
   type ElementType,
   type HTMLInputTypeAttribute,
-  LegacyRef,
+  type LegacyRef,
   useMemo,
 } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { InputProps } from './types.ts';
 import {
   clsxUnique,
   clsxWithOptions,
   filterAndTransformProperties,
   filterOptions,
   InputVariablesEnum,
-  type IntrinsicElements,
   isValueValid,
   processClassName,
   processSlotClasses,
@@ -21,14 +20,12 @@ import {
 import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(
-  props: Props<T> & {
+  props: InputProps<T> & {
     type?: HTMLInputTypeAttribute | undefined;
   },
 ) {
   const {
     as: Component = 'input',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
@@ -100,14 +97,6 @@ const Input = function Input<T extends ElementType = 'input'>(
     type,
   ]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
-
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {
       container: 'd-inline-flex align-items-center position-relative',
@@ -129,12 +118,12 @@ const Input = function Input<T extends ElementType = 'input'>(
           </div>
         )}
         <Component
-          {...(rest as IntrinsicElements['input'])}
+          {...rest}
           {...renderOptions}
           data-slot-component=""
           className={slotClassName.component}
         >
-          {renderContent}
+          {children}
         </Component>
         {endContent && (
           <div data-slot-suffix="" className={slotClassName.end}>
@@ -147,11 +136,11 @@ const Input = function Input<T extends ElementType = 'input'>(
 
   return (
     <Component
-      {...(rest as IntrinsicElements['input'])}
+      {...rest}
       {...renderOptions}
       ref={onRef as LegacyRef<ElementRef<'input'>>}
     >
-      {renderContent}
+      {children}
     </Component>
   );
 };

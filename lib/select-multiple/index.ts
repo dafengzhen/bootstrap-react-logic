@@ -1,7 +1,7 @@
 import SelectMultiple from './select-multiple.tsx';
 
 // types
-export type { Props as SelectMultipleProps } from './types.ts';
+export type { SelectMultipleProps } from './types.ts';
 
 // hooks
 

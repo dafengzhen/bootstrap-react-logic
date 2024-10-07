@@ -1,23 +1,20 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { SelectProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
   InputVariablesEnum,
-  type IntrinsicElements,
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 import SelectOption from './select-option.tsx';
 
 const Select = function Select<T extends ElementType = 'select'>(
-  props: Props<T>,
+  props: SelectProps<T>,
 ) {
   const {
     as: Component = 'select',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
@@ -57,17 +54,9 @@ const Select = function Select<T extends ElementType = 'select'>(
     );
   }, [dropOldClass, size, className, variables, style, nativeSize, disabled]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
-
   return (
-    <Component {...(rest as IntrinsicElements['select'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

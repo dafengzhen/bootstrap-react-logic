@@ -1,22 +1,19 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { TextareaProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
-  type IntrinsicElements,
   isValueValid,
   TextareaVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
 const Textarea = function Textarea<T extends ElementType = 'textarea'>(
-  props: Props<T>,
+  props: TextareaProps<T>,
 ) {
   const {
     as: Component = 'textarea',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     className,
@@ -47,17 +44,9 @@ const Textarea = function Textarea<T extends ElementType = 'textarea'>(
     );
   }, [dropOldClass, className, variables, style]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
-
   return (
-    <Component {...(rest as IntrinsicElements['textarea'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

@@ -1,0 +1,13 @@
+{
+  "variant": "Variant",
+  "outline": "Outline",
+  "rounded": "Rounded",
+  "size": "Size",
+  "disabledState": "Disabled state",
+  "blockButton": "Block button",
+  "toggleState": "Toggle state",
+  "isLoading": "Loading state",
+  "icon": "Icon",
+  "customStyle": "Custom style",
+  "example": "Example"
+}

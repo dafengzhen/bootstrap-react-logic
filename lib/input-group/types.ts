@@ -1,70 +1,15 @@
+import type { ElementType } from 'react';
 import type {
-  CSSProperties,
-  DetailedHTMLProps,
-  ElementType,
-  HTMLAttributes,
-  ReactNode,
-} from 'react';
-import {
+  BaseProps,
   InputGroupTextVariablesEnum,
   InputGroupVariablesEnum,
-  IntrinsicElements,
+  PropsWithoutRef,
 } from '../tools';
 
-type Variables = {
-  [key in keyof typeof InputGroupVariablesEnum]?: string | number;
-} & CSSProperties;
-
-type InputGroupTextVariables = {
-  [key in keyof typeof InputGroupTextVariablesEnum]?: string | number;
-} & CSSProperties;
-
-export type ElementProps<T extends ElementType> =
-  T extends keyof IntrinsicElements
-    ? DetailedHTMLProps<
-        T extends 'div'
-          ? HTMLAttributes<IntrinsicElements[T]>
-          : HTMLAttributes<IntrinsicElements[T]>,
-        IntrinsicElements[T]
-      >
-    : never;
-
-export type InputGroupTextElementProps<T extends ElementType> =
-  T extends keyof IntrinsicElements
-    ? DetailedHTMLProps<
-        T extends 'div'
-          ? HTMLAttributes<IntrinsicElements[T]>
-          : HTMLAttributes<IntrinsicElements[T]>,
-        IntrinsicElements[T]
-      >
-    : never;
-
-export type Props<T extends ElementType> = ElementProps<T> & {
-  /**
-   * Determines which element type to render as (e.g., input or other).
-   */
-  as?: T;
-
-  /**
-   * Custom render function to customize the rendering of the component.
-   */
-  render?: (renderOptions: ElementProps<T>) => ReactNode;
-
-  /**
-   * Flag to indicate whether to drop old class names.
-   */
-  dropOldClass?: boolean;
-
-  /**
-   * Flag to skip wrapping the component in an additional element.
-   */
-  skipCompWrap?: boolean;
-
-  /**
-   * variables.
-   */
-  variables?: Variables;
-
+type Props<T extends ElementType> = BaseProps<
+  T,
+  typeof InputGroupVariablesEnum
+> & {
   /**
    * nowrap.
    */
@@ -76,30 +21,19 @@ export type Props<T extends ElementType> = ElementProps<T> & {
   size?: 'lg' | 'sm';
 };
 
-export type InputGroupTextProps<T extends ElementType> =
-  InputGroupTextElementProps<T> & {
-    /**
-     * Determines which element type to render as (e.g., input or other).
-     */
-    as?: T;
+type TextProps<T extends ElementType> = BaseProps<
+  T,
+  typeof InputGroupTextVariablesEnum
+> & {};
 
-    /**
-     * Custom render function to customize the rendering of the component.
-     */
-    render?: (renderOptions: InputGroupTextElementProps<T>) => ReactNode;
+export type InputGroupProps<T extends ElementType> = PropsWithoutRef<
+  Props<T>,
+  T,
+  typeof InputGroupVariablesEnum
+>;
 
-    /**
-     * Flag to indicate whether to drop old class names.
-     */
-    dropOldClass?: boolean;
-
-    /**
-     * Flag to skip wrapping the component in an additional element.
-     */
-    skipCompWrap?: boolean;
-
-    /**
-     * variables.
-     */
-    variables?: InputGroupTextVariables;
-  };
+export type InputGroupTextProps<T extends ElementType> = PropsWithoutRef<
+  TextProps<T>,
+  T,
+  typeof InputGroupTextVariablesEnum
+>;

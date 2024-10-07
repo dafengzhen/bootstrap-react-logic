@@ -1,7 +1,7 @@
 import InputOtp from './input-otp.tsx';
 
 // types
-export type { Props as InputOtpProps } from './types.ts';
+export type { InputOtpProps } from './types.ts';
 
 // hooks
 

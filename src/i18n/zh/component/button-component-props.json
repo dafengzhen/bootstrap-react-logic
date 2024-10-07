@@ -1,0 +1,13 @@
+{
+  "desc": {
+    "variant": "变体",
+    "outline": "轮廓",
+    "disabled": "禁止",
+    "active": "切换状态",
+    "isLoading": "是否加载中",
+    "size": "大小",
+    "rounded": "圆形",
+    "startContent": "自定义开始内容",
+    "endContent": "自定义结束内容"
+  }
+}

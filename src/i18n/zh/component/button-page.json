@@ -1,0 +1,13 @@
+{
+  "variant": "变体",
+  "outline": "轮廓",
+  "rounded": "圆形",
+  "size": "大小",
+  "disabledState": "禁止状态",
+  "blockButton": "块状按钮",
+  "toggleState": "切换状态",
+  "isLoading": "加载状态",
+  "icon": "图标",
+  "customStyle": "自定义样式",
+  "example": "示例"
+}

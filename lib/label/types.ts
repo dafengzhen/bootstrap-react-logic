@@ -1,53 +1,7 @@
-import type {
-  CSSProperties,
-  DetailedHTMLProps,
-  ElementType,
-  HTMLAttributes,
-  LabelHTMLAttributes,
-  ReactNode,
-} from 'react';
-import type { IntrinsicElements, LabelVariablesEnum } from '../tools';
+import type { ElementType } from 'react';
+import type { BaseProps, LabelVariablesEnum, PropsWithoutRef } from '../tools';
 
-type Variables = {
-  [key in keyof typeof LabelVariablesEnum]?: string | number;
-} & CSSProperties;
-
-export type ElementProps<T extends ElementType> =
-  T extends keyof IntrinsicElements
-    ? DetailedHTMLProps<
-        T extends 'label'
-          ? LabelHTMLAttributes<IntrinsicElements[T]>
-          : HTMLAttributes<IntrinsicElements[T]>,
-        IntrinsicElements[T]
-      >
-    : never;
-
-export type Props<T extends ElementType> = ElementProps<T> & {
-  /**
-   * Determines which element type to render as (e.g., label or other).
-   */
-  as?: T;
-
-  /**
-   * Custom render function to customize the rendering of the component.
-   */
-  render?: (renderOptions: ElementProps<T>) => ReactNode;
-
-  /**
-   * Flag to indicate whether to drop old class names.
-   */
-  dropOldClass?: boolean;
-
-  /**
-   * Flag to skip wrapping the component in an additional element.
-   */
-  skipCompWrap?: boolean;
-
-  /**
-   * variables.
-   */
-  variables?: Variables;
-
+type Props<T extends ElementType> = BaseProps<T, typeof LabelVariablesEnum> & {
   /**
    * colFormLabel.
    */
@@ -58,3 +12,9 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    */
   inputGroupText?: boolean;
 };
+
+export type LabelProps<T extends ElementType> = PropsWithoutRef<
+  Props<T>,
+  T,
+  typeof LabelVariablesEnum
+>;

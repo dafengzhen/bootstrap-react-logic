@@ -1,20 +1,17 @@
 import { type ElementType, useMemo } from 'react';
-import type { ElementProps, Props } from './types.ts';
+import type { TextProps } from './types.ts';
 import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
-  type IntrinsicElements,
   isValueValid,
   TextVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Text = function Text<T extends ElementType = 'div'>(props: Props<T>) {
+const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
   const {
     as: Component = 'div',
-    render,
-    skipCompWrap,
     dropOldClass,
     variables,
     children,
@@ -45,17 +42,9 @@ const Text = function Text<T extends ElementType = 'div'>(props: Props<T>) {
     );
   }, [dropOldClass, className, variables, style]);
 
-  if (render && skipCompWrap) {
-    return render({ ...rest, ...renderOptions } as ElementProps<T>);
-  }
-
-  const renderContent = render
-    ? render({ ...rest, ...renderOptions } as ElementProps<T>)
-    : children;
-
   return (
-    <Component {...(rest as IntrinsicElements['div'])} {...renderOptions}>
-      {renderContent}
+    <Component {...rest} {...renderOptions}>
+      {children}
     </Component>
   );
 };

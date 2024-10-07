@@ -1,58 +1,12 @@
+import type { ElementRef, ElementType, LegacyRef, ReactNode } from 'react';
 import type {
-  CSSProperties,
-  DetailedHTMLProps,
-  ElementRef,
-  ElementType,
-  HTMLAttributes,
-  InputHTMLAttributes,
-  LegacyRef,
-  ReactNode,
-} from 'react';
-import { InputVariablesEnum, IntrinsicElements, SlotValue } from '../tools';
+  BaseProps,
+  InputVariablesEnum,
+  PropsWithoutRef,
+  SlotValue,
+} from '../tools';
 
-type Variables = {
-  [key in keyof typeof InputVariablesEnum]?: string | number;
-} & CSSProperties;
-
-export type ElementProps<T extends ElementType> =
-  T extends keyof IntrinsicElements
-    ? DetailedHTMLProps<
-        T extends 'input'
-          ? Omit<
-              InputHTMLAttributes<IntrinsicElements[T]>,
-              'size' | 'color' | 'prefix'
-            >
-          : HTMLAttributes<IntrinsicElements[T]>,
-        IntrinsicElements[T]
-      >
-    : never;
-
-export type Props<T extends ElementType> = ElementProps<T> & {
-  /**
-   * Determines which element type to render as (e.g., input or other).
-   */
-  as?: T;
-
-  /**
-   * Custom render function to customize the rendering of the component.
-   */
-  render?: (renderOptions: ElementProps<T>) => ReactNode;
-
-  /**
-   * Flag to indicate whether to drop old class names.
-   */
-  dropOldClass?: boolean;
-
-  /**
-   * Flag to skip wrapping the component in an additional element.
-   */
-  skipCompWrap?: boolean;
-
-  /**
-   * variables.
-   */
-  variables?: Variables;
-
+type Props<T extends ElementType> = BaseProps<T, typeof InputVariablesEnum> & {
   /**
    * size.
    */
@@ -103,3 +57,9 @@ export type Props<T extends ElementType> = ElementProps<T> & {
    */
   onRef?: LegacyRef<ElementRef<T>>;
 };
+
+export type InputProps<T extends ElementType> = PropsWithoutRef<
+  Props<T>,
+  T,
+  typeof InputVariablesEnum
+>;

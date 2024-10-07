@@ -1,0 +1,13 @@
+{
+  "desc": {
+    "variant": "Variant",
+    "outline": "Outline",
+    "disabled": "Disabled",
+    "active": "Toggle state",
+    "isLoading": "Loading state",
+    "size": "Size",
+    "rounded": "Rounded",
+    "startContent": "Custom start content",
+    "endContent": "Custom end content"
+  }
+}

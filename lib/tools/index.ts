@@ -1,4 +1,12 @@
-export type { IntrinsicElements, SlotValue } from './elements.ts';
+export type {
+  IntrinsicElements,
+  BaseProps,
+  PropsWithoutRef,
+  PropsWithRef,
+  PropsWithAs,
+  VariablesFromEnum,
+  SlotValue,
+} from './elements.ts';
 
 export type { ReactRef } from './refs';
 
@@ -24,6 +32,7 @@ export {
   InputGroupTextVariablesEnum,
   SelectVariablesEnum,
   SelectOptionVariablesEnum,
+  SelectMultipleVariablesEnum,
 } from './enums';
 
 export {
