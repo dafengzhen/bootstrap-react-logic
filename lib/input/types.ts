@@ -6,6 +6,8 @@ import type {
   SlotValue,
 } from '../tools';
 
+type SlotValueKeys = 'container' | 'start' | 'end' | 'component';
+
 type Props<T extends ElementType> = BaseProps<T, typeof InputVariablesEnum> & {
   /**
    * size.
@@ -45,12 +47,7 @@ type Props<T extends ElementType> = BaseProps<T, typeof InputVariablesEnum> & {
   /**
    * startEndContentClasses.
    */
-  startEndContentClasses?: {
-    container?: SlotValue;
-    start?: SlotValue;
-    end?: SlotValue;
-    component?: SlotValue;
-  };
+  startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
 
   /**
    * onRef.

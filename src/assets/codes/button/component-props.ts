@@ -3,6 +3,11 @@ const buttonComponentPropsCodes = {
     code: `
 type Props = {
   /**
+   * as.
+   */
+  as?: 'button' | 'a';
+
+  /**
    * variant.
    */
   variant?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark' | 'link';

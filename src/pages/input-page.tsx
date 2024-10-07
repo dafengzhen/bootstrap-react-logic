@@ -801,7 +801,7 @@ export default function InputPage() {
             attr: 'inputProps',
             type: (
               <span className="badge text-bg-secondary">
-                Props&lt;input&gt;
+                InputProps&lt;input&gt;
               </span>
             ),
             desc: tInputOtpComponentProps('desc.inputProps'),

@@ -54,14 +54,6 @@ interface IComponentPropsStates {
       openCode: boolean;
       code?: string;
     };
-    generalProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    generalEvents: {
-      openCode: boolean;
-      code?: string;
-    };
   };
 }
 
@@ -115,14 +107,6 @@ export default function SelectPage() {
         generalComponentProps: {
           openCode: false,
           code: generalCodes.generalComponentProps.code.trim(),
-        },
-        generalProps: {
-          openCode: false,
-          code: selectComponentPropsCodes.generalProps.code.trim(),
-        },
-        generalEvents: {
-          openCode: false,
-          code: selectComponentPropsCodes.generalEvents.code.trim(),
         },
       },
     });

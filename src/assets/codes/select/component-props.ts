@@ -1,12 +1,7 @@
 const selectComponentPropsCodes = {
   selectComponentProps: {
     code: `
-type Props {
-  /**
-   * as.
-   */
-  as?: 'select';
-
+type Props = {
   /**
    * size.
    */
@@ -26,12 +21,7 @@ type Props {
   },
   selectOptionComponentProps: {
     code: `
-type Props {
-  /**
-   * as.
-   */
-  as?: 'option';
-
+type Props = {
   /**
    * disabled.
    */
@@ -67,12 +57,7 @@ interface IOption {
   text: string;
 }
 
-type Props {
-  /**
-   * as.
-   */
-  as?: div;
-
+type Props = {
   /**
    * disabled.
    */
@@ -113,16 +98,6 @@ type Props {
    */
   onChange?: (value: (string | number)[]) => void;
 };
-    `,
-  },
-  generalProps: {
-    code: `
-    
-    `,
-  },
-  generalEvents: {
-    code: `
-    
     `,
   },
 };
