@@ -46,7 +46,7 @@ export default function IndexPage() {
           <div className="h5 mb-4">一、安装</div>
           <div className="mb-4">
             <div className="mb-4">
-              在安装之前请确保已经存在 <code>bootstrap</code> 依赖
+              Tips：在安装之前请确保已经存在 <code>bootstrap</code> 依赖
             </div>
 
             <div className="mb-2">使用 npm 安装 BRL：</div>
@@ -62,16 +62,34 @@ export default function IndexPage() {
           </div>
 
           <div className="h5 mb-4">二、使用</div>
+          <div className="mb-4">
+            <div className="mb-4">
+              导入组件：{"import { Button } from 'bootstrap-react-logic'"}
+            </div>
+
+            <div className="mb-2">基本使用</div>
+            <div className="d-flex gap-2">
+              <div className="user-select-none">#</div>
+              <pre>
+                <code className="nohighlight">
+                  <span className="text-danger">
+                    &lt;Button variant="primary"&gt;Primary&lt;/Button&gt;
+                  </span>
+                </code>
+              </pre>
+            </div>
+          </div>
 
           <div className="h5 mb-4">三、问题</div>
           <div className="mb-4">
-            <div className="mb-2">Q: 为什么创建，和其他第三方库有什么区别?</div>
+            <div className="mb-2">Q: 其他第三方库有什么区别?</div>
             <div>
               <div>1. 封装为组件，可以提高复用性和开发效率</div>
               <div>
                 2.
                 与其他第三方库相比，该库是根据项目的具体需求而开发的，因此可能并不适合所有用户的需求
               </div>
+              <div>3. 基于 Bootstrap 的基础上提供更多常用的组件</div>
             </div>
           </div>
         </div>

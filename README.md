@@ -1,14 +1,17 @@
 # Bootstrap React Logic
 
-Bootstrap React Logic (BRL) 是一个专为 [React](https://react.dev) 应用设计的逻辑操作库，旨在与 [Bootstrap](https://getbootstrap.com) 样式无缝结合，帮助开发者轻松构建丰富的交互式用户界面
+Bootstrap React Logic (BRL) is a logic operation library designed specifically for [React](https://react.dev) applications. It seamlessly integrates with [Bootstrap](https://getbootstrap.com) styles, helping developers easily build rich, interactive user interfaces.
 
-BRL 提供了一系列强大且灵活的逻辑组件，简化了状态管理和事件处理，使得创建动态、响应迅速的 UI 变得更加高效。无论是复杂的表单处理、数据展示还是用户交互，BRL 都能提供流畅的体验，助力开发者快速实现创意设计，提升开发效率
+BRL offers a series of powerful and flexible logic components, simplifying state management and event handling, making it more efficient to create dynamic, responsive UIs. Whether it's complex form handling, data presentation, or user interactions, BRL provides a smooth experience, empowering
+developers to quickly implement creative designs and improve development efficiency.
+
+[简体中文](./README.zh.md)
 
 ## Installation
 
-在安装之前请确保已经存在 bootstrap 依赖
+Tip: Before installation, please ensure that the bootstrap dependency is already in place.
 
-使用 npm 安装 BRL：
+Install BRL using npm:
 
 ```bash
 npm install bootstrap-react-logic
@@ -16,9 +19,22 @@ npm install bootstrap-react-logic
 
 ## Usage
 
+Import the component: import { Button } from 'bootstrap-react-logic'
+
+Basic usage:
+
+```jsx
+<Button variant="primary">Primary</Button>
+```
+
 ## FAQ
 
-Q: 为什么创建，和其他第三方库有什么区别?
+Q: How is this different from other third-party libraries?
 
-- 封装为组件，可以提高复用性和开发效率
-- 与其他第三方库相比，该库是根据项目的具体需求而开发的，因此可能并不适合所有用户的需求
+- It is encapsulated into components, which enhances reusability and development efficiency.
+- Compared to other third-party libraries, BRL is developed based on specific project needs, so it may not suit every user's requirements.
+- It builds on top of Bootstrap and provides more commonly used components.
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
