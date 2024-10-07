@@ -4,11 +4,15 @@ import { useNavigation } from 'react-router-dom';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
 import type { NestedKeys } from '@src/types';
 import CustomSimpleCard from '@src/components/custom-simple-card';
-import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import { ButtonGroup } from '@lib/button-group';
 import buttonGroupCodes from '@assets/codes/button-group';
 import AboutComponent from '@components/about-component.tsx';
 import { updateState } from '@src/tools';
+import PropsIndicator from '@components/props-indicator.tsx';
+import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
+import generalCodes from '@assets/codes/general';
+import { useTranslation } from 'react-i18next';
+import buttonGroupComponentPropsCodes from '@assets/codes/button-group/component-props.ts';
 
 interface IStates {
   buttonGroup: {
@@ -43,9 +47,26 @@ interface IStates {
   };
 }
 
+interface IComponentPropsStates {
+  buttonGroup: {
+    buttonGroupComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    generalComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+  };
+}
+
 export default function ButtonGroupPage() {
   useHighlightCode();
   const navigation = useNavigation();
+  const { t: tButtonGroupComponentProps } = useTranslation([
+    'buttonGroupComponentProps',
+  ]);
+  const { t: tButtonGroupPage } = useTranslation(['buttonGroupPage']);
 
   const [states, setStates] = useState<IStates>({
     buttonGroup: {
@@ -79,6 +100,19 @@ export default function ButtonGroupPage() {
       },
     },
   });
+  const [componentPropsStates, setComponentPropsStates] =
+    useState<IComponentPropsStates>({
+      buttonGroup: {
+        buttonGroupComponentProps: {
+          openCode: false,
+          code: buttonGroupComponentPropsCodes.buttonGroupComponentProps.code.trim(),
+        },
+        generalComponentProps: {
+          openCode: false,
+          code: generalCodes.generalComponentProps.code.trim(),
+        },
+      },
+    });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -103,6 +137,14 @@ export default function ButtonGroupPage() {
     updateState(setStates, k, v, c);
   }
 
+  function onClickUpdateComponentPropsState(
+    k: NestedKeys<IComponentPropsStates>,
+    v: unknown,
+    c?: () => void,
+  ) {
+    updateState(setComponentPropsStates, k, v, c);
+  }
+
   function onClickChangeSizeTest() {
     setMySize(mySize === 'sm' ? 'lg' : 'sm');
   }
@@ -114,7 +156,7 @@ export default function ButtonGroupPage() {
   return (
     <div className="d-flex flex-column gap-3">
       <CustomSimpleCard
-        title="基本"
+        title={tButtonGroupPage('basic')}
         hash="basic"
         isOpen={states.buttonGroup.basic.openCode}
         toggleCode={() =>
@@ -167,7 +209,7 @@ export default function ButtonGroupPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="选项框"
+        title={tButtonGroupPage('checkbox')}
         hash="checkbox"
         isOpen={states.buttonGroup.checkbox.openCode}
         toggleCode={() =>
@@ -214,7 +256,7 @@ export default function ButtonGroupPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="单选框"
+        title={tButtonGroupPage('radio')}
         hash="radio"
         isOpen={states.buttonGroup.radio.openCode}
         toggleCode={() =>
@@ -265,7 +307,7 @@ export default function ButtonGroupPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="工具组"
+        title={tButtonGroupPage('toolbar')}
         hash="toolbar"
         isOpen={states.buttonGroup.toolbar.openCode}
         toggleCode={() =>
@@ -349,7 +391,7 @@ export default function ButtonGroupPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="大小"
+        title={tButtonGroupPage('size')}
         hash="size"
         isOpen={states.buttonGroup.size.openCode}
         toggleCode={() =>
@@ -386,7 +428,7 @@ export default function ButtonGroupPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="垂直"
+        title={tButtonGroupPage('vertical')}
         hash="vertical"
         isOpen={states.buttonGroup.vertical.openCode}
         toggleCode={() =>
@@ -446,7 +488,7 @@ export default function ButtonGroupPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="示例"
+        title={tButtonGroupPage('example')}
         hash="example"
         isOpen={states.buttonGroup.example.openCode}
         toggleCode={() =>
@@ -475,187 +517,58 @@ export default function ButtonGroupPage() {
         </div>
       </CustomSimpleCard>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink title="组件属性" hash="componentProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                  </td>
-                  <td></td>
-                  <td>div</td>
-                </tr>
-                <tr>
-                  <td>render</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      (renderOptions) =&gt; ReactNode
-                    </span>
-                  </td>
-                  <td>Customize rendering logic</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>skipCompWrap</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Skip component wrapper</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>dropOldClass</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>variables</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td>Style variables</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>toolbar</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>vertical</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>
-                    <span className="badge text-bg-secondary">lg | sm</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用属性" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>className</td>
-                  <td>
-                    <span className="badge text-bg-secondary">string</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>style</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用事件" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>onClick</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      MouseEventHandler
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <PropsIndicator />
+
+      <CustomSimpleCard.ComponentProps
+        title="ButtonGroup"
+        hash="buttonGroupComponentProps"
+        colgroup={colgroup}
+        isOpen={
+          componentPropsStates.buttonGroup.buttonGroupComponentProps.openCode
+        }
+        code={componentPropsStates.buttonGroup.buttonGroupComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'buttonGroup.buttonGroupComponentProps.openCode',
+            !componentPropsStates.buttonGroup.buttonGroupComponentProps
+              .openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'toolbar',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonGroupComponentProps('desc.toolbar'),
+            default: '',
+          },
+          {
+            attr: 'vertical',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonGroupComponentProps('desc.vertical'),
+            default: '',
+          },
+          {
+            attr: 'size',
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
+            desc: tButtonGroupComponentProps('desc.size'),
+            default: '',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
+
+      <GeneralComponentPropsCard
+        colgroup={colgroup}
+        isOpen={componentPropsStates.buttonGroup.generalComponentProps.openCode}
+        code={componentPropsStates.buttonGroup.generalComponentProps.code}
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'buttonGroup.generalComponentProps.openCode',
+            !componentPropsStates.buttonGroup.generalComponentProps.openCode,
+          )
+        }
+      ></GeneralComponentPropsCard>
 
       <AboutComponent />
     </div>

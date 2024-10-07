@@ -115,33 +115,6 @@ type Props {
 };
     `,
   },
-  generalComponentProps: {
-    code: `
-type Variables = { [key in string]?: string | number; } & CSSProperties;
-
-type Props {
-  /**
-   * render.
-   */
-  render?: (renderOptions: HTMLAttributes) => ReactNode;
-
-  /**
-   * dropOldClass.
-   */
-  dropOldClass?: boolean;
-
-  /**
-   * skipCompWrap.
-   */
-  skipCompWrap?: boolean;
-
-  /**
-   * variables.
-   */
-  variables?: Variables;
-}
-    `,
-  },
   generalProps: {
     code: `
     

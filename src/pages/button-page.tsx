@@ -11,6 +11,7 @@ import GeneralComponentPropsCard from '@components/general-component-props-card.
 import selectComponentPropsCodes from '@assets/codes/select/component-props.ts';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
+import generalCodes from '@assets/codes/general';
 
 interface IStates {
   button: {
@@ -137,7 +138,7 @@ export default function ButtonPage() {
         },
         generalComponentProps: {
           openCode: false,
-          code: selectComponentPropsCodes.generalComponentProps.code.trim(),
+          code: generalCodes.generalComponentProps.code.trim(),
         },
       },
     });
@@ -164,6 +165,7 @@ export default function ButtonPage() {
   ) {
     updateState(setStates, k, v, c);
   }
+
   function onClickUpdateComponentPropsState(
     k: NestedKeys<IComponentPropsStates>,
     v: unknown,

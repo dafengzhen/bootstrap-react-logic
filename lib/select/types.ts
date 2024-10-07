@@ -1,6 +1,7 @@
 import type { ElementType } from 'react';
 import type {
   BaseProps,
+  OmittedPropsWithoutRef,
   PropsWithoutRef,
   SelectOptionVariablesEnum,
   SelectVariablesEnum,
@@ -33,10 +34,11 @@ type OptionProps<T extends ElementType> = BaseProps<
   disabled?: boolean;
 };
 
-export type SelectProps<T extends ElementType> = PropsWithoutRef<
+export type SelectProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
   T,
-  typeof SelectVariablesEnum
+  typeof SelectVariablesEnum,
+  'size'
 >;
 
 export type SelectOptionProps<T extends ElementType> = PropsWithoutRef<

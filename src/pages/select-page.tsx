@@ -13,6 +13,7 @@ import GeneralComponentPropsCard from '@components/general-component-props-card.
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
 import OptionRow from '@components/option-row.tsx';
+import generalCodes from '@assets/codes/general';
 
 interface IStates {
   select: {
@@ -113,7 +114,7 @@ export default function SelectPage() {
         },
         generalComponentProps: {
           openCode: false,
-          code: selectComponentPropsCodes.generalComponentProps.code.trim(),
+          code: generalCodes.generalComponentProps.code.trim(),
         },
         generalProps: {
           openCode: false,

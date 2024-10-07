@@ -4,6 +4,9 @@ export type {
   PropsWithoutRef,
   PropsWithRef,
   PropsWithAs,
+  OmittedPropsWithoutRef,
+  OmittedPropsWithRef,
+  OmittedPropsWithAs,
   VariablesFromEnum,
   SlotValue,
 } from './elements.ts';

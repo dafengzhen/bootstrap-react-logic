@@ -2,7 +2,7 @@ import type { ElementRef, ElementType, LegacyRef, ReactNode } from 'react';
 import type {
   BaseProps,
   InputVariablesEnum,
-  PropsWithoutRef,
+  OmittedPropsWithoutRef,
   SlotValue,
 } from '../tools';
 
@@ -58,8 +58,9 @@ type Props<T extends ElementType> = BaseProps<T, typeof InputVariablesEnum> & {
   onRef?: LegacyRef<ElementRef<T>>;
 };
 
-export type InputProps<T extends ElementType> = PropsWithoutRef<
+export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
   T,
-  typeof InputVariablesEnum
+  typeof InputVariablesEnum,
+  'size' | 'color'
 >;

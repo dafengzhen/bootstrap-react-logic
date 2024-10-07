@@ -18,6 +18,10 @@ import buttonComponentPropsEn from './en/component/button-component-props.json';
 import buttonComponentPropsZh from './zh/component/button-component-props.json';
 import buttonPageEn from './en/component/button-page.json';
 import buttonPageZh from './zh/component/button-page.json';
+import buttonGroupComponentPropsEn from './en/component/button-group-component-props.json';
+import buttonGroupComponentPropsZh from './zh/component/button-group-component-props.json';
+import buttonGroupPageEn from './en/component/button-group-page.json';
+import buttonGroupPageZh from './zh/component/button-group-page.json';
 
 const resources = {
   en: {
@@ -30,6 +34,8 @@ const resources = {
     selectPage: selectPageEn,
     buttonComponentProps: buttonComponentPropsEn,
     buttonPage: buttonPageEn,
+    buttonGroupComponentProps: buttonGroupComponentPropsEn,
+    buttonGroupPage: buttonGroupPageEn,
   },
   zh: {
     index: indexEn,
@@ -41,6 +47,8 @@ const resources = {
     selectPage: selectPageZh,
     buttonComponentProps: buttonComponentPropsZh,
     buttonPage: buttonPageZh,
+    buttonGroupComponentProps: buttonGroupComponentPropsZh,
+    buttonGroupPage: buttonGroupPageZh,
   },
 };
 

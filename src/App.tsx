@@ -1,4 +1,10 @@
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import {
+  NavLink,
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { useState } from 'react';
 import clsx from 'clsx';
 import {
@@ -116,6 +122,7 @@ function App() {
           </div>
         </div>
       </div>
+      <ScrollRestoration />
     </GlobalContext.Provider>
   );
 }
