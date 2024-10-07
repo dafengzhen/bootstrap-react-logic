@@ -249,27 +249,27 @@ export default function SelectPage() {
             placeholder="Please select"
             options={[
               {
-                label: 'Primary',
+                text: 'Primary',
                 value: 1,
               },
               {
-                label: 'Secondary',
+                text: 'Secondary',
                 value: 1,
               },
               {
-                label: 'Success',
+                text: 'Success',
                 value: 1,
               },
               {
-                label: 'Danger',
+                text: 'Danger',
                 value: 2,
               },
               {
-                label: 'Warning',
+                text: 'Warning',
                 value: 3,
               },
               {
-                label: 'Info',
+                text: 'Info',
                 value: 4,
               },
             ]}
@@ -282,29 +282,29 @@ export default function SelectPage() {
             placeholder="Please select"
             options={[
               {
-                label: 'Primary',
+                text: 'Primary',
                 value: 1,
               },
               {
-                label: 'Secondary',
+                text: 'Secondary',
                 value: 1,
                 active: true,
               },
               {
-                label: 'Success',
+                text: 'Success',
                 value: 1,
                 disabled: true,
               },
               {
-                label: 'Danger',
+                text: 'Danger',
                 value: 2,
               },
               {
-                label: 'Warning',
+                text: 'Warning',
                 value: 3,
               },
               {
-                label: 'Info',
+                text: 'Info',
                 value: 4,
               },
             ]}
@@ -314,29 +314,29 @@ export default function SelectPage() {
             placeholder="Please select"
             options={[
               {
-                label: 'Primary',
+                text: 'Primary',
                 value: 1,
               },
               {
-                label: 'Secondary',
+                text: 'Secondary',
                 value: 1,
                 active: true,
               },
               {
-                label: 'Success',
+                text: 'Success',
                 value: 1,
               },
               {
-                label: 'Danger',
+                text: 'Danger',
                 value: 2,
                 active: true,
               },
               {
-                label: 'Warning',
+                text: 'Warning',
                 value: 3,
               },
               {
-                label: 'Info',
+                text: 'Info',
                 value: 4,
               },
             ]}
@@ -346,30 +346,30 @@ export default function SelectPage() {
             placeholder="Please select"
             options={[
               {
-                label: 'Primary',
+                text: 'Primary',
                 value: 1,
               },
               {
-                label: 'Secondary',
+                text: 'Secondary',
                 value: 1,
                 active: true,
               },
               {
-                label: 'Success',
+                text: 'Success',
                 value: 1,
               },
               {
                 divider: 'top',
-                label: 'Danger',
+                text: 'Danger',
                 value: 2,
               },
               {
-                label: 'Warning',
+                text: 'Warning',
                 value: 3,
                 divider: 'bottom',
               },
               {
-                label: 'Info',
+                text: 'Info',
                 value: 4,
               },
             ]}
@@ -380,34 +380,34 @@ export default function SelectPage() {
             options={[
               {
                 header: 'Status and Importance',
-                label: 'Primary',
+                text: 'Primary',
                 value: 1,
               },
               {
                 header: 'Status and Importance',
-                label: 'Secondary',
+                text: 'Secondary',
                 value: 1,
                 active: true,
               },
               {
                 header: 'Status and Importance',
-                label: 'Success',
+                text: 'Success',
                 value: 1,
               },
               {
                 header: 'Status and Importance',
-                label: 'Danger',
+                text: 'Danger',
                 value: 2,
                 active: true,
               },
               {
                 header: 'Warning and Information',
-                label: 'Warning',
+                text: 'Warning',
                 value: 3,
               },
               {
                 header: 'Warning and Information',
-                label: 'Info',
+                text: 'Info',
                 value: 4,
               },
             ]}
@@ -419,30 +419,30 @@ export default function SelectPage() {
             placeholder="Please select"
             options={[
               {
-                label: 'Primary',
+                text: 'Primary',
                 value: 1,
               },
               {
-                label: 'Secondary',
-                value: 1,
-                active: true,
-              },
-              {
-                label: 'Success',
+                text: 'Secondary',
                 value: 1,
                 active: true,
               },
               {
-                label: 'Danger',
+                text: 'Success',
+                value: 1,
+                active: true,
+              },
+              {
+                text: 'Danger',
                 value: 2,
                 active: true,
               },
               {
-                label: 'Warning',
+                text: 'Warning',
                 value: 3,
               },
               {
-                label: 'Info',
+                text: 'Info',
                 value: 4,
               },
             ]}
@@ -614,8 +614,8 @@ export default function SelectPage() {
                   value={tSelectMultipleComponentProps('options.header')}
                 />
                 <OptionRow
-                  label="label: string"
-                  value={tSelectMultipleComponentProps('options.label')}
+                  label="text: string"
+                  value={tSelectMultipleComponentProps('options.text')}
                 />
               </div>
             ),

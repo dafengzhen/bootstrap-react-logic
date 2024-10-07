@@ -22,6 +22,24 @@ import buttonGroupComponentPropsEn from './en/component/button-group-component-p
 import buttonGroupComponentPropsZh from './zh/component/button-group-component-props.json';
 import buttonGroupPageEn from './en/component/button-group-page.json';
 import buttonGroupPageZh from './zh/component/button-group-page.json';
+import inputComponentPropsEn from './en/component/input-component-props.json';
+import inputComponentPropsZh from './zh/component/input-component-props.json';
+import inputPageEn from './en/component/input-page.json';
+import inputPageZh from './zh/component/input-page.json';
+import inputOtpComponentPropsEn from './en/component/input-otp-component-props.json';
+import inputOtpComponentPropsZh from './zh/component/input-otp-component-props.json';
+import textareaComponentPropsEn from './en/component/textarea-component-props.json';
+import textareaComponentPropsZh from './zh/component/textarea-component-props.json';
+import labelComponentPropsEn from './en/component/label-component-props.json';
+import labelComponentPropsZh from './zh/component/label-component-props.json';
+import textComponentPropsEn from './en/component/text-component-props.json';
+import textComponentPropsZh from './zh/component/text-component-props.json';
+import inputGroupComponentPropsEn from './en/component/input-group-component-props.json';
+import inputGroupComponentPropsZh from './zh/component/input-group-component-props.json';
+import inputGroupTextComponentPropsEn from './en/component/input-group-text-component-props.json';
+import inputGroupTextComponentPropsZh from './zh/component/input-group-text-component-props.json';
+import inputGroupPageEn from './en/component/input-group-page.json';
+import inputGroupPageZh from './zh/component/input-group-page.json';
 
 const resources = {
   en: {
@@ -36,6 +54,15 @@ const resources = {
     buttonPage: buttonPageEn,
     buttonGroupComponentProps: buttonGroupComponentPropsEn,
     buttonGroupPage: buttonGroupPageEn,
+    inputComponentProps: inputComponentPropsEn,
+    inputPage: inputPageEn,
+    inputOtpComponentProps: inputOtpComponentPropsEn,
+    textareaComponentProps: textareaComponentPropsEn,
+    labelComponentProps: labelComponentPropsEn,
+    textComponentProps: textComponentPropsEn,
+    inputGroupComponentProps: inputGroupComponentPropsEn,
+    inputGroupTextComponentProps: inputGroupTextComponentPropsEn,
+    inputGroupPage: inputGroupPageEn,
   },
   zh: {
     index: indexEn,
@@ -49,6 +76,15 @@ const resources = {
     buttonPage: buttonPageZh,
     buttonGroupComponentProps: buttonGroupComponentPropsZh,
     buttonGroupPage: buttonGroupPageZh,
+    inputComponentProps: inputComponentPropsZh,
+    inputPage: inputPageZh,
+    inputOtpComponentProps: inputOtpComponentPropsZh,
+    textareaComponentProps: textareaComponentPropsZh,
+    labelComponentProps: labelComponentPropsZh,
+    textComponentProps: textComponentPropsZh,
+    inputGroupComponentProps: inputGroupComponentPropsZh,
+    inputGroupTextComponentProps: inputGroupTextComponentPropsZh,
+    inputGroupPage: inputGroupPageZh,
   },
 };
 

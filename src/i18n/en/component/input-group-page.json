@@ -1,0 +1,11 @@
+{
+  "basic": "Basic",
+  "nowrap": "No wrap",
+  "size": "Size",
+  "checkboxAndRadio": "Checkboxes and radios",
+  "multipleInput": "Multiple inputs",
+  "multipleAddons": "Multiple addons",
+  "buttonAddons": "Button addons",
+  "customSelect": "Custom select",
+  "customFileInput": "Custom file input"
+}

@@ -224,7 +224,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
                   key={item.id}
                   className={slotClassName.activeOption}
                 >
-                  {item.label}
+                  {item.text}
                   <i
                     data-slot-clear-icon=""
                     tabIndex={-1}
@@ -314,7 +314,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
                               className={paramSlotClassName.selectButton}
                               type="button"
                             >
-                              {item.label}
+                              {item.text}
                             </button>
                           </li>
 

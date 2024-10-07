@@ -1,0 +1,11 @@
+{
+  "basic": "基本",
+  "nowrap": "不换行",
+  "size": "大小",
+  "checkboxAndRadio": "选项框和单选框",
+  "multipleInput": "多个输入框",
+  "multipleAddons": "多个附加组件",
+  "buttonAddons": "按钮",
+  "customSelect": "选择框",
+  "customFileInput": "文件框"
+}

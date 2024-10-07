@@ -1,0 +1,15 @@
+{
+  "desc": {
+    "onRef": "元素",
+    "size": "大小",
+    "nativeSize": "大小 (HTML 属性)",
+    "disabled": "禁止",
+    "readonly": "只读",
+    "readonlyPlainText": "类名 (.form-control-plaintext)",
+    "color": "颜色",
+    "nativeColor": "颜色 (HTML 属性)",
+    "startContent": "开始内容",
+    "endContent": "结束内容",
+    "startEndContentClasses": "设置插槽类名"
+  }
+}

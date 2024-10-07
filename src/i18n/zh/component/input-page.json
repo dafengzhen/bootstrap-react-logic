@@ -1,0 +1,13 @@
+{
+  "basic": "基本",
+  "size": "大小",
+  "text": "文本",
+  "disabled": "禁止",
+  "readonly": "只读",
+  "readonlyPlainText": "只读文本",
+  "file": "文件",
+  "color": "颜色",
+  "datalist": "数据列表",
+  "startEndContent": "前缀和后缀",
+  "otp": "密码框"
+}

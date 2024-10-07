@@ -64,7 +64,7 @@ interface IOption {
   disabled?: boolean;
   divider?: 'top' | 'bottom';
   header?: string;
-  label: string;
+  text: string;
 }
 
 type Props {

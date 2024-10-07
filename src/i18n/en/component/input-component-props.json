@@ -1,0 +1,15 @@
+{
+  "desc": {
+    "onRef": "Ref",
+    "size": "Size",
+    "nativeSize": "Size (HTMLAttributes)",
+    "disabled": "Disabled",
+    "readonly": "Readonly",
+    "readonlyPlainText": "Class (.form-control-plaintext)",
+    "color": "Color",
+    "nativeColor": "Color (HTMLAttributes)",
+    "startContent": "Start content",
+    "endContent": "End content",
+    "startEndContentClasses": "Set slot class names"
+  }
+}

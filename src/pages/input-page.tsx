@@ -3,7 +3,6 @@ import { useNavigation } from 'react-router-dom';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
 import type { NestedKeys } from '@src/types';
 import CustomSimpleCard from '@src/components/custom-simple-card';
-import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import AboutComponent from '@components/about-component.tsx';
 import { Label } from '@lib/label';
 import { Input } from '@lib/input';
@@ -13,6 +12,11 @@ import Text from '../../lib/text/text.tsx';
 import { Button } from '@lib/button';
 import { updateState } from '@src/tools';
 import { InputOtp } from '@lib/input-otp';
+import { useTranslation } from 'react-i18next';
+import generalCodes from '@assets/codes/general';
+import PropsIndicator from '@components/props-indicator.tsx';
+import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
+import inputComponentPropsCodes from '@assets/codes/input/component-props.ts';
 
 interface IStates {
   input: {
@@ -63,9 +67,48 @@ interface IStates {
   };
 }
 
+interface IComponentPropsStates {
+  input: {
+    generalComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    inputComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    inputOtpComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    textareaComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    labelComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+    textComponentProps: {
+      openCode: boolean;
+      code?: string;
+    };
+  };
+}
+
 export default function InputPage() {
   useHighlightCode();
   const navigation = useNavigation();
+  const { t: tInputComponentProps } = useTranslation(['inputComponentProps']);
+  const { t: tInputOtpComponentProps } = useTranslation([
+    'inputOtpComponentProps',
+  ]);
+  // const { t: tTextComponentProps } = useTranslation(['textComponentProps']);
+  const { t: tLabelComponentProps } = useTranslation(['labelComponentProps']);
+  const { t: tTextareaComponentProps } = useTranslation([
+    'textareaComponentProps',
+  ]);
+  const { t: tInputPage } = useTranslation(['inputPage']);
 
   const [states, setStates] = useState<IStates>({
     input: {
@@ -115,6 +158,35 @@ export default function InputPage() {
       },
     },
   });
+  const [componentPropsStates, setComponentPropsStates] =
+    useState<IComponentPropsStates>({
+      input: {
+        generalComponentProps: {
+          openCode: false,
+          code: generalCodes.generalComponentProps.code.trim(),
+        },
+        inputComponentProps: {
+          openCode: false,
+          code: inputComponentPropsCodes.inputComponentProps.code.trim(),
+        },
+        inputOtpComponentProps: {
+          openCode: false,
+          code: inputComponentPropsCodes.inputOtpComponentProps.code.trim(),
+        },
+        textComponentProps: {
+          openCode: false,
+          code: inputComponentPropsCodes.textComponentProps.code.trim(),
+        },
+        labelComponentProps: {
+          openCode: false,
+          code: inputComponentPropsCodes.labelComponentProps.code.trim(),
+        },
+        textareaComponentProps: {
+          openCode: false,
+          code: inputComponentPropsCodes.textareaComponentProps.code.trim(),
+        },
+      },
+    });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -138,6 +210,14 @@ export default function InputPage() {
     updateState(setStates, k, v, c);
   }
 
+  function onClickUpdateComponentPropsState(
+    k: NestedKeys<IComponentPropsStates>,
+    v: unknown,
+    c?: () => void,
+  ) {
+    updateState(setComponentPropsStates, k, v, c);
+  }
+
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
   }
@@ -145,7 +225,7 @@ export default function InputPage() {
   return (
     <div className="d-flex flex-column gap-3">
       <CustomSimpleCard
-        title="基本"
+        title={tInputPage('basic')}
         hash="basic"
         isOpen={states.input.basic.openCode}
         toggleCode={() =>
@@ -175,7 +255,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="大小"
+        title={tInputPage('size')}
         hash="size"
         isOpen={states.input.size.openCode}
         toggleCode={() =>
@@ -205,7 +285,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="文本"
+        title={tInputPage('text')}
         hash="text"
         isOpen={states.input.text.openCode}
         toggleCode={() =>
@@ -270,7 +350,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="禁止"
+        title={tInputPage('disabled')}
         hash="disabled"
         isOpen={states.input.disabled.openCode}
         toggleCode={() =>
@@ -304,7 +384,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="只读"
+        title={tInputPage('readonly')}
         hash="readonly"
         isOpen={states.input.readonly.openCode}
         toggleCode={() =>
@@ -328,8 +408,8 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="只读纯文本"
-        hash="readonly"
+        title={tInputPage('readonlyPlainText')}
+        hash="readonlyPlainText"
         isOpen={states.input.readonlyPlainText.openCode}
         toggleCode={() =>
           onClickUpdateState(
@@ -421,8 +501,8 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="文件"
-        hash="readonly"
+        title={tInputPage('file')}
+        hash="file"
         isOpen={states.input.file.openCode}
         toggleCode={() =>
           onClickUpdateState('input.file.openCode', !states.input.file.openCode)
@@ -458,7 +538,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="颜色"
+        title={tInputPage('color')}
         hash="color"
         isOpen={states.input.color.openCode}
         toggleCode={() =>
@@ -484,7 +564,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="数据列表"
+        title={tInputPage('datalist')}
         hash="datalist"
         isOpen={states.input.datalist.openCode}
         toggleCode={() =>
@@ -515,7 +595,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="前缀和后缀"
+        title={tInputPage('startEndContent')}
         hash="startEndContent"
         isOpen={states.input.startEndContent.openCode}
         toggleCode={() =>
@@ -549,7 +629,7 @@ export default function InputPage() {
       </CustomSimpleCard>
 
       <CustomSimpleCard
-        title="密码框"
+        title={tInputPage('otp')}
         hash="otp"
         isOpen={states.input.otp.openCode}
         toggleCode={() =>
@@ -574,517 +654,257 @@ export default function InputPage() {
         </div>
       </CustomSimpleCard>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Input 组件属性"
-            hash="inputComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">input</span>
-                  </td>
-                  <td></td>
-                  <td>input</td>
-                </tr>
-                <tr>
-                  <td>onRef</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      RefCallback&lt;input&gt;
-                    </span>
-                  </td>
-                  <td>Input</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>size</td>
-                  <td>
-                    <span className="badge text-bg-secondary">lg | sm</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>nativeSize</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      number | undefined
-                    </span>
-                  </td>
-                  <td>HTMLAttributes</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>readonly</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>readonlyPlainText</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>color</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>nativeColor</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      string | undefined
-                    </span>
-                  </td>
-                  <td>HTMLAttributes</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>startContent</td>
-                  <td>
-                    <span className="badge text-bg-secondary">ReactNode</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>endContent</td>
-                  <td>
-                    <span className="badge text-bg-secondary">ReactNode</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>startEndContentClasses</td>
-                  <td>
-                    <div className="d-flex flex-column gap-2">
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Key : container | start | end | component
-                        </span>
-                      </div>
-                      <div>
-                        <span className="badge text-bg-secondary">
-                          Value : string | ((originalClass: string) =&gt; string
-                          | undefined)
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <PropsIndicator />
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="InputOtp 组件属性"
-            hash="inputOtpComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                  </td>
-                  <td></td>
-                  <td>div</td>
-                </tr>
-                <tr>
-                  <td>length</td>
-                  <td>
-                    <span className="badge text-bg-secondary">number</span>
-                  </td>
-                  <td></td>
-                  <td>4</td>
-                </tr>
-                <tr>
-                  <td>defaultValue</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      (string | number)[]
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>inputProps</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      InputProps&lt;input&gt;
-                    </span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="Input"
+        hash="inputComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.input.inputComponentProps.openCode}
+        code={componentPropsStates.input.inputComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'input.inputComponentProps.openCode',
+            !componentPropsStates.input.inputComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'onRef',
+            type: (
+              <span className="badge text-bg-secondary">
+                RefCallback&lt;input&gt;
+              </span>
+            ),
+            desc: tInputComponentProps('desc.onRef'),
+            default: '',
+          },
+          {
+            attr: 'size',
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
+            desc: tInputComponentProps('desc.size'),
+            default: '',
+          },
+          {
+            attr: 'nativeSize',
+            type: (
+              <span className="badge text-bg-secondary">
+                number | undefined
+              </span>
+            ),
+            desc: tInputComponentProps('desc.nativeSize'),
+            default: '',
+          },
+          {
+            attr: 'disabled',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('desc.disabled'),
+            default: '',
+          },
+          {
+            attr: 'readonly',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('desc.readonly'),
+            default: '',
+          },
+          {
+            attr: 'readonlyPlainText',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('desc.readonlyPlainText'),
+            default: '',
+          },
+          {
+            attr: 'color',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('desc.color'),
+            default: '',
+          },
+          {
+            attr: 'nativeColor',
+            type: (
+              <span className="badge text-bg-secondary">
+                string | undefined
+              </span>
+            ),
+            desc: tInputComponentProps('desc.nativeColor'),
+            default: '',
+          },
+          {
+            attr: 'startContent',
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tInputComponentProps('desc.startContent'),
+            default: '',
+          },
+          {
+            attr: 'endContent',
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tInputComponentProps('desc.endContent'),
+            default: '',
+          },
+          {
+            attr: 'startEndContentClasses',
+            type: (
+              <div className="d-flex flex-column gap-2">
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Key : container | start | end | component
+                  </span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Value : string | ((originalClass: string) =&gt; string |
+                    undefined)
+                  </span>
+                </div>
+              </div>
+            ),
+            desc: tInputComponentProps('desc.startEndContentClasses'),
+            default: '',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Textarea 组件属性"
-            hash="textareaComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">textarea</span>
-                  </td>
-                  <td></td>
-                  <td>textarea</td>
-                </tr>
-                <tr>
-                  <td>disabled</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>readonly</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="InputOtp"
+        hash="inputOtpComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.input.inputOtpComponentProps.openCode}
+        code={componentPropsStates.input.inputOtpComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'input.inputOtpComponentProps.openCode',
+            !componentPropsStates.input.inputOtpComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'length',
+            type: <span className="badge text-bg-secondary">number</span>,
+            desc: tInputOtpComponentProps('desc.length'),
+            default: '4',
+          },
+          {
+            attr: 'defaultValue',
+            type: (
+              <span className="badge text-bg-secondary">
+                (string | number)[]
+              </span>
+            ),
+            desc: tInputOtpComponentProps('desc.defaultValue'),
+            default: '-',
+          },
+          {
+            attr: 'inputProps',
+            type: (
+              <span className="badge text-bg-secondary">
+                Props&lt;input&gt;
+              </span>
+            ),
+            desc: tInputOtpComponentProps('desc.inputProps'),
+            default: '-',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Label 组件属性"
-            hash="labelComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">label</span>
-                  </td>
-                  <td></td>
-                  <td>label</td>
-                </tr>
-                <tr>
-                  <td>colFormLabel</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>inputGroupText</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Class</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="Textarea"
+        hash="textareaComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.input.textareaComponentProps.openCode}
+        code={componentPropsStates.input.textareaComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'input.textareaComponentProps.openCode',
+            !componentPropsStates.input.textareaComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'disabled',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextareaComponentProps('desc.disabled'),
+            default: '-',
+          },
+          {
+            attr: 'readonly',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextareaComponentProps('desc.readonly'),
+            default: '-',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="Text 组件属性"
-            hash="textComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>as</td>
-                  <td>
-                    <span className="badge text-bg-secondary">div</span>
-                    <span className="badge text-bg-secondary ms-1">span</span>
-                  </td>
-                  <td></td>
-                  <td>div</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="Label"
+        hash="labelComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.input.labelComponentProps.openCode}
+        code={componentPropsStates.input.labelComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'input.labelComponentProps.openCode',
+            !componentPropsStates.input.labelComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: 'colFormLabel',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tLabelComponentProps('desc.colFormLabel'),
+            default: '-',
+          },
+          {
+            attr: 'inputGroupText',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tLabelComponentProps('desc.inputGroupText'),
+            default: '-',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
 
-      <div className="card">
-        <div className="card-header">
-          <CustomSimpleCardLink
-            title="通用组件属性"
-            hash="generalComponentProps"
-          />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>render</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      (renderOptions) =&gt; ReactNode
-                    </span>
-                  </td>
-                  <td>Customize rendering logic</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>skipCompWrap</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Skip component wrapper</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>dropOldClass</td>
-                  <td>
-                    <span className="badge text-bg-secondary">boolean</span>
-                  </td>
-                  <td>Clear original class names</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>variables</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td>Style variables</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用属性" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                  <th scope="col">Default</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>className</td>
-                  <td>
-                    <span className="badge text-bg-secondary">string</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>style</td>
-                  <td>
-                    <span className="badge text-bg-secondary">object</span>
-                  </td>
-                  <td></td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="card-header border-top rounded-top">
-          <CustomSimpleCardLink title="通用事件" hash="generalProps" />
-        </div>
-        <div className="card-body">
-          <div className="table-responsive">
-            <table className="table tw-table-fixed">
-              <colgroup>
-                <col style={colgroup.attr} />
-                <col style={colgroup.type} />
-                <col style={colgroup.desc} />
-                <col style={colgroup.default} />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th scope="col">Attr</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Desc</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>onClick</td>
-                  <td>
-                    <span className="badge text-bg-secondary">
-                      MouseEventHandler
-                    </span>
-                  </td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <CustomSimpleCard.ComponentProps
+        title="Text"
+        hash="textComponentProps"
+        colgroup={colgroup}
+        isOpen={componentPropsStates.input.textComponentProps.openCode}
+        code={componentPropsStates.input.textComponentProps.code}
+        codeLanguage="typescript"
+        codeDisplayMode="direct"
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'input.textComponentProps.openCode',
+            !componentPropsStates.input.textComponentProps.openCode,
+          )
+        }
+        items={[
+          {
+            attr: '-',
+            type: '-',
+            desc: '-',
+            default: '-',
+          },
+        ]}
+      ></CustomSimpleCard.ComponentProps>
+
+      <GeneralComponentPropsCard
+        colgroup={colgroup}
+        isOpen={componentPropsStates.input.generalComponentProps.openCode}
+        code={componentPropsStates.input.generalComponentProps.code}
+        toggleCode={() =>
+          onClickUpdateComponentPropsState(
+            'input.generalComponentProps.openCode',
+            !componentPropsStates.input.generalComponentProps.openCode,
+          )
+        }
+      ></GeneralComponentPropsCard>
 
       <AboutComponent />
     </div>

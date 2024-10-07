@@ -1,0 +1,13 @@
+{
+  "basic": "Basic",
+  "size": "Size",
+  "text": "Text",
+  "disabled": "Disabled",
+  "readonly": "Readonly",
+  "readonlyPlainText": "Readonly plain text",
+  "file": "File",
+  "color": "Color",
+  "datalist": "Datalist",
+  "startEndContent": "Prefix and suffix",
+  "otp": "OTP"
+}

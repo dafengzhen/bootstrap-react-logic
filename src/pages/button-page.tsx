@@ -8,10 +8,10 @@ import CustomSimpleCard from '@src/components/custom-simple-card';
 import AboutComponent from '@components/about-component.tsx';
 import { updateState } from '@src/tools';
 import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
-import selectComponentPropsCodes from '@assets/codes/select/component-props.ts';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
 import generalCodes from '@assets/codes/general';
+import buttonComponentPropsCodes from '@assets/codes/button/component-props.ts';
 
 interface IStates {
   button: {
@@ -134,7 +134,7 @@ export default function ButtonPage() {
       button: {
         buttonComponentProps: {
           openCode: false,
-          code: selectComponentPropsCodes.selectComponentProps.code.trim(),
+          code: buttonComponentPropsCodes.buttonComponentProps.code.trim(),
         },
         generalComponentProps: {
           openCode: false,
@@ -523,6 +523,12 @@ export default function ButtonPage() {
           )
         }
         items={[
+          {
+            attr: 'as',
+            type: <span className="badge text-bg-secondary">button | a</span>,
+            desc: tButtonComponentProps('desc.as'),
+            default: 'button',
+          },
           {
             attr: 'variant',
             type: (
