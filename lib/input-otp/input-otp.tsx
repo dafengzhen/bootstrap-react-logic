@@ -38,6 +38,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
     style,
     length = 4,
     defaultValue,
+    maxLength = 1,
     inputProps,
     ...rest
   } = props;
@@ -99,14 +100,16 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
           idx === index ? { ...otpItem, value } : otpItem,
         );
 
-        if (value && index < newOtp.length - 1) {
-          focusInput(index + 1);
+        if (value.length === maxLength) {
+          if (value && index < newOtp.length - 1) {
+            focusInput(index + 1);
+          }
         }
 
         return newOtp;
       });
     },
-    [focusInput],
+    [focusInput, maxLength],
   );
 
   const handleKeyDown = useCallback(
@@ -150,7 +153,6 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
 
         return (
           <Input
-            maxLength={1}
             className="text-center"
             {...mergeProps(_inputProps, {
               onRef: (instance: HTMLInputElement | null | undefined) => {
@@ -170,6 +172,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
                 _inputProps?.onFocus?.();
               },
             })}
+            maxLength
             key={item.id}
             value={item.value}
           />

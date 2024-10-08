@@ -40,6 +40,8 @@ import inputGroupTextComponentPropsEn from './en/component/input-group-text-comp
 import inputGroupTextComponentPropsZh from './zh/component/input-group-text-component-props.json';
 import inputGroupPageEn from './en/component/input-group-page.json';
 import inputGroupPageZh from './zh/component/input-group-page.json';
+import indexPageEn from './en/component/index-page.json';
+import indexPageZh from './zh/component/index-page.json';
 
 const resources = {
   en: {
@@ -63,6 +65,7 @@ const resources = {
     inputGroupComponentProps: inputGroupComponentPropsEn,
     inputGroupTextComponentProps: inputGroupTextComponentPropsEn,
     inputGroupPage: inputGroupPageEn,
+    indexPage: indexPageEn,
   },
   zh: {
     index: indexEn,
@@ -85,6 +88,7 @@ const resources = {
     inputGroupComponentProps: inputGroupComponentPropsZh,
     inputGroupTextComponentProps: inputGroupTextComponentPropsZh,
     inputGroupPage: inputGroupPageZh,
+    indexPage: indexPageZh,
   },
 };
 
