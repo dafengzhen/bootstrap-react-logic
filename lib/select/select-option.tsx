@@ -9,18 +9,8 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const SelectOption = function SelectOption<T extends ElementType = 'option'>(
-  props: SelectOptionProps<T>,
-) {
-  const {
-    as: Component = 'option',
-    variables,
-    className,
-    style,
-    children,
-    disabled,
-    ...rest
-  } = props;
+const SelectOption = function SelectOption<T extends ElementType = 'option'>(props: SelectOptionProps<T>) {
+  const { as: Component = 'option', variables, className, style, children, disabled, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(className);

@@ -1,10 +1,4 @@
-import {
-  type ElementRef,
-  type ElementType,
-  type HTMLInputTypeAttribute,
-  type LegacyRef,
-  useMemo,
-} from 'react';
+import { type ElementRef, type ElementType, type HTMLInputTypeAttribute, type LegacyRef, useMemo } from 'react';
 import type { InputProps } from './types.ts';
 import {
   clsxUnique,
@@ -47,8 +41,7 @@ const Input = function Input<T extends ElementType = 'input'>(
   const renderOptions = useMemo(() => {
     const finalClass = processClassName(
       clsxUnique(
-        !dropOldClass &&
-          (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
+        !dropOldClass && (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
         color && 'form-control-color',
         size && `form-control-${size}`,
         className,
@@ -56,9 +49,7 @@ const Input = function Input<T extends ElementType = 'input'>(
       [
         (classNames) => {
           if (type === 'checkbox' || type === 'radio') {
-            return classNames.filter(
-              (className) => className !== 'form-control',
-            );
+            return classNames.filter((className) => className !== 'form-control');
           }
         },
       ],
@@ -84,18 +75,7 @@ const Input = function Input<T extends ElementType = 'input'>(
       },
       isValueValid,
     );
-  }, [
-    dropOldClass,
-    readonlyPlainText,
-    color,
-    size,
-    className,
-    variables,
-    style,
-    nativeSize,
-    nativeColor,
-    type,
-  ]);
+  }, [dropOldClass, readonlyPlainText, color, size, className, variables, style, nativeSize, nativeColor, type]);
 
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {
@@ -117,12 +97,7 @@ const Input = function Input<T extends ElementType = 'input'>(
             {startContent}
           </div>
         )}
-        <Component
-          {...rest}
-          {...renderOptions}
-          data-slot-component=""
-          className={slotClassName.component}
-        >
+        <Component {...rest} {...renderOptions} data-slot-component="" className={slotClassName.component}>
           {children}
         </Component>
         {endContent && (
@@ -135,11 +110,7 @@ const Input = function Input<T extends ElementType = 'input'>(
   }
 
   return (
-    <Component
-      {...rest}
-      {...renderOptions}
-      ref={onRef as LegacyRef<ElementRef<'input'>>}
-    >
+    <Component {...rest} {...renderOptions} ref={onRef as LegacyRef<ElementRef<'input'>>}>
       {children}
     </Component>
   );

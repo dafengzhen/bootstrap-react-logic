@@ -62,8 +62,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof ButtonVariableEnum> & {
   disabled?: boolean;
 };
 
-export type ButtonProps<T extends ElementType> = PropsWithoutRef<
-  Props<T>,
-  T,
-  typeof ButtonVariableEnum
->;
+export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof ButtonVariableEnum>;

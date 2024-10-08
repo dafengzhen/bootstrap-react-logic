@@ -21,11 +21,7 @@ export default function AboutComponent() {
             <Trans
               t={t}
               i18nKey="p3"
-              components={[
-                <code>className</code>,
-                <code>style</code>,
-                <code>slot</code>,
-              ]}
+              components={[<code>className</code>, <code>style</code>, <code>slot</code>]}
             ></Trans>
           </p>
           <p className="small">
@@ -36,11 +32,7 @@ export default function AboutComponent() {
               t={t}
               i18nKey="p5"
               components={[
-                <a
-                  href="https://github.com/dafengzhen/bootstrap-react-logic/issues"
-                  target="_blank"
-                  className="small"
-                >
+                <a href="https://github.com/dafengzhen/bootstrap-react-logic/issues" target="_blank" className="small">
                   issue
                 </a>,
               ]}

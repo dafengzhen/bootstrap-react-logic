@@ -8,12 +8,7 @@ import { useTranslation } from 'react-i18next';
 const onClickClipboard = (code?: string) => {
   if (code !== undefined && code !== null && code !== '') {
     const _code = code.trim();
-    if (
-      _code === 'Nodata' ||
-      _code === 'nodata' ||
-      _code === 'TODO' ||
-      _code === 'todo'
-    ) {
+    if (_code === 'Nodata' || _code === 'nodata' || _code === 'TODO' || _code === 'todo') {
       alert(_code);
       return;
     }
@@ -96,10 +91,7 @@ const CustomSimpleCard = ({
           <div className="d-flex gap-2">
             <i
               title="Code"
-              className={clsx(
-                'bi tw-cursor-pointer',
-                isOpen ? 'bi-code-slash text-primary' : 'bi-code',
-              )}
+              className={clsx('bi tw-cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
               onClick={toggleCode}
             ></i>
             <i
@@ -109,42 +101,27 @@ const CustomSimpleCard = ({
             ></i>
             <i
               title="Full / Full Exit"
-              className={clsx(
-                'bi tw-cursor-pointer',
-                fullscreen
-                  ? 'bi-fullscreen-exit text-primary'
-                  : 'bi-fullscreen',
-              )}
+              className={clsx('bi tw-cursor-pointer', fullscreen ? 'bi-fullscreen-exit text-primary' : 'bi-fullscreen')}
               onClick={() => onClickFullscreen(fullscreenState)}
             ></i>
             <i
               title="Center / Full"
               className={clsx(
                 'bi tw-cursor-pointer',
-                center
-                  ? 'bi-fullscreen-exit text-primary'
-                  : 'bi-arrows-fullscreen',
+                center ? 'bi-fullscreen-exit text-primary' : 'bi-arrows-fullscreen',
               )}
               onClick={() => onClickLayout(layoutState)}
             ></i>
 
             <i
               title="Light / Dark"
-              className={clsx(
-                'bi tw-cursor-pointer',
-                dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high',
-              )}
+              className={clsx('bi tw-cursor-pointer', dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high')}
               onClick={() => onClickTheme(themeState)}
             ></i>
 
             <i
               title="En / Zh"
-              className={clsx(
-                'bi tw-cursor-pointer',
-                language !== 'en'
-                  ? 'bi-translate text-primary'
-                  : 'bi-translate',
-              )}
+              className={clsx('bi tw-cursor-pointer', language !== 'en' ? 'bi-translate text-primary' : 'bi-translate')}
               onClick={() => onClickLanguage(i18n)}
             ></i>
           </div>
@@ -153,13 +130,7 @@ const CustomSimpleCard = ({
       <div className="card-body">{children}</div>
       <div className={clsx('card-footer', !isOpen && 'd-none')}>
         <pre>
-          <code
-            className={clsx(
-              codeLanguage ? `language-${codeLanguage}` : 'language-html',
-            )}
-          >
-            {code ?? 'TODO'}
-          </code>
+          <code className={clsx(codeLanguage ? `language-${codeLanguage}` : 'language-html')}>{code ?? 'TODO'}</code>
         </pre>
       </div>
     </div>
@@ -229,10 +200,7 @@ const ComponentProps = ({
               <div className="d-flex gap-2">
                 <i
                   title="Code"
-                  className={clsx(
-                    'bi tw-cursor-pointer',
-                    isOpen ? 'bi-code-slash text-primary' : 'bi-code',
-                  )}
+                  className={clsx('bi tw-cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
                   onClick={toggleCode}
                 ></i>
                 <i
@@ -244,9 +212,7 @@ const ComponentProps = ({
                   title="Full / Full Exit"
                   className={clsx(
                     'bi tw-cursor-pointer',
-                    fullscreen
-                      ? 'bi-fullscreen-exit text-primary'
-                      : 'bi-fullscreen',
+                    fullscreen ? 'bi-fullscreen-exit text-primary' : 'bi-fullscreen',
                   )}
                   onClick={() => onClickFullscreen(fullscreenState)}
                 ></i>
@@ -254,9 +220,7 @@ const ComponentProps = ({
                   title="Center / Full"
                   className={clsx(
                     'bi tw-cursor-pointer',
-                    center
-                      ? 'bi-fullscreen-exit text-primary'
-                      : 'bi-arrows-fullscreen',
+                    center ? 'bi-fullscreen-exit text-primary' : 'bi-arrows-fullscreen',
                   )}
                   onClick={() => onClickLayout(layoutState)}
                 ></i>
@@ -265,9 +229,7 @@ const ComponentProps = ({
                   title="Light / Dark"
                   className={clsx(
                     'bi tw-cursor-pointer',
-                    dark
-                      ? 'bi-moon-stars-fill text-primary'
-                      : 'bi-brightness-high',
+                    dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high',
                   )}
                   onClick={() => onClickTheme(themeState)}
                 ></i>
@@ -276,21 +238,14 @@ const ComponentProps = ({
                   title="En / Zh"
                   className={clsx(
                     'bi tw-cursor-pointer',
-                    language !== 'en'
-                      ? 'bi-translate text-primary'
-                      : 'bi-translate',
+                    language !== 'en' ? 'bi-translate text-primary' : 'bi-translate',
                   )}
                   onClick={() => onClickLanguage(i18n)}
                 ></i>
               </div>
             </div>
           </div>
-          <div
-            className={clsx(
-              'card-body',
-              codeDisplayMode === 'direct' && isOpen && 'd-none',
-            )}
-          >
+          <div className={clsx('card-body', codeDisplayMode === 'direct' && isOpen && 'd-none')}>
             <div className="table-responsive">
               <table className="table tw-table-fixed">
                 <colgroup>
@@ -319,9 +274,7 @@ const ComponentProps = ({
                 <tbody>
                   {items.map((item, index) => {
                     return (
-                      <tr
-                        key={typeof item.attr === 'string' ? item.attr : index}
-                      >
+                      <tr key={typeof item.attr === 'string' ? item.attr : index}>
                         <td>{item.attr}</td>
                         <td>{item.type}</td>
                         <td>{item.desc}</td>
@@ -337,22 +290,12 @@ const ComponentProps = ({
       )}
 
       <div
-        className={clsx(
-          'card-footer',
-          codeDisplayMode === 'direct' && isOpen && 'border-top-0',
-          {
-            'd-none': !isOpen,
-          },
-        )}
+        className={clsx('card-footer', codeDisplayMode === 'direct' && isOpen && 'border-top-0', {
+          'd-none': !isOpen,
+        })}
       >
         <pre>
-          <code
-            className={clsx(
-              codeLanguage ? `language-${codeLanguage}` : 'language-html',
-            )}
-          >
-            {code ?? 'TODO'}
-          </code>
+          <code className={clsx(codeLanguage ? `language-${codeLanguage}` : 'language-html')}>{code ?? 'TODO'}</code>
         </pre>
       </div>
     </div>

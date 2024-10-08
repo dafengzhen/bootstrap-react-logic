@@ -9,24 +9,11 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const InputGroupText = function InputGroupText<T extends ElementType = 'span'>(
-  props: InputGroupTextProps<T>,
-) {
-  const {
-    as: Component = 'span',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    children,
-    ...rest
-  } = props;
+const InputGroupText = function InputGroupText<T extends ElementType = 'span'>(props: InputGroupTextProps<T>) {
+  const { as: Component = 'span', dropOldClass, variables, className, style, children, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
-      !dropOldClass && 'input-group-text',
-      className,
-    );
+    const finalClass = clsxUnique(!dropOldClass && 'input-group-text', className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = InputVariablesEnum[key];

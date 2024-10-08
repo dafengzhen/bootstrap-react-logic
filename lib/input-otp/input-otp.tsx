@@ -27,9 +27,7 @@ interface IOtp {
   value: string;
 }
 
-const InputOtp = function InputOtp<T extends ElementType = 'div'>(
-  props: InputOtpProps<T>,
-) {
+const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOtpProps<T>) {
   const {
     as: Component = 'div',
     dropOldClass,
@@ -50,9 +48,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
     })),
   );
 
-  const otpRefs = useRef<Map<string, HTMLInputElement | null | undefined>>(
-    new Map(),
-  );
+  const otpRefs = useRef<Map<string, HTMLInputElement | null | undefined>>(new Map());
 
   const mountedRef = useRef(false);
 
@@ -80,10 +76,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
       ...style,
     };
 
-    return filterOptions(
-      { className: finalClass, style: finalStyle },
-      isValueValid,
-    );
+    return filterOptions({ className: finalClass, style: finalStyle }, isValueValid);
   }, [dropOldClass, className, variables, style]);
 
   const focusInput = useCallback(
@@ -96,9 +89,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
   const handleChange = useCallback(
     (index: number, value: string) => {
       setOtp((prevOtp) => {
-        const newOtp = prevOtp.map((otpItem, idx) =>
-          idx === index ? { ...otpItem, value } : otpItem,
-        );
+        const newOtp = prevOtp.map((otpItem, idx) => (idx === index ? { ...otpItem, value } : otpItem));
 
         if (value.length === maxLength) {
           if (value && index < newOtp.length - 1) {
@@ -119,10 +110,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
         focusInput(index - 1);
       }
 
-      if (
-        (key === 'ArrowLeft' && index > 0) ||
-        (key === 'ArrowRight' && index < otp.length - 1)
-      ) {
+      if ((key === 'ArrowLeft' && index > 0) || (key === 'ArrowRight' && index < otp.length - 1)) {
         focusInput(key === 'ArrowLeft' ? index - 1 : index + 1);
         e.preventDefault();
       }
@@ -140,12 +128,9 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(
   return (
     <Component {...rest} {...renderOptions}>
       {otp.map((item, index) => {
-        const onRef = (instance: HTMLInputElement | null | undefined) =>
-          otpRefs.current.set(item.id, instance);
-        const onChange = (e: ChangeEvent<HTMLInputElement>) =>
-          handleChange(index, e.target.value as string);
-        const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) =>
-          handleKeyDown(index, e);
+        const onRef = (instance: HTMLInputElement | null | undefined) => otpRefs.current.set(item.id, instance);
+        const onChange = (e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value as string);
+        const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e);
         const onFocus = () => handleFocus(index);
 
         /* eslint-disable @typescript-eslint/no-explicit-any */

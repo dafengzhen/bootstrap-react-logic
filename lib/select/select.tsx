@@ -10,9 +10,7 @@ import {
 } from '../tools';
 import SelectOption from './select-option.tsx';
 
-const Select = function Select<T extends ElementType = 'select'>(
-  props: SelectProps<T>,
-) {
+const Select = function Select<T extends ElementType = 'select'>(props: SelectProps<T>) {
   const {
     as: Component = 'select',
     dropOldClass,
@@ -27,11 +25,7 @@ const Select = function Select<T extends ElementType = 'select'>(
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
-      !dropOldClass && 'form-select',
-      size && `form-select-${size}`,
-      className,
-    );
+    const finalClass = clsxUnique(!dropOldClass && 'form-select', size && `form-select-${size}`, className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = InputVariablesEnum[key];

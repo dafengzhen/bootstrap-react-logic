@@ -63,9 +63,7 @@ interface IComponentPropsStates {
 export default function ButtonGroupPage() {
   useHighlightCode();
   const navigation = useNavigation();
-  const { t: tButtonGroupComponentProps } = useTranslation([
-    'buttonGroupComponentProps',
-  ]);
+  const { t: tButtonGroupComponentProps } = useTranslation(['buttonGroupComponentProps']);
   const { t: tButtonGroupPage } = useTranslation(['buttonGroupPage']);
 
   const [states, setStates] = useState<IStates>({
@@ -100,19 +98,18 @@ export default function ButtonGroupPage() {
       },
     },
   });
-  const [componentPropsStates, setComponentPropsStates] =
-    useState<IComponentPropsStates>({
-      buttonGroup: {
-        buttonGroupComponentProps: {
-          openCode: false,
-          code: buttonGroupComponentPropsCodes.buttonGroupComponentProps.code.trim(),
-        },
-        generalComponentProps: {
-          openCode: false,
-          code: generalCodes.generalComponentProps.code.trim(),
-        },
+  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
+    buttonGroup: {
+      buttonGroupComponentProps: {
+        openCode: false,
+        code: buttonGroupComponentPropsCodes.buttonGroupComponentProps.code.trim(),
       },
-    });
+      generalComponentProps: {
+        openCode: false,
+        code: generalCodes.generalComponentProps.code.trim(),
+      },
+    },
+  });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -129,19 +126,11 @@ export default function ButtonGroupPage() {
   });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
-  function onClickUpdateState(
-    k: NestedKeys<IStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
     updateState(setStates, k, v, c);
   }
 
-  function onClickUpdateComponentPropsState(
-    k: NestedKeys<IComponentPropsStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
     updateState(setComponentPropsStates, k, v, c);
   }
 
@@ -159,12 +148,7 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('basic')}
         hash="basic"
         isOpen={states.buttonGroup.basic.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.basic.openCode',
-            !states.buttonGroup.basic.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.basic.openCode', !states.buttonGroup.basic.openCode)}
         code={states.buttonGroup.basic.code}
       >
         <div className="d-flex flex-column gap-2 overflow-x-auto text-nowrap">
@@ -212,42 +196,22 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('checkbox')}
         hash="checkbox"
         isOpen={states.buttonGroup.checkbox.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.checkbox.openCode',
-            !states.buttonGroup.checkbox.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.checkbox.openCode', !states.buttonGroup.checkbox.openCode)}
         code={states.buttonGroup.checkbox.code}
       >
         <div className="overflow-x-auto text-nowrap">
           <ButtonGroup>
-            <input
-              type="checkbox"
-              className="btn-check"
-              id="btncheck1"
-              autoComplete="off"
-            />
+            <input type="checkbox" className="btn-check" id="btncheck1" autoComplete="off" />
             <label className="btn btn-outline-primary" htmlFor="btncheck1">
               Checkbox 1
             </label>
 
-            <input
-              type="checkbox"
-              className="btn-check"
-              id="btncheck2"
-              autoComplete="off"
-            />
+            <input type="checkbox" className="btn-check" id="btncheck2" autoComplete="off" />
             <label className="btn btn-outline-primary" htmlFor="btncheck2">
               Checkbox 2
             </label>
 
-            <input
-              type="checkbox"
-              className="btn-check"
-              id="btncheck3"
-              autoComplete="off"
-            />
+            <input type="checkbox" className="btn-check" id="btncheck3" autoComplete="off" />
             <label className="btn btn-outline-primary" htmlFor="btncheck3">
               Checkbox 3
             </label>
@@ -259,12 +223,7 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('radio')}
         hash="radio"
         isOpen={states.buttonGroup.radio.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.radio.openCode',
-            !states.buttonGroup.radio.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.radio.openCode', !states.buttonGroup.radio.openCode)}
         code={states.buttonGroup.radio.code}
       >
         <div className="overflow-x-auto text-nowrap">
@@ -281,24 +240,12 @@ export default function ButtonGroupPage() {
               Radio 1
             </label>
 
-            <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio2"
-              autoComplete="off"
-            />
+            <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off" />
             <label className="btn btn-outline-primary" htmlFor="btnradio2">
               Radio 2
             </label>
 
-            <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio3"
-              autoComplete="off"
-            />
+            <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autoComplete="off" />
             <label className="btn btn-outline-primary" htmlFor="btnradio3">
               Radio 3
             </label>
@@ -310,12 +257,7 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('toolbar')}
         hash="toolbar"
         isOpen={states.buttonGroup.toolbar.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.toolbar.openCode',
-            !states.buttonGroup.toolbar.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.toolbar.openCode', !states.buttonGroup.toolbar.openCode)}
         code={states.buttonGroup.toolbar.code}
       >
         <div className="d-flex flex-column gap-2">
@@ -394,12 +336,7 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('size')}
         hash="size"
         isOpen={states.buttonGroup.size.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.size.openCode',
-            !states.buttonGroup.size.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.size.openCode', !states.buttonGroup.size.openCode)}
         code={states.buttonGroup.size.code}
       >
         <div className="d-flex flex-column gap-2 overflow-x-auto text-nowrap">
@@ -431,12 +368,7 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('vertical')}
         hash="vertical"
         isOpen={states.buttonGroup.vertical.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.vertical.openCode',
-            !states.buttonGroup.vertical.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.vertical.openCode', !states.buttonGroup.vertical.openCode)}
         code={states.buttonGroup.vertical.code}
       >
         <div className="d-flex gap-2">
@@ -462,23 +394,11 @@ export default function ButtonGroupPage() {
               <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
                 Radio 1
               </label>
-              <input
-                type="radio"
-                className="btn-check"
-                name="vbtn-radio"
-                id="vbtn-radio2"
-                autoComplete="off"
-              />
+              <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio2" autoComplete="off" />
               <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
                 Radio 2
               </label>
-              <input
-                type="radio"
-                className="btn-check"
-                name="vbtn-radio"
-                id="vbtn-radio3"
-                autoComplete="off"
-              />
+              <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio3" autoComplete="off" />
               <label className="btn btn-outline-danger" htmlFor="vbtn-radio3">
                 Radio 3
               </label>
@@ -491,12 +411,7 @@ export default function ButtonGroupPage() {
         title={tButtonGroupPage('example')}
         hash="example"
         isOpen={states.buttonGroup.example.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'buttonGroup.example.openCode',
-            !states.buttonGroup.example.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('buttonGroup.example.openCode', !states.buttonGroup.example.openCode)}
         code={states.buttonGroup.example.code}
         codeLanguage="typescript"
       >
@@ -523,17 +438,14 @@ export default function ButtonGroupPage() {
         title="ButtonGroup"
         hash="buttonGroupComponentProps"
         colgroup={colgroup}
-        isOpen={
-          componentPropsStates.buttonGroup.buttonGroupComponentProps.openCode
-        }
+        isOpen={componentPropsStates.buttonGroup.buttonGroupComponentProps.openCode}
         code={componentPropsStates.buttonGroup.buttonGroupComponentProps.code}
         codeLanguage="typescript"
         codeDisplayMode="direct"
         toggleCode={() =>
           onClickUpdateComponentPropsState(
             'buttonGroup.buttonGroupComponentProps.openCode',
-            !componentPropsStates.buttonGroup.buttonGroupComponentProps
-              .openCode,
+            !componentPropsStates.buttonGroup.buttonGroupComponentProps.openCode,
           )
         }
         items={[

@@ -10,15 +10,7 @@ import {
 } from '../tools';
 
 const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
-  const {
-    as: Component = 'div',
-    dropOldClass,
-    variables,
-    children,
-    className,
-    style,
-    ...rest
-  } = props;
+  const { as: Component = 'div', dropOldClass, variables, children, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-text', className);

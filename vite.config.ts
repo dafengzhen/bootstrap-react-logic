@@ -28,11 +28,7 @@ export default defineConfig({
             return 'highlight';
           } else if (id.includes('react-dom')) {
             return 'react-dom';
-          } else if (
-            id.includes('@remix-run') ||
-            id.includes('react-router-dom') ||
-            id.includes('react-router')
-          ) {
+          } else if (id.includes('@remix-run') || id.includes('react-router-dom') || id.includes('react-router')) {
             return 'react-router';
           }
         },

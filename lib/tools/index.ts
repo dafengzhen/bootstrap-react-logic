@@ -13,12 +13,7 @@ export type {
 
 export type { ReactRef } from './refs';
 
-export {
-  VARIABLE_PREFIX,
-  VARIABLE_BS_PREFIX,
-  DEVELOPMENT,
-  EMPTY_GROUP_FLAG,
-} from './constants';
+export { VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT, EMPTY_GROUP_FLAG } from './constants';
 
 export {
   ButtonVariableEnum,

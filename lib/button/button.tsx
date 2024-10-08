@@ -22,9 +22,7 @@ function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
   }
 }
 
-const Button = function Button<T extends ElementType = 'button' | 'a'>(
-  props: ButtonProps<T>,
-) {
+const Button = function Button<T extends ElementType = 'button' | 'a'>(props: ButtonProps<T>) {
   const {
     as: Component = 'button',
     dropOldClass,
@@ -79,22 +77,10 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(
       ...style,
     } as CSSProperties;
     const finalRole = getValue(role, Component === 'a' ? 'button' : undefined);
-    const finalDisabled = getValue(
-      Component === 'button' && disabled,
-      Component === 'a' ? undefined : disabled,
-    );
-    const finalAriaDisabled = getValue(
-      ariaDisabled,
-      disabled ? 'true' : undefined,
-    );
-    const finalAriaPressed = getValue(
-      ariaPressed,
-      className?.includes('active') ? 'true' : undefined,
-    );
-    const finalTabIndex = getValue(
-      tabIndex,
-      Component === 'a' && disabled ? -1 : undefined,
-    );
+    const finalDisabled = getValue(Component === 'button' && disabled, Component === 'a' ? undefined : disabled);
+    const finalAriaDisabled = getValue(ariaDisabled, disabled ? 'true' : undefined);
+    const finalAriaPressed = getValue(ariaPressed, className?.includes('active') ? 'true' : undefined);
+    const finalTabIndex = getValue(tabIndex, Component === 'a' && disabled ? -1 : undefined);
 
     return filterOptions(
       {
@@ -130,10 +116,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(
     <Component {...rest} {...renderOptions}>
       {isLoading && !startContent && (
         <>
-          <span
-            className="spinner-border spinner-border-sm me-1"
-            aria-hidden="true"
-          ></span>
+          <span className="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
           <span className="visually-hidden" role="status">
             Loading...
           </span>

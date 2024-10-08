@@ -1,10 +1,5 @@
 import type { ElementType } from 'react';
-import type {
-  BaseProps,
-  PropsWithoutRef,
-  SelectMultipleVariablesEnum,
-  SlotValue,
-} from '../tools';
+import type { BaseProps, PropsWithoutRef, SelectMultipleVariablesEnum, SlotValue } from '../tools';
 
 type SlotValueKeys =
   | 'mainContainer'
@@ -30,10 +25,7 @@ export interface IOption {
   text: string;
 }
 
-type Props<T extends ElementType> = BaseProps<
-  T,
-  typeof SelectMultipleVariablesEnum
-> & {
+type Props<T extends ElementType> = BaseProps<T, typeof SelectMultipleVariablesEnum> & {
   /**
    * disabled.
    */

@@ -23,11 +23,7 @@ export default function IndexPage() {
           <div className="d-flex align-items-center justify-content-between">
             <div>Getting started</div>
             <div className="d-flex gap-2">
-              <a
-                href="https://github.com/dafengzhen/bootstrap-react-logic"
-                target="_blank"
-                className="link-dark"
-              >
+              <a href="https://github.com/dafengzhen/bootstrap-react-logic" target="_blank" className="link-dark">
                 <i className="bi bi-github tw-cursor-pointer"></i>
               </a>
 
@@ -35,9 +31,7 @@ export default function IndexPage() {
                 title="En / Zh"
                 className={clsx(
                   'bi tw-cursor-pointer',
-                  language !== 'en'
-                    ? 'bi-translate text-primary'
-                    : 'bi-translate',
+                  language !== 'en' ? 'bi-translate text-primary' : 'bi-translate',
                 )}
                 onClick={() => onClickLanguage(i18n)}
               ></i>
@@ -104,9 +98,7 @@ export default function IndexPage() {
               <div className="user-select-none">#</div>
               <pre>
                 <code className="nohighlight">
-                  <span className="text-danger">
-                    &lt;Button variant="primary"&gt;Primary&lt;/Button&gt;
-                  </span>
+                  <span className="text-danger">&lt;Button variant="primary"&gt;Primary&lt;/Button&gt;</span>
                 </code>
               </pre>
             </div>

@@ -129,19 +129,18 @@ export default function ButtonPage() {
       },
     },
   });
-  const [componentPropsStates, setComponentPropsStates] =
-    useState<IComponentPropsStates>({
-      button: {
-        buttonComponentProps: {
-          openCode: false,
-          code: buttonComponentPropsCodes.buttonComponentProps.code.trim(),
-        },
-        generalComponentProps: {
-          openCode: false,
-          code: generalCodes.generalComponentProps.code.trim(),
-        },
+  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
+    button: {
+      buttonComponentProps: {
+        openCode: false,
+        code: buttonComponentPropsCodes.buttonComponentProps.code.trim(),
       },
-    });
+      generalComponentProps: {
+        openCode: false,
+        code: generalCodes.generalComponentProps.code.trim(),
+      },
+    },
+  });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -158,19 +157,11 @@ export default function ButtonPage() {
   });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
-  function onClickUpdateState(
-    k: NestedKeys<IStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
     updateState(setStates, k, v, c);
   }
 
-  function onClickUpdateComponentPropsState(
-    k: NestedKeys<IComponentPropsStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
     updateState(setComponentPropsStates, k, v, c);
   }
 
@@ -188,12 +179,7 @@ export default function ButtonPage() {
         title={tButtonPage('variant')}
         hash="variant"
         isOpen={states.button.variant.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.variant.openCode',
-            !states.button.variant.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.variant.openCode', !states.button.variant.openCode)}
         code={states.button.variant.code}
       >
         <div className="d-flex flex-wrap gap-2">
@@ -213,12 +199,7 @@ export default function ButtonPage() {
         title={tButtonPage('outline')}
         hash="outline"
         isOpen={states.button.outline.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.outline.openCode',
-            !states.button.outline.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.outline.openCode', !states.button.outline.openCode)}
         code={states.button.outline.code}
       >
         <div className="d-flex flex-wrap gap-2">
@@ -237,12 +218,7 @@ export default function ButtonPage() {
         title={tButtonPage('rounded')}
         hash="rounded"
         isOpen={states.button.rounded.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.rounded.openCode',
-            !states.button.rounded.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.rounded.openCode', !states.button.rounded.openCode)}
         code={states.button.rounded.code}
       >
         <div className="d-flex flex-wrap gap-2">
@@ -277,12 +253,7 @@ export default function ButtonPage() {
         title={tButtonPage('size')}
         hash="size"
         isOpen={states.button.size.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.size.openCode',
-            !states.button.size.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.size.openCode', !states.button.size.openCode)}
         code={states.button.size.code}
       >
         <div className="d-flex flex-wrap align-items-center gap-2">
@@ -315,12 +286,7 @@ export default function ButtonPage() {
         title={tButtonPage('disabledState')}
         hash="disabledState"
         isOpen={states.button.disabledState.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.disabledState.openCode',
-            !states.button.disabledState.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.disabledState.openCode', !states.button.disabledState.openCode)}
         code={states.button.disabledState.code}
       >
         <div className="d-flex flex-wrap align-items-center gap-2">
@@ -346,12 +312,7 @@ export default function ButtonPage() {
         title={tButtonPage('blockButton')}
         hash="blockButton"
         isOpen={states.button.blockButton.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.blockButton.openCode',
-            !states.button.blockButton.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.blockButton.openCode', !states.button.blockButton.openCode)}
         code={states.button.blockButton.code}
       >
         <div className="d-flex flex-wrap flex-column gap-4">
@@ -376,12 +337,7 @@ export default function ButtonPage() {
         title={tButtonPage('toggleState')}
         hash="toggleState"
         isOpen={states.button.toggleState.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.toggleState.openCode',
-            !states.button.toggleState.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.toggleState.openCode', !states.button.toggleState.openCode)}
         code={states.button.toggleState.code}
       >
         <div className="d-flex flex-wrap gap-2">
@@ -412,12 +368,7 @@ export default function ButtonPage() {
         title={tButtonPage('isLoading')}
         hash="isLoading"
         isOpen={states.button.isLoading.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.isLoading.openCode',
-            !states.button.isLoading.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.isLoading.openCode', !states.button.isLoading.openCode)}
         code={states.button.isLoading.code}
       >
         <div className="d-flex flex-wrap gap-2">
@@ -434,25 +385,14 @@ export default function ButtonPage() {
         title={tButtonPage('icon')}
         hash="icon"
         isOpen={states.button.icon.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.icon.openCode',
-            !states.button.icon.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.icon.openCode', !states.button.icon.openCode)}
         code={states.button.icon.code}
       >
         <div className="d-flex flex-wrap gap-2">
-          <Button
-            variant="primary"
-            startContent={<i className="bi bi-arrow-up me-1"></i>}
-          >
+          <Button variant="primary" startContent={<i className="bi bi-arrow-up me-1"></i>}>
             Up
           </Button>
-          <Button
-            variant="secondary"
-            endContent={<i className="bi bi-arrow-down ms-1"></i>}
-          >
+          <Button variant="secondary" endContent={<i className="bi bi-arrow-down ms-1"></i>}>
             Down
           </Button>
           <Button variant="success">
@@ -465,12 +405,7 @@ export default function ButtonPage() {
         title={tButtonPage('customStyle')}
         hash="customStyle"
         isOpen={states.button.customStyle.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.customStyle.openCode',
-            !states.button.customStyle.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.customStyle.openCode', !states.button.customStyle.openCode)}
         code={states.button.customStyle.code}
       >
         <div className="d-flex flex-wrap gap-2">
@@ -484,22 +419,13 @@ export default function ButtonPage() {
         title={tButtonPage('example')}
         hash="example"
         isOpen={states.button.example.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'button.example.openCode',
-            !states.button.example.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('button.example.openCode', !states.button.example.openCode)}
         code={states.button.example.code}
         codeLanguage="typescript"
       >
         <div className="d-flex flex-wrap gap-2 overflow-x-auto text-nowrap">
           <div>
-            <Button
-              size={mySize}
-              variant="primary"
-              onClick={onClickChangeSizeTest}
-            >
+            <Button size={mySize} variant="primary" onClick={onClickChangeSizeTest}>
               Click Change Button Size ({mySize})
             </Button>
           </div>
@@ -533,23 +459,15 @@ export default function ButtonPage() {
             attr: 'variant',
             type: (
               <div className="d-flex flex-column">
-                {[
-                  'primary',
-                  'secondary',
-                  'success',
-                  'info',
-                  'warning',
-                  'danger',
-                  'light',
-                  'dark',
-                  'link',
-                ].map((item) => {
-                  return (
-                    <div key={item}>
-                      <span className="badge text-bg-secondary">{item}</span>
-                    </div>
-                  );
-                })}
+                {['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'link'].map(
+                  (item) => {
+                    return (
+                      <div key={item}>
+                        <span className="badge text-bg-secondary">{item}</span>
+                      </div>
+                    );
+                  },
+                )}
               </div>
             ),
             desc: tButtonComponentProps('desc.variant'),
@@ -593,9 +511,7 @@ export default function ButtonPage() {
             attr: 'rounded',
             type: (
               <>
-                <span className="badge text-bg-secondary">
-                  xs | sm | md | lg | xl | xxl | circle | pill
-                </span>
+                <span className="badge text-bg-secondary">xs | sm | md | lg | xl | xxl | circle | pill</span>
                 <span className="badge text-bg-secondary ms-1">boolean</span>
               </>
             ),

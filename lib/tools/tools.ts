@@ -26,11 +26,7 @@ type MaybeFunction<T> = T | (() => T);
  *                       should be merged based on the key's path and values.
  * @returns A merged object that combines properties from both obj1 and obj2.
  */
-type MergeFn = <T, U>(
-  obj1: T,
-  obj2: U,
-  shouldAssign?: (path: string, value1: any, value2: any) => boolean,
-) => T & U;
+type MergeFn = <T, U>(obj1: T, obj2: U, shouldAssign?: (path: string, value1: any, value2: any) => boolean) => T & U;
 
 /**
  * Checks if a value is a plain object.
@@ -49,11 +45,7 @@ type MergeFn = <T, U>(
  * const result4 = isPlainObject('string'); // result4 is false
  */
 const isPlainObject = (value: any): value is { [key: string]: any } => {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    Object.prototype.toString.call(value) === '[object Object]'
-  );
+  return typeof value === 'object' && value !== null && Object.prototype.toString.call(value) === '[object Object]';
 };
 
 /**
@@ -87,13 +79,8 @@ const isArray = <T>(obj: T): obj is T & Array<any> => {
  * console.log(isFunctionOrClass(classInstance)); // true
  * console.log(isFunctionOrClass(notFuncOrClass)); // false
  */
-const isFunctionOrClass = (
-  obj: unknown,
-): obj is (...args: any[]) => any | object => {
-  return (
-    typeof obj === 'function' ||
-    (typeof obj === 'object' && obj !== null && obj.constructor !== Object)
-  );
+const isFunctionOrClass = (obj: unknown): obj is (...args: any[]) => any | object => {
+  return typeof obj === 'function' || (typeof obj === 'object' && obj !== null && obj.constructor !== Object);
 };
 
 /**
@@ -164,10 +151,7 @@ const mapAndFilterStyles = (
 const filterTransformAndExcludeProperties = <T>(
   sourceObject: T,
   exclusionValues: Array<any> = [undefined],
-  transformFn?: (
-    value: any,
-    key: keyof T,
-  ) => { include: boolean; transformedValue?: any; transformedKey?: string },
+  transformFn?: (value: any, key: keyof T) => { include: boolean; transformedValue?: any; transformedKey?: string },
 ): Partial<T> => {
   const result: Partial<T> = {};
 
@@ -183,8 +167,7 @@ const filterTransformAndExcludeProperties = <T>(
 
         if (include) {
           const finalKey = transformedKey !== undefined ? transformedKey : key;
-          result[finalKey as keyof T] =
-            transformedValue !== undefined ? transformedValue : value;
+          result[finalKey as keyof T] = transformedValue !== undefined ? transformedValue : value;
         }
       }
     }
@@ -206,10 +189,7 @@ const filterTransformAndExcludeProperties = <T>(
  */
 const filterAndTransformProperties = <T>(
   sourceObject: T,
-  transformFn?: (
-    value: any,
-    key: keyof T,
-  ) => { include: boolean; transformedValue?: any; transformedKey?: string },
+  transformFn?: (value: any, key: keyof T) => { include: boolean; transformedValue?: any; transformedKey?: string },
 ): Partial<T> => {
   const result: Partial<T> = {};
 
@@ -222,8 +202,7 @@ const filterAndTransformProperties = <T>(
 
       if (include) {
         const finalKey = transformedKey !== undefined ? transformedKey : key;
-        result[finalKey as keyof T] =
-          transformedValue !== undefined ? transformedValue : value;
+        result[finalKey as keyof T] = transformedValue !== undefined ? transformedValue : value;
       }
     }
   }
@@ -255,10 +234,7 @@ const camelToKebab = (str: string): string => {
  * @returns The result of the callback if provided, otherwise the parsed object or original object.
  * @throws Will throw an error if the input is a string that is not valid JSON.
  */
-const parseJson = (
-  input: string | any,
-  callback?: (result: object, isString: boolean) => object | void,
-): object => {
+const parseJson = (input: string | any, callback?: (result: object, isString: boolean) => object | void): object => {
   let result: object;
   const isString = typeof input === 'string';
 
@@ -285,19 +261,11 @@ const parseJson = (
  * @param param2 - The optional second parameter, can be a value or a function returning a value.
  * @returns The first parameter if it's defined, otherwise the second parameter if provided.
  */
-const getValue = <T>(
-  param1: MaybeFunction<T>,
-  param2?: MaybeFunction<T>,
-): T => {
-  const resolve = (val: MaybeFunction<T>): T =>
-    typeof val === 'function' ? (val as () => T)() : val;
+const getValue = <T>(param1: MaybeFunction<T>, param2?: MaybeFunction<T>): T => {
+  const resolve = (val: MaybeFunction<T>): T => (typeof val === 'function' ? (val as () => T)() : val);
 
   const resolvedParam1 = resolve(param1);
-  return resolvedParam1 !== undefined
-    ? resolvedParam1
-    : param2
-      ? resolve(param2)
-      : resolvedParam1;
+  return resolvedParam1 !== undefined ? resolvedParam1 : param2 ? resolve(param2) : resolvedParam1;
 };
 
 /**
@@ -318,11 +286,7 @@ const deepMerge: MergeFn = (obj1, obj2, shouldAssign = () => true) => {
     return obj1 || {};
   }
 
-  const mergeArrays = (
-    targetArr: any[],
-    sourceArr: any[],
-    path: string,
-  ): any[] => {
+  const mergeArrays = (targetArr: any[], sourceArr: any[], path: string): any[] => {
     return sourceArr.map((sourceValue, index) => {
       const targetValue = targetArr[index];
       const newPath = `${path}[${index}]`;
@@ -349,9 +313,7 @@ const deepMerge: MergeFn = (obj1, obj2, shouldAssign = () => true) => {
         }
 
         if (isSpecialObject(sourceValue)) {
-          const Constructor = sourceValue.constructor as new (
-            ...args: any[]
-          ) => typeof sourceValue;
+          const Constructor = sourceValue.constructor as new (...args: any[]) => typeof sourceValue;
           target[key] = new Constructor(sourceValue);
         } else if (isFunctionOrClass(sourceValue)) {
           target[key] = sourceValue;
@@ -409,11 +371,7 @@ const filterOptions = <T extends Record<string, any>>(
  * @returns {boolean} - Returns true if the value is valid, otherwise false.
  */
 const isValueValid = (value: unknown): boolean => {
-  return (
-    value !== undefined &&
-    value !== null &&
-    !(typeof value === 'object' && Object.keys(value).length === 0)
-  );
+  return value !== undefined && value !== null && !(typeof value === 'object' && Object.keys(value).length === 0);
 };
 
 /**
@@ -462,8 +420,7 @@ const createLogger = (
     currentValue,
   }: WarnOptions) => {
     const dateTime = getCurrentDateTime();
-    const currentValStr =
-      currentValue !== undefined ? `, current value is "${currentValue}"` : '';
+    const currentValStr = currentValue !== undefined ? `, current value is "${currentValue}"` : '';
     const message = `[${projectName}] ${dateTime} ${level.toUpperCase()} ${componentName}: The parameter "${propertyName}" is missing${expectedType ? `, expected type is "${expectedType}"` : ''}${currentValStr}.`;
 
     console[level](message);
@@ -514,13 +471,8 @@ const checkObjectProperties = <T extends object>(
  * @param {boolean} [checkEmptyString=false] - Whether to consider an empty string as undefined.
  * @returns {boolean} - Returns true if the value is neither undefined, null, nor an empty string (if checked); otherwise, false.
  */
-const isDefined = <T>(
-  value: T,
-  checkEmptyString: boolean = false,
-): value is Exclude<T, undefined | null> => {
-  return (
-    value !== undefined && value !== null && (!checkEmptyString || value !== '')
-  );
+const isDefined = <T>(value: T, checkEmptyString: boolean = false): value is Exclude<T, undefined | null> => {
+  return value !== undefined && value !== null && (!checkEmptyString || value !== '');
 };
 
 /**
@@ -535,9 +487,7 @@ const isDefined = <T>(
 const clsxUnique = (...inputs: ClassValue[]): string => {
   const classNames = clsx(...inputs);
 
-  const uniqueClassNames = Array.from(
-    new Set(classNames.split(' ').filter(Boolean)),
-  );
+  const uniqueClassNames = Array.from(new Set(classNames.split(' ').filter(Boolean)));
 
   return uniqueClassNames.join(' ');
 };
@@ -553,10 +503,7 @@ const clsxUnique = (...inputs: ClassValue[]): string => {
  *
  * @returns {string} - A string of class names separated by a space, with duplicates removed if `dedupe` is true.
  */
-const clsxWithOptions = (
-  options?: { dedupe?: boolean } | null | undefined,
-  ...inputs: ClassValue[]
-): string => {
+const clsxWithOptions = (options?: { dedupe?: boolean } | null | undefined, ...inputs: ClassValue[]): string => {
   const dedupe = options?.dedupe ?? false;
   return dedupe ? clsxUnique(...inputs) : clsx(...inputs);
 };
@@ -605,15 +552,8 @@ const processClassName = (
  * @returns {string} - A single string of class names, with no duplicates.
  * The class names are joined by a single space.
  */
-const mergeClassNames = (
-  originalClass: string | undefined,
-  newClass: string,
-): string => {
-  const classSet = new Set(
-    [...(originalClass || '').split(' '), ...newClass.split(' ')].filter(
-      Boolean,
-    ),
-  );
+const mergeClassNames = (originalClass: string | undefined, newClass: string): string => {
+  const classSet = new Set([...(originalClass || '').split(' '), ...newClass.split(' ')].filter(Boolean));
   return Array.from(classSet).join(' ');
 };
 
@@ -637,19 +577,12 @@ const mergeClassNames = (
  *                                                  the processed class names based on the
  *                                                  provided or original class names.
  */
-const processSlotClasses = <
-  T extends Record<
-    string,
-    string | ((originalClass: string) => string | undefined)
-  >,
->(
+const processSlotClasses = <T extends Record<string, string | ((originalClass: string) => string | undefined)>>(
   slotClasses?: T,
   originalClasses?: Partial<Record<keyof T, string>>,
 ): Partial<{ [K in keyof T]: string }> => {
   if (!slotClasses || Object.keys(slotClasses).length === 0) {
-    return originalClasses && Object.keys(originalClasses).length > 0
-      ? originalClasses
-      : {};
+    return originalClasses && Object.keys(originalClasses).length > 0 ? originalClasses : {};
   }
 
   const result: Partial<{ [K in keyof T]: string }> = {};
@@ -661,8 +594,7 @@ const processSlotClasses = <
       result[slot as keyof T] = slotClass;
     } else if (typeof slotClass === 'function') {
       const processedClass = slotClass(originalClass);
-      result[slot as keyof T] =
-        processedClass !== undefined ? processedClass : originalClass;
+      result[slot as keyof T] = processedClass !== undefined ? processedClass : originalClass;
     } else {
       result[slot as keyof T] = originalClass;
     }
@@ -687,11 +619,8 @@ const processSlotClasses = <
  * @returns {string} A random string of the specified length.
  */
 const generateRandomId = (length: number = 6): string => {
-  const chars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  return Array.from({ length }, () =>
-    chars.charAt(Math.floor(Math.random() * chars.length)),
-  ).join('');
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  return Array.from({ length }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
 };
 
 /**
@@ -729,9 +658,7 @@ const groupByProperty = <T>(
     (acc, item, index) => {
       const propertyValue = item[propertyName];
       const key =
-        propertyValue === null ||
-        propertyValue === undefined ||
-        propertyValue === ''
+        propertyValue === null || propertyValue === undefined || propertyValue === ''
           ? EMPTY_GROUP_FLAG
           : propertyValue.toString();
       if (!acc[key]) {
@@ -768,14 +695,10 @@ const pickObjectProperties = <T extends object, K extends keyof T>(
   propertyKeys: K[],
   isExcludeKeys: boolean = false,
 ): Omit<T, K> | Pick<T, K> => {
-  const result: Partial<
-    typeof isExcludeKeys extends true ? Omit<T, K> : Pick<T, K>
-  > = {};
+  const result: Partial<typeof isExcludeKeys extends true ? Omit<T, K> : Pick<T, K>> = {};
 
   if (!inputObj) {
-    return result as typeof isExcludeKeys extends true
-      ? Omit<T, K>
-      : Pick<T, K>;
+    return result as typeof isExcludeKeys extends true ? Omit<T, K> : Pick<T, K>;
   }
 
   if (isExcludeKeys) {

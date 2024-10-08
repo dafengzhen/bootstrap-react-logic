@@ -9,18 +9,8 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Textarea = function Textarea<T extends ElementType = 'textarea'>(
-  props: TextareaProps<T>,
-) {
-  const {
-    as: Component = 'textarea',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    children,
-    ...rest
-  } = props;
+const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: TextareaProps<T>) {
+  const { as: Component = 'textarea', dropOldClass, variables, className, style, children, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-control', className);

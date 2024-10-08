@@ -9,9 +9,7 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
-  props: ButtonGroupProps<T>,
-) {
+const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: ButtonGroupProps<T>) {
   const {
     as: Component = 'div',
     dropOldClass,
@@ -27,12 +25,7 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass &&
-        (vertical
-          ? 'btn-group-vertical'
-          : toolbar
-            ? 'btn-toolbar'
-            : 'btn-group'),
+      !dropOldClass && (vertical ? 'btn-group-vertical' : toolbar ? 'btn-toolbar' : 'btn-group'),
       size && `btn-group-${size}`,
       className,
     );

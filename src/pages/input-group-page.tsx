@@ -79,12 +79,8 @@ interface IComponentPropsStates {
 export default function InputGroupPage() {
   useHighlightCode();
   const navigation = useNavigation();
-  const { t: tInputGroupComponentProps } = useTranslation([
-    'inputGroupComponentProps',
-  ]);
-  const { t: tInputGroupTextComponentProps } = useTranslation([
-    'inputGroupTextComponentProps',
-  ]);
+  const { t: tInputGroupComponentProps } = useTranslation(['inputGroupComponentProps']);
+  const { t: tInputGroupTextComponentProps } = useTranslation(['inputGroupTextComponentProps']);
   const { t: tInputGroupPage } = useTranslation(['inputGroupPage']);
 
   const [states, setStates] = useState<IStates>({
@@ -127,23 +123,22 @@ export default function InputGroupPage() {
       },
     },
   });
-  const [componentPropsStates, setComponentPropsStates] =
-    useState<IComponentPropsStates>({
-      inputGroup: {
-        generalComponentProps: {
-          openCode: false,
-          code: generalCodes.generalComponentProps.code.trim(),
-        },
-        inputGroupComponentProps: {
-          openCode: false,
-          code: inputGroupComponentPropsCodes.inputGroupComponentProps.code.trim(),
-        },
-        inputGroupTextComponentProps: {
-          openCode: false,
-          code: inputGroupComponentPropsCodes.inputGroupTextComponentProps.code.trim(),
-        },
+  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
+    inputGroup: {
+      generalComponentProps: {
+        openCode: false,
+        code: generalCodes.generalComponentProps.code.trim(),
       },
-    });
+      inputGroupComponentProps: {
+        openCode: false,
+        code: inputGroupComponentPropsCodes.inputGroupComponentProps.code.trim(),
+      },
+      inputGroupTextComponentProps: {
+        openCode: false,
+        code: inputGroupComponentPropsCodes.inputGroupTextComponentProps.code.trim(),
+      },
+    },
+  });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -159,19 +154,11 @@ export default function InputGroupPage() {
     },
   });
 
-  function onClickUpdateState(
-    k: NestedKeys<IStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
     updateState(setStates, k, v, c);
   }
 
-  function onClickUpdateComponentPropsState(
-    k: NestedKeys<IComponentPropsStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
     updateState(setComponentPropsStates, k, v, c);
   }
 
@@ -185,23 +172,13 @@ export default function InputGroupPage() {
         title={tInputGroupPage('basic')}
         hash="basic"
         isOpen={states.inputGroup.basic.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.basic.openCode',
-            !states.inputGroup.basic.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('inputGroup.basic.openCode', !states.inputGroup.basic.openCode)}
         code={states.inputGroup.basic.code}
       >
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <InputGroupText id="basic-addon1">@</InputGroupText>
-            <Input
-              type="text"
-              placeholder="Username"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
+            <Input type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
           </InputGroup>
 
           <InputGroup>
@@ -217,18 +194,10 @@ export default function InputGroupPage() {
           <div>
             <Label htmlFor="basic-url">Your vanity URL</Label>
             <InputGroup>
-              <InputGroupText id="basic-addon3">
-                https://example.com/users/
-              </InputGroupText>
-              <Input
-                type="text"
-                id="basic-url"
-                aria-describedby="basic-addon3 basic-addon4"
-              />
+              <InputGroupText id="basic-addon3">https://example.com/users/</InputGroupText>
+              <Input type="text" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
             </InputGroup>
-            <Text id="basic-addon4">
-              Example help text goes outside the input group.
-            </Text>
+            <Text id="basic-addon4">Example help text goes outside the input group.</Text>
           </div>
 
           <InputGroup>
@@ -254,23 +223,13 @@ export default function InputGroupPage() {
         title={tInputGroupPage('nowrap')}
         hash="nowrap"
         isOpen={states.inputGroup.nowrap.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.nowrap.openCode',
-            !states.inputGroup.nowrap.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('inputGroup.nowrap.openCode', !states.inputGroup.nowrap.openCode)}
         code={states.inputGroup.nowrap.code}
       >
         <div className="d-flex flex-column gap-2">
           <InputGroup nowrap>
             <InputGroupText id="addon-wrapping">@</InputGroupText>
-            <Input
-              type="text"
-              placeholder="Username"
-              aria-label="Username"
-              aria-describedby="addon-wrapping"
-            />
+            <Input type="text" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" />
           </InputGroup>
         </div>
       </CustomSimpleCard>
@@ -279,42 +238,23 @@ export default function InputGroupPage() {
         title={tInputGroupPage('size')}
         hash="size"
         isOpen={states.inputGroup.size.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.size.openCode',
-            !states.inputGroup.size.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('inputGroup.size.openCode', !states.inputGroup.size.openCode)}
         code={states.inputGroup.size.code}
       >
         <div className="d-flex flex-column gap-2">
           <InputGroup size="sm">
             <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
-            <Input
-              type="text"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-sm"
-            />
+            <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
           </InputGroup>
 
           <InputGroup>
-            <InputGroupText id="inputGroup-sizing-default">
-              Default
-            </InputGroupText>
-            <Input
-              type="text"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default"
-            />
+            <InputGroupText id="inputGroup-sizing-default">Default</InputGroupText>
+            <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
           </InputGroup>
 
           <InputGroup size="lg">
             <InputGroupText id="inputGroup-sizing-lg">Large</InputGroupText>
-            <Input
-              type="text"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-lg"
-            />
+            <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
           </InputGroup>
         </div>
       </CustomSimpleCard>
@@ -324,10 +264,7 @@ export default function InputGroupPage() {
         hash="checkboxAndRadio"
         isOpen={states.inputGroup.checkboxAndRadio.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.checkboxAndRadio.openCode',
-            !states.inputGroup.checkboxAndRadio.openCode,
-          )
+          onClickUpdateState('inputGroup.checkboxAndRadio.openCode', !states.inputGroup.checkboxAndRadio.openCode)
         }
         code={states.inputGroup.checkboxAndRadio.code}
       >
@@ -363,18 +300,13 @@ export default function InputGroupPage() {
         hash="multipleInput"
         isOpen={states.inputGroup.multipleInput.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.multipleInput.openCode',
-            !states.inputGroup.multipleInput.openCode,
-          )
+          onClickUpdateState('inputGroup.multipleInput.openCode', !states.inputGroup.multipleInput.openCode)
         }
         code={states.inputGroup.multipleInput.code}
       >
         <div className="d-flex flex-column gap-2">
           <InputGroup>
-            <InputGroupText className="input-group-text">
-              First and last name
-            </InputGroupText>
+            <InputGroupText className="input-group-text">First and last name</InputGroupText>
             <Input type="text" aria-label="First name" />
             <Input type="text" aria-label="Last name" />
           </InputGroup>
@@ -386,10 +318,7 @@ export default function InputGroupPage() {
         hash="multipleAddons"
         isOpen={states.inputGroup.multipleAddons.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.multipleAddons.openCode',
-            !states.inputGroup.multipleAddons.openCode,
-          )
+          onClickUpdateState('inputGroup.multipleAddons.openCode', !states.inputGroup.multipleAddons.openCode)
         }
         code={states.inputGroup.multipleAddons.code}
       >
@@ -397,16 +326,10 @@ export default function InputGroupPage() {
           <InputGroup>
             <InputGroupText>$</InputGroupText>
             <InputGroupText>0.00</InputGroupText>
-            <Input
-              type="text"
-              aria-label="Dollar amount (with dot and two decimal places)"
-            />
+            <Input type="text" aria-label="Dollar amount (with dot and two decimal places)" />
           </InputGroup>
           <InputGroup>
-            <Input
-              type="text"
-              aria-label="Dollar amount (with dot and two decimal places)"
-            />
+            <Input type="text" aria-label="Dollar amount (with dot and two decimal places)" />
             <InputGroupText>$</InputGroupText>
             <InputGroupText>0.00</InputGroupText>
           </InputGroup>
@@ -418,10 +341,7 @@ export default function InputGroupPage() {
         hash="buttonAddons"
         isOpen={states.inputGroup.buttonAddons.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.buttonAddons.openCode',
-            !states.inputGroup.buttonAddons.openCode,
-          )
+          onClickUpdateState('inputGroup.buttonAddons.openCode', !states.inputGroup.buttonAddons.openCode)
         }
         code={states.inputGroup.buttonAddons.code}
       >
@@ -457,11 +377,7 @@ export default function InputGroupPage() {
             <Button outline="secondary" type="button">
               Button
             </Button>
-            <Input
-              type="text"
-              placeholder=""
-              aria-label="Example text with two button addons"
-            />
+            <Input type="text" placeholder="" aria-label="Example text with two button addons" />
           </InputGroup>
 
           <InputGroup>
@@ -485,10 +401,7 @@ export default function InputGroupPage() {
         hash="customSelect"
         isOpen={states.inputGroup.customSelect.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.customSelect.openCode',
-            !states.inputGroup.customSelect.openCode,
-          )
+          onClickUpdateState('inputGroup.customSelect.openCode', !states.inputGroup.customSelect.openCode)
         }
         code={states.inputGroup.customSelect.code}
       >
@@ -521,11 +434,7 @@ export default function InputGroupPage() {
             <Button outline="secondary" type="button">
               Button
             </Button>
-            <select
-              className="form-select"
-              id="inputGroupSelect03"
-              aria-label="Example select with button addon"
-            >
+            <select className="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
               <option defaultValue="">Choose...</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -534,11 +443,7 @@ export default function InputGroupPage() {
           </InputGroup>
 
           <InputGroup>
-            <select
-              className="form-select"
-              id="inputGroupSelect04"
-              aria-label="Example select with button addon"
-            >
+            <select className="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
               <option defaultValue="">Choose...</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -556,10 +461,7 @@ export default function InputGroupPage() {
         hash="customFileInput"
         isOpen={states.inputGroup.customFileInput.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'inputGroup.customFileInput.openCode',
-            !states.inputGroup.customFileInput.openCode,
-          )
+          onClickUpdateState('inputGroup.customFileInput.openCode', !states.inputGroup.customFileInput.openCode)
         }
         code={states.inputGroup.customFileInput.code}
       >
@@ -579,33 +481,15 @@ export default function InputGroupPage() {
           </InputGroup>
 
           <InputGroup>
-            <Button
-              outline="secondary"
-              type="button"
-              id="inputGroupFileAddon03"
-            >
+            <Button outline="secondary" type="button" id="inputGroupFileAddon03">
               Button
             </Button>
-            <Input
-              type="file"
-              id="inputGroupFile03"
-              aria-describedby="inputGroupFileAddon03"
-              aria-label="Upload"
-            />
+            <Input type="file" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload" />
           </InputGroup>
 
           <InputGroup>
-            <Input
-              type="file"
-              id="inputGroupFile04"
-              aria-describedby="inputGroupFileAddon04"
-              aria-label="Upload"
-            />
-            <Button
-              outline="secondary"
-              type="button"
-              id="inputGroupFileAddon04"
-            >
+            <Input type="file" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+            <Button outline="secondary" type="button" id="inputGroupFileAddon04">
               Button
             </Button>
           </InputGroup>
@@ -618,9 +502,7 @@ export default function InputGroupPage() {
         title="InputGroup"
         hash="inputGroupComponentProps"
         colgroup={colgroup}
-        isOpen={
-          componentPropsStates.inputGroup.inputGroupComponentProps.openCode
-        }
+        isOpen={componentPropsStates.inputGroup.inputGroupComponentProps.openCode}
         code={componentPropsStates.inputGroup.inputGroupComponentProps.code}
         codeLanguage="typescript"
         codeDisplayMode="direct"
@@ -650,17 +532,14 @@ export default function InputGroupPage() {
         title="InputGroupText"
         hash="inputGroupTextComponentProps"
         colgroup={colgroup}
-        isOpen={
-          componentPropsStates.inputGroup.inputGroupTextComponentProps.openCode
-        }
+        isOpen={componentPropsStates.inputGroup.inputGroupTextComponentProps.openCode}
         code={componentPropsStates.inputGroup.inputGroupTextComponentProps.code}
         codeLanguage="typescript"
         codeDisplayMode="direct"
         toggleCode={() =>
           onClickUpdateComponentPropsState(
             'inputGroup.inputGroupTextComponentProps.openCode',
-            !componentPropsStates.inputGroup.inputGroupTextComponentProps
-              .openCode,
+            !componentPropsStates.inputGroup.inputGroupTextComponentProps.openCode,
           )
         }
         items={[

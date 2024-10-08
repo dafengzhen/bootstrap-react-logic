@@ -100,14 +100,10 @@ export default function InputPage() {
   useHighlightCode();
   const navigation = useNavigation();
   const { t: tInputComponentProps } = useTranslation(['inputComponentProps']);
-  const { t: tInputOtpComponentProps } = useTranslation([
-    'inputOtpComponentProps',
-  ]);
+  const { t: tInputOtpComponentProps } = useTranslation(['inputOtpComponentProps']);
   // const { t: tTextComponentProps } = useTranslation(['textComponentProps']);
   const { t: tLabelComponentProps } = useTranslation(['labelComponentProps']);
-  const { t: tTextareaComponentProps } = useTranslation([
-    'textareaComponentProps',
-  ]);
+  const { t: tTextareaComponentProps } = useTranslation(['textareaComponentProps']);
   const { t: tInputPage } = useTranslation(['inputPage']);
 
   const [states, setStates] = useState<IStates>({
@@ -158,35 +154,34 @@ export default function InputPage() {
       },
     },
   });
-  const [componentPropsStates, setComponentPropsStates] =
-    useState<IComponentPropsStates>({
-      input: {
-        generalComponentProps: {
-          openCode: false,
-          code: generalCodes.generalComponentProps.code.trim(),
-        },
-        inputComponentProps: {
-          openCode: false,
-          code: inputComponentPropsCodes.inputComponentProps.code.trim(),
-        },
-        inputOtpComponentProps: {
-          openCode: false,
-          code: inputComponentPropsCodes.inputOtpComponentProps.code.trim(),
-        },
-        textComponentProps: {
-          openCode: false,
-          code: inputComponentPropsCodes.textComponentProps.code.trim(),
-        },
-        labelComponentProps: {
-          openCode: false,
-          code: inputComponentPropsCodes.labelComponentProps.code.trim(),
-        },
-        textareaComponentProps: {
-          openCode: false,
-          code: inputComponentPropsCodes.textareaComponentProps.code.trim(),
-        },
+  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
+    input: {
+      generalComponentProps: {
+        openCode: false,
+        code: generalCodes.generalComponentProps.code.trim(),
       },
-    });
+      inputComponentProps: {
+        openCode: false,
+        code: inputComponentPropsCodes.inputComponentProps.code.trim(),
+      },
+      inputOtpComponentProps: {
+        openCode: false,
+        code: inputComponentPropsCodes.inputOtpComponentProps.code.trim(),
+      },
+      textComponentProps: {
+        openCode: false,
+        code: inputComponentPropsCodes.textComponentProps.code.trim(),
+      },
+      labelComponentProps: {
+        openCode: false,
+        code: inputComponentPropsCodes.labelComponentProps.code.trim(),
+      },
+      textareaComponentProps: {
+        openCode: false,
+        code: inputComponentPropsCodes.textareaComponentProps.code.trim(),
+      },
+    },
+  });
   const [colgroup] = useState({
     attr: {
       width: '150px',
@@ -202,19 +197,11 @@ export default function InputPage() {
     },
   });
 
-  function onClickUpdateState(
-    k: NestedKeys<IStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
     updateState(setStates, k, v, c);
   }
 
-  function onClickUpdateComponentPropsState(
-    k: NestedKeys<IComponentPropsStates>,
-    v: unknown,
-    c?: () => void,
-  ) {
+  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
     updateState(setComponentPropsStates, k, v, c);
   }
 
@@ -228,27 +215,16 @@ export default function InputPage() {
         title={tInputPage('basic')}
         hash="basic"
         isOpen={states.input.basic.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.basic.openCode',
-            !states.input.basic.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('input.basic.openCode', !states.input.basic.openCode)}
         code={states.input.basic.code}
       >
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="exampleFormControlInput1">Email address</Label>
-            <Input
-              type="email"
-              id="exampleFormControlInput1"
-              placeholder="name@example.com"
-            ></Input>
+            <Input type="email" id="exampleFormControlInput1" placeholder="name@example.com"></Input>
           </div>
           <div>
-            <Label htmlFor="exampleFormControlTextarea1">
-              Example textarea
-            </Label>
+            <Label htmlFor="exampleFormControlTextarea1">Example textarea</Label>
             <Textarea id="exampleFormControlTextarea1" rows={3}></Textarea>
           </div>
         </div>
@@ -258,29 +234,13 @@ export default function InputPage() {
         title={tInputPage('size')}
         hash="size"
         isOpen={states.input.size.openCode}
-        toggleCode={() =>
-          onClickUpdateState('input.size.openCode', !states.input.size.openCode)
-        }
+        toggleCode={() => onClickUpdateState('input.size.openCode', !states.input.size.openCode)}
         code={states.input.size.code}
       >
         <div className="d-flex flex-column gap-2">
-          <Input
-            size="lg"
-            type="text"
-            placeholder=".form-control-lg"
-            aria-label=".form-control-lg example"
-          />
-          <Input
-            type="text"
-            placeholder="Default input"
-            aria-label="default input example"
-          />
-          <Input
-            size="sm"
-            type="text"
-            placeholder=".form-control-sm"
-            aria-label=".form-control-sm example"
-          />
+          <Input size="lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example" />
+          <Input type="text" placeholder="Default input" aria-label="default input example" />
+          <Input size="sm" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example" />
         </div>
       </CustomSimpleCard>
 
@@ -288,9 +248,7 @@ export default function InputPage() {
         title={tInputPage('text')}
         hash="text"
         isOpen={states.input.text.openCode}
-        toggleCode={() =>
-          onClickUpdateState('input.text.openCode', !states.input.text.openCode)
-        }
+        toggleCode={() => onClickUpdateState('input.text.openCode', !states.input.text.openCode)}
         code={states.input.text.code}
       >
         <div className="d-flex flex-column gap-2">
@@ -311,9 +269,8 @@ export default function InputPage() {
                 autoComplete="new-password"
               />
               <Text>
-                Your password must be 8-20 characters long, contain letters and
-                numbers, and must not contain spaces, special characters, or
-                emoji.
+                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
+                special characters, or emoji.
               </Text>
             </form>
           </div>
@@ -353,32 +310,16 @@ export default function InputPage() {
         title={tInputPage('disabled')}
         hash="disabled"
         isOpen={states.input.disabled.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.disabled.openCode',
-            !states.input.disabled.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('input.disabled.openCode', !states.input.disabled.openCode)}
         code={states.input.disabled.code}
       >
         <div className="d-flex flex-column gap-2">
           <div>
-            <Input
-              type="text"
-              placeholder="Disabled input"
-              aria-label="Disabled input example"
-              disabled
-            />
+            <Input type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled />
           </div>
 
           <div>
-            <Input
-              type="text"
-              value="Disabled readonly input"
-              aria-label="Disabled input example"
-              disabled
-              readOnly
-            />
+            <Input type="text" value="Disabled readonly input" aria-label="Disabled input example" disabled readOnly />
           </div>
         </div>
       </CustomSimpleCard>
@@ -387,22 +328,12 @@ export default function InputPage() {
         title={tInputPage('readonly')}
         hash="readonly"
         isOpen={states.input.readonly.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.readonly.openCode',
-            !states.input.readonly.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('input.readonly.openCode', !states.input.readonly.openCode)}
         code={states.input.readonly.code}
       >
         <div className="d-flex flex-column gap-2">
           <div>
-            <Input
-              type="text"
-              value="Readonly input here..."
-              aria-label="readonly input example"
-              readOnly
-            />
+            <Input type="text" value="Readonly input here..." aria-label="readonly input example" readOnly />
           </div>
         </div>
       </CustomSimpleCard>
@@ -412,10 +343,7 @@ export default function InputPage() {
         hash="readonlyPlainText"
         isOpen={states.input.readonlyPlainText.openCode}
         toggleCode={() =>
-          onClickUpdateState(
-            'input.readonlyPlainText.openCode',
-            !states.input.readonlyPlainText.openCode,
-          )
+          onClickUpdateState('input.readonlyPlainText.openCode', !states.input.readonlyPlainText.openCode)
         }
         code={states.input.readonlyPlainText.code}
       >
@@ -426,13 +354,7 @@ export default function InputPage() {
                 Email
               </Label>
               <div className="col-sm-10">
-                <Input
-                  type="text"
-                  readOnly
-                  readonlyPlainText
-                  id="staticEmail"
-                  value="email@example.com"
-                />
+                <Input type="text" readOnly readonlyPlainText id="staticEmail" value="email@example.com" />
               </div>
             </div>
             <form>
@@ -448,11 +370,7 @@ export default function InputPage() {
                     defaultValue="hiddenUsername"
                     className="d-none"
                   />
-                  <Input
-                    type="password"
-                    id="inputPassword"
-                    autoComplete="new-password"
-                  />
+                  <Input type="password" id="inputPassword" autoComplete="new-password" />
                 </div>
               </div>
             </form>
@@ -483,12 +401,7 @@ export default function InputPage() {
                   defaultValue="hiddenUsername"
                   className="d-none"
                 />
-                <Input
-                  type="password"
-                  id="inputPassword2"
-                  placeholder="Password"
-                  autoComplete="new-password"
-                />
+                <Input type="password" id="inputPassword2" placeholder="Password" autoComplete="new-password" />
               </div>
               <div className="col-auto">
                 <Button type="button" variant="primary">
@@ -504,9 +417,7 @@ export default function InputPage() {
         title={tInputPage('file')}
         hash="file"
         isOpen={states.input.file.openCode}
-        toggleCode={() =>
-          onClickUpdateState('input.file.openCode', !states.input.file.openCode)
-        }
+        toggleCode={() => onClickUpdateState('input.file.openCode', !states.input.file.openCode)}
         code={states.input.file.code}
       >
         <div className="d-flex flex-column gap-2">
@@ -515,15 +426,11 @@ export default function InputPage() {
             <Input type="file" id="formFile" />
           </div>
           <div>
-            <Label htmlFor="formFileMultiple">
-              Multiple files input example
-            </Label>
+            <Label htmlFor="formFileMultiple">Multiple files input example</Label>
             <Input type="file" id="formFileMultiple" multiple />
           </div>
           <div>
-            <Label htmlFor="formFileDisabled">
-              Disabled file input example
-            </Label>
+            <Label htmlFor="formFileDisabled">Disabled file input example</Label>
             <Input type="file" id="formFileDisabled" disabled />
           </div>
           <div>
@@ -541,24 +448,13 @@ export default function InputPage() {
         title={tInputPage('color')}
         hash="color"
         isOpen={states.input.color.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.color.openCode',
-            !states.input.color.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('input.color.openCode', !states.input.color.openCode)}
         code={states.input.color.code}
       >
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="exampleColorInput">Color picker</Label>
-            <Input
-              type="color"
-              color
-              id="exampleColorInput"
-              defaultValue="#563d7c"
-              title="Choose your color"
-            />
+            <Input type="color" color id="exampleColorInput" defaultValue="#563d7c" title="Choose your color" />
           </div>
         </div>
       </CustomSimpleCard>
@@ -567,22 +463,13 @@ export default function InputPage() {
         title={tInputPage('datalist')}
         hash="datalist"
         isOpen={states.input.datalist.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.datalist.openCode',
-            !states.input.datalist.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('input.datalist.openCode', !states.input.datalist.openCode)}
         code={states.input.datalist.code}
       >
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="exampleDataList">Datalist example</Label>
-            <Input
-              list="datalistOptions"
-              id="exampleDataList"
-              placeholder="Type to search..."
-            />
+            <Input list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
             <datalist id="datalistOptions">
               <option value="San Francisco"></option>
               <option value="New York"></option>
@@ -598,23 +485,12 @@ export default function InputPage() {
         title={tInputPage('startEndContent')}
         hash="startEndContent"
         isOpen={states.input.startEndContent.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'input.startEndContent.openCode',
-            !states.input.startEndContent.openCode,
-          )
-        }
+        toggleCode={() => onClickUpdateState('input.startEndContent.openCode', !states.input.startEndContent.openCode)}
         code={states.input.startEndContent.code}
       >
         <div className="d-flex flex-column gap-2">
-          <Input
-            startContent={<i className="bi bi-person"></i>}
-            placeholder="Username"
-          />
-          <Input
-            endContent={<i className="bi bi-eye"></i>}
-            placeholder="Password"
-          />
+          <Input startContent={<i className="bi bi-person"></i>} placeholder="Username" />
+          <Input endContent={<i className="bi bi-eye"></i>} placeholder="Password" />
           <Input
             endContent={
               <>
@@ -632,9 +508,7 @@ export default function InputPage() {
         title={tInputPage('otp')}
         hash="otp"
         isOpen={states.input.otp.openCode}
-        toggleCode={() =>
-          onClickUpdateState('input.otp.openCode', !states.input.otp.openCode)
-        }
+        toggleCode={() => onClickUpdateState('input.otp.openCode', !states.input.otp.openCode)}
         code={states.input.otp.code}
       >
         <div className="d-flex flex-column gap-2">
@@ -673,11 +547,7 @@ export default function InputPage() {
         items={[
           {
             attr: 'onRef',
-            type: (
-              <span className="badge text-bg-secondary">
-                RefCallback&lt;input&gt;
-              </span>
-            ),
+            type: <span className="badge text-bg-secondary">RefCallback&lt;input&gt;</span>,
             desc: tInputComponentProps('desc.onRef'),
             default: '',
           },
@@ -689,11 +559,7 @@ export default function InputPage() {
           },
           {
             attr: 'nativeSize',
-            type: (
-              <span className="badge text-bg-secondary">
-                number | undefined
-              </span>
-            ),
+            type: <span className="badge text-bg-secondary">number | undefined</span>,
             desc: tInputComponentProps('desc.nativeSize'),
             default: '',
           },
@@ -723,11 +589,7 @@ export default function InputPage() {
           },
           {
             attr: 'nativeColor',
-            type: (
-              <span className="badge text-bg-secondary">
-                string | undefined
-              </span>
-            ),
+            type: <span className="badge text-bg-secondary">string | undefined</span>,
             desc: tInputComponentProps('desc.nativeColor'),
             default: '',
           },
@@ -748,14 +610,11 @@ export default function InputPage() {
             type: (
               <div className="d-flex flex-column gap-2">
                 <div>
-                  <span className="badge text-bg-secondary">
-                    Key : container | start | end | component
-                  </span>
+                  <span className="badge text-bg-secondary">Key : container | start | end | component</span>
                 </div>
                 <div>
                   <span className="badge text-bg-secondary">
-                    Value : string | ((originalClass: string) =&gt; string |
-                    undefined)
+                    Value : string | ((originalClass: string) =&gt; string | undefined)
                   </span>
                 </div>
               </div>
@@ -789,21 +648,13 @@ export default function InputPage() {
           },
           {
             attr: 'defaultValue',
-            type: (
-              <span className="badge text-bg-secondary">
-                (string | number)[]
-              </span>
-            ),
+            type: <span className="badge text-bg-secondary">(string | number)[]</span>,
             desc: tInputOtpComponentProps('desc.defaultValue'),
             default: '-',
           },
           {
             attr: 'inputProps',
-            type: (
-              <span className="badge text-bg-secondary">
-                InputProps&lt;input&gt;
-              </span>
-            ),
+            type: <span className="badge text-bg-secondary">InputProps&lt;input&gt;</span>,
             desc: tInputOtpComponentProps('desc.inputProps'),
             default: '-',
           },

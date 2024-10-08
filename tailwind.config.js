@@ -5,11 +5,7 @@ export default {
     preflight: false,
   },
   darkMode: ['selector', '[data-bs-theme="dark"]'],
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    './lib/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './lib/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },

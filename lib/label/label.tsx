@@ -9,9 +9,7 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const Label = function Label<T extends ElementType = 'label'>(
-  props: LabelProps<T>,
-) {
+const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<T>) {
   const {
     as: Component = 'label',
     dropOldClass,
@@ -26,9 +24,7 @@ const Label = function Label<T extends ElementType = 'label'>(
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass &&
-        !inputGroupText &&
-        (colFormLabel ? 'col-form-label' : 'form-label'),
+      !dropOldClass && !inputGroupText && (colFormLabel ? 'col-form-label' : 'form-label'),
       inputGroupText && 'input-group-text',
       className,
     );

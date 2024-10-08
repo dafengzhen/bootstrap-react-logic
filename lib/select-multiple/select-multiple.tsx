@@ -1,11 +1,4 @@
-import {
-  type ElementType,
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import type { IOption, SelectMultipleProps } from './types.ts';
 import {
   clsxUnique,
@@ -30,9 +23,7 @@ import {
 } from '@floating-ui/react';
 import selectMultipleStyles from './select-multiple.module.scss';
 
-const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
-  props: SelectMultipleProps<T>,
-) {
+const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(props: SelectMultipleProps<T>) {
   const {
     as: Component = 'div',
     dropOldClass,
@@ -54,15 +45,14 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
     ...item,
     id: item.id ?? index,
   }));
-  const noParamContentClasses = pickObjectProperties(
-    contentClasses,
-    ['optionItem', 'selectButton'],
-    true,
-  ) as Omit<keyof typeof contentClasses, 'optionItem' | 'selectButton'>;
-  const paramContentClasses = pickObjectProperties(contentClasses, [
-    'optionItem',
-    'selectButton',
-  ]) as Pick<keyof typeof contentClasses, 'optionItem' | 'selectButton'>;
+  const noParamContentClasses = pickObjectProperties(contentClasses, ['optionItem', 'selectButton'], true) as Omit<
+    keyof typeof contentClasses,
+    'optionItem' | 'selectButton'
+  >;
+  const paramContentClasses = pickObjectProperties(contentClasses, ['optionItem', 'selectButton']) as Pick<
+    keyof typeof contentClasses,
+    'optionItem' | 'selectButton'
+  >;
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<IOption[]>(initialOptions);
 
@@ -85,19 +75,10 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
     enabled: !disabled,
   });
   const dismiss = useDismiss(context);
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-  ]);
+  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss]);
 
-  const showGroupFlag = useMemo(
-    () => options.some((item) => isDefined(item.header, true)),
-    [options],
-  );
-  const getOptionsByHeader = useMemo(
-    () => groupByProperty(options, 'header'),
-    [options],
-  );
+  const showGroupFlag = useMemo(() => options.some((item) => isDefined(item.header, true)), [options]);
+  const getOptionsByHeader = useMemo(() => groupByProperty(options, 'header'), [options]);
   const getActiveOptions = useMemo(() => {
     if (single) {
       const activeOption = options.find((item) => item.active);
@@ -106,20 +87,13 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
       return options.filter((item) => item.active);
     }
   }, [options, single]);
-  const getActiveOptionsLength = useMemo(
-    () => getActiveOptions.length,
-    [getActiveOptions.length],
-  );
+  const getActiveOptionsLength = useMemo(() => getActiveOptions.length, [getActiveOptions.length]);
   const onClickSelectOption = useCallback(
     (index: number) => {
       setOptions((prevOptions) => {
         return prevOptions.map((optionItem, idx) => ({
           ...optionItem,
-          active: single
-            ? idx === index
-            : idx === index
-              ? !optionItem.active
-              : optionItem.active,
+          active: single ? idx === index : idx === index ? !optionItem.active : optionItem.active,
         }));
       });
     },
@@ -137,8 +111,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass &&
-        `form-select ${selectMultipleStyles.brlSelectMultipleMinHeight}`,
+      !dropOldClass && `form-select ${selectMultipleStyles.brlSelectMultipleMinHeight}`,
       disabled && 'bg-body-secondary',
       className,
     );
@@ -165,17 +138,14 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
 
   useEffect(() => {
     onChange?.(
-      getActiveOptions
-        .filter((item) => isDefined(item.value))
-        .map((item) => item.value) as (string | number)[],
+      getActiveOptions.filter((item) => isDefined(item.value)).map((item) => item.value) as (string | number)[],
     );
   }, [getActiveOptions, onChange]);
 
   const slotClassName = processSlotClasses(noParamContentClasses, {
     mainContainer: clsxWithOptions(
       null,
-      typeof selectableCount === 'number' &&
-        'd-flex flex-wrap justify-content-between gap-2',
+      typeof selectableCount === 'number' && 'd-flex flex-wrap justify-content-between gap-2',
     ),
     optionsContainer: 'd-flex flex-wrap column-gap-2 row-gap-1',
     placeholder: 'text-secondary user-select-none',
@@ -184,11 +154,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
       'd-flex align-items-center badge text-bg-secondary',
       selectMultipleStyles.brlSelectMultipleCursorDefault,
     ),
-    clearIcon: clsxWithOptions(
-      null,
-      'bi bi-x',
-      selectMultipleStyles.brlSelectMultipleCursorPointer,
-    ),
+    clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlSelectMultipleCursorPointer),
     countDisplay: clsxWithOptions(
       null,
       'align-self-center flex-shrink-0 text-secondary',
@@ -201,17 +167,9 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
   });
 
   return (
-    <Component
-      {...getReferenceProps()}
-      {...rest}
-      {...renderOptions}
-      ref={refs.setReference}
-    >
+    <Component {...getReferenceProps()} {...rest} {...renderOptions} ref={refs.setReference}>
       <div data-slot-main-container="" className={slotClassName.mainContainer}>
-        <div
-          data-slot-options-container=""
-          className={slotClassName.optionsContainer}
-        >
+        <div data-slot-options-container="" className={slotClassName.optionsContainer}>
           {placeholder && getActiveOptions.length === 0 ? (
             <div data-slot-placeholder="" className={slotClassName.placeholder}>
               {placeholder}
@@ -219,11 +177,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
           ) : (
             getActiveOptions.map((item) => {
               return (
-                <div
-                  data-slot-active-option=""
-                  key={item.id}
-                  className={slotClassName.activeOption}
-                >
+                <div data-slot-active-option="" key={item.id} className={slotClassName.activeOption}>
                   {item.text}
                   <i
                     data-slot-clear-icon=""
@@ -268,68 +222,47 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(
                     </li>
                   )}
 
-                  {getOptionsByHeader.groupedData[key].map(
-                    ({ item, index }) => {
-                      const paramSlotClassName = processSlotClasses(
-                        paramContentClasses,
-                        {
-                          optionItem: clsxWithOptions(
-                            null,
-                            item.active &&
-                              hideActiveOptions &&
-                              'visually-hidden',
-                          ),
-                          selectButton: clsxWithOptions(
-                            null,
-                            'dropdown-item',
-                            item.active && 'active',
-                            (item.disabled ||
-                              selectableCount === getActiveOptionsLength) &&
-                              'disabled',
-                          ),
-                        },
-                      );
+                  {getOptionsByHeader.groupedData[key].map(({ item, index }) => {
+                    const paramSlotClassName = processSlotClasses(paramContentClasses, {
+                      optionItem: clsxWithOptions(null, item.active && hideActiveOptions && 'visually-hidden'),
+                      selectButton: clsxWithOptions(
+                        null,
+                        'dropdown-item',
+                        item.active && 'active',
+                        (item.disabled || selectableCount === getActiveOptionsLength) && 'disabled',
+                      ),
+                    });
 
-                      return (
-                        <Fragment key={item.id}>
-                          {item.divider === 'top' && (
-                            <li>
-                              <hr
-                                data-slot-top-divider=""
-                                className={slotClassName.topDivider}
-                              />
-                            </li>
-                          )}
-
-                          <li
-                            data-slot-option-item=""
-                            className={paramSlotClassName.optionItem}
-                          >
-                            <button
-                              data-slot-select-button=""
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                onClickSelectOption(index);
-                              }}
-                              className={paramSlotClassName.selectButton}
-                              type="button"
-                            >
-                              {item.text}
-                            </button>
+                    return (
+                      <Fragment key={item.id}>
+                        {item.divider === 'top' && (
+                          <li>
+                            <hr data-slot-top-divider="" className={slotClassName.topDivider} />
                           </li>
+                        )}
 
-                          {item.divider === 'bottom' && (
-                            <li>
-                              <hr
-                                data-slot-bottom-divider=""
-                                className={slotClassName.bottomDivider}
-                              />
-                            </li>
-                          )}
-                        </Fragment>
-                      );
-                    },
-                  )}
+                        <li data-slot-option-item="" className={paramSlotClassName.optionItem}>
+                          <button
+                            data-slot-select-button=""
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onClickSelectOption(index);
+                            }}
+                            className={paramSlotClassName.selectButton}
+                            type="button"
+                          >
+                            {item.text}
+                          </button>
+                        </li>
+
+                        {item.divider === 'bottom' && (
+                          <li>
+                            <hr data-slot-bottom-divider="" className={slotClassName.bottomDivider} />
+                          </li>
+                        )}
+                      </Fragment>
+                    );
+                  })}
                 </Fragment>
               );
             })}

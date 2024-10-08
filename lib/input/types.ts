@@ -1,10 +1,5 @@
 import type { ElementRef, ElementType, LegacyRef, ReactNode } from 'react';
-import type {
-  BaseProps,
-  InputVariablesEnum,
-  OmittedPropsWithoutRef,
-  SlotValue,
-} from '../tools';
+import type { BaseProps, InputVariablesEnum, OmittedPropsWithoutRef, SlotValue } from '../tools';
 
 type SlotValueKeys = 'container' | 'start' | 'end' | 'component';
 

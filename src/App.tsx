@@ -1,26 +1,11 @@
-import {
-  NavLink,
-  Outlet,
-  ScrollRestoration,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import clsx from 'clsx';
-import {
-  GlobalContext,
-  type Layout,
-  type Theme,
-} from '@contexts/global-context.ts';
+import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 
 interface IMenu {
   name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select';
-  to:
-    | '/pages/button'
-    | '/pages/button-group'
-    | '/pages/input'
-    | '/pages/input-group'
-    | '/pages/select';
+  to: '/pages/button' | '/pages/button-group' | '/pages/input' | '/pages/input-group' | '/pages/select';
 }
 
 function App() {
@@ -64,27 +49,17 @@ function App() {
 
   return (
     <GlobalContext.Provider value={{ fullscreen, theme, layout }}>
-      <div
-        className={clsx('container-fluid p-2 p-sm-4', isCenter && 'container')}
-      >
+      <div className={clsx('container-fluid p-2 p-sm-4', isCenter && 'container')}>
         <div className="row g-2 g-sm-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">
               {location.pathname !== '/' && (
                 <div className="d-flex gap-2 mb-2">
-                  <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={onClickHouse}
-                  >
+                  <button type="button" className="btn btn-light" onClick={onClickHouse}>
                     <i className="bi bi-house-door-fill"></i>
                   </button>
 
-                  <button
-                    type="button"
-                    className="btn btn-light w-100"
-                    onClick={onClickReturn}
-                  >
+                  <button type="button" className="btn btn-light w-100" onClick={onClickReturn}>
                     <i className="bi bi-chevron-left"></i>
                   </button>
                 </div>
@@ -112,12 +87,7 @@ function App() {
             </div>
           )}
 
-          <div
-            className={clsx(
-              'overflow-hidden',
-              !isFullscreen ? 'col' : '"col-8 col-sm-10"',
-            )}
-          >
+          <div className={clsx('overflow-hidden', !isFullscreen ? 'col' : '"col-8 col-sm-10"')}>
             <Outlet />
           </div>
         </div>

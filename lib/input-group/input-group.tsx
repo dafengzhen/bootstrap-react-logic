@@ -10,20 +10,8 @@ import {
 } from '../tools';
 import InputGroupText from './input-group-text.tsx';
 
-const InputGroup = function InputGroup<T extends ElementType = 'div'>(
-  props: InputGroupProps<T>,
-) {
-  const {
-    as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    children,
-    nowrap,
-    size,
-    ...rest
-  } = props;
+const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: InputGroupProps<T>) {
+  const { as: Component = 'div', dropOldClass, variables, className, style, children, nowrap, size, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(

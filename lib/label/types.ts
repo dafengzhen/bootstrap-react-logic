@@ -13,8 +13,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof LabelVariablesEnum> & {
   inputGroupText?: boolean;
 };
 
-export type LabelProps<T extends ElementType> = PropsWithoutRef<
-  Props<T>,
-  T,
-  typeof LabelVariablesEnum
->;
+export type LabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof LabelVariablesEnum>;
