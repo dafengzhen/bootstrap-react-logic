@@ -191,6 +191,8 @@ enum SelectOptionVariablesEnum {}
 
 enum SelectMultipleVariablesEnum {}
 
+enum CheckboxVariablesEnum {}
+
 export {
   ButtonVariableEnum,
   RoundedClassEnum,
@@ -207,4 +209,5 @@ export {
   SelectVariablesEnum,
   SelectOptionVariablesEnum,
   SelectMultipleVariablesEnum,
+  CheckboxVariablesEnum,
 };

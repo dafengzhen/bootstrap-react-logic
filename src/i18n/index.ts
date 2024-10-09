@@ -42,6 +42,10 @@ import inputGroupPageEn from './en/component/input-group-page.json';
 import inputGroupPageZh from './zh/component/input-group-page.json';
 import indexPageEn from './en/component/index-page.json';
 import indexPageZh from './zh/component/index-page.json';
+import checkboxPageEn from './en/component/checkbox-page.json';
+import checkboxPageZh from './zh/component/checkbox-page.json';
+import checkboxComponentPropsEn from './en/component/checkbox-component-props.json';
+import checkboxComponentPropsZh from './zh/component/checkbox-component-props.json';
 
 const resources = {
   en: {
@@ -66,6 +70,8 @@ const resources = {
     inputGroupTextComponentProps: inputGroupTextComponentPropsEn,
     inputGroupPage: inputGroupPageEn,
     indexPage: indexPageEn,
+    checkboxPage: checkboxPageEn,
+    checkboxComponentProps: checkboxComponentPropsEn,
   },
   zh: {
     index: indexEn,
@@ -89,13 +95,15 @@ const resources = {
     inputGroupTextComponentProps: inputGroupTextComponentPropsZh,
     inputGroupPage: inputGroupPageZh,
     indexPage: indexPageZh,
+    checkboxPage: checkboxPageZh,
+    checkboxComponentProps: checkboxComponentPropsZh,
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
   lng: 'en',
-  debug: process.env.NODE_ENV !== 'production',
+  debug: false,
   defaultNS: 'index',
   fallbackLng: 'en',
   interpolation: {

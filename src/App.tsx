@@ -4,8 +4,14 @@ import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 
 interface IMenu {
-  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select';
-  to: '/pages/button' | '/pages/button-group' | '/pages/input' | '/pages/input-group' | '/pages/select';
+  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox';
+  to:
+    | '/pages/button'
+    | '/pages/button-group'
+    | '/pages/input'
+    | '/pages/input-group'
+    | '/pages/select'
+    | '/pages/checkbox';
 }
 
 function App() {
@@ -36,6 +42,10 @@ function App() {
     {
       name: 'Select',
       to: '/pages/select',
+    },
+    {
+      name: 'Checkbox',
+      to: '/pages/checkbox',
     },
   ]);
 

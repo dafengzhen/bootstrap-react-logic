@@ -14,7 +14,7 @@ import {
   filterAndTransformProperties,
   filterOptions,
   generateRandomId,
-  InputVariablesEnum,
+  InputOtpVariablesEnum,
   isArray,
   isValueValid,
   mergeProps,
@@ -67,7 +67,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
     const finalClass = clsxUnique(!dropOldClass && 'd-flex gap-4', className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputVariablesEnum[key];
+        const _value = InputOtpVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
@@ -157,7 +157,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
                 _inputProps?.onFocus?.();
               },
             })}
-            maxLength
+            maxLength={maxLength}
             key={item.id}
             value={item.value}
           />

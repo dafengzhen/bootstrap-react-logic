@@ -4,8 +4,8 @@ import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
-  InputVariablesEnum,
   isValueValid,
+  SelectVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 import SelectOption from './select-option.tsx';
@@ -28,7 +28,7 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
     const finalClass = clsxUnique(!dropOldClass && 'form-select', size && `form-select-${size}`, className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputVariablesEnum[key];
+        const _value = SelectVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,

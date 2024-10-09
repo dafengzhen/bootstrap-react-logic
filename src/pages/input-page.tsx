@@ -718,6 +718,12 @@ export default function InputPage() {
             desc: tLabelComponentProps('desc.inputGroupText'),
             default: '-',
           },
+          {
+            attr: 'formCheckLabel',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tLabelComponentProps('desc.formCheckLabel'),
+            default: '-',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 

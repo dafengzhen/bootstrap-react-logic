@@ -4,6 +4,7 @@ import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
+  getFirstNonEmptyClass,
   isValueValid,
   LabelVariablesEnum,
   VARIABLE_BS_PREFIX,
@@ -19,13 +20,19 @@ const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<
     children,
     colFormLabel,
     inputGroupText,
+    formCheckLabel,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass && !inputGroupText && (colFormLabel ? 'col-form-label' : 'form-label'),
-      inputGroupText && 'input-group-text',
+      !dropOldClass &&
+        getFirstNonEmptyClass({
+          'form-check-label': formCheckLabel,
+          'input-group-text': inputGroupText,
+          'col-form-label': colFormLabel,
+          'form-label': true,
+        }),
       className,
     );
     const finalStyle = {
@@ -46,7 +53,7 @@ const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<
       },
       isValueValid,
     );
-  }, [dropOldClass, inputGroupText, colFormLabel, className, variables, style]);
+  }, [dropOldClass, formCheckLabel, inputGroupText, colFormLabel, className, variables, style]);
 
   return (
     <Component {...rest} {...renderOptions}>

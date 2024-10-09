@@ -11,6 +11,11 @@ type Props<T extends ElementType> = BaseProps<T, typeof LabelVariablesEnum> & {
    * inputGroupText.
    */
   inputGroupText?: boolean;
+
+  /**
+   * formCheckLabel.
+   */
+  formCheckLabel?: boolean;
 };
 
 export type LabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof LabelVariablesEnum>;

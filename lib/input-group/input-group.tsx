@@ -4,7 +4,7 @@ import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
-  InputVariablesEnum,
+  InputGroupVariablesEnum,
   isValueValid,
   VARIABLE_BS_PREFIX,
 } from '../tools';
@@ -22,7 +22,7 @@ const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: Inp
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputVariablesEnum[key];
+        const _value = InputGroupVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,

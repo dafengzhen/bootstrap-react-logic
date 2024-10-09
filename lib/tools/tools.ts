@@ -719,6 +719,26 @@ const pickObjectProperties = <T extends object, K extends keyof T>(
   return result as typeof isExcludeKeys extends true ? Omit<T, K> : Pick<T, K>;
 };
 
+/**
+ * Returns the first non-empty class name from a class mapping object.
+ *
+ * The function takes an object where the keys are class names and
+ * the values are the corresponding conditions. It returns the first
+ * class name whose value is considered "truthy" (i.e., not null, undefined,
+ * false, 0, empty string, etc.).
+ *
+ * @param {Record<string, any>} classMap - A mapping of class names to their corresponding values.
+ * @returns {string | boolean} - The first non-empty class name, or false if all values are empty.
+ */
+const getFirstNonEmptyClass = (classMap: Record<string, any>): string | boolean => {
+  for (const [className, value] of Object.entries(classMap)) {
+    if (value) {
+      return className;
+    }
+  }
+  return false;
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
@@ -744,4 +764,5 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
+  getFirstNonEmptyClass,
 };

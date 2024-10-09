@@ -6,11 +6,11 @@ import {
   filterAndTransformProperties,
   filterOptions,
   groupByProperty,
-  InputVariablesEnum,
   isDefined,
   isValueValid,
   pickObjectProperties,
   processSlotClasses,
+  SelectMultipleVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 import {
@@ -117,7 +117,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputVariablesEnum[key];
+        const _value = SelectMultipleVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,

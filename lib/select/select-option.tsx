@@ -4,8 +4,8 @@ import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
-  InputVariablesEnum,
   isValueValid,
+  SelectOptionVariablesEnum,
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
@@ -16,7 +16,7 @@ const SelectOption = function SelectOption<T extends ElementType = 'option'>(pro
     const finalClass = clsxUnique(className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputVariablesEnum[key];
+        const _value = SelectOptionVariablesEnum[key];
         return {
           include: true,
           transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,

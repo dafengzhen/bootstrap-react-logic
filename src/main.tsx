@@ -1,16 +1,17 @@
+import '@assets/styles/main.scss';
+import '@src/i18n';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@assets/styles/main.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from '@src/App.tsx';
 import ErrorPage from '@pages/error-page.tsx';
 import ButtonPage from '@pages/button-page.tsx';
 import IndexPage from '@pages/index-page.tsx';
-import App from '@src/App.tsx';
 import ButtonGroupPage from '@pages/button-group-page.tsx';
 import InputPage from '@pages/input-page.tsx';
 import InputGroupPage from '@pages/input-group-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
-import '@src/i18n';
+import CheckboxPage from '@pages/checkbox-page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
           {
             path: 'pages/select',
             element: <SelectPage />,
+          },
+          {
+            path: 'pages/checkbox',
+            element: <CheckboxPage />,
           },
         ],
       },
