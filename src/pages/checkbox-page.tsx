@@ -28,6 +28,30 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
+    switch: {
+      openCode: boolean;
+      code?: string;
+    };
+    inline: {
+      openCode: boolean;
+      code?: string;
+    };
+    reverse: {
+      openCode: boolean;
+      code?: string;
+    };
+    withoutLabels: {
+      openCode: boolean;
+      code?: string;
+    };
+    toggleButtons: {
+      openCode: boolean;
+      code?: string;
+    };
+    outlinedStyles: {
+      openCode: boolean;
+      code?: string;
+    };
   };
 }
 
@@ -47,7 +71,7 @@ interface IComponentPropsStates {
 export default function CheckboxPage() {
   useHighlightCode();
   const navigation = useNavigation();
-  const { t: tSelectComponentProps } = useTranslation(['checkboxComponentProps']);
+  const { t: tCheckboxComponentProps } = useTranslation(['checkboxComponentProps']);
   const { t: tCheckboxPage } = useTranslation(['checkboxPage']);
 
   const [states, setStates] = useState<IStates>({
@@ -63,6 +87,30 @@ export default function CheckboxPage() {
       disabled: {
         openCode: false,
         code: checkboxCodes.disabled.code.trim(),
+      },
+      switch: {
+        openCode: false,
+        code: checkboxCodes.switch.code.trim(),
+      },
+      inline: {
+        openCode: false,
+        code: checkboxCodes.inline.code.trim(),
+      },
+      reverse: {
+        openCode: false,
+        code: checkboxCodes.reverse.code.trim(),
+      },
+      withoutLabels: {
+        openCode: false,
+        code: checkboxCodes.withoutLabels.code.trim(),
+      },
+      toggleButtons: {
+        openCode: false,
+        code: checkboxCodes.toggleButtons.code.trim(),
+      },
+      outlinedStyles: {
+        openCode: false,
+        code: checkboxCodes.outlinedStyles.code.trim(),
       },
     },
   });
@@ -121,12 +169,9 @@ export default function CheckboxPage() {
               Default checkbox
             </Label>
           </div>
-          <div className="form-check">
-            <Checkbox defaultChecked value="" id="flexCheckChecked"></Checkbox>
-            <Label formCheckLabel htmlFor="flexCheckChecked">
-              Checked checkbox
-            </Label>
-          </div>
+          <Checkbox defaultChecked value="" id="flexCheckChecked">
+            Checked checkbox
+          </Checkbox>
         </div>
       </CustomSimpleCard>
 
@@ -180,6 +225,191 @@ export default function CheckboxPage() {
         </div>
       </CustomSimpleCard>
 
+      <CustomSimpleCard
+        title={tCheckboxPage('switch')}
+        hash="switch"
+        isOpen={states.checkbox.switch.openCode}
+        toggleCode={() => onClickUpdateState('checkbox.switch.openCode', !states.checkbox.switch.openCode)}
+        code={states.checkbox.switch.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <Checkbox switch value="" id="flexSwitchCheckDefault">
+            Default switch checkbox input
+          </Checkbox>
+
+          <div className="form-check form-switch">
+            <Checkbox defaultChecked value="" id="flexSwitchCheckChecked" role="switch"></Checkbox>
+            <Label formCheckLabel htmlFor="flexSwitchCheckChecked">
+              Checked switch checkbox input
+            </Label>
+          </div>
+
+          <div className="form-check form-switch">
+            <Checkbox disabled value="" id="flexSwitchCheckDisabled" role="switch"></Checkbox>
+            <Label formCheckLabel htmlFor="flexSwitchCheckDisabled">
+              Disabled switch checkbox input
+            </Label>
+          </div>
+
+          <div className="form-check form-switch">
+            <Checkbox defaultChecked disabled value="" id="flexSwitchCheckCheckedDisabled" role="switch"></Checkbox>
+            <Label formCheckLabel htmlFor="flexSwitchCheckCheckedDisabled">
+              Disabled checked switch checkbox input
+            </Label>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title={tCheckboxPage('inline')}
+        hash="inline"
+        isOpen={states.checkbox.inline.openCode}
+        toggleCode={() => onClickUpdateState('checkbox.inline.openCode', !states.checkbox.inline.openCode)}
+        code={states.checkbox.inline.code}
+      >
+        <div>
+          <Checkbox inline value="option1" id="inlineCheckbox1">
+            1
+          </Checkbox>
+
+          <div className="form-check form-check-inline">
+            <Checkbox value="option2" id="inlineCheckbox2"></Checkbox>
+            <Label formCheckLabel htmlFor="inlineCheckbox2">
+              2
+            </Label>
+          </div>
+
+          <div className="form-check form-check-inline">
+            <Checkbox disabled value="option3" id="inlineCheckbox3"></Checkbox>
+            <Label formCheckLabel htmlFor="inlineCheckbox3">
+              3 (disabled)
+            </Label>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title={tCheckboxPage('reverse')}
+        hash="reverse"
+        isOpen={states.checkbox.reverse.openCode}
+        toggleCode={() => onClickUpdateState('checkbox.reverse.openCode', !states.checkbox.reverse.openCode)}
+        code={states.checkbox.reverse.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <Checkbox reverse value="" id="reverseCheck1">
+            Reverse checkbox
+          </Checkbox>
+
+          <div className="form-check form-check-reverse">
+            <Checkbox disabled value="" id="reverseCheck2"></Checkbox>
+            <Label formCheckLabel htmlFor="reverseCheck2">
+              Disabled reverse checkbox
+            </Label>
+          </div>
+
+          <div className="form-check form-switch form-check-reverse">
+            <Checkbox value="" id="flexSwitchCheckReverse"></Checkbox>
+            <Label formCheckLabel htmlFor="flexSwitchCheckReverse">
+              Reverse switch checkbox input
+            </Label>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title={tCheckboxPage('withoutLabels')}
+        hash="withoutLabels"
+        isOpen={states.checkbox.withoutLabels.openCode}
+        toggleCode={() =>
+          onClickUpdateState('checkbox.withoutLabels.openCode', !states.checkbox.withoutLabels.openCode)
+        }
+        code={states.checkbox.withoutLabels.code}
+      >
+        <div className="d-flex flex-column gap-2">
+          <Checkbox value="" />
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title={tCheckboxPage('toggleButtons')}
+        hash="toggleButtons"
+        isOpen={states.checkbox.toggleButtons.openCode}
+        toggleCode={() =>
+          onClickUpdateState('checkbox.toggleButtons.openCode', !states.checkbox.toggleButtons.openCode)
+        }
+        code={states.checkbox.toggleButtons.code}
+      >
+        <div className="d-flex gap-2">
+          <div>
+            <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check"></Checkbox>
+            <Label dropOldClass className="btn btn-primary" htmlFor="btn-check">
+              Single toggle
+            </Label>
+          </div>
+
+          <div>
+            <Checkbox
+              defaultChecked
+              dropOldClass
+              value=""
+              className="btn-check"
+              autoComplete="off"
+              id="btn-check-2"
+            ></Checkbox>
+            <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-2">
+              Checked
+            </Label>
+          </div>
+
+          <div>
+            <Checkbox
+              dropOldClass
+              disabled
+              value=""
+              className="btn-check"
+              autoComplete="off"
+              id="btn-check-3"
+            ></Checkbox>
+            <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-3">
+              Disabled
+            </Label>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
+      <CustomSimpleCard
+        title={tCheckboxPage('outlinedStyles')}
+        hash="outlinedStyles"
+        isOpen={states.checkbox.outlinedStyles.openCode}
+        toggleCode={() =>
+          onClickUpdateState('checkbox.outlinedStyles.openCode', !states.checkbox.outlinedStyles.openCode)
+        }
+        code={states.checkbox.outlinedStyles.code}
+      >
+        <div className="d-flex gap-2">
+          <div>
+            <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check-outlined"></Checkbox>
+            <Label dropOldClass className="btn btn-outline-primary" htmlFor="btn-check-outlined">
+              Single toggle
+            </Label>
+          </div>
+
+          <div>
+            <Checkbox
+              defaultChecked
+              dropOldClass
+              value=""
+              className="btn-check"
+              autoComplete="off"
+              id="btn-check-2-outlined"
+            ></Checkbox>
+            <Label dropOldClass className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">
+              Checked
+            </Label>
+          </div>
+        </div>
+      </CustomSimpleCard>
+
       <PropsIndicator />
 
       <CustomSimpleCard.ComponentProps
@@ -200,13 +430,48 @@ export default function CheckboxPage() {
           {
             attr: 'indeterminate',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('desc.indeterminate'),
+            desc: tCheckboxComponentProps('desc.indeterminate'),
             default: '',
           },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('desc.disabled'),
+            desc: tCheckboxComponentProps('desc.disabled'),
+            default: '',
+          },
+          {
+            attr: 'contentClasses',
+            type: (
+              <div className="d-flex flex-column gap-2">
+                <div>
+                  <span className="badge text-bg-secondary">Key : container | component | label</span>
+                </div>
+                <div>
+                  <span className="badge text-bg-secondary">
+                    Value : string | ((originalClass: string) =&gt; string | undefined)
+                  </span>
+                </div>
+              </div>
+            ),
+            desc: tCheckboxComponentProps('desc.contentClasses'),
+            default: '',
+          },
+          {
+            attr: 'switch',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tCheckboxComponentProps('desc.switch'),
+            default: '',
+          },
+          {
+            attr: 'inline',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tCheckboxComponentProps('desc.inline'),
+            default: '',
+          },
+          {
+            attr: 'reverse',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tCheckboxComponentProps('desc.reverse'),
             default: '',
           },
         ]}

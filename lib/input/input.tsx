@@ -5,9 +5,9 @@ import {
   clsxWithOptions,
   filterAndTransformProperties,
   filterOptions,
+  getFirstNonEmptyClass,
   InputVariablesEnum,
   isValueValid,
-  processClassName,
   processSlotClasses,
   VARIABLE_BS_PREFIX,
 } from '../tools';
@@ -39,20 +39,16 @@ const Input = function Input<T extends ElementType = 'input'>(
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = processClassName(
-      clsxUnique(
-        !dropOldClass && (readonlyPlainText ? 'form-control-plaintext' : 'form-control'),
-        color && 'form-control-color',
-        size && `form-control-${size}`,
-        className,
-      ),
-      [
-        (classNames) => {
-          if (type === 'checkbox' || type === 'radio') {
-            return classNames.filter((className) => className !== 'form-control');
-          }
-        },
-      ],
+    const finalClass = clsxUnique(
+      !dropOldClass &&
+        getFirstNonEmptyClass({
+          'form-check-input': type === 'checkbox' || type === 'radio',
+          'form-control-plaintext': readonlyPlainText,
+          'form-control': true,
+        }),
+      color && 'form-control-color',
+      size && `form-control-${size}`,
+      className,
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {

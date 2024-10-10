@@ -1,4 +1,10 @@
 {
   "basic": "Basic",
-  "indeterminate": "Indeterminate"
+  "indeterminate": "Indeterminate",
+  "switch": "Switch",
+  "inline": "Inline",
+  "reverse": "Reverse",
+  "withoutLabels": "Without labels",
+  "toggleButtons": "Toggle buttons",
+  "outlinedStyles": "Outlined styles"
 }

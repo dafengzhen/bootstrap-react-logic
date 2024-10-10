@@ -1,6 +1,10 @@
 {
   "desc": {
     "indeterminate": "不确定状态",
-    "disabled": "禁止"
+    "disabled": "禁止",
+    "contentClasses": "设置插槽类名",
+    "switch": "开关",
+    "inline": "内联",
+    "reverse": "相反"
   }
 }

@@ -1,6 +1,10 @@
 {
   "desc": {
     "indeterminate": "Indeterminate",
-    "disabled": "Disabled"
+    "disabled": "Disabled",
+    "contentClasses": "Set slot class names",
+    "switch": "Switch",
+    "inline": "Inline",
+    "reverse": "Reverse"
   }
 }
