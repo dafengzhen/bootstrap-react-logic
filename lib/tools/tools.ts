@@ -739,6 +739,28 @@ const getFirstNonEmptyClass = (classMap: Record<string, any>): string | boolean 
   return false;
 };
 
+/**
+ * Checks if the provided value is a valid number.
+ *
+ * This function works for both numbers and strings that represent numbers.
+ * It ensures that the value is finite and not NaN.
+ *
+ * @param {unknown} value - The value to check, can be of any type.
+ * @returns {value is number} - Returns true if the value is a valid number or a string that can be converted to a valid number, otherwise false.
+ */
+const isNumber = (value: unknown): value is number | string => {
+  if (typeof value === 'number' && isFinite(value)) {
+    return true;
+  }
+
+  if (typeof value === 'string' && value.trim() !== '') {
+    const num = Number(value);
+    return !isNaN(num) && isFinite(num);
+  }
+
+  return false;
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
@@ -750,10 +772,12 @@ export {
   filterOptions,
   filterTransformAndExcludeProperties,
   generateRandomId,
+  getFirstNonEmptyClass,
   getValue,
   groupByProperty,
   isArray,
   isDefined,
+  isNumber,
   isPlainObject,
   isSpecialObject,
   isValueValid,
@@ -764,5 +788,4 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
-  getFirstNonEmptyClass,
 };

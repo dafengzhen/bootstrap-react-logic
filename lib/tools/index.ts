@@ -45,10 +45,12 @@ export {
   filterOptions,
   filterTransformAndExcludeProperties,
   generateRandomId,
+  getFirstNonEmptyClass,
   getValue,
   groupByProperty,
   isArray,
   isDefined,
+  isNumber,
   isPlainObject,
   isSpecialObject,
   isValueValid,
@@ -59,5 +61,4 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
-  getFirstNonEmptyClass,
 } from './tools';
