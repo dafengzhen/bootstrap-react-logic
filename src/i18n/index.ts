@@ -46,6 +46,10 @@ import checkboxPageEn from './en/component/checkbox-page.json';
 import checkboxPageZh from './zh/component/checkbox-page.json';
 import checkboxComponentPropsEn from './en/component/checkbox-component-props.json';
 import checkboxComponentPropsZh from './zh/component/checkbox-component-props.json';
+import radioPageEn from './en/component/radio-page.json';
+import radioPageZh from './zh/component/radio-page.json';
+import radioComponentPropsEn from './en/component/radio-component-props.json';
+import radioComponentPropsZh from './zh/component/radio-component-props.json';
 
 const resources = {
   en: {
@@ -72,6 +76,8 @@ const resources = {
     indexPage: indexPageEn,
     checkboxPage: checkboxPageEn,
     checkboxComponentProps: checkboxComponentPropsEn,
+    radioPage: radioPageEn,
+    radioComponentProps: radioComponentPropsEn,
   },
   zh: {
     index: indexEn,
@@ -97,6 +103,8 @@ const resources = {
     indexPage: indexPageZh,
     checkboxPage: checkboxPageZh,
     checkboxComponentProps: checkboxComponentPropsZh,
+    radioPage: radioPageZh,
+    radioComponentProps: radioComponentPropsZh,
   },
 };
 

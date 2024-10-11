@@ -12,6 +12,7 @@ import InputPage from '@pages/input-page.tsx';
 import InputGroupPage from '@pages/input-group-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
 import CheckboxPage from '@pages/checkbox-page.tsx';
+import RadioPage from '@pages/radio-page.tsx';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
           {
             path: 'pages/checkbox',
             element: <CheckboxPage />,
+          },
+          {
+            path: 'pages/radio',
+            element: <RadioPage />,
           },
         ],
       },

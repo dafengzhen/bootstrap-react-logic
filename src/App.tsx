@@ -4,14 +4,15 @@ import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 
 interface IMenu {
-  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox';
+  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox' | 'Radio';
   to:
     | '/pages/button'
     | '/pages/button-group'
     | '/pages/input'
     | '/pages/input-group'
     | '/pages/select'
-    | '/pages/checkbox';
+    | '/pages/checkbox'
+    | '/pages/radio';
 }
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
     {
       name: 'Checkbox',
       to: '/pages/checkbox',
+    },
+    {
+      name: 'Radio',
+      to: '/pages/radio',
     },
   ]);
 
