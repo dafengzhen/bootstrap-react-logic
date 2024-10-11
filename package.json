@@ -51,7 +51,7 @@
     "@eslint/js": "^9.12.0",
     "@types/node": "^20",
     "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
+    "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.3",
@@ -60,7 +60,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
-    "globals": "^15.10.0",
+    "globals": "^15.11.0",
     "highlight.js": "^11.10.0",
     "husky": "^9.1.6",
     "i18next": "^23.15.2",
@@ -74,10 +74,10 @@
     "rollup-plugin-visualizer": "^5.12.0",
     "sass-embedded": "^1.79.4",
     "tailwindcss": "^3.4.13",
-    "typescript": "^5.6.2",
+    "typescript": "^5.6.3",
     "typescript-eslint": "^8.8.1",
     "vite": "^5.4.8",
-    "vite-plugin-dts": "^4.2.3"
+    "vite-plugin-dts": "^4.2.4"
   },
   "packageManager": "npm@10.9.0",
   "repository": {

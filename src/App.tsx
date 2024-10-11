@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 
 interface IMenu {
-  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox' | 'Radio';
+  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox' | 'Radio' | 'Range';
   to:
     | '/pages/button'
     | '/pages/button-group'
@@ -12,7 +12,8 @@ interface IMenu {
     | '/pages/input-group'
     | '/pages/select'
     | '/pages/checkbox'
-    | '/pages/radio';
+    | '/pages/radio'
+    | '/pages/range';
 }
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
     {
       name: 'Radio',
       to: '/pages/radio',
+    },
+    {
+      name: 'Range',
+      to: '/pages/range',
     },
   ]);
 

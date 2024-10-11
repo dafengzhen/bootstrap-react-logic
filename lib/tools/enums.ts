@@ -273,6 +273,26 @@ enum RadioVariablesEnum {
   formSwitchCheckedBgPosition = 'form-switch-checked-bg-position',
 }
 
+enum RangeVariablesEnum {
+  formRangeTrackWidth = 'form-range-track-width',
+  formRangeTrackHeight = 'form-range-track-height',
+  formRangeTrackCursor = 'form-range-track-cursor',
+  formRangeTrackBg = 'form-range-track-bg',
+  formRangeTrackBorderRadius = 'form-range-track-border-radius',
+  formRangeTrackBoxShadow = 'form-range-track-box-shadow',
+  formRangeThumbWidth = 'form-range-thumb-width',
+  formRangeThumbHeight = 'form-range-thumb-height',
+  formRangeThumbBg = 'form-range-thumb-bg',
+  formRangeThumbBorder = 'form-range-thumb-border',
+  formRangeThumbBorderRadius = 'form-range-thumb-border-radius',
+  formRangeThumbBoxShadow = 'form-range-thumb-box-shadow',
+  formRangeThumbFocusBoxShadow = 'form-range-thumb-focus-box-shadow',
+  formRangeThumbFocusBoxShadowWidth = 'form-range-thumb-focus-box-shadow-width',
+  formRangeThumbActiveBg = 'form-range-thumb-active-bg',
+  formRangeThumbDisabledBg = 'form-range-thumb-disabled-bg',
+  formRangeThumbTransition = 'form-range-thumb-transition',
+}
+
 export {
   ButtonVariableEnum,
   RoundedClassEnum,
@@ -291,4 +311,5 @@ export {
   SelectMultipleVariablesEnum,
   CheckboxVariablesEnum,
   RadioVariablesEnum,
+  RangeVariablesEnum,
 };

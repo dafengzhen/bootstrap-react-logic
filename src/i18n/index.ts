@@ -50,6 +50,10 @@ import radioPageEn from './en/component/radio-page.json';
 import radioPageZh from './zh/component/radio-page.json';
 import radioComponentPropsEn from './en/component/radio-component-props.json';
 import radioComponentPropsZh from './zh/component/radio-component-props.json';
+import rangePageEn from './en/component/range-page.json';
+import rangePageZh from './zh/component/range-page.json';
+import rangeComponentPropsEn from './en/component/range-component-props.json';
+import rangeComponentPropsZh from './zh/component/range-component-props.json';
 
 const resources = {
   en: {
@@ -78,6 +82,8 @@ const resources = {
     checkboxComponentProps: checkboxComponentPropsEn,
     radioPage: radioPageEn,
     radioComponentProps: radioComponentPropsEn,
+    rangePage: rangePageEn,
+    rangeComponentProps: rangeComponentPropsEn,
   },
   zh: {
     index: indexEn,
@@ -105,6 +111,8 @@ const resources = {
     checkboxComponentProps: checkboxComponentPropsZh,
     radioPage: radioPageZh,
     radioComponentProps: radioComponentPropsZh,
+    rangePage: rangePageZh,
+    rangeComponentProps: rangeComponentPropsZh,
   },
 };
 

@@ -23,12 +23,13 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime'],
+      external: ['react', 'react/jsx-runtime', 'react-dom'],
       output: {
         assetFileNames: 'bootstrap-react-logic.[ext]',
         globals: {
           react: 'React',
           'react/jsx-runtime': 'ReactJsxRuntime',
+          'react-dom': 'ReactDom',
         },
       },
     },

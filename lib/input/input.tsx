@@ -42,6 +42,7 @@ const Input = function Input<T extends ElementType = 'input'>(
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
+          'form-range': type === 'range',
           'form-check-input': type === 'checkbox' || type === 'radio',
           'form-control-plaintext': readonlyPlainText,
           'form-control': true,

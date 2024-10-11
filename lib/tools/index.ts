@@ -33,6 +33,7 @@ export {
   SelectMultipleVariablesEnum,
   CheckboxVariablesEnum,
   RadioVariablesEnum,
+  RangeVariablesEnum,
 } from './enums';
 
 export {
