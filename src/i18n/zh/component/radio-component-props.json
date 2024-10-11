@@ -1,10 +1,9 @@
 {
   "desc": {
-    "indeterminate": "Indeterminate",
-    "disabled": "Disabled",
-    "contentClasses": "Set slot class names",
-    "switch": "Switch",
-    "inline": "Inline",
-    "reverse": "Reverse"
+    "disabled": "禁止",
+    "contentClasses": "设置插槽类名",
+    "switch": "开关",
+    "inline": "内联",
+    "reverse": "相反"
   }
 }

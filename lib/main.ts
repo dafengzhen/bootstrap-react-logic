@@ -6,6 +6,7 @@ export * as InputOtp from './input-otp/input-otp.tsx';
 export * as InputGroup from './input-group/input-group.tsx';
 export * as InputGroupText from './input-group/input-group-text.tsx';
 export * as Checkbox from './checkbox/checkbox.tsx';
+export * as Radio from './radio/radio.tsx';
 export * as Textarea from './textarea/textarea';
 export * as Label from './label/label';
 export * as Text from './text/text';

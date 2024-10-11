@@ -1,4 +1,4 @@
-import { type ElementType, useCallback, useEffect, useMemo, useRef } from 'react';
+import { type ElementType, useMemo } from 'react';
 import type { RadioProps } from './types.ts';
 import {
   clsxUnique,
@@ -21,7 +21,6 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
     className,
     style,
     children,
-    indeterminate,
     id,
     contentClasses,
     switch: formSwitch,
@@ -29,17 +28,6 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
     reverse,
     ...rest
   } = props;
-
-  const checkboxElement = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    const current = checkboxElement.current;
-    if (indeterminate && current) {
-      current.indeterminate = true;
-    }
-  }, [indeterminate, checkboxElement]);
-
-  const setInstance = useCallback((instance: HTMLInputElement | null) => (checkboxElement.current = instance), []);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-check-input', className);
@@ -86,7 +74,6 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
           as={Component}
           data-slot-component=""
           type="radio"
-          onRef={setInstance}
           id={id}
           dropOldClass
           className={slotClassName.component}
@@ -101,7 +88,7 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    <Input {...rest} {...renderOptions} as={Component} type="radio" onRef={setInstance} id={id} />
+    <Input {...rest} {...renderOptions} as={Component} type="radio" id={id} />
   );
 };
 

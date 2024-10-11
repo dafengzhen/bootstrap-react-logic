@@ -20,23 +20,11 @@ interface IStates {
       openCode: boolean;
       code?: string;
     };
-    indeterminate: {
-      openCode: boolean;
-      code?: string;
-    };
     disabled: {
       openCode: boolean;
       code?: string;
     };
-    switch: {
-      openCode: boolean;
-      code?: string;
-    };
     inline: {
-      openCode: boolean;
-      code?: string;
-    };
-    reverse: {
       openCode: boolean;
       code?: string;
     };
@@ -80,25 +68,13 @@ export default function RadioPage() {
         openCode: false,
         code: radioCodes.basic.code.trim(),
       },
-      indeterminate: {
-        openCode: false,
-        code: radioCodes.indeterminate.code.trim(),
-      },
       disabled: {
         openCode: false,
         code: radioCodes.disabled.code.trim(),
       },
-      switch: {
-        openCode: false,
-        code: radioCodes.switch.code.trim(),
-      },
       inline: {
         openCode: false,
         code: radioCodes.inline.code.trim(),
-      },
-      reverse: {
-        openCode: false,
-        code: radioCodes.reverse.code.trim(),
       },
       withoutLabels: {
         openCode: false,
@@ -169,6 +145,7 @@ export default function RadioPage() {
               Default radio
             </Label>
           </div>
+
           <Radio defaultChecked name="flexRadioDefault" id="flexRadioDefault2">
             Default checked radio
           </Radio>
@@ -335,12 +312,6 @@ export default function RadioPage() {
           )
         }
         items={[
-          {
-            attr: 'indeterminate',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('desc.indeterminate'),
-            default: '',
-          },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,

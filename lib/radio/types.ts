@@ -5,11 +5,6 @@ type SlotValueKeys = 'container' | 'component' | 'label';
 
 type Props<T extends ElementType> = BaseProps<T, typeof RadioVariablesEnum> & {
   /**
-   * indeterminate.
-   */
-  indeterminate?: boolean;
-
-  /**
    * disabled.
    */
   disabled?: boolean;

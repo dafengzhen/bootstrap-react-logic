@@ -5,11 +5,6 @@ type SlotValueKeys = 'container' | 'checkbox' | 'label';
 
 type Props = {
   /**
-   * indeterminate.
-   */
-  indeterminate?: boolean;
-
-  /**
    * disabled.
    */
   disabled?: boolean;

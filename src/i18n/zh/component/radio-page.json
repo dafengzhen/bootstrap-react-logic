@@ -1,11 +1,8 @@
 {
-  "basic": "Basic",
-  "indeterminate": "Indeterminate",
-  "switch": "Switch",
-  "disabled": "Disabled",
-  "inline": "Inline",
-  "reverse": "Reverse",
-  "withoutLabels": "Without labels",
-  "toggleButtons": "Toggle buttons",
-  "outlinedStyles": "Outlined styles"
+  "basic": "基本",
+  "disabled": "禁止",
+  "inline": "内联",
+  "withoutLabels": "没有标签",
+  "toggleButtons": "切换按钮",
+  "outlinedStyles": "轮廓样式"
 }
