@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-react-logic",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Bootstrap React Logic is a logic operations library designed specifically for React applications, aiming to seamlessly integrate with Bootstrap styles to help developers easily create rich interactive user interfaces",
   "author": "dafengzhen",
   "license": "MIT",
@@ -33,7 +33,8 @@
     "prettier:check": "npx prettier . --check --ignore-unknown",
     "prepare": "husky",
     "commit:test": "npx commitlint --from HEAD~1 --to HEAD --verbose",
-    "commit": "commit"
+    "commit": "commit",
+    "publish": "npm publish"
   },
   "peerDependencies": {
     "bootstrap": "^5.3.3",
