@@ -15,53 +15,58 @@ import CheckboxPage from '@pages/checkbox-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          errorElement: <ErrorPage />,
+          children: [
+            { index: true, element: <IndexPage /> },
+            {
+              path: 'pages/button',
+              element: <ButtonPage />,
+            },
+            {
+              path: 'pages/button-group',
+              element: <ButtonGroupPage />,
+            },
+            {
+              path: 'pages/input',
+              element: <InputPage />,
+            },
+            {
+              path: 'pages/input-group',
+              element: <InputGroupPage />,
+            },
+            {
+              path: 'pages/select',
+              element: <SelectPage />,
+            },
+            {
+              path: 'pages/checkbox',
+              element: <CheckboxPage />,
+            },
+            {
+              path: 'pages/radio',
+              element: <RadioPage />,
+            },
+            {
+              path: 'pages/range',
+              element: <RangePage />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <App />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        errorElement: <ErrorPage />,
-        children: [
-          { index: true, element: <IndexPage /> },
-          {
-            path: 'pages/button',
-            element: <ButtonPage />,
-          },
-          {
-            path: 'pages/button-group',
-            element: <ButtonGroupPage />,
-          },
-          {
-            path: 'pages/input',
-            element: <InputPage />,
-          },
-          {
-            path: 'pages/input-group',
-            element: <InputGroupPage />,
-          },
-          {
-            path: 'pages/select',
-            element: <SelectPage />,
-          },
-          {
-            path: 'pages/checkbox',
-            element: <CheckboxPage />,
-          },
-          {
-            path: 'pages/radio',
-            element: <RadioPage />,
-          },
-          {
-            path: 'pages/range',
-            element: <RangePage />,
-          },
-        ],
-      },
-    ],
+    basename: '/bootstrap-react-logic/',
   },
-]);
+);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
