@@ -5,6 +5,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/bootstrap-react-logic/',
   plugins: [
     react(),
     visualizer({

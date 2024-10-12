@@ -34,7 +34,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: npm ci
-      - name: Build with Youdeyiwu Docs
+      - name: Build with BRL Docs
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
