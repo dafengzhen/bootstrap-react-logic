@@ -1,6 +1,5 @@
 {
   "name": "bootstrap-react-logic",
-  "private": true,
   "version": "0.1.0-alpha.0",
   "description": "Bootstrap React Logic is a logic operations library designed specifically for React applications, aiming to seamlessly integrate with Bootstrap styles to help developers easily create rich interactive user interfaces",
   "author": "dafengzhen",
