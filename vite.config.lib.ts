@@ -5,6 +5,9 @@ import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import mergeCssPlugin from './merge-css-plugin';
 
+// lite tools
+const lightweightTools = ['clsx'];
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), mergeCssPlugin],
@@ -36,6 +39,10 @@ export default defineConfig({
         chunkFileNames: format === 'cjs' ? '[name].cjs' : '[name].js',
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (lightweightTools.some((tool) => id.includes(`${tool}/`))) {
+              return 'lite';
+            }
+
             return 'vendor';
           }
 
