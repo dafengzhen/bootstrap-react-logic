@@ -8,13 +8,14 @@
   "files": [
     "dist-lib"
   ],
-  "main": "./dist-lib/bootstrap-react.umd.cjs",
-  "module": "./dist-lib/bootstrap-react.js",
+  "main": "./dist-lib/bootstrap-react-logic.cjs",
+  "module": "./dist-lib/bootstrap-react-logic.js",
   "types": "./dist-lib/main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist-lib/bootstrap-react.js",
-      "require": "./dist-lib/bootstrap-react.umd.cjs"
+      "import": "./dist-lib/bootstrap-react-logic.js",
+      "require": "./dist-lib/bootstrap-react-logic.cjs",
+      "types": "./dist-lib/main.d.ts"
     }
   },
   "engines": {

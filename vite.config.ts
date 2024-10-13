@@ -37,51 +37,18 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: [
-      {
-        find: '@src',
-        replacement: resolve(__dirname, 'src'),
-      },
-      {
-        find: '@assets',
-        replacement: resolve(__dirname, 'src/assets'),
-      },
-      {
-        find: '@components',
-        replacement: resolve(__dirname, 'src/components'),
-      },
-      {
-        find: '@hooks',
-        replacement: resolve(__dirname, 'src/hooks'),
-      },
-      {
-        find: '@hocs',
-        replacement: resolve(__dirname, 'src/hocs'),
-      },
-      {
-        find: '@pages',
-        replacement: resolve(__dirname, 'src/pages'),
-      },
-      {
-        find: '@types',
-        replacement: resolve(__dirname, 'src/types'),
-      },
-      {
-        find: '@store',
-        replacement: resolve(__dirname, 'src/store'),
-      },
-      {
-        find: '@contexts',
-        replacement: resolve(__dirname, 'src/contexts'),
-      },
-      {
-        find: '@tools',
-        replacement: resolve(__dirname, 'src/tools'),
-      },
-      {
-        find: '@lib',
-        replacement: resolve(__dirname, 'lib'),
-      },
-    ],
+    alias: {
+      '@src': resolve(__dirname, 'src'),
+      '@lib': resolve(__dirname, 'lib'),
+      '@assets': resolve(__dirname, 'src/assets'),
+      '@components': resolve(__dirname, 'src/components'),
+      '@hooks': resolve(__dirname, 'src/hooks'),
+      '@hocs': resolve(__dirname, 'src/hocs'),
+      '@pages': resolve(__dirname, 'src/pages'),
+      '@types': resolve(__dirname, 'src/types'),
+      '@store': resolve(__dirname, 'src/store'),
+      '@contexts': resolve(__dirname, 'src/contexts'),
+      '@tools': resolve(__dirname, 'src/tools'),
+    },
   },
 });
