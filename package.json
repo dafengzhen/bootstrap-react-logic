@@ -45,7 +45,8 @@
     "publish:alpha": "npm publish --tag alpha",
     "publish:beta": "npm publish --tag beta",
     "publish:rc": "npm publish --tag rc",
-    "publish:latest": "npm publish --tag latest"
+    "publish:latest": "npm publish --tag latest",
+    "update:latest": "npm dist-tag add bootstrap-react-logic@%npm_package_version% latest"
   },
   "peerDependencies": {
     "bootstrap": "^5.3.3",
