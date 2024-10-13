@@ -64,7 +64,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/bootstrap-react-logic/',
+    basename: __APP_PUBLIC_BASE_PATH__,
   },
 );
 

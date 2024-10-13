@@ -23,7 +23,8 @@
     "npm": ">=10"
   },
   "scripts": {
-    "dev": "vite --force",
+    "dev": "vite",
+    "dev:force": "vite --force",
     "build": "tsc -b && vite build --config vite.config.ts --mode app",
     "build:lib": "tsc -b tsconfig.lib.json && vite build --config vite.config.lib.ts --mode lib",
     "build:full": "npm run lint && npm run build",
