@@ -2,7 +2,6 @@ import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 're
 import { useState } from 'react';
 import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
-import { Analytics } from '@vercel/analytics/react';
 
 interface IMenu {
   name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox' | 'Radio' | 'Range';
@@ -114,7 +113,6 @@ function App() {
         </div>
       </div>
       <ScrollRestoration />
-      <Analytics />
     </GlobalContext.Provider>
   );
 }
