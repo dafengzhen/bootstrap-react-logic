@@ -26,6 +26,9 @@ export default defineConfig({
         silenceDeprecations: ['mixed-decls', 'color-functions'],
       },
     },
+    modules: {
+      localsConvention: 'camelCase',
+    },
   },
   build: {
     rollupOptions: {

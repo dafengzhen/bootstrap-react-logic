@@ -1,15 +1,15 @@
-.brlSelectMultipleCursorPointer {
-  cursor: pointer;
+.brl-cursor-pointer {
+  @apply tw-cursor-pointer;
 }
 
-.brlSelectMultipleCursorDefault {
-  cursor: default;
+.brl-cursor-default {
+  @apply tw-cursor-default;
 }
 
-.brlSelectMultipleMinHeight {
-  min-height: 38px;
+.brl-min-h-38px {
+  @apply tw-min-h-[38px];
 }
 
-.brlSelectMultipleScale75 {
-  transform: scale(0.75);
+.brl-scale-75 {
+  @apply tw-scale-75;
 }

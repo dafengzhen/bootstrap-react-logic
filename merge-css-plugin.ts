@@ -1,5 +1,6 @@
 import type { Plugin } from 'vite';
 import type { OutputAsset } from 'rollup';
+import postcssLoadConfig from 'postcss-load-config';
 import postcss from 'postcss';
 import cssnano from 'cssnano';
 
@@ -12,7 +13,8 @@ const mergeCssPlugin: Plugin = {
 
     if (cssFiles.length > 1) {
       const mergedCss = cssFiles.map((file) => file.source).join('');
-      const result = await postcss([cssnano({ preset: 'default' })]).process(mergedCss);
+      const { plugins, options } = await postcssLoadConfig();
+      const result = await postcss([...plugins, cssnano({ preset: 'default' })]).process(mergedCss, options);
       this.emitFile({
         type: 'asset',
         fileName: 'bootstrap-react-logic.css',

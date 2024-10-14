@@ -77,13 +77,13 @@ const Input = function Input<T extends ElementType = 'input'>(
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {
       container: 'd-inline-flex align-items-center position-relative',
-      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlInputStart3}`,
-      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlInputEnd3}`,
+      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
+      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
       component: clsxWithOptions(
         null,
         renderOptions.className,
-        startContent && inputStyles.brlInputPs9,
-        endContent && inputStyles.brlInputPe9,
+        startContent && inputStyles.brlPs9,
+        endContent && inputStyles.brlPe9,
       ),
     });
 

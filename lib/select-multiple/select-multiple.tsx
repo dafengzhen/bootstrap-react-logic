@@ -111,7 +111,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass && `form-select ${selectMultipleStyles.brlSelectMultipleMinHeight}`,
+      !dropOldClass && `form-select ${selectMultipleStyles.brlMinH38px}`,
       disabled && 'bg-body-secondary',
       className,
     );
@@ -152,13 +152,13 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     activeOption: clsxWithOptions(
       null,
       'd-flex align-items-center badge text-bg-secondary',
-      selectMultipleStyles.brlSelectMultipleCursorDefault,
+      selectMultipleStyles.brlCursorDefault,
     ),
-    clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlSelectMultipleCursorPointer),
+    clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
     countDisplay: clsxWithOptions(
       null,
       'align-self-center flex-shrink-0 text-secondary',
-      selectMultipleStyles.brlSelectMultipleScale75,
+      selectMultipleStyles.brlScale75,
     ),
     floatingMenu: 'overflow-y-auto dropdown-menu rounded-3 shadow show',
     header: 'dropdown-header',

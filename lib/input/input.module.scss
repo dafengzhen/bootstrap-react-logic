@@ -1,15 +1,15 @@
-.brlInputPs9 {
-  padding-inline-start: 2.25rem;
+.brl-ps-9 {
+  @apply tw-ps-9;
 }
 
-.brlInputPe9 {
-  padding-inline-end: 2.25rem;
+.brl-pe-9 {
+  @apply tw-pe-9;
 }
 
-.brlInputStart3 {
-  inset-inline-start: 0.75rem;
+.brl-start-3 {
+  @apply tw-start-3;
 }
 
-.brlInputEnd3 {
-  inset-inline-end: 0.75rem;
+.brl-end-3 {
+  @apply tw-end-3;
 }
