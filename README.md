@@ -9,7 +9,7 @@ developers to quickly implement creative designs and improve development efficie
 
 ## Installation
 
-Tip: Before installation, please ensure that the bootstrap dependency is already in place.
+Tip: Before installation, please ensure that the **bootstrap** dependency is already in place.
 
 Install BRL using npm:
 
@@ -19,7 +19,9 @@ npm install bootstrap-react-logic
 
 ## Usage
 
-Import the component: import { Button } from 'bootstrap-react-logic'
+Import global styles: `import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css'`
+
+Import the component: `import { Button } from 'bootstrap-react-logic'`
 
 Basic usage:
 

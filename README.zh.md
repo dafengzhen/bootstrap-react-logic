@@ -8,7 +8,7 @@ BRL 提供了一系列强大且灵活的逻辑组件，简化了状态管理和�
 
 ## Installation
 
-Tip：在安装之前请确保已经存在 bootstrap 依赖
+Tip：在安装之前请确保已经存在 **bootstrap** 依赖
 
 使用 npm 安装 BRL：
 
@@ -18,7 +18,9 @@ npm install bootstrap-react-logic
 
 ## Usage
 
-导入组件：import { Button } from 'bootstrap-react-logic'
+导入全局样式：`import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css'`
+
+导入组件：`import { Button } from 'bootstrap-react-logic'`
 
 基本使用：
 
