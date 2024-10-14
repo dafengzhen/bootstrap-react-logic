@@ -87,6 +87,9 @@ export default function IndexPage() {
             <Trans t={tIndexPage} i18nKey="p6" />
           </div>
           <div className="mb-4">
+            <div className="mb-2">
+              <Trans t={tIndexPage} i18nKey="p7.2" />
+            </div>
             <div className="mb-4">
               <Trans t={tIndexPage} i18nKey="p7" />
             </div>

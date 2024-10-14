@@ -6,6 +6,7 @@
   "p5": "使用 npm 安装 BRL：",
   "p6": "二、使用",
   "p7": "导入组件：import { Button } from 'bootstrap-react-logic'",
+  "p7.2": "导入全局样式: import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css'",
   "p8": "基本使用：",
   "p9": "三、问题",
   "p10": "Q: 和其他第三方库有什么区别?",

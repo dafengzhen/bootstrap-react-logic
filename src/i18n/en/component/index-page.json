@@ -6,6 +6,7 @@
   "p5": "Install BRL using npm:",
   "p6": "二、Usage",
   "p7": "Import the component: import { Button } from 'bootstrap-react-logic'",
+  "p7.2": "Import global styles: import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css'",
   "p8": "Basic usage:",
   "p9": "三、FAQ",
   "p10": "Q: How is this different from other third-party libraries?",
