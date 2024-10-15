@@ -26,3 +26,11 @@ export const updateState = (
   });
   c?.();
 };
+
+export const toKebabCase = (str: string) => {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+};
+
+export const toCamelCase = (str: string): string => {
+  return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+};

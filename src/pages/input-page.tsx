@@ -582,6 +582,12 @@ export default function InputPage() {
             default: '',
           },
           {
+            attr: 'invalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('desc.invalid'),
+            default: '',
+          },
+          {
             attr: 'color',
             type: <span className="badge text-bg-secondary">boolean</span>,
             desc: tInputComponentProps('desc.color'),

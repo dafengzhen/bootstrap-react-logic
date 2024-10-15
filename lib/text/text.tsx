@@ -10,10 +10,19 @@ import {
 } from '../tools';
 
 const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, children, className, style, ...rest } = props;
+  const {
+    as: Component = 'div',
+    dropOldClass,
+    variables,
+    children,
+    className,
+    style,
+    invalidFeedback,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-text', className);
+    const finalClass = clsxUnique(!dropOldClass && 'form-text', invalidFeedback && 'invalid-feedback', className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = TextVariablesEnum[key];
@@ -32,7 +41,7 @@ const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, className, variables, style]);
+  }, [dropOldClass, invalidFeedback, className, variables, style]);
 
   return (
     <Component {...rest} {...renderOptions}>

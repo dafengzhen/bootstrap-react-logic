@@ -10,7 +10,16 @@ import {
 } from '../tools';
 
 const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: TextareaProps<T>) {
-  const { as: Component = 'textarea', dropOldClass, variables, className, style, children, ...rest } = props;
+  const {
+    as: Component = 'textarea',
+    dropOldClass,
+    variables,
+    className,
+    style,
+    children,
+    defaultValue,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-control', className);
@@ -35,9 +44,13 @@ const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: Te
   }, [dropOldClass, className, variables, style]);
 
   return (
-    <Component {...rest} {...renderOptions}>
-      {children}
-    </Component>
+    <Component
+      {...rest}
+      {...renderOptions}
+      defaultValue={
+        defaultValue ?? (typeof children === 'string' || typeof children === 'number' ? children : undefined)
+      }
+    ></Component>
   );
 };
 

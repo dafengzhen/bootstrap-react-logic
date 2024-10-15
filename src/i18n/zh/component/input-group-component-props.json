@@ -1,6 +1,7 @@
 {
   "desc": {
     "nowrap": "不换行",
-    "size": "大小"
+    "size": "大小",
+    "hasValidation": "类名 (.has-validation)"
   }
 }

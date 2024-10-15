@@ -20,6 +20,11 @@ type Props = {
   readonlyPlainText?: boolean;
 
   /**
+   * invalid.
+   */
+  invalid?: boolean;
+
+  /**
    * color
    */
   color?: boolean;

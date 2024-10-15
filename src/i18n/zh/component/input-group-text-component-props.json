@@ -1,5 +1,6 @@
 {
   "desc": {
-    "as": "类型"
+    "as": "类型",
+    "invalidFeedback": "类名 (.invalid-feedback)"
   }
 }

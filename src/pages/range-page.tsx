@@ -178,7 +178,7 @@ export default function RangePage() {
       <PropsIndicator />
 
       <CustomSimpleCard.ComponentProps
-        title="Radio"
+        title="Range"
         hash="radioComponentProps"
         colgroup={colgroup}
         isOpen={componentPropsStates.range.rangeComponentProps.openCode}

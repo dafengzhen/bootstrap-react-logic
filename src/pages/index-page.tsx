@@ -40,6 +40,10 @@ export default function IndexPage() {
         </div>
 
         <div className="card-body">
+          <div className="mb-4 display-6">
+            <Trans t={tIndexPage} i18nKey="p0" />
+          </div>
+
           <div className="mb-4">
             <div className="card-title">
               <Trans

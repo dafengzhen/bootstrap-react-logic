@@ -6,6 +6,7 @@
     "disabled": "Disabled",
     "readonly": "Readonly",
     "readonlyPlainText": "Class (.form-control-plaintext)",
+    "invalid": "Class (.is-invalid)",
     "color": "Color",
     "nativeColor": "Color (HTMLAttributes)",
     "startContent": "Start content",

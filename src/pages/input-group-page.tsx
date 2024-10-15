@@ -525,6 +525,12 @@ export default function InputGroupPage() {
             desc: tInputGroupComponentProps('desc.size'),
             default: '-',
           },
+          {
+            attr: 'hasValidation',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputGroupComponentProps('desc.hasValidation'),
+            default: '-',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 
@@ -548,6 +554,12 @@ export default function InputGroupPage() {
             type: <span className="badge text-bg-secondary">div | span</span>,
             desc: tInputGroupTextComponentProps('desc.as'),
             default: 'span',
+          },
+          {
+            attr: 'invalidFeedback',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputGroupTextComponentProps('desc.invalidFeedback'),
+            default: '-',
           },
         ]}
       ></CustomSimpleCard.ComponentProps>

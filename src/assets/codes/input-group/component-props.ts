@@ -11,6 +11,11 @@ type Props = {
    * size.
    */
   size?: 'lg' | 'sm';
+
+  /**
+   * hasValidation.
+   */
+  hasValidation?: boolean;
 };
     `,
   },
@@ -21,6 +26,11 @@ type Props = {
    * as.
    */
   as?: 'div' | 'span';
+
+  /**
+   * invalidFeedback.
+   */
+  invalidFeedback?: boolean;
 };
     `,
   },

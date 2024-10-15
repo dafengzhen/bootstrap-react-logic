@@ -11,13 +11,25 @@ import {
 import InputGroupText from './input-group-text.tsx';
 
 const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: InputGroupProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, className, style, children, nowrap, size, ...rest } = props;
+  const {
+    as: Component = 'div',
+    dropOldClass,
+    variables,
+    className,
+    style,
+    children,
+    nowrap,
+    size,
+    hasValidation,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass && 'input-group',
       nowrap && 'flex-nowrap',
       size && `input-group-${size}`,
+      hasValidation && 'has-validation',
       className,
     );
     const finalStyle = {
@@ -38,7 +50,7 @@ const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: Inp
       },
       isValueValid,
     );
-  }, [dropOldClass, nowrap, size, className, variables, style]);
+  }, [dropOldClass, nowrap, size, hasValidation, className, variables, style]);
 
   return (
     <Component {...rest} {...renderOptions}>

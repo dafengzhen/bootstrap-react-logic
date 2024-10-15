@@ -1,6 +1,7 @@
 {
   "desc": {
     "nowrap": "No wrap",
-    "size": "Size"
+    "size": "Size",
+    "hasValidation": "Class (.has-validation)"
   }
 }

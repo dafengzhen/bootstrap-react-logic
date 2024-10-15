@@ -1,5 +1,6 @@
 {
   "desc": {
-    "as": "Type"
+    "as": "Type",
+    "invalidFeedback": "Class (.invalid-feedback)"
   }
 }

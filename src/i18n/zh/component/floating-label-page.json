@@ -1,0 +1,9 @@
+{
+  "basic": "基本",
+  "textarea": "文本框",
+  "select": "选择框",
+  "disabled": "禁止",
+  "readonlyPlaintext": "只读文本",
+  "inputGroups": "输入组",
+  "layout": "布局"
+}

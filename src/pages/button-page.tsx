@@ -15,6 +15,10 @@ import buttonComponentPropsCodes from '@assets/codes/button/component-props.ts';
 
 interface IStates {
   button: {
+    basic: {
+      openCode: boolean;
+      code?: string;
+    };
     variant: {
       openCode: boolean;
       code?: string;
@@ -83,6 +87,10 @@ export default function ButtonPage() {
 
   const [states, setStates] = useState<IStates>({
     button: {
+      basic: {
+        openCode: false,
+        code: buttonCodes.basic.code.trim(),
+      },
       variant: {
         openCode: false,
         code: buttonCodes.variant.code.trim(),
@@ -175,6 +183,18 @@ export default function ButtonPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
+      <CustomSimpleCard
+        title={tButtonPage('basic')}
+        hash="basic"
+        isOpen={states.button.basic.openCode}
+        toggleCode={() => onClickUpdateState('button.basic.openCode', !states.button.basic.openCode)}
+        code={states.button.basic.code}
+      >
+        <div className="d-flex flex-wrap gap-2">
+          <Button>Base class</Button>
+        </div>
+      </CustomSimpleCard>
+
       <CustomSimpleCard
         title={tButtonPage('variant')}
         hash="variant"

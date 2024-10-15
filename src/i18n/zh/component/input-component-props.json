@@ -6,6 +6,7 @@
     "disabled": "禁止",
     "readonly": "只读",
     "readonlyPlainText": "类名 (.form-control-plaintext)",
+    "invalid": "类名 (.is-invalid)",
     "color": "颜色",
     "nativeColor": "颜色 (HTML 属性)",
     "startContent": "开始内容",

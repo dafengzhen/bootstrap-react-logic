@@ -761,6 +761,41 @@ const isNumber = (value: unknown): value is number | string => {
   return false;
 };
 
+/**
+ * Converts a given camelCase or PascalCase string to kebab-case.
+ *
+ * The function identifies the transitions between lowercase and
+ * uppercase letters, inserting a hyphen ("-") before each uppercase
+ * letter and converting the entire string to lowercase.
+ *
+ * Example:
+ *   "camelCase" => "camel-case"
+ *   "PascalCase" => "pascal-case"
+ *
+ * @param {string} str - The input string to be converted.
+ * @returns {string} The converted kebab-case string.
+ */
+const toKebabCase = (str: string): string => {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+};
+
+/**
+ * Converts a hyphenated string to camel case.
+ *
+ * This function takes a string with words separated by hyphens
+ * (e.g., "hello-world") and converts it to camel case
+ * (e.g., "helloWorld"). It achieves this by replacing each
+ * occurrence of a hyphen followed by a lowercase letter
+ * with the uppercase version of that letter, effectively
+ * removing the hyphen in the process.
+ *
+ * @param {string} str - The input string to be converted.
+ * @returns {string} - The camel-cased version of the input string.
+ */
+const toCamelCase = (str: string): string => {
+  return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
@@ -788,4 +823,6 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
+  toKebabCase,
+  toCamelCase,
 };

@@ -28,6 +28,7 @@ const Input = function Input<T extends ElementType = 'input'>(
     size,
     nativeSize,
     readonlyPlainText,
+    invalid,
     color,
     nativeColor,
     type,
@@ -49,6 +50,7 @@ const Input = function Input<T extends ElementType = 'input'>(
         }),
       color && 'form-control-color',
       size && `form-control-${size}`,
+      invalid && 'is-invalid',
       className,
     );
     const finalStyle = {
@@ -72,7 +74,19 @@ const Input = function Input<T extends ElementType = 'input'>(
       },
       isValueValid,
     );
-  }, [dropOldClass, readonlyPlainText, color, size, className, variables, style, nativeSize, nativeColor, type]);
+  }, [
+    dropOldClass,
+    type,
+    readonlyPlainText,
+    color,
+    size,
+    invalid,
+    className,
+    variables,
+    style,
+    nativeSize,
+    nativeColor,
+  ]);
 
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {

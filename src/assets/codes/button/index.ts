@@ -1,4 +1,9 @@
 const buttonCodes = {
+  basic: {
+    code: `
+<Button>Base class</Button>
+    `,
+  },
   variant: {
     code: `
 <Button variant="primary">Primary</Button>

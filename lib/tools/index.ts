@@ -34,6 +34,7 @@ export {
   CheckboxVariablesEnum,
   RadioVariablesEnum,
   RangeVariablesEnum,
+  FloatingLabelVariablesEnum,
 } from './enums';
 
 export {
@@ -63,4 +64,6 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
+  toKebabCase,
+  toCamelCase,
 } from './tools';

@@ -11,6 +11,11 @@ type Props<T extends ElementType> = BaseProps<T, typeof InputGroupVariablesEnum>
    * size.
    */
   size?: 'lg' | 'sm';
+
+  /**
+   * hasValidation.
+   */
+  hasValidation?: boolean;
 };
 
 type TextProps<T extends ElementType> = BaseProps<T, typeof InputGroupTextVariablesEnum> & {};

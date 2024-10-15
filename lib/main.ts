@@ -10,6 +10,7 @@ export * from './range';
 export * from './textarea';
 export * from './label';
 export * from './text';
+export * from './floating-label';
 
 export * from './select';
 export * from './select-multiple';

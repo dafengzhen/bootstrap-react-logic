@@ -2,19 +2,7 @@ import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 're
 import { useState } from 'react';
 import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
-
-interface IMenu {
-  name: 'Button' | 'ButtonGroup' | 'Input' | 'InputGroup' | 'Select' | 'Checkbox' | 'Radio' | 'Range';
-  to:
-    | '/pages/button'
-    | '/pages/button-group'
-    | '/pages/input'
-    | '/pages/input-group'
-    | '/pages/select'
-    | '/pages/checkbox'
-    | '/pages/radio'
-    | '/pages/range';
-}
+import { MenuEnum } from '@src/routes.tsx';
 
 function App() {
   const location = useLocation();
@@ -24,40 +12,17 @@ function App() {
   const theme = useState<Theme>('light');
   const isCenter = layout[0] === 'center';
   const isFullscreen = fullscreen[0] && location.pathname !== '/';
-  const [menus] = useState<IMenu[]>([
+  const [menus] = useState<
     {
-      name: 'Button',
-      to: '/pages/button',
-    },
-    {
-      name: 'ButtonGroup',
-      to: '/pages/button-group',
-    },
-    {
-      name: 'Input',
-      to: '/pages/input',
-    },
-    {
-      name: 'InputGroup',
-      to: '/pages/input-group',
-    },
-    {
-      name: 'Select',
-      to: '/pages/select',
-    },
-    {
-      name: 'Checkbox',
-      to: '/pages/checkbox',
-    },
-    {
-      name: 'Radio',
-      to: '/pages/radio',
-    },
-    {
-      name: 'Range',
-      to: '/pages/range',
-    },
-  ]);
+      name: string;
+      to: string;
+    }[]
+  >(
+    Object.keys(MenuEnum).map((key) => ({
+      name: key,
+      to: MenuEnum[key as keyof typeof MenuEnum],
+    })),
+  );
 
   function onClickReturn() {
     navigate(-1);

@@ -293,6 +293,20 @@ enum RangeVariablesEnum {
   formRangeThumbTransition = 'form-range-thumb-transition',
 }
 
+enum FloatingLabelVariablesEnum {
+  formFloatingHeight = 'form-floating-height',
+  formFloatingLineHeight = 'form-floating-line-height',
+  formFloatingPaddingX = 'form-floating-padding-x',
+  formFloatingPaddingY = 'form-floating-padding-y',
+  formFloatingInputPaddingT = 'form-floating-input-padding-t',
+  formFloatingInputPaddingB = 'form-floating-input-padding-b',
+  formFloatingLabelHeight = 'form-floating-label-height',
+  formFloatingLabelOpacity = 'form-floating-label-opacity',
+  formFloatingLabelTransform = 'form-floating-label-transform',
+  formFloatingLabelDisabledColor = 'form-floating-label-disabled-color',
+  formFloatingTransition = 'form-floating-transition',
+}
+
 export {
   ButtonVariableEnum,
   RoundedClassEnum,
@@ -312,4 +326,5 @@ export {
   CheckboxVariablesEnum,
   RadioVariablesEnum,
   RangeVariablesEnum,
+  FloatingLabelVariablesEnum,
 };
