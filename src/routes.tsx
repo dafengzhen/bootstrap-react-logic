@@ -3,6 +3,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router-dom';
 import App from '@src/App.tsx';
 import ErrorPage from '@pages/error-page.tsx';
 import IndexPage from '@pages/index-page.tsx';
+import { toPascalCase } from '@src/tools';
 
 /**
  * Configure sidebar menu.
@@ -32,11 +33,7 @@ const childrenRoutes = Object.entries(pageComponents)
       return;
     }
 
-    const pascalCaseKey = kebabKey
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('');
-
+    const pascalCaseKey = toPascalCase(kebabKey);
     return {
       path: MenuEnum[pascalCaseKey as keyof typeof MenuEnum],
       element: createElement(component.default),

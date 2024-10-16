@@ -35,9 +35,9 @@ export const toCamelCase = (str: string): string => {
   return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 };
 
-export function toPascalCase(str: string): string {
+export const toPascalCase = (str: string): string => {
   return str
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
-}
+};

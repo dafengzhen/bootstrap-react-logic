@@ -799,14 +799,14 @@ const toCamelCase = (str: string): string => {
 /**
  * Converts a kebab-case string to PascalCase.
  *
- * @param {string} input - The kebab-case string to be converted.
+ * @param {string} str - The kebab-case string to be converted.
  * @returns {string} - The converted PascalCase string.
  *
  * Example:
  * toPascalCase('my-component') => 'MyComponent'
  */
-const toPascalCase = (input: string): string => {
-  return input
+const toPascalCase = (str: string): string => {
+  return str
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
