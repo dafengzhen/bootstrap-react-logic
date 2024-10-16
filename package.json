@@ -48,7 +48,7 @@
     "publish:beta": "npm publish --tag beta",
     "publish:rc": "npm publish --tag rc",
     "publish:latest": "npm publish --tag latest",
-    "update:latest": "npm dist-tag add bootstrap-react-logic@%npm_package_version% latest"
+    "update:latest": "cross-env npm dist-tag add bootstrap-react-logic@$npm_package_version latest"
   },
   "peerDependencies": {
     "bootstrap": "^5.3.3",
@@ -71,6 +71,7 @@
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "cross-env": "^7.0.3",
     "cssnano": "^7.0.6",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
