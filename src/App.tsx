@@ -1,8 +1,11 @@
 import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 import { MenuEnum } from '@src/routes.tsx';
+import { useTranslation } from 'react-i18next';
+
+export const LOCAL_STORAGE_KEY_PREFIX = '_brl_';
 
 function App() {
   const location = useLocation();
@@ -23,6 +26,77 @@ function App() {
       to: MenuEnum[key as keyof typeof MenuEnum],
     })),
   );
+  const isLoadLanguage = useRef(false);
+
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (typeof localStorage !== 'undefined') {
+      const retrieveOrSetDefault = <T extends string | boolean>(
+        key: string,
+        defaultValue: string,
+        setter: (value: T) => void,
+        mapValue: (value: string) => T,
+        callback?: (value: T) => void,
+      ) => {
+        const item = localStorage.getItem(key);
+        let mappedValue: T;
+
+        if (item) {
+          mappedValue = mapValue(item);
+          setter(mappedValue);
+        } else {
+          localStorage.setItem(key, defaultValue);
+          mappedValue = mapValue(defaultValue);
+          setter(mappedValue);
+        }
+
+        if (callback) {
+          callback(mappedValue);
+        }
+      };
+
+      retrieveOrSetDefault<boolean>(
+        LOCAL_STORAGE_KEY_PREFIX + 'options_fullscreen',
+        'false',
+        fullscreen[1],
+        (v) => v === 'true',
+      );
+
+      retrieveOrSetDefault<'light' | 'dark'>(
+        LOCAL_STORAGE_KEY_PREFIX + 'options_theme',
+        'light',
+        theme[1],
+        (v) => (v === 'light' ? 'light' : 'dark'),
+        (value) => {
+          document.documentElement.setAttribute('data-bs-theme', value);
+        },
+      );
+
+      retrieveOrSetDefault<'center' | 'fullscreen'>(
+        LOCAL_STORAGE_KEY_PREFIX + 'options_layout',
+        'default',
+        layout[1],
+        (v) => (v === 'center' ? 'center' : 'fullscreen'),
+      );
+
+      retrieveOrSetDefault<'en' | 'zh'>(
+        LOCAL_STORAGE_KEY_PREFIX + 'options_language',
+        'en',
+        () => {},
+        (v) => (v === 'en' ? 'en' : 'zh'),
+        (value) => {
+          if (!isLoadLanguage.current) {
+            isLoadLanguage.current = true;
+            setTimeout(() => {
+              i18n.changeLanguage(value);
+            }, 1000);
+          }
+        },
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function onClickReturn() {
     navigate(-1);

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
 import { GlobalContext } from '@contexts/global-context.ts';
 import { useTranslation } from 'react-i18next';
+import { LOCAL_STORAGE_KEY_PREFIX } from '@src/App.tsx';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const onClickClipboard = (code?: string) => {
@@ -29,14 +30,18 @@ const onClickClipboard = (code?: string) => {
 
 const onClickFullscreen = (fullscreenState: any) => {
   if (fullscreenState !== undefined) {
-    fullscreenState[1](!fullscreenState[0]);
+    const value = !fullscreenState[0];
+    fullscreenState[1](value);
+    localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + 'options_fullscreen', value ? 'true' : 'false');
   }
 };
 
 const onClickLayout = (layoutState: any) => {
   if (layoutState !== undefined) {
     const layout = layoutState[0];
-    layoutState[1](layout === 'center' ? 'fullscreen' : 'center');
+    const value = layout === 'center' ? 'fullscreen' : 'center';
+    layoutState[1](value);
+    localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + 'options_layout', value);
   }
 };
 
@@ -46,12 +51,15 @@ const onClickTheme = (themeState: any) => {
     const value = themeState[0] === 'dark' ? 'light' : 'dark';
     setTheme(value);
     document.documentElement.setAttribute('data-bs-theme', value);
+    localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + 'options_theme', value);
   }
 };
 
 const onClickLanguage = (i18n: any) => {
   const language = i18n.language;
-  i18n.changeLanguage(language === 'en' ? 'zh' : 'en');
+  const value = language === 'en' ? 'zh' : 'en';
+  i18n.changeLanguage(value);
+  localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + 'options_language', value);
 };
 
 const CustomSimpleCard = ({
