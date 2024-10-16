@@ -796,6 +796,22 @@ const toCamelCase = (str: string): string => {
   return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 };
 
+/**
+ * Converts a kebab-case string to PascalCase.
+ *
+ * @param {string} input - The kebab-case string to be converted.
+ * @returns {string} - The converted PascalCase string.
+ *
+ * Example:
+ * toPascalCase('my-component') => 'MyComponent'
+ */
+const toPascalCase = (input: string): string => {
+  return input
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
@@ -825,4 +841,5 @@ export {
   processSlotClasses,
   toKebabCase,
   toCamelCase,
+  toPascalCase,
 };

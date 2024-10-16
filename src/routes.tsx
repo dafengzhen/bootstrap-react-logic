@@ -1,9 +1,8 @@
 import { type ComponentType, createElement } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, type RouteObject } from 'react-router-dom';
 import App from '@src/App.tsx';
 import ErrorPage from '@pages/error-page.tsx';
 import IndexPage from '@pages/index-page.tsx';
-import { toKebabCase } from '@src/tools';
 
 /**
  * Configure sidebar menu.
@@ -20,24 +19,30 @@ export enum MenuEnum {
   FloatingLabel = '/pages/floating-label',
 }
 
-const excludedPages = ['error', 'index'];
+const excludedPages = new Set(['error', 'index']);
 
 const pageComponents: Record<string, { default: ComponentType }> = import.meta.glob('./pages/*-page.tsx', {
   eager: true,
 });
 
-const filteredPages = Object.fromEntries(
-  Object.entries(pageComponents).filter(([key]) => !excludedPages.some((page) => key.includes(`/${page}-page`))),
-);
+const childrenRoutes = Object.entries(pageComponents)
+  .map(([key, component]) => {
+    const kebabKey = key.match(/\/pages\/(.*?)-page\.tsx$/)![1];
+    if (excludedPages.has(kebabKey)) {
+      return;
+    }
 
-const childrenRoutes = Object.keys(MenuEnum).map((key) => {
-  const kebabKey = toKebabCase(key);
-  const component = filteredPages[`./pages/${kebabKey}-page.tsx`];
-  return {
-    path: MenuEnum[key as keyof typeof MenuEnum],
-    element: createElement(component.default),
-  };
-});
+    const pascalCaseKey = kebabKey
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
+
+    return {
+      path: MenuEnum[pascalCaseKey as keyof typeof MenuEnum],
+      element: createElement(component.default),
+    };
+  })
+  .filter(Boolean) as RouteObject[];
 
 const router = createBrowserRouter(
   [

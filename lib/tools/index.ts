@@ -66,4 +66,5 @@ export {
   processSlotClasses,
   toKebabCase,
   toCamelCase,
+  toPascalCase,
 } from './tools';
