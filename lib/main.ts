@@ -14,3 +14,5 @@ export * from './floating-label';
 
 export * from './select';
 export * from './select-multiple';
+
+export * from './card';

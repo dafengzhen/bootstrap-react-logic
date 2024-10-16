@@ -18,6 +18,7 @@ export enum MenuEnum {
   Radio = '/pages/radio',
   Range = '/pages/range',
   FloatingLabel = '/pages/floating-label',
+  Card = '/pages/card',
 }
 
 const excludedPages = new Set(['error', 'index']);

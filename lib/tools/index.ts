@@ -35,6 +35,16 @@ export {
   RadioVariablesEnum,
   RangeVariablesEnum,
   FloatingLabelVariablesEnum,
+  CardVariablesEnum,
+  CardBodyVariablesEnum,
+  CardImgVariablesEnum,
+  CardTitleVariablesEnum,
+  CardSubtitleVariablesEnum,
+  CardTextVariablesEnum,
+  CardLinkVariablesEnum,
+  CardHeaderVariablesEnum,
+  CardFooterVariablesEnum,
+  CardGroupVariablesEnum,
 } from './enums';
 
 export {
