@@ -22,6 +22,16 @@ type Props<T extends ElementType> = BaseProps<T, typeof SelectVariablesEnum> & {
    * disabled.
    */
   disabled?: boolean;
+
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
 
 type OptionProps<T extends ElementType> = BaseProps<T, typeof SelectOptionVariablesEnum> & {

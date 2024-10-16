@@ -101,7 +101,7 @@ export default function InputPage() {
   const navigation = useNavigation();
   const { t: tInputComponentProps } = useTranslation(['inputComponentProps']);
   const { t: tInputOtpComponentProps } = useTranslation(['inputOtpComponentProps']);
-  // const { t: tTextComponentProps } = useTranslation(['textComponentProps']);
+  const { t: tTextComponentProps } = useTranslation(['textComponentProps']);
   const { t: tLabelComponentProps } = useTranslation(['labelComponentProps']);
   const { t: tTextareaComponentProps } = useTranslation(['textareaComponentProps']);
   const { t: tInputPage } = useTranslation(['inputPage']);
@@ -582,9 +582,15 @@ export default function InputPage() {
             default: '',
           },
           {
-            attr: 'invalid',
+            attr: 'isValid',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputComponentProps('desc.invalid'),
+            desc: tInputComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('desc.isInvalid'),
             default: '',
           },
           {
@@ -694,6 +700,18 @@ export default function InputPage() {
             desc: tTextareaComponentProps('desc.readonly'),
             default: '-',
           },
+          {
+            attr: 'isValid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextareaComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextareaComponentProps('desc.isInvalid'),
+            default: '',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 
@@ -749,10 +767,28 @@ export default function InputPage() {
         }
         items={[
           {
-            attr: '-',
-            type: '-',
-            desc: '-',
-            default: '-',
+            attr: 'validFeedback',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextComponentProps('desc.validFeedback'),
+            default: '',
+          },
+          {
+            attr: 'invalidFeedback',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextComponentProps('desc.invalidFeedback'),
+            default: '',
+          },
+          {
+            attr: 'validTooltip',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextComponentProps('desc.validTooltip'),
+            default: '',
+          },
+          {
+            attr: 'invalidTooltip',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tTextComponentProps('desc.invalidTooltip'),
+            default: '',
           },
         ]}
       ></CustomSimpleCard.ComponentProps>

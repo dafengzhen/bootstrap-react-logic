@@ -23,7 +23,7 @@ const floatingLabelCodes = {
 
 <FloatingLabel as="form">
   <Input
-    invalid
+    isInvalid
     type="email"
     id="floatingInputInvalid"
     placeholder="name@example.com"
@@ -132,8 +132,8 @@ const floatingLabelCodes = {
 
 <InputGroup hasValidation>
   <InputGroupText>@</InputGroupText>
-  <FloatingLabel invalid>
-    <Input type="text" invalid id="floatingInputGroup2" placeholder="Username" required />
+  <FloatingLabel isInvalid>
+    <Input type="text" isInvalid id="floatingInputGroup2" placeholder="Username" required />
     <Label htmlFor="floatingInputGroup2">Username</Label>
   </FloatingLabel>
   <Text invalidFeedback>Please choose a username.</Text>

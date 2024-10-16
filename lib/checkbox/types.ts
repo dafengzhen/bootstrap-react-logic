@@ -33,6 +33,16 @@ type Props<T extends ElementType> = BaseProps<T, typeof CheckboxVariablesEnum> &
    * reverse.
    */
   reverse?: boolean;
+
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
 
 export type CheckboxProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof CheckboxVariablesEnum>;

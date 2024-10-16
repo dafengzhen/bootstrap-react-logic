@@ -21,11 +21,19 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
     size,
     nativeSize,
     disabled,
+    isValid,
+    isInvalid,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-select', size && `form-select-${size}`, className);
+    const finalClass = clsxUnique(
+      !dropOldClass && 'form-select',
+      isValid && 'is-valid',
+      isInvalid && 'is-invalid',
+      size && `form-select-${size}`,
+      className,
+    );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = SelectVariablesEnum[key];
@@ -46,7 +54,7 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
       },
       isValueValid,
     );
-  }, [dropOldClass, size, className, variables, style, nativeSize, disabled]);
+  }, [dropOldClass, isValid, isInvalid, size, className, variables, style, nativeSize, disabled]);
 
   return (
     <Component {...rest} {...renderOptions}>

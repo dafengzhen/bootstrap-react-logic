@@ -474,6 +474,18 @@ export default function CheckboxPage() {
             desc: tCheckboxComponentProps('desc.reverse'),
             default: '',
           },
+          {
+            attr: 'isValid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tCheckboxComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tCheckboxComponentProps('desc.isInvalid'),
+            default: '',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 

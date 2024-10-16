@@ -4,6 +4,7 @@ import {
   clsxUnique,
   filterAndTransformProperties,
   filterOptions,
+  getFirstNonEmptyClass,
   isValueValid,
   TextVariablesEnum,
   VARIABLE_BS_PREFIX,
@@ -17,12 +18,25 @@ const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
     children,
     className,
     style,
+    validFeedback,
     invalidFeedback,
+    validTooltip,
+    invalidTooltip,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-text', invalidFeedback && 'invalid-feedback', className);
+    const finalClass = clsxUnique(
+      !dropOldClass &&
+        getFirstNonEmptyClass({
+          'valid-feedback': validFeedback,
+          'invalid-feedback': invalidFeedback,
+          'valid-tooltip': validTooltip,
+          'invalid-tooltip': invalidTooltip,
+          'form-text': true,
+        }),
+      className,
+    );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = TextVariablesEnum[key];
@@ -41,7 +55,7 @@ const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, invalidFeedback, className, variables, style]);
+  }, [dropOldClass, validFeedback, invalidFeedback, validTooltip, invalidTooltip, className, variables, style]);
 
   return (
     <Component {...rest} {...renderOptions}>

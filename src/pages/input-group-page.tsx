@@ -555,12 +555,6 @@ export default function InputGroupPage() {
             desc: tInputGroupTextComponentProps('desc.as'),
             default: 'span',
           },
-          {
-            attr: 'invalidFeedback',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputGroupTextComponentProps('desc.invalidFeedback'),
-            default: '-',
-          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 

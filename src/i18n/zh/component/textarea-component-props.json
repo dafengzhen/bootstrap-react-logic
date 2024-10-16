@@ -1,6 +1,8 @@
 {
   "desc": {
     "disabled": "禁止",
-    "readonly": "只读"
+    "readonly": "只读",
+    "isValid": "类名 (.is-valid)",
+    "isInvalid": "类名 (.is-invalid)"
   }
 }

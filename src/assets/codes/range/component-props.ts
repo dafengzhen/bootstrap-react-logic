@@ -21,6 +21,16 @@ type Props = {
    * step.
    */
   step?: string | number;
+  
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
     `,
   },

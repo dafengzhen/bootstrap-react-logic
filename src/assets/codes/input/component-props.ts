@@ -20,9 +20,14 @@ type Props = {
   readonlyPlainText?: boolean;
 
   /**
-   * invalid.
+   * isValid.
    */
-  invalid?: boolean;
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 
   /**
    * color
@@ -88,6 +93,16 @@ type Props = {
    * readonly.
    */
   readonly?: boolean;
+
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
     `,
   },
@@ -108,7 +123,27 @@ type Props = {
   },
   textComponentProps: {
     code: `
-type Props = {};
+type Props = {
+  /**
+   * validFeedback.
+   */
+  validFeedback?: boolean;
+
+  /**
+   * invalidFeedback.
+   */
+  invalidFeedback?: boolean;
+
+  /**
+   * validTooltip.
+   */
+  validTooltip?: boolean;
+
+  /**
+   * invalidTooltip.
+   */
+  invalidTooltip?: boolean;
+};
     `,
   },
 };

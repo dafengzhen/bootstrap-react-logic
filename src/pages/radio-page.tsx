@@ -353,6 +353,18 @@ export default function RadioPage() {
             desc: tRadioComponentProps('desc.reverse'),
             default: '',
           },
+          {
+            attr: 'isValid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRadioComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRadioComponentProps('desc.isInvalid'),
+            default: '',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 

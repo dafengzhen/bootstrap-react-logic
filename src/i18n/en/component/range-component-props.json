@@ -3,6 +3,8 @@
     "disabled": "Disabled",
     "min": "min",
     "max": "Max",
-    "step": "Step"
+    "step": "Step",
+    "isValid": "Class (.is-valid)",
+    "isInvalid": "Class (.is-invalid)"
   }
 }

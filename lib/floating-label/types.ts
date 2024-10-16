@@ -3,9 +3,14 @@ import type { BaseProps, FloatingLabelVariablesEnum, PropsWithoutRef } from '../
 
 type Props<T extends ElementType> = BaseProps<T, typeof FloatingLabelVariablesEnum> & {
   /**
-   * invalid.
+   * isValid.
    */
-  invalid?: boolean;
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
 
 export type FloatingLabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof FloatingLabelVariablesEnum>;

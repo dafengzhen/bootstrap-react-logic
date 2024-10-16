@@ -28,6 +28,16 @@ type Props<T extends ElementType> = BaseProps<T, typeof RadioVariablesEnum> & {
    * reverse.
    */
   reverse?: boolean;
+
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
 
 export type RadioProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof RadioVariablesEnum>;

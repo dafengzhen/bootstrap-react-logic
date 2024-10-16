@@ -1,5 +1,7 @@
 {
   "desc": {
-    "as": "Type"
+    "as": "Type",
+    "isValid": "Class (.is-valid)",
+    "isInvalid": "Class (.is-invalid)"
   }
 }

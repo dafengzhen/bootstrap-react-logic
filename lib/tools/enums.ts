@@ -116,6 +116,14 @@ enum InputVariablesEnum {
   formFileButtonColor = 'form-file-button-color',
   formFileButtonBg = 'form-file-button-bg',
   formFileButtonHoverBg = 'form-file-button-hover-bg',
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
 enum InputOtpVariablesEnum {}
@@ -134,9 +142,27 @@ enum TextVariablesEnum {
   formTextFontStyle = 'form-text-font-style',
   formTextFontWeight = 'form-text-font-weight',
   formTextColor = 'form-text-color',
+  formFeedbackMarginTop = 'form-feedback-margin-top',
+  formFeedbackFontSize = 'form-feedback-font-size',
+  formFeedbackFontStyle = 'form-feedback-font-style',
+  formFeedbackValidColor = 'form-feedback-valid-color',
+  formFeedbackInvalidColor = 'form-feedback-invalid-color',
+  formFeedbackIconValidColor = 'form-feedback-icon-valid-color',
+  formFeedbackIconValid = 'form-feedback-icon-valid',
+  formFeedbackIconInvalidColor = 'form-feedback-icon-invalid-color',
+  formFeedbackIconInvalid = 'form-feedback-icon-invalid',
 }
 
-enum TextareaVariablesEnum {}
+enum TextareaVariablesEnum {
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
+}
 
 enum InputGroupVariablesEnum {
   inputGroupAddonPaddingY = 'input-group-addon-padding-y',
@@ -185,6 +211,14 @@ enum SelectVariablesEnum {
   formSelectFontSizeLg = 'form-select-font-size-lg',
   formSelectBorderRadiusLg = 'form-select-border-radius-lg',
   formSelectTransition = 'form-select-transition',
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
 enum SelectOptionVariablesEnum {}
@@ -230,6 +264,14 @@ enum CheckboxVariablesEnum {
   formSwitchCheckedColor = 'form-switch-checked-color',
   formSwitchCheckedBgImage = 'form-switch-checked-bg-image',
   formSwitchCheckedBgPosition = 'form-switch-checked-bg-position',
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
 enum RadioVariablesEnum {
@@ -271,6 +313,14 @@ enum RadioVariablesEnum {
   formSwitchCheckedColor = 'form-switch-checked-color',
   formSwitchCheckedBgImage = 'form-switch-checked-bg-image',
   formSwitchCheckedBgPosition = 'form-switch-checked-bg-position',
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
 enum RangeVariablesEnum {
@@ -291,6 +341,14 @@ enum RangeVariablesEnum {
   formRangeThumbActiveBg = 'form-range-thumb-active-bg',
   formRangeThumbDisabledBg = 'form-range-thumb-disabled-bg',
   formRangeThumbTransition = 'form-range-thumb-transition',
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
 enum FloatingLabelVariablesEnum {
@@ -305,6 +363,14 @@ enum FloatingLabelVariablesEnum {
   formFloatingLabelTransform = 'form-floating-label-transform',
   formFloatingLabelDisabledColor = 'form-floating-label-disabled-color',
   formFloatingTransition = 'form-floating-transition',
+  formValidColor = 'form-valid-color',
+  formValidBorderColor = 'form-valid-border-color',
+  formInvalidColor = 'form-invalid-color',
+  formInvalidBorderColor = 'form-invalid-border-color',
+  formValidColorDark = 'form-valid-color-dark',
+  formValidBorderColorDark = 'form-valid-border-color-dark',
+  formInvalidColorDark = 'form-invalid-color-dark',
+  formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
 export {

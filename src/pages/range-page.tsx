@@ -216,6 +216,18 @@ export default function RangePage() {
             desc: tRangeComponentProps('desc.step'),
             default: '',
           },
+          {
+            attr: 'isValid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRangeComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRangeComponentProps('desc.isInvalid'),
+            default: '',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 

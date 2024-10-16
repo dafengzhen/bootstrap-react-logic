@@ -4,6 +4,8 @@
     "contentClasses": "Set slot class names",
     "switch": "Switch",
     "inline": "Inline",
-    "reverse": "Reverse"
+    "reverse": "Reverse",
+    "isValid": "Class (.is-valid)",
+    "isInvalid": "Class (.is-invalid)"
   }
 }

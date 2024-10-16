@@ -20,9 +20,14 @@ type Props<T extends ElementType> = BaseProps<T, typeof InputVariablesEnum> & {
   readonlyPlainText?: boolean;
 
   /**
-   * invalid,
+   * isValid.
    */
-  invalid?: boolean;
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 
   /**
    * color

@@ -18,11 +18,18 @@ const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: Te
     style,
     children,
     defaultValue,
+    isValid,
+    isInvalid,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-control', className);
+    const finalClass = clsxUnique(
+      !dropOldClass && 'form-control',
+      isValid && 'is-valid',
+      isInvalid && 'is-invalid',
+      className,
+    );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = TextareaVariablesEnum[key];
@@ -41,7 +48,7 @@ const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: Te
       },
       isValueValid,
     );
-  }, [dropOldClass, className, variables, style]);
+  }, [dropOldClass, isValid, isInvalid, className, variables, style]);
 
   return (
     <Component

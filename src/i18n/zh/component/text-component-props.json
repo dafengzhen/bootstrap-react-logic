@@ -1,3 +1,8 @@
 {
-  "desc": {}
+  "desc": {
+    "validFeedback": "类名 (.valid-feedback)",
+    "invalidFeedback": "类名 (.invalid-feedback)",
+    "validTooltip": "类名 (.valid-tooltip)",
+    "invalidTooltip": "类名 (.invalid-tooltip)"
+  }
 }

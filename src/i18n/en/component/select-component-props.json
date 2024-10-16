@@ -2,6 +2,8 @@
   "desc": {
     "size": "Size",
     "nativeSize": "Size (HTMLAttributes)",
-    "disabled": "Disabled"
+    "disabled": "Disabled",
+    "isValid": "Class (.is-valid)",
+    "isInvalid": "Class (.is-invalid)"
   }
 }

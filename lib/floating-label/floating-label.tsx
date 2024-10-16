@@ -10,10 +10,15 @@ import {
 } from '../tools';
 
 const FloatingLabel = function FloatingLabel<T extends ElementType = 'div'>(props: FloatingLabelProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, className, style, invalid, ...rest } = props;
+  const { as: Component = 'div', dropOldClass, variables, className, style, isValid, isInvalid, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-floating', invalid && 'is-invalid', className);
+    const finalClass = clsxUnique(
+      !dropOldClass && 'form-floating',
+      isValid && 'is-valid',
+      isInvalid && 'is-invalid',
+      className,
+    );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = FloatingLabelVariablesEnum[key];
@@ -32,7 +37,7 @@ const FloatingLabel = function FloatingLabel<T extends ElementType = 'div'>(prop
       },
       isValueValid,
     );
-  }, [dropOldClass, invalid, className, variables, style]);
+  }, [dropOldClass, isValid, isInvalid, className, variables, style]);
 
   return <Component {...rest} {...renderOptions} />;
 };

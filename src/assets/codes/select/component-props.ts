@@ -16,6 +16,16 @@ type Props = {
    * disabled.
    */
   disabled?: boolean;
+
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 };
     `,
   },

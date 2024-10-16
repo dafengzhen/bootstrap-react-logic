@@ -181,7 +181,7 @@ export default function FloatingLabelPage() {
 
           <FloatingLabel as="form">
             <Input
-              invalid
+              isInvalid
               type="email"
               id="floatingInputInvalid"
               placeholder="name@example.com"
@@ -336,8 +336,8 @@ export default function FloatingLabelPage() {
 
           <InputGroup hasValidation>
             <InputGroupText>@</InputGroupText>
-            <FloatingLabel invalid>
-              <Input type="text" invalid id="floatingInputGroup2" placeholder="Username" required />
+            <FloatingLabel isInvalid>
+              <Input type="text" isInvalid id="floatingInputGroup2" placeholder="Username" required />
               <Label htmlFor="floatingInputGroup2">Username</Label>
             </FloatingLabel>
             <Text invalidFeedback>Please choose a username.</Text>
@@ -403,6 +403,18 @@ export default function FloatingLabelPage() {
             type: <span className="badge text-bg-secondary">div | form</span>,
             desc: tFloatingLabelComponentProps('desc.as'),
             default: 'div',
+          },
+          {
+            attr: 'isValid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tFloatingLabelComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tFloatingLabelComponentProps('desc.isInvalid'),
+            default: '',
           },
         ]}
       ></CustomSimpleCard.ComponentProps>

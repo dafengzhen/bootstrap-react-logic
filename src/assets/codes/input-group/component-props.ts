@@ -26,11 +26,6 @@ type Props = {
    * as.
    */
   as?: 'div' | 'span';
-
-  /**
-   * invalidFeedback.
-   */
-  invalidFeedback?: boolean;
 };
     `,
   },

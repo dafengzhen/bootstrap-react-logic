@@ -3,6 +3,8 @@
     "disabled": "禁止",
     "min": "最小值",
     "max": "最大值",
-    "step": "步长"
+    "step": "步长",
+    "isValid": "类名 (.is-valid)",
+    "isInvalid": "类名 (.is-invalid)"
   }
 }

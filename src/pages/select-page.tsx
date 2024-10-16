@@ -458,6 +458,18 @@ export default function SelectPage() {
             desc: tSelectComponentProps('desc.disabled'),
             default: '',
           },
+          {
+            attr: 'isValid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tSelectComponentProps('desc.isValid'),
+            default: '',
+          },
+          {
+            attr: 'isInvalid',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tSelectComponentProps('desc.isInvalid'),
+            default: '',
+          },
         ]}
       ></CustomSimpleCard.ComponentProps>
 
