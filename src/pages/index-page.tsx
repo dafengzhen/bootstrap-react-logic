@@ -1,4 +1,3 @@
-import useHighlightCode from '@hooks/use-highlight-code.ts';
 import clsx from 'clsx';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -9,8 +8,6 @@ const onClickLanguage = (i18n: any) => {
 
 export default function IndexPage() {
   const { t: tIndexPage } = useTranslation(['indexPage']);
-
-  useHighlightCode();
 
   const { i18n } = useTranslation();
   const language = i18n.language;
