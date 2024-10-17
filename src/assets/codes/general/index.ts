@@ -1,3 +1,5 @@
+import type { CodeType } from '@src/types';
+
 const generalCodes = {
   generalComponentProps: {
     code: `
@@ -21,4 +23,4 @@ type Props {
   },
 };
 
-export default generalCodes;
+export default generalCodes as CodeType;

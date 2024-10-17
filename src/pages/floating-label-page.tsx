@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { useNavigation } from 'react-router-dom';
-import useHighlightCode from '@hooks/use-highlight-code.ts';
-import type { NestedKeys } from '@src/types';
-import CustomSimpleCard from '@src/components/custom-simple-card';
-import AboutComponent from '@components/about-component.tsx';
-import { updateState } from '@src/tools';
-import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
+import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
 import generalCodes from '@assets/codes/general';
@@ -18,125 +13,35 @@ import { Textarea } from '@lib/textarea';
 import { Select, SelectOption } from '@lib/select';
 import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Text } from '@lib/text';
+import Example from '@components/example.tsx';
+import { createState } from '@tools/handlers.ts';
 
-interface IStates {
-  floatingLabel: {
-    basic: {
-      openCode: boolean;
-      code?: string;
-    };
-    textarea: {
-      openCode: boolean;
-      code?: string;
-    };
-    select: {
-      openCode: boolean;
-      code?: string;
-    };
-    disabled: {
-      openCode: boolean;
-      code?: string;
-    };
-    readonlyPlaintext: {
-      openCode: boolean;
-      code?: string;
-    };
-    inputGroups: {
-      openCode: boolean;
-      code?: string;
-    };
-    layout: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum StatesEnum {
+  basic,
+  textarea,
+  select,
+  disabled,
+  readonlyPlaintext,
+  inputGroups,
+  layout,
 }
 
-interface IComponentPropsStates {
-  floatingLabel: {
-    floatingLabelComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    generalComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum PropsStatesEnum {
+  floatingLabelComponentProps,
+  generalComponentProps,
 }
 
 export default function FloatingLabelPage() {
-  useHighlightCode();
   const navigation = useNavigation();
   const { t: tFloatingLabelComponentProps } = useTranslation(['floatingLabelComponentProps']);
   const { t: tFloatingLabelPage } = useTranslation(['floatingLabelPage']);
 
-  const [states, setStates] = useState<IStates>({
-    floatingLabel: {
-      basic: {
-        openCode: false,
-        code: floatingLabelCodes.basic.code.trim(),
-      },
-      textarea: {
-        openCode: false,
-        code: floatingLabelCodes.textarea.code.trim(),
-      },
-      select: {
-        openCode: false,
-        code: floatingLabelCodes.select.code.trim(),
-      },
-      disabled: {
-        openCode: false,
-        code: floatingLabelCodes.disabled.code.trim(),
-      },
-      readonlyPlaintext: {
-        openCode: false,
-        code: floatingLabelCodes.readonlyPlaintext.code.trim(),
-      },
-      inputGroups: {
-        openCode: false,
-        code: floatingLabelCodes.inputGroups.code.trim(),
-      },
-      layout: {
-        openCode: false,
-        code: floatingLabelCodes.layout.code.trim(),
-      },
-    },
+  const state = useState({
+    floatingLabel: createState(StatesEnum, floatingLabelCodes),
   });
-  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
-    floatingLabel: {
-      floatingLabelComponentProps: {
-        openCode: false,
-        code: floatingLabelComponentPropsCodes.floatingLabelComponentProps.code.trim(),
-      },
-      generalComponentProps: {
-        openCode: false,
-        code: generalCodes.generalComponentProps.code.trim(),
-      },
-    },
+  const propsState = useState({
+    floatingLabel: createState(PropsStatesEnum, floatingLabelComponentPropsCodes, generalCodes),
   });
-  const [colgroup] = useState({
-    attr: {
-      width: '150px',
-    },
-    type: {
-      width: '350px',
-    },
-    desc: {
-      width: '100px',
-    },
-    default: {
-      width: '100px',
-    },
-  });
-
-  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
-    updateState(setStates, k, v, c);
-  }
-
-  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
-    updateState(setComponentPropsStates, k, v, c);
-  }
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -144,13 +49,7 @@ export default function FloatingLabelPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <CustomSimpleCard
-        title={tFloatingLabelPage('basic')}
-        hash="basic"
-        isOpen={states.floatingLabel.basic.openCode}
-        toggleCode={() => onClickUpdateState('floatingLabel.basic.openCode', !states.floatingLabel.basic.openCode)}
-        code={states.floatingLabel.basic.code}
-      >
+      <Example hash="basic" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <FloatingLabel>
             <Input type="email" id="floatingInput" placeholder="name@example.com" />
@@ -190,17 +89,9 @@ export default function FloatingLabelPage() {
             <Label htmlFor="floatingInputInvalid">Invalid input</Label>
           </FloatingLabel>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tFloatingLabelPage('textarea')}
-        hash="textarea"
-        isOpen={states.floatingLabel.textarea.openCode}
-        toggleCode={() =>
-          onClickUpdateState('floatingLabel.textarea.openCode', !states.floatingLabel.textarea.openCode)
-        }
-        code={states.floatingLabel.textarea.code}
-      >
+      <Example hash="textarea" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <FloatingLabel>
             <Textarea placeholder="Leave a comment here" id="floatingTextarea"></Textarea>
@@ -212,15 +103,9 @@ export default function FloatingLabelPage() {
             <Label htmlFor="floatingTextarea2">Comments</Label>
           </FloatingLabel>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tFloatingLabelPage('select')}
-        hash="select"
-        isOpen={states.floatingLabel.select.openCode}
-        toggleCode={() => onClickUpdateState('floatingLabel.select.openCode', !states.floatingLabel.select.openCode)}
-        code={states.floatingLabel.select.code}
-      >
+      <Example hash="select" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <FloatingLabel>
             <Select id="floatingSelect" aria-label="Floating label select example">
@@ -232,17 +117,9 @@ export default function FloatingLabelPage() {
             <label htmlFor="floatingSelect">Works with selects</label>
           </FloatingLabel>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tFloatingLabelPage('disabled')}
-        hash="disabled"
-        isOpen={states.floatingLabel.disabled.openCode}
-        toggleCode={() =>
-          onClickUpdateState('floatingLabel.disabled.openCode', !states.floatingLabel.disabled.openCode)
-        }
-        code={states.floatingLabel.disabled.code}
-      >
+      <Example hash="disabled" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <FloatingLabel>
             <Input type="email" id="floatingInputDisabled" placeholder="name@example.com" disabled />
@@ -276,20 +153,9 @@ export default function FloatingLabelPage() {
             <Label htmlFor="floatingSelectDisabled">Works with selects</Label>
           </FloatingLabel>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tFloatingLabelPage('readonlyPlaintext')}
-        hash="readonlyPlaintext"
-        isOpen={states.floatingLabel.readonlyPlaintext.openCode}
-        toggleCode={() =>
-          onClickUpdateState(
-            'floatingLabel.readonlyPlaintext.openCode',
-            !states.floatingLabel.readonlyPlaintext.openCode,
-          )
-        }
-        code={states.floatingLabel.readonlyPlaintext.code}
-      >
+      <Example hash="readonlyPlaintext" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <FloatingLabel>
             <Input
@@ -314,17 +180,9 @@ export default function FloatingLabelPage() {
             <Label htmlFor="floatingPlaintextInput">Input with value</Label>
           </FloatingLabel>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tFloatingLabelPage('inputGroups')}
-        hash="inputGroups"
-        isOpen={states.floatingLabel.inputGroups.openCode}
-        toggleCode={() =>
-          onClickUpdateState('floatingLabel.inputGroups.openCode', !states.floatingLabel.inputGroups.openCode)
-        }
-        code={states.floatingLabel.inputGroups.code}
-      >
+      <Example hash="inputGroups" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <InputGroupText>@</InputGroupText>
@@ -343,15 +201,9 @@ export default function FloatingLabelPage() {
             <Text invalidFeedback>Please choose a username.</Text>
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tFloatingLabelPage('layout')}
-        hash="layout"
-        isOpen={states.floatingLabel.layout.openCode}
-        toggleCode={() => onClickUpdateState('floatingLabel.layout.openCode', !states.floatingLabel.layout.openCode)}
-        code={states.floatingLabel.layout.code}
-      >
+      <Example hash="layout" state={state} t={tFloatingLabelPage}>
         <div className="d-flex flex-column gap-2">
           <div className="row g-2">
             <div className="col-md">
@@ -379,24 +231,14 @@ export default function FloatingLabelPage() {
             </div>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
       <PropsIndicator />
 
-      <CustomSimpleCard.ComponentProps
-        title="FloatingLabel"
+      <Example
         hash="floatingLabel"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.floatingLabel.floatingLabelComponentProps.openCode}
-        code={componentPropsStates.floatingLabel.floatingLabelComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'floatingLabel.floatingLabelComponentProps.openCode',
-            !componentPropsStates.floatingLabel.floatingLabelComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tFloatingLabelComponentProps}
         items={[
           {
             attr: 'as',
@@ -417,21 +259,12 @@ export default function FloatingLabelPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <GeneralComponentPropsCard
-        colgroup={colgroup}
-        isOpen={componentPropsStates.floatingLabel.generalComponentProps.openCode}
-        code={componentPropsStates.floatingLabel.generalComponentProps.code}
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'floatingLabel.generalComponentProps.openCode',
-            !componentPropsStates.floatingLabel.generalComponentProps.openCode,
-          )
-        }
-      ></GeneralComponentPropsCard>
+      <Example hash="generalComponentProps" state={propsState} props></Example>
 
-      <AboutComponent />
+      <About />
     </div>
   );
 }

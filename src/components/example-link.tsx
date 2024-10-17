@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-export default function CustomSimpleCardLink({
+export default function ExampleLink({
   title,
   href,
   hash,

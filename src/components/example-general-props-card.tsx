@@ -1,17 +1,14 @@
-import CustomSimpleCard from '@components/custom-simple-card.tsx';
 import { Trans, useTranslation } from 'react-i18next';
+import ExamplePropsCard from '@components/example-props-card.tsx';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export default function GeneralComponentPropsCard(props: any) {
+export default function ExampleGeneralPropsCard(props: any) {
   const { t } = useTranslation(['genericComponentProps']);
 
   return (
-    <CustomSimpleCard.ComponentProps
+    <ExamplePropsCard
       title={t('genericComponentProps')}
       hash="generalComponentProps"
       customBody
-      codeLanguage="typescript"
-      codeDisplayMode="direct"
       items={[
         {
           attr: 'as',
@@ -64,6 +61,6 @@ export default function GeneralComponentPropsCard(props: any) {
         </div>
       }
       {...props}
-    ></CustomSimpleCard.ComponentProps>
+    ></ExamplePropsCard>
   );
 }

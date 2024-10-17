@@ -2,7 +2,6 @@ import useHighlightCode from '@hooks/use-highlight-code.ts';
 import clsx from 'clsx';
 import { Trans, useTranslation } from 'react-i18next';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const onClickLanguage = (i18n: any) => {
   const language = i18n.language;
   i18n.changeLanguage(language === 'en' ? 'zh' : 'en');

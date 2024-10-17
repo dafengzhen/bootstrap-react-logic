@@ -1,103 +1,44 @@
 import { useState } from 'react';
 import { useNavigation } from 'react-router-dom';
-import useHighlightCode from '@hooks/use-highlight-code.ts';
-import type { NestedKeys } from '@src/types';
-import CustomSimpleCard from '@src/components/custom-simple-card';
-import AboutComponent from '@components/about-component.tsx';
+import About from '@components/about.tsx';
 import { Label } from '@lib/label';
 import { Input } from '@lib/input';
 import { Textarea } from '@lib/textarea';
 import inputCodes from '@assets/codes/input';
 import Text from '../../lib/text/text.tsx';
 import { Button } from '@lib/button';
-import { updateState } from '@src/tools';
 import { InputOtp } from '@lib/input-otp';
 import { useTranslation } from 'react-i18next';
 import generalCodes from '@assets/codes/general';
 import PropsIndicator from '@components/props-indicator.tsx';
-import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
 import inputComponentPropsCodes from '@assets/codes/input/component-props.ts';
+import Example from '@components/example.tsx';
+import { createState } from '@tools/handlers.ts';
 
-interface IStates {
-  input: {
-    basic: {
-      openCode: boolean;
-      code?: string;
-    };
-    size: {
-      openCode: boolean;
-      code?: string;
-    };
-    text: {
-      openCode: boolean;
-      code?: string;
-    };
-    disabled: {
-      openCode: boolean;
-      code?: string;
-    };
-    readonly: {
-      openCode: boolean;
-      code?: string;
-    };
-    readonlyPlainText: {
-      openCode: boolean;
-      code?: string;
-    };
-    file: {
-      openCode: boolean;
-      code?: string;
-    };
-    color: {
-      openCode: boolean;
-      code?: string;
-    };
-    datalist: {
-      openCode: boolean;
-      code?: string;
-    };
-    startEndContent: {
-      openCode: boolean;
-      code?: string;
-    };
-    otp: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum StatesEnum {
+  basic,
+  size,
+  text,
+  disabled,
+  readonly,
+  readonlyPlainText,
+  file,
+  color,
+  datalist,
+  startEndContent,
+  otp,
 }
 
-interface IComponentPropsStates {
-  input: {
-    generalComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    inputComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    inputOtpComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    textareaComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    labelComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    textComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum PropsStatesEnum {
+  generalComponentProps,
+  inputComponentProps,
+  inputOtpComponentProps,
+  textareaComponentProps,
+  labelComponentProps,
+  textComponentProps,
 }
 
 export default function InputPage() {
-  useHighlightCode();
   const navigation = useNavigation();
   const { t: tInputComponentProps } = useTranslation(['inputComponentProps']);
   const { t: tInputOtpComponentProps } = useTranslation(['inputOtpComponentProps']);
@@ -106,104 +47,12 @@ export default function InputPage() {
   const { t: tTextareaComponentProps } = useTranslation(['textareaComponentProps']);
   const { t: tInputPage } = useTranslation(['inputPage']);
 
-  const [states, setStates] = useState<IStates>({
-    input: {
-      basic: {
-        openCode: false,
-        code: inputCodes.basic.code.trim(),
-      },
-      size: {
-        openCode: false,
-        code: inputCodes.size.code.trim(),
-      },
-      text: {
-        openCode: false,
-        code: inputCodes.text.code.trim(),
-      },
-      disabled: {
-        openCode: false,
-        code: inputCodes.disabled.code.trim(),
-      },
-      readonly: {
-        openCode: false,
-        code: inputCodes.readonly.code.trim(),
-      },
-      readonlyPlainText: {
-        openCode: false,
-        code: inputCodes.readonlyPlainText.code.trim(),
-      },
-      file: {
-        openCode: false,
-        code: inputCodes.file.code.trim(),
-      },
-      color: {
-        openCode: false,
-        code: inputCodes.color.code.trim(),
-      },
-      datalist: {
-        openCode: false,
-        code: inputCodes.datalist.code.trim(),
-      },
-      startEndContent: {
-        openCode: false,
-        code: inputCodes.startEndContent.code.trim(),
-      },
-      otp: {
-        openCode: false,
-        code: inputCodes.otp.code.trim(),
-      },
-    },
+  const state = useState({
+    input: createState(StatesEnum, inputCodes),
   });
-  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
-    input: {
-      generalComponentProps: {
-        openCode: false,
-        code: generalCodes.generalComponentProps.code.trim(),
-      },
-      inputComponentProps: {
-        openCode: false,
-        code: inputComponentPropsCodes.inputComponentProps.code.trim(),
-      },
-      inputOtpComponentProps: {
-        openCode: false,
-        code: inputComponentPropsCodes.inputOtpComponentProps.code.trim(),
-      },
-      textComponentProps: {
-        openCode: false,
-        code: inputComponentPropsCodes.textComponentProps.code.trim(),
-      },
-      labelComponentProps: {
-        openCode: false,
-        code: inputComponentPropsCodes.labelComponentProps.code.trim(),
-      },
-      textareaComponentProps: {
-        openCode: false,
-        code: inputComponentPropsCodes.textareaComponentProps.code.trim(),
-      },
-    },
+  const propsState = useState({
+    input: createState(PropsStatesEnum, inputComponentPropsCodes, generalCodes),
   });
-  const [colgroup] = useState({
-    attr: {
-      width: '150px',
-    },
-    type: {
-      width: '350px',
-    },
-    desc: {
-      width: '100px',
-    },
-    default: {
-      width: '100px',
-    },
-  });
-
-  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
-    updateState(setStates, k, v, c);
-  }
-
-  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
-    updateState(setComponentPropsStates, k, v, c);
-  }
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -211,13 +60,7 @@ export default function InputPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <CustomSimpleCard
-        title={tInputPage('basic')}
-        hash="basic"
-        isOpen={states.input.basic.openCode}
-        toggleCode={() => onClickUpdateState('input.basic.openCode', !states.input.basic.openCode)}
-        code={states.input.basic.code}
-      >
+      <Example hash="basic" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="exampleFormControlInput1">Email address</Label>
@@ -228,29 +71,17 @@ export default function InputPage() {
             <Textarea id="exampleFormControlTextarea1" rows={3}></Textarea>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('size')}
-        hash="size"
-        isOpen={states.input.size.openCode}
-        toggleCode={() => onClickUpdateState('input.size.openCode', !states.input.size.openCode)}
-        code={states.input.size.code}
-      >
+      <Example hash="size" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <Input size="lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example" />
           <Input type="text" placeholder="Default input" aria-label="default input example" />
           <Input size="sm" type="text" placeholder=".form-control-sm" aria-label=".form-control-sm example" />
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('text')}
-        hash="text"
-        isOpen={states.input.text.openCode}
-        toggleCode={() => onClickUpdateState('input.text.openCode', !states.input.text.openCode)}
-        code={states.input.text.code}
-      >
+      <Example hash="text" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <form>
@@ -304,15 +135,9 @@ export default function InputPage() {
             </form>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('disabled')}
-        hash="disabled"
-        isOpen={states.input.disabled.openCode}
-        toggleCode={() => onClickUpdateState('input.disabled.openCode', !states.input.disabled.openCode)}
-        code={states.input.disabled.code}
-      >
+      <Example hash="disabled" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Input type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled />
@@ -322,31 +147,17 @@ export default function InputPage() {
             <Input type="text" value="Disabled readonly input" aria-label="Disabled input example" disabled readOnly />
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('readonly')}
-        hash="readonly"
-        isOpen={states.input.readonly.openCode}
-        toggleCode={() => onClickUpdateState('input.readonly.openCode', !states.input.readonly.openCode)}
-        code={states.input.readonly.code}
-      >
+      <Example hash="readonly" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Input type="text" value="Readonly input here..." aria-label="readonly input example" readOnly />
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('readonlyPlainText')}
-        hash="readonlyPlainText"
-        isOpen={states.input.readonlyPlainText.openCode}
-        toggleCode={() =>
-          onClickUpdateState('input.readonlyPlainText.openCode', !states.input.readonlyPlainText.openCode)
-        }
-        code={states.input.readonlyPlainText.code}
-      >
+      <Example hash="readonlyPlainText" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-3">
           <div className="d-flex flex-column gap-2">
             <div className="row">
@@ -411,15 +222,9 @@ export default function InputPage() {
             </form>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('file')}
-        hash="file"
-        isOpen={states.input.file.openCode}
-        toggleCode={() => onClickUpdateState('input.file.openCode', !states.input.file.openCode)}
-        code={states.input.file.code}
-      >
+      <Example hash="file" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="formFile">Default file input example</Label>
@@ -442,30 +247,18 @@ export default function InputPage() {
             <Input size="lg" id="formFileLg" type="file" />
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('color')}
-        hash="color"
-        isOpen={states.input.color.openCode}
-        toggleCode={() => onClickUpdateState('input.color.openCode', !states.input.color.openCode)}
-        code={states.input.color.code}
-      >
+      <Example hash="color" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="exampleColorInput">Color picker</Label>
             <Input type="color" color id="exampleColorInput" defaultValue="#563d7c" title="Choose your color" />
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('datalist')}
-        hash="datalist"
-        isOpen={states.input.datalist.openCode}
-        toggleCode={() => onClickUpdateState('input.datalist.openCode', !states.input.datalist.openCode)}
-        code={states.input.datalist.code}
-      >
+      <Example hash="datalist" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Label htmlFor="exampleDataList">Datalist example</Label>
@@ -479,15 +272,9 @@ export default function InputPage() {
             </datalist>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('startEndContent')}
-        hash="startEndContent"
-        isOpen={states.input.startEndContent.openCode}
-        toggleCode={() => onClickUpdateState('input.startEndContent.openCode', !states.input.startEndContent.openCode)}
-        code={states.input.startEndContent.code}
-      >
+      <Example hash="startEndContent" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <Input startContent={<i className="bi bi-person"></i>} placeholder="Username" />
           <Input endContent={<i className="bi bi-eye"></i>} placeholder="Password" />
@@ -502,15 +289,9 @@ export default function InputPage() {
             placeholder="Password"
           />
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputPage('otp')}
-        hash="otp"
-        isOpen={states.input.otp.openCode}
-        toggleCode={() => onClickUpdateState('input.otp.openCode', !states.input.otp.openCode)}
-        code={states.input.otp.code}
-      >
+      <Example hash="otp" state={state} t={tInputPage}>
         <div className="d-flex flex-column gap-2">
           <div className="tw-w-full sm:tw-w-1/4">
             <InputOtp defaultValue={['1', '2', '3', '4']}></InputOtp>
@@ -526,24 +307,14 @@ export default function InputPage() {
             ></InputOtp>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
       <PropsIndicator />
 
-      <CustomSimpleCard.ComponentProps
-        title="Input"
+      <Example
         hash="inputComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.input.inputComponentProps.openCode}
-        code={componentPropsStates.input.inputComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'input.inputComponentProps.openCode',
-            !componentPropsStates.input.inputComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tInputComponentProps}
         items={[
           {
             attr: 'onRef',
@@ -635,22 +406,13 @@ export default function InputPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="InputOtp"
+      <Example
         hash="inputOtpComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.input.inputOtpComponentProps.openCode}
-        code={componentPropsStates.input.inputOtpComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'input.inputOtpComponentProps.openCode',
-            !componentPropsStates.input.inputOtpComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tInputOtpComponentProps}
         items={[
           {
             attr: 'length',
@@ -671,22 +433,13 @@ export default function InputPage() {
             default: '-',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="Textarea"
+      <Example
         hash="textareaComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.input.textareaComponentProps.openCode}
-        code={componentPropsStates.input.textareaComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'input.textareaComponentProps.openCode',
-            !componentPropsStates.input.textareaComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tTextComponentProps}
         items={[
           {
             attr: 'disabled',
@@ -713,22 +466,13 @@ export default function InputPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="Label"
+      <Example
         hash="labelComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.input.labelComponentProps.openCode}
-        code={componentPropsStates.input.labelComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'input.labelComponentProps.openCode',
-            !componentPropsStates.input.labelComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tLabelComponentProps}
         items={[
           {
             attr: 'colFormLabel',
@@ -749,22 +493,13 @@ export default function InputPage() {
             default: '-',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="Text"
+      <Example
         hash="textComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.input.textComponentProps.openCode}
-        code={componentPropsStates.input.textComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'input.textComponentProps.openCode',
-            !componentPropsStates.input.textComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tTextareaComponentProps}
         items={[
           {
             attr: 'validFeedback',
@@ -791,21 +526,12 @@ export default function InputPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <GeneralComponentPropsCard
-        colgroup={colgroup}
-        isOpen={componentPropsStates.input.generalComponentProps.openCode}
-        code={componentPropsStates.input.generalComponentProps.code}
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'input.generalComponentProps.openCode',
-            !componentPropsStates.input.generalComponentProps.openCode,
-          )
-        }
-      ></GeneralComponentPropsCard>
+      <Example hash="generalComponentProps" state={propsState} props></Example>
 
-      <AboutComponent />
+      <About />
     </div>
   );
 }

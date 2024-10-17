@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import hljs from 'highlight.js/lib/common';
 
-const useHighlightCode = () => {
+const useHighlightCode = ({ isOpen }: { isOpen?: boolean }) => {
   useEffect(() => {
     document.querySelectorAll('pre code').forEach((el) => {
       const _el = el as HTMLElement;
@@ -9,7 +9,7 @@ const useHighlightCode = () => {
         hljs.highlightElement(_el);
       }
     });
-  }, []);
+  }, [isOpen]);
 };
 
 export default useHighlightCode;

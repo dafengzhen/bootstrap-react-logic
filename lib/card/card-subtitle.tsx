@@ -13,7 +13,7 @@ const CardSubtitle = function CardSubtitle<T extends ElementType = 'div'>(props:
   const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'card-subtitle', className);
+    const finalClass = clsxUnique(!dropOldClass && 'card-subtitle h6', className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = CardSubtitleVariablesEnum[key];

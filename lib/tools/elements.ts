@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type * as React from 'react';
 import type { ComponentProps, ComponentPropsWithRef, CSSProperties, ElementType } from 'react';
 

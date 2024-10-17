@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import clsx, { type ClassValue } from 'clsx';
 import { EMPTY_GROUP_FLAG } from '@lib/tools/constants.ts';
 

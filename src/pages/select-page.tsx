@@ -1,132 +1,44 @@
 import { useState } from 'react';
 import { useNavigation } from 'react-router-dom';
-import useHighlightCode from '@hooks/use-highlight-code.ts';
-import type { NestedKeys } from '@src/types';
-import CustomSimpleCard from '@src/components/custom-simple-card';
-import AboutComponent from '@components/about-component.tsx';
-import { updateState } from '@src/tools';
+import About from '@components/about.tsx';
 import selectCodes from '@assets/codes/select';
 import selectComponentPropsCodes from '@assets/codes/select/component-props';
 import { Select, SelectOption } from '@lib/select';
 import { SelectMultiple } from '@lib/select-multiple';
-import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
 import OptionRow from '@components/option-row.tsx';
 import generalCodes from '@assets/codes/general';
+import Example from '@components/example.tsx';
+import { createState } from '@tools/handlers.ts';
 
-interface IStates {
-  select: {
-    basic: {
-      openCode: boolean;
-      code?: string;
-    };
-    size: {
-      openCode: boolean;
-      code?: string;
-    };
-    multiple: {
-      openCode: boolean;
-      code?: string;
-    };
-    disabled: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum StatesEnum {
+  basic,
+  size,
+  multiple,
+  disabled,
 }
 
-interface IComponentPropsStates {
-  select: {
-    selectComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    selectOptionComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    selectMultipleComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    generalComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum PropsStatesEnum {
+  selectComponentProps,
+  selectOptionComponentProps,
+  selectMultipleComponentProps,
+  generalComponentProps,
 }
 
 export default function SelectPage() {
-  useHighlightCode();
   const navigation = useNavigation();
-  const { t: tSelectMultipleComponentProps } = useTranslation(['selectMultipleComponentProps']);
-  const { t: tSelectOptionComponentProps } = useTranslation(['selectOptionComponentProps']);
   const { t: tSelectComponentProps } = useTranslation(['selectComponentProps']);
+  const { t: tSelectOptionComponentProps } = useTranslation(['selectOptionComponentProps']);
+  const { t: tSelectMultipleComponentProps } = useTranslation(['selectMultipleComponentProps']);
   const { t: tSelectPage } = useTranslation(['selectPage']);
 
-  const [states, setStates] = useState<IStates>({
-    select: {
-      basic: {
-        openCode: false,
-        code: selectCodes.basic.code.trim(),
-      },
-      size: {
-        openCode: false,
-        code: selectCodes.size.code.trim(),
-      },
-      multiple: {
-        openCode: false,
-        code: selectCodes.multiple.code.trim(),
-      },
-      disabled: {
-        openCode: false,
-        code: selectCodes.disabled.code.trim(),
-      },
-    },
+  const state = useState({
+    select: createState(StatesEnum, selectCodes),
   });
-  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
-    select: {
-      selectComponentProps: {
-        openCode: false,
-        code: selectComponentPropsCodes.selectComponentProps.code.trim(),
-      },
-      selectOptionComponentProps: {
-        openCode: false,
-        code: selectComponentPropsCodes.selectOptionComponentProps.code.trim(),
-      },
-      selectMultipleComponentProps: {
-        openCode: false,
-        code: selectComponentPropsCodes.selectMultipleComponentProps.code.trim(),
-      },
-      generalComponentProps: {
-        openCode: false,
-        code: generalCodes.generalComponentProps.code.trim(),
-      },
-    },
+  const propsState = useState({
+    select: createState(PropsStatesEnum, selectComponentPropsCodes, generalCodes),
   });
-  const [colgroup] = useState({
-    attr: {
-      width: '150px',
-    },
-    type: {
-      width: '350px',
-    },
-    desc: {
-      width: '100px',
-    },
-    default: {
-      width: '100px',
-    },
-  });
-
-  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
-    updateState(setStates, k, v, c);
-  }
-
-  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
-    updateState(setComponentPropsStates, k, v, c);
-  }
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -134,13 +46,7 @@ export default function SelectPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <CustomSimpleCard
-        title={tSelectPage('basic')}
-        hash="basic"
-        isOpen={states.select.basic.openCode}
-        toggleCode={() => onClickUpdateState('select.basic.openCode', !states.select.basic.openCode)}
-        code={states.select.basic.code}
-      >
+      <Example hash="basic" state={state} t={tSelectPage}>
         <div className="d-flex flex-column gap-2">
           <div>
             <Select aria-label="Default select example">
@@ -153,15 +59,9 @@ export default function SelectPage() {
             </Select>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tSelectPage('size')}
-        hash="size"
-        isOpen={states.select.size.openCode}
-        toggleCode={() => onClickUpdateState('select.size.openCode', !states.select.size.openCode)}
-        code={states.select.size.code}
-      >
+      <Example hash="size" state={state} t={tSelectPage}>
         <div className="d-flex flex-column gap-2">
           <Select size="lg" aria-label="Large select example">
             <SelectOption defaultValue="">Open this select menu</SelectOption>
@@ -177,15 +77,9 @@ export default function SelectPage() {
             <SelectOption value="3">Three</SelectOption>
           </Select>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tSelectPage('multiple')}
-        hash="multiple"
-        isOpen={states.select.multiple.openCode}
-        toggleCode={() => onClickUpdateState('select.multiple.openCode', !states.select.multiple.openCode)}
-        code={states.select.multiple.code}
-      >
+      <Example hash="multiple" state={state} t={tSelectPage}>
         <div className="d-flex flex-column gap-2">
           <Select multiple aria-label="Multiple select example">
             <SelectOption defaultValue="">Open this select menu</SelectOption>
@@ -404,15 +298,9 @@ export default function SelectPage() {
             ]}
           ></SelectMultiple>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tSelectPage('disabled')}
-        hash="disabled"
-        isOpen={states.select.disabled.openCode}
-        toggleCode={() => onClickUpdateState('select.disabled.openCode', !states.select.disabled.openCode)}
-        code={states.select.disabled.code}
-      >
+      <Example hash="disabled" state={state} t={tSelectPage}>
         <div className="d-flex flex-column gap-2">
           <Select aria-label="Disabled select example" disabled>
             <SelectOption defaultValue="">Open this select menu</SelectOption>
@@ -421,24 +309,14 @@ export default function SelectPage() {
             <SelectOption value="3">Three</SelectOption>
           </Select>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
       <PropsIndicator />
 
-      <CustomSimpleCard.ComponentProps
-        title="Select"
+      <Example
         hash="selectComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.select.selectComponentProps.openCode}
-        code={componentPropsStates.select.selectComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'select.selectComponentProps.openCode',
-            !componentPropsStates.select.selectComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tSelectComponentProps}
         items={[
           {
             attr: 'size',
@@ -471,22 +349,13 @@ export default function SelectPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="SelectOption"
+      <Example
         hash="selectOptionComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.select.selectOptionComponentProps.openCode}
-        code={componentPropsStates.select.selectOptionComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'select.selectOptionComponentProps.openCode',
-            !componentPropsStates.select.selectOptionComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tSelectOptionComponentProps}
         items={[
           {
             attr: 'disabled',
@@ -495,22 +364,13 @@ export default function SelectPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="SelectMultiple"
+      <Example
         hash="selectMultipleComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.select.selectMultipleComponentProps.openCode}
-        code={componentPropsStates.select.selectMultipleComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'select.selectMultipleComponentProps.openCode',
-            !componentPropsStates.select.selectMultipleComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tSelectMultipleComponentProps}
         items={[
           {
             attr: 'disabled',
@@ -615,21 +475,12 @@ export default function SelectPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <GeneralComponentPropsCard
-        colgroup={colgroup}
-        isOpen={componentPropsStates.select.generalComponentProps.openCode}
-        code={componentPropsStates.select.generalComponentProps.code}
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'select.generalComponentProps.openCode',
-            !componentPropsStates.select.generalComponentProps.openCode,
-          )
-        }
-      ></GeneralComponentPropsCard>
+      <Example hash="generalComponentProps" state={propsState} props></Example>
 
-      <AboutComponent />
+      <About />
     </div>
   );
 }

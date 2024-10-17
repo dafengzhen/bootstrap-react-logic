@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { useNavigation } from 'react-router-dom';
-import useHighlightCode from '@hooks/use-highlight-code.ts';
-import type { NestedKeys } from '@src/types';
-import CustomSimpleCard from '@src/components/custom-simple-card';
-import AboutComponent from '@components/about-component.tsx';
-import { updateState } from '@src/tools';
-import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
+import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
 import generalCodes from '@assets/codes/general';
@@ -13,117 +8,34 @@ import { Label } from '@lib/label';
 import radioComponentPropsCodes from '@assets/codes/radio/component-props.ts';
 import radioCodes from '@assets/codes/radio';
 import { Radio } from '@lib/radio';
+import Example from '@components/example.tsx';
+import { createState } from '@tools/handlers.ts';
 
-interface IStates {
-  radio: {
-    basic: {
-      openCode: boolean;
-      code?: string;
-    };
-    disabled: {
-      openCode: boolean;
-      code?: string;
-    };
-    inline: {
-      openCode: boolean;
-      code?: string;
-    };
-    withoutLabels: {
-      openCode: boolean;
-      code?: string;
-    };
-    toggleButtons: {
-      openCode: boolean;
-      code?: string;
-    };
-    outlinedStyles: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum StatesEnum {
+  basic,
+  disabled,
+  inline,
+  withoutLabels,
+  toggleButtons,
+  outlinedStyles,
 }
 
-interface IComponentPropsStates {
-  radio: {
-    radioComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    generalComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum PropsStatesEnum {
+  radioComponentProps,
+  generalComponentProps,
 }
 
 export default function RadioPage() {
-  useHighlightCode();
   const navigation = useNavigation();
   const { t: tRadioComponentProps } = useTranslation(['radioComponentProps']);
   const { t: tRadioPage } = useTranslation(['radioPage']);
 
-  const [states, setStates] = useState<IStates>({
-    radio: {
-      basic: {
-        openCode: false,
-        code: radioCodes.basic.code.trim(),
-      },
-      disabled: {
-        openCode: false,
-        code: radioCodes.disabled.code.trim(),
-      },
-      inline: {
-        openCode: false,
-        code: radioCodes.inline.code.trim(),
-      },
-      withoutLabels: {
-        openCode: false,
-        code: radioCodes.withoutLabels.code.trim(),
-      },
-      toggleButtons: {
-        openCode: false,
-        code: radioCodes.toggleButtons.code.trim(),
-      },
-      outlinedStyles: {
-        openCode: false,
-        code: radioCodes.outlinedStyles.code.trim(),
-      },
-    },
+  const state = useState({
+    radio: createState(StatesEnum, radioCodes),
   });
-  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
-    radio: {
-      radioComponentProps: {
-        openCode: false,
-        code: radioComponentPropsCodes.radioComponentProps.code.trim(),
-      },
-      generalComponentProps: {
-        openCode: false,
-        code: generalCodes.generalComponentProps.code.trim(),
-      },
-    },
+  const propsState = useState({
+    radio: createState(PropsStatesEnum, radioComponentPropsCodes, generalCodes),
   });
-  const [colgroup] = useState({
-    attr: {
-      width: '150px',
-    },
-    type: {
-      width: '350px',
-    },
-    desc: {
-      width: '100px',
-    },
-    default: {
-      width: '100px',
-    },
-  });
-
-  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
-    updateState(setStates, k, v, c);
-  }
-
-  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
-    updateState(setComponentPropsStates, k, v, c);
-  }
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -131,13 +43,7 @@ export default function RadioPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <CustomSimpleCard
-        title={tRadioPage('basic')}
-        hash="basic"
-        isOpen={states.radio.basic.openCode}
-        toggleCode={() => onClickUpdateState('radio.basic.openCode', !states.radio.basic.openCode)}
-        code={states.radio.basic.code}
-      >
+      <Example hash="basic" state={state} t={tRadioPage}>
         <div className="d-flex flex-column gap-2">
           <div className="form-check">
             <Radio name="flexRadioDefault" id="flexRadioDefault1"></Radio>
@@ -150,15 +56,9 @@ export default function RadioPage() {
             Default checked radio
           </Radio>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tRadioPage('disabled')}
-        hash="disabled"
-        isOpen={states.radio.disabled.openCode}
-        toggleCode={() => onClickUpdateState('radio.disabled.openCode', !states.radio.disabled.openCode)}
-        code={states.radio.disabled.code}
-      >
+      <Example hash="disabled" state={state} t={tRadioPage}>
         <div className="d-flex flex-column gap-2">
           <Radio name="flexRadioDisabled" id="flexRadioDisabled" disabled>
             Disabled radio
@@ -171,15 +71,9 @@ export default function RadioPage() {
             </Label>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tRadioPage('inline')}
-        hash="inline"
-        isOpen={states.radio.inline.openCode}
-        toggleCode={() => onClickUpdateState('radio.inline.openCode', !states.radio.inline.openCode)}
-        code={states.radio.inline.code}
-      >
+      <Example hash="inline" state={state} t={tRadioPage}>
         <div>
           <Radio inline name="inlineRadioOptions" id="inlineRadio1" value="option1">
             1
@@ -199,27 +93,15 @@ export default function RadioPage() {
             </Label>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tRadioPage('withoutLabels')}
-        hash="withoutLabels"
-        isOpen={states.radio.withoutLabels.openCode}
-        toggleCode={() => onClickUpdateState('radio.withoutLabels.openCode', !states.radio.withoutLabels.openCode)}
-        code={states.radio.withoutLabels.code}
-      >
+      <Example hash="withoutLabels" state={state} t={tRadioPage}>
         <div className="d-flex flex-column gap-2">
           <Radio />
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tRadioPage('toggleButtons')}
-        hash="toggleButtons"
-        isOpen={states.radio.toggleButtons.openCode}
-        toggleCode={() => onClickUpdateState('radio.toggleButtons.openCode', !states.radio.toggleButtons.openCode)}
-        code={states.radio.toggleButtons.code}
-      >
+      <Example hash="toggleButtons" state={state} t={tRadioPage}>
         <div className="d-flex gap-2">
           <div>
             <Radio
@@ -256,15 +138,9 @@ export default function RadioPage() {
             </Label>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tRadioPage('outlinedStyles')}
-        hash="outlinedStyles"
-        isOpen={states.radio.outlinedStyles.openCode}
-        toggleCode={() => onClickUpdateState('radio.outlinedStyles.openCode', !states.radio.outlinedStyles.openCode)}
-        code={states.radio.outlinedStyles.code}
-      >
+      <Example hash="outlinedStyles" state={state} t={tRadioPage}>
         <div className="d-flex gap-2">
           <div>
             <Radio
@@ -293,24 +169,14 @@ export default function RadioPage() {
             </Label>
           </div>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
       <PropsIndicator />
 
-      <CustomSimpleCard.ComponentProps
-        title="Radio"
+      <Example
         hash="radioComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.radio.radioComponentProps.openCode}
-        code={componentPropsStates.radio.radioComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'radio.radioComponentProps.openCode',
-            !componentPropsStates.radio.radioComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tRadioComponentProps}
         items={[
           {
             attr: 'disabled',
@@ -366,21 +232,12 @@ export default function RadioPage() {
             default: '',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <GeneralComponentPropsCard
-        colgroup={colgroup}
-        isOpen={componentPropsStates.radio.generalComponentProps.openCode}
-        code={componentPropsStates.radio.generalComponentProps.code}
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'radio.generalComponentProps.openCode',
-            !componentPropsStates.radio.generalComponentProps.openCode,
-          )
-        }
-      ></GeneralComponentPropsCard>
+      <Example hash="generalComponentProps" state={propsState} props></Example>
 
-      <AboutComponent />
+      <About />
     </div>
   );
 }

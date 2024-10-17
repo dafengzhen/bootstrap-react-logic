@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import type { NestedKeys } from '@src/types';
+import type { FoundValue, NestedKeys } from '@src/types';
 import type { SetStateAction } from 'react';
 
 export const updateState = (
@@ -40,4 +38,31 @@ export const toPascalCase = (str: string): string => {
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join('');
+};
+
+export const getStateByHash = <T extends object>(hash: string, states: T): FoundValue | null => {
+  if (!hash || !states) {
+    return null;
+  }
+
+  function findValue(obj: object, currentPath: string = ''): FoundValue | null {
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        const newPath = currentPath ? `${currentPath}.${key}` : key;
+
+        if (key === hash) {
+          return { path: newPath, value: (obj as any)[key] };
+        }
+
+        const value = (obj as any)[key];
+        if (typeof value === 'object' && value !== null) {
+          const result = findValue(value, newPath);
+          if (result) return result;
+        }
+      }
+    }
+    return null;
+  }
+
+  return findValue(states);
 };

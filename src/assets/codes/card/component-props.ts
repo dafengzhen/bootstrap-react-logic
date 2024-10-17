@@ -1,3 +1,5 @@
+import type { CodeType } from '@src/types';
+
 const cardComponentPropsCodes = {
   cardComponentProps: {
     code: `
@@ -64,4 +66,4 @@ type Props = {
   },
 };
 
-export default cardComponentPropsCodes;
+export default cardComponentPropsCodes as CodeType;

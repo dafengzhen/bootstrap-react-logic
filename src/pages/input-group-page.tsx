@@ -1,166 +1,50 @@
 import { useState } from 'react';
 import { useNavigation } from 'react-router-dom';
-import useHighlightCode from '@hooks/use-highlight-code.ts';
-import type { NestedKeys } from '@src/types';
-import CustomSimpleCard from '@src/components/custom-simple-card';
-import AboutComponent from '@components/about-component.tsx';
+import About from '@components/about.tsx';
 import { Label } from '@lib/label';
 import { Input } from '@lib/input';
 import inputGroupCodes from '@assets/codes/input-group';
 import Text from '../../lib/text/text.tsx';
 import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Textarea } from '@lib/textarea';
-import { updateState } from '@src/tools';
 import { Button } from '@lib/button';
 import { useTranslation } from 'react-i18next';
 import generalCodes from '@assets/codes/general';
-import GeneralComponentPropsCard from '@components/general-component-props-card.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import inputGroupComponentPropsCodes from '@assets/codes/input-group/component-props.ts';
+import Example from '@components/example.tsx';
+import { createState } from '@tools/handlers.ts';
 
-interface IStates {
-  inputGroup: {
-    basic: {
-      openCode: boolean;
-      code?: string;
-    };
-    nowrap: {
-      openCode: boolean;
-      code?: string;
-    };
-    size: {
-      openCode: boolean;
-      code?: string;
-    };
-    checkboxAndRadio: {
-      openCode: boolean;
-      code?: string;
-    };
-    multipleInput: {
-      openCode: boolean;
-      code?: string;
-    };
-    multipleAddons: {
-      openCode: boolean;
-      code?: string;
-    };
-    buttonAddons: {
-      openCode: boolean;
-      code?: string;
-    };
-    customSelect: {
-      openCode: boolean;
-      code?: string;
-    };
-    customFileInput: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum StatesEnum {
+  basic,
+  nowrap,
+  size,
+  checkboxAndRadio,
+  multipleInput,
+  multipleAddons,
+  buttonAddons,
+  customSelect,
+  customFileInput,
 }
 
-interface IComponentPropsStates {
-  inputGroup: {
-    generalComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    inputGroupComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-    inputGroupTextComponentProps: {
-      openCode: boolean;
-      code?: string;
-    };
-  };
+enum PropsStatesEnum {
+  generalComponentProps,
+  inputGroupComponentProps,
+  inputGroupTextComponentProps,
 }
 
 export default function InputGroupPage() {
-  useHighlightCode();
   const navigation = useNavigation();
   const { t: tInputGroupComponentProps } = useTranslation(['inputGroupComponentProps']);
   const { t: tInputGroupTextComponentProps } = useTranslation(['inputGroupTextComponentProps']);
   const { t: tInputGroupPage } = useTranslation(['inputGroupPage']);
 
-  const [states, setStates] = useState<IStates>({
-    inputGroup: {
-      basic: {
-        openCode: false,
-        code: inputGroupCodes.basic.code.trim(),
-      },
-      nowrap: {
-        openCode: false,
-        code: inputGroupCodes.nowrap.code.trim(),
-      },
-      size: {
-        openCode: false,
-        code: inputGroupCodes.size.code.trim(),
-      },
-      checkboxAndRadio: {
-        openCode: false,
-        code: inputGroupCodes.checkboxAndRadio.code.trim(),
-      },
-      multipleInput: {
-        openCode: false,
-        code: inputGroupCodes.multipleInput.code.trim(),
-      },
-      multipleAddons: {
-        openCode: false,
-        code: inputGroupCodes.multipleAddons.code.trim(),
-      },
-      buttonAddons: {
-        openCode: false,
-        code: inputGroupCodes.buttonAddons.code.trim(),
-      },
-      customSelect: {
-        openCode: false,
-        code: inputGroupCodes.customSelect.code.trim(),
-      },
-      customFileInput: {
-        openCode: false,
-        code: inputGroupCodes.customFileInput.code.trim(),
-      },
-    },
+  const state = useState({
+    inputGroup: createState(StatesEnum, inputGroupCodes),
   });
-  const [componentPropsStates, setComponentPropsStates] = useState<IComponentPropsStates>({
-    inputGroup: {
-      generalComponentProps: {
-        openCode: false,
-        code: generalCodes.generalComponentProps.code.trim(),
-      },
-      inputGroupComponentProps: {
-        openCode: false,
-        code: inputGroupComponentPropsCodes.inputGroupComponentProps.code.trim(),
-      },
-      inputGroupTextComponentProps: {
-        openCode: false,
-        code: inputGroupComponentPropsCodes.inputGroupTextComponentProps.code.trim(),
-      },
-    },
+  const propsState = useState({
+    inputGroup: createState(PropsStatesEnum, inputGroupComponentPropsCodes, generalCodes),
   });
-  const [colgroup] = useState({
-    attr: {
-      width: '150px',
-    },
-    type: {
-      width: '350px',
-    },
-    desc: {
-      width: '100px',
-    },
-    default: {
-      width: '100px',
-    },
-  });
-
-  function onClickUpdateState(k: NestedKeys<IStates>, v: unknown, c?: () => void) {
-    updateState(setStates, k, v, c);
-  }
-
-  function onClickUpdateComponentPropsState(k: NestedKeys<IComponentPropsStates>, v: unknown, c?: () => void) {
-    updateState(setComponentPropsStates, k, v, c);
-  }
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -168,13 +52,7 @@ export default function InputGroupPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <CustomSimpleCard
-        title={tInputGroupPage('basic')}
-        hash="basic"
-        isOpen={states.inputGroup.basic.openCode}
-        toggleCode={() => onClickUpdateState('inputGroup.basic.openCode', !states.inputGroup.basic.openCode)}
-        code={states.inputGroup.basic.code}
-      >
+      <Example hash="basic" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <InputGroupText id="basic-addon1">@</InputGroupText>
@@ -217,30 +95,18 @@ export default function InputGroupPage() {
             <Textarea aria-label="With textarea"></Textarea>
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('nowrap')}
-        hash="nowrap"
-        isOpen={states.inputGroup.nowrap.openCode}
-        toggleCode={() => onClickUpdateState('inputGroup.nowrap.openCode', !states.inputGroup.nowrap.openCode)}
-        code={states.inputGroup.nowrap.code}
-      >
+      <Example hash="nowrap" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup nowrap>
             <InputGroupText id="addon-wrapping">@</InputGroupText>
             <Input type="text" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" />
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('size')}
-        hash="size"
-        isOpen={states.inputGroup.size.openCode}
-        toggleCode={() => onClickUpdateState('inputGroup.size.openCode', !states.inputGroup.size.openCode)}
-        code={states.inputGroup.size.code}
-      >
+      <Example hash="size" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup size="sm">
             <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
@@ -257,17 +123,9 @@ export default function InputGroupPage() {
             <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('checkboxAndRadio')}
-        hash="checkboxAndRadio"
-        isOpen={states.inputGroup.checkboxAndRadio.openCode}
-        toggleCode={() =>
-          onClickUpdateState('inputGroup.checkboxAndRadio.openCode', !states.inputGroup.checkboxAndRadio.openCode)
-        }
-        code={states.inputGroup.checkboxAndRadio.code}
-      >
+      <Example hash="checkboxAndRadio" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <InputGroupText as="div">
@@ -293,17 +151,9 @@ export default function InputGroupPage() {
             <Input type="text" aria-label="Text input with radio button" />
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('multipleInput')}
-        hash="multipleInput"
-        isOpen={states.inputGroup.multipleInput.openCode}
-        toggleCode={() =>
-          onClickUpdateState('inputGroup.multipleInput.openCode', !states.inputGroup.multipleInput.openCode)
-        }
-        code={states.inputGroup.multipleInput.code}
-      >
+      <Example hash="multipleInput" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <InputGroupText className="input-group-text">First and last name</InputGroupText>
@@ -311,17 +161,9 @@ export default function InputGroupPage() {
             <Input type="text" aria-label="Last name" />
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('multipleAddons')}
-        hash="multipleAddons"
-        isOpen={states.inputGroup.multipleAddons.openCode}
-        toggleCode={() =>
-          onClickUpdateState('inputGroup.multipleAddons.openCode', !states.inputGroup.multipleAddons.openCode)
-        }
-        code={states.inputGroup.multipleAddons.code}
-      >
+      <Example hash="multipleAddons" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <InputGroupText>$</InputGroupText>
@@ -334,17 +176,9 @@ export default function InputGroupPage() {
             <InputGroupText>0.00</InputGroupText>
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('buttonAddons')}
-        hash="buttonAddons"
-        isOpen={states.inputGroup.buttonAddons.openCode}
-        toggleCode={() =>
-          onClickUpdateState('inputGroup.buttonAddons.openCode', !states.inputGroup.buttonAddons.openCode)
-        }
-        code={states.inputGroup.buttonAddons.code}
-      >
+      <Example hash="buttonAddons" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <Button outline="secondary" type="button" id="button-addon1">
@@ -394,17 +228,9 @@ export default function InputGroupPage() {
             </Button>
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('customSelect')}
-        hash="customSelect"
-        isOpen={states.inputGroup.customSelect.openCode}
-        toggleCode={() =>
-          onClickUpdateState('inputGroup.customSelect.openCode', !states.inputGroup.customSelect.openCode)
-        }
-        code={states.inputGroup.customSelect.code}
-      >
+      <Example hash="customSelect" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <Label inputGroupText htmlFor="inputGroupSelect01">
@@ -454,17 +280,9 @@ export default function InputGroupPage() {
             </Button>
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
-      <CustomSimpleCard
-        title={tInputGroupPage('customFileInput')}
-        hash="customFileInput"
-        isOpen={states.inputGroup.customFileInput.openCode}
-        toggleCode={() =>
-          onClickUpdateState('inputGroup.customFileInput.openCode', !states.inputGroup.customFileInput.openCode)
-        }
-        code={states.inputGroup.customFileInput.code}
-      >
+      <Example hash="customFileInput" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup>
             <Label inputGroupText htmlFor="inputGroupFile01">
@@ -494,24 +312,14 @@ export default function InputGroupPage() {
             </Button>
           </InputGroup>
         </div>
-      </CustomSimpleCard>
+      </Example>
 
       <PropsIndicator />
 
-      <CustomSimpleCard.ComponentProps
-        title="InputGroup"
+      <Example
         hash="inputGroupComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.inputGroup.inputGroupComponentProps.openCode}
-        code={componentPropsStates.inputGroup.inputGroupComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'inputGroup.inputGroupComponentProps.openCode',
-            !componentPropsStates.inputGroup.inputGroupComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tInputGroupComponentProps}
         items={[
           {
             attr: 'nowrap',
@@ -532,22 +340,13 @@ export default function InputGroupPage() {
             default: '-',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <CustomSimpleCard.ComponentProps
-        title="InputGroupText"
+      <Example
         hash="inputGroupTextComponentProps"
-        colgroup={colgroup}
-        isOpen={componentPropsStates.inputGroup.inputGroupTextComponentProps.openCode}
-        code={componentPropsStates.inputGroup.inputGroupTextComponentProps.code}
-        codeLanguage="typescript"
-        codeDisplayMode="direct"
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'inputGroup.inputGroupTextComponentProps.openCode',
-            !componentPropsStates.inputGroup.inputGroupTextComponentProps.openCode,
-          )
-        }
+        state={propsState}
+        t={tInputGroupTextComponentProps}
         items={[
           {
             attr: 'as',
@@ -556,21 +355,12 @@ export default function InputGroupPage() {
             default: 'span',
           },
         ]}
-      ></CustomSimpleCard.ComponentProps>
+        props
+      ></Example>
 
-      <GeneralComponentPropsCard
-        colgroup={colgroup}
-        isOpen={componentPropsStates.inputGroup.generalComponentProps.openCode}
-        code={componentPropsStates.inputGroup.generalComponentProps.code}
-        toggleCode={() =>
-          onClickUpdateComponentPropsState(
-            'inputGroup.generalComponentProps.openCode',
-            !componentPropsStates.inputGroup.generalComponentProps.openCode,
-          )
-        }
-      ></GeneralComponentPropsCard>
+      <Example hash="generalComponentProps" state={propsState} props></Example>
 
-      <AboutComponent />
+      <About />
     </div>
   );
 }

@@ -13,7 +13,7 @@ const CardTitle = function CardTitle<T extends ElementType = 'div'>(props: CardT
   const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'card-title', className);
+    const finalClass = clsxUnique(!dropOldClass && 'card-title h5', className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = CardTitleVariablesEnum[key];

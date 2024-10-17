@@ -1,13 +1,13 @@
-import CustomSimpleCardLink from '@components/custom-simple-card-link.tsx';
+import ExampleLink from '@components/example-link.tsx';
 import { Trans, useTranslation } from 'react-i18next';
 
-export default function AboutComponent() {
+export default function About() {
   const { t } = useTranslation(['about']);
 
   return (
     <div className="card">
       <div className="card-header">
-        <CustomSimpleCardLink title={t('other')} hash="other" />
+        <ExampleLink title={t('other')} hash="other" />
       </div>
       <div className="card-body">
         <div>

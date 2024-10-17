@@ -126,8 +126,6 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
     [otp],
   );
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-
   const onRef = useCallback(
     (instance: HTMLInputElement | null, item: IOtp) => {
       otpRefs.current.set(item.id, instance);
