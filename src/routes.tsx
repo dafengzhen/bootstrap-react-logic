@@ -1,9 +1,17 @@
-import { type ComponentType, createElement } from 'react';
-import { createBrowserRouter, type RouteObject } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import App from '@src/App.tsx';
 import ErrorPage from '@pages/error-page.tsx';
 import IndexPage from '@pages/index-page.tsx';
-import { toPascalCase } from '@src/tools';
+import ButtonPage from '@pages/button-page.tsx';
+import ButtonGroupPage from '@pages/button-group-page.tsx';
+import InputPage from '@pages/input-page.tsx';
+import InputGroupPage from '@pages/input-group-page.tsx';
+import SelectPage from '@pages/select-page.tsx';
+import CheckboxPage from '@pages/checkbox-page.tsx';
+import RadioPage from '@pages/radio-page.tsx';
+import RangePage from '@pages/range-page.tsx';
+import FloatingLabelPage from '@pages/floating-label-page.tsx';
+import CardPage from '@pages/card-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -21,27 +29,6 @@ export enum MenuEnum {
   Card = '/pages/card',
 }
 
-const excludedPages = new Set(['error', 'index']);
-
-const pageComponents: Record<string, { default: ComponentType }> = import.meta.glob('./pages/*-page.tsx', {
-  eager: true,
-});
-
-const childrenRoutes = Object.entries(pageComponents)
-  .map(([key, component]) => {
-    const kebabKey = key.match(/\/pages\/(.*?)-page\.tsx$/)![1];
-    if (excludedPages.has(kebabKey)) {
-      return;
-    }
-
-    const pascalCaseKey = toPascalCase(kebabKey);
-    return {
-      path: MenuEnum[pascalCaseKey as keyof typeof MenuEnum],
-      element: createElement(component.default),
-    };
-  })
-  .filter(Boolean) as RouteObject[];
-
 const router = createBrowserRouter(
   [
     {
@@ -51,7 +38,49 @@ const router = createBrowserRouter(
       children: [
         {
           errorElement: <ErrorPage />,
-          children: [{ index: true, element: <IndexPage /> }, ...childrenRoutes],
+          children: [
+            { index: true, element: <IndexPage /> },
+            {
+              path: 'pages/button',
+              element: <ButtonPage />,
+            },
+            {
+              path: 'pages/button-group',
+              element: <ButtonGroupPage />,
+            },
+            {
+              path: 'pages/input',
+              element: <InputPage />,
+            },
+            {
+              path: 'pages/input-group',
+              element: <InputGroupPage />,
+            },
+            {
+              path: 'pages/select',
+              element: <SelectPage />,
+            },
+            {
+              path: 'pages/checkbox',
+              element: <CheckboxPage />,
+            },
+            {
+              path: 'pages/radio',
+              element: <RadioPage />,
+            },
+            {
+              path: 'pages/range',
+              element: <RangePage />,
+            },
+            {
+              path: 'pages/floating-label',
+              element: <FloatingLabelPage />,
+            },
+            {
+              path: 'pages/card',
+              element: <CardPage />,
+            },
+          ],
         },
       ],
     },
