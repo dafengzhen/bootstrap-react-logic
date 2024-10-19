@@ -51,14 +51,16 @@ const getScript = (appPublicBaseHref: string, filename: string): string | undefi
     return `
       <script type="text/javascript">
         (function() {
-          const baseUrl = ${appPublicBaseHref};
-          const current = baseUrl.slice(-1) === '/' ? baseUrl.slice(0, -1) : baseUrl;
-          const updateUrlIfValid = (baseUrl, search) => {
-            if (/^\\?\\/.+/.test(search)) {
-              history.replaceState(null, '', baseUrl + search.replace('?', ''));
+          const publicBaseHref = ${appPublicBaseHref};
+          const sanitizedBaseHref = publicBaseHref.slice(-1) === '/' ? publicBaseHref.slice(0, -1) : publicBaseHref;
+
+          const replaceUrlIfValid = (baseHref, queryString) => {
+            if (/^\\?\\/.+/.test(queryString)) {
+              history.replaceState(null, '', baseHref + queryString.replace('?', ''));
             }
           };
-          updateUrlIfValid(current, location.search);
+
+          replaceUrlIfValid(sanitizedBaseHref, location.search);
         })();
       </script>
     `;
@@ -68,10 +70,32 @@ const getScript = (appPublicBaseHref: string, filename: string): string | undefi
     return `
       <script type="text/javascript">
         (function() {
-          const baseUrl = ${appPublicBaseHref};
-          const current = baseUrl.slice(-1) === '/' ? baseUrl.slice(0, -1) : baseUrl;
-          const generateNewUrl = (baseUrl) => baseUrl + "/?" + location.pathname;
-          location.replace(generateNewUrl(current));
+          const publicBaseHref = ${appPublicBaseHref};
+          const sanitizedBaseHref = publicBaseHref.slice(-1) === '/' ? publicBaseHref.slice(0, -1) : publicBaseHref;
+
+          const removeDuplicateBaseInPath = (baseHref, currentPath) => {
+            const baseHrefUrl = new URL(baseHref);
+            const baseHrefPath = baseHrefUrl.pathname;
+            const duplicateBaseIndex = currentPath.indexOf('/?/');
+        
+            if (duplicateBaseIndex === -1) {
+              return currentPath;
+            }
+
+            const pathBeforeQuery = currentPath.slice(0, duplicateBaseIndex + 2);
+            const pathAfterQuery = currentPath.slice(duplicateBaseIndex + 2);
+        
+            if (pathAfterQuery.startsWith(baseHrefPath)) {
+              const cleanedPathAfterQuery = pathAfterQuery.slice(baseHrefPath.length);
+              return pathBeforeQuery + cleanedPathAfterQuery;
+            }
+
+            return currentPath;
+          };
+        
+          const buildNewUrl = (baseHref) => baseHref + "/?" + location.pathname;
+        
+          location.replace(removeDuplicateBaseInPath(publicBaseHref, buildNewUrl(sanitizedBaseHref)));
         })();
       </script>
     `;
