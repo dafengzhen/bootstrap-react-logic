@@ -29,6 +29,9 @@ export enum MenuEnum {
   Card = '/pages/card',
 }
 
+/**
+ * Configure router.
+ */
 const router = createBrowserRouter(
   [
     {

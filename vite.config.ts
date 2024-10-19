@@ -2,22 +2,29 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
+import addScriptPlugin from './add-script-plugin.ts';
 
 const env = loadEnv('app', process.cwd(), '');
-const base = env.PUBLIC_BASE_PATH;
+const base = env.PUBLIC_BASE_PATH || '';
+const href = env.PUBLIC_BASE_HREF || '';
+const outputVisualizer = env.OUTPUT_VISUALIZER === 'true';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base,
+  appType: 'mpa',
   define: {
     __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
+    __APP_PUBLIC_BASE_HREF__: JSON.stringify(href),
   },
   plugins: [
     react(),
-    visualizer({
-      emitFile: true,
-      filename: 'stats.html',
-    }),
+    outputVisualizer &&
+      visualizer({
+        emitFile: true,
+        filename: 'stats.html',
+      }),
+    addScriptPlugin(),
   ],
   css: {
     preprocessorOptions: {
@@ -32,6 +39,10 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        404: resolve(__dirname, '404.html'),
+      },
       output: {
         manualChunks(id) {
           if (id.includes('highlight.js')) {
