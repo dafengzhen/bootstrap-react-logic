@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/pages/assets/(.*)", "destination": "/assets/(.*)" }]
+  "rewrites": [
+    {
+      "source": "/pages/assets/:path*",
+      "destination": "/assets/:path*"
+    }
+  ]
 }
