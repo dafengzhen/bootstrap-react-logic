@@ -91,9 +91,9 @@ const getScript = (appPublicBaseHref: string, filename: string): string | undefi
 
             return currentPath;
           };
-        
+
           const buildNewUrl = (baseHref) => baseHref + "/?" + location.pathname;
-        
+
           location.replace(removeDuplicateBaseInPath(publicBaseHref, buildNewUrl(sanitizedBaseHref)));
         })();
       </script>
