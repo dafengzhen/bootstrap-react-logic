@@ -49,7 +49,7 @@ const processHtml = ({
 const getScript = (appPublicBaseHref: string, filename: string): string | undefined => {
   if (filename.endsWith('/index.html')) {
     return `
-      <script type="text/javascript">
+      <script>
         (function() {
           const publicBaseHref = ${appPublicBaseHref};
           const sanitizedBaseHref = publicBaseHref.slice(-1) === '/' ? publicBaseHref.slice(0, -1) : publicBaseHref;
@@ -68,7 +68,7 @@ const getScript = (appPublicBaseHref: string, filename: string): string | undefi
 
   if (filename.endsWith('/404.html')) {
     return `
-      <script type="text/javascript">
+      <script>
         (function() {
           const publicBaseHref = ${appPublicBaseHref};
           const sanitizedBaseHref = publicBaseHref.slice(-1) === '/' ? publicBaseHref.slice(0, -1) : publicBaseHref;
