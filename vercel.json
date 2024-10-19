@@ -1,1 +1,3 @@
-{}
+{
+  "rewrites": [{ "source": "/pages/assets/(.*)", "destination": "/assets/(.*)" }]
+}
