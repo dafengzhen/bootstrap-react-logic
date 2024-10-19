@@ -77,17 +77,16 @@ const getScript = (appPublicBaseHref: string, filename: string): string | undefi
             const baseHrefUrl = new URL(baseHref);
             const baseHrefPath = baseHrefUrl.pathname;
             const duplicateBaseIndex = currentPath.indexOf('/?/');
-        
             if (duplicateBaseIndex === -1) {
               return currentPath;
             }
 
             const pathBeforeQuery = currentPath.slice(0, duplicateBaseIndex + 2);
             const pathAfterQuery = currentPath.slice(duplicateBaseIndex + 2);
-        
+
             if (pathAfterQuery.startsWith(baseHrefPath)) {
               const cleanedPathAfterQuery = pathAfterQuery.slice(baseHrefPath.length);
-              return pathBeforeQuery + cleanedPathAfterQuery;
+              return pathBeforeQuery + (cleanedPathAfterQuery.startsWith('/') ? cleanedPathAfterQuery : "/" + cleanedPathAfterQuery);
             }
 
             return currentPath;
