@@ -1,3 +1,38 @@
 {
-  "desc": {}
+  "card": {
+    "name": "Card"
+  },
+  "cardBody": {
+    "name": "CardBody"
+  },
+  "cardTitle": {
+    "name": "CardTitle"
+  },
+  "cardSubtitle": {
+    "name": "CardSubtitle"
+  },
+  "cardText": {
+    "name": "CardText"
+  },
+  "cardGroup": {
+    "name": "CardGroup"
+  },
+  "cardLink": {
+    "name": "CardLink"
+  },
+  "cardHeader": {
+    "name": "CardHeader"
+  },
+  "cardFooter": {
+    "name": "CardFooter"
+  },
+  "cardImg": {
+    "name": "CardImg",
+    "desc": {
+      "as": "Type",
+      "top": "Top",
+      "bottom": "Bottom",
+      "overlay": "Overlay"
+    }
+  }
 }

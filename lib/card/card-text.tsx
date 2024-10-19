@@ -9,11 +9,11 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const CardText = function CardText<T extends ElementType = 'p'>(props: CardTextProps<T>) {
-  const { as: Component = 'p', dropOldClass, variables, className, style, ...rest } = props;
+const CardText = function CardText<T extends ElementType = 'div'>(props: CardTextProps<T>) {
+  const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'card-text', className);
+    const finalClass = clsxUnique(!dropOldClass && 'card-text mb-3', className);
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
         const _value = CardTextVariablesEnum[key];

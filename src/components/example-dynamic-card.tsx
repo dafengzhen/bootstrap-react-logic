@@ -29,7 +29,7 @@ export default function ExampleDynamicCard({
   return (
     <div className="card">
       <div className="card-header">
-        <div className="d-flex align-items-center justify-content-between">
+        <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
           <ExampleLink title={title} hash={hash} />
           <ActionIcons
             isOpen={isOpen}

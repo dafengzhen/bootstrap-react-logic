@@ -17,9 +17,6 @@ enum StatesEnum {
   size,
   multiple,
   disabled,
-}
-
-enum PropsStatesEnum {
   selectComponentProps,
   selectOptionComponentProps,
   selectMultipleComponentProps,
@@ -34,10 +31,7 @@ export default function SelectPage() {
   const { t: tSelectPage } = useTranslation(['selectPage']);
 
   const state = useState({
-    select: createState(StatesEnum, selectCodes),
-  });
-  const propsState = useState({
-    select: createState(PropsStatesEnum, selectComponentPropsCodes, generalCodes),
+    select: createState(StatesEnum, selectCodes, selectComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -314,8 +308,9 @@ export default function SelectPage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="selectComponentProps"
-        state={propsState}
+        state={state}
         t={tSelectComponentProps}
         items={[
           {
@@ -349,12 +344,12 @@ export default function SelectPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="selectOptionComponentProps"
-        state={propsState}
+        state={state}
         t={tSelectOptionComponentProps}
         items={[
           {
@@ -364,12 +359,12 @@ export default function SelectPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="selectMultipleComponentProps"
-        state={propsState}
+        state={state}
         t={tSelectMultipleComponentProps}
         items={[
           {
@@ -475,10 +470,9 @@ export default function SelectPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

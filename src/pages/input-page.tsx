@@ -27,9 +27,6 @@ enum StatesEnum {
   datalist,
   startEndContent,
   otp,
-}
-
-enum PropsStatesEnum {
   generalComponentProps,
   inputComponentProps,
   inputOtpComponentProps,
@@ -48,10 +45,7 @@ export default function InputPage() {
   const { t: tInputPage } = useTranslation(['inputPage']);
 
   const state = useState({
-    input: createState(StatesEnum, inputCodes),
-  });
-  const propsState = useState({
-    input: createState(PropsStatesEnum, inputComponentPropsCodes, generalCodes),
+    input: createState(StatesEnum, inputCodes, inputComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -312,8 +306,9 @@ export default function InputPage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="inputComponentProps"
-        state={propsState}
+        state={state}
         t={tInputComponentProps}
         items={[
           {
@@ -406,12 +401,12 @@ export default function InputPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="inputOtpComponentProps"
-        state={propsState}
+        state={state}
         t={tInputOtpComponentProps}
         items={[
           {
@@ -433,12 +428,12 @@ export default function InputPage() {
             default: '-',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="textareaComponentProps"
-        state={propsState}
+        state={state}
         t={tTextComponentProps}
         items={[
           {
@@ -466,12 +461,12 @@ export default function InputPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="labelComponentProps"
-        state={propsState}
+        state={state}
         t={tLabelComponentProps}
         items={[
           {
@@ -493,12 +488,12 @@ export default function InputPage() {
             default: '-',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="textComponentProps"
-        state={propsState}
+        state={state}
         t={tTextareaComponentProps}
         items={[
           {
@@ -526,10 +521,9 @@ export default function InputPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

@@ -29,15 +29,12 @@ export const toKebabCase = (str: string) => {
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 };
 
-export const toCamelCase = (str: string): string => {
+export const kebabToCamelCase = (str: string): string => {
   return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 };
 
-export const toPascalCase = (str: string): string => {
-  return str
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
+export const kebabToCamelCaseLowerFirst = (str: string): string => {
+  return kebabToCamelCase(str).replace(/^[A-Z]/, (letter) => letter.toLowerCase());
 };
 
 export const getStateByHash = <T extends object>(hash: string, states: T): FoundValue | null => {
@@ -65,4 +62,37 @@ export const getStateByHash = <T extends object>(hash: string, states: T): Found
   }
 
   return findValue(states);
+};
+
+export const transformCodeObj = (
+  input: Record<string, unknown>,
+): {
+  [key: string]: {
+    code: string;
+  };
+} => {
+  const output: {
+    [key: string]: {
+      code: string;
+    };
+  } = {};
+
+  for (const key in input) {
+    const pathParts = key.split('/');
+    const fileNameWithExtension = pathParts[pathParts.length - 1];
+    const fileName = kebabToCamelCase(fileNameWithExtension.split('.')[0]);
+
+    const rawCode = (input[key] as string).trim();
+    const lines = rawCode.split('\n');
+
+    if (lines.length > 2 && lines[0].startsWith('```') && lines[lines.length - 1].endsWith('```')) {
+      lines.shift();
+      lines.pop();
+    }
+
+    const cleanedCode = lines.join('\n');
+    output[fileName] = { code: cleanedCode || '__NO_DATA__' };
+  }
+
+  return output;
 };

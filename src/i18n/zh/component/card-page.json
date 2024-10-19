@@ -1,3 +1,21 @@
 {
-  "basic": "基本"
+  "basic": "基本",
+  "body": "正文",
+  "titlesTextAndLinks": "标题、文本和链接",
+  "images": "图片",
+  "listGroups": "列表组",
+  "kitchenSink": "杂项组件",
+  "headerAndFooter": "页头和页尾",
+  "usingGridMarkup": "使用网格标记",
+  "usingUtilities": "使用实用工具",
+  "usingCustomCss": "使用自定义 CSS",
+  "textAlignment": "文本对齐",
+  "navigation": "导航",
+  "imageCaps": "图像帽",
+  "horizontal": "水平布局",
+  "backgroundAndColor": "背景和颜色",
+  "border": "边框",
+  "mixinsUtilities": "混合实用工具",
+  "cardGroups": "卡片组",
+  "gridCards": "网格卡片"
 }

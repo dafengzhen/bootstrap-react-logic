@@ -18,9 +18,6 @@ enum StatesEnum {
   withoutLabels,
   toggleButtons,
   outlinedStyles,
-}
-
-enum PropsStatesEnum {
   radioComponentProps,
   generalComponentProps,
 }
@@ -31,10 +28,7 @@ export default function RadioPage() {
   const { t: tRadioPage } = useTranslation(['radioPage']);
 
   const state = useState({
-    radio: createState(StatesEnum, radioCodes),
-  });
-  const propsState = useState({
-    radio: createState(PropsStatesEnum, radioComponentPropsCodes, generalCodes),
+    radio: createState(StatesEnum, radioCodes, radioComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -102,7 +96,7 @@ export default function RadioPage() {
       </Example>
 
       <Example hash="toggleButtons" state={state} t={tRadioPage}>
-        <div className="d-flex gap-2">
+        <div className="overflow-x-auto d-flex gap-2 text-nowrap">
           <div>
             <Radio
               dropOldClass
@@ -141,7 +135,7 @@ export default function RadioPage() {
       </Example>
 
       <Example hash="outlinedStyles" state={state} t={tRadioPage}>
-        <div className="d-flex gap-2">
+        <div className="overflow-x-auto d-flex gap-2 text-nowrap">
           <div>
             <Radio
               dropOldClass
@@ -174,8 +168,9 @@ export default function RadioPage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="radioComponentProps"
-        state={propsState}
+        state={state}
         t={tRadioComponentProps}
         items={[
           {
@@ -232,10 +227,9 @@ export default function RadioPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

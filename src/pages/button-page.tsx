@@ -23,9 +23,6 @@ enum StatesEnum {
   icon,
   customStyle,
   example,
-}
-
-enum PropsStatesEnum {
   buttonComponentProps,
   generalComponentProps,
 }
@@ -36,10 +33,7 @@ export default function ButtonPage() {
   const { t: tButtonPage } = useTranslation(['buttonPage']);
 
   const state = useState({
-    button: createState(StatesEnum, buttonCodes),
-  });
-  const propsState = useState({
-    button: createState(PropsStatesEnum, buttonComponentPropsCodes, generalCodes),
+    button: createState(StatesEnum, buttonCodes, buttonComponentPropsCodes, generalCodes),
   });
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
@@ -54,99 +48,111 @@ export default function ButtonPage() {
   return (
     <div className="d-flex flex-column gap-3">
       <Example hash="basic" state={state} t={tButtonPage}>
-        <Button>Base class</Button>
+        <div>
+          <Button>Base class</Button>
+        </div>
       </Example>
 
       <Example hash="variant" state={state} t={tButtonPage}>
-        <Button variant="primary">Primary</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="success">Success</Button>
-        <Button variant="danger">Danger</Button>
-        <Button variant="warning">Warning</Button>
-        <Button variant="info">Info</Button>
-        <Button variant="light">Light</Button>
-        <Button variant="dark">Dark</Button>
-        <Button variant="link">Link</Button>
+        <div className="d-flex flex-wrap gap-2">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="success">Success</Button>
+          <Button variant="danger">Danger</Button>
+          <Button variant="warning">Warning</Button>
+          <Button variant="info">Info</Button>
+          <Button variant="light">Light</Button>
+          <Button variant="dark">Dark</Button>
+          <Button variant="link">Link</Button>
+        </div>
       </Example>
 
       <Example hash="outline" state={state} t={tButtonPage}>
-        <Button outline="primary">Primary</Button>
-        <Button outline="secondary">Secondary</Button>
-        <Button outline="success">Success</Button>
-        <Button outline="danger">Danger</Button>
-        <Button outline="warning">Warning</Button>
-        <Button outline="info">Info</Button>
-        <Button outline="light">Light</Button>
-        <Button outline="dark">Dark</Button>
+        <div className="d-flex flex-wrap gap-2">
+          <Button outline="primary">Primary</Button>
+          <Button outline="secondary">Secondary</Button>
+          <Button outline="success">Success</Button>
+          <Button outline="danger">Danger</Button>
+          <Button outline="warning">Warning</Button>
+          <Button outline="info">Info</Button>
+          <Button outline="light">Light</Button>
+          <Button outline="dark">Dark</Button>
+        </div>
       </Example>
 
       <Example hash="rounded" state={state} t={tButtonPage}>
-        <Button outline="primary" rounded>
-          Primary
-        </Button>
-        <Button outline="secondary" rounded="sm">
-          Secondary
-        </Button>
-        <Button outline="success" rounded="md">
-          Success
-        </Button>
-        <Button outline="danger" rounded="lg">
-          Danger
-        </Button>
-        <Button outline="warning" rounded="xl">
-          Warning
-        </Button>
-        <Button outline="info" rounded="xxl">
-          Info
-        </Button>
-        <Button outline="info" rounded="circle">
-          C
-        </Button>
-        <Button outline="info" rounded="pill">
-          Pill
-        </Button>
+        <div className="d-flex flex-wrap gap-2">
+          <Button outline="primary" rounded>
+            Primary
+          </Button>
+          <Button outline="secondary" rounded="sm">
+            Secondary
+          </Button>
+          <Button outline="success" rounded="md">
+            Success
+          </Button>
+          <Button outline="danger" rounded="lg">
+            Danger
+          </Button>
+          <Button outline="warning" rounded="xl">
+            Warning
+          </Button>
+          <Button outline="info" rounded="xxl">
+            Info
+          </Button>
+          <Button outline="info" rounded="circle">
+            C
+          </Button>
+          <Button outline="info" rounded="pill">
+            Pill
+          </Button>
+        </div>
       </Example>
 
       <Example hash="size" state={state} t={tButtonPage}>
-        <div>
-          <Button variant="primary" size="lg">
-            Large
-          </Button>
-        </div>
-        <div>
-          <Button variant="secondary" size="sm">
-            Small
-          </Button>
-        </div>
-        <div>
-          <Button
-            variant="secondary"
-            size={{
-              paddingY: '0.25rem',
-              paddingX: '0.5rem',
-              fontSize: '0.75rem',
-            }}
-          >
-            Custom
-          </Button>
+        <div className="d-flex align-items-center flex-wrap gap-2">
+          <div>
+            <Button variant="primary" size="lg">
+              Large
+            </Button>
+          </div>
+          <div>
+            <Button variant="secondary" size="sm">
+              Small
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="secondary"
+              size={{
+                paddingY: '0.25rem',
+                paddingX: '0.5rem',
+                fontSize: '0.75rem',
+              }}
+            >
+              Custom
+            </Button>
+          </div>
         </div>
       </Example>
 
       <Example hash="disabledState" state={state} t={tButtonPage}>
-        <div>
-          <Button variant="primary" disabled>
-            Primary
-          </Button>
-        </div>
-        <div>
-          <Button variant="secondary" disabled>
-            Secondary
-          </Button>
-        </div>
-        <div>
-          <Button as="a" href="#" variant="success" disabled>
-            Link
-          </Button>
+        <div className="d-flex align-items-center flex-wrap gap-2">
+          <div>
+            <Button variant="primary" disabled>
+              Primary
+            </Button>
+          </div>
+          <div>
+            <Button variant="secondary" disabled>
+              Secondary
+            </Button>
+          </div>
+          <div>
+            <Button as="a" href="#" variant="success" disabled>
+              Link
+            </Button>
+          </div>
         </div>
       </Example>
 
@@ -193,32 +199,40 @@ export default function ButtonPage() {
       </Example>
 
       <Example hash="isLoading" state={state} t={tButtonPage}>
-        <Button variant="primary" isLoading>
-          Primary
-        </Button>
-        <Button variant="secondary" isLoading>
-          Secondary
-        </Button>
+        <div className="d-flex flex-wrap gap-2">
+          <Button variant="primary" isLoading>
+            Primary
+          </Button>
+          <Button variant="secondary" isLoading>
+            Secondary
+          </Button>
+        </div>
       </Example>
 
       <Example hash="icon" state={state} t={tButtonPage}>
-        <Button variant="primary" startContent={<i className="bi bi-arrow-up me-1"></i>}>
-          Up
-        </Button>
-        <Button variant="secondary" endContent={<i className="bi bi-arrow-down ms-1"></i>}>
-          Down
-        </Button>
-        <Button variant="success">
-          <i className="bi bi-arrow-left"></i>
-        </Button>
+        <div className="d-flex flex-wrap gap-2">
+          <Button variant="primary" startContent={<i className="bi bi-arrow-up me-1"></i>}>
+            Up
+          </Button>
+          <Button variant="secondary" endContent={<i className="bi bi-arrow-down ms-1"></i>}>
+            Down
+          </Button>
+          <Button variant="success">
+            <i className="bi bi-arrow-left"></i>
+          </Button>
+        </div>
       </Example>
 
       <Example hash="customStyle" state={state} t={tButtonPage}>
-        <Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">Custom</Button>
+        <div className="d-flex flex-wrap gap-2">
+          <Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">
+            Custom
+          </Button>
+        </div>
       </Example>
 
       <Example hash="example" state={state} t={tButtonPage}>
-        <div>
+        <div className="overflow-x-auto text-nowrap">
           <Button size={mySize} variant="primary" onClick={onClickChangeSizeTest}>
             Click Change Button Size ({mySize})
           </Button>
@@ -228,8 +242,9 @@ export default function ButtonPage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="buttonComponentProps"
-        state={propsState}
+        state={state}
         t={tButtonComponentProps}
         items={[
           {
@@ -314,10 +329,9 @@ export default function ButtonPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

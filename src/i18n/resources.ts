@@ -1,16 +1,15 @@
 import type { Resource } from 'i18next';
-import { toCamelCase } from '@src/tools';
+import { kebabToCamelCase } from '@src/tools';
 
-const enFiles = import.meta.glob('./en/**/*.json', { eager: true });
-const zhFiles = import.meta.glob('./zh/**/*.json', { eager: true });
+const enFiles = import.meta.glob('./en/**/*.json', { eager: true, import: 'default' });
+const zhFiles = import.meta.glob('./zh/**/*.json', { eager: true, import: 'default' });
 
 const parseFiles = (files: Record<string, unknown>) => {
   const resources: Record<string, unknown> = {};
 
   Object.keys(files).forEach((key) => {
-    const cleanedKey = toCamelCase(key.replace(/^.*\/(.*)\.json$/, '$1'));
-    const file = files[key] as { default: unknown };
-    resources[cleanedKey] = file.default;
+    const cleanedKey = kebabToCamelCase(key.replace(/^.*\/(.*)\.json$/, '$1'));
+    resources[cleanedKey] = files[key];
   });
 
   return resources;

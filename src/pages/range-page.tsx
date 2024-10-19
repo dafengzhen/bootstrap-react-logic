@@ -16,9 +16,6 @@ enum StatesEnum {
   disabled,
   minAndMax,
   steps,
-}
-
-enum PropsStatesEnum {
   rangeComponentProps,
   generalComponentProps,
 }
@@ -29,10 +26,7 @@ export default function RangePage() {
   const { t: tRangePage } = useTranslation(['rangePage']);
 
   const state = useState({
-    range: createState(StatesEnum, rangeCodes),
-  });
-  const propsState = useState({
-    range: createState(PropsStatesEnum, rangeComponentPropsCodes, generalCodes),
+    range: createState(StatesEnum, rangeCodes, rangeComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -80,8 +74,9 @@ export default function RangePage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="rangeComponentProps"
-        state={propsState}
+        state={state}
         t={tRangeComponentProps}
         items={[
           {
@@ -121,10 +116,9 @@ export default function RangePage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

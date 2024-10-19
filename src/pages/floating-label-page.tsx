@@ -24,9 +24,6 @@ enum StatesEnum {
   readonlyPlaintext,
   inputGroups,
   layout,
-}
-
-enum PropsStatesEnum {
   floatingLabelComponentProps,
   generalComponentProps,
 }
@@ -37,10 +34,7 @@ export default function FloatingLabelPage() {
   const { t: tFloatingLabelPage } = useTranslation(['floatingLabelPage']);
 
   const state = useState({
-    floatingLabel: createState(StatesEnum, floatingLabelCodes),
-  });
-  const propsState = useState({
-    floatingLabel: createState(PropsStatesEnum, floatingLabelComponentPropsCodes, generalCodes),
+    floatingLabel: createState(StatesEnum, floatingLabelCodes, floatingLabelComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -236,8 +230,9 @@ export default function FloatingLabelPage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="floatingLabel"
-        state={propsState}
+        state={state}
         t={tFloatingLabelComponentProps}
         items={[
           {
@@ -259,10 +254,9 @@ export default function FloatingLabelPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

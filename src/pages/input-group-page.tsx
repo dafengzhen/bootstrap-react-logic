@@ -25,9 +25,6 @@ enum StatesEnum {
   buttonAddons,
   customSelect,
   customFileInput,
-}
-
-enum PropsStatesEnum {
   generalComponentProps,
   inputGroupComponentProps,
   inputGroupTextComponentProps,
@@ -40,10 +37,7 @@ export default function InputGroupPage() {
   const { t: tInputGroupPage } = useTranslation(['inputGroupPage']);
 
   const state = useState({
-    inputGroup: createState(StatesEnum, inputGroupCodes),
-  });
-  const propsState = useState({
-    inputGroup: createState(PropsStatesEnum, inputGroupComponentPropsCodes, generalCodes),
+    inputGroup: createState(StatesEnum, inputGroupCodes, inputGroupComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -317,8 +311,9 @@ export default function InputGroupPage() {
       <PropsIndicator />
 
       <Example
+        props
         hash="inputGroupComponentProps"
-        state={propsState}
+        state={state}
         t={tInputGroupComponentProps}
         items={[
           {
@@ -340,12 +335,12 @@ export default function InputGroupPage() {
             default: '-',
           },
         ]}
-        props
       ></Example>
 
       <Example
+        props
         hash="inputGroupTextComponentProps"
-        state={propsState}
+        state={state}
         t={tInputGroupTextComponentProps}
         items={[
           {
@@ -355,10 +350,9 @@ export default function InputGroupPage() {
             default: 'span',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

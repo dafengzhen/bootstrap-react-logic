@@ -6,8 +6,6 @@ export default function ExampleGeneralPropsCard(props: any) {
 
   return (
     <ExamplePropsCard
-      title={t('genericComponentProps')}
-      hash="generalComponentProps"
       customBody
       items={[
         {

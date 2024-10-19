@@ -71,7 +71,7 @@ export default function ExamplePropsCard({
       ) : (
         <>
           <div className={clsx('card-header', headerClassName)}>
-            <div className="d-flex align-items-center justify-content-between">
+            <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
               <ExampleLink title={title} hash={hash} />
               <ActionIcons
                 isOpen={isOpen}
@@ -129,7 +129,7 @@ export default function ExamplePropsCard({
         </>
       )}
       {isOpen && (
-        <div className="card-footer">
+        <div className="card-footer border-top-0">
           <pre>
             <code className={clsx(codeLanguage ? `language-${codeLanguage}` : 'language-html')}>{code ?? 'TODO'}</code>
           </pre>

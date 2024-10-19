@@ -21,9 +21,6 @@ enum StatesEnum {
   withoutLabels,
   toggleButtons,
   outlinedStyles,
-}
-
-enum PropsStatesEnum {
   checkboxComponentProps,
   generalComponentProps,
 }
@@ -34,10 +31,7 @@ export default function CheckboxPage() {
   const { t: tCheckboxPage } = useTranslation(['checkboxPage']);
 
   const state = useState({
-    checkbox: createState(StatesEnum, checkboxCodes),
-  });
-  const propsState = useState({
-    checkbox: createState(PropsStatesEnum, checkboxComponentPropsCodes, generalCodes),
+    checkbox: createState(StatesEnum, checkboxCodes, checkboxComponentPropsCodes, generalCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -162,63 +156,75 @@ export default function CheckboxPage() {
       </Example>
 
       <Example hash="toggleButtons" state={state} t={tCheckboxPage}>
-        <div>
-          <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check"></Checkbox>
-          <Label dropOldClass className="btn btn-primary" htmlFor="btn-check">
-            Single toggle
-          </Label>
-        </div>
+        <div className="overflow-x-auto d-flex gap-2 text-nowrap">
+          <div>
+            <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check"></Checkbox>
+            <Label dropOldClass className="btn btn-primary" htmlFor="btn-check">
+              Single toggle
+            </Label>
+          </div>
 
-        <div>
-          <Checkbox
-            defaultChecked
-            dropOldClass
-            value=""
-            className="btn-check"
-            autoComplete="off"
-            id="btn-check-2"
-          ></Checkbox>
-          <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-2">
-            Checked
-          </Label>
-        </div>
+          <div>
+            <Checkbox
+              defaultChecked
+              dropOldClass
+              value=""
+              className="btn-check"
+              autoComplete="off"
+              id="btn-check-2"
+            ></Checkbox>
+            <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-2">
+              Checked
+            </Label>
+          </div>
 
-        <div>
-          <Checkbox dropOldClass disabled value="" className="btn-check" autoComplete="off" id="btn-check-3"></Checkbox>
-          <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-3">
-            Disabled
-          </Label>
+          <div>
+            <Checkbox
+              dropOldClass
+              disabled
+              value=""
+              className="btn-check"
+              autoComplete="off"
+              id="btn-check-3"
+            ></Checkbox>
+            <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-3">
+              Disabled
+            </Label>
+          </div>
         </div>
       </Example>
 
       <Example hash="outlinedStyles" state={state} t={tCheckboxPage}>
-        <div>
-          <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check-outlined"></Checkbox>
-          <Label dropOldClass className="btn btn-outline-primary" htmlFor="btn-check-outlined">
-            Single toggle
-          </Label>
-        </div>
+        <div className="overflow-x-auto d-flex gap-2 text-nowrap">
+          <div>
+            <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check-outlined"></Checkbox>
+            <Label dropOldClass className="btn btn-outline-primary" htmlFor="btn-check-outlined">
+              Single toggle
+            </Label>
+          </div>
 
-        <div>
-          <Checkbox
-            defaultChecked
-            dropOldClass
-            value=""
-            className="btn-check"
-            autoComplete="off"
-            id="btn-check-2-outlined"
-          ></Checkbox>
-          <Label dropOldClass className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">
-            Checked
-          </Label>
+          <div>
+            <Checkbox
+              defaultChecked
+              dropOldClass
+              value=""
+              className="btn-check"
+              autoComplete="off"
+              id="btn-check-2-outlined"
+            ></Checkbox>
+            <Label dropOldClass className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">
+              Checked
+            </Label>
+          </div>
         </div>
       </Example>
 
       <PropsIndicator />
 
       <Example
+        props
         hash="checkboxComponentProps"
-        state={propsState}
+        state={state}
         t={tCheckboxComponentProps}
         items={[
           {
@@ -281,10 +287,9 @@ export default function CheckboxPage() {
             default: '',
           },
         ]}
-        props
       ></Example>
 
-      <Example hash="generalComponentProps" state={propsState} props></Example>
+      <Example props hash="generalComponentProps" state={state}></Example>
 
       <About />
     </div>

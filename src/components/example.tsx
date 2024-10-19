@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { getStateByHash, updateState } from '@src/tools';
+import { getStateByHash, kebabToCamelCase, kebabToCamelCaseLowerFirst, updateState } from '@src/tools';
 import ExampleDynamicCard from '@components/example-dynamic-card.tsx';
 import ExamplePropsCard from '@components/example-props-card.tsx';
 import ExampleGeneralPropsCard from '@components/example-general-props-card.tsx';
@@ -40,16 +40,19 @@ export default function Example({
   }
 
   if (props) {
+    const _hash = kebabToCamelCase(hash.endsWith('ComponentProps') ? hash.split('ComponentProps')[0] : hash);
+    const _tHash = t(`${kebabToCamelCaseLowerFirst(_hash)}.name`) || _hash;
+
     if (hash === 'generalComponentProps') {
       return (
-        <ExampleGeneralPropsCard isOpen={isOpen} toggleCode={toggleCode} code={code}>
+        <ExampleGeneralPropsCard title={_tHash} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code}>
           {children}
         </ExampleGeneralPropsCard>
       );
     }
 
     return (
-      <ExamplePropsCard title={t(hash)} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code} items={items}>
+      <ExamplePropsCard title={_tHash} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code} items={items}>
         {children}
       </ExamplePropsCard>
     );
@@ -57,7 +60,7 @@ export default function Example({
 
   return (
     <ExampleDynamicCard title={t(hash)} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code}>
-      <div className="d-flex flex-column gap-2">{children}</div>
+      <div className="d-flex flex-column gap-2 overflow-x-auto">{children}</div>
     </ExampleDynamicCard>
   );
 }

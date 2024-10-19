@@ -10,8 +10,9 @@ import {
   VARIABLE_BS_PREFIX,
 } from '../tools';
 
-const CardImg = function CardImg<T extends ElementType = 'img'>(props: CardImgProps<T>) {
-  const { as: Component = 'img', dropOldClass, variables, className, style, top, bottom, overlay, ...rest } = props;
+const CardImg = function CardImg<T extends ElementType = 'img' | 'div'>(props: CardImgProps<T>) {
+  const { as, dropOldClass, variables, className, style, top, bottom, overlay, ...rest } = props;
+  const Component = as ? as : overlay ? 'div' : 'img';
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(

@@ -1,3 +1,21 @@
 {
-  "basic": "Basic"
+  "basic": "Basic",
+  "body": "Body",
+  "titlesTextAndLinks": "Titles, Text, and Links",
+  "images": "Images",
+  "listGroups": "List Groups",
+  "kitchenSink": "Kitchen Sink",
+  "headerAndFooter": "Header and Footer",
+  "usingGridMarkup": "Using Grid Markup",
+  "usingUtilities": "Using Utilities",
+  "usingCustomCss": "Using Custom CSS",
+  "textAlignment": "Text Alignment",
+  "navigation": "Navigation",
+  "imageCaps": "Image Caps",
+  "horizontal": "Horizontal",
+  "backgroundAndColor": "Background and Color",
+  "border": "Border",
+  "mixinsUtilities": "Mixins Utilities",
+  "cardGroups": "Card Groups",
+  "gridCards": "Grid Cards"
 }
