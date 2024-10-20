@@ -30,14 +30,16 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         scss: {
           api: 'modern-compiler',
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
         },
       },
       modules: {
         localsConvention: 'camelCase',
       },
+      devSourcemap: true,
     },
     build: {
+      sourcemap: true,
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),

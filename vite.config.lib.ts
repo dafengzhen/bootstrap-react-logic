@@ -10,19 +10,21 @@ const lightweightTools = ['clsx'];
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), mergeCssPlugin],
+  plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), mergeCssPlugin()],
   css: {
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls', 'color-functions'],
+        silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
       },
     },
     modules: {
       localsConvention: 'camelCase',
     },
+    devSourcemap: true,
   },
   build: {
+    sourcemap: true,
     outDir: 'dist-lib',
     copyPublicDir: false,
     lib: {

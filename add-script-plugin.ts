@@ -6,11 +6,9 @@ const addScriptPlugin = (): Plugin => {
 
   return {
     name: 'add-script',
-
     configResolved(resolvedConfig) {
       config = resolvedConfig;
     },
-
     async transformIndexHtml(html, { filename }) {
       const appPublicBaseHref = (config.define as { __APP_PUBLIC_BASE_HREF__: string })['__APP_PUBLIC_BASE_HREF__'];
       if (!appPublicBaseHref) {
