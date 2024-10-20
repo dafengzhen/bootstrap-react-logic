@@ -44,11 +44,11 @@
     "version:alpha": "npm version prerelease --preid=alpha",
     "version:beta": "npm version prerelease --preid=beta",
     "version:rc": "npm version prerelease --preid=rc",
-    "publish:alpha": "npm publish --tag alpha",
-    "publish:beta": "npm publish --tag beta",
-    "publish:rc": "npm publish --tag rc",
+    "publish:alpha": "npm run build:lib && npm publish --tag alpha",
+    "publish:beta": "npm run build:lib && npm publish --tag beta",
+    "publish:rc": "npm run build:lib && npm publish --tag rc",
     "publish:latest": "npm publish --tag latest",
-    "update:latest": "cross-env npm dist-tag add bootstrap-react-logic@$npm_package_version latest"
+    "update:latest": "cross-env npm dist-tag add bootstrap-react-logic@%npm_package_version% latest"
   },
   "peerDependencies": {
     "bootstrap": "^5.3.3",
