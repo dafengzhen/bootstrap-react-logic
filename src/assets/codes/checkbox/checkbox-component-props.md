@@ -1,6 +1,4 @@
-const checkboxComponentPropsCodes = {
-  checkboxComponentProps: {
-    code: `
+```ts
 type SlotValueKeys = 'container' | 'checkbox' | 'label';
 
 type Props = {
@@ -13,7 +11,7 @@ type Props = {
    * disabled.
    */
   disabled?: boolean;
-  
+
   /**
    * contentClasses.
    */
@@ -33,7 +31,7 @@ type Props = {
    * reverse.
    */
   reverse?: boolean;
-  
+
   /**
    * isValid.
    */
@@ -44,8 +42,4 @@ type Props = {
    */
   isInvalid?: boolean;
 };
-    `,
-  },
-};
-
-export default checkboxComponentPropsCodes;
+```

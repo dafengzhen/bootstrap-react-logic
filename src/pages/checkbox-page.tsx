@@ -3,35 +3,24 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import checkboxCodes from '@assets/codes/checkbox';
 import { Checkbox } from '@lib/checkbox';
 import { Label } from '@lib/label';
-import checkboxComponentPropsCodes from '@assets/codes/checkbox/component-props.ts';
 import Example from '@components/example.tsx';
-import { createState } from '@tools/handlers.ts';
+import { transformCodeObj } from '@src/tools';
 
-enum StatesEnum {
-  basic,
-  indeterminate,
-  disabled,
-  switch,
-  inline,
-  reverse,
-  withoutLabels,
-  toggleButtons,
-  outlinedStyles,
-  checkboxComponentProps,
-  generalComponentProps,
-}
+const codes = transformCodeObj(
+  import.meta.glob(['../assets/codes/checkbox/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }),
+);
 
 export default function CheckboxPage() {
   const navigation = useNavigation();
   const { t: tCheckboxComponentProps } = useTranslation(['checkboxComponentProps']);
   const { t: tCheckboxPage } = useTranslation(['checkboxPage']);
-
-  const state = useState({
-    checkbox: createState(StatesEnum, checkboxCodes, checkboxComponentPropsCodes),
-  });
+  const state = useState(codes);
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -229,13 +218,13 @@ export default function CheckboxPage() {
           {
             attr: 'indeterminate',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.indeterminate'),
+            desc: tCheckboxComponentProps('checkbox.desc.indeterminate'),
             default: '',
           },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.disabled'),
+            desc: tCheckboxComponentProps('checkbox.desc.disabled'),
             default: '',
           },
           {
@@ -252,43 +241,43 @@ export default function CheckboxPage() {
                 </div>
               </div>
             ),
-            desc: tCheckboxComponentProps('desc.contentClasses'),
+            desc: tCheckboxComponentProps('checkbox.desc.contentClasses'),
             default: '',
           },
           {
             attr: 'switch',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.switch'),
+            desc: tCheckboxComponentProps('checkbox.desc.switch'),
             default: '',
           },
           {
             attr: 'inline',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.inline'),
+            desc: tCheckboxComponentProps('checkbox.desc.inline'),
             default: '',
           },
           {
             attr: 'reverse',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.reverse'),
+            desc: tCheckboxComponentProps('checkbox.desc.reverse'),
             default: '',
           },
           {
             attr: 'isValid',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.isValid'),
+            desc: tCheckboxComponentProps('checkbox.desc.isValid'),
             default: '',
           },
           {
             attr: 'isInvalid',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('desc.isInvalid'),
+            desc: tCheckboxComponentProps('checkbox.desc.isInvalid'),
             default: '',
           },
         ]}
-      ></Example>
+      />
 
-      <Example props hash="commonComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state} />
 
       <About />
     </div>

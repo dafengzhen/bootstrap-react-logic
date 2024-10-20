@@ -1,7 +1,10 @@
 {
-  "desc": {
-    "as": "Type",
-    "isValid": "Class (.is-valid)",
-    "isInvalid": "Class (.is-invalid)"
+  "floatingLabel": {
+    "name": "FloatingLabel",
+    "desc": {
+      "as": "Type",
+      "isValid": "Class (.is-valid)",
+      "isInvalid": "Class (.is-invalid)"
+    }
   }
 }

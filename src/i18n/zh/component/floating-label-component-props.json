@@ -1,7 +1,10 @@
 {
-  "desc": {
-    "as": "类型",
-    "isValid": "类名 (.is-valid)",
-    "isInvalid": "类名 (.is-invalid)"
+  "floatingLabel": {
+    "name": "FloatingLabel",
+    "desc": {
+      "as": "类型",
+      "isValid": "类 (.is-valid)",
+      "isInvalid": "类 (.is-invalid)"
+    }
   }
 }

@@ -3,8 +3,6 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import floatingLabelComponentPropsCodes from '@assets/codes/floating-label/component-props.ts';
-import floatingLabelCodes from '@assets/codes/floating-label';
 import { FloatingLabel } from '@lib/floating-label';
 import { Input } from '@lib/input';
 import { Label } from '@lib/label';
@@ -13,28 +11,21 @@ import { Select, SelectOption } from '@lib/select';
 import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Text } from '@lib/text';
 import Example from '@components/example.tsx';
-import { createState } from '@tools/handlers.ts';
+import { transformCodeObj } from '@src/tools';
 
-enum StatesEnum {
-  basic,
-  textarea,
-  select,
-  disabled,
-  readonlyPlaintext,
-  inputGroups,
-  layout,
-  floatingLabelComponentProps,
-  generalComponentProps,
-}
+const codes = transformCodeObj(
+  import.meta.glob(['../assets/codes/floating-label/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }),
+);
 
 export default function FloatingLabelPage() {
   const navigation = useNavigation();
   const { t: tFloatingLabelComponentProps } = useTranslation(['floatingLabelComponentProps']);
   const { t: tFloatingLabelPage } = useTranslation(['floatingLabelPage']);
-
-  const state = useState({
-    floatingLabel: createState(StatesEnum, floatingLabelCodes, floatingLabelComponentPropsCodes),
-  });
+  const state = useState(codes);
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -230,32 +221,32 @@ export default function FloatingLabelPage() {
 
       <Example
         props
-        hash="floatingLabel"
+        hash="floatingLabelComponentProps"
         state={state}
         t={tFloatingLabelComponentProps}
         items={[
           {
             attr: 'as',
             type: <span className="badge text-bg-secondary">div | form</span>,
-            desc: tFloatingLabelComponentProps('desc.as'),
+            desc: tFloatingLabelComponentProps('floatingLabel.desc.as'),
             default: 'div',
           },
           {
             attr: 'isValid',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tFloatingLabelComponentProps('desc.isValid'),
+            desc: tFloatingLabelComponentProps('floatingLabel.desc.isValid'),
             default: '',
           },
           {
             attr: 'isInvalid',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tFloatingLabelComponentProps('desc.isInvalid'),
+            desc: tFloatingLabelComponentProps('floatingLabel.desc.isInvalid'),
             default: '',
           },
         ]}
-      ></Example>
+      />
 
-      <Example props hash="commonComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state} />
 
       <About />
     </div>

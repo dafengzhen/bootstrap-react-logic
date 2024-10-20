@@ -1,12 +1,15 @@
 {
-  "desc": {
-    "indeterminate": "Indeterminate",
-    "disabled": "Disabled",
-    "contentClasses": "Set slot class names",
-    "switch": "Switch",
-    "inline": "Inline",
-    "reverse": "Reverse",
-    "isValid": "Class (.is-valid)",
-    "isInvalid": "Class (.is-invalid)"
+  "checkbox": {
+    "name": "Checkbox",
+    "desc": {
+      "indeterminate": "Indeterminate",
+      "disabled": "Disabled",
+      "contentClasses": "Content Classes",
+      "switch": "Switch",
+      "inline": "Inline",
+      "reverse": "Reverse",
+      "isValid": "Class (.is-valid)",
+      "isInvalid": "Class (.is-invalid)"
+    }
   }
 }
