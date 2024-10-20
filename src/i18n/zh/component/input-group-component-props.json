@@ -1,7 +1,16 @@
 {
-  "desc": {
-    "nowrap": "不换行",
-    "size": "大小",
-    "hasValidation": "类名 (.has-validation)"
+  "inputGroup": {
+    "name": "InputGroup",
+    "desc": {
+      "nowrap": "不换行",
+      "size": "大小",
+      "hasValidation": "类 (.has-validation)"
+    }
+  },
+  "inputGroupText": {
+    "name": "InputGroupText",
+    "desc": {
+      "as": "类型"
+    }
   }
 }

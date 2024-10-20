@@ -3,41 +3,28 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import { Label } from '@lib/label';
 import { Input } from '@lib/input';
-import inputGroupCodes from '@assets/codes/input-group';
 import Text from '../../lib/text/text.tsx';
 import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Textarea } from '@lib/textarea';
 import { Button } from '@lib/button';
 import { useTranslation } from 'react-i18next';
 import PropsIndicator from '@components/props-indicator.tsx';
-import inputGroupComponentPropsCodes from '@assets/codes/input-group/component-props.ts';
 import Example from '@components/example.tsx';
-import { createState } from '@tools/handlers.ts';
+import { transformCodeObj } from '@src/tools';
 
-enum StatesEnum {
-  basic,
-  nowrap,
-  size,
-  checkboxAndRadio,
-  multipleInput,
-  multipleAddons,
-  buttonAddons,
-  customSelect,
-  customFileInput,
-  generalComponentProps,
-  inputGroupComponentProps,
-  inputGroupTextComponentProps,
-}
+const codes = transformCodeObj(
+  import.meta.glob(['../assets/codes/input-group/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }),
+);
 
 export default function InputGroupPage() {
   const navigation = useNavigation();
   const { t: tInputGroupComponentProps } = useTranslation(['inputGroupComponentProps']);
-  const { t: tInputGroupTextComponentProps } = useTranslation(['inputGroupTextComponentProps']);
   const { t: tInputGroupPage } = useTranslation(['inputGroupPage']);
-
-  const state = useState({
-    inputGroup: createState(StatesEnum, inputGroupCodes, inputGroupComponentPropsCodes),
-  });
+  const state = useState(codes);
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -318,19 +305,19 @@ export default function InputGroupPage() {
           {
             attr: 'nowrap',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputGroupComponentProps('desc.nowrap'),
+            desc: tInputGroupComponentProps('inputGroup.desc.nowrap'),
             default: '-',
           },
           {
             attr: 'size',
             type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tInputGroupComponentProps('desc.size'),
+            desc: tInputGroupComponentProps('inputGroup.desc.size'),
             default: '-',
           },
           {
             attr: 'hasValidation',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputGroupComponentProps('desc.hasValidation'),
+            desc: tInputGroupComponentProps('inputGroup.desc.hasValidation'),
             default: '-',
           },
         ]}
@@ -340,18 +327,18 @@ export default function InputGroupPage() {
         props
         hash="inputGroupTextComponentProps"
         state={state}
-        t={tInputGroupTextComponentProps}
+        t={tInputGroupComponentProps}
         items={[
           {
             attr: 'as',
             type: <span className="badge text-bg-secondary">div | span</span>,
-            desc: tInputGroupTextComponentProps('desc.as'),
+            desc: tInputGroupComponentProps('inputGroupText.desc.as'),
             default: 'span',
           },
         ]}
-      ></Example>
+      />
 
-      <Example props hash="commonComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state} />
 
       <About />
     </div>

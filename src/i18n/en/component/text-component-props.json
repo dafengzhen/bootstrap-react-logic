@@ -1,8 +1,0 @@
-{
-  "desc": {
-    "validFeedback": "Class (.valid-feedback)",
-    "invalidFeedback": "Class (.invalid-feedback)",
-    "validTooltip": "Class (.valid-tooltip)",
-    "invalidTooltip": "Class (.invalid-tooltip)"
-  }
-}

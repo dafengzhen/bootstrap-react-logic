@@ -3,6 +3,7 @@ import { getStateByHash, kebabToCamelCase, kebabToCamelCaseLowerFirst, updateSta
 import ExampleDynamicCard from '@components/example-dynamic-card.tsx';
 import ExamplePropsCard from '@components/example-props-card.tsx';
 import ExampleGeneralPropsCard from '@components/example-general-props-card.tsx';
+import clsx from 'clsx';
 
 export default function Example({
   children,
@@ -12,6 +13,8 @@ export default function Example({
   state,
   t,
   codeLanguage,
+  parentClassName,
+  overflowXAuto,
 }: {
   hash: string;
   state: any;
@@ -25,6 +28,8 @@ export default function Example({
     default?: ReactNode;
   }[];
   codeLanguage?: 'html' | 'tsx' | 'javascript' | 'typescript' | string;
+  parentClassName?: string;
+  overflowXAuto?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -83,7 +88,14 @@ export default function Example({
       code={code}
       codeLanguage={codeLanguage}
     >
-      <div className="d-flex flex-column gap-2 overflow-x-auto">{children}</div>
+      <div
+        className={clsx(
+          parentClassName ? parentClassName : 'd-flex flex-column gap-2',
+          overflowXAuto && 'overflow-x-auto',
+        )}
+      >
+        {children}
+      </div>
     </ExampleDynamicCard>
   );
 }

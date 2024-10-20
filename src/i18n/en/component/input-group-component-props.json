@@ -1,7 +1,16 @@
 {
-  "desc": {
-    "nowrap": "No wrap",
-    "size": "Size",
-    "hasValidation": "Class (.has-validation)"
+  "inputGroup": {
+    "name": "InputGroup",
+    "desc": {
+      "nowrap": "Nowrap",
+      "size": "Size",
+      "hasValidation": "Class (.has-validation)"
+    }
+  },
+  "inputGroupText": {
+    "name": "InputGroupText",
+    "desc": {
+      "as": "As"
+    }
   }
 }

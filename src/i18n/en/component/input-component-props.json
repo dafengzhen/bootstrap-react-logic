@@ -1,17 +1,54 @@
 {
-  "desc": {
-    "onRef": "Ref",
-    "size": "Size",
-    "nativeSize": "Size (HTMLAttributes)",
-    "disabled": "Disabled",
-    "readonly": "Readonly",
-    "readonlyPlainText": "Class (.form-control-plaintext)",
-    "isValid": "Class (.is-valid)",
-    "isInvalid": "Class (.is-invalid)",
-    "color": "Color",
-    "nativeColor": "Color (HTMLAttributes)",
-    "startContent": "Start content",
-    "endContent": "End content",
-    "startEndContentClasses": "Set slot class names"
+  "input": {
+    "name": "Input",
+    "desc": {
+      "onRef": "On Ref",
+      "size": "Size",
+      "nativeSize": "Size (HTMLAttributes)",
+      "disabled": "Disabled",
+      "readonly": "Readonly",
+      "readonlyPlainText": "Class (.form-control-plaintext)",
+      "isValid": "Class (.is-valid)",
+      "isInvalid": "Class (.is-invalid)",
+      "color": "Color",
+      "nativeColor": "Color (HTMLAttributes)",
+      "startContent": "Start Content",
+      "endContent": "End Content",
+      "startEndContentClasses": "Start and End Content Classes"
+    }
+  },
+  "inputOtp": {
+    "name": "InputOtp",
+    "desc": {
+      "length": "Length",
+      "defaultValue": "Default Value",
+      "inputProps": "Input Props"
+    }
+  },
+  "textarea": {
+    "name": "Textarea",
+    "desc": {
+      "disabled": "Disabled",
+      "readonly": "Readonly",
+      "isValid": "Class (.is-valid)",
+      "isInvalid": "Class (.is-invalid)"
+    }
+  },
+  "label": {
+    "name": "Label",
+    "desc": {
+      "colFormLabel": "Class (.col-form-label)",
+      "inputGroupText": "Class (.input-group-text)",
+      "formCheckLabel": "Class (.form-check-label)"
+    }
+  },
+  "text": {
+    "name": "Text",
+    "desc": {
+      "validFeedback": "Class (.valid-feedback)",
+      "invalidFeedback": "Class (.invalid-feedback)",
+      "validTooltip": "Class (.valid-tooltip)",
+      "invalidTooltip": "Class (.invalid-tooltip)"
+    }
   }
 }
