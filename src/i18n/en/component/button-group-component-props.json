@@ -1,7 +1,10 @@
 {
-  "desc": {
-    "toolbar": "Toolbar",
-    "vertical": "Vertical",
-    "size": "Size"
+  "buttonGroup": {
+    "name": "ButtonGroup",
+    "desc": {
+      "toolbar": "Toolbar",
+      "vertical": "Vertical",
+      "size": "Size"
+    }
   }
 }

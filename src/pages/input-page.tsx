@@ -9,7 +9,6 @@ import Text from '../../lib/text/text.tsx';
 import { Button } from '@lib/button';
 import { InputOtp } from '@lib/input-otp';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
 import PropsIndicator from '@components/props-indicator.tsx';
 import inputComponentPropsCodes from '@assets/codes/input/component-props.ts';
 import Example from '@components/example.tsx';
@@ -45,7 +44,7 @@ export default function InputPage() {
   const { t: tInputPage } = useTranslation(['inputPage']);
 
   const state = useState({
-    input: createState(StatesEnum, inputCodes, inputComponentPropsCodes, generalCodes),
+    input: createState(StatesEnum, inputCodes, inputComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -523,7 +522,7 @@ export default function InputPage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>

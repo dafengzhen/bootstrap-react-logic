@@ -1,11 +1,13 @@
 {
-  "genericComponentProps": "通用组件属性",
-  "desc": {
-    "as": "设置元素类型",
-    "render": "自定义渲染子元素",
-    "skipCompWrap": "跳过组件包装",
-    "dropOldClass": "移除基础类名",
-    "variables": "自定义 CSS 变量"
+  "common": {
+    "name": "Common",
+    "desc": {
+      "as": "设置元素类型",
+      "render": "自定义渲染子元素",
+      "skipCompWrap": "跳过组件包装",
+      "dropOldClass": "移除基础类名",
+      "variables": "自定义 CSS 变量"
+    }
   },
   "p0": "as 属性允许你指定应该渲染的元素类型",
   "p1": "这为当你希望组件渲染除默认标签以外的其他元素时提供了灵活性。例如，你可以将按钮渲染为 a（锚点）标签，或者任何其他有效元素",

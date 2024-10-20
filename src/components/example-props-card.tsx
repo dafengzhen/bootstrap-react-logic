@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ExampleLink from '@components/example-link.tsx';
 import clsx from 'clsx';
 import { ActionIcons } from '@components/action-icons.tsx';
+import useHighlightCode from '@hooks/use-highlight-code.ts';
 
 export default function ExamplePropsCard({
   title,
@@ -40,7 +41,7 @@ export default function ExamplePropsCard({
   isOpen: boolean;
   toggleCode: () => void;
   code?: string;
-  codeLanguage?: 'html' | 'javascript' | 'typescript' | string;
+  codeLanguage?: string;
   codeDisplayMode?: 'direct' | 'indirectly';
   customCaption?: ReactNode;
 }) {
@@ -63,6 +64,7 @@ export default function ExamplePropsCard({
       },
     },
   );
+  const [setElement] = useHighlightCode({ isOpen, code, codeLanguage });
 
   return (
     <div className="card">
@@ -131,7 +133,7 @@ export default function ExamplePropsCard({
       {isOpen && (
         <div className="card-footer border-top-0">
           <pre>
-            <code className={clsx(codeLanguage ? `language-${codeLanguage}` : 'language-html')}>{code ?? 'TODO'}</code>
+            <code ref={setElement}>{code}</code>
           </pre>
         </div>
       )}

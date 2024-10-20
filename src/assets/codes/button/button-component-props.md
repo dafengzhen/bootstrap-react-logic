@@ -1,6 +1,4 @@
-const buttonComponentPropsCodes = {
-  buttonComponentProps: {
-    code: `
+```ts
 type Props = {
   /**
    * as.
@@ -52,8 +50,4 @@ type Props = {
    */
   disabled?: boolean;
 };
-    `,
-  },
-};
-
-export default buttonComponentPropsCodes;
+```

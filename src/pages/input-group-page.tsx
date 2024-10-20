@@ -9,7 +9,6 @@ import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Textarea } from '@lib/textarea';
 import { Button } from '@lib/button';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
 import PropsIndicator from '@components/props-indicator.tsx';
 import inputGroupComponentPropsCodes from '@assets/codes/input-group/component-props.ts';
 import Example from '@components/example.tsx';
@@ -37,7 +36,7 @@ export default function InputGroupPage() {
   const { t: tInputGroupPage } = useTranslation(['inputGroupPage']);
 
   const state = useState({
-    inputGroup: createState(StatesEnum, inputGroupCodes, inputGroupComponentPropsCodes, generalCodes),
+    inputGroup: createState(StatesEnum, inputGroupCodes, inputGroupComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -352,7 +351,7 @@ export default function InputGroupPage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>

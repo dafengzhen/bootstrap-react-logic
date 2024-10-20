@@ -2,8 +2,8 @@ import { type ReactNode, useContext } from 'react';
 import { GlobalContext } from '@contexts/global-context.ts';
 import { useTranslation } from 'react-i18next';
 import ExampleLink from '@components/example-link.tsx';
-import clsx from 'clsx';
 import { ActionIcons } from '@components/action-icons.tsx';
+import useHighlightCode from '@hooks/use-highlight-code.ts';
 
 export default function ExampleDynamicCard({
   title,
@@ -20,11 +20,12 @@ export default function ExampleDynamicCard({
   toggleCode: () => void;
   children: ReactNode;
   code?: string;
-  codeLanguage?: 'html' | 'javascript' | 'typescript' | string;
+  codeLanguage?: string;
 }) {
   const globalContext = useContext(GlobalContext);
   const { fullscreen, layout, theme } = globalContext;
   const { i18n } = useTranslation();
+  const [setElement] = useHighlightCode({ isOpen, code, codeLanguage });
 
   return (
     <div className="card">
@@ -49,7 +50,7 @@ export default function ExampleDynamicCard({
       {isOpen && (
         <div className="card-footer">
           <pre>
-            <code className={clsx(codeLanguage ? `language-${codeLanguage}` : 'language-html')}>{code ?? 'TODO'}</code>
+            <code ref={setElement}>{code}</code>
           </pre>
         </div>
       )}

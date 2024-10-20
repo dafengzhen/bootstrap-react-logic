@@ -3,7 +3,6 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
 import { Label } from '@lib/label';
 import radioComponentPropsCodes from '@assets/codes/radio/component-props.ts';
 import radioCodes from '@assets/codes/radio';
@@ -28,7 +27,7 @@ export default function RadioPage() {
   const { t: tRadioPage } = useTranslation(['radioPage']);
 
   const state = useState({
-    radio: createState(StatesEnum, radioCodes, radioComponentPropsCodes, generalCodes),
+    radio: createState(StatesEnum, radioCodes, radioComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -229,7 +228,7 @@ export default function RadioPage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>

@@ -2,35 +2,25 @@ import { Button } from '@lib/button';
 import { useState } from 'react';
 import { useNavigation } from 'react-router-dom';
 import { ButtonGroup } from '@lib/button-group';
-import buttonGroupCodes from '@assets/codes/button-group';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import generalCodes from '@assets/codes/general';
 import { useTranslation } from 'react-i18next';
-import buttonGroupComponentPropsCodes from '@assets/codes/button-group/component-props.ts';
 import Example from '@components/example.tsx';
-import { createState } from '@tools/handlers.ts';
+import { transformCodeObj } from '@src/tools';
 
-enum StatesEnum {
-  basic,
-  checkbox,
-  radio,
-  toolbar,
-  size,
-  vertical,
-  example,
-  buttonGroupComponentProps,
-  generalComponentProps,
-}
+const codes = transformCodeObj(
+  import.meta.glob(['../assets/codes/button-group/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }),
+);
 
 export default function ButtonGroupPage() {
   const navigation = useNavigation();
   const { t: tButtonGroupComponentProps } = useTranslation(['buttonGroupComponentProps']);
   const { t: tButtonGroupPage } = useTranslation(['buttonGroupPage']);
-
-  const state = useState({
-    buttonGroup: createState(StatesEnum, buttonGroupCodes, buttonGroupComponentPropsCodes, generalCodes),
-  });
+  const state = useState(codes);
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
   function onClickChangeSizeTest() {
@@ -230,37 +220,39 @@ export default function ButtonGroupPage() {
       </Example>
 
       <Example hash="vertical" state={state} t={tButtonGroupPage}>
-        <div>
-          <ButtonGroup vertical>
-            <Button variant="primary">Button</Button>
-            <Button variant="primary">Button</Button>
-            <Button variant="primary">Button</Button>
-            <Button variant="primary">Button</Button>
-          </ButtonGroup>
-        </div>
+        <div className="d-flex flex-wrap gap-2">
+          <div>
+            <ButtonGroup vertical>
+              <Button variant="primary">Button</Button>
+              <Button variant="primary">Button</Button>
+              <Button variant="primary">Button</Button>
+              <Button variant="primary">Button</Button>
+            </ButtonGroup>
+          </div>
 
-        <div>
-          <ButtonGroup vertical>
-            <input
-              type="radio"
-              className="btn-check"
-              name="vbtn-radio"
-              id="vbtn-radio1"
-              autoComplete="off"
-              defaultChecked
-            />
-            <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
-              Radio 1
-            </label>
-            <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio2" autoComplete="off" />
-            <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
-              Radio 2
-            </label>
-            <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio3" autoComplete="off" />
-            <label className="btn btn-outline-danger" htmlFor="vbtn-radio3">
-              Radio 3
-            </label>
-          </ButtonGroup>
+          <div>
+            <ButtonGroup vertical>
+              <input
+                type="radio"
+                className="btn-check"
+                name="vbtn-radio"
+                id="vbtn-radio1"
+                autoComplete="off"
+                defaultChecked
+              />
+              <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
+                Radio 1
+              </label>
+              <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio2" autoComplete="off" />
+              <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
+                Radio 2
+              </label>
+              <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio3" autoComplete="off" />
+              <label className="btn btn-outline-danger" htmlFor="vbtn-radio3">
+                Radio 3
+              </label>
+            </ButtonGroup>
+          </div>
         </div>
       </Example>
 
@@ -291,25 +283,25 @@ export default function ButtonGroupPage() {
           {
             attr: 'toolbar',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonGroupComponentProps('desc.toolbar'),
+            desc: tButtonGroupComponentProps('buttonGroup.desc.toolbar'),
             default: '',
           },
           {
             attr: 'vertical',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonGroupComponentProps('desc.vertical'),
+            desc: tButtonGroupComponentProps('buttonGroup.desc.vertical'),
             default: '',
           },
           {
             attr: 'size',
             type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tButtonGroupComponentProps('desc.size'),
+            desc: tButtonGroupComponentProps('buttonGroup.desc.size'),
             default: '',
           },
         ]}
-      ></Example>
+      />
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state} />
 
       <About />
     </div>

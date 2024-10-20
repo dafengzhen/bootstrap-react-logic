@@ -1559,7 +1559,7 @@ export default function CardPage() {
         ]}
       />
 
-      <Example props hash="generalComponentProps" state={state} />
+      <Example props hash="commonComponentProps" state={state} />
 
       <About />
     </div>

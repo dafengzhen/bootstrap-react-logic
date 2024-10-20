@@ -3,7 +3,6 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
 import floatingLabelComponentPropsCodes from '@assets/codes/floating-label/component-props.ts';
 import floatingLabelCodes from '@assets/codes/floating-label';
 import { FloatingLabel } from '@lib/floating-label';
@@ -34,7 +33,7 @@ export default function FloatingLabelPage() {
   const { t: tFloatingLabelPage } = useTranslation(['floatingLabelPage']);
 
   const state = useState({
-    floatingLabel: createState(StatesEnum, floatingLabelCodes, floatingLabelComponentPropsCodes, generalCodes),
+    floatingLabel: createState(StatesEnum, floatingLabelCodes, floatingLabelComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -256,7 +255,7 @@ export default function FloatingLabelPage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>

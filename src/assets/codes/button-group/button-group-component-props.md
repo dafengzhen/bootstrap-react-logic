@@ -1,6 +1,4 @@
-const buttonGroupComponentPropsCodes = {
-  buttonGroupComponentProps: {
-    code: `
+```ts
 type Props = {
   /**
    * toolbar.
@@ -17,8 +15,4 @@ type Props = {
    */
   size?: 'lg' | 'sm';
 };
-    `,
-  },
-};
-
-export default buttonGroupComponentPropsCodes;
+```

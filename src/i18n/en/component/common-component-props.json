@@ -1,11 +1,13 @@
 {
-  "genericComponentProps": "Generic Component Props",
-  "desc": {
-    "as": "Set element type",
-    "render": "Customize rendering logic",
-    "skipCompWrap": "Skip component wrapper",
-    "dropOldClass": "Clear original class names",
-    "variables": "Style variables"
+  "common": {
+    "name": "Common",
+    "desc": {
+      "as": "Set element type",
+      "render": "Customize rendering logic",
+      "skipCompWrap": "Skip component wrapper",
+      "dropOldClass": "Clear original class names",
+      "variables": "Style variables"
+    }
   },
   "p0": "The 'as' property allows you to specify the element type or custom component that should be rendered.",
   "p1": "This provides flexibility when you want a component to render something other than its default tag. For instance, you can render a button as an 'a' (anchor) tag, or any other valid element.",

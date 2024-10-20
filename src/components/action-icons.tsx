@@ -6,7 +6,6 @@ import {
   handleToggleState,
   handleToggleTheme,
 } from '@tools/handlers';
-import useHighlightCode from '@hooks/use-highlight-code.ts';
 
 export const ActionIcons = ({
   isOpen,
@@ -31,8 +30,6 @@ export const ActionIcons = ({
   i18n: any;
   onClickCode: () => void;
 }) => {
-  useHighlightCode({ isOpen });
-
   return (
     <div className="d-flex gap-2">
       <i

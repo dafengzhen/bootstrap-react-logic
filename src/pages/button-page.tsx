@@ -1,40 +1,25 @@
 import { Button } from '@lib/button';
 import { useState } from 'react';
-import buttonCodes from '@assets/codes/button';
 import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
-import buttonComponentPropsCodes from '@assets/codes/button/component-props.ts';
 import Example from '@components/example.tsx';
-import { createState } from '@tools/handlers.ts';
+import { transformCodeObj } from '@src/tools';
 
-enum StatesEnum {
-  basic,
-  variant,
-  outline,
-  size,
-  disabledState,
-  blockButton,
-  toggleState,
-  isLoading,
-  rounded,
-  icon,
-  customStyle,
-  example,
-  buttonComponentProps,
-  generalComponentProps,
-}
+const codes = transformCodeObj(
+  import.meta.glob(['../assets/codes/button/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
+    query: '?raw',
+    import: 'default',
+  }),
+);
 
 export default function ButtonPage() {
   const navigation = useNavigation();
   const { t: tButtonComponentProps } = useTranslation(['buttonComponentProps']);
   const { t: tButtonPage } = useTranslation(['buttonPage']);
-
-  const state = useState({
-    button: createState(StatesEnum, buttonCodes, buttonComponentPropsCodes, generalCodes),
-  });
+  const state = useState(codes);
   const [mySize, setMySize] = useState<'lg' | 'sm'>('sm');
 
   function onClickChangeSizeTest() {
@@ -250,7 +235,7 @@ export default function ButtonPage() {
           {
             attr: 'as',
             type: <span className="badge text-bg-secondary">button | a</span>,
-            desc: tButtonComponentProps('desc.as'),
+            desc: tButtonComponentProps('button.desc.as'),
             default: 'button',
           },
           {
@@ -268,7 +253,7 @@ export default function ButtonPage() {
                 )}
               </div>
             ),
-            desc: tButtonComponentProps('desc.variant'),
+            desc: tButtonComponentProps('button.desc.variant'),
             default: '',
           },
           {
@@ -278,31 +263,31 @@ export default function ButtonPage() {
                 Reference <span className="fw-bold">variant</span>
               </span>
             ),
-            desc: tButtonComponentProps('desc.outline'),
+            desc: tButtonComponentProps('button.desc.outline'),
             default: '',
           },
           {
             attr: 'disabled',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('desc.disabled'),
+            desc: tButtonComponentProps('button.desc.disabled'),
             default: '',
           },
           {
             attr: 'active',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('desc.active'),
+            desc: tButtonComponentProps('button.desc.active'),
             default: '',
           },
           {
             attr: 'isLoading',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('desc.isLoading'),
+            desc: tButtonComponentProps('button.desc.isLoading'),
             default: '',
           },
           {
             attr: 'size',
             type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tButtonComponentProps('desc.size'),
+            desc: tButtonComponentProps('button.desc.size'),
             default: '',
           },
           {
@@ -313,25 +298,25 @@ export default function ButtonPage() {
                 <span className="badge text-bg-secondary ms-1">boolean</span>
               </>
             ),
-            desc: tButtonComponentProps('desc.rounded'),
+            desc: tButtonComponentProps('button.desc.rounded'),
             default: '',
           },
           {
             attr: 'startContent',
             type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tButtonComponentProps('desc.startContent'),
+            desc: tButtonComponentProps('button.desc.startContent'),
             default: '',
           },
           {
             attr: 'endContent',
             type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tButtonComponentProps('desc.endContent'),
+            desc: tButtonComponentProps('button.desc.endContent'),
             default: '',
           },
         ]}
-      ></Example>
+      />
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state} />
 
       <About />
     </div>

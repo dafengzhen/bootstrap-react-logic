@@ -8,7 +8,6 @@ import { SelectMultiple } from '@lib/select-multiple';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
 import OptionRow from '@components/option-row.tsx';
-import generalCodes from '@assets/codes/general';
 import Example from '@components/example.tsx';
 import { createState } from '@tools/handlers.ts';
 
@@ -31,7 +30,7 @@ export default function SelectPage() {
   const { t: tSelectPage } = useTranslation(['selectPage']);
 
   const state = useState({
-    select: createState(StatesEnum, selectCodes, selectComponentPropsCodes, generalCodes),
+    select: createState(StatesEnum, selectCodes, selectComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -472,7 +471,7 @@ export default function SelectPage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>

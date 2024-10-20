@@ -11,6 +11,7 @@ export default function Example({
   props,
   state,
   t,
+  codeLanguage,
 }: {
   hash: string;
   state: any;
@@ -23,6 +24,7 @@ export default function Example({
     desc?: ReactNode;
     default?: ReactNode;
   }[];
+  codeLanguage?: 'html' | 'tsx' | 'javascript' | 'typescript' | string;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -40,26 +42,47 @@ export default function Example({
   }
 
   if (props) {
-    const _hash = kebabToCamelCase(hash.endsWith('ComponentProps') ? hash.split('ComponentProps')[0] : hash);
-    const _tHash = t(`${kebabToCamelCaseLowerFirst(_hash)}.name`) || _hash;
-
-    if (hash === 'generalComponentProps') {
+    if (hash === 'commonComponentProps') {
       return (
-        <ExampleGeneralPropsCard title={_tHash} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code}>
+        <ExampleGeneralPropsCard
+          hash={hash}
+          isOpen={isOpen}
+          toggleCode={toggleCode}
+          code={code}
+          codeLanguage={codeLanguage || 'typescript'}
+        >
           {children}
         </ExampleGeneralPropsCard>
       );
     }
 
+    const _hash = kebabToCamelCase(hash.endsWith('ComponentProps') ? hash.split('ComponentProps')[0] : hash);
+    const _tHash = t(`${kebabToCamelCaseLowerFirst(_hash)}.name`) || _hash;
+
     return (
-      <ExamplePropsCard title={_tHash} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code} items={items}>
+      <ExamplePropsCard
+        title={_tHash}
+        hash={hash}
+        isOpen={isOpen}
+        toggleCode={toggleCode}
+        code={code}
+        codeLanguage={codeLanguage || 'typescript'}
+        items={items}
+      >
         {children}
       </ExamplePropsCard>
     );
   }
 
   return (
-    <ExampleDynamicCard title={t(hash)} hash={hash} isOpen={isOpen} toggleCode={toggleCode} code={code}>
+    <ExampleDynamicCard
+      title={t(hash)}
+      hash={hash}
+      isOpen={isOpen}
+      toggleCode={toggleCode}
+      code={code}
+      codeLanguage={codeLanguage}
+    >
       <div className="d-flex flex-column gap-2 overflow-x-auto">{children}</div>
     </ExampleDynamicCard>
   );

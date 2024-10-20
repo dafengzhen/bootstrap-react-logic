@@ -1,15 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import hljs from 'highlight.js/lib/common';
 
-const useHighlightCode = ({ isOpen }: { isOpen?: boolean }) => {
+const useHighlightCode = ({
+  isOpen,
+  code,
+  codeLanguage,
+}: {
+  isOpen?: boolean;
+  code?: string;
+  codeLanguage?: string;
+}) => {
+  const element = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    document.querySelectorAll('pre code').forEach((el) => {
-      const _el = el as HTMLElement;
-      if (!_el.classList.contains('nohighlight') && !_el.dataset.highlighted) {
-        hljs.highlightElement(_el);
-      }
-    });
-  }, [isOpen]);
+    const currentElement = element.current;
+    if (currentElement && isOpen && code) {
+      const language = codeLanguage || 'tsx';
+      currentElement.classList.add(`language-${language}`);
+      currentElement.innerHTML = hljs.highlight(code, { language: language }).value;
+    }
+  }, [isOpen, code, codeLanguage]);
+
+  function getElement() {
+    return element.current;
+  }
+
+  function setElement(el: HTMLElement | null) {
+    element.current = el;
+  }
+
+  return [setElement, getElement];
 };
 
 export default useHighlightCode;

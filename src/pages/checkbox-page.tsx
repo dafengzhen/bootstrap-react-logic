@@ -3,7 +3,6 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
 import checkboxCodes from '@assets/codes/checkbox';
 import { Checkbox } from '@lib/checkbox';
 import { Label } from '@lib/label';
@@ -31,7 +30,7 @@ export default function CheckboxPage() {
   const { t: tCheckboxPage } = useTranslation(['checkboxPage']);
 
   const state = useState({
-    checkbox: createState(StatesEnum, checkboxCodes, checkboxComponentPropsCodes, generalCodes),
+    checkbox: createState(StatesEnum, checkboxCodes, checkboxComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -289,7 +288,7 @@ export default function CheckboxPage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>

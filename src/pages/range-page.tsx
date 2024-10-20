@@ -3,7 +3,6 @@ import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useTranslation } from 'react-i18next';
-import generalCodes from '@assets/codes/general';
 import rangeComponentPropsCodes from '@assets/codes/range/component-props.ts';
 import rangeCodes from '@assets/codes/range';
 import { Label } from '@lib/label';
@@ -26,7 +25,7 @@ export default function RangePage() {
   const { t: tRangePage } = useTranslation(['rangePage']);
 
   const state = useState({
-    range: createState(StatesEnum, rangeCodes, rangeComponentPropsCodes, generalCodes),
+    range: createState(StatesEnum, rangeCodes, rangeComponentPropsCodes),
   });
 
   if (navigation.state === 'loading') {
@@ -118,7 +117,7 @@ export default function RangePage() {
         ]}
       ></Example>
 
-      <Example props hash="generalComponentProps" state={state}></Example>
+      <Example props hash="commonComponentProps" state={state}></Example>
 
       <About />
     </div>
