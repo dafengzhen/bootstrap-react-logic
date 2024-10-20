@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 import { MenuEnum } from '@src/routes.tsx';
 import { useTranslation } from 'react-i18next';
+import { sortByProperty } from '@src/tools';
 
 export const LOCAL_STORAGE_KEY_PREFIX = '_brl_';
 
@@ -21,10 +22,13 @@ function App() {
       to: string;
     }[]
   >(
-    Object.keys(MenuEnum).map((key) => ({
-      name: key,
-      to: MenuEnum[key as keyof typeof MenuEnum],
-    })),
+    sortByProperty(
+      Object.keys(MenuEnum).map((key) => ({
+        name: key,
+        to: MenuEnum[key as keyof typeof MenuEnum],
+      })),
+      'name',
+    ),
   );
   const isLoadLanguage = useRef(false);
 

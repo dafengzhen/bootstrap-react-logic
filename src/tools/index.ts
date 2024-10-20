@@ -83,3 +83,16 @@ export const transformCodeObj = (input: Record<string, unknown>): Record<string,
 
   return output;
 };
+
+export const sortByProperty = (arr: any[], key: string): any[] => {
+  return arr.sort((a, b) => {
+    const valueA = a[key]?.toLowerCase?.() || a[key];
+    const valueB = b[key]?.toLowerCase?.() || b[key];
+
+    if (typeof valueA === 'string' && typeof valueB === 'string') {
+      return valueA.localeCompare(valueB);
+    }
+
+    return valueA > valueB ? 1 : valueA < valueB ? -1 : 0;
+  });
+};
