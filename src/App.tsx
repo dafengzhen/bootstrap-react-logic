@@ -112,36 +112,45 @@ function App() {
         <div className="row g-2 g-sm-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">
-              {location.pathname !== '/' && (
-                <div className="d-flex gap-2 mb-2">
-                  <button type="button" className="btn btn-light" onClick={onClickHouse}>
-                    <i className="bi bi-house-door-fill"></i>
-                  </button>
+              <div
+                className={clsx(
+                  'position-fixed row g-2 g-sm-4 ps-0 sm:tw-w-full sm:tw-pe-[1.375rem]',
+                  isCenter && 'container',
+                )}
+              >
+                <div className="col-10 col-sm-2">
+                  {location.pathname !== '/' && (
+                    <div className="d-flex gap-2 mb-2">
+                      <button type="button" className="btn btn-light" onClick={onClickHouse}>
+                        <i className="bi bi-house-door-fill"></i>
+                      </button>
 
-                  <button type="button" className="btn btn-light w-100" onClick={onClickReturn}>
-                    <i className="bi bi-chevron-left"></i>
-                  </button>
+                      <button type="button" className="btn btn-light w-100" onClick={onClickReturn}>
+                        <i className="bi bi-chevron-left"></i>
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="list-group">
+                    {menus.map((item) => {
+                      return (
+                        <NavLink
+                          key={item.name}
+                          className={({ isActive, isPending }) => {
+                            return clsx(
+                              'list-group-item list-group-item-action text-truncate',
+                              isActive && 'active',
+                              isPending && 'pending',
+                            );
+                          }}
+                          to={item.to}
+                        >
+                          {item.name}
+                        </NavLink>
+                      );
+                    })}
+                  </div>
                 </div>
-              )}
-
-              <div className="list-group">
-                {menus.map((item) => {
-                  return (
-                    <NavLink
-                      key={item.name}
-                      className={({ isActive, isPending }) => {
-                        return clsx(
-                          'list-group-item list-group-item-action text-truncate',
-                          isActive && 'active',
-                          isPending && 'pending',
-                        );
-                      }}
-                      to={item.to}
-                    >
-                      {item.name}
-                    </NavLink>
-                  );
-                })}
               </div>
             </div>
           )}
