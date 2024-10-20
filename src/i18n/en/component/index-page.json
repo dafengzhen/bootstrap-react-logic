@@ -11,7 +11,7 @@
   "p8": "Basic usage:",
   "p9": "三、FAQ",
   "p10": "Q: How is this different from other third-party libraries?",
-  "p11": "1.It is encapsulated into components, which enhances reusability and development efficiency.",
-  "p12": "2.Compared to other third-party libraries, BRL is developed based on specific project needs, so it may not suit every user's requirements.",
-  "p13": "3.It builds on top of Bootstrap and provides more commonly used components."
+  "p11": "1. It is encapsulated into components, which enhances reusability and development efficiency.",
+  "p12": "2. Compared to other third-party libraries, BRL is developed based on specific project needs, so it may not suit every user's requirements.",
+  "p13": "3. It builds on top of Bootstrap and provides more commonly used components."
 }

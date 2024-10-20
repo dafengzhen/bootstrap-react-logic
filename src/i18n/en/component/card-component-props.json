@@ -18,7 +18,10 @@
     "name": "CardGroup"
   },
   "cardLink": {
-    "name": "CardLink"
+    "name": "CardLink",
+    "desc": {
+      "as": "Type"
+    }
   },
   "cardHeader": {
     "name": "CardHeader"

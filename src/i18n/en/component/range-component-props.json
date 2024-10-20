@@ -1,10 +1,13 @@
 {
-  "desc": {
-    "disabled": "Disabled",
-    "min": "min",
-    "max": "Max",
-    "step": "Step",
-    "isValid": "Class (.is-valid)",
-    "isInvalid": "Class (.is-invalid)"
+  "range": {
+    "name": "Range",
+    "desc": {
+      "disabled": "Disabled",
+      "min": "Min",
+      "max": "Max",
+      "step": "Step",
+      "isValid": "Class (.is-valid)",
+      "isInvalid": "Class (.is-invalid)"
+    }
   }
 }

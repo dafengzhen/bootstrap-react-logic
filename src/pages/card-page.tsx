@@ -1553,7 +1553,7 @@ export default function CardPage() {
           {
             attr: 'as',
             type: <span className="badge text-bg-secondary">a</span>,
-            desc: tCardComponentProps('desc.as'),
+            desc: tCardComponentProps('cardLink.desc.as'),
             default: 'a',
           },
         ]}

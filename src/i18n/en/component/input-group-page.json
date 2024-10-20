@@ -1,11 +1,11 @@
 {
   "basic": "Basic",
-  "nowrap": "No wrap",
+  "nowrap": "Nowrap",
   "size": "Size",
-  "checkboxAndRadio": "Checkboxes and radios",
-  "multipleInput": "Multiple inputs",
-  "multipleAddons": "Multiple addons",
-  "buttonAddons": "Button addons",
-  "customSelect": "Custom select",
-  "customFileInput": "Custom file input"
+  "checkboxAndRadio": "Checkbox and Radio",
+  "multipleInput": "Multiple Input",
+  "multipleAddons": "Multiple Addons",
+  "buttonAddons": "Button Addons",
+  "customSelect": "Custom Select",
+  "customFileInput": "Custom File Input"
 }

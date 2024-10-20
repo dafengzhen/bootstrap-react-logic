@@ -2,11 +2,9 @@
   "common": {
     "name": "Common",
     "desc": {
-      "as": "Set element type",
-      "render": "Customize rendering logic",
-      "skipCompWrap": "Skip component wrapper",
-      "dropOldClass": "Clear original class names",
-      "variables": "Style variables"
+      "as": "Type",
+      "dropOldClass": "Drop Old Class",
+      "variables": "Variables"
     }
   },
   "p0": "The 'as' property allows you to specify the element type or custom component that should be rendered.",
@@ -15,5 +13,5 @@
   "p3": "Just think about it, the purpose of using a component library is to simplify development, not to rewrite components.",
   "p4": "On the other hand, the dropOldClass and variables properties are more practical.",
   "p5": "The dropOldClass property can remove the base class names. For example, <Button className=\"btn btn-info\"> would be modified to <Button className=\"btn-info\">.",
-  "p6": "Meanwhile, the variables property allows us to customize CSS variables, enhancing the flexibility of styles.\n"
+  "p6": "Meanwhile, the variables property allows us to customize CSS variables, enhancing the flexibility of styles."
 }

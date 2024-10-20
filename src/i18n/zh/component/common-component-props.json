@@ -2,18 +2,16 @@
   "common": {
     "name": "Common",
     "desc": {
-      "as": "设置元素类型",
-      "render": "自定义渲染子元素",
-      "skipCompWrap": "跳过组件包装",
-      "dropOldClass": "移除基础类名",
-      "variables": "自定义 CSS 变量"
+      "as": "类型",
+      "dropOldClass": "删除旧类",
+      "variables": "变量"
     }
   },
-  "p0": "as 属性允许你指定应该渲染的元素类型",
-  "p1": "这为当你希望组件渲染除默认标签以外的其他元素时提供了灵活性。例如，你可以将按钮渲染为 a（锚点）标签，或者任何其他有效元素",
-  "p2": "render 和 skipCompWrap 这两个属性的使用意义不大",
-  "p3": "想象一下，我们使用组件库的目的是为了简化开发，而不是重新编写组件",
-  "p4": "dropOldClass 和 variables 属性则更加实用",
-  "p5": "dropOldClass 属性可以移除基础类名，例如 <Button className=\"btn btn-info\">; 会修改为 <Button className=\"btn-info\">",
-  "p6": "而 variables 属性允许我们自定义 CSS 变量，提升样式的灵活性"
+  "p0": "‘as’ 属性允许您指定应该渲染的元素类型或自定义组件",
+  "p1": "这提供了灵活性，当您想让一个组件渲染不同于其默认标签的内容时。例如，您可以将按钮渲染为 ‘a’（锚）标签或任何其他有效元素",
+  "p2": "render 和 skipCompWrap 属性的使用意义不大",
+  "p3": "想想看，使用组件库的目的是简化开发，而不是重写组件",
+  "p4": "另一方面，dropOldClass 和 variables 属性更实用",
+  "p5": "dropOldClass 属性可以删除基础类名。例如，<Button className=\"btn btn-info\">将被修改为<Button className=\"btn-info\">",
+  "p6": "同时，variables 属性允许我们自定义 CSS 变量，增强样式的灵活性"
 }

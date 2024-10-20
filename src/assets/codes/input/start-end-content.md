@@ -1,6 +1,8 @@
 ```jsx
 <Input startContent={<i className="bi bi-person"></i>} placeholder="Username" />
+
 <Input endContent={<i className="bi bi-eye"></i>} placeholder="Password" />
+
 <Input
   endContent={
     <>

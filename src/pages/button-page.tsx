@@ -38,106 +38,96 @@ export default function ButtonPage() {
         </div>
       </Example>
 
-      <Example hash="variant" state={state} t={tButtonPage}>
-        <div className="d-flex flex-wrap gap-2">
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="success">Success</Button>
-          <Button variant="danger">Danger</Button>
-          <Button variant="warning">Warning</Button>
-          <Button variant="info">Info</Button>
-          <Button variant="light">Light</Button>
-          <Button variant="dark">Dark</Button>
-          <Button variant="link">Link</Button>
+      <Example hash="variant" state={state} t={tButtonPage} row wrap>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="success">Success</Button>
+        <Button variant="danger">Danger</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="info">Info</Button>
+        <Button variant="light">Light</Button>
+        <Button variant="dark">Dark</Button>
+        <Button variant="link">Link</Button>
+      </Example>
+
+      <Example hash="outline" state={state} t={tButtonPage} row wrap>
+        <Button outline="primary">Primary</Button>
+        <Button outline="secondary">Secondary</Button>
+        <Button outline="success">Success</Button>
+        <Button outline="danger">Danger</Button>
+        <Button outline="warning">Warning</Button>
+        <Button outline="info">Info</Button>
+        <Button outline="light">Light</Button>
+        <Button outline="dark">Dark</Button>
+      </Example>
+
+      <Example hash="rounded" state={state} t={tButtonPage} row wrap>
+        <Button outline="primary" rounded>
+          Primary
+        </Button>
+        <Button outline="secondary" rounded="sm">
+          Secondary
+        </Button>
+        <Button outline="success" rounded="md">
+          Success
+        </Button>
+        <Button outline="danger" rounded="lg">
+          Danger
+        </Button>
+        <Button outline="warning" rounded="xl">
+          Warning
+        </Button>
+        <Button outline="info" rounded="xxl">
+          Info
+        </Button>
+        <Button outline="info" rounded="circle">
+          C
+        </Button>
+        <Button outline="info" rounded="pill">
+          Pill
+        </Button>
+      </Example>
+
+      <Example hash="size" state={state} t={tButtonPage} row wrap alignItemsCenter>
+        <div>
+          <Button variant="primary" size="lg">
+            Large
+          </Button>
+        </div>
+        <div>
+          <Button variant="secondary" size="sm">
+            Small
+          </Button>
+        </div>
+        <div>
+          <Button
+            variant="secondary"
+            size={{
+              paddingY: '0.25rem',
+              paddingX: '0.5rem',
+              fontSize: '0.75rem',
+            }}
+          >
+            Custom
+          </Button>
         </div>
       </Example>
 
-      <Example hash="outline" state={state} t={tButtonPage}>
-        <div className="d-flex flex-wrap gap-2">
-          <Button outline="primary">Primary</Button>
-          <Button outline="secondary">Secondary</Button>
-          <Button outline="success">Success</Button>
-          <Button outline="danger">Danger</Button>
-          <Button outline="warning">Warning</Button>
-          <Button outline="info">Info</Button>
-          <Button outline="light">Light</Button>
-          <Button outline="dark">Dark</Button>
-        </div>
-      </Example>
-
-      <Example hash="rounded" state={state} t={tButtonPage}>
-        <div className="d-flex flex-wrap gap-2">
-          <Button outline="primary" rounded>
+      <Example hash="disabledState" state={state} t={tButtonPage} row wrap>
+        <div>
+          <Button variant="primary" disabled>
             Primary
           </Button>
-          <Button outline="secondary" rounded="sm">
+        </div>
+        <div>
+          <Button variant="secondary" disabled>
             Secondary
           </Button>
-          <Button outline="success" rounded="md">
-            Success
-          </Button>
-          <Button outline="danger" rounded="lg">
-            Danger
-          </Button>
-          <Button outline="warning" rounded="xl">
-            Warning
-          </Button>
-          <Button outline="info" rounded="xxl">
-            Info
-          </Button>
-          <Button outline="info" rounded="circle">
-            C
-          </Button>
-          <Button outline="info" rounded="pill">
-            Pill
-          </Button>
         </div>
-      </Example>
-
-      <Example hash="size" state={state} t={tButtonPage}>
-        <div className="d-flex align-items-center flex-wrap gap-2">
-          <div>
-            <Button variant="primary" size="lg">
-              Large
-            </Button>
-          </div>
-          <div>
-            <Button variant="secondary" size="sm">
-              Small
-            </Button>
-          </div>
-          <div>
-            <Button
-              variant="secondary"
-              size={{
-                paddingY: '0.25rem',
-                paddingX: '0.5rem',
-                fontSize: '0.75rem',
-              }}
-            >
-              Custom
-            </Button>
-          </div>
-        </div>
-      </Example>
-
-      <Example hash="disabledState" state={state} t={tButtonPage}>
-        <div className="d-flex align-items-center flex-wrap gap-2">
-          <div>
-            <Button variant="primary" disabled>
-              Primary
-            </Button>
-          </div>
-          <div>
-            <Button variant="secondary" disabled>
-              Secondary
-            </Button>
-          </div>
-          <div>
-            <Button as="a" href="#" variant="success" disabled>
-              Link
-            </Button>
-          </div>
+        <div>
+          <Button as="a" href="#" variant="success" disabled>
+            Link
+          </Button>
         </div>
       </Example>
 
@@ -169,7 +159,8 @@ export default function ButtonPage() {
             </Button>
           </div>
         </div>
-        <div className="d-flex flex-wrap gap-2 mt-2">
+
+        <div className="d-flex flex-wrap gap-2">
           <div>
             <Button variant="primary" active>
               Primary
@@ -183,45 +174,35 @@ export default function ButtonPage() {
         </div>
       </Example>
 
-      <Example hash="isLoading" state={state} t={tButtonPage}>
-        <div className="d-flex flex-wrap gap-2">
-          <Button variant="primary" isLoading>
-            Primary
-          </Button>
-          <Button variant="secondary" isLoading>
-            Secondary
-          </Button>
-        </div>
+      <Example hash="isLoading" state={state} t={tButtonPage} row wrap>
+        <Button variant="primary" isLoading>
+          Primary
+        </Button>
+        <Button variant="secondary" isLoading>
+          Secondary
+        </Button>
       </Example>
 
-      <Example hash="icon" state={state} t={tButtonPage}>
-        <div className="d-flex flex-wrap gap-2">
-          <Button variant="primary" startContent={<i className="bi bi-arrow-up me-1"></i>}>
-            Up
-          </Button>
-          <Button variant="secondary" endContent={<i className="bi bi-arrow-down ms-1"></i>}>
-            Down
-          </Button>
-          <Button variant="success">
-            <i className="bi bi-arrow-left"></i>
-          </Button>
-        </div>
+      <Example hash="icon" state={state} t={tButtonPage} row wrap>
+        <Button variant="primary" startContent={<i className="bi bi-arrow-up me-1"></i>}>
+          Up
+        </Button>
+        <Button variant="secondary" endContent={<i className="bi bi-arrow-down ms-1"></i>}>
+          Down
+        </Button>
+        <Button variant="success">
+          <i className="bi bi-arrow-left"></i>
+        </Button>
       </Example>
 
-      <Example hash="customStyle" state={state} t={tButtonPage}>
-        <div className="d-flex flex-wrap gap-2">
-          <Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">
-            Custom
-          </Button>
-        </div>
+      <Example hash="customStyle" state={state} t={tButtonPage} row wrap>
+        <Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">Custom</Button>
       </Example>
 
-      <Example hash="example" state={state} t={tButtonPage}>
-        <div className="overflow-x-auto text-nowrap">
-          <Button size={mySize} variant="primary" onClick={onClickChangeSizeTest}>
-            Click Change Button Size ({mySize})
-          </Button>
-        </div>
+      <Example hash="example" state={state} t={tButtonPage} row wrap overflowXAuto textNowrap>
+        <Button size={mySize} variant="primary" onClick={onClickChangeSizeTest}>
+          Click Change Button Size ({mySize})
+        </Button>
       </Example>
 
       <PropsIndicator />

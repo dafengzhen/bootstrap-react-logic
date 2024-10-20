@@ -1,9 +1,40 @@
 {
-  "desc": {
-    "size": "大小",
-    "nativeSize": "大小 (HTML 属性)",
-    "disabled": "禁止",
-    "isValid": "类名 (.is-valid)",
-    "isInvalid": "类名 (.is-invalid)"
+  "select": {
+    "name": "Select",
+    "desc": {
+      "size": "大小",
+      "nativeSize": "大小 (HTML属性)",
+      "disabled": "禁用",
+      "isValid": "类 (.is-valid)",
+      "isInvalid": "类 (.is-invalid)"
+    }
+  },
+  "selectOption": {
+    "name": "SelectOption",
+    "desc": {
+      "disabled": "禁用"
+    }
+  },
+  "selectMultiple": {
+    "name": "SelectMultiple",
+    "desc": {
+      "disabled": "禁用",
+      "single": "单选",
+      "hideActiveOptions": "隐藏激活选项",
+      "placeholder": "占位符",
+      "selectableCount": "可选项数量",
+      "options": "选项",
+      "contentClasses": "内容类",
+      "onChange": "改变时执行"
+    },
+    "options": {
+      "id": "ID",
+      "value": "值",
+      "active": "激活",
+      "disabled": "禁用",
+      "divider": "分隔符",
+      "header": "头部",
+      "text": "文本"
+    }
   }
 }

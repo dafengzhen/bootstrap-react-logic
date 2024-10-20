@@ -1,46 +1,4 @@
-const selectComponentPropsCodes = {
-  selectComponentProps: {
-    code: `
-type Props = {
-  /**
-   * size.
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * nativeSize (HTMLAttributes).
-   */
-  nativeSize?: number | undefined;
-
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-
-  /**
-   * isValid.
-   */
-  isValid?: boolean;
-
-  /**
-   * isInvalid,
-   */
-  isInvalid?: boolean;
-};
-    `,
-  },
-  selectOptionComponentProps: {
-    code: `
-type Props = {
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-};
-    `,
-  },
-  selectMultipleComponentProps: {
-    code: `
+```ts
 type SlotValueKeys =
   | 'mainContainer'
   | 'optionsContainer'
@@ -108,8 +66,4 @@ type Props = {
    */
   onChange?: (value: (string | number)[]) => void;
 };
-    `,
-  },
-};
-
-export default selectComponentPropsCodes;
+```

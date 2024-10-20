@@ -1,8 +1,8 @@
 {
   "basic": "基本",
-  "disabled": "禁止",
+  "disabled": "禁用",
   "inline": "内联",
-  "withoutLabels": "没有标签",
+  "withoutLabels": "无标签",
   "toggleButtons": "切换按钮",
   "outlinedStyles": "轮廓样式"
 }

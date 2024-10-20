@@ -1,6 +1,4 @@
-const rangeComponentPropsCodes = {
-  rangeComponentProps: {
-    code: `
+```ts
 type Props = {
   /**
    * disabled.
@@ -21,7 +19,7 @@ type Props = {
    * step.
    */
   step?: string | number;
-  
+
   /**
    * isValid.
    */
@@ -32,8 +30,4 @@ type Props = {
    */
   isInvalid?: boolean;
 };
-    `,
-  },
-};
-
-export default rangeComponentPropsCodes;
+```

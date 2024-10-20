@@ -4,10 +4,10 @@
   "text": "Text",
   "disabled": "Disabled",
   "readonly": "Readonly",
-  "readonlyPlainText": "Readonly plain text",
+  "readonlyPlainText": "Readonly Plaintext",
   "file": "File",
   "color": "Color",
   "datalist": "Datalist",
-  "startEndContent": "Prefix and suffix",
+  "startEndContent": "Start and End Content",
   "otp": "OTP"
 }

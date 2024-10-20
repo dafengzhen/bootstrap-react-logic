@@ -4,11 +4,11 @@
   "outline": "Outline",
   "rounded": "Rounded",
   "size": "Size",
-  "disabledState": "Disabled state",
-  "blockButton": "Block button",
-  "toggleState": "Toggle state",
-  "isLoading": "Loading state",
+  "disabledState": "Disabled State",
+  "blockButton": "Block Button",
+  "toggleState": "Toggle State",
+  "isLoading": "Is Loading",
   "icon": "Icon",
-  "customStyle": "Custom style",
+  "customStyle": "Custom Style",
   "example": "Example"
 }

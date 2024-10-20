@@ -1,11 +1,14 @@
 {
-  "desc": {
-    "disabled": "禁止",
-    "contentClasses": "设置插槽类名",
-    "switch": "开关",
-    "inline": "内联",
-    "reverse": "相反",
-    "isValid": "类名 (.is-valid)",
-    "isInvalid": "类名 (.is-invalid)"
+  "radio": {
+    "name": "Radio",
+    "desc": {
+      "disabled": "禁用",
+      "contentClasses": "内容类",
+      "switch": "开关",
+      "inline": "内联",
+      "reverse": "反向",
+      "isValid": "类 (.is-valid)",
+      "isInvalid": "类 (.is-invalid)"
+    }
   }
 }

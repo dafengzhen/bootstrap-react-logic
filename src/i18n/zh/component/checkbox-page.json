@@ -1,11 +1,11 @@
 {
   "basic": "基本",
-  "indeterminate": "不确定状态",
-  "disabled": "禁止",
+  "indeterminate": "不确定",
   "switch": "开关",
+  "disabled": "禁用",
   "inline": "内联",
-  "reverse": "相反",
-  "withoutLabels": "没有标签",
+  "reverse": "反向",
+  "withoutLabels": "无标签",
   "toggleButtons": "切换按钮",
   "outlinedStyles": "轮廓样式"
 }

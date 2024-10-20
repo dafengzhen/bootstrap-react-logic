@@ -40,7 +40,6 @@
       autoComplete="username"
     />
   </div>
-
   <div className="col-auto">
     <Label htmlFor="inputPassword2" className="visually-hidden">
       Password

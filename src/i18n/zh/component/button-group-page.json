@@ -1,7 +1,7 @@
 {
   "basic": "基本",
-  "checkbox": "选项框",
-  "radio": "单选框",
+  "checkbox": "复选框",
+  "radio": "单选按钮",
   "toolbar": "工具栏",
   "size": "大小",
   "vertical": "垂直",

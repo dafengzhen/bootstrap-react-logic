@@ -1,9 +1,9 @@
 {
   "basic": "Basic",
-  "textarea": "Textareas",
-  "select": "Selects",
+  "textarea": "Textarea",
+  "select": "Select",
   "disabled": "Disabled",
-  "readonlyPlaintext": "Readonly plaintext",
-  "inputGroups": "Input groups",
+  "readonlyPlaintext": "Readonly Plaintext",
+  "inputGroups": "Input Groups",
   "layout": "Layout"
 }

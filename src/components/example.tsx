@@ -15,6 +15,10 @@ export default function Example({
   codeLanguage,
   parentClassName,
   overflowXAuto,
+  row,
+  wrap,
+  textNowrap,
+  alignItemsCenter,
 }: {
   hash: string;
   state: any;
@@ -30,6 +34,10 @@ export default function Example({
   codeLanguage?: 'html' | 'tsx' | 'javascript' | 'typescript' | string;
   parentClassName?: string;
   overflowXAuto?: boolean;
+  row?: boolean;
+  wrap?: boolean;
+  textNowrap?: boolean;
+  alignItemsCenter?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -90,8 +98,12 @@ export default function Example({
     >
       <div
         className={clsx(
-          parentClassName ? parentClassName : 'd-flex flex-column gap-2',
+          parentClassName ? parentClassName : 'd-flex gap-2',
           overflowXAuto && 'overflow-x-auto',
+          row ? 'flex-row' : 'flex-column',
+          wrap && 'flex-wrap',
+          textNowrap && 'text-nowrap',
+          alignItemsCenter && 'align-items-center',
         )}
       >
         {children}

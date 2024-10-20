@@ -1,9 +1,40 @@
 {
-  "desc": {
-    "size": "Size",
-    "nativeSize": "Size (HTMLAttributes)",
-    "disabled": "Disabled",
-    "isValid": "Class (.is-valid)",
-    "isInvalid": "Class (.is-invalid)"
+  "select": {
+    "name": "Select",
+    "desc": {
+      "size": "Size",
+      "nativeSize": "Size (HTMLAttributes)",
+      "disabled": "Disabled",
+      "isValid": "Class (.is-valid)",
+      "isInvalid": "Class (.is-invalid)"
+    }
+  },
+  "selectOption": {
+    "name": "SelectOption",
+    "desc": {
+      "disabled": "Disabled"
+    }
+  },
+  "selectMultiple": {
+    "name": "SelectMultiple",
+    "desc": {
+      "disabled": "Disabled",
+      "single": "Single",
+      "hideActiveOptions": "Hide Active Options",
+      "placeholder": "Placeholder",
+      "selectableCount": "Selectable Count",
+      "options": "Options",
+      "contentClasses": "Content Classes",
+      "onChange": "On Change"
+    },
+    "options": {
+      "id": "ID",
+      "value": "Value",
+      "active": "Active",
+      "disabled": "Disabled",
+      "divider": "Divider",
+      "header": "Header",
+      "text": "Text"
+    }
   }
 }
