@@ -1,0 +1,12 @@
+{
+  "alert": {
+    "name": "Alert",
+    "desc": {
+      "variant": "Variant"
+    }
+  },
+  "alertLink": {
+    "name": "AlertLink",
+    "desc": {}
+  }
+}

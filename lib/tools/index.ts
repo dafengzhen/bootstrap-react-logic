@@ -45,6 +45,9 @@ export {
   CardHeaderVariablesEnum,
   CardFooterVariablesEnum,
   CardGroupVariablesEnum,
+  AlertVariablesEnum,
+  AlertLinkVariablesEnum,
+  AlertHeadingVariablesEnum,
 } from './enums';
 
 export {

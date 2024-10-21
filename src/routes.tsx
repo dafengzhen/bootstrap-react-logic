@@ -12,6 +12,7 @@ import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
 import FloatingLabelPage from '@pages/floating-label-page.tsx';
 import CardPage from '@pages/card-page.tsx';
+import AlertPage from '@pages/alert-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -27,6 +28,7 @@ export enum MenuEnum {
   Range = '/pages/range',
   FloatingLabel = '/pages/floating-label',
   Card = '/pages/card',
+  Alert = '/pages/alert',
 }
 
 /**
@@ -82,6 +84,10 @@ const router = createBrowserRouter(
             {
               path: 'pages/card',
               element: <CardPage />,
+            },
+            {
+              path: 'pages/alert',
+              element: <AlertPage />,
             },
           ],
         },

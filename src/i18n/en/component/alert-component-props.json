@@ -1,0 +1,18 @@
+{
+  "alert": {
+    "name": "Alert",
+    "desc": {
+      "variant": "Variant",
+      "show": "Show",
+      "dismissible": "Dismissible"
+    }
+  },
+  "alertLink": {
+    "name": "AlertLink",
+    "desc": {}
+  },
+  "alertHeading": {
+    "name": "AlertHeading",
+    "desc": {}
+  }
+}

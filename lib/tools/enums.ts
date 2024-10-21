@@ -593,6 +593,36 @@ enum FloatingLabelVariablesEnum {
   formInvalidBorderColorDark = 'form-invalid-border-color-dark',
 }
 
+enum AlertVariablesEnum {
+  alertPaddingY = 'alert-padding-y',
+  alertPaddingX = 'alert-padding-x',
+  alertMarginBottom = 'alert-margin-bottom',
+  alertBorderRadius = 'alert-border-radius',
+  alertLinkFontWeight = 'alert-link-font-weight',
+  alertBorderWidth = 'alert-border-width',
+  alertDismissiblePaddingR = 'alert-dismissible-padding-r',
+}
+
+enum AlertLinkVariablesEnum {
+  alertPaddingY = AlertVariablesEnum.alertPaddingY,
+  alertPaddingX = AlertVariablesEnum.alertPaddingX,
+  alertMarginBottom = AlertVariablesEnum.alertMarginBottom,
+  alertBorderRadius = AlertVariablesEnum.alertBorderRadius,
+  alertLinkFontWeight = AlertVariablesEnum.alertLinkFontWeight,
+  alertBorderWidth = AlertVariablesEnum.alertBorderWidth,
+  alertDismissiblePaddingR = AlertVariablesEnum.alertDismissiblePaddingR,
+}
+
+enum AlertHeadingVariablesEnum {
+  alertPaddingY = AlertVariablesEnum.alertPaddingY,
+  alertPaddingX = AlertVariablesEnum.alertPaddingX,
+  alertMarginBottom = AlertVariablesEnum.alertMarginBottom,
+  alertBorderRadius = AlertVariablesEnum.alertBorderRadius,
+  alertLinkFontWeight = AlertVariablesEnum.alertLinkFontWeight,
+  alertBorderWidth = AlertVariablesEnum.alertBorderWidth,
+  alertDismissiblePaddingR = AlertVariablesEnum.alertDismissiblePaddingR,
+}
+
 export {
   ButtonVariableEnum,
   RoundedClassEnum,
@@ -623,4 +653,7 @@ export {
   CardHeaderVariablesEnum,
   CardFooterVariablesEnum,
   CardGroupVariablesEnum,
+  AlertVariablesEnum,
+  AlertLinkVariablesEnum,
+  AlertHeadingVariablesEnum,
 };

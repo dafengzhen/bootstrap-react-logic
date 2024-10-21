@@ -16,3 +16,4 @@ export * from './select';
 export * from './select-multiple';
 
 export * from './card';
+export * from './alert';
