@@ -1,16 +1,34 @@
-```jsx
-const [show, setShow] = useState(false);
+```tsx
+const [alerts, setAlerts] = useState<number[]>([]);
 
 function onClickShowLiveAlertTest() {
-  setShow(!show);
+  setAlerts([...alerts, alerts.length + 1]);
 }
 
-<Alert show={show} dismissible variant="success" role="alert">
-  <div>A simple primary alert—check it out!</div>
-  <button type="button" className="btn-close" aria-label="Close" onClick={onClickShowLiveAlertTest}></button>
-</Alert>
+{
+  alerts.map((item) => {
+    return (
+      <Alert
+        key={item}
+        variant="success"
+        role="alert"
+        fade
+        dismissible
+        clickToClose={false}
+        onClose={(close) => {
+          console.log(item);
+          if (item > 1) {
+            close?.();
+          }
+        }}
+      >
+        <div>A simple primary alert—check it out!</div>
+      </Alert>
+    );
+  });
+}
 
 <Button variant="primary" onClick={onClickShowLiveAlertTest}>
-  {show ? 'Close' : 'Show'} live alert
-</Button>
+  Show live alert
+</Button>;
 ```

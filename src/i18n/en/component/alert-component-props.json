@@ -3,7 +3,8 @@
     "name": "Alert",
     "desc": {
       "variant": "Variant",
-      "show": "Show",
+      "onClose": "On Close",
+      "clickToClose": "Click to Close",
       "dismissible": "Dismissible"
     }
   },

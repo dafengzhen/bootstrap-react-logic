@@ -1,4 +1,4 @@
-import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { AlertProps } from './types.ts';
 import {
   AlertVariablesEnum,
@@ -11,62 +11,89 @@ import {
 import AlertLink from './alert-link.tsx';
 import AlertHeading from './alert-heading.tsx';
 
-const visibleByDefault = true;
-
-const fadeByDefault = false;
+const DEFAULTS = {
+  clickToClose: true,
+};
 
 const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>) {
   const {
-    as: Component = 'div',
+    as: AlertComponent = 'div',
     dropOldClass,
     variables,
     className,
     style,
     variant,
-    show,
     dismissible,
     fade,
+    onClose,
+    clickToClose = DEFAULTS.clickToClose,
     ...rest
   } = props;
-  const [isVisible, setIsVisible] = useState(visibleByDefault);
-  const _fade = fade ?? fadeByDefault;
-  const alertRef = useRef<HTMLDivElement | null>(null);
+
+  const [isVisible, setIsVisible] = useState(true);
+  const [isShowing, setIsShowing] = useState(false);
+  const alertElement = useRef<HTMLDivElement | null>(null);
+  const wasClosedByClick = useRef(false);
+
+  const initiateClose = useCallback(() => {
+    if (fade) {
+      setIsShowing(false);
+      wasClosedByClick.current = true;
+    } else {
+      setIsVisible(false);
+    }
+  }, [fade]);
+
+  const handleClose = useCallback(() => {
+    if (clickToClose) {
+      initiateClose();
+
+      if (!fade) {
+        onClose?.();
+      }
+    } else {
+      onClose?.(initiateClose);
+    }
+  }, [clickToClose, fade, initiateClose, onClose]);
 
   useEffect(() => {
-    const value = show ?? visibleByDefault;
-    setIsVisible(value);
-  }, [show]);
+    if (!fade) {
+      return;
+    }
 
-  // useEffect(() => {
-  //   const alertNode = alertRef.current;
-  //   if (!alertNode) {
-  //     return;
-  //   }
-  //
-  //   const handleTransitionEnd = () => {
-  //     console.log('end');
-  //   };
-  //
-  //   alertNode.addEventListener('transitionrun', handleTransitionEnd);
-  //   return () => {
-  //     alertNode.removeEventListener('transitionend', handleTransitionEnd);
-  //   };
-  // }, []);
+    const element = alertElement.current;
+    if (element) {
+      const onTransitionEnd = () => {
+        if (dismissible && wasClosedByClick.current) {
+          setIsVisible(false);
+
+          if (clickToClose) {
+            onClose?.();
+          }
+        }
+      };
+
+      element.addEventListener('transitionend', onTransitionEnd);
+      setIsShowing(true);
+
+      return () => element.removeEventListener('transitionend', onTransitionEnd);
+    }
+  }, [clickToClose, dismissible, fade, onClose]);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClassName = clsxUnique(
       !dropOldClass && 'alert',
       variant && `alert-${variant}`,
       dismissible && 'alert-dismissible',
-      _fade && 'fade',
+      fade && 'fade',
+      isShowing && 'show',
       className,
     );
     const finalStyle = {
       ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = AlertVariablesEnum[key];
         return {
           include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
+          transformedKey: AlertVariablesEnum[key] ? `${VARIABLE_BS_PREFIX}${AlertVariablesEnum[key]}` : key,
         };
       }),
       ...style,
@@ -74,14 +101,21 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
 
     return filterOptions(
       {
-        className: finalClass,
+        className: finalClassName,
         style: finalStyle,
       },
       isValueValid,
     );
-  }, [dropOldClass, variant, dismissible, _fade, className, variables, style]);
+  }, [className, dismissible, dropOldClass, fade, isShowing, style, variables, variant]);
 
-  return isVisible && <Component {...rest} {...renderOptions} ref={alertRef}></Component>;
+  return (
+    isVisible && (
+      <AlertComponent {...rest} {...renderOptions} ref={alertElement}>
+        {props.children}
+        {dismissible && <button type="button" className="btn-close" aria-label="Close" onClick={handleClose} />}
+      </AlertComponent>
+    )
+  );
 };
 
 Alert.Link = AlertLink;

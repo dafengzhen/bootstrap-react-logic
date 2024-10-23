@@ -2,11 +2,18 @@
   "alert": {
     "name": "Alert",
     "desc": {
-      "variant": "Variant"
+      "variant": "变体",
+      "onClose": "关闭时",
+      "clickToClose": "点击关闭",
+      "dismissible": "可关闭"
     }
   },
   "alertLink": {
     "name": "AlertLink",
+    "desc": {}
+  },
+  "alertHeading": {
+    "name": "AlertHeading",
     "desc": {}
   }
 }

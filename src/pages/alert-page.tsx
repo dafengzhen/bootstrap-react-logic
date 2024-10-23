@@ -23,10 +23,10 @@ export default function AlertPage() {
   const { t: tAlertComponentProps } = useTranslation(['alertComponentProps']);
   const { t: tAlertPage } = useTranslation(['alertPage']);
   const state = useState(codes);
-  const [show, setShow] = useState(false);
+  const [alerts, setAlerts] = useState<number[]>([]);
 
   function onClickShowLiveAlertTest() {
-    setShow(!show);
+    setAlerts([...alerts, alerts.length + 1]);
   }
 
   if (navigation.state === 'loading') {
@@ -70,14 +70,30 @@ export default function AlertPage() {
       </Example>
 
       <Example hash="liveExample" state={state} t={tAlertPage}>
-        <Alert show={show} dismissible variant="success" role="alert">
-          <div>A simple primary alert—check it out!</div>
-          <button type="button" className="btn-close" aria-label="Close" onClick={onClickShowLiveAlertTest}></button>
-        </Alert>
+        {alerts.map((item) => {
+          return (
+            <Alert
+              key={item}
+              variant="success"
+              role="alert"
+              fade
+              dismissible
+              clickToClose={false}
+              onClose={(close) => {
+                console.log(item);
+                if (item > 1) {
+                  close?.();
+                }
+              }}
+            >
+              <div>A simple primary alert—check it out!</div>
+            </Alert>
+          );
+        })}
 
         <div>
           <Button variant="primary" onClick={onClickShowLiveAlertTest}>
-            {show ? 'Close' : 'Show'} live alert
+            Show live alert
           </Button>
         </div>
       </Example>
@@ -180,9 +196,15 @@ export default function AlertPage() {
             default: '',
           },
           {
-            attr: 'show',
+            attr: 'onClose',
+            type: <span className="badge text-bg-secondary">(close?: () =&gt; void) =&gt; void</span>,
+            desc: tAlertComponentProps('alert.desc.onClose'),
+            default: '',
+          },
+          {
+            attr: 'clickToClose',
             type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAlertComponentProps('alert.desc.show'),
+            desc: tAlertComponentProps('alert.desc.clickToClose'),
             default: 'true',
           },
           {

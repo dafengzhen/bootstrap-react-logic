@@ -14,9 +14,14 @@ type Props<T extends ElementType> = BaseProps<T, typeof AlertVariablesEnum> & {
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
 
   /**
-   * show.
+   * onClose.
    */
-  show?: boolean;
+  onClose?: (close?: () => void) => void;
+
+  /**
+   * clickToClose.
+   */
+  clickToClose?: boolean;
 
   /**
    * dismissible.
