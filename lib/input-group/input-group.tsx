@@ -1,13 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { InputGroupProps } from './types.ts';
-import {
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  InputGroupVariablesEnum,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import InputGroupText from './input-group-text.tsx';
 
 const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: InputGroupProps<T>) {
@@ -32,16 +25,9 @@ const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: Inp
       hasValidation && 'has-validation',
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputGroupVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

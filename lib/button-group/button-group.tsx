@@ -1,13 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { ButtonGroupProps } from './types.ts';
-import {
-  ButtonGroupVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: ButtonGroupProps<T>) {
   const {
@@ -29,16 +22,9 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: B
       size && `btn-group-${size}`,
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = ButtonGroupVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

@@ -171,6 +171,32 @@ export default function AlertPage() {
         </Alert>
       </Example>
 
+      <Example hash="dismissing" state={state} t={tAlertPage}>
+        <Alert variant="warning" fade dismissible role="alert">
+          <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </Alert>
+
+        <Alert
+          variant="warning"
+          fade
+          dismissible
+          closeButton={({ close }) => {
+            return (
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                onClick={close}
+              ></button>
+            );
+          }}
+          role="alert"
+        >
+          <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </Alert>
+      </Example>
+
       <PropsIndicator />
 
       <Example
@@ -211,6 +237,18 @@ export default function AlertPage() {
             attr: 'dismissible',
             type: <span className="badge text-bg-secondary">boolean</span>,
             desc: tAlertComponentProps('alert.desc.dismissible'),
+            default: '',
+          },
+          {
+            attr: 'fade',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tAlertComponentProps('alert.desc.fade'),
+            default: '',
+          },
+          {
+            attr: 'closeButton',
+            type: <span className="badge text-bg-secondary">{'({ close }: { close: () => void }) => ReactNode'}</span>,
+            desc: tAlertComponentProps('alert.desc.closeButton'),
             default: '',
           },
         ]}

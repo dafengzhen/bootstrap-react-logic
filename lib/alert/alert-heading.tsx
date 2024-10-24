@@ -1,29 +1,15 @@
 import { type ElementType, useMemo } from 'react';
 import type { AlertHeadingProps } from './types.ts';
-import {
-  AlertHeadingVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const AlertHeading = function AlertHeading<T extends ElementType = 'div'>(props: AlertHeadingProps<T>) {
   const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'alert-heading h4', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = AlertHeadingVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

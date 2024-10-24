@@ -1,17 +1,16 @@
 import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import type { IOption, SelectMultipleProps } from './types.ts';
 import {
+  clsxStyle,
   clsxUnique,
   clsxWithOptions,
-  filterAndTransformProperties,
+  convertBsKeyToVar,
   filterOptions,
   groupByProperty,
   isDefined,
   isValueValid,
   pickObjectProperties,
   processSlotClasses,
-  SelectMultipleVariablesEnum,
-  VARIABLE_BS_PREFIX,
 } from '../tools';
 import {
   FloatingPortal,
@@ -115,16 +114,9 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
       disabled && 'bg-body-secondary',
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = SelectMultipleVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

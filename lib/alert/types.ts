@@ -1,13 +1,13 @@
-import type { ElementType } from 'react';
+import type { ElementType, ReactNode } from 'react';
 import type {
-  AlertHeadingVariablesEnum,
-  AlertLinkVariablesEnum,
-  AlertVariablesEnum,
+  AlertHeadingVariablesType,
+  AlertLinkVariablesType,
+  AlertVariablesType,
   BaseProps,
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof AlertVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
   /**
    * variant.
    */
@@ -32,18 +32,19 @@ type Props<T extends ElementType> = BaseProps<T, typeof AlertVariablesEnum> & {
    * fade.
    */
   fade?: boolean;
+
+  /**
+   * closeButton.
+   */
+  closeButton?: ({ close }: { close: () => void }) => ReactNode;
 };
 
-type LinkProps<T extends ElementType> = BaseProps<T, typeof AlertLinkVariablesEnum> & {};
+type LinkProps<T extends ElementType> = BaseProps<T, AlertLinkVariablesType> & {};
 
-type HeadingProps<T extends ElementType> = BaseProps<T, typeof AlertHeadingVariablesEnum> & {};
+type HeadingProps<T extends ElementType> = BaseProps<T, AlertHeadingVariablesType> & {};
 
-export type AlertProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof AlertVariablesEnum>;
+export type AlertProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, AlertVariablesType>;
 
-export type AlertLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, typeof AlertLinkVariablesEnum>;
+export type AlertLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, AlertLinkVariablesType>;
 
-export type AlertHeadingProps<T extends ElementType> = PropsWithoutRef<
-  HeadingProps<T>,
-  T,
-  typeof AlertHeadingVariablesEnum
->;
+export type AlertHeadingProps<T extends ElementType> = PropsWithoutRef<HeadingProps<T>, T, AlertHeadingVariablesType>;

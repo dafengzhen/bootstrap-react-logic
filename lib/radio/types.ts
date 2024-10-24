@@ -1,9 +1,9 @@
 import type { ElementType } from 'react';
-import type { BaseProps, PropsWithoutRef, RadioVariablesEnum, SlotValue } from '../tools';
+import type { BaseProps, PropsWithoutRef, RadioVariablesType, SlotValue } from '../tools';
 
 type SlotValueKeys = 'container' | 'component' | 'label';
 
-type Props<T extends ElementType> = BaseProps<T, typeof RadioVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, RadioVariablesType> & {
   /**
    * disabled.
    */
@@ -40,4 +40,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof RadioVariablesEnum> & {
   isInvalid?: boolean;
 };
 
-export type RadioProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof RadioVariablesEnum>;
+export type RadioProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RadioVariablesType>;

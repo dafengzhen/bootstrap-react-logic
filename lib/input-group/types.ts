@@ -1,7 +1,7 @@
 import type { ElementType } from 'react';
-import type { BaseProps, InputGroupTextVariablesEnum, InputGroupVariablesEnum, PropsWithoutRef } from '../tools';
+import type { BaseProps, InputGroupTextVariablesType, InputGroupVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof InputGroupVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, InputGroupVariablesType> & {
   /**
    * nowrap.
    */
@@ -18,12 +18,8 @@ type Props<T extends ElementType> = BaseProps<T, typeof InputGroupVariablesEnum>
   hasValidation?: boolean;
 };
 
-type TextProps<T extends ElementType> = BaseProps<T, typeof InputGroupTextVariablesEnum> & {};
+type TextProps<T extends ElementType> = BaseProps<T, InputGroupTextVariablesType> & {};
 
-export type InputGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof InputGroupVariablesEnum>;
+export type InputGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, InputGroupVariablesType>;
 
-export type InputGroupTextProps<T extends ElementType> = PropsWithoutRef<
-  TextProps<T>,
-  T,
-  typeof InputGroupTextVariablesEnum
->;
+export type InputGroupTextProps<T extends ElementType> = PropsWithoutRef<TextProps<T>, T, InputGroupTextVariablesType>;

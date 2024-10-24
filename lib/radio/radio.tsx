@@ -1,14 +1,13 @@
 import { type ElementType, useMemo } from 'react';
 import type { RadioProps } from './types.ts';
 import {
+  clsxStyle,
   clsxUnique,
   clsxWithOptions,
-  filterAndTransformProperties,
+  convertBsKeyToVar,
   filterOptions,
   isValueValid,
   processSlotClasses,
-  RadioVariablesEnum,
-  VARIABLE_BS_PREFIX,
 } from '../tools';
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
@@ -31,16 +30,9 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-check-input', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = RadioVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

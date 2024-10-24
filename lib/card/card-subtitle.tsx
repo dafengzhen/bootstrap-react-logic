@@ -1,29 +1,15 @@
 import { type ElementType, useMemo } from 'react';
 import type { CardTitleProps } from './types.ts';
-import {
-  CardSubtitleVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const CardSubtitle = function CardSubtitle<T extends ElementType = 'div'>(props: CardTitleProps<T>) {
   const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card-subtitle h6', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = CardSubtitleVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

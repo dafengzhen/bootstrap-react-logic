@@ -1,29 +1,15 @@
 import { type ElementType, useMemo } from 'react';
 import type { CardTextProps } from './types.ts';
-import {
-  CardTextVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const CardHeader = function CardHeader<T extends ElementType = 'div'>(props: CardTextProps<T>) {
   const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card-header', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = CardTextVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

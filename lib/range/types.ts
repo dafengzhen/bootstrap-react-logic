@@ -1,7 +1,7 @@
 import type { ElementType } from 'react';
-import type { BaseProps, PropsWithoutRef, RangeVariablesEnum } from '../tools';
+import type { BaseProps, PropsWithoutRef, RangeVariablesType } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof RangeVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, RangeVariablesType> & {
   /**
    * disabled.
    */
@@ -33,4 +33,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof RangeVariablesEnum> & {
   isInvalid?: boolean;
 };
 
-export type RangeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof RangeVariablesEnum>;
+export type RangeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RangeVariablesType>;

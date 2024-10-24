@@ -1,13 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { RangeProps } from './types.ts';
-import {
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  RangeVariablesEnum,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import Input from '../input/input.tsx';
 
 const Range = function Range<T extends ElementType = 'input'>(props: RangeProps<T>) {
@@ -15,16 +8,9 @@ const Range = function Range<T extends ElementType = 'input'>(props: RangeProps<
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-range', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = RangeVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

@@ -1,24 +1,24 @@
 import type { ElementType } from 'react';
 import type {
   BaseProps,
-  CardBodyVariablesEnum,
-  CardFooterVariablesEnum,
-  CardGroupVariablesEnum,
-  CardHeaderVariablesEnum,
-  CardImgVariablesEnum,
-  CardLinkVariablesEnum,
-  CardSubtitleVariablesEnum,
-  CardTextVariablesEnum,
-  CardTitleVariablesEnum,
-  CardVariablesEnum,
+  CardBodyVariablesType,
+  CardFooterVariablesType,
+  CardGroupVariablesType,
+  CardHeaderVariablesType,
+  CardImgVariablesType,
+  CardLinkVariablesType,
+  CardSubtitleVariablesType,
+  CardTextVariablesType,
+  CardTitleVariablesType,
+  CardVariablesType,
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof CardVariablesEnum> & {};
+type Props<T extends ElementType> = BaseProps<T, CardVariablesType> & {};
 
-type BodyProps<T extends ElementType> = BaseProps<T, typeof CardBodyVariablesEnum> & {};
+type BodyProps<T extends ElementType> = BaseProps<T, CardBodyVariablesType> & {};
 
-type ImgProps<T extends ElementType> = BaseProps<T, typeof CardImgVariablesEnum> & {
+type ImgProps<T extends ElementType> = BaseProps<T, CardImgVariablesType> & {
   /**
    * top.
    */
@@ -35,40 +35,36 @@ type ImgProps<T extends ElementType> = BaseProps<T, typeof CardImgVariablesEnum>
   overlay?: boolean;
 };
 
-type TitleProps<T extends ElementType> = BaseProps<T, typeof CardTitleVariablesEnum> & {};
+type TitleProps<T extends ElementType> = BaseProps<T, CardTitleVariablesType> & {};
 
-type SubtitleProps<T extends ElementType> = BaseProps<T, typeof CardSubtitleVariablesEnum> & {};
+type SubtitleProps<T extends ElementType> = BaseProps<T, CardSubtitleVariablesType> & {};
 
-type TextProps<T extends ElementType> = BaseProps<T, typeof CardTextVariablesEnum> & {};
+type TextProps<T extends ElementType> = BaseProps<T, CardTextVariablesType> & {};
 
-type LinkProps<T extends ElementType> = BaseProps<T, typeof CardLinkVariablesEnum> & {};
+type LinkProps<T extends ElementType> = BaseProps<T, CardLinkVariablesType> & {};
 
-type HeaderProps<T extends ElementType> = BaseProps<T, typeof CardHeaderVariablesEnum> & {};
+type HeaderProps<T extends ElementType> = BaseProps<T, CardHeaderVariablesType> & {};
 
-type FooterProps<T extends ElementType> = BaseProps<T, typeof CardFooterVariablesEnum> & {};
+type FooterProps<T extends ElementType> = BaseProps<T, CardFooterVariablesType> & {};
 
-type GroupProps<T extends ElementType> = BaseProps<T, typeof CardGroupVariablesEnum> & {};
+type GroupProps<T extends ElementType> = BaseProps<T, CardGroupVariablesType> & {};
 
-export type CardProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof CardVariablesEnum>;
+export type CardProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CardVariablesType>;
 
-export type CardBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, typeof CardBodyVariablesEnum>;
+export type CardBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, CardBodyVariablesType>;
 
-export type CardImgProps<T extends ElementType> = PropsWithoutRef<ImgProps<T>, T, typeof CardImgVariablesEnum>;
+export type CardImgProps<T extends ElementType> = PropsWithoutRef<ImgProps<T>, T, CardImgVariablesType>;
 
-export type CardTitleProps<T extends ElementType> = PropsWithoutRef<TitleProps<T>, T, typeof CardTitleVariablesEnum>;
+export type CardTitleProps<T extends ElementType> = PropsWithoutRef<TitleProps<T>, T, CardTitleVariablesType>;
 
-export type CardSubtitleProps<T extends ElementType> = PropsWithoutRef<
-  SubtitleProps<T>,
-  T,
-  typeof CardSubtitleVariablesEnum
->;
+export type CardSubtitleProps<T extends ElementType> = PropsWithoutRef<SubtitleProps<T>, T, CardSubtitleVariablesType>;
 
-export type CardTextProps<T extends ElementType> = PropsWithoutRef<TextProps<T>, T, typeof CardTextVariablesEnum>;
+export type CardTextProps<T extends ElementType> = PropsWithoutRef<TextProps<T>, T, CardTextVariablesType>;
 
-export type CardLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, typeof CardLinkVariablesEnum>;
+export type CardLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, CardLinkVariablesType>;
 
-export type CardHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, typeof CardHeaderVariablesEnum>;
+export type CardHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, CardHeaderVariablesType>;
 
-export type CardFooterProps<T extends ElementType> = PropsWithoutRef<FooterProps<T>, T, typeof CardFooterVariablesEnum>;
+export type CardFooterProps<T extends ElementType> = PropsWithoutRef<FooterProps<T>, T, CardFooterVariablesType>;
 
-export type CardGroupProps<T extends ElementType> = PropsWithoutRef<GroupProps<T>, T, typeof CardGroupVariablesEnum>;
+export type CardGroupProps<T extends ElementType> = PropsWithoutRef<GroupProps<T>, T, CardGroupVariablesType>;

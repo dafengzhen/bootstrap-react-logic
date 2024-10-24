@@ -1,7 +1,7 @@
 import type { ElementType } from 'react';
-import type { BaseProps, LabelVariablesEnum, PropsWithoutRef } from '../tools';
+import type { BaseProps, LabelVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof LabelVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, LabelVariablesType> & {
   /**
    * colFormLabel.
    */
@@ -18,4 +18,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof LabelVariablesEnum> & {
   formCheckLabel?: boolean;
 };
 
-export type LabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof LabelVariablesEnum>;
+export type LabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, LabelVariablesType>;

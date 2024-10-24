@@ -1,7 +1,7 @@
 import type { ElementType } from 'react';
-import type { BaseProps, ButtonGroupVariablesEnum, PropsWithoutRef } from '../tools';
+import type { BaseProps, ButtonGroupVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof ButtonGroupVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, ButtonGroupVariablesType> & {
   /**
    * toolbar.
    */
@@ -18,4 +18,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof ButtonGroupVariablesEnum
   size?: 'lg' | 'sm';
 };
 
-export type ButtonGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof ButtonGroupVariablesEnum>;
+export type ButtonGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonGroupVariablesType>;

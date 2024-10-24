@@ -1,5 +1,5 @@
 import type { ElementType } from 'react';
-import type { BaseProps, PropsWithoutRef, SelectMultipleVariablesEnum, SlotValue } from '../tools';
+import type { BaseProps, PropsWithoutRef, SelectMultipleVariablesType, SlotValue } from '../tools';
 
 type SlotValueKeys =
   | 'mainContainer'
@@ -25,7 +25,7 @@ export interface IOption {
   text: string;
 }
 
-type Props<T extends ElementType> = BaseProps<T, typeof SelectMultipleVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & {
   /**
    * disabled.
    */
@@ -67,8 +67,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof SelectMultipleVariablesE
   onChange?: (value: (string | number)[]) => void;
 };
 
-export type SelectMultipleProps<T extends ElementType> = PropsWithoutRef<
-  Props<T>,
-  T,
-  typeof SelectMultipleVariablesEnum
->;
+export type SelectMultipleProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, SelectMultipleVariablesType>;

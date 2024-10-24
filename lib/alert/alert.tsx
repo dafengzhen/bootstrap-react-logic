@@ -1,13 +1,6 @@
 import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { AlertProps } from './types.ts';
-import {
-  AlertVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import AlertLink from './alert-link.tsx';
 import AlertHeading from './alert-heading.tsx';
 
@@ -27,6 +20,7 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
     fade,
     onClose,
     clickToClose = DEFAULTS.clickToClose,
+    closeButton,
     ...rest
   } = props;
 
@@ -89,15 +83,9 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
       isShowing && 'show',
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        return {
-          include: true,
-          transformedKey: AlertVariablesEnum[key] ? `${VARIABLE_BS_PREFIX}${AlertVariablesEnum[key]}` : key,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {
@@ -112,7 +100,12 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
     isVisible && (
       <AlertComponent {...rest} {...renderOptions} ref={alertElement}>
         {props.children}
-        {dismissible && <button type="button" className="btn-close" aria-label="Close" onClick={handleClose} />}
+        {dismissible &&
+          (closeButton ? (
+            closeButton({ close: handleClose })
+          ) : (
+            <button type="button" className="btn-close" aria-label="Close" onClick={handleClose} />
+          ))}
       </AlertComponent>
     )
   );

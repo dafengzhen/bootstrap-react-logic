@@ -1,14 +1,13 @@
 import { type ElementType, useCallback, useEffect, useMemo, useRef } from 'react';
 import type { CheckboxProps } from './types.ts';
 import {
-  CheckboxVariablesEnum,
+  clsxStyle,
   clsxUnique,
   clsxWithOptions,
-  filterAndTransformProperties,
+  convertBsKeyToVar,
   filterOptions,
   isValueValid,
   processSlotClasses,
-  VARIABLE_BS_PREFIX,
 } from '../tools';
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
@@ -43,16 +42,9 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-check-input', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = CheckboxVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

@@ -1,14 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { LabelProps } from './types.ts';
-import {
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  getFirstNonEmptyClass,
-  isValueValid,
-  LabelVariablesEnum,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, getFirstNonEmptyClass, isValueValid } from '../tools';
 
 const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<T>) {
   const {
@@ -35,16 +27,9 @@ const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<
         }),
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = LabelVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

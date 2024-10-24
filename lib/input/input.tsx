@@ -1,15 +1,14 @@
 import { type ElementRef, type ElementType, type HTMLInputTypeAttribute, type LegacyRef, useMemo } from 'react';
 import type { InputProps } from './types.ts';
 import {
+  clsxStyle,
   clsxUnique,
   clsxWithOptions,
-  filterAndTransformProperties,
+  convertBsKeyToVar,
   filterOptions,
   getFirstNonEmptyClass,
-  InputVariablesEnum,
   isValueValid,
   processSlotClasses,
-  VARIABLE_BS_PREFIX,
 } from '../tools';
 import inputStyles from './input.module.scss';
 
@@ -55,16 +54,9 @@ const Input = function Input<T extends ElementType = 'input'>(
       isInvalid && 'is-invalid',
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

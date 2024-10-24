@@ -1,7 +1,7 @@
 import type { ElementType } from 'react';
-import type { BaseProps, PropsWithoutRef, TextareaVariablesEnum } from '../tools';
+import type { BaseProps, PropsWithoutRef, TextareaVariablesType } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof TextareaVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, TextareaVariablesType> & {
   /**
    * isValid.
    */
@@ -13,4 +13,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof TextareaVariablesEnum> &
   isInvalid?: boolean;
 };
 
-export type TextareaProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof TextareaVariablesEnum>;
+export type TextareaProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, TextareaVariablesType>;

@@ -1,14 +1,14 @@
-import { type CSSProperties, type ElementType, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 import {
-  ButtonVariableEnum,
+  BS_PREFIX,
+  clsxStyle,
   clsxUnique,
-  filterAndTransformProperties,
+  convertBsKeyToVar,
   filterOptions,
   getValue,
   isValueValid,
   mapAndFilterStyles,
   RoundedClassEnum,
-  VARIABLE_BS_PREFIX,
 } from '../tools';
 import type { ButtonProps } from './types.ts';
 
@@ -57,25 +57,25 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
       rounded && getRoundedValue(rounded),
       className,
     );
+    const finalStyle = clsxStyle(
+      {
+        ...mapAndFilterStyles(
+          {
+            [`${BS_PREFIX}PaddingY`]: 'paddingY',
+            [`${BS_PREFIX}paddingX`]: 'paddingX',
+            [`${BS_PREFIX}fontSize`]: 'fontSize',
+          },
+          size,
+        ),
+        ...variables,
+        ...style,
+      },
+      true,
+      (_, key) => {
+        return convertBsKeyToVar(key);
+      },
+    );
 
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = ButtonVariableEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...mapAndFilterStyles(
-        {
-          [`${VARIABLE_BS_PREFIX}btn-padding-y`]: 'paddingY',
-          [`${VARIABLE_BS_PREFIX}btn-padding-x`]: 'paddingX',
-          [`${VARIABLE_BS_PREFIX}btn-font-size`]: 'fontSize',
-        },
-        size,
-      ),
-      ...style,
-    } as CSSProperties;
     const finalRole = getValue(role, Component === 'a' ? 'button' : undefined);
     const finalDisabled = getValue(Component === 'button' && disabled, Component === 'a' ? undefined : disabled);
     const finalAriaDisabled = getValue(ariaDisabled, disabled ? 'true' : undefined);

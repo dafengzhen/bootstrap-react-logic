@@ -1,14 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { CardImgProps } from './types.ts';
-import {
-  CardImgVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  getFirstNonEmptyClass,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, getFirstNonEmptyClass, isValueValid } from '../tools';
 
 const CardImg = function CardImg<T extends ElementType = 'img' | 'div'>(props: CardImgProps<T>) {
   const { as, dropOldClass, variables, className, style, top, bottom, overlay, ...rest } = props;
@@ -26,16 +18,9 @@ const CardImg = function CardImg<T extends ElementType = 'img' | 'div'>(props: C
 
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = CardImgVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

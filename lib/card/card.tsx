@@ -1,13 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { CardProps } from './types.ts';
-import {
-  CardVariablesEnum,
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import CardBody from './card-body.tsx';
 import CardImg from './card-img.tsx';
 import CardTitle from './card-title.tsx';
@@ -22,16 +15,9 @@ const Card = function Card<T extends ElementType = 'div'>(props: CardProps<T>) {
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = CardVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

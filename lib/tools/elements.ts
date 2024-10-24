@@ -17,7 +17,7 @@ export type BaseProps<T extends ElementType, V extends object> = {
   /**
    * variables.
    */
-  variables?: VariablesFromEnum<V>;
+  variables?: VariablesFromType<V>;
 };
 
 export type PropsWithoutRef<P, T extends ElementType, V extends object> = P &
@@ -38,8 +38,10 @@ export type OmittedPropsWithRef<P, T extends ElementType, V extends object, O ex
 export type OmittedPropsWithAs<P, T extends ElementType, V extends object, O extends keyof any> = P &
   (OmittedPropsWithoutRef<P, T, V, O> | OmittedPropsWithRef<P, T, V, O>);
 
-export type VariablesFromEnum<T extends object> = {
-  [key in keyof T]?: string | number;
-} & CSSProperties;
+export type AddPrefixToKeys<T extends object, Prefix extends string> = {
+  [K in keyof T as `${Prefix}${Capitalize<string & K>}`]: T[K];
+};
+
+export type VariablesFromType<T extends object> = AddPrefixToKeys<T, 'bs'> & CSSProperties;
 
 export type SlotValue = string | ((originalClass: string) => string | undefined);

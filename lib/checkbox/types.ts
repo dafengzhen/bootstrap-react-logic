@@ -1,9 +1,9 @@
 import type { ElementType } from 'react';
-import type { BaseProps, CheckboxVariablesEnum, PropsWithoutRef, SlotValue } from '../tools';
+import type { BaseProps, CheckboxVariablesType, PropsWithoutRef, SlotValue } from '../tools';
 
 type SlotValueKeys = 'container' | 'component' | 'label';
 
-type Props<T extends ElementType> = BaseProps<T, typeof CheckboxVariablesEnum> & {
+type Props<T extends ElementType> = BaseProps<T, CheckboxVariablesType> & {
   /**
    * indeterminate.
    */
@@ -45,4 +45,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof CheckboxVariablesEnum> &
   isInvalid?: boolean;
 };
 
-export type CheckboxProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof CheckboxVariablesEnum>;
+export type CheckboxProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CheckboxVariablesType>;

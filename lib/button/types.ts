@@ -1,23 +1,23 @@
 import type { ElementType, ReactNode } from 'react';
 import type {
   BaseProps,
-  ButtonVariableEnum,
-  OutlineEnum,
+  ButtonVariableType,
+  OutlineType,
   PropsWithoutRef,
   RoundedClassEnum,
-  VariantEnum,
+  VariantType,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, typeof ButtonVariableEnum> & {
+type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   /**
    * variant.
    */
-  variant?: keyof typeof VariantEnum;
+  variant?: keyof VariantType;
 
   /**
    * outline.
    */
-  outline?: keyof typeof OutlineEnum;
+  outline?: keyof OutlineType;
 
   /**
    * rounded.
@@ -62,4 +62,4 @@ type Props<T extends ElementType> = BaseProps<T, typeof ButtonVariableEnum> & {
   disabled?: boolean;
 };
 
-export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, typeof ButtonVariableEnum>;
+export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;

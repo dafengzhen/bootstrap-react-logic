@@ -11,15 +11,14 @@ import {
 } from 'react';
 import type { InputOtpProps } from './types.ts';
 import {
+  clsxStyle,
   clsxUnique,
-  filterAndTransformProperties,
+  convertBsKeyToVar,
   filterOptions,
   generateRandomId,
-  InputOtpVariablesEnum,
   isArray,
   isValueValid,
   mergeProps,
-  VARIABLE_BS_PREFIX,
 } from '../tools';
 import { Input } from '../input';
 
@@ -66,16 +65,9 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'd-flex gap-4', className);
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = InputOtpVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions({ className: finalClass, style: finalStyle }, isValueValid);
   }, [dropOldClass, className, variables, style]);

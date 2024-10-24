@@ -5,7 +5,9 @@
       "variant": "Variant",
       "onClose": "On Close",
       "clickToClose": "Click to Close",
-      "dismissible": "Dismissible"
+      "dismissible": "Dismissible",
+      "fade": "Fade",
+      "closeButton": "Close Button"
     }
   },
   "alertLink": {

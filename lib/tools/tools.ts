@@ -1,5 +1,5 @@
 import clsx, { type ClassValue } from 'clsx';
-import { EMPTY_GROUP_FLAG } from '@lib/tools/constants.ts';
+import { BS_PREFIX, EMPTY_GROUP_FLAG, VARIABLE_BS_PREFIX } from '@lib/tools/constants.ts';
 
 /**
  * A type that represents either a value of type T or a function returning a value of type T.
@@ -810,11 +810,104 @@ const toPascalCase = (str: string): string => {
     .join('');
 };
 
+/**
+ * Conditionally applies styles based on a given set of conditions and optional transformation logic.
+ *
+ * @param {Record<string, any>} [style={}] - An optional object where the keys represent style properties and the values represent style values.
+ * Defaults to an empty object if not provided.
+ * @param {Record<string, boolean | undefined> | boolean} [conditions] - An optional object mapping style property keys to booleans
+ * indicating whether they should be included. If a boolean is provided, `true` will include all keys, while `false` excludes all.
+ * @param {(value: any, key: string, style: Record<string, any>) => { include?: boolean; transformedKey: string } | string | boolean | undefined} [transformer] - An optional
+ * function that allows for custom logic to transform or filter style keys. The function should return either:
+ *   - `true`, `undefined` or an object with `include: true` to include the style.
+ *   - `false` or an object with `include: false` to exclude the style.
+ *   - A `string`, which will be treated as a new key for the style.
+ *   - An object with `transformedKey` to rename the key and an optional `include` flag to determine whether to include it.
+ *
+ * @returns {Record<string, any>} - A new object containing the filtered and/or transformed styles.
+ *
+ * @example
+ * const style = { color: 'red', fontSize: '12px' };
+ * const conditions = { color: true, fontSize: false };
+ * const transformedStyles = clsxStyle(style, conditions);
+ * // Result: { color: 'red' }
+ *
+ * @example
+ * const style = { color: 'blue', fontSize: '16px' };
+ * const transformer = (value, key, style) => key === 'color' ? 'textColor' : undefined;
+ * const transformedStyles = clsxStyle(style, true, transformer);
+ * // Result: { textColor: 'blue' }
+ */
+const clsxStyle = (
+  style: Record<string, any> = {},
+  conditions?: Record<string, boolean | undefined> | boolean,
+  transformer?: (
+    value: any,
+    key: string,
+    style: Record<string, any>,
+  ) =>
+    | {
+        include?: boolean;
+        transformedKey: string;
+      }
+    | string
+    | boolean
+    | undefined,
+): Record<string, any> => {
+  const finalStyle: Record<string, any> = {};
+
+  const conditionKeys =
+    typeof conditions === 'boolean'
+      ? conditions
+        ? Object.keys(style)
+        : []
+      : conditions
+        ? Object.keys(conditions).filter((key) => conditions[key])
+        : Object.keys(style);
+
+  conditionKeys.forEach((key) => {
+    const value = style[key];
+    const transformed = transformer ? transformer(value, key, style) : { include: true, transformedKey: key };
+
+    if (typeof transformed === 'string') {
+      finalStyle[transformed] = value;
+    } else if (transformed === undefined || transformed === true) {
+      finalStyle[key] = value;
+    } else if (typeof transformed === 'boolean' && transformed) {
+      finalStyle[key] = value;
+    } else if (typeof transformed === 'object' && (transformed.include === undefined || transformed.include)) {
+      finalStyle[transformed.transformedKey] = value;
+    }
+  });
+
+  return finalStyle;
+};
+
+/**
+ * Converts a Bootstrap key to a corresponding CSS variable.
+ *
+ * @param key The Bootstrap key to convert
+ * @returns The converted CSS variable if the key starts with the Bootstrap prefix, otherwise returns the original key
+ */
+const convertBsKeyToVar = (key: string): string => {
+  const prefix = BS_PREFIX;
+
+  if (key.startsWith(prefix)) {
+    const trimmedKey = key.slice(prefix.length);
+    const kebabKey = toKebabCase(trimmedKey);
+    return VARIABLE_BS_PREFIX + kebabKey;
+  }
+
+  return key;
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
+  clsxStyle,
   clsxUnique,
   clsxWithOptions,
+  convertBsKeyToVar,
   createLogger,
   deepMerge,
   filterAndTransformProperties,
@@ -837,7 +930,7 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
-  toKebabCase,
   toCamelCase,
+  toKebabCase,
   toPascalCase,
 };

@@ -1,13 +1,6 @@
 import { type ElementType, useMemo } from 'react';
 import type { SelectProps } from './types.ts';
-import {
-  clsxUnique,
-  filterAndTransformProperties,
-  filterOptions,
-  isValueValid,
-  SelectVariablesEnum,
-  VARIABLE_BS_PREFIX,
-} from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import SelectOption from './select-option.tsx';
 
 const Select = function Select<T extends ElementType = 'select'>(props: SelectProps<T>) {
@@ -34,16 +27,9 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
       size && `form-select-${size}`,
       className,
     );
-    const finalStyle = {
-      ...filterAndTransformProperties(variables, (_, key) => {
-        const _value = SelectVariablesEnum[key];
-        return {
-          include: true,
-          transformedKey: _value ? key : `${VARIABLE_BS_PREFIX}${_value}`,
-        };
-      }),
-      ...style,
-    };
+    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
+      return convertBsKeyToVar(key);
+    });
 
     return filterOptions(
       {

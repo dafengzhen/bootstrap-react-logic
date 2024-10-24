@@ -1,8 +1,8 @@
 {
-  "basic": "Basic",
-  "liveExample": "Live example",
-  "linkColor": "Link color",
-  "additionalContent": "Additional content",
-  "icons": "Icons",
-  "dismissing": "Dismissing"
+  "basic": "基础",
+  "liveExample": "实时示例",
+  "linkColor": "链接颜色",
+  "additionalContent": "附加内容",
+  "icons": "图标",
+  "dismissing": "关闭"
 }
