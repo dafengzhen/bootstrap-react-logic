@@ -294,6 +294,12 @@ export default function ButtonPage() {
             desc: tButtonComponentProps('button.desc.endContent'),
             default: '',
           },
+          {
+            attr: 'btnClose',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonComponentProps('button.desc.btnClose'),
+            default: '',
+          },
         ]}
       />
 

@@ -60,6 +60,11 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
    * disabled.
    */
   disabled?: boolean;
+
+  /**
+   * btnClose.
+   */
+  btnClose?: boolean;
 };
 
 export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;

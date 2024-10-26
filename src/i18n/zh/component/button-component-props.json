@@ -11,7 +11,8 @@
       "size": "大小",
       "rounded": "圆角",
       "startContent": "开始内容",
-      "endContent": "结束内容"
+      "endContent": "结束内容",
+      "btnClose": "类 (.btn-close)"
     }
   }
 }

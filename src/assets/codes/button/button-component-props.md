@@ -49,5 +49,10 @@ type Props = {
    * disabled.
    */
   disabled?: boolean;
+
+  /**
+   * btnClose.
+   */
+  btnClose?: boolean;
 };
 ```

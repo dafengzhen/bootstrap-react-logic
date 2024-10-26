@@ -13,5 +13,5 @@
   "p3": "想想看，使用组件库的目的是简化开发，而不是重写组件",
   "p4": "另一方面，dropOldClass 和 variables 属性更实用",
   "p5": "dropOldClass 属性可以删除基础类名。例如，<Button className=\"btn btn-info\">将被修改为<Button className=\"btn-info\">",
-  "p6": "同时，variables 属性允许我们自定义 CSS 变量，增强样式的灵活性"
+  "p6": "与此同时，variables 属性允许我们使用以 'bs' 开头的 Bootstrap 变量和自定义 CSS 变量，增强了样式的灵活性"
 }

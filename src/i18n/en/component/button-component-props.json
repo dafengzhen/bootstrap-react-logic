@@ -11,7 +11,8 @@
       "size": "Size",
       "rounded": "Rounded",
       "startContent": "Start Content",
-      "endContent": "End Content"
+      "endContent": "End Content",
+      "btnClose": "Class (.btn-close)"
     }
   }
 }

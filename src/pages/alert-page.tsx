@@ -251,6 +251,18 @@ export default function AlertPage() {
             desc: tAlertComponentProps('alert.desc.closeButton'),
             default: '',
           },
+          {
+            attr: 'closeButtonProps',
+            type: <span className="badge text-bg-secondary">ButtonProps&lt;button&gt;</span>,
+            desc: tAlertComponentProps('alert.desc.closeButtonProps'),
+            default: '',
+          },
+          {
+            attr: 'visible',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tAlertComponentProps('alert.desc.visible'),
+            default: '',
+          },
         ]}
       />
 

@@ -373,58 +373,53 @@ const isValueValid = (value: unknown): boolean => {
 };
 
 /**
- * Creates a logger with a given project name.
- * This logger provides methods to output warning messages for missing parameters.
+ * Initializes a logger with a specified project name.
+ * This logger includes methods for generating warnings about missing or incorrect parameters.
  *
- * @param {string} [projectName='BRL'] - The name of the project.
- * @returns {{ warnMissingParam: (options: { propertyName: string; componentName: string; expectedType?: string; level?: 'warn' | 'error' | 'info'; currentValue?: any; }) => void }} - An object containing the logging methods.
+ * @param {string} [project='BRL'] - Project name to prefix in log messages.
+ * @returns {{ logParamWarning: (options: { param: string; component: string; expectedType?: string; level?: 'warn' | 'error' | 'info'; currentValue?: any; customMessage?: string; }) => void }} - Logging methods.
  */
-const createLogger = (
-  projectName: string = 'BRL',
+const initializeLogger = (
+  project: string = 'BRL',
 ): {
-  warnMissingParam: (options: {
-    propertyName: string;
-    componentName: string;
+  logWarning: (options: {
+    param: string;
+    component: string;
     expectedType?: string;
     level?: 'warn' | 'error' | 'info';
     currentValue?: any;
+    message?: string;
   }) => void;
 } => {
-  type WarnOptions = {
-    propertyName: string;
-    componentName: string;
+  type LogOptions = {
+    param: string;
+    component: string;
     expectedType?: string;
     level?: 'warn' | 'error' | 'info';
     currentValue?: any;
+    message?: string;
   };
 
   /**
-   * Gets the current date and time in ISO string format.
+   * Logs a message for missing or incorrect parameters.
    *
-   * @returns {string} - The current date and time in ISO format.
+   * @param {LogOptions} options - Configuration object for the log message.
    */
-  const getCurrentDateTime = (): string => new Date().toISOString();
-
-  /**
-   * Logs a message when a parameter is missing or invalid.
-   *
-   * @param {WarnOptions} options - Options object for the warning.
-   */
-  const warnMissingParam = ({
-    propertyName,
-    componentName,
+  const logWarning = ({
+    param,
+    component,
     expectedType = 'string',
     level = 'warn',
     currentValue,
-  }: WarnOptions) => {
-    const dateTime = getCurrentDateTime();
-    const currentValStr = currentValue !== undefined ? `, current value is "${currentValue}"` : '';
-    const message = `[${projectName}] ${dateTime} ${level.toUpperCase()} ${componentName}: The parameter "${propertyName}" is missing${expectedType ? `, expected type is "${expectedType}"` : ''}${currentValStr}.`;
+    message: customMessage,
+  }: LogOptions) => {
+    const baseMessage = `Parameter "${param}" is missing${expectedType ? `, expected type: "${expectedType}"` : ''}${currentValue !== undefined ? `, current value: "${currentValue}"` : ''}.`;
+    const finalMessage = `[${project + '.' + component}] ${level.toUpperCase()} : ${customMessage || baseMessage}`;
 
-    console[level](message);
+    console[level](finalMessage);
   };
 
-  return { warnMissingParam };
+  return { logWarning };
 };
 
 /**
@@ -908,7 +903,7 @@ export {
   clsxUnique,
   clsxWithOptions,
   convertBsKeyToVar,
-  createLogger,
+  initializeLogger,
   deepMerge,
   filterAndTransformProperties,
   filterOptions,

@@ -6,8 +6,10 @@
       "onClose": "On Close",
       "clickToClose": "Click to Close",
       "dismissible": "Dismissible",
-      "fade": "Fade",
-      "closeButton": "Close Button"
+      "fade": "Class (.fade)",
+      "closeButton": "Close Button",
+      "closeButtonProps": "Close Button Props",
+      "visible": "Visible"
     }
   },
   "alertLink": {

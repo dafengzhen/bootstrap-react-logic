@@ -5,6 +5,7 @@ import {
   clsxUnique,
   convertBsKeyToVar,
   filterOptions,
+  getFirstNonEmptyClass,
   getValue,
   isValueValid,
   mapAndFilterStyles,
@@ -32,6 +33,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     rounded,
     'aria-disabled': ariaDisabled,
     'aria-pressed': ariaPressed,
+    'aria-label': ariaLabel,
     active,
     disabled,
     isLoading,
@@ -43,12 +45,17 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     variant,
     startContent,
     endContent,
+    btnClose,
     ...rest
   } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass && 'btn',
+      !dropOldClass &&
+        getFirstNonEmptyClass({
+          'btn-close': btnClose,
+          btn: true,
+        }),
       active && 'active',
       variant && `btn-${variant}`,
       outline && `btn-outline-${outline}`,
@@ -80,6 +87,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     const finalDisabled = getValue(Component === 'button' && disabled, Component === 'a' ? undefined : disabled);
     const finalAriaDisabled = getValue(ariaDisabled, disabled ? 'true' : undefined);
     const finalAriaPressed = getValue(ariaPressed, className?.includes('active') ? 'true' : undefined);
+    const finalAriaLabel = getValue(ariaLabel, 'Close');
     const finalTabIndex = getValue(tabIndex, Component === 'a' && disabled ? -1 : undefined);
 
     return filterOptions(
@@ -91,6 +99,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
         tabIndex: finalTabIndex,
         'aria-disabled': finalAriaDisabled,
         'aria-pressed': finalAriaPressed,
+        'aria-label': finalAriaLabel,
       },
       isValueValid,
     );
@@ -98,7 +107,9 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     Component,
     active,
     ariaDisabled,
+    ariaLabel,
     ariaPressed,
+    btnClose,
     className,
     disabled,
     dropOldClass,

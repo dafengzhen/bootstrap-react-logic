@@ -6,6 +6,7 @@ import type {
   BaseProps,
   PropsWithoutRef,
 } from '../tools';
+import type { ButtonProps } from '../button';
 
 type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
   /**
@@ -37,6 +38,16 @@ type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
    * closeButton.
    */
   closeButton?: ({ close }: { close: () => void }) => ReactNode;
+
+  /**
+   * closeButtonProps.
+   */
+  closeButtonProps?: ButtonProps<'button'>;
+
+  /**
+   * visible.
+   */
+  visible?: boolean;
 };
 
 type LinkProps<T extends ElementType> = BaseProps<T, AlertLinkVariablesType> & {};

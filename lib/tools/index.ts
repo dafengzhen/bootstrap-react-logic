@@ -58,7 +58,7 @@ export {
   clsxUnique,
   clsxWithOptions,
   convertBsKeyToVar,
-  createLogger,
+  initializeLogger,
   deepMerge,
   filterAndTransformProperties,
   filterOptions,
