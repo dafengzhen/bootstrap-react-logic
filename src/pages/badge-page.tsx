@@ -15,7 +15,7 @@ const codes = transformCodeObj(
   }),
 );
 
-export default function RangePage() {
+export default function BadgePage() {
   const navigation = useNavigation();
   const { t: tBadgeComponentProps } = useTranslation(['badgeComponentProps']);
   const { t: tBadgePage } = useTranslation(['badgePage']);

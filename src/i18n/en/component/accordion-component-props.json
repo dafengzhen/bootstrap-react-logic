@@ -1,0 +1,19 @@
+{
+  "accordion": {
+    "name": "Accordion",
+    "desc": {
+      "flush": "Flush",
+      "alwaysOpen": "Always open",
+      "options": "Options",
+      "onChange": "On change",
+      "collapsing": "Class (.collapsing)"
+    },
+    "options": {
+      "id": "ID",
+      "header": "Header",
+      "body": "Body",
+      "collapsed": "Collapsed",
+      "show": "Show"
+    }
+  }
+}

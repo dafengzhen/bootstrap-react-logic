@@ -35,7 +35,7 @@ const Badge = function Badge<T extends ElementType = 'span'>(props: BadgeProps<T
     );
   }, [className, dropOldClass, rounded, style, variables, variant, variantType]);
 
-  return <Component {...rest} {...renderOptions} as={Component} />;
+  return <Component {...rest} {...renderOptions} />;
 };
 
 Badge.displayName = 'BRL.Badge';

@@ -252,19 +252,22 @@ const parseJson = (input: string | any, callback?: (result: object, isString: bo
 
 /**
  * A utility function that returns the first parameter if it's not undefined.
- * If the first parameter is undefined, it returns the second parameter if provided.
- * If either of the parameters is a function, it evaluates the function
- * and uses its return value to make the comparison.
+ * If the first parameter is undefined, it checks the second parameter (if provided).
+ * If the second parameter is also undefined or evaluates to a falsy value,
+ * the function will return undefined.
+ * If either parameter is a function, it evaluates the function
+ * and uses its return value for the comparison.
  *
  * @param param1 - The first parameter, can be a value or a function returning a value.
  * @param param2 - The optional second parameter, can be a value or a function returning a value.
- * @returns The first parameter if it's defined, otherwise the second parameter if provided.
+ * @returns The first parameter if it's defined, otherwise the resolved value of the second parameter
+ *          if provided and truthy; otherwise, returns undefined.
  */
-const getValue = <T>(param1: MaybeFunction<T>, param2?: MaybeFunction<T>): T => {
+const getValue = <T>(param1: MaybeFunction<T>, param2?: MaybeFunction<T>): T | undefined => {
   const resolve = (val: MaybeFunction<T>): T => (typeof val === 'function' ? (val as () => T)() : val);
 
   const resolvedParam1 = resolve(param1);
-  return resolvedParam1 !== undefined ? resolvedParam1 : param2 ? resolve(param2) : resolvedParam1;
+  return resolvedParam1 !== undefined ? resolvedParam1 : param2 ? resolve(param2) || undefined : resolvedParam1;
 };
 
 /**
@@ -618,19 +621,17 @@ const generateRandomId = (length: number = 6): string => {
 };
 
 /**
- * Merges two objects' properties, where properties from the second object
- * will overwrite those in the first object.
+ * Merges two objects' properties and returns a new object.
  *
- * @template T - The type representing the first object's structure, which should be a record type.
- * @template R - The type representing the second object's structure, which should be a partial type of the first object.
- * @param {T} [props={}] - The first object to merge, defaults to an empty object.
- * @param {R} [replacement={}] - The second object to merge, defaults to an empty object.
- * @returns {T & R} - A new object containing the merged properties.
+ * @template T - The type of the original properties.
+ * @template R - The type of the replacement properties, defaults to a partial of T.
+ *
+ * @param {T} [props={}] - The original properties object to merge, defaults to an empty object.
+ * @param {R} [replacement={}] - The properties object to replace, defaults to an empty object.
+ *
+ * @returns {T & R} - A new object containing the merged original and replacement properties.
  */
-const mergeProps = <T extends Record<string, any>, R extends Partial<T>>(
-  props: T = {} as T,
-  replacement: R = {} as R,
-): T & R => {
+const mergeProps = <T, R extends Partial<T>>(props: T = {} as T, replacement: R = {} as R): T & R => {
   return { ...props, ...replacement } as T & R;
 };
 
@@ -844,7 +845,7 @@ const clsxStyle = (
   ) =>
     | {
         include?: boolean;
-        transformedKey: string;
+        transformedKey?: string;
       }
     | string
     | boolean
@@ -871,7 +872,11 @@ const clsxStyle = (
       finalStyle[key] = value;
     } else if (typeof transformed === 'boolean' && transformed) {
       finalStyle[key] = value;
-    } else if (typeof transformed === 'object' && (transformed.include === undefined || transformed.include)) {
+    } else if (
+      typeof transformed === 'object' &&
+      (transformed.include === undefined || transformed.include) &&
+      transformed.transformedKey
+    ) {
       finalStyle[transformed.transformedKey] = value;
     }
   });

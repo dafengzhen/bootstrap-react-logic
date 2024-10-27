@@ -76,27 +76,21 @@ export default function SelectPage() {
           options={[
             {
               text: 'Primary',
-              value: 1,
             },
             {
               text: 'Secondary',
-              value: 1,
             },
             {
               text: 'Success',
-              value: 1,
             },
             {
               text: 'Danger',
-              value: 2,
             },
             {
               text: 'Warning',
-              value: 3,
             },
             {
               text: 'Info',
-              value: 4,
             },
           ]}
         ></SelectMultiple>
@@ -109,29 +103,23 @@ export default function SelectPage() {
           options={[
             {
               text: 'Primary',
-              value: 1,
             },
             {
               text: 'Secondary',
-              value: 1,
               active: true,
             },
             {
               text: 'Success',
-              value: 1,
               disabled: true,
             },
             {
               text: 'Danger',
-              value: 2,
             },
             {
               text: 'Warning',
-              value: 3,
             },
             {
               text: 'Info',
-              value: 4,
             },
           ]}
         ></SelectMultiple>
@@ -141,29 +129,24 @@ export default function SelectPage() {
           options={[
             {
               text: 'Primary',
-              value: 1,
             },
             {
               text: 'Secondary',
-              value: 1,
               active: true,
             },
             {
               text: 'Success',
-              value: 1,
             },
             {
               text: 'Danger',
-              value: 2,
+
               active: true,
             },
             {
               text: 'Warning',
-              value: 3,
             },
             {
               text: 'Info',
-              value: 4,
             },
           ]}
         ></SelectMultiple>
@@ -173,30 +156,24 @@ export default function SelectPage() {
           options={[
             {
               text: 'Primary',
-              value: 1,
             },
             {
               text: 'Secondary',
-              value: 1,
               active: true,
             },
             {
               text: 'Success',
-              value: 1,
             },
             {
               divider: 'top',
               text: 'Danger',
-              value: 2,
             },
             {
               text: 'Warning',
-              value: 3,
               divider: 'bottom',
             },
             {
               text: 'Info',
-              value: 4,
             },
           ]}
         ></SelectMultiple>
@@ -207,34 +184,28 @@ export default function SelectPage() {
             {
               header: 'Status and Importance',
               text: 'Primary',
-              value: 1,
             },
             {
               header: 'Status and Importance',
               text: 'Secondary',
-              value: 1,
               active: true,
             },
             {
               header: 'Status and Importance',
               text: 'Success',
-              value: 1,
             },
             {
               header: 'Status and Importance',
               text: 'Danger',
-              value: 2,
               active: true,
             },
             {
               header: 'Warning and Information',
               text: 'Warning',
-              value: 3,
             },
             {
               header: 'Warning and Information',
               text: 'Info',
-              value: 4,
             },
           ]}
         ></SelectMultiple>
@@ -246,30 +217,24 @@ export default function SelectPage() {
           options={[
             {
               text: 'Primary',
-              value: 1,
             },
             {
               text: 'Secondary',
-              value: 1,
               active: true,
             },
             {
               text: 'Success',
-              value: 1,
               active: true,
             },
             {
               text: 'Danger',
-              value: 2,
               active: true,
             },
             {
               text: 'Warning',
-              value: 3,
             },
             {
               text: 'Info',
-              value: 4,
             },
           ]}
         ></SelectMultiple>
@@ -381,10 +346,6 @@ export default function SelectPage() {
             type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tSelectComponentProps('selectMultiple.options.id')} />
-                <OptionRow
-                  label="value?: string | number"
-                  value={tSelectComponentProps('selectMultiple.options.value')}
-                />
                 <OptionRow label="active?: boolean" value={tSelectComponentProps('selectMultiple.options.active')} />
                 <OptionRow
                   label="disabled?: boolean"
@@ -453,7 +414,7 @@ export default function SelectPage() {
           },
           {
             attr: 'onChange',
-            type: <span className="badge text-bg-secondary">(value: (string | number)[]) =&gt; void</span>,
+            type: <span className="badge text-bg-secondary">(id: (string | number)[]) =&gt; void</span>,
             desc: tSelectComponentProps('selectMultiple.desc.onChange'),
             default: '',
           },

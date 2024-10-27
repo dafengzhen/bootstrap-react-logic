@@ -14,6 +14,7 @@ import FloatingLabelPage from '@pages/floating-label-page.tsx';
 import CardPage from '@pages/card-page.tsx';
 import AlertPage from '@pages/alert-page.tsx';
 import BadgePage from '@pages/badge-page';
+import AccordionPage from '@pages/accordion-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -31,6 +32,7 @@ export enum MenuEnum {
   Card = '/pages/card',
   Alert = '/pages/alert',
   Badge = '/pages/badge',
+  Accordion = '/pages/accordion',
 }
 
 /**
@@ -94,6 +96,10 @@ const router = createBrowserRouter(
             {
               path: 'pages/badge',
               element: <BadgePage />,
+            },
+            {
+              path: 'pages/accordion',
+              element: <AccordionPage />,
             },
           ],
         },

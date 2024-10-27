@@ -1,5 +1,5 @@
 import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState } from 'react';
-import type { IOption, SelectMultipleProps } from './types.ts';
+import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 import {
   clsxStyle,
   clsxUnique,
@@ -53,7 +53,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     'optionItem' | 'selectButton'
   >;
   const [isOpen, setIsOpen] = useState(false);
-  const [options, setOptions] = useState<IOption[]>(initialOptions);
+  const [options, setOptions] = useState<SelectMultipleOption[]>(initialOptions);
 
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -99,7 +99,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     [single],
   );
   const onClickClearOption = useCallback(
-    (item: IOption) => {
+    (item: SelectMultipleOption) => {
       const index = options.findIndex((value) => value.id === item.id);
       if (index !== -1) {
         onClickSelectOption(index);
@@ -128,12 +128,6 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     );
   }, [dropOldClass, disabled, className, variables, style]);
 
-  useEffect(() => {
-    onChange?.(
-      getActiveOptions.filter((item) => isDefined(item.value)).map((item) => item.value) as (string | number)[],
-    );
-  }, [getActiveOptions, onChange]);
-
   const slotClassName = processSlotClasses(noParamContentClasses, {
     mainContainer: clsxWithOptions(
       null,
@@ -157,6 +151,10 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     topDivider: 'dropdown-divider',
     bottomDivider: 'dropdown-divider',
   });
+
+  useEffect(() => {
+    onChange?.(getActiveOptions.map((item) => item.id) as (string | number)[]);
+  }, [getActiveOptions, onChange]);
 
   return (
     <Component {...getReferenceProps()} {...rest} {...renderOptions} ref={refs.setReference}>

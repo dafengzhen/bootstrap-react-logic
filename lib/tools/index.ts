@@ -46,6 +46,11 @@ export type {
   AlertLinkVariablesType,
   AlertHeadingVariablesType,
   BadgeVariablesType,
+  AccordionVariablesType,
+  AccordionItemVariablesType,
+  AccordionHeaderVariablesType,
+  AccordionBodyVariablesType,
+  AccordionBasicVariablesType,
 } from './types.ts';
 
 export { BS_PREFIX, VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT, EMPTY_GROUP_FLAG } from './constants';

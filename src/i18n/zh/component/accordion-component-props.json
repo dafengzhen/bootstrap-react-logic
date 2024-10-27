@@ -1,0 +1,19 @@
+{
+  "accordion": {
+    "name": "Accordion",
+    "desc": {
+      "flush": "无间距",
+      "alwaysOpen": "始终打开",
+      "options": "选项",
+      "onChange": "变化时触发",
+      "collapsing": "类 (.collapsing)"
+    },
+    "options": {
+      "id": "标识符",
+      "header": "标题",
+      "body": "内容",
+      "collapsed": "折叠状态",
+      "show": "显示"
+    }
+  }
+}

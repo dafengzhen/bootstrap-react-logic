@@ -17,7 +17,6 @@ type SlotValue = string | ((originalClass: string) => string | undefined);
 
 interface IOption {
   id?: string | number;
-  value?: string | number;
   active?: boolean;
   disabled?: boolean;
   divider?: 'top' | 'bottom';

@@ -1,5 +1,5 @@
 import type { ElementType } from 'react';
-import type { BaseProps, PropsWithoutRef, SelectMultipleVariablesType, SlotValue } from '../tools';
+import type { BaseProps, OmittedPropsWithoutRef, SelectMultipleVariablesType, SlotValue } from '../tools';
 
 type SlotValueKeys =
   | 'mainContainer'
@@ -14,16 +14,6 @@ type SlotValueKeys =
   | 'optionItem'
   | 'selectButton'
   | 'bottomDivider';
-
-export interface IOption {
-  id?: string | number;
-  value?: string | number;
-  active?: boolean;
-  disabled?: boolean;
-  divider?: 'top' | 'bottom';
-  header?: string;
-  text: string;
-}
 
 type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & {
   /**
@@ -54,7 +44,7 @@ type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & 
   /**
    * options.
    */
-  options?: IOption[];
+  options?: SelectMultipleOption[];
 
   /**
    * contentClasses.
@@ -67,4 +57,18 @@ type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & 
   onChange?: (value: (string | number)[]) => void;
 };
 
-export type SelectMultipleProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, SelectMultipleVariablesType>;
+export interface SelectMultipleOption {
+  id?: string | number;
+  active?: boolean;
+  disabled?: boolean;
+  divider?: 'top' | 'bottom';
+  header?: string;
+  text: string;
+}
+
+export type SelectMultipleProps<T extends ElementType> = OmittedPropsWithoutRef<
+  Props<T>,
+  T,
+  SelectMultipleVariablesType,
+  'onChange'
+>;

@@ -621,6 +621,43 @@ type BadgeVariablesType = {
   badgeBorderRadius?: string;
 };
 
+type AccordionVariablesType = {
+  accordionPaddingY?: string;
+  accordionPaddingX?: string;
+  accordionColor?: string;
+  accordionBg?: string;
+  accordionBorderWidth?: string;
+  accordionBorderColor?: string;
+  accordionBorderRadius?: string;
+  accordionInnerBorderRadius?: string;
+  accordionBodyPaddingY?: string;
+  accordionBodyPaddingX?: string;
+  accordionButtonPaddingY?: string;
+  accordionButtonPaddingX?: string;
+  accordionButtonColor?: string;
+  accordionButtonBg?: string;
+  accordionTransition?: string;
+  accordionButtonActiveBg?: string;
+  accordionButtonActiveColor?: string;
+  accordionButtonFocusBorderColor?: string;
+  accordionButtonFocusBoxShadow?: string;
+  accordionIconWidth?: string;
+  accordionIconColor?: string;
+  accordionIconActiveColor?: string;
+  accordionIconTransition?: string;
+  accordionIconTransform?: string;
+  accordionButtonIcon?: string;
+  accordionButtonActiveIcon?: string;
+};
+
+type AccordionBasicVariablesType = AccordionVariablesType;
+
+type AccordionItemVariablesType = AccordionVariablesType;
+
+type AccordionHeaderVariablesType = AccordionVariablesType;
+
+type AccordionBodyVariablesType = AccordionVariablesType;
+
 export type {
   ButtonVariableType,
   VariantType,
@@ -654,4 +691,9 @@ export type {
   AlertLinkVariablesType,
   AlertHeadingVariablesType,
   BadgeVariablesType,
+  AccordionVariablesType,
+  AccordionItemVariablesType,
+  AccordionHeaderVariablesType,
+  AccordionBodyVariablesType,
+  AccordionBasicVariablesType,
 };

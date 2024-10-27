@@ -73,11 +73,11 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
       },
     );
 
-    const finalRole = getValue(role, Component === 'a' ? 'button' : undefined);
+    const finalRole = getValue(role, Component === 'a' && 'button');
     const finalDisabled = getValue(Component === 'button' && disabled, Component === 'a' ? undefined : disabled);
-    const finalAriaDisabled = getValue(ariaDisabled, disabled ? 'true' : undefined);
-    const finalAriaPressed = getValue(ariaPressed, className?.includes('active') ? 'true' : undefined);
-    const finalAriaLabel = getValue(ariaLabel, 'Close');
+    const finalAriaDisabled = getValue(ariaDisabled, disabled && 'true');
+    const finalAriaPressed = getValue(ariaPressed, active && 'true');
+    const finalAriaLabel = getValue(ariaLabel, btnClose && 'Close');
     const finalTabIndex = getValue(tabIndex, Component === 'a' && disabled ? -1 : undefined);
 
     return filterOptions(
