@@ -17,3 +17,4 @@ export * from './select-multiple';
 
 export * from './card';
 export * from './alert';
+export * from './badge';

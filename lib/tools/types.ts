@@ -612,6 +612,15 @@ type AlertHeadingVariablesType = {
   alertDismissiblePaddingR?: string;
 };
 
+type BadgeVariablesType = {
+  badgeFontSize?: string;
+  badgeFontWeight?: string;
+  badgeColor?: string;
+  badgePaddingY?: string;
+  badgePaddingX?: string;
+  badgeBorderRadius?: string;
+};
+
 export type {
   ButtonVariableType,
   VariantType,
@@ -644,4 +653,5 @@ export type {
   AlertVariablesType,
   AlertLinkVariablesType,
   AlertHeadingVariablesType,
+  BadgeVariablesType,
 };

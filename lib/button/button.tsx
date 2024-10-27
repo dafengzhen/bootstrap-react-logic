@@ -9,19 +9,9 @@ import {
   getValue,
   isValueValid,
   mapAndFilterStyles,
-  RoundedClassEnum,
+  resolveRoundedClass,
 } from '../tools';
 import type { ButtonProps } from './types.ts';
-
-function getRoundedValue(key?: keyof typeof RoundedClassEnum | boolean) {
-  if (key !== undefined) {
-    if (typeof key === 'boolean') {
-      return key ? 'rounded' : false;
-    } else {
-      return `rounded-${RoundedClassEnum[key]}`;
-    }
-  }
-}
 
 const Button = function Button<T extends ElementType = 'button' | 'a'>(props: ButtonProps<T>) {
   const {
@@ -61,7 +51,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
       outline && `btn-outline-${outline}`,
       typeof size === 'string' && `btn-${size}`,
       Component === 'a' && disabled && 'disabled',
-      rounded && getRoundedValue(rounded),
+      rounded && resolveRoundedClass(rounded),
       className,
     );
     const finalStyle = clsxStyle(

@@ -1,0 +1,11 @@
+{
+  "badge": {
+    "name": "Badge",
+    "desc": {
+      "as": "类型",
+      "variant": "变体",
+      "variantType": "变体类型",
+      "rounded": "圆角"
+    }
+  }
+}

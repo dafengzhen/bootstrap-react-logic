@@ -13,6 +13,7 @@ import RangePage from '@pages/range-page.tsx';
 import FloatingLabelPage from '@pages/floating-label-page.tsx';
 import CardPage from '@pages/card-page.tsx';
 import AlertPage from '@pages/alert-page.tsx';
+import BadgePage from '@pages/badge-page';
 
 /**
  * Configure sidebar menu.
@@ -29,6 +30,7 @@ export enum MenuEnum {
   FloatingLabel = '/pages/floating-label',
   Card = '/pages/card',
   Alert = '/pages/alert',
+  Badge = '/pages/badge',
 }
 
 /**
@@ -88,6 +90,10 @@ const router = createBrowserRouter(
             {
               path: 'pages/alert',
               element: <AlertPage />,
+            },
+            {
+              path: 'pages/badge',
+              element: <BadgePage />,
             },
           ],
         },

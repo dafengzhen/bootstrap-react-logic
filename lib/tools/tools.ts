@@ -1,5 +1,6 @@
 import clsx, { type ClassValue } from 'clsx';
-import { BS_PREFIX, EMPTY_GROUP_FLAG, VARIABLE_BS_PREFIX } from '@lib/tools/constants.ts';
+import { BS_PREFIX, EMPTY_GROUP_FLAG, VARIABLE_BS_PREFIX } from './constants.ts';
+import { RoundedClassEnum } from './enums.ts';
 
 /**
  * A type that represents either a value of type T or a function returning a value of type T.
@@ -896,6 +897,27 @@ const convertBsKeyToVar = (key: string): string => {
   return key;
 };
 
+/**
+ * Retrieves the rounded class value.
+ *
+ * @param key - An optional parameter that can be a key of `RoundedClassEnum` or a boolean.
+ *               - If `true`, returns `'rounded'`.
+ *               - If `false`, returns `false`.
+ *               - If a key of `RoundedClassEnum`, returns the corresponding rounded class string.
+ *               - If not provided, returns `undefined`.
+ *
+ * @returns The corresponding rounded class string or boolean value.
+ */
+const resolveRoundedClass = (key?: keyof typeof RoundedClassEnum | boolean) => {
+  if (key !== undefined) {
+    if (typeof key === 'boolean') {
+      return key && 'rounded';
+    } else {
+      return `rounded-${RoundedClassEnum[key]}`;
+    }
+  }
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
@@ -928,4 +950,5 @@ export {
   toCamelCase,
   toKebabCase,
   toPascalCase,
+  resolveRoundedClass,
 };
