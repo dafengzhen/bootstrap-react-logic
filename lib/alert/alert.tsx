@@ -19,32 +19,22 @@ const DEFAULTS = {
   clickToClose: true,
 };
 
-const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>) {
-  const {
-    as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    variant,
-    dismissible,
-    fade,
-    onClose,
-    clickToClose = DEFAULTS.clickToClose,
-    closeButton,
-    closeButtonProps,
-    visible,
-    ...rest
-  } = props;
-
-  const [isVisible, setIsVisible] = useState(true);
+const useAlertVisibility = (props: {
+  fade?: boolean;
+  visible?: boolean;
+  dismissible?: boolean;
+  clickToClose?: boolean;
+  onClose?: (close?: () => void) => void;
+}) => {
+  const { fade, visible, dismissible, clickToClose, onClose } = props;
+  const [isVisible, setIsVisible] = useState(!fade && typeof visible === 'boolean' ? visible : true);
   const [isShowing, setIsShowing] = useState(false);
   const alertElement = useRef<HTMLDivElement | null>(null);
   const isInit = useRef(false);
 
   if (!isInit.current) {
     isInit.current = true;
-    if (fade && typeof visible === 'boolean' && dismissible && clickToClose && typeof onClose !== 'function') {
+    if (typeof visible === 'boolean' && dismissible && clickToClose && typeof onClose !== 'function') {
       logWarning({
         param: 'visible',
         component: 'Alert',
@@ -63,7 +53,7 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
   }, [fade]);
 
   const handleClose = useCallback(() => {
-    if (fade && typeof visible === 'boolean' && dismissible) {
+    if (typeof visible === 'boolean' && dismissible) {
       onClose?.();
     } else {
       if (clickToClose) {
@@ -73,29 +63,7 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
         onClose?.(initiateClose);
       }
     }
-  }, [clickToClose, dismissible, fade, initiateClose, onClose, visible]);
-
-  const onClick = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      handleClose();
-      closeButtonProps?.onClick?.(e);
-    },
-    [closeButtonProps, handleClose],
-  );
-
-  const onTransitionEnd = useCallback(() => {
-    if (fade && isVisible && !isShowing) {
-      setIsVisible(false);
-    }
-  }, [fade, isShowing, isVisible]);
-
-  useEffect(() => {
-    if (fade && typeof visible === 'boolean' && visible && isVisible) {
-      requestAnimationFrame(() => {
-        setIsShowing(true);
-      });
-    }
-  }, [fade, visible, isVisible]);
+  }, [clickToClose, dismissible, initiateClose, onClose, visible]);
 
   useEffect(() => {
     if (typeof visible === 'boolean') {
@@ -108,23 +76,78 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
       } else {
         setIsVisible(visible);
       }
+    } else {
+      if (fade) {
+        setIsShowing(true);
+      }
     }
   }, [fade, visible]);
 
   useEffect(() => {
-    if (fade) {
-      setIsVisible(true);
-      setIsShowing(true);
+    if (!fade) {
+      return;
     }
-  }, [fade]);
 
-  useEffect(() => {
     const element = alertElement.current;
     if (element) {
+      const onTransitionEnd = () => {
+        if (typeof visible === 'boolean') {
+          if (!visible) {
+            setIsVisible(false);
+          }
+        } else if (!isShowing && isVisible) {
+          setIsVisible(false);
+        }
+      };
+
       element.addEventListener('transitionend', onTransitionEnd);
+
+      if (typeof visible === 'boolean' && visible) {
+        requestAnimationFrame(() => {
+          setIsShowing(true);
+        });
+      }
+
       return () => element.removeEventListener('transitionend', onTransitionEnd);
     }
-  }, [onTransitionEnd]);
+  }, [fade, visible, isVisible, isShowing]);
+
+  return { isVisible, isShowing, alertElement, handleClose };
+};
+
+const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>) {
+  const {
+    as: Component = 'div',
+    dropOldClass,
+    variables,
+    className,
+    style,
+    variant,
+    dismissible,
+    fade,
+    onClose,
+    clickToClose = DEFAULTS.clickToClose,
+    closeButton,
+    closeButtonProps,
+    visible,
+    ...rest
+  } = props;
+
+  const { isVisible, isShowing, alertElement, handleClose } = useAlertVisibility({
+    fade,
+    visible,
+    dismissible,
+    clickToClose,
+    onClose,
+  });
+
+  const onClick = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      handleClose();
+      closeButtonProps?.onClick?.(e);
+    },
+    [closeButtonProps, handleClose],
+  );
 
   const renderOptions = useMemo(() => {
     const finalClassName = clsxUnique(

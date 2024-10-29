@@ -16,10 +16,7 @@ function onClickShowLiveAlertTest() {
         dismissible
         clickToClose={false}
         onClose={(close) => {
-          console.log(item);
-          if (item > 1) {
-            close?.();
-          }
+          close?.();
         }}
       >
         <div>A simple primary alert—check it out!</div>
