@@ -658,6 +658,24 @@ type AccordionHeaderVariablesType = AccordionVariablesType;
 
 type AccordionBodyVariablesType = AccordionVariablesType;
 
+type BreadcrumbVariablesType = {
+  breadcrumbFontSize?: string;
+  breadcrumbPaddingY?: string;
+  breadcrumbPaddingX?: string;
+  breadcrumbItemPaddingX?: string;
+  breadcrumbMarginBottom?: string;
+  breadcrumbBg?: string;
+  breadcrumbDividerColor?: string;
+  breadcrumbActiveColor?: string;
+  breadcrumbDivider?: string;
+  breadcrumbDividerFlipped?: string;
+  breadcrumbBorderRadius?: string;
+};
+
+type BreadcrumbBasicVariablesType = BreadcrumbVariablesType;
+
+type BreadcrumbItemVariablesType = BreadcrumbVariablesType;
+
 export type {
   ButtonVariableType,
   VariantType,
@@ -696,4 +714,7 @@ export type {
   AccordionHeaderVariablesType,
   AccordionBodyVariablesType,
   AccordionBasicVariablesType,
+  BreadcrumbVariablesType,
+  BreadcrumbBasicVariablesType,
+  BreadcrumbItemVariablesType,
 };

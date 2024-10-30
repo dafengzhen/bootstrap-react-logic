@@ -1,0 +1,14 @@
+{
+  "breadcrumb": {
+    "name": "Breadcrumb",
+    "desc": {
+      "options": "Options",
+      "onClick": "On click"
+    },
+    "options": {
+      "id": "ID",
+      "title": "Title",
+      "active": "Active"
+    }
+  }
+}
