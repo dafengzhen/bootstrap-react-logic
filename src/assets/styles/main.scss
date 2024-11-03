@@ -2,6 +2,8 @@
 
 $transition-fade: opacity 0.4s linear;
 
+$carousel-transition-duration: 0.6s;
+
 /// === bootstrap ===
 @import 'bootstrap';
 
@@ -185,4 +187,26 @@ pre code.hljs {
 * {
   font-size: 16px;
   // font-family: 'Raleway', serif;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  text-anchor: middle;
+}
+
+.bd-placeholder-img-lg {
+  font-size: calc(1.475rem + 2.7vw);
+}
+
+@media (min-width: 1200px) {
+  .bd-placeholder-img-lg {
+    * {
+      font-size: inherit;
+    }
+
+    font-size: 3.5rem;
+  }
 }

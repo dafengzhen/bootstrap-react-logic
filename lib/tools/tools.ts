@@ -923,6 +923,43 @@ const resolveRoundedClass = (key?: keyof typeof RoundedClassEnum | boolean) => {
   }
 };
 
+/**
+ * A utility function to calculate a looping index.
+ *
+ * @param currentIndex - The current index, must be between 0 and totalLength-1.
+ * @param totalLength - The total length, representing the range of available indices.
+ * @param step - The step size for moving, can be positive or negative.
+ * @returns The new index after looping, always between 0 and totalLength-1.
+ */
+const calculateLoopIndex = (currentIndex: number, totalLength: number, step: number): number => {
+  step = step % totalLength;
+  const newIndex = (currentIndex + step) % totalLength;
+  return newIndex < 0 ? newIndex + totalLength : newIndex;
+};
+
+/**
+ * Determines the direction between two indices in a circular array.
+ *
+ * @param {number} currentIndex - The index of the current item.
+ * @param {number} targetIndex - The index of the target item.
+ * @param {number} totalItems - The total number of items in the array.
+ * @returns {Object} An object containing two boolean properties:
+ *                   - isNext: true if the targetIndex is the next item.
+ *                   - isPrev: true if the targetIndex is the previous item.
+ */
+const getLoopIndexDirection = (
+  currentIndex: number,
+  targetIndex: number,
+  totalItems: number,
+): {
+  isNext: boolean;
+  isPrev: boolean;
+} => {
+  const isNext = (targetIndex - currentIndex + totalItems) % totalItems === 1;
+  const isPrev = (currentIndex - targetIndex + totalItems) % totalItems === 1;
+  return { isNext, isPrev };
+};
+
 export {
   camelToKebab,
   checkObjectProperties,
@@ -956,4 +993,6 @@ export {
   toKebabCase,
   toPascalCase,
   resolveRoundedClass,
+  calculateLoopIndex,
+  getLoopIndexDirection,
 };

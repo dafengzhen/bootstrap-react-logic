@@ -676,6 +676,35 @@ type BreadcrumbBasicVariablesType = BreadcrumbVariablesType;
 
 type BreadcrumbItemVariablesType = BreadcrumbVariablesType;
 
+type CarouselVariablesType = {
+  carouselControlColor?: string;
+  carouselControlWidth?: string;
+  carouselControlOpacity?: string;
+  carouselControlHoverOpacity?: string;
+  carouselControlTransition?: string;
+  carouselIndicatorWidth?: string;
+  carouselIndicatorHeight?: string;
+  carouselIndicatorHitAreaHeight?: string;
+  carouselIndicatorSpacer?: string;
+  carouselIndicatorOpacity?: string;
+  carouselIndicatorActiveBg?: string;
+  carouselIndicatorActiveOpacity?: string;
+  carouselIndicatorTransition?: string;
+  carouselCaptionWidth?: string;
+  carouselCaptionColor?: string;
+  carouselCaptionPaddingY?: string;
+  carouselCaptionSpacer?: string;
+  carouselControlIconWidth?: string;
+  carouselControlPrevIconBg?: string;
+  carouselControlNextIconBg?: string;
+  carouselTransitionDuration?: string;
+  carouselTransition?: string;
+};
+
+type CarouselItemVariablesType = CarouselVariablesType;
+
+type CarouselCaptionVariablesType = CarouselVariablesType;
+
 export type {
   ButtonVariableType,
   VariantType,
@@ -717,4 +746,7 @@ export type {
   BreadcrumbVariablesType,
   BreadcrumbBasicVariablesType,
   BreadcrumbItemVariablesType,
+  CarouselVariablesType,
+  CarouselItemVariablesType,
+  CarouselCaptionVariablesType,
 };

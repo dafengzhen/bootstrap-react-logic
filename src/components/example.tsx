@@ -19,6 +19,7 @@ export default function Example({
   wrap,
   textNowrap,
   alignItemsCenter,
+  dark,
 }: {
   hash: string;
   state: any;
@@ -38,6 +39,7 @@ export default function Example({
   wrap?: boolean;
   textNowrap?: boolean;
   alignItemsCenter?: boolean;
+  dark?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -95,6 +97,7 @@ export default function Example({
       toggleCode={toggleCode}
       code={code}
       codeLanguage={codeLanguage}
+      dark={dark}
     >
       <div
         className={clsx(

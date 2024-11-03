@@ -1,0 +1,10 @@
+{
+  "basic": "基本",
+  "indicators": "指示器",
+  "captions": "字幕",
+  "crossfade": "淡入淡出",
+  "autoplayingCarousels": "自动播放轮播",
+  "individualCarouselItemInterval": "单个轮播项间隔",
+  "autoplayingCarouselsWithoutControls": "无控件的自动播放轮播",
+  "darkVariant": "深色变体"
+}

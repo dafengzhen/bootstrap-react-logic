@@ -1,23 +1,19 @@
 ```ts
+export interface IOption {
+  id?: string | number;
+  title?: ReactNode;
+  active?: boolean;
+}
+
 type Props = {
   /**
-   * as.
+   * options.
    */
-  as?: 'span';
+  options?: IOption[];
 
   /**
-   * variant.
+   * onClick.
    */
-  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
-
-  /**
-   * variantType.
-   */
-  variantType?: 'text' | 'bg';
-
-  /**
-   * rounded.
-   */
-  rounded?: keyof typeof RoundedClassEnum | boolean;
+  onClick?: (id: string | number, event: MouseEvent<HTMLLIElement>) => void;
 };
 ```

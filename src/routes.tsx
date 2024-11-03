@@ -16,6 +16,7 @@ import AlertPage from '@pages/alert-page.tsx';
 import BadgePage from '@pages/badge-page';
 import AccordionPage from '@pages/accordion-page.tsx';
 import BreadcrumbPage from '@pages/breadcrumb-page.tsx';
+import CarouselPage from '@pages/carousel-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -35,6 +36,7 @@ export enum MenuEnum {
   Badge = '/pages/badge',
   Accordion = '/pages/accordion',
   Breadcrumb = '/pages/breadcrumb',
+  Carousel = '/pages/carousel',
 }
 
 /**
@@ -106,6 +108,10 @@ const router = createBrowserRouter(
             {
               path: 'pages/breadcrumb',
               element: <BreadcrumbPage />,
+            },
+            {
+              path: 'pages/carousel',
+              element: <CarouselPage />,
             },
           ],
         },

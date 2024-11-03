@@ -1,0 +1,23 @@
+{
+  "carousel": {
+    "name": "Carousel",
+    "desc": {
+      "slide": "Slide",
+      "fade": "Fade",
+      "options": "Options",
+      "controls": "Controls",
+      "indicators": "Indicators",
+      "onChange": "On change",
+      "ride": "Ride",
+      "pause": "Pause",
+      "touch": "Touch"
+    },
+    "options": {
+      "id": "ID",
+      "item": "Item",
+      "caption": "Caption",
+      "active": "Active",
+      "interval": "Interval"
+    }
+  }
+}

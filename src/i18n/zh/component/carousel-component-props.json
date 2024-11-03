@@ -1,0 +1,23 @@
+{
+  "carousel": {
+    "name": "Carousel",
+    "desc": {
+      "slide": "滑动",
+      "fade": "淡出",
+      "options": "选项",
+      "controls": "控件",
+      "indicators": "指示器",
+      "onChange": "变化时触发",
+      "ride": "轮播方式",
+      "pause": "暂停",
+      "touch": "触摸"
+    },
+    "options": {
+      "id": "标识符",
+      "item": "项",
+      "caption": "字幕",
+      "active": "激活",
+      "interval": "间隔"
+    }
+  }
+}
