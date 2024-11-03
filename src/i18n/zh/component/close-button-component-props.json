@@ -1,0 +1,9 @@
+{
+  "closeButton": {
+    "name": "CloseButton",
+    "desc": {
+      "disabled": "禁用",
+      "ariaLabel": "ARIA 标签"
+    }
+  }
+}

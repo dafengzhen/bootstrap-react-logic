@@ -37,6 +37,17 @@ type ButtonVariableType = {
   btnActiveBorderTintAmount?: string;
 };
 
+type CloseButtonVariableType = {
+  btnCloseColor?: string;
+  btnCloseBg?: string;
+  btnCloseOpacity?: string;
+  btnCloseHoverOpacity?: string;
+  btnCloseFocusShadow?: string;
+  btnCloseFocusOpacity?: string;
+  btnCloseDisabledOpacity?: string;
+  btnCloseWhiteFilter?: string;
+};
+
 type VariantType = {
   primary?: string;
   secondary?: string;
@@ -706,47 +717,48 @@ type CarouselItemVariablesType = CarouselVariablesType;
 type CarouselCaptionVariablesType = CarouselVariablesType;
 
 export type {
-  ButtonVariableType,
-  VariantType,
-  OutlineType,
-  InputVariablesType,
-  InputOtpVariablesType,
-  LabelVariablesType,
-  TextVariablesType,
-  TextareaVariablesType,
-  ButtonGroupVariablesType,
-  InputGroupVariablesType,
-  InputGroupTextVariablesType,
-  SelectVariablesType,
-  SelectOptionVariablesType,
-  SelectMultipleVariablesType,
-  CheckboxVariablesType,
-  RadioVariablesType,
-  RangeVariablesType,
-  FloatingLabelVariablesType,
-  CardVariablesType,
-  CardBodyVariablesType,
-  CardImgVariablesType,
-  CardTitleVariablesType,
-  CardSubtitleVariablesType,
-  CardTextVariablesType,
-  CardLinkVariablesType,
-  CardHeaderVariablesType,
-  CardFooterVariablesType,
-  CardGroupVariablesType,
-  AlertVariablesType,
-  AlertLinkVariablesType,
-  AlertHeadingVariablesType,
-  BadgeVariablesType,
-  AccordionVariablesType,
-  AccordionItemVariablesType,
-  AccordionHeaderVariablesType,
-  AccordionBodyVariablesType,
   AccordionBasicVariablesType,
-  BreadcrumbVariablesType,
+  AccordionBodyVariablesType,
+  AccordionHeaderVariablesType,
+  AccordionItemVariablesType,
+  AccordionVariablesType,
+  AlertHeadingVariablesType,
+  AlertLinkVariablesType,
+  AlertVariablesType,
+  BadgeVariablesType,
   BreadcrumbBasicVariablesType,
   BreadcrumbItemVariablesType,
-  CarouselVariablesType,
-  CarouselItemVariablesType,
+  BreadcrumbVariablesType,
+  ButtonGroupVariablesType,
+  ButtonVariableType,
+  CardBodyVariablesType,
+  CardFooterVariablesType,
+  CardGroupVariablesType,
+  CardHeaderVariablesType,
+  CardImgVariablesType,
+  CardLinkVariablesType,
+  CardSubtitleVariablesType,
+  CardTextVariablesType,
+  CardTitleVariablesType,
+  CardVariablesType,
   CarouselCaptionVariablesType,
+  CarouselItemVariablesType,
+  CarouselVariablesType,
+  CheckboxVariablesType,
+  CloseButtonVariableType,
+  FloatingLabelVariablesType,
+  InputGroupTextVariablesType,
+  InputGroupVariablesType,
+  InputOtpVariablesType,
+  InputVariablesType,
+  LabelVariablesType,
+  OutlineType,
+  RadioVariablesType,
+  RangeVariablesType,
+  SelectMultipleVariablesType,
+  SelectOptionVariablesType,
+  SelectVariablesType,
+  TextVariablesType,
+  TextareaVariablesType,
+  VariantType,
 };

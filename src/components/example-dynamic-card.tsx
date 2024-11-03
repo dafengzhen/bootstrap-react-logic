@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ExampleLink from '@components/example-link.tsx';
 import { ActionIcons } from '@components/action-icons.tsx';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
+import clsx from 'clsx';
 
 export default function ExampleDynamicCard({
   title,
@@ -31,7 +32,7 @@ export default function ExampleDynamicCard({
 
   if (dark) {
     return (
-      <div className="card" data-bs-theme={dark ? 'dark' : ''}>
+      <div className="card">
         <div className="card-header">
           <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
             <ExampleLink title={title} hash={hash} />
@@ -49,7 +50,15 @@ export default function ExampleDynamicCard({
             />
           </div>
         </div>
-        <div className="card-body">{children}</div>
+        <div className={clsx('card-body', dark && 'p-1')}>
+          {dark ? (
+            <div className="card" data-bs-theme="dark">
+              <div className="card-body">{children}</div>
+            </div>
+          ) : (
+            children
+          )}
+        </div>
         {isOpen && (
           <div className="card-footer">
             <pre>

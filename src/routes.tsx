@@ -17,6 +17,7 @@ import BadgePage from '@pages/badge-page';
 import AccordionPage from '@pages/accordion-page.tsx';
 import BreadcrumbPage from '@pages/breadcrumb-page.tsx';
 import CarouselPage from '@pages/carousel-page.tsx';
+import CloseButtonPage from '@pages/close-button-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -37,6 +38,7 @@ export enum MenuEnum {
   Accordion = '/pages/accordion',
   Breadcrumb = '/pages/breadcrumb',
   Carousel = '/pages/carousel',
+  CloseButton = '/pages/close-button',
 }
 
 /**
@@ -112,6 +114,10 @@ const router = createBrowserRouter(
             {
               path: 'pages/carousel',
               element: <CarouselPage />,
+            },
+            {
+              path: 'pages/close-button',
+              element: <CloseButtonPage />,
             },
           ],
         },

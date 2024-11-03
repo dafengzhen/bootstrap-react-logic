@@ -2,6 +2,7 @@ import type { ElementType, ReactNode } from 'react';
 import type {
   BaseProps,
   ButtonVariableType,
+  CloseButtonVariableType,
   OutlineType,
   PropsWithoutRef,
   RoundedClassEnum,
@@ -67,4 +68,13 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   btnClose?: boolean;
 };
 
+type CloseProps<T extends ElementType> = BaseProps<T, CloseButtonVariableType> & {
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+};
+
 export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;
+
+export type CloseButtonProps<T extends ElementType> = PropsWithoutRef<CloseProps<T>, T, CloseButtonVariableType>;

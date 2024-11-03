@@ -1,0 +1,9 @@
+{
+  "closeButton": {
+    "name": "CloseButton",
+    "desc": {
+      "disabled": "Disabled",
+      "ariaLabel": "ARIA Label"
+    }
+  }
+}
