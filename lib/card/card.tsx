@@ -11,10 +11,10 @@ import CardHeader from './card-header.tsx';
 import CardFooter from './card-footer.tsx';
 
 const Card = function Card<T extends ElementType = 'div'>(props: CardProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
+  const { as: Component = 'div', dropOldClass, variables, className, style, cardBody, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'card', className);
+    const finalClass = clsxUnique(!dropOldClass && 'card', cardBody && '.card-body', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -26,7 +26,7 @@ const Card = function Card<T extends ElementType = 'div'>(props: CardProps<T>) {
       },
       isValueValid,
     );
-  }, [dropOldClass, className, variables, style]);
+  }, [cardBody, className, dropOldClass, style, variables]);
 
   return <Component {...rest} {...renderOptions}></Component>;
 };

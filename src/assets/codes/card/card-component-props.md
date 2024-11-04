@@ -1,3 +1,8 @@
 ```ts
-type Props = {};
+type Props = {
+  /**
+   * cardBody.
+   */
+  cardBody?: boolean;
+};
 ```

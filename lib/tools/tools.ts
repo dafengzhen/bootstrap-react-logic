@@ -960,22 +960,39 @@ const getLoopIndexDirection = (
   return { isNext, isPrev };
 };
 
+/**
+ * Capitalizes the first letter of a given string.
+ *
+ * @param str - The input string to be modified.
+ * @returns A new string with the first letter capitalized.
+ *
+ * @example
+ * // Returns "Hello"
+ * capitalizeFirstLetter("hello");
+ */
+const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export {
+  calculateLoopIndex,
   camelToKebab,
+  capitalizeFirstLetter,
   checkObjectProperties,
   clsxStyle,
   clsxUnique,
   clsxWithOptions,
   convertBsKeyToVar,
-  initializeLogger,
   deepMerge,
   filterAndTransformProperties,
   filterOptions,
   filterTransformAndExcludeProperties,
   generateRandomId,
   getFirstNonEmptyClass,
+  getLoopIndexDirection,
   getValue,
   groupByProperty,
+  initializeLogger,
   isArray,
   isDefined,
   isNumber,
@@ -989,10 +1006,8 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
+  resolveRoundedClass,
   toCamelCase,
   toKebabCase,
   toPascalCase,
-  resolveRoundedClass,
-  calculateLoopIndex,
-  getLoopIndexDirection,
 };

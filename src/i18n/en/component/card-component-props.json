@@ -1,6 +1,9 @@
 {
   "card": {
-    "name": "Card"
+    "name": "Card",
+    "desc": {
+      "cardBody": "Class (.card-body)"
+    }
   },
   "cardBody": {
     "name": "CardBody"

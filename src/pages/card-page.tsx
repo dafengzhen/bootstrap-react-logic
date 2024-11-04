@@ -1398,10 +1398,10 @@ export default function CardPage() {
         t={tCardComponentProps}
         items={[
           {
-            attr: '-',
-            type: '-',
-            desc: '-',
-            default: '-',
+            attr: 'cardBody',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tCardComponentProps('card.desc.cardBody'),
+            default: '',
           },
         ]}
       />

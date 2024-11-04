@@ -1,0 +1,10 @@
+{
+  "collapse": {
+    "name": "Collapse",
+    "desc": {
+      "collapsing": "Collapsing",
+      "visible": "Visible",
+      "horizontal": "Horizontal"
+    }
+  }
+}

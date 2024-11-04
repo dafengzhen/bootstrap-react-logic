@@ -1,6 +1,9 @@
 {
   "card": {
-    "name": "Card"
+    "name": "Card",
+    "desc": {
+      "cardBody": "类 (.card-body)"
+    }
   },
   "cardBody": {
     "name": "CardBody"

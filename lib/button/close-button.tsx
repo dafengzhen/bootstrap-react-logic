@@ -1,21 +1,13 @@
 import { type ElementType, useMemo } from 'react';
 import type { CloseButtonProps } from './types.ts';
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import Button from './button.tsx';
 
 const CloseButton = function CloseButton<T extends ElementType = 'button'>(props: CloseButtonProps<T>) {
-  const {
-    as: Component = 'button',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    'aria-label': ariaLabel = 'Close',
-    disabled,
-    ...rest
-  } = props;
+  const { as: Component = 'button', variables, className, style, disabled, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'btn-close', className);
+    const finalClass = clsxUnique(className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -24,14 +16,13 @@ const CloseButton = function CloseButton<T extends ElementType = 'button'>(props
       {
         className: finalClass,
         style: finalStyle,
-        'aria-label': ariaLabel,
         disabled,
       },
       isValueValid,
     );
-  }, [ariaLabel, className, disabled, dropOldClass, style, variables]);
+  }, [className, disabled, style, variables]);
 
-  return <Component {...rest} {...renderOptions} />;
+  return <Button as={Component as 'button'} btnClose {...rest} {...renderOptions} />;
 };
 
 CloseButton.displayName = 'BRL.CloseButton';

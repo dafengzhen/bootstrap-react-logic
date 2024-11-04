@@ -43,6 +43,7 @@ export type {
   CarouselVariablesType,
   CheckboxVariablesType,
   CloseButtonVariableType,
+  CollapseVariablesType,
   FloatingLabelVariablesType,
   InputGroupTextVariablesType,
   InputGroupVariablesType,
@@ -67,6 +68,7 @@ export { RoundedClassEnum } from './enums';
 export {
   calculateLoopIndex,
   camelToKebab,
+  capitalizeFirstLetter,
   checkObjectProperties,
   clsxStyle,
   clsxUnique,

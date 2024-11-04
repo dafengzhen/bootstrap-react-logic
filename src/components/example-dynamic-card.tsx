@@ -29,6 +29,7 @@ export default function ExampleDynamicCard({
   const { fullscreen, layout, theme } = globalContext;
   const { i18n } = useTranslation();
   const [setElement] = useHighlightCode({ isOpen, code, codeLanguage });
+  const isDark = (theme as any)[0] as 'dark' | 'light';
 
   if (dark) {
     return (
@@ -50,9 +51,9 @@ export default function ExampleDynamicCard({
             />
           </div>
         </div>
-        <div className={clsx('card-body', dark && 'p-1')}>
+        <div className={clsx('card-body', dark && (isDark === 'dark' ? 'p-0' : 'p-1'))}>
           {dark ? (
-            <div className="card" data-bs-theme="dark">
+            <div className={clsx(isDark !== 'dark' && 'card')} data-bs-theme="dark">
               <div className="card-body">{children}</div>
             </div>
           ) : (

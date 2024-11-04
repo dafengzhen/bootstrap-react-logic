@@ -14,7 +14,12 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, CardVariablesType> & {};
+type Props<T extends ElementType> = BaseProps<T, CardVariablesType> & {
+  /**
+   * cardBody.
+   */
+  cardBody?: boolean;
+};
 
 type BodyProps<T extends ElementType> = BaseProps<T, CardBodyVariablesType> & {};
 

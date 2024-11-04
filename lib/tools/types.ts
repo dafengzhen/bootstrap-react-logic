@@ -716,6 +716,11 @@ type CarouselItemVariablesType = CarouselVariablesType;
 
 type CarouselCaptionVariablesType = CarouselVariablesType;
 
+type CollapseVariablesType = {
+  transitionCollapse?: string;
+  transitionCollapseWidth?: string;
+};
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -746,6 +751,7 @@ export type {
   CarouselVariablesType,
   CheckboxVariablesType,
   CloseButtonVariableType,
+  CollapseVariablesType,
   FloatingLabelVariablesType,
   InputGroupTextVariablesType,
   InputGroupVariablesType,

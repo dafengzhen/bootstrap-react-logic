@@ -1,0 +1,10 @@
+{
+  "collapse": {
+    "name": "Collapse",
+    "desc": {
+      "collapsing": "类 (.collapsing)",
+      "visible": "可见",
+      "horizontal": "水平"
+    }
+  }
+}
