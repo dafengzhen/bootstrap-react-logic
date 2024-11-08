@@ -1,0 +1,22 @@
+{
+  "listGroup": {
+    "name": "List Group",
+    "desc": {
+      "options": "Options",
+      "flush": "Flush",
+      "numbered": "Numbered",
+      "horizontal": "Horizontal",
+      "itemAction": "Item Action"
+    },
+    "options": {
+      "id": "ID",
+      "item": "Item",
+      "active": "Active",
+      "disabled": "Disabled",
+      "props": "Properties",
+      "flexFill": "Flex Fill",
+      "variant": "Variant",
+      "itemAction": "Item Action"
+    }
+  }
+}

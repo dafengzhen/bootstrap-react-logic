@@ -56,7 +56,7 @@ type HeaderProps<T extends ElementType> = BaseProps<T, AccordionHeaderVariablesT
   /**
    * buttonProps.
    */
-  buttonProps?: ButtonProps<'button'>;
+  buttonProps?: ButtonProps<ElementType>;
 };
 
 type BodyProps<T extends ElementType> = BaseProps<T, AccordionBodyVariablesType> & {

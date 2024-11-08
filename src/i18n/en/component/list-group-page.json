@@ -1,0 +1,14 @@
+{
+  "basic": "Basic",
+  "activeItems": "Active Items",
+  "disabledItems": "Disabled Items",
+  "linksAndButtons": "Links and Buttons",
+  "flush": "Flush",
+  "numbered": "Numbered",
+  "horizontal": "Horizontal",
+  "variants": "Variants",
+  "forLinksAndButtons": "For Links and Buttons",
+  "withBadges": "With Badges",
+  "customContent": "Custom Content",
+  "checkboxesAndRadios": "Checkboxes and Radios"
+}

@@ -21,6 +21,8 @@ export default function Example({
   alignItemsCenter,
   dark,
   inline,
+  gap3,
+  mw400,
 }: {
   hash: string;
   state: any;
@@ -42,6 +44,8 @@ export default function Example({
   alignItemsCenter?: boolean;
   dark?: boolean;
   inline?: boolean;
+  gap3?: boolean;
+  mw400?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -103,12 +107,14 @@ export default function Example({
     >
       <div
         className={clsx(
-          parentClassName ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'} gap-2`,
+          parentClassName ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'}`,
           overflowXAuto && 'overflow-x-auto',
           row ? 'flex-row' : 'flex-column',
           wrap && 'flex-wrap',
           textNowrap && 'text-nowrap',
           alignItemsCenter && 'align-items-center',
+          gap3 ? 'gap-3' : 'gap-2',
+          mw400 && 'tw-w-[400px]',
         )}
       >
         {children}

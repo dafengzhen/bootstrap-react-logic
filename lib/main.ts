@@ -23,3 +23,4 @@ export * from './breadcrumb';
 export * from './carousel';
 export * from './collapse';
 export * from './dropdown';
+export * from './list-group';

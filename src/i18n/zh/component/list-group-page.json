@@ -1,0 +1,14 @@
+{
+  "basic": "基本",
+  "activeItems": "激活项",
+  "disabledItems": "禁用项",
+  "linksAndButtons": "链接和按钮",
+  "flush": "无间距",
+  "numbered": "编号",
+  "horizontal": "水平",
+  "variants": "变体",
+  "forLinksAndButtons": "用于链接和按钮",
+  "withBadges": "带徽章",
+  "customContent": "自定义内容",
+  "checkboxesAndRadios": "复选框和单选框"
+}

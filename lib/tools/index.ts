@@ -66,6 +66,8 @@ export type {
   TextVariablesType,
   TextareaVariablesType,
   VariantType,
+  ListGroupVariablesType,
+  ListGroupItemVariablesType,
 } from './types.ts';
 
 export { BS_PREFIX, VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT, EMPTY_GROUP_FLAG } from './constants';

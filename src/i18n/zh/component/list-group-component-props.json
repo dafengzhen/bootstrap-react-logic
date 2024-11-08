@@ -1,0 +1,22 @@
+{
+  "listGroup": {
+    "name": "ListGroup",
+    "desc": {
+      "options": "选项",
+      "flush": "无间距",
+      "numbered": "编号",
+      "horizontal": "水平",
+      "itemAction": "项目操作"
+    },
+    "options": {
+      "id": "标识",
+      "item": "项目",
+      "active": "激活",
+      "disabled": "禁用",
+      "props": "属性",
+      "flexFill": "弹性填充",
+      "variant": "变体",
+      "itemAction": "项目操作"
+    }
+  }
+}

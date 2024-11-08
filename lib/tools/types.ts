@@ -759,6 +759,30 @@ type DropdownDividerVariablesType = DropdownVariablesType;
 
 type DropdownHeaderVariablesType = DropdownVariablesType;
 
+type ListGroupVariablesType = {
+  listGroupColor?: string;
+  listGroupBg?: string;
+  listGroupBorderColor?: string;
+  listGroupBorderWidth?: string;
+  listGroupBorderRadius?: string;
+  listGroupItemPaddingY?: string;
+  listGroupItemPaddingX?: string;
+  listGroupItemBgScale?: string;
+  listGroupItemColorScale?: string;
+  listGroupHoverBg?: string;
+  listGroupActiveColor?: string;
+  listGroupActiveBg?: string;
+  listGroupActiveBorderColor?: string;
+  listGroupDisabledColor?: string;
+  listGroupDisabledBg?: string;
+  listGroupActionColor?: string;
+  listGroupActionHoverColor?: string;
+  listGroupActionActiveColor?: string;
+  listGroupActionActiveBg?: string;
+};
+
+type ListGroupItemVariablesType = ListGroupVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -812,4 +836,6 @@ export type {
   TextVariablesType,
   TextareaVariablesType,
   VariantType,
+  ListGroupVariablesType,
+  ListGroupItemVariablesType,
 };

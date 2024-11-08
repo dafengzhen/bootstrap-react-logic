@@ -26,12 +26,12 @@ type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
   /**
    * toggleProps.
    */
-  toggleProps?: ButtonProps<'button' | 'a'>;
+  toggleProps?: ButtonProps<ElementType>;
 
   /**
    * buttonProps.
    */
-  buttonProps?: ButtonProps<'button' | 'a'>;
+  buttonProps?: ButtonProps<ElementType>;
 
   /**
    * split.
@@ -76,7 +76,7 @@ type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
   /**
    * menuProps.
    */
-  menuProps?: DropdownMenuProps<'ul'>;
+  menuProps?: DropdownMenuProps<ElementType>;
 
   /**
    * customMenu.

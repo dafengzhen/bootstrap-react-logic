@@ -16,7 +16,7 @@ type Props<T extends ElementType> = BaseProps<T, InputOtpVariablesType> & {
   /**
    * inputProps.
    */
-  inputProps?: Omit<InputProps<'input'>, 'key' | 'value' | 'defaultValue'>;
+  inputProps?: InputProps<ElementType>;
 };
 
 export type InputOtpProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, InputOtpVariablesType>;

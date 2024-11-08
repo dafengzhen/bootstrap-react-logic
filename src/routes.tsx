@@ -20,6 +20,7 @@ import CarouselPage from '@pages/carousel-page.tsx';
 import CloseButtonPage from '@pages/close-button-page.tsx';
 import CollapsePage from '@pages/collapse-page.tsx';
 import DropdownPage from '@pages/dropdown-page.tsx';
+import ListGroupPage from '@pages/list-group-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -43,6 +44,7 @@ export enum MenuEnum {
   CloseButton = '/pages/close-button',
   Collapse = '/pages/collapse',
   Dropdown = '/pages/dropdown',
+  ListGroup = '/pages/list-group',
 }
 
 /**
@@ -130,6 +132,10 @@ const router = createBrowserRouter(
             {
               path: 'pages/dropdown',
               element: <DropdownPage />,
+            },
+            {
+              path: 'pages/list-group',
+              element: <ListGroupPage />,
             },
           ],
         },

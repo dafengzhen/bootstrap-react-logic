@@ -42,7 +42,7 @@ type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
   /**
    * closeButtonProps.
    */
-  closeButtonProps?: ButtonProps<'button'>;
+  closeButtonProps?: ButtonProps<ElementType>;
 
   /**
    * visible.
