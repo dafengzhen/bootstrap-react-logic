@@ -6,7 +6,6 @@ import {
   convertBsKeyToVar,
   filterOptions,
   getFirstNonEmptyClass,
-  getValue,
   isValueValid,
   mapAndFilterStyles,
   resolveRoundedClass,
@@ -38,6 +37,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     btnClose,
     show,
     onRef,
+    type = 'button',
     ...rest
   } = props;
 
@@ -76,23 +76,16 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
       },
     );
 
-    const finalRole = getValue(role, Component === 'a' && 'button');
-    const finalDisabled = getValue(Component === 'button' && disabled, Component === 'a' ? undefined : disabled);
-    const finalAriaDisabled = getValue(ariaDisabled, disabled && 'true');
-    const finalAriaPressed = getValue(ariaPressed, active && 'true');
-    const finalAriaLabel = getValue(ariaLabel, btnClose && 'Close');
-    const finalTabIndex = getValue(tabIndex, Component === 'a' && disabled ? -1 : undefined);
-
     return filterOptions(
       {
         className: finalClass,
         style: finalStyle,
-        role: finalRole,
-        disabled: finalDisabled,
-        tabIndex: finalTabIndex,
-        'aria-disabled': finalAriaDisabled,
-        'aria-pressed': finalAriaPressed,
-        'aria-label': finalAriaLabel,
+        role: role ?? (Component === 'a' && 'button'),
+        disabled: disabled && Component === 'button',
+        tabIndex: tabIndex ?? (Component === 'a' && disabled && -1),
+        'aria-disabled': ariaDisabled ?? (disabled ? 'true' : 'false'),
+        'aria-pressed': ariaPressed ?? (active ? 'true' : 'false'),
+        'aria-label': ariaLabel ?? (btnClose && 'Close'),
       },
       isValueValid,
     );
@@ -118,7 +111,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
   ]);
 
   return (
-    <Component {...rest} {...renderOptions} ref={onRef}>
+    <Component type={type} {...rest} {...renderOptions} ref={onRef}>
       {isLoading && !startContent && (
         <>
           <span className="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
