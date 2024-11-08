@@ -1,0 +1,35 @@
+{
+  "dropdown": {
+    "name": "Dropdown",
+    "desc": {
+      "options": "选项",
+      "toggle": "切换",
+      "toggleProps": "切换属性",
+      "buttonProps": "按钮属性",
+      "split": "分割",
+      "btnGroup": "按钮组",
+      "center": "居中",
+      "dropup": "向上弹出",
+      "dropupCenter": "居中向上弹出",
+      "dropend": "向右弹出",
+      "dropstart": "向左弹出",
+      "strategy": "策略",
+      "menuProps": "菜单属性",
+      "customMenu": "自定义菜单",
+      "offset": "偏移",
+      "autoClose": "自动关闭",
+      "visible": "可见"
+    },
+    "options": {
+      "id": "标识",
+      "item": "项目",
+      "itemText": "项目文本",
+      "href": "链接",
+      "divider": "分隔线",
+      "active": "激活",
+      "as": "类型",
+      "disabled": "禁用",
+      "header": "标题"
+    }
+  }
+}

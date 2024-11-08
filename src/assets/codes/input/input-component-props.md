@@ -55,6 +55,6 @@ type Props = {
   /**
    * onRef.
    */
-  onRef?: LegacyRef<ElementRef<T>>;
+  onRef?: RefCallback<ElementRef<'input'>>;
 };
 ```

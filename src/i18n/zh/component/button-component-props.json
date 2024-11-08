@@ -7,12 +7,14 @@
       "outline": "轮廓",
       "disabled": "禁用",
       "active": "激活",
+      "show": "显示",
       "isLoading": "正在加载",
       "size": "大小",
       "rounded": "圆角",
       "startContent": "开始内容",
       "endContent": "结束内容",
-      "btnClose": "类 (.btn-close)"
+      "btnClose": "类 (.btn-close)",
+      "onRef": "引用"
     }
   }
 }

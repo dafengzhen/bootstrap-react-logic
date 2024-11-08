@@ -1,0 +1,23 @@
+{
+  "basic": "基本",
+  "splitButton": "分割按钮",
+  "sizing": "尺寸",
+  "darkDropdowns": "深色下拉菜单",
+  "centered": "居中",
+  "dropup": "向上弹出",
+  "dropupCentered": "居中向上弹出",
+  "dropend": "向右弹出",
+  "dropstart": "向左弹出",
+  "menuItems": "菜单项",
+  "active": "激活",
+  "disabled": "禁用",
+  "menuAlignment": "菜单对齐",
+  "responsiveAlignment": "响应式对齐",
+  "alignmentOptions": "对齐选项",
+  "headers": "标题",
+  "dividers": "分隔线",
+  "text": "文本",
+  "forms": "表单",
+  "dropdownOptions": "下拉选项",
+  "autoCloseBehavior": "自动关闭行为"
+}

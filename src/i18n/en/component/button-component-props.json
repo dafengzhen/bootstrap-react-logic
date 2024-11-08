@@ -7,12 +7,14 @@
       "outline": "Outline",
       "disabled": "Disabled",
       "active": "Active",
+      "show": "Show",
       "isLoading": "Is Loading",
       "size": "Size",
       "rounded": "Rounded",
       "startContent": "Start Content",
       "endContent": "End Content",
-      "btnClose": "Class (.btn-close)"
+      "btnClose": "Class (.btn-close)",
+      "onRef": "On Ref"
     }
   }
 }

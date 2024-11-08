@@ -20,6 +20,7 @@ export default function Example({
   textNowrap,
   alignItemsCenter,
   dark,
+  inline,
 }: {
   hash: string;
   state: any;
@@ -40,6 +41,7 @@ export default function Example({
   textNowrap?: boolean;
   alignItemsCenter?: boolean;
   dark?: boolean;
+  inline?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -101,7 +103,7 @@ export default function Example({
     >
       <div
         className={clsx(
-          parentClassName ? parentClassName : 'd-flex gap-2',
+          parentClassName ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'} gap-2`,
           overflowXAuto && 'overflow-x-auto',
           row ? 'flex-row' : 'flex-column',
           wrap && 'flex-wrap',

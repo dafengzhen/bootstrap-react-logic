@@ -974,6 +974,33 @@ const capitalizeFirstLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+/**
+ * Returns the key of the first property in the object with a truthy value.
+ * If all values are falsy, it returns the default value.
+ *
+ * @param obj - The object to check, with properties that may have truthy or falsy values
+ * @param defaultValue - The default value to return if all properties have falsy values
+ * @returns {string} - The key of the first truthy property or the default value
+ *
+ * @example
+ * const obj = { a: false, b: 0, c: null, d: 'value' };
+ * const result = getTruthyKeyOrDefault(obj, 'default');
+ * // result is 'd'
+ *
+ * @example
+ * const obj = { a: false, b: 0, c: null };
+ * const result = getTruthyKeyOrDefault(obj, 'default');
+ * // result is 'default'
+ */
+const getTruthyKeyOrDefault = <T extends Record<string, any>>(obj: T, defaultValue: string): string => {
+  for (const key in obj) {
+    if (obj[key]) {
+      return key;
+    }
+  }
+  return defaultValue;
+};
+
 export {
   calculateLoopIndex,
   camelToKebab,
@@ -990,6 +1017,7 @@ export {
   generateRandomId,
   getFirstNonEmptyClass,
   getLoopIndexDirection,
+  getTruthyKeyOrDefault,
   getValue,
   groupByProperty,
   initializeLogger,

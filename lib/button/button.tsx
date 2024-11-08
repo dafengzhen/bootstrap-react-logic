@@ -15,7 +15,7 @@ import type { ButtonProps } from './types.ts';
 
 const Button = function Button<T extends ElementType = 'button' | 'a'>(props: ButtonProps<T>) {
   const {
-    as: Component = 'button',
+    as: Component = 'button' as ElementType,
     dropOldClass,
     children,
     className,
@@ -36,6 +36,8 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     startContent,
     endContent,
     btnClose,
+    show,
+    onRef,
     ...rest
   } = props;
 
@@ -47,6 +49,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
           btn: true,
         }),
       active && 'active',
+      show && 'show',
       variant && `btn-${variant}`,
       outline && `btn-outline-${outline}`,
       typeof size === 'string' && `btn-${size}`,
@@ -106,6 +109,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     outline,
     role,
     rounded,
+    show,
     size,
     style,
     tabIndex,
@@ -114,7 +118,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
   ]);
 
   return (
-    <Component {...rest} {...renderOptions}>
+    <Component {...rest} {...renderOptions} ref={onRef}>
       {isLoading && !startContent && (
         <>
           <span className="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>

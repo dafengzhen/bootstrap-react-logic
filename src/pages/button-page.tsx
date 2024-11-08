@@ -260,6 +260,12 @@ export default function ButtonPage() {
             default: '',
           },
           {
+            attr: 'show',
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tButtonComponentProps('button.desc.show'),
+            default: '',
+          },
+          {
             attr: 'isLoading',
             type: <span className="badge text-bg-secondary">boolean</span>,
             desc: tButtonComponentProps('button.desc.isLoading'),
@@ -298,6 +304,12 @@ export default function ButtonPage() {
             attr: 'btnClose',
             type: <span className="badge text-bg-secondary">boolean</span>,
             desc: tButtonComponentProps('button.desc.btnClose'),
+            default: '',
+          },
+          {
+            attr: 'onRef',
+            type: <span className="badge text-bg-secondary">onRef?: RefCallback</span>,
+            desc: tButtonComponentProps('button.desc.onRef'),
             default: '',
           },
         ]}

@@ -31,6 +31,11 @@ type Props = {
   active?: boolean;
 
   /**
+   * show.
+   */
+  show?: boolean;
+
+  /**
    * isLoading.
    */
   isLoading?: boolean;
@@ -54,5 +59,10 @@ type Props = {
    * btnClose.
    */
   btnClose?: boolean;
+
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback;
 };
 ```

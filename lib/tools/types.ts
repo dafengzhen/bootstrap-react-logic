@@ -716,10 +716,48 @@ type CarouselItemVariablesType = CarouselVariablesType;
 
 type CarouselCaptionVariablesType = CarouselVariablesType;
 
-type CollapseVariablesType = {
-  transitionCollapse?: string;
-  transitionCollapseWidth?: string;
+type CollapseVariablesType = object;
+
+type DropdownVariablesType = {
+  dropdownZindex?: string;
+  dropdownMinWidth?: string;
+  dropdownPaddingX?: string;
+  dropdownPaddingY?: string;
+  dropdownSpacer?: string;
+  dropdownFontSize?: string;
+  dropdownColor?: string;
+  dropdownBg?: string;
+  dropdownBorderColor?: string;
+  dropdownBorderRadius?: string;
+  dropdownBorderWidth?: string;
+  dropdownInnerBorderRadius?: string;
+  dropdownDividerBg?: string;
+  dropdownDividerMarginY?: string;
+  dropdownBoxShadow?: string;
+  dropdownLinkColor?: string;
+  dropdownLinkHoverColor?: string;
+  dropdownLinkHoverBg?: string;
+  dropdownLinkActiveColor?: string;
+  dropdownLinkActiveBg?: string;
+  dropdownLinkDisabledColor?: string;
+  dropdownItemPaddingX?: string;
+  dropdownItemPaddingY?: string;
+  dropdownHeaderColor?: string;
+  dropdownHeaderPaddingX?: string;
+  dropdownHeaderPaddingY?: string;
 };
+
+type DropdownToggleVariablesType = DropdownVariablesType;
+
+type DropdownItemVariablesType = DropdownVariablesType;
+
+type DropdownItemTextVariablesType = DropdownVariablesType;
+
+type DropdownMenuVariablesType = DropdownVariablesType;
+
+type DropdownDividerVariablesType = DropdownVariablesType;
+
+type DropdownHeaderVariablesType = DropdownVariablesType;
 
 export type {
   AccordionBasicVariablesType,
@@ -752,6 +790,13 @@ export type {
   CheckboxVariablesType,
   CloseButtonVariableType,
   CollapseVariablesType,
+  DropdownDividerVariablesType,
+  DropdownHeaderVariablesType,
+  DropdownItemTextVariablesType,
+  DropdownItemVariablesType,
+  DropdownMenuVariablesType,
+  DropdownToggleVariablesType,
+  DropdownVariablesType,
   FloatingLabelVariablesType,
   InputGroupTextVariablesType,
   InputGroupVariablesType,

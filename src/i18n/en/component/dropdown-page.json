@@ -1,0 +1,23 @@
+{
+  "basic": "Basic",
+  "splitButton": "Split Button",
+  "sizing": "Sizing",
+  "darkDropdowns": "Dark Dropdowns",
+  "centered": "Centered",
+  "dropup": "Dropup",
+  "dropupCentered": "Dropup Centered",
+  "dropend": "Dropend",
+  "dropstart": "Dropstart",
+  "menuItems": "Menu Items",
+  "active": "Active",
+  "disabled": "Disabled",
+  "menuAlignment": "Menu Alignment",
+  "responsiveAlignment": "Responsive Alignment",
+  "alignmentOptions": "Alignment Options",
+  "headers": "Headers",
+  "dividers": "Dividers",
+  "text": "Text",
+  "forms": "Forms",
+  "dropdownOptions": "Dropdown Options",
+  "autoCloseBehavior": "Auto-Close Behavior"
+}

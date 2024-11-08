@@ -1,0 +1,35 @@
+{
+  "dropdown": {
+    "name": "Dropdown",
+    "desc": {
+      "options": "Options",
+      "toggle": "Toggle",
+      "toggleProps": "Toggle Properties",
+      "buttonProps": "Button Properties",
+      "split": "Split",
+      "btnGroup": "Button Group",
+      "center": "Center",
+      "dropup": "Dropup",
+      "dropupCenter": "Dropup Center",
+      "dropend": "Dropend",
+      "dropstart": "Dropstart",
+      "strategy": "Strategy",
+      "menuProps": "Menu Properties",
+      "customMenu": "Custom Menu",
+      "offset": "Offset",
+      "autoClose": "Auto Close",
+      "visible": "Visible"
+    },
+    "options": {
+      "id": "ID",
+      "item": "Item",
+      "itemText": "Item Text",
+      "href": "Link",
+      "divider": "Divider",
+      "active": "Active",
+      "as": "Type",
+      "disabled": "Disabled",
+      "header": "Header"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import type { ElementType, ReactNode } from 'react';
+import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
 import type {
   BaseProps,
   ButtonVariableType,
@@ -66,6 +66,16 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
    * btnClose.
    */
   btnClose?: boolean;
+
+  /**
+   * show.
+   */
+  show?: boolean;
+
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<ElementRef<T>>;
 };
 
 type CloseProps<T extends ElementType> = BaseProps<T, CloseButtonVariableType> & {
