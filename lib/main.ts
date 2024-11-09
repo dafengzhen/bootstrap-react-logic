@@ -24,3 +24,4 @@ export * from './carousel';
 export * from './collapse';
 export * from './dropdown';
 export * from './list-group';
+export * from './modal';

@@ -1006,6 +1006,36 @@ const getTruthyKeyOrDefault = <T extends Record<string, any>>(obj: T, defaultVal
   return defaultValue;
 };
 
+/**
+ * Calculates the width of the scrollbar on the current page and optionally
+ * appends a specified unit.
+ *
+ * This function calculates the difference between the inner width of the
+ * window (including the scrollbar) and the client width of the document
+ * (excluding the scrollbar). If a unit is specified, it returns the width
+ * as a string with the unit appended. If no unit is provided, it returns
+ * the width as a number.
+ *
+ * @param {string} [unit] - Optional unit to append to the scrollbar width.
+ *                          Example: "px", "%", "em".
+ * @returns {number | string} The width of the scrollbar in pixels, either as
+ *                            a number or a string with the specified unit.
+ */
+const getScrollbarWidth = (unit?: string): number | string => {
+  let width = window.innerWidth - document.body.clientWidth + '';
+
+  if (width === '0') {
+    const lastScrollbarWidth = document.body.dataset.lastScrollbarWidth;
+    if (lastScrollbarWidth) {
+      width = lastScrollbarWidth;
+    }
+  } else {
+    document.body.dataset.lastScrollbarWidth = width;
+  }
+
+  return unit ? width + unit : width;
+};
+
 export {
   calculateLoopIndex,
   camelToKebab,
@@ -1043,4 +1073,5 @@ export {
   toCamelCase,
   toKebabCase,
   toPascalCase,
+  getScrollbarWidth,
 };

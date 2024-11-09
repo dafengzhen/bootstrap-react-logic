@@ -783,6 +783,54 @@ type ListGroupVariablesType = {
 
 type ListGroupItemVariablesType = ListGroupVariablesType;
 
+type ModalVariablesType = {
+  modalInnerPadding?: string;
+  modalFooterMarginBetween?: string;
+  modalDialogMargin?: string;
+  modalDialogMarginYSmUp?: string;
+  modalTitleLineHeight?: string;
+  modalContentColor?: string;
+  modalContentBg?: string;
+  modalContentBorderColor?: string;
+  modalContentBorderWidth?: string;
+  modalContentBorderRadius?: string;
+  modalContentInnerBorderRadius?: string;
+  modalContentBoxShadowXs?: string;
+  modalContentBoxShadowSmUp?: string;
+  modalBackdropBg?: string;
+  modalBackdropOpacity?: string;
+  modalHeaderBorderColor?: string;
+  modalHeaderBorderWidth?: string;
+  modalHeaderPaddingY?: string;
+  modalHeaderPaddingX?: string;
+  modalHeaderPadding?: string;
+  modalFooterBg?: string;
+  modalFooterBorderColor?: string;
+  modalFooterBorderWidth?: string;
+  modalSm?: string;
+  modalMd?: string;
+  modalLg?: string;
+  modalXl?: string;
+  modalFadeTransform?: string;
+  modalShowTransform?: string;
+  modalTransition?: string;
+  modalScaleTransform?: string;
+};
+
+type ModalDialogVariablesType = ModalVariablesType;
+
+type ModalContentVariablesType = ModalVariablesType;
+
+type ModalHeaderVariablesType = ModalVariablesType;
+
+type ModalFooterVariablesType = ModalVariablesType;
+
+type ModalTitleVariablesType = ModalVariablesType;
+
+type ModalBodyVariablesType = ModalVariablesType;
+
+type ModalBackdropVariablesType = ModalVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -838,4 +886,12 @@ export type {
   VariantType,
   ListGroupVariablesType,
   ListGroupItemVariablesType,
+  ModalVariablesType,
+  ModalDialogVariablesType,
+  ModalContentVariablesType,
+  ModalHeaderVariablesType,
+  ModalFooterVariablesType,
+  ModalTitleVariablesType,
+  ModalBodyVariablesType,
+  ModalBackdropVariablesType,
 };

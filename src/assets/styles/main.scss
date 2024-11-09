@@ -210,3 +210,18 @@ pre code.hljs {
     font-size: 3.5rem;
   }
 }
+
+.bd-example-row [class^='col'],
+.bd-example-cols [class^='col'] > *,
+.bd-example-cssgrid [class*='grid'] > * {
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background-color: rgba(var(--bd-violet-rgb), 0.15);
+  border: 1px solid rgba(var(--bd-violet-rgb), 0.3);
+}
+
+.bd-example-row .row + .row,
+.bd-example-cssgrid .grid + .grid {
+  margin-top: 1rem;
+}

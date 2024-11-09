@@ -122,7 +122,7 @@ function App() {
                   isCenter && 'container',
                 )}
               >
-                <div className="col-10 col-sm-2">
+                <div className="col-10 col-sm-2 overflow-y-auto">
                   {location.pathname !== '/' && (
                     <div className="d-flex gap-2 mb-2">
                       <button type="button" className="btn btn-light" onClick={onClickHouse}>

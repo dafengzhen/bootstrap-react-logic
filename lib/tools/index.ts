@@ -68,6 +68,14 @@ export type {
   VariantType,
   ListGroupVariablesType,
   ListGroupItemVariablesType,
+  ModalVariablesType,
+  ModalDialogVariablesType,
+  ModalContentVariablesType,
+  ModalHeaderVariablesType,
+  ModalFooterVariablesType,
+  ModalTitleVariablesType,
+  ModalBodyVariablesType,
+  ModalBackdropVariablesType,
 } from './types.ts';
 
 export { BS_PREFIX, VARIABLE_PREFIX, VARIABLE_BS_PREFIX, DEVELOPMENT, EMPTY_GROUP_FLAG } from './constants';
@@ -111,4 +119,5 @@ export {
   toCamelCase,
   toKebabCase,
   toPascalCase,
+  getScrollbarWidth,
 } from './tools';

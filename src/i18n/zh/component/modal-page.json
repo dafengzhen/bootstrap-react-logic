@@ -1,0 +1,13 @@
+{
+  "basic": "基本",
+  "liveDemo": "实时演示",
+  "staticBackdrop": "静态背景",
+  "scrollingLongContent": "滚动长内容",
+  "verticallyCentered": "垂直居中",
+  "tooltipsAndPopovers": "工具提示和弹出框",
+  "usingTheGrid": "使用网格",
+  "varyingModalContent": "不同的模态内容",
+  "toggleBetweenModals": "切换模态框",
+  "optionalSizes": "可选大小",
+  "fullscreenModal": "全屏模态框"
+}

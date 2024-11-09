@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "name": "Modal",
+    "desc": {
+      "header": "标题栏",
+      "footer": "页脚",
+      "title": "标题",
+      "body": "主体",
+      "fade": "渐隐效果",
+      "visible": "可见",
+      "container": "容器",
+      "static": "静态",
+      "onVisibleChange": "可见状态变化",
+      "titleProps": "标题属性",
+      "bodyProps": "主体属性",
+      "contentProps": "内容属性",
+      "backdropProps": "背景属性",
+      "headerProps": "标题栏属性",
+      "footerProps": "页脚属性",
+      "dialogProps": "对话框属性",
+      "scrollable": "可滚动",
+      "centered": "居中",
+      "toggle": "切换",
+      "size": "大小",
+      "fullscreen": "全屏"
+    }
+  }
+}

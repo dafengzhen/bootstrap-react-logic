@@ -1,0 +1,13 @@
+{
+  "basic": "Basic",
+  "liveDemo": "Live Demo",
+  "staticBackdrop": "Static Backdrop",
+  "scrollingLongContent": "Scrolling Long Content",
+  "verticallyCentered": "Vertically Centered",
+  "tooltipsAndPopovers": "Tooltips and Popovers",
+  "usingTheGrid": "Using the Grid",
+  "varyingModalContent": "Varying Modal Content",
+  "toggleBetweenModals": "Toggle Between Modals",
+  "optionalSizes": "Optional Sizes",
+  "fullscreenModal": "Fullscreen Modal"
+}

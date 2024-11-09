@@ -23,6 +23,8 @@ export default function Example({
   inline,
   gap3,
   mw400,
+  bg,
+  contentId,
 }: {
   hash: string;
   state: any;
@@ -46,6 +48,8 @@ export default function Example({
   inline?: boolean;
   gap3?: boolean;
   mw400?: boolean;
+  bg?: boolean;
+  contentId?: string;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -104,8 +108,10 @@ export default function Example({
       code={code}
       codeLanguage={codeLanguage}
       dark={dark}
+      bg={bg}
     >
       <div
+        id={contentId}
         className={clsx(
           parentClassName ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'}`,
           overflowXAuto && 'overflow-x-auto',

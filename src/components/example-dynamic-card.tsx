@@ -15,6 +15,7 @@ export default function ExampleDynamicCard({
   code,
   codeLanguage,
   dark,
+  bg,
 }: {
   title: string;
   hash: string;
@@ -24,6 +25,7 @@ export default function ExampleDynamicCard({
   code?: string;
   codeLanguage?: string;
   dark?: boolean;
+  bg?: boolean;
 }) {
   const globalContext = useContext(GlobalContext);
   const { fullscreen, layout, theme } = globalContext;
@@ -51,7 +53,7 @@ export default function ExampleDynamicCard({
             />
           </div>
         </div>
-        <div className={clsx('card-body', dark && (isDark === 'dark' ? 'p-0' : 'p-1'))}>
+        <div className={clsx('card-body', dark && (isDark === 'dark' ? 'p-0' : 'p-1'), bg && 'bg-body-tertiary')}>
           {dark ? (
             <div className={clsx(isDark !== 'dark' && 'card')} data-bs-theme="dark">
               <div className="card-body">{children}</div>
@@ -90,7 +92,7 @@ export default function ExampleDynamicCard({
           />
         </div>
       </div>
-      <div className="card-body">{children}</div>
+      <div className={clsx('card-body', bg && 'bg-body-tertiary')}>{children}</div>
       {isOpen && (
         <div className="card-footer">
           <pre>

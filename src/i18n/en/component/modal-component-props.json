@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "name": "Modal",
+    "desc": {
+      "header": "Header",
+      "footer": "Footer",
+      "title": "Title",
+      "body": "Body",
+      "fade": "Fade",
+      "visible": "Visible",
+      "container": "Container",
+      "static": "Static",
+      "onVisibleChange": "On Visible Change",
+      "titleProps": "Title Properties",
+      "bodyProps": "Body Properties",
+      "contentProps": "Content Properties",
+      "backdropProps": "Backdrop Properties",
+      "headerProps": "Header Properties",
+      "footerProps": "Footer Properties",
+      "dialogProps": "Dialog Properties",
+      "scrollable": "Scrollable",
+      "centered": "Centered",
+      "toggle": "Toggle",
+      "size": "Size",
+      "fullscreen": "Fullscreen"
+    }
+  }
+}
