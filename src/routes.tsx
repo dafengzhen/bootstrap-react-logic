@@ -22,6 +22,7 @@ import CollapsePage from '@pages/collapse-page.tsx';
 import DropdownPage from '@pages/dropdown-page.tsx';
 import ListGroupPage from '@pages/list-group-page.tsx';
 import ModalPage from '@pages/modal-page.tsx';
+import NavbarPage from '@pages/navbar-page.tsx';
 
 /**
  * Configure sidebar menu.
@@ -47,6 +48,7 @@ export enum MenuEnum {
   Dropdown = '/pages/dropdown',
   ListGroup = '/pages/list-group',
   Modal = '/pages/modal',
+  Navbar = '/pages/navbar',
 }
 
 /**
@@ -143,6 +145,10 @@ const router = createBrowserRouter(
               path: 'pages/modal',
               element: <ModalPage />,
             },
+            {
+              path: 'pages/navbar',
+              element: <NavbarPage />,
+            },
           ],
         },
       ],
@@ -150,6 +156,13 @@ const router = createBrowserRouter(
   ],
   {
     basename: __APP_PUBLIC_BASE_PATH__,
+    future: {
+      v7_partialHydration: true,
+      v7_normalizeFormMethod: true,
+      v7_fetcherPersist: true,
+      v7_relativeSplatPath: true,
+      v7_skipActionErrorRevalidation: true,
+    },
   },
 );
 

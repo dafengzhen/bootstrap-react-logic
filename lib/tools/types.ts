@@ -831,6 +831,41 @@ type ModalBodyVariablesType = ModalVariablesType;
 
 type ModalBackdropVariablesType = ModalVariablesType;
 
+type NavbarVariablesType = {
+  navbarPaddingY?: string;
+  navbarPaddingX?: string;
+  navbarNavLinkPaddingX?: string;
+  navbarBrandFontSize?: string;
+  navLinkHeight?: string;
+  navbarBrandHeight?: string;
+  navbarBrandPaddingY?: string;
+  navbarBrandMarginEnd?: string;
+  navbarTogglerPaddingY?: string;
+  navbarTogglerPaddingX?: string;
+  navbarTogglerFontSize?: string;
+  navbarTogglerBorderRadius?: string;
+  navbarTogglerFocusWidth?: string;
+  navbarTogglerTransition?: string;
+  navbarLightColor?: string;
+  navbarLightHoverColor?: string;
+  navbarLightActiveColor?: string;
+  navbarLightDisabledColor?: string;
+  navbarLightIconColor?: string;
+  navbarLightTogglerIconBg?: string;
+  navbarLightTogglerBorderColor?: string;
+  navbarLightBrandColor?: string;
+  navbarLightBrandHoverColor?: string;
+  navbarDarkColor?: string;
+  navbarDarkHoverColor?: string;
+  navbarDarkActiveColor?: string;
+  navbarDarkDisabledColor?: string;
+  navbarDarkIconColor?: string;
+  navbarDarkTogglerIconBg?: string;
+  navbarDarkTogglerBorderColor?: string;
+  navbarDarkBrandColor?: string;
+  navbarDarkBrandHoverColor?: string;
+};
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -894,4 +929,5 @@ export type {
   ModalTitleVariablesType,
   ModalBodyVariablesType,
   ModalBackdropVariablesType,
+  NavbarVariablesType,
 };

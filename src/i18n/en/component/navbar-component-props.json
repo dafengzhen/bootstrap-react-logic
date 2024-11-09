@@ -1,0 +1,11 @@
+{
+  "navbar": {
+    "name": "Navbar",
+    "desc": {
+      "as": "Type",
+      "variant": "Variant",
+      "variantType": "Variant Type",
+      "rounded": "Rounded"
+    }
+  }
+}

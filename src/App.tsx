@@ -14,6 +14,7 @@ function App() {
   const fullscreen = useState(false);
   const layout = useState<Layout>('default');
   const theme = useState<Theme>('light');
+  const isDark = theme[0] === 'dark';
   const isCenter = layout[0] === 'center';
   const isFullscreen = fullscreen[0] && location.pathname !== '/';
   const [menus] = useState<
@@ -116,43 +117,59 @@ function App() {
         <div className="row g-2 g-sm-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">
-              <div
-                className={clsx(
-                  'position-fixed row g-2 g-sm-4 ps-0 sm:tw-w-full sm:tw-pe-[1.375rem]',
-                  isCenter && 'container',
-                )}
-              >
-                <div className="col-10 col-sm-2 overflow-y-auto">
-                  {location.pathname !== '/' && (
-                    <div className="d-flex gap-2 mb-2">
-                      <button type="button" className="btn btn-light" onClick={onClickHouse}>
-                        <i className="bi bi-house-door-fill"></i>
-                      </button>
+              <div className={clsx('position-fixed g-2 g-sm-4 ps-0 sm:tw-w-full sm:tw-pe-[1.375rem]')}>
+                <div className={clsx('row', isCenter && 'container')}>
+                  <div className="col-10 col-sm-2">
+                    <div
+                      className="vh-100 overflow-y-auto pb-5"
+                      style={{ paddingRight: 'calc(var(--bs-gutter-x) * 0.5)' }}
+                    >
+                      {location.pathname !== '/' && (
+                        <div className="d-flex gap-2 mb-2">
+                          <button
+                            type="button"
+                            className={clsx('btn', isDark ? 'btn-dark' : 'btn-outline-light')}
+                            onClick={onClickHouse}
+                          >
+                            <span style={{ color: '#712cf9' }}>B</span>
+                            <span style={{ color: '#0074a6' }}>R</span>
+                            <span style={{ color: '#3950D0' }}>L</span>
+                          </button>
 
-                      <button type="button" className="btn btn-light w-100" onClick={onClickReturn}>
-                        <i className="bi bi-chevron-left"></i>
-                      </button>
+                          <button
+                            type="button"
+                            className={clsx('btn w-100', isDark ? 'btn-dark' : 'btn-outline-light')}
+                            onClick={onClickReturn}
+                          >
+                            <i className="bi bi-chevron-left" style={{ color: '#3950D0' }}></i>
+                          </button>
+                        </div>
+                      )}
+
+                      <div className={clsx('list-group', !isDark && 'list-group-flush')}>
+                        {menus.map((item) => {
+                          return (
+                            <NavLink
+                              key={item.name}
+                              className={({ isActive, isPending }) => {
+                                return clsx(
+                                  'list-group-item list-group-item-action text-truncate',
+                                  isActive && 'active',
+                                  isPending && 'pending',
+                                  !isDark && 'rounded border-1',
+                                );
+                              }}
+                              style={{
+                                borderColor: isDark ? undefined : '#f8f9fa',
+                              }}
+                              to={item.to}
+                            >
+                              {item.name}
+                            </NavLink>
+                          );
+                        })}
+                      </div>
                     </div>
-                  )}
-
-                  <div className="list-group">
-                    {menus.map((item) => {
-                      return (
-                        <NavLink
-                          key={item.name}
-                          className={({ isActive, isPending }) => {
-                            return clsx(
-                              'list-group-item list-group-item-action text-truncate',
-                              isActive && 'active',
-                              isPending && 'pending',
-                            );
-                          }}
-                          to={item.to}
-                        >
-                          {item.name}
-                        </NavLink>
-                      );
-                    })}
                   </div>
                 </div>
               </div>
