@@ -8,7 +8,9 @@ export type {
   NavbarNavItemProps,
   NavbarNavLinkProps,
   NavbarNavProps,
+  NavbarOption,
   NavbarProps,
+  NavbarTextProps,
   NavbarTogglerIconProps,
   NavbarTogglerProps,
 } from './types.ts';

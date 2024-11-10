@@ -5,22 +5,39 @@ import type { NavbarNavLinkProps } from './types.ts';
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const NavbarNavLink = function NavbarNavLink<T extends ElementType = 'a'>(props: NavbarNavLinkProps<T>) {
-  const { as: Component = 'a', className, dropOldClass, style, variables, ...rest } = props;
+  const {
+    active,
+    'aria-disabled': ariaDisabled,
+    as: Component = 'a' as ElementType,
+    className,
+    disabled,
+    dropOldClass,
+    style,
+    variables,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(
+      !dropOldClass && 'nav-link',
+      active && 'active',
+      disabled && Component === 'a' && 'disabled',
+      className,
+    );
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
 
     return filterOptions(
       {
+        'aria-disabled': ariaDisabled ?? (disabled ? 'true' : undefined),
         className: finalClass,
+        disabled: disabled && Component === 'button' ? true : undefined,
         style: finalStyle,
       },
       isValueValid,
     );
-  }, [className, dropOldClass, style, variables]);
+  }, [Component, active, ariaDisabled, className, disabled, dropOldClass, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;
 };

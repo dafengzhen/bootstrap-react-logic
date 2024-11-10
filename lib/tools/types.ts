@@ -882,6 +882,8 @@ type NavbarNavItemVariablesType = NavbarVariablesType;
 
 type NavbarNavLinkVariablesType = NavbarVariablesType;
 
+type NavbarTextVariablesType = NavbarVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -942,6 +944,7 @@ export type {
   NavbarNavItemVariablesType,
   NavbarNavLinkVariablesType,
   NavbarNavVariablesType,
+  NavbarTextVariablesType,
   NavbarTogglerIconVariablesType,
   NavbarTogglerVariablesType,
   NavbarVariablesType,

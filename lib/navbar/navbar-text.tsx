@@ -1,14 +1,14 @@
 import { type ElementType, useMemo } from 'react';
 
-import type { NavbarBrandProps } from './types.ts';
+import type { NavbarTextProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const NavbarBrand = function NavbarBrand<T extends ElementType = 'a'>(props: NavbarBrandProps<T>) {
-  const { as: Component = 'a', className, dropOldClass, style, variables, ...rest } = props;
+const NavbarText = function NavbarText<T extends ElementType = 'span'>(props: NavbarTextProps<T>) {
+  const { as: Component = 'span', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'navbar-brand', className);
+    const finalClass = clsxUnique(!dropOldClass && 'navbar-text', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -25,6 +25,6 @@ const NavbarBrand = function NavbarBrand<T extends ElementType = 'a'>(props: Nav
   return <Component {...rest} {...renderOptions} />;
 };
 
-NavbarBrand.displayName = 'BRL.NavbarBrand';
+NavbarText.displayName = 'BRL.NavbarText';
 
-export default NavbarBrand;
+export default NavbarText;

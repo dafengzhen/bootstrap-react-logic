@@ -8,7 +8,7 @@ const NavbarTogglerIcon = function NavbarTogglerIcon<T extends ElementType = 'sp
   const { as: Component = 'span', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(!dropOldClass && 'navbar-toggler-icon', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });

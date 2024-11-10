@@ -1,7 +1,16 @@
 {
   "basic": "Basic",
-  "buttons": "Buttons",
-  "positioned": "Positioned",
-  "backgroundColors": "Background Colors",
-  "pillBadges": "Pill Badges"
+  "brand": "Brand",
+  "image": "Image",
+  "imageAndText": "Image and Text",
+  "nav": "Navigation",
+  "forms": "Forms",
+  "text": "Text",
+  "colorSchemes": "Color Schemes",
+  "containers": "Containers",
+  "placement": "Placement",
+  "scrolling": "Scrolling",
+  "toggler": "Toggler",
+  "externalContent": "External Content",
+  "offcanvas": "Offcanvas"
 }

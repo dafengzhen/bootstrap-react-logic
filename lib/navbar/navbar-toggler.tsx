@@ -8,7 +8,7 @@ const NavbarToggler = function NavbarToggler<T extends ElementType = 'button'>(p
   const { as: Component = 'button', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(!dropOldClass && 'navbar-toggler', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -22,7 +22,7 @@ const NavbarToggler = function NavbarToggler<T extends ElementType = 'button'>(p
     );
   }, [className, dropOldClass, style, variables]);
 
-  return <Component {...rest} {...renderOptions} />;
+  return <Component type="button" {...rest} {...renderOptions} />;
 };
 
 NavbarToggler.displayName = 'BRL.NavbarToggler';

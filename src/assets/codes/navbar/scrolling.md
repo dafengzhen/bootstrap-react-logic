@@ -1,6 +1,6 @@
 ```jsx
 <Navbar
-  brand="Navbar"
+  brand="Navbar scroll"
   brandProps={{
     href: '#',
   }}
@@ -54,18 +54,18 @@
       itemProps: {
         className: 'dropdown',
       },
-      link: 'Dropdown',
+      link: 'Link',
       linkProps: {
-        'aria-disabled': 'true',
         className: 'dropdown-toggle',
         role: 'button',
       },
     },
     {
       disabled: true,
-      link: 'Disabled',
+      link: 'Link',
     },
   ]}
+  scroll
   toggler
 />
 ```

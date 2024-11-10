@@ -2,10 +2,37 @@
   "navbar": {
     "name": "Navbar",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "brand": "Brand",
+      "brandPosition": "Brand Position",
+      "brandProps": "Brand Properties",
+      "collapse": "Collapse",
+      "collapseProps": "Collapse Properties",
+      "container": "Container",
+      "containerProps": "Container Properties",
+      "expand": "Expand",
+      "externalContent": "External Content",
+      "fixed": "Fixed",
+      "nav": "Navigation",
+      "navProps": "Navigation Properties",
+      "options": "Options",
+      "scroll": "Scroll",
+      "skipItem": "Skip Item",
+      "sticky": "Sticky",
+      "text": "Text",
+      "textProps": "Text Properties",
+      "toggler": "Toggler",
+      "togglerIconProps": "Toggler Icon Properties",
+      "togglerProps": "Toggler Properties"
+    },
+    "options": {
+      "active": "Active",
+      "disabled": "Disabled",
+      "href": "Link",
+      "id": "ID",
+      "item": "Item",
+      "itemProps": "Item Properties",
+      "link": "Link",
+      "linkProps": "Link Properties"
     }
   }
 }

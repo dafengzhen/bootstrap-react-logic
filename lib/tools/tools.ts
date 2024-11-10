@@ -1037,6 +1037,26 @@ const getScrollbarWidth = (unit?: string): number | string => {
   return unit ? width + unit : width;
 };
 
+/**
+ * Removes specified classes from a given className string.
+ *
+ * @param className - The original className string which may contain multiple class names separated by spaces.
+ *                    If className is undefined or empty, an empty string is returned.
+ * @param classesToRemove - An array of class names to be removed from the className string.
+ *
+ * @returns A string with the specified classes removed. If no className is provided, returns an empty string.
+ *          If no matching classes are found to remove, the original className is returned as is.
+ */
+const removeClasses = (className: null | string | undefined, classesToRemove: string[]): string => {
+  if (!className) {
+    return '';
+  }
+
+  const classArray = className.split(' ');
+  const filteredClasses = classArray.filter((cls) => !classesToRemove.includes(cls));
+  return filteredClasses.join(' ');
+};
+
 export {
   calculateLoopIndex,
   camelToKebab,
@@ -1071,6 +1091,7 @@ export {
   pickObjectProperties,
   processClassName,
   processSlotClasses,
+  removeClasses,
   resolveRoundedClass,
   toCamelCase,
   toKebabCase,

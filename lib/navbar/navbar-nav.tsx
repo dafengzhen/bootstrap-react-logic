@@ -4,11 +4,11 @@ import type { NavbarNavProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const NavbarNav = function NavbarNav<T extends ElementType = 'ul'>(props: NavbarNavProps<T>) {
-  const { as: Component = 'ul', className, dropOldClass, style, variables, ...rest } = props;
+const NavbarNav = function NavbarNav<T extends ElementType = 'div' | 'ul'>(props: NavbarNavProps<T>) {
+  const { as: Component = 'ul', className, dropOldClass, scroll, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(!dropOldClass && 'navbar-nav', scroll && 'navbar-nav-scroll', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -20,7 +20,7 @@ const NavbarNav = function NavbarNav<T extends ElementType = 'ul'>(props: Navbar
       },
       isValueValid,
     );
-  }, [className, dropOldClass, style, variables]);
+  }, [className, dropOldClass, scroll, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;
 };

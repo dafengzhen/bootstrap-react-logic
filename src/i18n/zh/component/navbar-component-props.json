@@ -2,10 +2,37 @@
   "navbar": {
     "name": "Navbar",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "brand": "品牌",
+      "brandPosition": "品牌位置",
+      "brandProps": "品牌属性",
+      "collapse": "折叠",
+      "collapseProps": "折叠属性",
+      "container": "容器",
+      "containerProps": "容器属性",
+      "expand": "展开",
+      "externalContent": "外部内容",
+      "fixed": "固定",
+      "nav": "导航",
+      "navProps": "导航属性",
+      "options": "选项",
+      "scroll": "滚动",
+      "skipItem": "跳过项目",
+      "sticky": "粘性",
+      "text": "文本",
+      "textProps": "文本属性",
+      "toggler": "切换器",
+      "togglerIconProps": "切换器图标属性",
+      "togglerProps": "切换器属性"
+    },
+    "options": {
+      "active": "激活",
+      "disabled": "禁用",
+      "href": "链接",
+      "id": "标识",
+      "item": "项目",
+      "itemProps": "项目属性",
+      "link": "链接",
+      "linkProps": "链接属性"
     }
   }
 }

@@ -8,7 +8,7 @@ const NavbarCollapse = function NavbarCollapse<T extends ElementType = 'div'>(pr
   const { as: Component = 'div', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(!dropOldClass && 'collapse navbar-collapse', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });

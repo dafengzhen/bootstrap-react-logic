@@ -4,11 +4,11 @@ import type { NavbarNavItemProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const NavbarNavItem = function NavbarNavItem<T extends ElementType = 'li'>(props: NavbarNavItemProps<T>) {
+const NavbarNavItem = function NavbarNavItem<T extends ElementType = 'a' | 'li'>(props: NavbarNavItemProps<T>) {
   const { as: Component = 'li', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(!dropOldClass && 'nav-item', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });

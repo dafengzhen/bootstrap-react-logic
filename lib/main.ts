@@ -1,6 +1,5 @@
 export * from './accordion';
 export * from './alert';
-
 export * from './badge';
 export * from './breadcrumb';
 export * from './button';
@@ -11,10 +10,8 @@ export * from './checkbox';
 export * from './collapse';
 export * from './dropdown';
 export * from './floating-label';
-
 export * from './input';
 export * from './input-group';
-
 export * from './input-otp';
 export * from './label';
 export * from './list-group';

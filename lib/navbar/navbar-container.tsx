@@ -4,14 +4,13 @@ import type { NavbarContainerProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const NavbarContainer = function NavbarContainer<T extends ElementType = 'div'>(props: NavbarContainerProps<T>) {
-  const { as: Component = 'div', className, container, dropOldClass, style, variables, ...rest } = props;
+const NavbarContainer = function NavbarContainer<T extends ElementType = 'div' | 'form'>(
+  props: NavbarContainerProps<T>,
+) {
+  const { as: Component = 'div', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
-      !dropOldClass && (typeof container === 'boolean' && container ? 'container' : 'container-fluid'),
-      className,
-    );
+    const finalClass = clsxUnique(!dropOldClass && !className?.includes('container') && 'container-fluid', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -23,7 +22,7 @@ const NavbarContainer = function NavbarContainer<T extends ElementType = 'div'>(
       },
       isValueValid,
     );
-  }, [className, container, dropOldClass, style, variables]);
+  }, [className, dropOldClass, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;
 };

@@ -1,7 +1,16 @@
 {
-  "basic": "Basic",
-  "buttons": "Buttons",
-  "positioned": "Positioned",
-  "backgroundColors": "Background Colors",
-  "pillBadges": "Pill Badges"
+  "basic": "基本",
+  "brand": "品牌",
+  "image": "图片",
+  "imageAndText": "图片和文本",
+  "nav": "导航",
+  "forms": "表单",
+  "text": "文本",
+  "colorSchemes": "配色方案",
+  "containers": "容器",
+  "placement": "位置",
+  "scrolling": "滚动",
+  "toggler": "切换器",
+  "externalContent": "外部内容",
+  "offcanvas": "侧边栏"
 }
