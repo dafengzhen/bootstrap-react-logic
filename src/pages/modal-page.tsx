@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Modal } from '@lib/modal';
+import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/modal/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -34,10 +34,10 @@ export default function ModalPage() {
   const [visible12, setVisible12] = useState(false);
   const [visible13, setVisible13] = useState(false);
 
-  const [value, setValue] = useState<'@mdo' | '@fat' | '@getbootstrap'>();
+  const [value, setValue] = useState<'@fat' | '@getbootstrap' | '@mdo'>();
   const [toggle, setToggle] = useState(true);
-  const [size, setSize] = useState<'sm' | 'lg' | 'xl'>();
-  const [fullscreen, setFullscreen] = useState<boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'>();
+  const [size, setSize] = useState<'lg' | 'sm' | 'xl'>();
+  const [fullscreen, setFullscreen] = useState<'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean>();
 
   function onClickVisible() {
     setVisible(!visible);
@@ -97,100 +97,94 @@ export default function ModalPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tModalPage} contentId="custom-container" bg>
+      <Example bg contentId="custom-container" hash="basic" state={state} t={tModalPage}>
         <Modal
-          container="#custom-container"
-          tabIndex={-1}
-          className="position-static d-block z-0"
-          title="Modal title"
-          header={<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>}
           body={<p>Modal body text goes here.</p>}
+          className="position-static d-block z-0"
+          container="#custom-container"
           footer={
             <>
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+              <button className="btn btn-secondary" data-bs-dismiss="modal" type="button">
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button className="btn btn-primary" type="button">
                 Save changes
               </button>
             </>
           }
+          header={<button aria-label="Close" className="btn-close" data-bs-dismiss="modal" type="button"></button>}
+          tabIndex={-1}
+          title="Modal title"
         />
       </Example>
 
-      <Example hash="liveDemo" state={state} t={tModalPage} row>
-        <button type="button" className="btn btn-primary" onClick={onClickVisible}>
+      <Example hash="liveDemo" row state={state} t={tModalPage}>
+        <button className="btn btn-primary" onClick={onClickVisible} type="button">
           Launch demo modal
         </button>
 
         <Modal
-          visible={visible}
-          onVisibleChange={setVisible}
-          fade
-          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
-          title="Modal title"
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible}></button>}
           body
+          fade
           footer={
             <>
-              <button type="button" className="btn btn-secondary" onClick={onClickVisible}>
+              <button className="btn btn-secondary" onClick={onClickVisible} type="button">
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button className="btn btn-primary" type="button">
                 Save changes
               </button>
             </>
           }
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible} type="button"></button>}
+          onVisibleChange={setVisible}
+          tabIndex={-1}
+          title="Modal title"
+          visible={visible}
         />
       </Example>
 
-      <Example hash="staticBackdrop" state={state} t={tModalPage} row>
-        <button type="button" className="btn btn-primary" onClick={onClickVisible2}>
+      <Example hash="staticBackdrop" row state={state} t={tModalPage}>
+        <button className="btn btn-primary" onClick={onClickVisible2} type="button">
           Launch static backdrop modal
         </button>
 
         <Modal
-          visible={visible2}
+          aria-labelledby="exampleModalLabel"
+          body
+          fade
+          footer={
+            <>
+              <button className="btn btn-secondary" onClick={onClickVisible2} type="button">
+                Close
+              </button>
+              <button className="btn btn-primary" type="button">
+                Understood
+              </button>
+            </>
+          }
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible2} type="button"></button>}
           onVisibleChange={setVisible2}
           static
-          fade
           tabIndex={-1}
-          aria-labelledby="exampleModalLabel"
           title="Modal title"
           titleProps={{
             as: 'h1',
             className: 'fs-5',
           }}
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible2}></button>}
-          body
-          footer={
-            <>
-              <button type="button" className="btn btn-secondary" onClick={onClickVisible2}>
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
-              </button>
-            </>
-          }
+          visible={visible2}
         />
       </Example>
 
       <Example hash="scrollingLongContent" state={state} t={tModalPage}>
         <div>
-          <button type="button" className="btn btn-primary" onClick={onClickVisible3}>
+          <button className="btn btn-primary" onClick={onClickVisible3} type="button">
             Launch demo modal
           </button>
 
           <Modal
-            visible={visible3}
-            onVisibleChange={setVisible3}
-            fade
-            tabIndex={-1}
             aria-labelledby="exampleModalLabel"
-            title="Modal title"
-            header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible3}></button>}
             body={
               <p>
                 This is some placeholder content to show the scrolling behavior for modals. Instead of repeating the
@@ -202,33 +196,32 @@ export default function ModalPage() {
             bodyProps={{
               style: { minHeight: 1500 },
             }}
+            fade
             footer={
               <>
-                <button type="button" className="btn btn-secondary" onClick={onClickVisible3}>
+                <button className="btn btn-secondary" onClick={onClickVisible3} type="button">
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button className="btn btn-primary" type="button">
                   Save changes
                 </button>
               </>
             }
+            header={<button aria-label="Close" className="btn-close" onClick={onClickVisible3} type="button"></button>}
+            onVisibleChange={setVisible3}
+            tabIndex={-1}
+            title="Modal title"
+            visible={visible3}
           />
         </div>
 
         <div>
-          <button type="button" className="btn btn-primary" onClick={onClickVisible4}>
+          <button className="btn btn-primary" onClick={onClickVisible4} type="button">
             Launch demo modal
           </button>
 
           <Modal
-            scrollable
-            visible={visible4}
-            onVisibleChange={setVisible4}
-            fade
-            tabIndex={-1}
             aria-labelledby="exampleModalLabel"
-            title="Modal title"
-            header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible4}></button>}
             body={
               <>
                 <div className="modal-body">
@@ -282,64 +275,63 @@ export default function ModalPage() {
                 </div>
               </>
             }
+            fade
             footer={
               <>
-                <button type="button" className="btn btn-secondary" onClick={onClickVisible4}>
+                <button className="btn btn-secondary" onClick={onClickVisible4} type="button">
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button className="btn btn-primary" type="button">
                   Save changes
                 </button>
               </>
             }
+            header={<button aria-label="Close" className="btn-close" onClick={onClickVisible4} type="button"></button>}
+            onVisibleChange={setVisible4}
+            scrollable
+            tabIndex={-1}
+            title="Modal title"
+            visible={visible4}
           />
         </div>
       </Example>
 
       <Example hash="verticallyCentered" state={state} t={tModalPage}>
         <div>
-          <button type="button" className="btn btn-primary" onClick={onClickVisible5}>
+          <button className="btn btn-primary" onClick={onClickVisible5} type="button">
             Launch demo modal
           </button>
 
           <Modal
-            centered
-            visible={visible5}
-            onVisibleChange={setVisible5}
-            fade
-            tabIndex={-1}
             aria-labelledby="exampleModalLabel"
-            title="Modal title"
-            header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible5}></button>}
             body={<p>This is a vertically centered modal.</p>}
+            centered
+            fade
             footer={
               <>
-                <button type="button" className="btn btn-secondary" onClick={onClickVisible5}>
+                <button className="btn btn-secondary" onClick={onClickVisible5} type="button">
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button className="btn btn-primary" type="button">
                   Save changes
                 </button>
               </>
             }
+            header={<button aria-label="Close" className="btn-close" onClick={onClickVisible5} type="button"></button>}
+            onVisibleChange={setVisible5}
+            tabIndex={-1}
+            title="Modal title"
+            visible={visible5}
           />
         </div>
 
         <div>
-          <button type="button" className="btn btn-primary" onClick={onClickVisible6}>
+          <button className="btn btn-primary" onClick={onClickVisible6} type="button">
             Launch demo modal
           </button>
 
           <Modal
-            centered
-            scrollable
-            visible={visible6}
-            onVisibleChange={setVisible6}
-            fade
-            tabIndex={-1}
             aria-labelledby="exampleModalLabel"
-            title="Modal title"
-            header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible6}></button>}
             body={
               <>
                 <p>
@@ -362,33 +354,35 @@ export default function ModalPage() {
                 <p>Just like that.</p>
               </>
             }
+            centered
+            fade
             footer={
               <>
-                <button type="button" className="btn btn-secondary" onClick={onClickVisible6}>
+                <button className="btn btn-secondary" onClick={onClickVisible6} type="button">
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button className="btn btn-primary" type="button">
                   Save changes
                 </button>
               </>
             }
+            header={<button aria-label="Close" className="btn-close" onClick={onClickVisible6} type="button"></button>}
+            onVisibleChange={setVisible6}
+            scrollable
+            tabIndex={-1}
+            title="Modal title"
+            visible={visible6}
           />
         </div>
       </Example>
 
-      <Example hash="tooltipsAndPopovers" state={state} t={tModalPage} row>
-        <button type="button" className="btn btn-primary" onClick={onClickVisible7}>
+      <Example hash="tooltipsAndPopovers" row state={state} t={tModalPage}>
+        <button className="btn btn-primary" onClick={onClickVisible7} type="button">
           Launch demo modal
         </button>
 
         <Modal
-          visible={visible7}
-          onVisibleChange={setVisible7}
-          fade
-          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
-          title="Modal title"
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible7}></button>}
           body={
             <>
               <h2 className="fs-5">Popover in a modal</h2>
@@ -396,9 +390,9 @@ export default function ModalPage() {
                 This{' '}
                 <button
                   className="btn btn-secondary"
+                  data-bs-content="Popover body content is set in this attribute."
                   data-bs-toggle="popover"
                   title="Popover title"
-                  data-bs-content="Popover body content is set in this attribute."
                 >
                   button
                 </button>{' '}
@@ -407,43 +401,43 @@ export default function ModalPage() {
               <hr />
               <h2 className="fs-5">Tooltips in a modal</h2>
               <p>
-                <a href="#" data-bs-toggle="tooltip" title="Tooltip">
+                <a data-bs-toggle="tooltip" href="#" title="Tooltip">
                   This link
                 </a>{' '}
                 and{' '}
-                <a href="#" data-bs-toggle="tooltip" title="Tooltip">
+                <a data-bs-toggle="tooltip" href="#" title="Tooltip">
                   that link
                 </a>{' '}
                 have tooltips on hover.
               </p>
             </>
           }
+          fade
           footer={
             <>
-              <button type="button" className="btn btn-secondary" onClick={onClickVisible7}>
+              <button className="btn btn-secondary" onClick={onClickVisible7} type="button">
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button className="btn btn-primary" type="button">
                 Save changes
               </button>
             </>
           }
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible7} type="button"></button>}
+          onVisibleChange={setVisible7}
+          tabIndex={-1}
+          title="Modal title"
+          visible={visible7}
         />
       </Example>
 
-      <Example hash="usingTheGrid" state={state} t={tModalPage} row>
-        <button type="button" className="btn btn-primary" onClick={onClickVisible8}>
+      <Example hash="usingTheGrid" row state={state} t={tModalPage}>
+        <button className="btn btn-primary" onClick={onClickVisible8} type="button">
           Launch demo modal
         </button>
 
         <Modal
-          visible={visible8}
-          onVisibleChange={setVisible8}
-          fade
-          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
-          title="Modal title"
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible8}></button>}
           body={
             <div className="container-fluid bd-example-row">
               <div className="row">
@@ -468,124 +462,110 @@ export default function ModalPage() {
               </div>
             </div>
           }
+          fade
           footer={
             <>
-              <button type="button" className="btn btn-secondary" onClick={onClickVisible8}>
+              <button className="btn btn-secondary" onClick={onClickVisible8} type="button">
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button className="btn btn-primary" type="button">
                 Save changes
               </button>
             </>
           }
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible8} type="button"></button>}
+          onVisibleChange={setVisible8}
+          tabIndex={-1}
+          title="Modal title"
+          visible={visible8}
         />
       </Example>
 
-      <Example hash="varyingModalContent" state={state} t={tModalPage} row>
+      <Example hash="varyingModalContent" row state={state} t={tModalPage}>
         <div className="d-flex gap-2">
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setValue('@mdo');
               onClickVisible9();
             }}
+            type="button"
           >
             Open modal for @mdo
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setValue('@fat');
               onClickVisible9();
             }}
+            type="button"
           >
             OOpen modal for @fat
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setValue('@getbootstrap');
               onClickVisible9();
             }}
+            type="button"
           >
             Open modal for @getbootstrap
           </button>
         </div>
 
         <Modal
-          visible={visible9}
-          onVisibleChange={setVisible9}
-          fade
-          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
-          title={`New message to ${value}`}
-          titleProps={{
-            as: 'h1',
-            className: 'fs-5',
-          }}
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible9}></button>}
           body={
             <form>
               <div className="mb-3">
-                <label htmlFor="recipient-name" className="col-form-label">
+                <label className="col-form-label" htmlFor="recipient-name">
                   Recipient:
                 </label>
-                <input type="text" className="form-control" id="recipient-name" defaultValue={value} />
+                <input className="form-control" defaultValue={value} id="recipient-name" type="text" />
               </div>
               <div className="mb-3">
-                <label htmlFor="message-text" className="col-form-label">
+                <label className="col-form-label" htmlFor="message-text">
                   Message:
                 </label>
                 <textarea className="form-control" id="message-text"></textarea>
               </div>
             </form>
           }
+          fade
           footer={
             <>
-              <button type="button" className="btn btn-secondary" onClick={onClickVisible9}>
+              <button className="btn btn-secondary" onClick={onClickVisible9} type="button">
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button className="btn btn-primary" type="button">
                 Save changes
               </button>
             </>
           }
-        />
-      </Example>
-
-      <Example hash="toggleBetweenModals" state={state} t={tModalPage} row>
-        <button type="button" className="btn btn-primary" onClick={onClickVisible10}>
-          Open first modal
-        </button>
-
-        <Modal
-          toggle={toggle}
-          centered
-          visible={visible10}
-          onVisibleChange={setVisible10}
-          fade
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible9} type="button"></button>}
+          onVisibleChange={setVisible9}
           tabIndex={-1}
-          aria-labelledby="exampleModalLabel"
-          title="Modal 1"
+          title={`New message to ${value}`}
           titleProps={{
             as: 'h1',
             className: 'fs-5',
           }}
-          header={
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={() => {
-                setToggle(false);
-                onClickVisible10();
-              }}
-            ></button>
-          }
+          visible={visible9}
+        />
+      </Example>
+
+      <Example hash="toggleBetweenModals" row state={state} t={tModalPage}>
+        <button className="btn btn-primary" onClick={onClickVisible10} type="button">
+          Open first modal
+        </button>
+
+        <Modal
+          aria-labelledby="exampleModalLabel"
           body="Show a second modal and hide this one with the button below."
+          centered
+          fade
           footer={
             <button
               className="btn btn-primary"
@@ -598,33 +578,33 @@ export default function ModalPage() {
               Open second modal
             </button>
           }
-        />
-
-        <Modal
-          toggle={toggle}
-          centered
-          visible={visible11}
-          onVisibleChange={setVisible11}
-          fade
+          header={
+            <button
+              aria-label="Close"
+              className="btn-close"
+              onClick={() => {
+                setToggle(false);
+                onClickVisible10();
+              }}
+              type="button"
+            ></button>
+          }
+          onVisibleChange={setVisible10}
           tabIndex={-1}
-          aria-labelledby="exampleModalLabel"
-          title="Modal 2"
+          title="Modal 1"
           titleProps={{
             as: 'h1',
             className: 'fs-5',
           }}
-          header={
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={() => {
-                setToggle(false);
-                onClickVisible11();
-              }}
-            ></button>
-          }
+          toggle={toggle}
+          visible={visible10}
+        />
+
+        <Modal
+          aria-labelledby="exampleModalLabel"
           body="Hide this modal and show the first with the button below."
+          centered
+          fade
           footer={
             <button
               className="btn btn-primary"
@@ -637,50 +617,81 @@ export default function ModalPage() {
               Back to first
             </button>
           }
+          header={
+            <button
+              aria-label="Close"
+              className="btn-close"
+              onClick={() => {
+                setToggle(false);
+                onClickVisible11();
+              }}
+              type="button"
+            ></button>
+          }
+          onVisibleChange={setVisible11}
+          tabIndex={-1}
+          title="Modal 2"
+          titleProps={{
+            as: 'h1',
+            className: 'fs-5',
+          }}
+          toggle={toggle}
+          visible={visible11}
         />
       </Example>
 
-      <Example hash="optionalSizes" state={state} t={tModalPage} row>
+      <Example hash="optionalSizes" row state={state} t={tModalPage}>
         <div className="d-flex gap-2">
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setSize('xl');
               onClickVisible12();
             }}
+            type="button"
           >
             Extra large modal
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setSize('lg');
               onClickVisible12();
             }}
+            type="button"
           >
             Large modal
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setSize('sm');
               onClickVisible12();
             }}
+            type="button"
           >
             Small modal
           </button>
         </div>
 
         <Modal
-          size={size}
-          visible={visible12}
-          onVisibleChange={setVisible12}
-          fade
-          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
+          body
+          fade
+          footer={
+            <>
+              <button className="btn btn-secondary" onClick={onClickVisible12} type="button">
+                Close
+              </button>
+              <button className="btn btn-primary" type="button">
+                Save changes
+              </button>
+            </>
+          }
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible12} type="button"></button>}
+          onVisibleChange={setVisible12}
+          size={size}
+          tabIndex={-1}
           title={
             size === 'xl'
               ? 'Extra large modal'
@@ -690,92 +701,87 @@ export default function ModalPage() {
                   ? 'Small modal'
                   : 'Modal title'
           }
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible12}></button>}
-          body
-          footer={
-            <>
-              <button type="button" className="btn btn-secondary" onClick={onClickVisible12}>
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </>
-          }
+          visible={visible12}
         />
       </Example>
 
-      <Example hash="fullscreenModal" state={state} t={tModalPage} row>
+      <Example hash="fullscreenModal" row state={state} t={tModalPage}>
         <div className="d-flex flex-wrap gap-2">
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setFullscreen(true);
               onClickVisible13();
             }}
+            type="button"
           >
             Full screen
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setFullscreen('sm');
               onClickVisible13();
             }}
+            type="button"
           >
             Full screen below sm
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setFullscreen('md');
               onClickVisible13();
             }}
+            type="button"
           >
             Full screen below md
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setFullscreen('lg');
               onClickVisible13();
             }}
+            type="button"
           >
             Full screen below lg
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setFullscreen('xl');
               onClickVisible13();
             }}
+            type="button"
           >
             Full screen below xl
           </button>
           <button
-            type="button"
             className="btn btn-primary"
             onClick={() => {
               setFullscreen('xxl');
               onClickVisible13();
             }}
+            type="button"
           >
             Full screen below xxl
           </button>
         </div>
 
         <Modal
-          fullscreen={fullscreen}
-          visible={visible13}
-          onVisibleChange={setVisible13}
-          fade
-          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
+          body
+          fade
+          footer={
+            <button className="btn btn-secondary" onClick={onClickVisible13} type="button">
+              Close
+            </button>
+          }
+          fullscreen={fullscreen}
+          header={<button aria-label="Close" className="btn-close" onClick={onClickVisible13} type="button"></button>}
+          onVisibleChange={setVisible13}
+          tabIndex={-1}
           title={
             fullscreen === 'sm'
               ? 'Full screen below sm'
@@ -789,154 +795,148 @@ export default function ModalPage() {
                       ? 'Full screen below xxl'
                       : 'Full screen modal'
           }
-          header={<button type="button" className="btn-close" aria-label="Close" onClick={onClickVisible13}></button>}
-          body
-          footer={
-            <button type="button" className="btn btn-secondary" onClick={onClickVisible13}>
-              Close
-            </button>
-          }
+          visible={visible13}
         />
       </Example>
 
       <PropsIndicator />
 
       <Example
-        props
         hash="modalComponentProps"
-        state={state}
-        t={tModalComponentProps}
         items={[
           {
             attr: 'header',
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tModalComponentProps('modal.desc.header'),
             default: '',
+            desc: tModalComponentProps('modal.desc.header'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
             attr: 'footer',
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tModalComponentProps('modal.desc.footer'),
             default: '',
+            desc: tModalComponentProps('modal.desc.footer'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
             attr: 'title',
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tModalComponentProps('modal.desc.title'),
             default: '',
+            desc: tModalComponentProps('modal.desc.title'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
             attr: 'body',
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tModalComponentProps('modal.desc.body'),
             default: '',
+            desc: tModalComponentProps('modal.desc.body'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
             attr: 'fade',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tModalComponentProps('modal.desc.fade'),
             default: 'true',
+            desc: tModalComponentProps('modal.desc.fade'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'visible',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tModalComponentProps('modal.desc.visible'),
             default: 'false',
+            desc: tModalComponentProps('modal.desc.visible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'container',
-            type: <span className="badge text-bg-secondary">HTMLElement | string</span>,
-            desc: tModalComponentProps('modal.desc.container'),
             default: '',
+            desc: tModalComponentProps('modal.desc.container'),
+            type: <span className="badge text-bg-secondary">HTMLElement | string</span>,
           },
           {
             attr: 'static',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tModalComponentProps('modal.desc.static'),
             default: '',
+            desc: tModalComponentProps('modal.desc.static'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'onVisibleChange',
-            type: <span className="badge text-bg-secondary">(visible: boolean) =&gt; void</span>,
-            desc: tModalComponentProps('modal.desc.onVisibleChange'),
             default: '',
+            desc: tModalComponentProps('modal.desc.onVisibleChange'),
+            type: <span className="badge text-bg-secondary">(visible: boolean) =&gt; void</span>,
           },
           {
             attr: 'titleProps',
-            type: <span className="badge text-bg-secondary">ModalTitleProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.titleProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.titleProps'),
+            type: <span className="badge text-bg-secondary">ModalTitleProps&lt;div&gt;</span>,
           },
           {
             attr: 'bodyProps',
-            type: <span className="badge text-bg-secondary">ModalBodyProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.bodyProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.bodyProps'),
+            type: <span className="badge text-bg-secondary">ModalBodyProps&lt;div&gt;</span>,
           },
           {
             attr: 'contentProps',
-            type: <span className="badge text-bg-secondary">ModalContentProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.contentProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.contentProps'),
+            type: <span className="badge text-bg-secondary">ModalContentProps&lt;div&gt;</span>,
           },
           {
             attr: 'backdropProps',
-            type: <span className="badge text-bg-secondary">BackdropProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.backdropProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.backdropProps'),
+            type: <span className="badge text-bg-secondary">BackdropProps&lt;div&gt;</span>,
           },
           {
             attr: 'headerProps',
-            type: <span className="badge text-bg-secondary">ModalHeaderProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.headerProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.headerProps'),
+            type: <span className="badge text-bg-secondary">ModalHeaderProps&lt;div&gt;</span>,
           },
           {
             attr: 'footerProps',
-            type: <span className="badge text-bg-secondary">ModalFooterProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.footerProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.footerProps'),
+            type: <span className="badge text-bg-secondary">ModalFooterProps&lt;div&gt;</span>,
           },
           {
             attr: 'dialogProps',
-            type: <span className="badge text-bg-secondary">ModalDialogProps&lt;div&gt;</span>,
-            desc: tModalComponentProps('modal.desc.dialogProps'),
             default: '',
+            desc: tModalComponentProps('modal.desc.dialogProps'),
+            type: <span className="badge text-bg-secondary">ModalDialogProps&lt;div&gt;</span>,
           },
           {
             attr: 'scrollable',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tModalComponentProps('modal.desc.scrollable'),
             default: '',
+            desc: tModalComponentProps('modal.desc.scrollable'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'centered',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tModalComponentProps('modal.desc.centered'),
             default: '',
+            desc: tModalComponentProps('modal.desc.centered'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'toggle',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tModalComponentProps('modal.desc.toggle'),
             default: '',
+            desc: tModalComponentProps('modal.desc.toggle'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'size',
-            type: <span className="badge text-bg-secondary">sm | lg | xl</span>,
-            desc: tModalComponentProps('modal.desc.size'),
             default: '',
+            desc: tModalComponentProps('modal.desc.size'),
+            type: <span className="badge text-bg-secondary">sm | lg | xl</span>,
           },
           {
             attr: 'fullscreen',
-            type: <span className="badge text-bg-secondary">boolean | sm | md | lg | xl | xxl</span>,
-            desc: tModalComponentProps('modal.desc.fullscreen'),
             default: '',
+            desc: tModalComponentProps('modal.desc.fullscreen'),
+            type: <span className="badge text-bg-secondary">boolean | sm | md | lg | xl | xxl</span>,
           },
         ]}
+        props
+        state={state}
+        t={tModalComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

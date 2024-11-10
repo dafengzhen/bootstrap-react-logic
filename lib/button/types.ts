@@ -1,4 +1,5 @@
 import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
+
 import type {
   BaseProps,
   ButtonVariableType,
@@ -9,11 +10,36 @@ import type {
   VariantType,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
+type Props<T extends ElementType> = {
   /**
-   * variant.
+   * active.
    */
-  variant?: keyof VariantType;
+  active?: boolean;
+
+  /**
+   * btnClose.
+   */
+  btnClose?: boolean;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * endContent.
+   */
+  endContent?: ReactNode;
+
+  /**
+   * isLoading.
+   */
+  isLoading?: boolean;
+
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<ElementRef<T>>;
 
   /**
    * outline.
@@ -23,7 +49,12 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   /**
    * rounded.
    */
-  rounded?: keyof typeof RoundedClassEnum | boolean;
+  rounded?: boolean | keyof typeof RoundedClassEnum;
+
+  /**
+   * show.
+   */
+  show?: boolean;
 
   /**
    * size.
@@ -32,20 +63,10 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
     | 'lg'
     | 'sm'
     | {
-        paddingY?: string;
-        paddingX?: string;
         fontSize?: string;
+        paddingX?: string;
+        paddingY?: string;
       };
-
-  /**
-   * active.
-   */
-  active?: boolean;
-
-  /**
-   * isLoading.
-   */
-  isLoading?: boolean;
 
   /**
    * startContent.
@@ -53,37 +74,17 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   startContent?: ReactNode;
 
   /**
-   * endContent.
+   * variant.
    */
-  endContent?: ReactNode;
+  variant?: keyof VariantType;
+} & BaseProps<T, ButtonVariableType>;
 
+type CloseProps<T extends ElementType> = {
   /**
    * disabled.
    */
   disabled?: boolean;
-
-  /**
-   * btnClose.
-   */
-  btnClose?: boolean;
-
-  /**
-   * show.
-   */
-  show?: boolean;
-
-  /**
-   * onRef.
-   */
-  onRef?: RefCallback<ElementRef<T>>;
-};
-
-type CloseProps<T extends ElementType> = BaseProps<T, CloseButtonVariableType> & {
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-};
+} & BaseProps<T, CloseButtonVariableType>;
 
 export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;
 

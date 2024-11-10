@@ -1,23 +1,25 @@
 import { type ElementType, useCallback, useState } from 'react';
+
 import type { AccordionOption, AccordionProps } from './types.ts';
+
 import AccordionBasic from './accordion-basic.tsx';
-import AccordionItem from './accordion-item.tsx';
-import AccordionHeader from './accordion-header.tsx';
 import AccordionBody from './accordion-body.tsx';
+import AccordionHeader from './accordion-header.tsx';
+import AccordionItem from './accordion-item.tsx';
 
 const Accordion = function Accordion<T extends ElementType = 'div'>(props: AccordionProps<T>) {
   const {
-    as: Component = 'div',
     alwaysOpen,
+    as: Component = 'div',
+    collapsing,
     onChange: onChangeByDefault,
     options: defaultOptions,
-    collapsing,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
     ...item,
-    id: item.id ?? index,
     collapsed: item.collapsed === undefined ? false : item.collapsed,
+    id: item.id ?? index,
     show: item.show === undefined ? true : item.show,
   }));
   const [options, setOptions] = useState<AccordionOption[]>(initialOptions);
@@ -76,17 +78,17 @@ const Accordion = function Accordion<T extends ElementType = 'div'>(props: Accor
         return (
           <AccordionItem key={item.id}>
             <AccordionHeader
-              collapsed={item.collapsed}
               buttonProps={{
                 onClick: () => {
                   onClickCurrentOption(item);
                   onClickHeader(index);
                 },
               }}
+              collapsed={item.collapsed}
             >
               {item.header}
             </AccordionHeader>
-            <AccordionBody collapsing={collapsing} show={item.show} onChange={onChange}>
+            <AccordionBody collapsing={collapsing} onChange={onChange} show={item.show}>
               {item.body}
             </AccordionBody>
           </AccordionItem>

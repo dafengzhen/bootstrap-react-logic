@@ -2,14 +2,14 @@ import Dropdown from './dropdown.tsx';
 
 // types
 export type {
-  DropdownProps,
-  DropdownToggleProps,
+  DropdownDividerProps,
+  DropdownHeaderProps,
   DropdownItemProps,
   DropdownItemTextProps,
   DropdownMenuProps,
-  DropdownDividerProps,
-  DropdownHeaderProps,
   DropdownOption,
+  DropdownProps,
+  DropdownToggleProps,
 } from './types.ts';
 
 // hooks

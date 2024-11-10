@@ -2,7 +2,7 @@ import Select from './select.tsx';
 import SelectOption from './select-option.tsx';
 
 // types
-export type { SelectProps, SelectOptionProps } from './types.ts';
+export type { SelectOptionProps, SelectProps } from './types.ts';
 
 // hooks
 

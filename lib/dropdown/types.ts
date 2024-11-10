@@ -1,4 +1,6 @@
 import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
+
+import type { ButtonProps } from '../button';
 import type {
   BaseProps,
   DropdownDividerVariablesType,
@@ -10,33 +12,12 @@ import type {
   DropdownVariablesType,
   PropsWithoutRef,
 } from '../tools';
-import type { ButtonProps } from '../button';
 
-type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * options.
+   * autoClose.
    */
-  options?: DropdownOption[];
-
-  /**
-   * toggle.
-   */
-  toggle?: ReactNode;
-
-  /**
-   * toggleProps.
-   */
-  toggleProps?: ButtonProps<ElementType>;
-
-  /**
-   * buttonProps.
-   */
-  buttonProps?: ButtonProps<ElementType>;
-
-  /**
-   * split.
-   */
-  split?: boolean;
+  autoClose?: 'inside' | 'outside' | boolean;
 
   /**
    * btnGroup.
@@ -44,19 +25,19 @@ type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
   btnGroup?: boolean;
 
   /**
+   * buttonProps.
+   */
+  buttonProps?: ButtonProps<ElementType>;
+
+  /**
    * center.
    */
   center?: boolean;
 
   /**
-   * dropup.
+   * customMenu.
    */
-  dropup?: boolean;
-
-  /**
-   * dropupCenter.
-   */
-  dropupCenter?: boolean;
+  customMenu?: boolean;
 
   /**
    * dropend.
@@ -69,9 +50,14 @@ type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
   dropstart?: boolean;
 
   /**
-   * strategy.
+   * dropup.
    */
-  strategy?: 'fixed' | 'absolute';
+  dropup?: boolean;
+
+  /**
+   * dropupCenter.
+   */
+  dropupCenter?: boolean;
 
   /**
    * menuProps.
@@ -79,40 +65,55 @@ type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
   menuProps?: DropdownMenuProps<ElementType>;
 
   /**
-   * customMenu.
-   */
-  customMenu?: boolean;
-
-  /**
    * offset.
    */
   offset?:
-    | number
     | {
-        mainAxis?: number;
+        alignmentAxis?: null | number;
         crossAxis?: number;
-        alignmentAxis?: number | null;
-      };
+        mainAxis?: number;
+      }
+    | number;
 
   /**
-   * autoClose.
+   * options.
    */
-  autoClose?: boolean | 'inside' | 'outside';
+  options?: DropdownOption[];
+
+  /**
+   * split.
+   */
+  split?: boolean;
+
+  /**
+   * strategy.
+   */
+  strategy?: 'absolute' | 'fixed';
+
+  /**
+   * toggle.
+   */
+  toggle?: ReactNode;
+
+  /**
+   * toggleProps.
+   */
+  toggleProps?: ButtonProps<ElementType>;
 
   /**
    * visible.
    */
   visible?: boolean;
-};
+} & BaseProps<T, DropdownVariablesType>;
 
-type ToggleProps<T extends ElementType> = BaseProps<T, DropdownToggleVariablesType> & {
+type ToggleProps<T extends ElementType> = {
   /**
    * onRef.
    */
   onRef?: RefCallback<ElementRef<T>>;
-};
+} & BaseProps<T, DropdownToggleVariablesType>;
 
-type ItemProps<T extends ElementType> = BaseProps<T, DropdownItemVariablesType> & {
+type ItemProps<T extends ElementType> = {
   /**
    * active.
    */
@@ -122,36 +123,36 @@ type ItemProps<T extends ElementType> = BaseProps<T, DropdownItemVariablesType> 
    * disabled.
    */
   disabled?: boolean;
-};
+} & BaseProps<T, DropdownItemVariablesType>;
 
-type ItemTextProps<T extends ElementType> = BaseProps<T, DropdownItemTextVariablesType> & {};
+type ItemTextProps<T extends ElementType> = {} & BaseProps<T, DropdownItemTextVariablesType>;
 
-type MenuProps<T extends ElementType> = BaseProps<T, DropdownMenuVariablesType> & {
-  /**
-   * show.
-   */
-  show?: boolean;
-
+type MenuProps<T extends ElementType> = {
   /**
    * onRef.
    */
   onRef?: RefCallback<ElementRef<T>>;
-};
 
-type DividerProps<T extends ElementType> = BaseProps<T, DropdownDividerVariablesType> & {};
+  /**
+   * show.
+   */
+  show?: boolean;
+} & BaseProps<T, DropdownMenuVariablesType>;
 
-type HeaderProps<T extends ElementType> = BaseProps<T, DropdownHeaderVariablesType> & {};
+type DividerProps<T extends ElementType> = {} & BaseProps<T, DropdownDividerVariablesType>;
+
+type HeaderProps<T extends ElementType> = {} & BaseProps<T, DropdownHeaderVariablesType>;
 
 export interface DropdownOption {
-  id?: string | number;
+  active?: boolean;
+  as?: 'a' | 'button';
+  disabled?: boolean;
+  divider?: boolean;
+  header?: ReactNode;
+  href?: string;
+  id?: number | string;
   item?: ReactNode;
   itemText?: ReactNode;
-  href?: string;
-  divider?: boolean;
-  active?: boolean;
-  as?: 'button' | 'a';
-  disabled?: boolean;
-  header?: ReactNode;
 }
 
 export type DropdownProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, DropdownVariablesType>;

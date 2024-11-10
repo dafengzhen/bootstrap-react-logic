@@ -1,22 +1,16 @@
-import { normalizePath, type Plugin } from 'vite';
 import type { OutputAsset, PluginContext, SourceMap } from 'rollup';
-import postcssLoadConfig from 'postcss-load-config';
-import postcss from 'postcss';
+
 import cssnano from 'cssnano';
 import path from 'path';
+import postcss from 'postcss';
+import postcssLoadConfig from 'postcss-load-config';
 import { SourceMapConsumer, SourceMapGenerator } from 'source-map';
+import { normalizePath, type Plugin } from 'vite';
 
 const mergeCssPlugin = (): Plugin => {
   const combinedSourcemap = new Map<string, SourceMap>();
 
   return {
-    name: 'merge-css',
-    async transform(_, id) {
-      if (id.endsWith('.scss')) {
-        combinedSourcemap.set(id, this.getCombinedSourcemap());
-      }
-      return null;
-    },
     async generateBundle(_, bundle) {
       const cssFiles = Object.values(bundle).filter(
         (file): file is OutputAsset => file.type === 'asset' && file.fileName.endsWith('.css'),
@@ -29,18 +23,25 @@ const mergeCssPlugin = (): Plugin => {
 
         const mergedMap = await mergeSourceMaps(combinedSourcemap);
         this.emitFile({
-          type: 'asset',
           fileName: 'bootstrap-react-logic.css',
           source: result.css,
+          type: 'asset',
         });
         this.emitFile({
-          type: 'asset',
           fileName: 'bootstrap-react-logic.css.map',
           source: mergedMap.toString(),
+          type: 'asset',
         });
 
         emitUpdatedSourceMaps(cssFiles, combinedSourcemap, this);
       }
+    },
+    name: 'merge-css',
+    async transform(_, id) {
+      if (id.endsWith('.scss')) {
+        combinedSourcemap.set(id, this.getCombinedSourcemap());
+      }
+      return null;
     },
   };
 };
@@ -54,7 +55,7 @@ const mergeCssSources = (cssFiles: OutputAsset[]): string => {
 };
 
 const processCssWithPostcss = async (css: string) => {
-  const { plugins, options } = await postcssLoadConfig();
+  const { options, plugins } = await postcssLoadConfig();
   return postcss([...plugins, cssnano({ preset: 'default' })]).process(css, options);
 };
 
@@ -75,15 +76,15 @@ const mergeSourceMaps = async (combinedSourcemap: Map<string, SourceMap>) => {
     consumer.eachMapping((mapping) => {
       mergedMap.addMapping({
         generated: {
-          line: mapping.generatedLine,
           column: mapping.generatedColumn,
-        },
-        source: normalizeRelativePath(process.cwd(), mapping.source),
-        original: {
-          line: mapping.originalLine,
-          column: mapping.originalColumn,
+          line: mapping.generatedLine,
         },
         name: mapping.name,
+        original: {
+          column: mapping.originalColumn,
+          line: mapping.originalLine,
+        },
+        source: normalizeRelativePath(process.cwd(), mapping.source),
       });
     });
 
@@ -109,10 +110,10 @@ const emitUpdatedSourceMaps = (
     updateSourcemapSources(sourcemap, outputDir);
 
     pluginContext.emitFile({
-      type: 'asset',
       fileName: outputMapPath,
       originalFileName: filePath,
       source: sourcemap.toString(),
+      type: 'asset',
     });
 
     const cssFile = cssFiles.find((file) => file.fileName === normalizePath(getCssFileName(outputMapPath)));

@@ -9,7 +9,10 @@ import {
   useRef,
   useState,
 } from 'react';
+
 import type { InputOtpProps } from './types.ts';
+
+import { Input } from '../input';
 import {
   clsxStyle,
   clsxUnique,
@@ -20,7 +23,6 @@ import {
   isValueValid,
   mergeProps,
 } from '../tools';
-import { Input } from '../input';
 
 interface IOtp {
   id: string;
@@ -30,14 +32,14 @@ interface IOtp {
 const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOtpProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
     className,
-    style,
-    length = 4,
     defaultValue,
-    maxLength = 1,
+    dropOldClass,
     inputProps,
+    length = 4,
+    maxLength = 1,
+    style,
+    variables,
     ...rest
   } = props;
 
@@ -157,13 +159,13 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
           <Input
             className="text-center"
             {...mergeProps(inputProps, {
-              onRef: (instance: HTMLInputElement | null) => onRef(instance, item),
               onChange: (e: ChangeEvent<HTMLInputElement>) => onChange(e, index),
-              onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => onKeyDown(e, index),
               onFocus: (e: FocusEvent<HTMLInputElement>) => onFocus(e, index),
+              onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => onKeyDown(e, index),
+              onRef: (instance: HTMLInputElement | null) => onRef(instance, item),
             })}
-            maxLength={maxLength}
             key={item.id}
+            maxLength={maxLength}
             value={item.value}
           />
         );

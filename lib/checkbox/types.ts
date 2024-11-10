@@ -1,13 +1,14 @@
 import type { ElementType } from 'react';
+
 import type { BaseProps, CheckboxVariablesType, PropsWithoutRef, SlotValue } from '../tools';
 
-type SlotValueKeys = 'container' | 'component' | 'label';
+type SlotValueKeys = 'component' | 'container' | 'label';
 
-type Props<T extends ElementType> = BaseProps<T, CheckboxVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * indeterminate.
+   * contentClasses.
    */
-  indeterminate?: boolean;
+  contentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
 
   /**
    * disabled.
@@ -15,14 +16,9 @@ type Props<T extends ElementType> = BaseProps<T, CheckboxVariablesType> & {
   disabled?: boolean;
 
   /**
-   * contentClasses.
+   * indeterminate.
    */
-  contentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
-
-  /**
-   * switch.
-   */
-  switch?: boolean;
+  indeterminate?: boolean;
 
   /**
    * inline.
@@ -30,9 +26,9 @@ type Props<T extends ElementType> = BaseProps<T, CheckboxVariablesType> & {
   inline?: boolean;
 
   /**
-   * reverse.
+   * isInvalid,
    */
-  reverse?: boolean;
+  isInvalid?: boolean;
 
   /**
    * isValid.
@@ -40,9 +36,14 @@ type Props<T extends ElementType> = BaseProps<T, CheckboxVariablesType> & {
   isValid?: boolean;
 
   /**
-   * isInvalid,
+   * reverse.
    */
-  isInvalid?: boolean;
-};
+  reverse?: boolean;
+
+  /**
+   * switch.
+   */
+  switch?: boolean;
+} & BaseProps<T, CheckboxVariablesType>;
 
 export type CheckboxProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CheckboxVariablesType>;

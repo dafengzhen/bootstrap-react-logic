@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import {
   handleClipboard,
   handleToggleLanguage,
@@ -6,57 +5,58 @@ import {
   handleToggleState,
   handleToggleTheme,
 } from '@tools/handlers';
+import clsx from 'clsx';
 
 export const ActionIcons = ({
-  isOpen,
+  center,
   code,
+  dark,
   fullscreen,
   fullscreenState,
-  layoutState,
-  center,
-  themeState,
-  dark,
   i18n,
+  isOpen,
+  layoutState,
   onClickCode,
+  themeState,
 }: {
-  isOpen: boolean;
+  center?: boolean;
   code?: string;
+  dark?: boolean;
   fullscreen?: boolean;
   fullscreenState: any;
-  layoutState: any;
-  center?: boolean;
-  themeState: any;
-  dark?: boolean;
   i18n: any;
+  isOpen: boolean;
+  layoutState: any;
   onClickCode: () => void;
+  themeState: any;
 }) => {
   return (
     <div className="d-flex gap-2">
       <i
-        title="Code"
         className={clsx('bi tw-cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
         onClick={onClickCode}
+        title="Code"
       ></i>
-      <i title="Clipboard" className="bi bi-clipboard2 tw-cursor-pointer" onClick={() => handleClipboard(code)}></i>
+      <i className="bi bi-clipboard2 tw-cursor-pointer" onClick={() => handleClipboard(code)} title="Clipboard"></i>
       <i
-        title="Full / Full Exit"
         className={clsx('bi tw-cursor-pointer', fullscreen ? 'bi-fullscreen-exit text-primary' : 'bi-fullscreen')}
         onClick={() => handleToggleState(fullscreenState, 'options_fullscreen', 'true', 'false')}
+        title="Full / Full Exit"
       ></i>
       <i
-        title="Center / Full"
         className={clsx('bi tw-cursor-pointer', center ? 'bi-fullscreen-exit text-primary' : 'bi-arrows-fullscreen')}
         onClick={() => handleToggleLayout(layoutState)}
+        title="Center / Full"
       ></i>
       <i
-        title="Light / Dark"
         className={clsx('bi tw-cursor-pointer', dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high')}
         onClick={() => handleToggleTheme(themeState)}
+        title="Light / Dark"
       ></i>
       <i
-        title="En / Zh"
         className={clsx('bi tw-cursor-pointer', i18n.language !== 'en' ? 'bi-translate text-primary' : 'bi-translate')}
         onClick={() => handleToggleLanguage(i18n)}
+        title="En / Zh"
       ></i>
     </div>
   );

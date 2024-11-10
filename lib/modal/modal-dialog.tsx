@@ -1,18 +1,20 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { ModalDialogProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const ModalDialog = function ModalDialog<T extends ElementType = 'div'>(props: ModalDialogProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    scrollable,
     centered,
-    size,
+    className,
+    dropOldClass,
     fullscreen,
+    scrollable,
+    size,
+    style,
+    variables,
     ...rest
   } = props;
 

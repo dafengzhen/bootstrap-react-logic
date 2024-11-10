@@ -1,17 +1,17 @@
 export interface IError {
-  statusText: string;
   message: string;
+  statusText: string;
 }
 
 export type NestedKeys<T> = T extends object
   ? {
-      [K in keyof T]-?: K extends string ? `${K}` | `${K}.${Exclude<NestedKeys<T[K]>, `${string}.`>}` : never;
+      [K in keyof T]-?: K extends string ? `${K}.${Exclude<NestedKeys<T[K]>, `${string}.`>}` | `${K}` : never;
     }[keyof T]
   : '';
 
 export interface ICodeSection {
-  openCode: boolean;
   code?: string;
+  openCode: boolean;
 }
 
 export type StateObject = {

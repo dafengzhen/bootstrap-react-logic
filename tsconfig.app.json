@@ -31,6 +31,6 @@
       "@lib/*": ["./lib/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["dist", "dist-lib"]
+  "exclude": ["dist", "dist-lib"],
+  "include": ["src"]
 }

@@ -1,5 +1,8 @@
 import { type ElementType, type TouchEvent, useCallback, useEffect, useMemo, useState } from 'react';
+
 import type { CarouselOption, CarouselProps } from './types.ts';
+
+import Button from '../button/button.tsx';
 import {
   calculateLoopIndex,
   clsxStyle,
@@ -10,35 +13,34 @@ import {
   getLoopIndexDirection,
   isValueValid,
 } from '../tools';
-import CarouselItem from './carousel-item.tsx';
 import CarouselCaption from './carousel-caption.tsx';
-import Button from '../button/button.tsx';
+import CarouselItem from './carousel-item.tsx';
 
 interface IOption extends CarouselOption {
-  id: string | number;
-  interval: number;
-  carouselItemStart?: boolean;
   carouselItemEnd?: boolean;
   carouselItemNext?: boolean;
   carouselItemPrev?: boolean;
+  carouselItemStart?: boolean;
+  id: number | string;
+  interval: number;
 }
 
 const Carousel = function Carousel<T extends ElementType = 'div'>(props: CarouselProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
     className,
-    style,
-    slide = true,
-    fade,
-    options: defaultOptions,
     controls = true,
-    onChange: onChangeByDefault,
+    dropOldClass,
+    fade,
     indicators,
-    ride,
+    onChange: onChangeByDefault,
+    options: defaultOptions,
     pause,
+    ride,
+    slide = true,
+    style,
     touch,
+    variables,
     ...rest
   } = props;
 
@@ -51,7 +53,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
   const [options, setOptions] = useState<IOption[]>(initialOptions);
   const [carouselItemIndex, setCarouselItemIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<null | number>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'carousel', slide && 'slide', fade && 'carousel-fade', className);
@@ -61,7 +63,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
   }, [className, dropOldClass, fade, slide, style, variables]);
 
   const updateItemsState = useCallback(
-    (currentIndex: number, nextIndex: number, type: 'next' | 'prev' | 'nextIndicator' | 'prevIndicator') => {
+    (currentIndex: number, nextIndex: number, type: 'next' | 'nextIndicator' | 'prev' | 'prevIndicator') => {
       const currentItem = options[currentIndex];
       const nextItem = options[nextIndex];
 
@@ -83,7 +85,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
   );
 
   const handleClick = useCallback(
-    (type: 'prev' | 'next' | 'nextIndicator' | 'prevIndicator') => {
+    (type: 'next' | 'nextIndicator' | 'prev' | 'prevIndicator') => {
       const length = options.length;
       if (length === 0) {
         return;
@@ -181,8 +183,8 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
       {...renderOptions}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onTouchStart={handleTouchStart}
     >
       {indicators && (
         <div className="carousel-indicators">
@@ -190,12 +192,12 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
             const { isNext } = getLoopIndexDirection(carouselItemIndex, index, options.length);
             return (
               <Button
-                dropOldClass
-                key={item.id}
-                data-bs-target=""
+                aria-current={index === carouselItemIndex ? 'true' : 'false'}
                 aria-label={`Slide ${index + 1}`}
                 className={clsxWithOptions(null, index === carouselItemIndex && 'active')}
-                aria-current={index === carouselItemIndex ? 'true' : 'false'}
+                data-bs-target=""
+                dropOldClass
+                key={item.id}
                 onClick={() => handleClick(isNext ? 'nextIndicator' : 'prevIndicator')}
               ></Button>
             );
@@ -205,12 +207,12 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
       <div className="carousel-inner">
         {options.map((item) => (
           <CarouselItem
-            key={item.id}
             active={item.active}
-            carouselItemStart={item.carouselItemStart}
             carouselItemEnd={item.carouselItemEnd}
-            carouselItemPrev={item.carouselItemPrev}
             carouselItemNext={item.carouselItemNext}
+            carouselItemPrev={item.carouselItemPrev}
+            carouselItemStart={item.carouselItemStart}
+            key={item.id}
           >
             {item.item}
             {item.caption && <CarouselCaption>{item.caption}</CarouselCaption>}
@@ -219,12 +221,12 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
       </div>
       {controls && (
         <>
-          <Button dropOldClass className="carousel-control-prev" onClick={() => handleClick('prev')}>
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <Button className="carousel-control-prev" dropOldClass onClick={() => handleClick('prev')}>
+            <span aria-hidden="true" className="carousel-control-prev-icon"></span>
             <span className="visually-hidden">Previous</span>
           </Button>
-          <Button dropOldClass className="carousel-control-next" onClick={() => handleClick('next')}>
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <Button className="carousel-control-next" dropOldClass onClick={() => handleClick('next')}>
+            <span aria-hidden="true" className="carousel-control-next-icon"></span>
             <span className="visually-hidden">Next</span>
           </Button>
         </>

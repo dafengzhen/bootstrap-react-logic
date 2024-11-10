@@ -1,19 +1,21 @@
 import { type ElementType, useEffect, useMemo, useRef } from 'react';
+
 import type { CarouselItemProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const CarouselItem = function CarouselItem<T extends ElementType = 'div'>(props: CarouselItemProps<T>) {
   const {
-    as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
     active: activeByDefault = false,
-    carouselItemStart: carouselItemStartByDefault = false,
+    as: Component = 'div',
     carouselItemEnd: carouselItemEndByDefault = false,
-    carouselItemPrev: carouselItemPrevByDefault = false,
     carouselItemNext: carouselItemNextByDefault = false,
+    carouselItemPrev: carouselItemPrevByDefault = false,
+    carouselItemStart: carouselItemStartByDefault = false,
+    className,
+    dropOldClass,
+    style,
+    variables,
     ...rest
   } = props;
 

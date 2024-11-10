@@ -1,18 +1,18 @@
-import { Button } from '@lib/button';
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
-import { ButtonGroup } from '@lib/button-group';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Button } from '@lib/button';
+import { ButtonGroup } from '@lib/button-group';
 import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/button-group/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -44,7 +44,7 @@ export default function ButtonGroupPage() {
 
         <div className="overflow-x-auto text-nowrap">
           <ButtonGroup>
-            <Button as="a" href="#" variant="primary" active>
+            <Button active as="a" href="#" variant="primary">
               Active link
             </Button>
             <Button as="a" href="#" variant="primary">
@@ -73,20 +73,20 @@ export default function ButtonGroupPage() {
         </div>
       </Example>
 
-      <Example hash="checkbox" state={state} t={tButtonGroupPage} overflowXAuto textNowrap>
+      <Example hash="checkbox" overflowXAuto state={state} t={tButtonGroupPage} textNowrap>
         <div>
           <ButtonGroup>
-            <input type="checkbox" className="btn-check" id="btncheck1" autoComplete="off" />
+            <input autoComplete="off" className="btn-check" id="btncheck1" type="checkbox" />
             <label className="btn btn-outline-primary" htmlFor="btncheck1">
               Checkbox 1
             </label>
 
-            <input type="checkbox" className="btn-check" id="btncheck2" autoComplete="off" />
+            <input autoComplete="off" className="btn-check" id="btncheck2" type="checkbox" />
             <label className="btn btn-outline-primary" htmlFor="btncheck2">
               Checkbox 2
             </label>
 
-            <input type="checkbox" className="btn-check" id="btncheck3" autoComplete="off" />
+            <input autoComplete="off" className="btn-check" id="btncheck3" type="checkbox" />
             <label className="btn btn-outline-primary" htmlFor="btncheck3">
               Checkbox 3
             </label>
@@ -94,27 +94,27 @@ export default function ButtonGroupPage() {
         </div>
       </Example>
 
-      <Example hash="radio" state={state} t={tButtonGroupPage} overflowXAuto textNowrap>
+      <Example hash="radio" overflowXAuto state={state} t={tButtonGroupPage} textNowrap>
         <div>
           <ButtonGroup>
             <input
-              type="radio"
-              className="btn-check"
-              name="btnradio"
-              id="btnradio1"
               autoComplete="off"
+              className="btn-check"
               defaultChecked
+              id="btnradio1"
+              name="btnradio"
+              type="radio"
             />
             <label className="btn btn-outline-primary" htmlFor="btnradio1">
               Radio 1
             </label>
 
-            <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off" />
+            <input autoComplete="off" className="btn-check" id="btnradio2" name="btnradio" type="radio" />
             <label className="btn btn-outline-primary" htmlFor="btnradio2">
               Radio 2
             </label>
 
-            <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autoComplete="off" />
+            <input autoComplete="off" className="btn-check" id="btnradio3" name="btnradio" type="radio" />
             <label className="btn btn-outline-primary" htmlFor="btnradio3">
               Radio 3
             </label>
@@ -123,7 +123,7 @@ export default function ButtonGroupPage() {
       </Example>
 
       <Example hash="toolbar" state={state} t={tButtonGroupPage}>
-        <ButtonGroup toolbar className="gap-2">
+        <ButtonGroup className="gap-2" toolbar>
           <ButtonGroup>
             <Button variant="primary">1</Button>
             <Button variant="primary">2</Button>
@@ -142,7 +142,7 @@ export default function ButtonGroupPage() {
           </ButtonGroup>
         </ButtonGroup>
 
-        <ButtonGroup toolbar className="gap-2">
+        <ButtonGroup className="gap-2" toolbar>
           <ButtonGroup>
             <Button outline="secondary">1</Button>
             <Button outline="secondary">2</Button>
@@ -155,16 +155,16 @@ export default function ButtonGroupPage() {
               @
             </div>
             <input
-              type="text"
+              aria-describedby="btnGroupAddon"
+              aria-label="Input group example"
               className="form-control"
               placeholder="Input group example"
-              aria-label="Input group example"
-              aria-describedby="btnGroupAddon"
+              type="text"
             />
           </div>
         </ButtonGroup>
 
-        <ButtonGroup toolbar className="justify-content-between gap-2">
+        <ButtonGroup className="justify-content-between gap-2" toolbar>
           <ButtonGroup>
             <Button outline="secondary">1</Button>
             <Button outline="secondary">2</Button>
@@ -177,17 +177,17 @@ export default function ButtonGroupPage() {
               @
             </div>
             <input
-              type="text"
+              aria-describedby="btnGroupAddon2"
+              aria-label="Input group example"
               className="form-control"
               placeholder="Input group example"
-              aria-label="Input group example"
-              aria-describedby="btnGroupAddon2"
+              type="text"
             />
           </div>
         </ButtonGroup>
       </Example>
 
-      <Example hash="size" state={state} t={tButtonGroupPage} overflowXAuto textNowrap>
+      <Example hash="size" overflowXAuto state={state} t={tButtonGroupPage} textNowrap>
         <div>
           <ButtonGroup size="lg">
             <Button outline="primary">Left</Button>
@@ -213,7 +213,7 @@ export default function ButtonGroupPage() {
         </div>
       </Example>
 
-      <Example hash="vertical" state={state} t={tButtonGroupPage} row wrap>
+      <Example hash="vertical" row state={state} t={tButtonGroupPage} wrap>
         <ButtonGroup vertical>
           <Button variant="primary">Button</Button>
           <Button variant="primary">Button</Button>
@@ -223,36 +223,36 @@ export default function ButtonGroupPage() {
 
         <ButtonGroup vertical>
           <input
-            type="radio"
-            className="btn-check"
-            name="vbtn-radio"
-            id="vbtn-radio1"
             autoComplete="off"
+            className="btn-check"
             defaultChecked
+            id="vbtn-radio1"
+            name="vbtn-radio"
+            type="radio"
           />
           <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
             Radio 1
           </label>
-          <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio2" autoComplete="off" />
+          <input autoComplete="off" className="btn-check" id="vbtn-radio2" name="vbtn-radio" type="radio" />
           <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
             Radio 2
           </label>
-          <input type="radio" className="btn-check" name="vbtn-radio" id="vbtn-radio3" autoComplete="off" />
+          <input autoComplete="off" className="btn-check" id="vbtn-radio3" name="vbtn-radio" type="radio" />
           <label className="btn btn-outline-danger" htmlFor="vbtn-radio3">
             Radio 3
           </label>
         </ButtonGroup>
       </Example>
 
-      <Example hash="example" state={state} t={tButtonGroupPage} row wrap overflowXAuto textNowrap>
+      <Example hash="example" overflowXAuto row state={state} t={tButtonGroupPage} textNowrap wrap>
         <ButtonGroup size={mySize}>
-          <Button variant="primary" onClick={onClickChangeSizeTest}>
+          <Button onClick={onClickChangeSizeTest} variant="primary">
             Click
           </Button>
-          <Button variant="primary" onClick={onClickChangeSizeTest}>
+          <Button onClick={onClickChangeSizeTest} variant="primary">
             Change Button
           </Button>
-          <Button variant="primary" onClick={onClickChangeSizeTest}>
+          <Button onClick={onClickChangeSizeTest} variant="primary">
             Size ({mySize})
           </Button>
         </ButtonGroup>
@@ -261,33 +261,33 @@ export default function ButtonGroupPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="buttonGroupComponentProps"
-        state={state}
-        t={tButtonGroupComponentProps}
         items={[
           {
             attr: 'toolbar',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonGroupComponentProps('buttonGroup.desc.toolbar'),
             default: '',
+            desc: tButtonGroupComponentProps('buttonGroup.desc.toolbar'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'vertical',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonGroupComponentProps('buttonGroup.desc.vertical'),
             default: '',
+            desc: tButtonGroupComponentProps('buttonGroup.desc.vertical'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'size',
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tButtonGroupComponentProps('buttonGroup.desc.size'),
             default: '',
+            desc: tButtonGroupComponentProps('buttonGroup.desc.size'),
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
         ]}
+        props
+        state={state}
+        t={tButtonGroupComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

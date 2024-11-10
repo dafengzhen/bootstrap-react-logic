@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import { Checkbox } from '@lib/checkbox';
 import { Label } from '@lib/label';
-import Example from '@components/example.tsx';
 import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/checkbox/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -30,20 +30,20 @@ export default function CheckboxPage() {
     <div className="d-flex flex-column gap-3">
       <Example hash="basic" state={state} t={tCheckboxPage}>
         <div className="form-check">
-          <Checkbox value="" id="flexCheckDefault"></Checkbox>
+          <Checkbox id="flexCheckDefault" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexCheckDefault">
             Default checkbox
           </Label>
         </div>
 
-        <Checkbox defaultChecked value="" id="flexCheckChecked">
+        <Checkbox defaultChecked id="flexCheckChecked" value="">
           Checked checkbox
         </Checkbox>
       </Example>
 
       <Example hash="indeterminate" state={state} t={tCheckboxPage}>
         <div className="form-check">
-          <Checkbox indeterminate value="" id="flexCheckIndeterminate"></Checkbox>
+          <Checkbox id="flexCheckIndeterminate" indeterminate value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexCheckIndeterminate">
             Indeterminate checkbox
           </Label>
@@ -52,21 +52,21 @@ export default function CheckboxPage() {
 
       <Example hash="disabled" state={state} t={tCheckboxPage}>
         <div className="form-check">
-          <Checkbox indeterminate value="" id="flexCheckIndeterminateDisabled" disabled></Checkbox>
+          <Checkbox disabled id="flexCheckIndeterminateDisabled" indeterminate value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexCheckIndeterminateDisabled">
             Disabled indeterminate checkbox
           </Label>
         </div>
 
         <div className="form-check">
-          <Checkbox value="" id="flexCheckDisabled" disabled></Checkbox>
+          <Checkbox disabled id="flexCheckDisabled" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexCheckDisabled">
             Disabled checkbox
           </Label>
         </div>
 
         <div className="form-check">
-          <Checkbox value="" id="flexCheckCheckedDisabled" disabled defaultChecked></Checkbox>
+          <Checkbox defaultChecked disabled id="flexCheckCheckedDisabled" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexCheckCheckedDisabled">
             Disabled checked checkbox
           </Label>
@@ -74,26 +74,26 @@ export default function CheckboxPage() {
       </Example>
 
       <Example hash="switch" state={state} t={tCheckboxPage}>
-        <Checkbox switch value="" id="flexSwitchCheckDefault">
+        <Checkbox id="flexSwitchCheckDefault" switch value="">
           Default switch checkbox input
         </Checkbox>
 
         <div className="form-check form-switch">
-          <Checkbox defaultChecked value="" id="flexSwitchCheckChecked" role="switch"></Checkbox>
+          <Checkbox defaultChecked id="flexSwitchCheckChecked" role="switch" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexSwitchCheckChecked">
             Checked switch checkbox input
           </Label>
         </div>
 
         <div className="form-check form-switch">
-          <Checkbox disabled value="" id="flexSwitchCheckDisabled" role="switch"></Checkbox>
+          <Checkbox disabled id="flexSwitchCheckDisabled" role="switch" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexSwitchCheckDisabled">
             Disabled switch checkbox input
           </Label>
         </div>
 
         <div className="form-check form-switch">
-          <Checkbox defaultChecked disabled value="" id="flexSwitchCheckCheckedDisabled" role="switch"></Checkbox>
+          <Checkbox defaultChecked disabled id="flexSwitchCheckCheckedDisabled" role="switch" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexSwitchCheckCheckedDisabled">
             Disabled checked switch checkbox input
           </Label>
@@ -101,19 +101,19 @@ export default function CheckboxPage() {
       </Example>
 
       <Example hash="inline" state={state} t={tCheckboxPage}>
-        <Checkbox inline value="option1" id="inlineCheckbox1">
+        <Checkbox id="inlineCheckbox1" inline value="option1">
           1
         </Checkbox>
 
         <div className="form-check form-check-inline">
-          <Checkbox value="option2" id="inlineCheckbox2"></Checkbox>
+          <Checkbox id="inlineCheckbox2" value="option2"></Checkbox>
           <Label formCheckLabel htmlFor="inlineCheckbox2">
             2
           </Label>
         </div>
 
         <div className="form-check form-check-inline">
-          <Checkbox disabled value="option3" id="inlineCheckbox3"></Checkbox>
+          <Checkbox disabled id="inlineCheckbox3" value="option3"></Checkbox>
           <Label formCheckLabel htmlFor="inlineCheckbox3">
             3 (disabled)
           </Label>
@@ -121,19 +121,19 @@ export default function CheckboxPage() {
       </Example>
 
       <Example hash="reverse" state={state} t={tCheckboxPage}>
-        <Checkbox reverse value="" id="reverseCheck1">
+        <Checkbox id="reverseCheck1" reverse value="">
           Reverse checkbox
         </Checkbox>
 
         <div className="form-check form-check-reverse">
-          <Checkbox disabled value="" id="reverseCheck2"></Checkbox>
+          <Checkbox disabled id="reverseCheck2" value=""></Checkbox>
           <Label formCheckLabel htmlFor="reverseCheck2">
             Disabled reverse checkbox
           </Label>
         </div>
 
         <div className="form-check form-switch form-check-reverse">
-          <Checkbox value="" id="flexSwitchCheckReverse"></Checkbox>
+          <Checkbox id="flexSwitchCheckReverse" value=""></Checkbox>
           <Label formCheckLabel htmlFor="flexSwitchCheckReverse">
             Reverse switch checkbox input
           </Label>
@@ -144,54 +144,54 @@ export default function CheckboxPage() {
         <Checkbox value="" />
       </Example>
 
-      <Example hash="toggleButtons" state={state} t={tCheckboxPage} row overflowXAuto textNowrap>
+      <Example hash="toggleButtons" overflowXAuto row state={state} t={tCheckboxPage} textNowrap>
         <div>
-          <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check"></Checkbox>
-          <Label dropOldClass className="btn btn-primary" htmlFor="btn-check">
+          <Checkbox autoComplete="off" className="btn-check" dropOldClass id="btn-check" value=""></Checkbox>
+          <Label className="btn btn-primary" dropOldClass htmlFor="btn-check">
             Single toggle
           </Label>
         </div>
 
         <div>
           <Checkbox
+            autoComplete="off"
+            className="btn-check"
             defaultChecked
             dropOldClass
-            value=""
-            className="btn-check"
-            autoComplete="off"
             id="btn-check-2"
+            value=""
           ></Checkbox>
-          <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-2">
+          <Label className="btn btn-primary" dropOldClass htmlFor="btn-check-2">
             Checked
           </Label>
         </div>
 
         <div>
-          <Checkbox dropOldClass disabled value="" className="btn-check" autoComplete="off" id="btn-check-3"></Checkbox>
-          <Label dropOldClass className="btn btn-primary" htmlFor="btn-check-3">
+          <Checkbox autoComplete="off" className="btn-check" disabled dropOldClass id="btn-check-3" value=""></Checkbox>
+          <Label className="btn btn-primary" dropOldClass htmlFor="btn-check-3">
             Disabled
           </Label>
         </div>
       </Example>
 
-      <Example hash="outlinedStyles" state={state} t={tCheckboxPage} row overflowXAuto textNowrap>
+      <Example hash="outlinedStyles" overflowXAuto row state={state} t={tCheckboxPage} textNowrap>
         <div>
-          <Checkbox dropOldClass value="" className="btn-check" autoComplete="off" id="btn-check-outlined"></Checkbox>
-          <Label dropOldClass className="btn btn-outline-primary" htmlFor="btn-check-outlined">
+          <Checkbox autoComplete="off" className="btn-check" dropOldClass id="btn-check-outlined" value=""></Checkbox>
+          <Label className="btn btn-outline-primary" dropOldClass htmlFor="btn-check-outlined">
             Single toggle
           </Label>
         </div>
 
         <div>
           <Checkbox
+            autoComplete="off"
+            className="btn-check"
             defaultChecked
             dropOldClass
-            value=""
-            className="btn-check"
-            autoComplete="off"
             id="btn-check-2-outlined"
+            value=""
           ></Checkbox>
-          <Label dropOldClass className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined">
+          <Label className="btn btn-outline-secondary" dropOldClass htmlFor="btn-check-2-outlined">
             Checked
           </Label>
         </div>
@@ -200,25 +200,24 @@ export default function CheckboxPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="checkboxComponentProps"
-        state={state}
-        t={tCheckboxComponentProps}
         items={[
           {
             attr: 'indeterminate',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.indeterminate'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.indeterminate'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'disabled',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.disabled'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'contentClasses',
+            default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.contentClasses'),
             type: (
               <div className="d-flex flex-column gap-2">
                 <div>
@@ -231,43 +230,44 @@ export default function CheckboxPage() {
                 </div>
               </div>
             ),
-            desc: tCheckboxComponentProps('checkbox.desc.contentClasses'),
-            default: '',
           },
           {
             attr: 'switch',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.switch'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.switch'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'inline',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.inline'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.inline'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'reverse',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.reverse'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.reverse'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'isValid',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.isValid'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.isValid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'isInvalid',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.isInvalid'),
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.isInvalid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tCheckboxComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

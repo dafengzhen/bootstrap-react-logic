@@ -1,18 +1,20 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { TextareaProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: TextareaProps<T>) {
   const {
     as: Component = 'textarea',
-    dropOldClass,
-    variables,
-    className,
-    style,
     children,
+    className,
     defaultValue,
-    isValid,
+    dropOldClass,
     isInvalid,
+    isValid,
+    style,
+    variables,
     ...rest
   } = props;
 

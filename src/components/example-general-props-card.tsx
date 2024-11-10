@@ -1,6 +1,6 @@
-import { Trans, useTranslation } from 'react-i18next';
 import ExamplePropsCard from '@components/example-props-card.tsx';
 import { kebabToCamelCase, kebabToCamelCaseLowerFirst } from '@src/tools';
+import { Trans, useTranslation } from 'react-i18next';
 
 export default function ExampleGeneralPropsCard(props: any) {
   const { t } = useTranslation(['commonComponentProps']);
@@ -10,29 +10,7 @@ export default function ExampleGeneralPropsCard(props: any) {
 
   return (
     <ExamplePropsCard
-      title={_tHash}
-      hash={hash}
       customBody
-      items={[
-        {
-          attr: 'as',
-          type: <span className="badge text-bg-secondary">ElementType</span>,
-          desc: t('common.desc.as'),
-          default: '',
-        },
-        {
-          attr: 'dropOldClass',
-          type: <span className="badge text-bg-secondary">boolean</span>,
-          desc: t('common.desc.dropOldClass'),
-          default: '',
-        },
-        {
-          attr: 'variables',
-          type: <span className="badge text-bg-secondary">CSSProperties</span>,
-          desc: t('common.desc.variables'),
-          default: '',
-        },
-      ]}
       customCaption={
         <div className="d-flex gap-2">
           <div>
@@ -41,10 +19,10 @@ export default function ExampleGeneralPropsCard(props: any) {
           <div className="d-flex flex-column gap-2">
             <div className="d-flex flex-column gap-2">
               <div>
-                <Trans t={t} i18nKey="p0"></Trans>
+                <Trans i18nKey="p0" t={t}></Trans>
               </div>
               <div>
-                <Trans t={t} i18nKey="p1"></Trans>
+                <Trans i18nKey="p1" t={t}></Trans>
               </div>
             </div>
 
@@ -52,18 +30,40 @@ export default function ExampleGeneralPropsCard(props: any) {
 
             <div className="d-flex flex-column gap-2">
               <div>
-                <Trans t={t} i18nKey="p4"></Trans>
+                <Trans i18nKey="p4" t={t}></Trans>
               </div>
               <div>
-                <Trans t={t} i18nKey="p5"></Trans>
+                <Trans i18nKey="p5" t={t}></Trans>
               </div>
               <div>
-                <Trans t={t} i18nKey="p6"></Trans>
+                <Trans i18nKey="p6" t={t}></Trans>
               </div>
             </div>
           </div>
         </div>
       }
+      hash={hash}
+      items={[
+        {
+          attr: 'as',
+          default: '',
+          desc: t('common.desc.as'),
+          type: <span className="badge text-bg-secondary">ElementType</span>,
+        },
+        {
+          attr: 'dropOldClass',
+          default: '',
+          desc: t('common.desc.dropOldClass'),
+          type: <span className="badge text-bg-secondary">boolean</span>,
+        },
+        {
+          attr: 'variables',
+          default: '',
+          desc: t('common.desc.variables'),
+          type: <span className="badge text-bg-secondary">CSSProperties</span>,
+        },
+      ]}
+      title={_tHash}
       {...props}
     ></ExamplePropsCard>
   );

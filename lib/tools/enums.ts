@@ -1,12 +1,12 @@
 enum RoundedClassEnum {
-  xs = 0,
-  sm = 1,
-  md = 2,
-  lg = 3,
-  xl = 4,
-  xxl = 5,
   circle = 'circle',
+  lg = 3,
+  md = 2,
   pill = 'pill',
+  sm = 1,
+  xl = 4,
+  xs = 0,
+  xxl = 5,
 }
 
 export { RoundedClassEnum };

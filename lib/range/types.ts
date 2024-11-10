@@ -1,26 +1,17 @@
 import type { ElementType } from 'react';
+
 import type { BaseProps, PropsWithoutRef, RangeVariablesType } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, RangeVariablesType> & {
+type Props<T extends ElementType> = {
   /**
    * disabled.
    */
   disabled?: boolean;
 
   /**
-   * min.
+   * isInvalid,
    */
-  min?: string | number;
-
-  /**
-   * max.
-   */
-  max?: string | number;
-
-  /**
-   * step.
-   */
-  step?: string | number;
+  isInvalid?: boolean;
 
   /**
    * isValid.
@@ -28,9 +19,19 @@ type Props<T extends ElementType> = BaseProps<T, RangeVariablesType> & {
   isValid?: boolean;
 
   /**
-   * isInvalid,
+   * max.
    */
-  isInvalid?: boolean;
-};
+  max?: number | string;
+
+  /**
+   * min.
+   */
+  min?: number | string;
+
+  /**
+   * step.
+   */
+  step?: number | string;
+} & BaseProps<T, RangeVariablesType>;
 
 export type RangeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RangeVariablesType>;

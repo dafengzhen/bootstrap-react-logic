@@ -1,36 +1,36 @@
-import { type ReactNode, useContext } from 'react';
-import { GlobalContext } from '@contexts/global-context.ts';
-import { useTranslation } from 'react-i18next';
-import ExampleLink from '@components/example-link.tsx';
 import { ActionIcons } from '@components/action-icons.tsx';
+import ExampleLink from '@components/example-link.tsx';
+import { GlobalContext } from '@contexts/global-context.ts';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
 import clsx from 'clsx';
+import { type ReactNode, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function ExampleDynamicCard({
-  title,
-  hash,
-  isOpen,
-  toggleCode,
+  bg,
   children,
   code,
   codeLanguage,
   dark,
-  bg,
+  hash,
+  isOpen,
+  title,
+  toggleCode,
 }: {
-  title: string;
-  hash: string;
-  isOpen: boolean;
-  toggleCode: () => void;
+  bg?: boolean;
   children: ReactNode;
   code?: string;
   codeLanguage?: string;
   dark?: boolean;
-  bg?: boolean;
+  hash: string;
+  isOpen: boolean;
+  title: string;
+  toggleCode: () => void;
 }) {
   const globalContext = useContext(GlobalContext);
   const { fullscreen, layout, theme } = globalContext;
   const { i18n } = useTranslation();
-  const [setElement] = useHighlightCode({ isOpen, code, codeLanguage });
+  const [setElement] = useHighlightCode({ code, codeLanguage, isOpen });
   const isDark = (theme as any)[0] as 'dark' | 'light';
 
   if (dark) {
@@ -38,18 +38,18 @@ export default function ExampleDynamicCard({
       <div className="card">
         <div className="card-header">
           <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
-            <ExampleLink title={title} hash={hash} />
+            <ExampleLink hash={hash} title={title} />
             <ActionIcons
-              isOpen={isOpen}
+              center={layout?.[0] === 'center'}
               code={code}
+              dark={theme?.[0] === 'dark'}
               fullscreen={fullscreen?.[0]}
               fullscreenState={fullscreen}
-              layoutState={layout}
-              center={layout?.[0] === 'center'}
-              themeState={theme}
-              dark={theme?.[0] === 'dark'}
               i18n={i18n}
+              isOpen={isOpen}
+              layoutState={layout}
               onClickCode={toggleCode}
+              themeState={theme}
             />
           </div>
         </div>
@@ -77,18 +77,18 @@ export default function ExampleDynamicCard({
     <div className="card">
       <div className="card-header">
         <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
-          <ExampleLink title={title} hash={hash} />
+          <ExampleLink hash={hash} title={title} />
           <ActionIcons
-            isOpen={isOpen}
+            center={layout?.[0] === 'center'}
             code={code}
+            dark={theme?.[0] === 'dark'}
             fullscreen={fullscreen?.[0]}
             fullscreenState={fullscreen}
-            layoutState={layout}
-            center={layout?.[0] === 'center'}
-            themeState={theme}
-            dark={theme?.[0] === 'dark'}
             i18n={i18n}
+            isOpen={isOpen}
+            layoutState={layout}
             onClickCode={toggleCode}
+            themeState={theme}
           />
         </div>
       </div>

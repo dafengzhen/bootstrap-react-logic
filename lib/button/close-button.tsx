@@ -1,10 +1,12 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { CloseButtonProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import Button from './button.tsx';
 
 const CloseButton = function CloseButton<T extends ElementType = 'button'>(props: CloseButtonProps<T>) {
-  const { as: Component = 'button', variables, className, style, disabled, ...rest } = props;
+  const { as: Component = 'button', className, disabled, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(className);
@@ -15,8 +17,8 @@ const CloseButton = function CloseButton<T extends ElementType = 'button'>(props
     return filterOptions(
       {
         className: finalClass,
-        style: finalStyle,
         disabled,
+        style: finalStyle,
       },
       isValueValid,
     );

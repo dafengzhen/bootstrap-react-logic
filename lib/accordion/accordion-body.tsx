@@ -1,5 +1,7 @@
 import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
+
 import type { AccordionBodyProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChange?: (onChange: boolean) => void) => {
@@ -72,32 +74,32 @@ const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChang
   }, [collapse, visible, show, isCollapsing]);
 
   return {
+    bodyElement,
+    collapse,
+    collapseElement,
+    collapseHeight,
+    collapsing,
     show,
     visible,
-    collapse,
-    collapsing,
-    collapseHeight,
-    collapseElement,
-    bodyElement,
   };
 };
 
 const AccordionBody = function AccordionBody<T extends ElementType = 'div'>(props: AccordionBodyProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
     children,
-    show: showByDefault = true,
+    className,
     collapsing: collapsingByDefault = true,
+    dropOldClass,
     onChange,
+    show: showByDefault = true,
+    style,
+    variables,
     ...rest
   } = props;
 
   const isCollapsing = collapsingByDefault === undefined || collapsingByDefault;
-  const { show, visible, collapse, collapsing, collapseHeight, collapseElement, bodyElement } = useAccordionBody(
+  const { bodyElement, collapse, collapseElement, collapseHeight, collapsing, show, visible } = useAccordionBody(
     showByDefault,
     isCollapsing,
     onChange,

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Select, SelectOption } from '@lib/select';
 import { SelectMultiple } from '@lib/select-multiple';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
-import OptionRow from '@components/option-row.tsx';
-import Example from '@components/example.tsx';
 import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/select/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -41,14 +41,14 @@ export default function SelectPage() {
       </Example>
 
       <Example hash="size" state={state} t={tSelectPage}>
-        <Select size="lg" aria-label="Large select example">
+        <Select aria-label="Large select example" size="lg">
           <SelectOption defaultValue="">Open this select menu</SelectOption>
           <SelectOption value="1">One</SelectOption>
           <SelectOption value="2">Two</SelectOption>
           <SelectOption value="3">Three</SelectOption>
         </Select>
 
-        <Select size="sm" aria-label="Small select example">
+        <Select aria-label="Small select example" size="sm">
           <SelectOption defaultValue="">Open this select menu</SelectOption>
           <SelectOption value="1">One</SelectOption>
           <SelectOption value="2">Two</SelectOption>
@@ -57,14 +57,14 @@ export default function SelectPage() {
       </Example>
 
       <Example hash="multiple" state={state} t={tSelectPage}>
-        <Select multiple aria-label="Multiple select example">
+        <Select aria-label="Multiple select example" multiple>
           <SelectOption defaultValue="">Open this select menu</SelectOption>
           <SelectOption value="1">One</SelectOption>
           <SelectOption value="2">Two</SelectOption>
           <SelectOption value="3">Three</SelectOption>
         </Select>
 
-        <Select nativeSize={3} aria-label="Size 3 select example">
+        <Select aria-label="Size 3 select example" nativeSize={3}>
           <SelectOption defaultValue="">Open this select menu</SelectOption>
           <SelectOption value="1">One</SelectOption>
           <SelectOption value="2">Two</SelectOption>
@@ -72,7 +72,6 @@ export default function SelectPage() {
         </Select>
 
         <SelectMultiple
-          placeholder="Please select"
           options={[
             {
               text: 'Primary',
@@ -93,24 +92,23 @@ export default function SelectPage() {
               text: 'Info',
             },
           ]}
+          placeholder="Please select"
         ></SelectMultiple>
 
         <SelectMultiple disabled placeholder="Please select"></SelectMultiple>
 
         <SelectMultiple
-          single
-          placeholder="Please select"
           options={[
             {
               text: 'Primary',
             },
             {
-              text: 'Secondary',
               active: true,
+              text: 'Secondary',
             },
             {
-              text: 'Success',
               disabled: true,
+              text: 'Success',
             },
             {
               text: 'Danger',
@@ -122,25 +120,26 @@ export default function SelectPage() {
               text: 'Info',
             },
           ]}
+          placeholder="Please select"
+          single
         ></SelectMultiple>
 
         <SelectMultiple
-          placeholder="Please select"
           options={[
             {
               text: 'Primary',
             },
             {
-              text: 'Secondary',
               active: true,
+              text: 'Secondary',
             },
             {
               text: 'Success',
             },
             {
-              text: 'Danger',
-
               active: true,
+
+              text: 'Danger',
             },
             {
               text: 'Warning',
@@ -149,17 +148,17 @@ export default function SelectPage() {
               text: 'Info',
             },
           ]}
+          placeholder="Please select"
         ></SelectMultiple>
 
         <SelectMultiple
-          placeholder="Please select"
           options={[
             {
               text: 'Primary',
             },
             {
-              text: 'Secondary',
               active: true,
+              text: 'Secondary',
             },
             {
               text: 'Success',
@@ -169,35 +168,35 @@ export default function SelectPage() {
               text: 'Danger',
             },
             {
-              text: 'Warning',
               divider: 'bottom',
+              text: 'Warning',
             },
             {
               text: 'Info',
             },
           ]}
+          placeholder="Please select"
         ></SelectMultiple>
 
         <SelectMultiple
-          placeholder="Please select"
           options={[
             {
               header: 'Status and Importance',
               text: 'Primary',
             },
             {
+              active: true,
               header: 'Status and Importance',
               text: 'Secondary',
-              active: true,
             },
             {
               header: 'Status and Importance',
               text: 'Success',
             },
             {
+              active: true,
               header: 'Status and Importance',
               text: 'Danger',
-              active: true,
             },
             {
               header: 'Warning and Information',
@@ -208,27 +207,26 @@ export default function SelectPage() {
               text: 'Info',
             },
           ]}
+          placeholder="Please select"
         ></SelectMultiple>
 
         <SelectMultiple
           hideActiveOptions
-          selectableCount={4}
-          placeholder="Please select"
           options={[
             {
               text: 'Primary',
             },
             {
+              active: true,
               text: 'Secondary',
-              active: true,
             },
             {
+              active: true,
               text: 'Success',
-              active: true,
             },
             {
-              text: 'Danger',
               active: true,
+              text: 'Danger',
             },
             {
               text: 'Warning',
@@ -237,6 +235,8 @@ export default function SelectPage() {
               text: 'Info',
             },
           ]}
+          placeholder="Please select"
+          selectableCount={4}
         ></SelectMultiple>
       </Example>
 
@@ -252,97 +252,96 @@ export default function SelectPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="selectComponentProps"
-        state={state}
-        t={tSelectComponentProps}
         items={[
           {
             attr: 'size',
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tSelectComponentProps('select.desc.size'),
             default: '',
+            desc: tSelectComponentProps('select.desc.size'),
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
           {
             attr: 'nativeSize',
-            type: <span className="badge text-bg-secondary">number | undefined</span>,
-            desc: tSelectComponentProps('select.desc.nativeSize'),
             default: '',
+            desc: tSelectComponentProps('select.desc.nativeSize'),
+            type: <span className="badge text-bg-secondary">number | undefined</span>,
           },
           {
             attr: 'disabled',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('select.desc.disabled'),
             default: '',
+            desc: tSelectComponentProps('select.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'isValid',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('select.desc.isValid'),
             default: '',
+            desc: tSelectComponentProps('select.desc.isValid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'isInvalid',
-            type: <span className="badge text-bg-secondary">boolean</span>,
+            default: '',
             desc: tSelectComponentProps('select.desc.isInvalid'),
-            default: '',
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tSelectComponentProps}
       />
 
       <Example
-        props
         hash="selectOptionComponentProps"
-        state={state}
-        t={tSelectComponentProps}
         items={[
           {
             attr: 'disabled',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('selectOption.desc.disabled'),
             default: '',
+            desc: tSelectComponentProps('selectOption.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tSelectComponentProps}
       />
 
       <Example
-        props
         hash="selectMultipleComponentProps"
-        state={state}
-        t={tSelectComponentProps}
         items={[
           {
             attr: 'disabled',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('selectMultiple.desc.disabled'),
             default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'single',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('selectMultiple.desc.single'),
             default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.single'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'hideActiveOptions',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSelectComponentProps('selectMultiple.desc.hideActiveOptions'),
             default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.hideActiveOptions'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'placeholder',
-            type: <span className="badge text-bg-secondary">string</span>,
-            desc: tSelectComponentProps('selectMultiple.desc.placeholder'),
             default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.placeholder'),
+            type: <span className="badge text-bg-secondary">string</span>,
           },
           {
             attr: 'selectableCount',
-            type: <span className="badge text-bg-secondary">number</span>,
-            desc: tSelectComponentProps('selectMultiple.desc.selectableCount'),
             default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.selectableCount'),
+            type: <span className="badge text-bg-secondary">number</span>,
           },
           {
             attr: 'options',
+            default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tSelectComponentProps('selectMultiple.options.id')} />
@@ -359,11 +358,11 @@ export default function SelectPage() {
                 <OptionRow label="text: string" value={tSelectComponentProps('selectMultiple.options.text')} />
               </div>
             ),
-            desc: tSelectComponentProps('selectMultiple.desc.options'),
-            default: '',
           },
           {
             attr: 'contentClasses',
+            default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.contentClasses'),
             type: (
               <div className="d-flex flex-column">
                 <div>
@@ -409,19 +408,20 @@ export default function SelectPage() {
                 </div>
               </div>
             ),
-            desc: tSelectComponentProps('selectMultiple.desc.contentClasses'),
-            default: '',
           },
           {
             attr: 'onChange',
-            type: <span className="badge text-bg-secondary">(id: (string | number)[]) =&gt; void</span>,
-            desc: tSelectComponentProps('selectMultiple.desc.onChange'),
             default: '',
+            desc: tSelectComponentProps('selectMultiple.desc.onChange'),
+            type: <span className="badge text-bg-secondary">(id: (string | number)[]) =&gt; void</span>,
           },
         ]}
+        props
+        state={state}
+        t={tSelectComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

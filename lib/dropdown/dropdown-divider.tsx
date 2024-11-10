@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { DropdownDividerProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const DropdownDivider = function DropdownDivider<T extends ElementType = 'hr'>(props: DropdownDividerProps<T>) {
-  const { as: Component = 'hr', dropOldClass, variables, className, style, ...rest } = props;
+  const { as: Component = 'hr', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'dropdown-divider', className);

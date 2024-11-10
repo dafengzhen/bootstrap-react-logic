@@ -49,8 +49,8 @@ export const handleToggleLanguage = (i18n: any) => {
 };
 
 export const initCardState = (codeValue?: string) => ({
-  openCode: false,
   code: codeValue?.trim(),
+  openCode: false,
 });
 
 export const createState = (statesEnum: any, ...codes: any[]) => {

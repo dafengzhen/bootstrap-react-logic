@@ -1,37 +1,37 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import { Carousel } from '@lib/carousel';
-import clsx from 'clsx';
 import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Carousel } from '@lib/carousel';
+import { transformCodeObj } from '@src/tools';
+import clsx from 'clsx';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/carousel/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
 const FirstSlide = ({ className = 'd-block w-100', dark }: { className?: string; dark?: boolean }) => {
   return (
     <svg
-      className={clsx('bd-placeholder-img bd-placeholder-img-lg', className)}
-      width="800"
-      height="400"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
       aria-label="Placeholder: First slide"
-      preserveAspectRatio="xMidYMid slice"
+      className={clsx('bd-placeholder-img bd-placeholder-img-lg', className)}
       focusable="false"
+      height="400"
+      preserveAspectRatio="xMidYMid slice"
+      role="img"
+      width="800"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <title>Placeholder</title>
-      <rect width="100%" height="100%" fill={dark ? '#f5f5f5' : '#777'}></rect>
-      <text x="50%" y="50%" fill={dark ? '#aaa' : '#555'} dy=".3em">
+      <rect fill={dark ? '#f5f5f5' : '#777'} height="100%" width="100%"></rect>
+      <text dy=".3em" fill={dark ? '#aaa' : '#555'} x="50%" y="50%">
         First slide
       </text>
     </svg>
@@ -41,18 +41,18 @@ const FirstSlide = ({ className = 'd-block w-100', dark }: { className?: string;
 const SecondSlide = ({ className = 'd-block w-100', dark }: { className?: string; dark?: boolean }) => {
   return (
     <svg
-      className={clsx('bd-placeholder-img bd-placeholder-img-lg d-block w-100', className)}
-      width="800"
-      height="400"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
       aria-label="Placeholder: Second slide"
-      preserveAspectRatio="xMidYMid slice"
+      className={clsx('bd-placeholder-img bd-placeholder-img-lg d-block w-100', className)}
       focusable="false"
+      height="400"
+      preserveAspectRatio="xMidYMid slice"
+      role="img"
+      width="800"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <title>Placeholder</title>
-      <rect width="100%" height="100%" fill={dark ? '#eee' : '#666'}></rect>
-      <text x="50%" y="50%" fill={dark ? '#bbb' : '#444'} dy=".3em">
+      <rect fill={dark ? '#eee' : '#666'} height="100%" width="100%"></rect>
+      <text dy=".3em" fill={dark ? '#bbb' : '#444'} x="50%" y="50%">
         Second slide
       </text>
     </svg>
@@ -62,18 +62,18 @@ const SecondSlide = ({ className = 'd-block w-100', dark }: { className?: string
 const ThirdSlide = ({ className = 'd-block w-100', dark }: { className?: string; dark?: boolean }) => {
   return (
     <svg
-      className={clsx('bd-placeholder-img bd-placeholder-img-lg d-block w-100', className)}
-      width="800"
-      height="400"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
       aria-label="Placeholder: Third slide"
-      preserveAspectRatio="xMidYMid slice"
+      className={clsx('bd-placeholder-img bd-placeholder-img-lg d-block w-100', className)}
       focusable="false"
+      height="400"
+      preserveAspectRatio="xMidYMid slice"
+      role="img"
+      width="800"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <title>Placeholder</title>
-      <rect width="100%" height="100%" fill={dark ? '#e5e5e5' : '#555'}></rect>
-      <text x="50%" y="50%" fill={dark ? '#999' : '#333'} dy=".3em">
+      <rect fill={dark ? '#e5e5e5' : '#555'} height="100%" width="100%"></rect>
+      <text dy=".3em" fill={dark ? '#999' : '#333'} x="50%" y="50%">
         Third slide
       </text>
     </svg>
@@ -96,8 +96,8 @@ export default function CarouselPage() {
         <Carousel
           options={[
             {
-              item: <FirstSlide />,
               active: true,
+              item: <FirstSlide />,
             },
             {
               item: <SecondSlide />,
@@ -114,8 +114,8 @@ export default function CarouselPage() {
           indicators
           options={[
             {
-              item: <FirstSlide />,
               active: true,
+              item: <FirstSlide />,
             },
             {
               item: <SecondSlide />,
@@ -133,31 +133,31 @@ export default function CarouselPage() {
           options={[
             {
               active: true,
-              item: <FirstSlide />,
               caption: (
                 <>
                   <h5>First slide label</h5>
                   <p>Some representative placeholder content for the first slide.</p>
                 </>
               ),
+              item: <FirstSlide />,
             },
             {
-              item: <SecondSlide />,
               caption: (
                 <>
                   <h5>Second slide label</h5>
                   <p>Some representative placeholder content for the second slide.</p>
                 </>
               ),
+              item: <SecondSlide />,
             },
             {
-              item: <ThirdSlide />,
               caption: (
                 <>
                   <h5>Third slide label</h5>
                   <p>Some representative placeholder content for the third slide.</p>
                 </>
               ),
+              item: <ThirdSlide />,
             },
           ]}
         />
@@ -183,7 +183,6 @@ export default function CarouselPage() {
 
       <Example hash="autoplayingCarousels" state={state} t={tCarouselPage}>
         <Carousel
-          ride="carousel"
           options={[
             {
               active: true,
@@ -196,10 +195,10 @@ export default function CarouselPage() {
               item: <ThirdSlide />,
             },
           ]}
+          ride="carousel"
         />
 
         <Carousel
-          ride
           options={[
             {
               active: true,
@@ -212,16 +211,16 @@ export default function CarouselPage() {
               item: <ThirdSlide />,
             },
           ]}
+          ride
         />
       </Example>
 
       <Example hash="individualCarouselItemInterval" state={state} t={tCarouselPage}>
         <Carousel
-          ride="carousel"
           options={[
             {
-              interval: 10000,
               active: true,
+              interval: 10000,
               item: <FirstSlide />,
             },
             {
@@ -232,13 +231,13 @@ export default function CarouselPage() {
               item: <ThirdSlide />,
             },
           ]}
+          ride="carousel"
         />
       </Example>
 
       <Example hash="autoplayingCarouselsWithoutControls" state={state} t={tCarouselPage}>
         <Carousel
           controls={false}
-          ride="carousel"
           options={[
             {
               active: true,
@@ -251,12 +250,12 @@ export default function CarouselPage() {
               item: <ThirdSlide className="d-block w-100" />,
             },
           ]}
+          ride="carousel"
         />
       </Example>
 
       <Example hash="disableTouchSwiping" state={state} t={tCarouselPage}>
         <Carousel
-          touch={false}
           options={[
             {
               active: true,
@@ -269,6 +268,7 @@ export default function CarouselPage() {
               item: <ThirdSlide />,
             },
           ]}
+          touch={false}
         />
       </Example>
 
@@ -279,31 +279,31 @@ export default function CarouselPage() {
           options={[
             {
               active: true,
-              item: <FirstSlide dark />,
               caption: (
                 <>
                   <h5>First slide label</h5>
                   <p>Some representative placeholder content for the first slide.</p>
                 </>
               ),
+              item: <FirstSlide dark />,
             },
             {
-              item: <SecondSlide dark />,
               caption: (
                 <>
                   <h5>Second slide label</h5>
                   <p>Some representative placeholder content for the second slide.</p>
                 </>
               ),
+              item: <SecondSlide dark />,
             },
             {
-              item: <ThirdSlide dark />,
               caption: (
                 <>
                   <h5>Third slide label</h5>
                   <p>Some representative placeholder content for the third slide.</p>
                 </>
               ),
+              item: <ThirdSlide dark />,
             },
           ]}
         />
@@ -312,25 +312,24 @@ export default function CarouselPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="carouselComponentProps"
-        state={state}
-        t={tCarouselComponentProps}
         items={[
           {
             attr: 'slide',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.slide'),
             default: 'true',
+            desc: tCarouselComponentProps('carousel.desc.slide'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'fade',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.fade'),
             default: '',
+            desc: tCarouselComponentProps('carousel.desc.fade'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'options',
+            default: '',
+            desc: tCarouselComponentProps('carousel.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tCarouselComponentProps('carousel.options.id')} />
@@ -340,23 +339,23 @@ export default function CarouselPage() {
                 <OptionRow label="interval?: number" value={tCarouselComponentProps('carousel.options.interval')} />
               </div>
             ),
-            desc: tCarouselComponentProps('carousel.desc.options'),
-            default: '',
           },
           {
             attr: 'controls',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.controls'),
             default: 'true',
+            desc: tCarouselComponentProps('carousel.desc.controls'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'indicators',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.indicators'),
             default: '',
+            desc: tCarouselComponentProps('carousel.desc.indicators'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'onChange',
+            default: '',
+            desc: tCarouselComponentProps('carousel.desc.onChange'),
             type: (
               <div className="d-flex flex-column">
                 <div>
@@ -372,31 +371,32 @@ export default function CarouselPage() {
                 </div>
               </div>
             ),
-            desc: tCarouselComponentProps('carousel.desc.onChange'),
-            default: '',
           },
           {
             attr: 'ride',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.ride'),
             default: '',
+            desc: tCarouselComponentProps('carousel.desc.ride'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'pause',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.pause'),
             default: '',
+            desc: tCarouselComponentProps('carousel.desc.pause'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'touch',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCarouselComponentProps('carousel.desc.touch'),
             default: '',
+            desc: tCarouselComponentProps('carousel.desc.touch'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tCarouselComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

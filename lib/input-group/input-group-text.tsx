@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { InputGroupTextProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const InputGroupText = function InputGroupText<T extends ElementType = 'span'>(props: InputGroupTextProps<T>) {
-  const { as: Component = 'span', dropOldClass, variables, className, style, children, ...rest } = props;
+  const { as: Component = 'span', children, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'input-group-text', className);

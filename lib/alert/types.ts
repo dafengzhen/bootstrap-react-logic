@@ -1,4 +1,6 @@
 import type { ElementType, ReactNode } from 'react';
+
+import type { ButtonProps } from '../button';
 import type {
   AlertHeadingVariablesType,
   AlertLinkVariablesType,
@@ -6,33 +8,12 @@ import type {
   BaseProps,
   PropsWithoutRef,
 } from '../tools';
-import type { ButtonProps } from '../button';
 
-type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
-  /**
-   * variant.
-   */
-  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
-
-  /**
-   * onClose.
-   */
-  onClose?: (close?: () => void) => void;
-
+type Props<T extends ElementType> = {
   /**
    * clickToClose.
    */
   clickToClose?: boolean;
-
-  /**
-   * dismissible.
-   */
-  dismissible?: boolean;
-
-  /**
-   * fade.
-   */
-  fade?: boolean;
 
   /**
    * closeButton.
@@ -45,14 +26,34 @@ type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
   closeButtonProps?: ButtonProps<ElementType>;
 
   /**
+   * dismissible.
+   */
+  dismissible?: boolean;
+
+  /**
+   * fade.
+   */
+  fade?: boolean;
+
+  /**
+   * onClose.
+   */
+  onClose?: (close?: () => void) => void;
+
+  /**
+   * variant.
+   */
+  variant?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
+
+  /**
    * visible.
    */
   visible?: boolean;
-};
+} & BaseProps<T, AlertVariablesType>;
 
-type LinkProps<T extends ElementType> = BaseProps<T, AlertLinkVariablesType> & {};
+type LinkProps<T extends ElementType> = {} & BaseProps<T, AlertLinkVariablesType>;
 
-type HeadingProps<T extends ElementType> = BaseProps<T, AlertHeadingVariablesType> & {};
+type HeadingProps<T extends ElementType> = {} & BaseProps<T, AlertHeadingVariablesType>;
 
 export type AlertProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, AlertVariablesType>;
 

@@ -1,32 +1,34 @@
 import { type ElementType, useMemo, useState } from 'react';
+
 import type { ListGroupOption, ListGroupProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import ListGroupItem from './list-group-item.tsx';
 
 interface IOption extends ListGroupOption {
-  id: string | number;
+  id: number | string;
 }
 
-const ListGroup = function ListGroup<T extends ElementType = 'ul' | 'ol' | 'div'>(props: ListGroupProps<T>) {
+const ListGroup = function ListGroup<T extends ElementType = 'div' | 'ol' | 'ul'>(props: ListGroupProps<T>) {
   const {
     as: Component = 'ul',
-    dropOldClass,
-    variables,
     className,
-    style,
-    options: defaultOptions,
+    dropOldClass,
     flush,
-    numbered,
     horizontal,
-    variant,
     itemAction,
+    numbered,
+    options: defaultOptions,
+    style,
+    variables,
+    variant,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
     ...item,
     id: item.id ?? index,
   }));
-  const [options] = useState<({ id: string | number } & IOption)[]>(initialOptions);
+  const [options] = useState<({ id: number | string } & IOption)[]>(initialOptions);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
@@ -58,11 +60,11 @@ const ListGroup = function ListGroup<T extends ElementType = 'ul' | 'ol' | 'div'
         return (
           <ListGroupItem
             {...item.props}
-            key={item.id}
             active={item.active}
-            itemAction={item.itemAction || isActive || itemAction}
             disabled={item.disabled}
             flexFill={item.flexFill}
+            itemAction={item.itemAction || isActive || itemAction}
+            key={item.id}
             variant={item.variant}
           >
             {item.item}

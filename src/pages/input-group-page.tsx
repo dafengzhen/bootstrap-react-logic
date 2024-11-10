@@ -1,22 +1,23 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import { Label } from '@lib/label';
-import { Input } from '@lib/input';
-import Text from '../../lib/text/text.tsx';
-import { InputGroup, InputGroupText } from '@lib/input-group';
-import { Textarea } from '@lib/textarea';
-import { Button } from '@lib/button';
-import { useTranslation } from 'react-i18next';
-import PropsIndicator from '@components/props-indicator.tsx';
 import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Button } from '@lib/button';
+import { Input } from '@lib/input';
+import { InputGroup, InputGroupText } from '@lib/input-group';
+import { Label } from '@lib/label';
+import { Textarea } from '@lib/textarea';
 import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
+
+import Text from '../../lib/text/text.tsx';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/input-group/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -35,15 +36,15 @@ export default function InputGroupPage() {
       <Example hash="basic" state={state} t={tInputGroupPage}>
         <InputGroup>
           <InputGroupText id="basic-addon1">@</InputGroupText>
-          <Input type="text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+          <Input aria-describedby="basic-addon1" aria-label="Username" placeholder="Username" type="text" />
         </InputGroup>
 
         <InputGroup>
           <Input
-            type="text"
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
             aria-describedby="basic-addon2"
+            aria-label="Recipient's username"
+            placeholder="Recipient's username"
+            type="text"
           />
           <InputGroupText id="basic-addon2">@example.com</InputGroupText>
         </InputGroup>
@@ -54,21 +55,21 @@ export default function InputGroupPage() {
             <InputGroupText className="d-inline-block text-truncate" id="basic-addon3">
               https://example.com/users/
             </InputGroupText>
-            <Input type="text" id="basic-url" aria-describedby="basic-addon3 basic-addon4" />
+            <Input aria-describedby="basic-addon3 basic-addon4" id="basic-url" type="text" />
           </InputGroup>
           <Text id="basic-addon4">Example help text goes outside the input group.</Text>
         </div>
 
         <InputGroup>
           <InputGroupText>$</InputGroupText>
-          <Input type="text" aria-label="Amount (to the nearest dollar)" />
+          <Input aria-label="Amount (to the nearest dollar)" type="text" />
           <InputGroupText>.00</InputGroupText>
         </InputGroup>
 
         <InputGroup>
-          <Input type="text" placeholder="Username" aria-label="Username" />
+          <Input aria-label="Username" placeholder="Username" type="text" />
           <InputGroupText>@</InputGroupText>
-          <Input type="text" placeholder="Server" aria-label="Server" />
+          <Input aria-label="Server" placeholder="Server" type="text" />
         </InputGroup>
 
         <InputGroup>
@@ -81,7 +82,7 @@ export default function InputGroupPage() {
         <div className="d-flex flex-column gap-2">
           <InputGroup nowrap>
             <InputGroupText id="addon-wrapping">@</InputGroupText>
-            <Input type="text" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" />
+            <Input aria-describedby="addon-wrapping" aria-label="Username" placeholder="Username" type="text" />
           </InputGroup>
         </div>
       </Example>
@@ -89,17 +90,17 @@ export default function InputGroupPage() {
       <Example hash="size" state={state} t={tInputGroupPage}>
         <InputGroup size="sm">
           <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
-          <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
+          <Input aria-describedby="inputGroup-sizing-sm" aria-label="Sizing example input" type="text" />
         </InputGroup>
 
         <InputGroup>
           <InputGroupText id="inputGroup-sizing-default">Default</InputGroupText>
-          <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+          <Input aria-describedby="inputGroup-sizing-default" aria-label="Sizing example input" type="text" />
         </InputGroup>
 
         <InputGroup size="lg">
           <InputGroupText id="inputGroup-sizing-lg">Large</InputGroupText>
-          <Input type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" />
+          <Input aria-describedby="inputGroup-sizing-lg" aria-label="Sizing example input" type="text" />
         </InputGroup>
       </Example>
 
@@ -107,33 +108,33 @@ export default function InputGroupPage() {
         <InputGroup>
           <InputGroupText as="div">
             <Input
-              className="form-check-input mt-0"
-              type="checkbox"
-              readOnly
               aria-label="Checkbox for following text input"
+              className="form-check-input mt-0"
+              readOnly
+              type="checkbox"
             />
           </InputGroupText>
-          <Input type="text" aria-label="Text input with checkbox" />
+          <Input aria-label="Text input with checkbox" type="text" />
         </InputGroup>
 
         <InputGroup>
           <InputGroupText as="div">
             <Input
-              className="form-check-input mt-0"
-              type="radio"
-              readOnly
               aria-label="Radio button for following text input"
+              className="form-check-input mt-0"
+              readOnly
+              type="radio"
             />
           </InputGroupText>
-          <Input type="text" aria-label="Text input with radio button" />
+          <Input aria-label="Text input with radio button" type="text" />
         </InputGroup>
       </Example>
 
       <Example hash="multipleInput" state={state} t={tInputGroupPage}>
         <InputGroup>
           <InputGroupText className="!tw-w-full sm:!tw-w-auto">First and last name</InputGroupText>
-          <Input className="!tw-w-full sm:!tw-w-auto" type="text" aria-label="First name" />
-          <Input className="!tw-w-full sm:!tw-w-auto" type="text" aria-label="Last name" />
+          <Input aria-label="First name" className="!tw-w-full sm:!tw-w-auto" type="text" />
+          <Input aria-label="Last name" className="!tw-w-full sm:!tw-w-auto" type="text" />
         </InputGroup>
       </Example>
 
@@ -141,11 +142,11 @@ export default function InputGroupPage() {
         <InputGroup>
           <InputGroupText>$</InputGroupText>
           <InputGroupText>0.00</InputGroupText>
-          <Input type="text" aria-label="Dollar amount (with dot and two decimal places)" />
+          <Input aria-label="Dollar amount (with dot and two decimal places)" type="text" />
         </InputGroup>
 
         <InputGroup>
-          <Input type="text" aria-label="Dollar amount (with dot and two decimal places)" />
+          <Input aria-label="Dollar amount (with dot and two decimal places)" type="text" />
           <InputGroupText>$</InputGroupText>
           <InputGroupText>0.00</InputGroupText>
         </InputGroup>
@@ -153,25 +154,25 @@ export default function InputGroupPage() {
 
       <Example hash="buttonAddons" state={state} t={tInputGroupPage}>
         <InputGroup>
-          <Button outline="secondary" type="button" id="button-addon1">
+          <Button id="button-addon1" outline="secondary" type="button">
             Button
           </Button>
           <Input
-            type="text"
-            placeholder=""
-            aria-label="Example text with button addon"
             aria-describedby="button-addon1"
+            aria-label="Example text with button addon"
+            placeholder=""
+            type="text"
           />
         </InputGroup>
 
         <InputGroup>
           <Input
-            type="text"
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
             aria-describedby="button-addon2"
+            aria-label="Recipient's username"
+            placeholder="Recipient's username"
+            type="text"
           />
-          <Button outline="secondary" type="button" id="button-addon2">
+          <Button id="button-addon2" outline="secondary" type="button">
             Button
           </Button>
         </InputGroup>
@@ -183,14 +184,14 @@ export default function InputGroupPage() {
           <Button outline="secondary" type="button">
             Button
           </Button>
-          <Input type="text" placeholder="" aria-label="Example text with two button addons" />
+          <Input aria-label="Example text with two button addons" placeholder="" type="text" />
         </InputGroup>
 
         <InputGroup>
           <Input
-            type="text"
-            placeholder="Recipient's username"
             aria-label="Recipient's username with two button addons"
+            placeholder="Recipient's username"
+            type="text"
           />
           <Button outline="secondary" type="button">
             Button
@@ -203,7 +204,7 @@ export default function InputGroupPage() {
 
       <Example hash="customSelect" state={state} t={tInputGroupPage}>
         <InputGroup>
-          <Label inputGroupText htmlFor="inputGroupSelect01">
+          <Label htmlFor="inputGroupSelect01" inputGroupText>
             Options
           </Label>
           <select className="form-select" id="inputGroupSelect01">
@@ -221,7 +222,7 @@ export default function InputGroupPage() {
             <option value="2">Two</option>
             <option value="3">Three</option>
           </select>
-          <Label inputGroupText htmlFor="inputGroupSelect02">
+          <Label htmlFor="inputGroupSelect02" inputGroupText>
             Options
           </Label>
         </InputGroup>
@@ -230,7 +231,7 @@ export default function InputGroupPage() {
           <Button outline="secondary" type="button">
             Button
           </Button>
-          <select className="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+          <select aria-label="Example select with button addon" className="form-select" id="inputGroupSelect03">
             <option defaultValue="">Choose...</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -239,7 +240,7 @@ export default function InputGroupPage() {
         </InputGroup>
 
         <InputGroup>
-          <select className="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+          <select aria-label="Example select with button addon" className="form-select" id="inputGroupSelect04">
             <option defaultValue="">Choose...</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -253,29 +254,29 @@ export default function InputGroupPage() {
 
       <Example hash="customFileInput" state={state} t={tInputGroupPage}>
         <InputGroup>
-          <Label inputGroupText htmlFor="inputGroupFile01">
+          <Label htmlFor="inputGroupFile01" inputGroupText>
             Upload
           </Label>
-          <Input type="file" id="inputGroupFile01" />
+          <Input id="inputGroupFile01" type="file" />
         </InputGroup>
 
         <InputGroup>
-          <Input type="file" id="inputGroupFile02" />
-          <Label inputGroupText htmlFor="inputGroupFile02">
+          <Input id="inputGroupFile02" type="file" />
+          <Label htmlFor="inputGroupFile02" inputGroupText>
             Upload
           </Label>
         </InputGroup>
 
         <InputGroup>
-          <Button outline="secondary" type="button" id="inputGroupFileAddon03">
+          <Button id="inputGroupFileAddon03" outline="secondary" type="button">
             Button
           </Button>
-          <Input type="file" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload" />
+          <Input aria-describedby="inputGroupFileAddon03" aria-label="Upload" id="inputGroupFile03" type="file" />
         </InputGroup>
 
         <InputGroup>
-          <Input type="file" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
-          <Button outline="secondary" type="button" id="inputGroupFileAddon04">
+          <Input aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="inputGroupFile04" type="file" />
+          <Button id="inputGroupFileAddon04" outline="secondary" type="button">
             Button
           </Button>
         </InputGroup>
@@ -284,48 +285,48 @@ export default function InputGroupPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="inputGroupComponentProps"
-        state={state}
-        t={tInputGroupComponentProps}
         items={[
           {
             attr: 'nowrap',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputGroupComponentProps('inputGroup.desc.nowrap'),
             default: '-',
+            desc: tInputGroupComponentProps('inputGroup.desc.nowrap'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'size',
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tInputGroupComponentProps('inputGroup.desc.size'),
             default: '-',
+            desc: tInputGroupComponentProps('inputGroup.desc.size'),
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
           {
             attr: 'hasValidation',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputGroupComponentProps('inputGroup.desc.hasValidation'),
             default: '-',
+            desc: tInputGroupComponentProps('inputGroup.desc.hasValidation'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tInputGroupComponentProps}
       ></Example>
 
       <Example
-        props
         hash="inputGroupTextComponentProps"
-        state={state}
-        t={tInputGroupComponentProps}
         items={[
           {
             attr: 'as',
-            type: <span className="badge text-bg-secondary">div | span</span>,
-            desc: tInputGroupComponentProps('inputGroupText.desc.as'),
             default: 'span',
+            desc: tInputGroupComponentProps('inputGroupText.desc.as'),
+            type: <span className="badge text-bg-secondary">div | span</span>,
           },
         ]}
+        props
+        state={state}
+        t={tInputGroupComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

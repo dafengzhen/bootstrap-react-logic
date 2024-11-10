@@ -1,17 +1,17 @@
-import { Button } from '@lib/button';
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Button } from '@lib/button';
 import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/button/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -38,7 +38,7 @@ export default function ButtonPage() {
         </div>
       </Example>
 
-      <Example hash="variant" state={state} t={tButtonPage} row wrap>
+      <Example hash="variant" row state={state} t={tButtonPage} wrap>
         <Button variant="primary">Primary</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="success">Success</Button>
@@ -50,7 +50,7 @@ export default function ButtonPage() {
         <Button variant="link">Link</Button>
       </Example>
 
-      <Example hash="outline" state={state} t={tButtonPage} row wrap>
+      <Example hash="outline" row state={state} t={tButtonPage} wrap>
         <Button outline="primary">Primary</Button>
         <Button outline="secondary">Secondary</Button>
         <Button outline="success">Success</Button>
@@ -61,7 +61,7 @@ export default function ButtonPage() {
         <Button outline="dark">Dark</Button>
       </Example>
 
-      <Example hash="rounded" state={state} t={tButtonPage} row wrap>
+      <Example hash="rounded" row state={state} t={tButtonPage} wrap>
         <Button outline="primary" rounded>
           Primary
         </Button>
@@ -88,44 +88,44 @@ export default function ButtonPage() {
         </Button>
       </Example>
 
-      <Example hash="size" state={state} t={tButtonPage} row wrap alignItemsCenter>
+      <Example alignItemsCenter hash="size" row state={state} t={tButtonPage} wrap>
         <div>
-          <Button variant="primary" size="lg">
+          <Button size="lg" variant="primary">
             Large
           </Button>
         </div>
         <div>
-          <Button variant="secondary" size="sm">
+          <Button size="sm" variant="secondary">
             Small
           </Button>
         </div>
         <div>
           <Button
-            variant="secondary"
             size={{
-              paddingY: '0.25rem',
-              paddingX: '0.5rem',
               fontSize: '0.75rem',
+              paddingX: '0.5rem',
+              paddingY: '0.25rem',
             }}
+            variant="secondary"
           >
             Custom
           </Button>
         </div>
       </Example>
 
-      <Example hash="disabledState" state={state} t={tButtonPage} row wrap>
+      <Example hash="disabledState" row state={state} t={tButtonPage} wrap>
         <div>
-          <Button variant="primary" disabled>
+          <Button disabled variant="primary">
             Primary
           </Button>
         </div>
         <div>
-          <Button variant="secondary" disabled>
+          <Button disabled variant="secondary">
             Secondary
           </Button>
         </div>
         <div>
-          <Button as="a" href="#" variant="success" disabled>
+          <Button as="a" disabled href="#" variant="success">
             Link
           </Button>
         </div>
@@ -162,32 +162,32 @@ export default function ButtonPage() {
 
         <div className="d-flex flex-wrap gap-2">
           <div>
-            <Button variant="primary" active>
+            <Button active variant="primary">
               Primary
             </Button>
           </div>
           <div>
-            <Button variant="primary" active disabled>
+            <Button active disabled variant="primary">
               Primary
             </Button>
           </div>
         </div>
       </Example>
 
-      <Example hash="isLoading" state={state} t={tButtonPage} row wrap>
-        <Button variant="primary" isLoading>
+      <Example hash="isLoading" row state={state} t={tButtonPage} wrap>
+        <Button isLoading variant="primary">
           Primary
         </Button>
-        <Button variant="secondary" isLoading>
+        <Button isLoading variant="secondary">
           Secondary
         </Button>
       </Example>
 
-      <Example hash="icon" state={state} t={tButtonPage} row wrap>
-        <Button variant="primary" startContent={<i className="bi bi-arrow-up me-1"></i>}>
+      <Example hash="icon" row state={state} t={tButtonPage} wrap>
+        <Button startContent={<i className="bi bi-arrow-up me-1"></i>} variant="primary">
           Up
         </Button>
-        <Button variant="secondary" endContent={<i className="bi bi-arrow-down ms-1"></i>}>
+        <Button endContent={<i className="bi bi-arrow-down ms-1"></i>} variant="secondary">
           Down
         </Button>
         <Button variant="success">
@@ -195,12 +195,12 @@ export default function ButtonPage() {
         </Button>
       </Example>
 
-      <Example hash="customStyle" state={state} t={tButtonPage} row wrap>
+      <Example hash="customStyle" row state={state} t={tButtonPage} wrap>
         <Button className="border-0 tw-bg-gradient-to-r tw-from-amber-500 tw-to-pink-500 tw-text-white">Custom</Button>
       </Example>
 
-      <Example hash="example" state={state} t={tButtonPage} row wrap overflowXAuto textNowrap>
-        <Button size={mySize} variant="primary" onClick={onClickChangeSizeTest}>
+      <Example hash="example" overflowXAuto row state={state} t={tButtonPage} textNowrap wrap>
+        <Button onClick={onClickChangeSizeTest} size={mySize} variant="primary">
           Click Change Button Size ({mySize})
         </Button>
       </Example>
@@ -208,19 +208,18 @@ export default function ButtonPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="buttonComponentProps"
-        state={state}
-        t={tButtonComponentProps}
         items={[
           {
             attr: 'as',
-            type: <span className="badge text-bg-secondary">button | a</span>,
-            desc: tButtonComponentProps('button.desc.as'),
             default: 'button',
+            desc: tButtonComponentProps('button.desc.as'),
+            type: <span className="badge text-bg-secondary">button | a</span>,
           },
           {
             attr: 'variant',
+            default: '',
+            desc: tButtonComponentProps('button.desc.variant'),
             type: (
               <div className="d-flex flex-column">
                 {['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'link'].map(
@@ -234,88 +233,89 @@ export default function ButtonPage() {
                 )}
               </div>
             ),
-            desc: tButtonComponentProps('button.desc.variant'),
-            default: '',
           },
           {
             attr: 'outline',
+            default: '',
+            desc: tButtonComponentProps('button.desc.outline'),
             type: (
               <span>
                 Reference <span className="fw-bold">variant</span>
               </span>
             ),
-            desc: tButtonComponentProps('button.desc.outline'),
-            default: '',
           },
           {
             attr: 'disabled',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('button.desc.disabled'),
             default: '',
+            desc: tButtonComponentProps('button.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'active',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('button.desc.active'),
             default: '',
+            desc: tButtonComponentProps('button.desc.active'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'show',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('button.desc.show'),
             default: '',
+            desc: tButtonComponentProps('button.desc.show'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'isLoading',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('button.desc.isLoading'),
             default: '',
+            desc: tButtonComponentProps('button.desc.isLoading'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'size',
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tButtonComponentProps('button.desc.size'),
             default: '',
+            desc: tButtonComponentProps('button.desc.size'),
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
           {
             attr: 'rounded',
+            default: '',
+            desc: tButtonComponentProps('button.desc.rounded'),
             type: (
               <>
                 <span className="badge text-bg-secondary">xs | sm | md | lg | xl | xxl | circle | pill</span>
                 <span className="badge text-bg-secondary ms-1">boolean</span>
               </>
             ),
-            desc: tButtonComponentProps('button.desc.rounded'),
-            default: '',
           },
           {
             attr: 'startContent',
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tButtonComponentProps('button.desc.startContent'),
             default: '',
+            desc: tButtonComponentProps('button.desc.startContent'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
             attr: 'endContent',
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tButtonComponentProps('button.desc.endContent'),
             default: '',
+            desc: tButtonComponentProps('button.desc.endContent'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
             attr: 'btnClose',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tButtonComponentProps('button.desc.btnClose'),
             default: '',
+            desc: tButtonComponentProps('button.desc.btnClose'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'onRef',
-            type: <span className="badge text-bg-secondary">onRef?: RefCallback</span>,
-            desc: tButtonComponentProps('button.desc.onRef'),
             default: '',
+            desc: tButtonComponentProps('button.desc.onRef'),
+            type: <span className="badge text-bg-secondary">onRef?: RefCallback</span>,
           },
         ]}
+        props
+        state={state}
+        t={tButtonComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

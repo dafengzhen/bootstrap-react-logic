@@ -1,4 +1,6 @@
 import type { ElementType, ReactNode } from 'react';
+
+import type { ButtonProps } from '../button';
 import type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -9,62 +11,56 @@ import type {
   OmittedPropsWithoutRef,
   PropsWithoutRef,
 } from '../tools';
-import type { ButtonProps } from '../button';
 
-type Props<T extends ElementType> = BaseProps<T, AccordionVariablesType> & {
-  /**
-   * flush.
-   */
-  flush?: boolean;
-
+type Props<T extends ElementType> = {
   /**
    * alwaysOpen.
    */
   alwaysOpen?: boolean;
 
   /**
-   * options.
-   */
-  options?: AccordionOption[];
-
-  /**
-   * onChange.
-   */
-  onChange?: (id: string | number, visible: boolean) => void;
-
-  /**
    * collapsing.
    */
   collapsing?: boolean;
-};
 
-type BasicProps<T extends ElementType> = BaseProps<T, AccordionBasicVariablesType> & {
   /**
    * flush.
    */
   flush?: boolean;
-};
 
-type ItemProps<T extends ElementType> = BaseProps<T, AccordionItemVariablesType> & {};
-
-type HeaderProps<T extends ElementType> = BaseProps<T, AccordionHeaderVariablesType> & {
   /**
-   * collapsed.
+   * onChange.
    */
-  collapsed?: boolean;
+  onChange?: (id: number | string, visible: boolean) => void;
 
+  /**
+   * options.
+   */
+  options?: AccordionOption[];
+} & BaseProps<T, AccordionVariablesType>;
+
+type BasicProps<T extends ElementType> = {
+  /**
+   * flush.
+   */
+  flush?: boolean;
+} & BaseProps<T, AccordionBasicVariablesType>;
+
+type ItemProps<T extends ElementType> = {} & BaseProps<T, AccordionItemVariablesType>;
+
+type HeaderProps<T extends ElementType> = {
   /**
    * buttonProps.
    */
   buttonProps?: ButtonProps<ElementType>;
-};
 
-type BodyProps<T extends ElementType> = BaseProps<T, AccordionBodyVariablesType> & {
   /**
-   * show.
+   * collapsed.
    */
-  show?: boolean;
+  collapsed?: boolean;
+} & BaseProps<T, AccordionHeaderVariablesType>;
 
+type BodyProps<T extends ElementType> = {
   /**
    * collapsing.
    */
@@ -74,13 +70,18 @@ type BodyProps<T extends ElementType> = BaseProps<T, AccordionBodyVariablesType>
    * onChange.
    */
   onChange?: (visible: boolean) => void;
-};
+
+  /**
+   * show.
+   */
+  show?: boolean;
+} & BaseProps<T, AccordionBodyVariablesType>;
 
 export interface AccordionOption {
-  id?: string | number;
-  header?: string;
   body?: ReactNode;
   collapsed?: boolean;
+  header?: string;
+  id?: number | string;
   show?: boolean;
 }
 

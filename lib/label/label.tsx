@@ -1,18 +1,20 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { LabelProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, getFirstNonEmptyClass, isValueValid } from '../tools';
 
 const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<T>) {
   const {
     as: Component = 'label',
-    dropOldClass,
-    variables,
-    className,
-    style,
     children,
+    className,
     colFormLabel,
-    inputGroupText,
+    dropOldClass,
     formCheckLabel,
+    inputGroupText,
+    style,
+    variables,
     ...rest
   } = props;
 
@@ -20,10 +22,10 @@ const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
-          'form-check-label': formCheckLabel,
-          'input-group-text': inputGroupText,
           'col-form-label': colFormLabel,
+          'form-check-label': formCheckLabel,
           'form-label': true,
+          'input-group-text': inputGroupText,
         }),
       className,
     );

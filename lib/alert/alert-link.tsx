@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { AlertLinkProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const AlertLink = function AlertLink<T extends ElementType = 'a'>(props: AlertLinkProps<T>) {
-  const { as: Component = 'a', dropOldClass, variables, className, style, ...rest } = props;
+  const { as: Component = 'a', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'alert-link', className);

@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
+
 import type {
   BaseProps,
   CarouselCaptionVariablesType,
@@ -8,26 +9,16 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, CarouselVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * slide.
+   * controls.
    */
-  slide?: boolean;
+  controls?: boolean;
 
   /**
    * fade.
    */
   fade?: boolean;
-
-  /**
-   * options.
-   */
-  options?: CarouselOption[];
-
-  /**
-   * controls.
-   */
-  controls?: boolean;
 
   /**
    * indicators.
@@ -37,12 +28,12 @@ type Props<T extends ElementType> = BaseProps<T, CarouselVariablesType> & {
   /**
    * onChange.
    */
-  onChange?: (id: string | number, type: 'prev' | 'next' | 'nextIndicator' | 'prevIndicator') => void;
+  onChange?: (id: number | string, type: 'next' | 'nextIndicator' | 'prev' | 'prevIndicator') => void;
 
   /**
-   * ride.
+   * options.
    */
-  ride?: 'carousel' | boolean;
+  options?: CarouselOption[];
 
   /**
    * pause.
@@ -50,21 +41,26 @@ type Props<T extends ElementType> = BaseProps<T, CarouselVariablesType> & {
   pause?: boolean;
 
   /**
+   * ride.
+   */
+  ride?: 'carousel' | boolean;
+
+  /**
+   * slide.
+   */
+  slide?: boolean;
+
+  /**
    * touch.
    */
   touch?: boolean;
-};
+} & BaseProps<T, CarouselVariablesType>;
 
-type ItemProps<T extends ElementType> = BaseProps<T, CarouselItemVariablesType> & {
+type ItemProps<T extends ElementType> = {
   /**
    * active.
    */
   active?: boolean;
-
-  /**
-   * carouselItemStart.
-   */
-  carouselItemStart?: boolean;
 
   /**
    * carouselItemEnd.
@@ -80,16 +76,21 @@ type ItemProps<T extends ElementType> = BaseProps<T, CarouselItemVariablesType> 
    * carouselItemPrev.
    */
   carouselItemPrev?: boolean;
-};
 
-type CaptionProps<T extends ElementType> = BaseProps<T, CarouselCaptionVariablesType> & {};
+  /**
+   * carouselItemStart.
+   */
+  carouselItemStart?: boolean;
+} & BaseProps<T, CarouselItemVariablesType>;
+
+type CaptionProps<T extends ElementType> = {} & BaseProps<T, CarouselCaptionVariablesType>;
 
 export interface CarouselOption {
-  id?: string | number;
-  item?: ReactNode;
-  caption?: ReactNode;
   active?: boolean;
+  caption?: ReactNode;
+  id?: number | string;
   interval?: number;
+  item?: ReactNode;
 }
 
 export type CarouselProps<T extends ElementType> = OmittedPropsWithoutRef<

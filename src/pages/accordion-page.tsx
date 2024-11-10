@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import { Accordion } from '@lib/accordion';
 import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Accordion } from '@lib/accordion';
+import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/accordion/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -32,7 +32,18 @@ export default function AccordionPage() {
         <Accordion
           options={[
             {
+              body: (
+                <>
+                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
+                  plugin adds the appropriate classes that we use to style each element. These classes control the
+                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
+                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
+                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </>
+              ),
               header: 'Accordion Item #1',
+            },
+            {
               body: (
                 <>
                   <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
@@ -42,25 +53,11 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
-            },
-            {
               collapsed: true,
-              show: false,
               header: 'Accordion Item #2',
-              body: (
-                <>
-                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                  plugin adds the appropriate classes that we use to style each element. These classes control the
-                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
-                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </>
-              ),
+              show: false,
             },
             {
-              collapsed: true,
-              show: false,
-              header: 'Accordion Item #3',
               body: (
                 <>
                   <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
@@ -70,6 +67,9 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
+              collapsed: true,
+              header: 'Accordion Item #3',
+              show: false,
             },
           ]}
         />
@@ -80,20 +80,17 @@ export default function AccordionPage() {
           flush
           options={[
             {
-              collapsed: true,
-              show: false,
-              header: 'Accordion Item #1',
               body: (
                 <>
                   Placeholder content for this accordion, which is intended to demonstrate the
                   <code>.accordion-flush</code> class. This is the first item's accordion body.
                 </>
               ),
+              collapsed: true,
+              header: 'Accordion Item #1',
+              show: false,
             },
             {
-              collapsed: true,
-              show: false,
-              header: 'Accordion Item #2',
               body: (
                 <>
                   Placeholder content for this accordion, which is intended to demonstrate the
@@ -101,11 +98,11 @@ export default function AccordionPage() {
                   being filled with some actual content.
                 </>
               ),
+              collapsed: true,
+              header: 'Accordion Item #2',
+              show: false,
             },
             {
-              collapsed: true,
-              show: false,
-              header: 'Accordion Item #3',
               body: (
                 <>
                   Placeholder content for this accordion, which is intended to demonstrate the
@@ -114,6 +111,9 @@ export default function AccordionPage() {
                   glance, a bit more representative of how this would look in a real-world application.
                 </>
               ),
+              collapsed: true,
+              header: 'Accordion Item #3',
+              show: false,
             },
           ]}
         />
@@ -124,7 +124,6 @@ export default function AccordionPage() {
           alwaysOpen
           options={[
             {
-              header: 'Accordion Item #1',
               body: (
                 <>
                   <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
@@ -134,11 +133,9 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
+              header: 'Accordion Item #1',
             },
             {
-              collapsed: true,
-              show: false,
-              header: 'Accordion Item #2',
               body: (
                 <>
                   <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse
@@ -148,11 +145,11 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
+              collapsed: true,
+              header: 'Accordion Item #2',
+              show: false,
             },
             {
-              collapsed: true,
-              show: false,
-              header: 'Accordion Item #3',
               body: (
                 <>
                   <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
@@ -162,6 +159,9 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
+              collapsed: true,
+              header: 'Accordion Item #3',
+              show: false,
             },
           ]}
         />
@@ -170,25 +170,24 @@ export default function AccordionPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="accordionComponentProps"
-        state={state}
-        t={tAccordionComponentProps}
         items={[
           {
             attr: 'flush',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAccordionComponentProps('accordion.desc.flush'),
             default: '',
+            desc: tAccordionComponentProps('accordion.desc.flush'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'alwaysOpen',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAccordionComponentProps('accordion.desc.alwaysOpen'),
             default: '',
+            desc: tAccordionComponentProps('accordion.desc.alwaysOpen'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'options',
+            default: '',
+            desc: tAccordionComponentProps('accordion.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tAccordionComponentProps('accordion.options.id')} />
@@ -201,25 +200,26 @@ export default function AccordionPage() {
                 <OptionRow label="show?: boolean" value={tAccordionComponentProps('accordion.options.show')} />
               </div>
             ),
-            desc: tAccordionComponentProps('accordion.desc.options'),
-            default: '',
           },
           {
             attr: 'onChange',
-            type: <span className="badge text-bg-secondary">(id: string | number, visible: boolean) =&gt; void</span>,
-            desc: tAccordionComponentProps('accordion.desc.onChange'),
             default: '',
+            desc: tAccordionComponentProps('accordion.desc.onChange'),
+            type: <span className="badge text-bg-secondary">(id: string | number, visible: boolean) =&gt; void</span>,
           },
           {
             attr: 'collapsing',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAccordionComponentProps('accordion.desc.collapsing'),
             default: 'true',
+            desc: tAccordionComponentProps('accordion.desc.collapsing'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tAccordionComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

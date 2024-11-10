@@ -1,5 +1,8 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { AccordionHeaderProps } from './types.ts';
+
+import Button from '../button/button.tsx';
 import {
   clsxStyle,
   clsxUnique,
@@ -9,18 +12,17 @@ import {
   isValueValid,
   mergeProps,
 } from '../tools';
-import Button from '../button/button.tsx';
 
 const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(props: AccordionHeaderProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    children,
-    collapsed,
     buttonProps,
+    children,
+    className,
+    collapsed,
+    dropOldClass,
+    style,
+    variables,
     ...rest
   } = props;
 

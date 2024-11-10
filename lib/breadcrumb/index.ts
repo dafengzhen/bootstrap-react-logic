@@ -1,7 +1,7 @@
 import Breadcrumb from './breadcrumb.tsx';
 
 // types
-export type { BreadcrumbProps, BreadcrumbBasicProps, BreadcrumbItemProps, BreadcrumbOption } from './types.ts';
+export type { BreadcrumbBasicProps, BreadcrumbItemProps, BreadcrumbOption, BreadcrumbProps } from './types.ts';
 
 // hooks
 

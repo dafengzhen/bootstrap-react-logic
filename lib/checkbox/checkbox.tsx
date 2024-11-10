@@ -1,5 +1,9 @@
 import { type ElementType, useCallback, useEffect, useMemo, useRef } from 'react';
+
 import type { CheckboxProps } from './types.ts';
+
+import Input from '../input/input.tsx';
+import Label from '../label/label.tsx';
 import {
   clsxStyle,
   clsxUnique,
@@ -9,23 +13,21 @@ import {
   isValueValid,
   processSlotClasses,
 } from '../tools';
-import Input from '../input/input.tsx';
-import Label from '../label/label.tsx';
 
 const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: CheckboxProps<T>) {
   const {
     as: Component = 'input',
-    dropOldClass,
-    variables,
-    className,
-    style,
     children,
-    indeterminate,
-    id,
+    className,
     contentClasses,
-    switch: formSwitch,
+    dropOldClass,
+    id,
+    indeterminate,
     inline,
     reverse,
+    style,
+    switch: formSwitch,
+    variables,
     ...rest
   } = props;
 
@@ -57,6 +59,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
 
   if (children) {
     const slotClassName = processSlotClasses(contentClasses, {
+      component: 'form-check-input',
       container: clsxWithOptions(
         null,
         'form-check',
@@ -64,26 +67,25 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
         inline && 'form-check-inline',
         reverse && 'form-check-reverse',
       ),
-      component: 'form-check-input',
       label: 'form-check-label',
     });
 
     return (
-      <div data-slot-container="" className={slotClassName.container}>
+      <div className={slotClassName.container} data-slot-container="">
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
         <Input
           {...rest}
           {...renderOptions}
           as={Component}
-          data-slot-component=""
-          type="checkbox"
-          onRef={setInstance}
-          id={id}
-          dropOldClass
           className={slotClassName.component}
+          data-slot-component=""
+          dropOldClass
+          id={id}
+          onRef={setInstance}
+          type="checkbox"
         />
-        <Label data-slot-label="" dropOldClass className={slotClassName.label} htmlFor={id as string | undefined}>
+        <Label className={slotClassName.label} data-slot-label="" dropOldClass htmlFor={id as string | undefined}>
           {children}
         </Label>
       </div>
@@ -93,7 +95,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    <Input {...rest} {...renderOptions} as={Component} type="checkbox" onRef={setInstance} id={id} />
+    <Input {...rest} {...renderOptions} as={Component} id={id} onRef={setInstance} type="checkbox" />
   );
 };
 

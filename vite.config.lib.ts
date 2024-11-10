@@ -1,8 +1,10 @@
 import type { OutputOptions } from 'rollup';
-import { defineConfig } from 'vite';
+
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+
 import mergeCssPlugin from './merge-css-plugin';
 
 // lite tools
@@ -10,44 +12,29 @@ const lightweightTools = ['clsx'];
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), mergeCssPlugin()],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
-      },
-    },
-    modules: {
-      localsConvention: 'camelCase',
-    },
-    devSourcemap: true,
-  },
   build: {
-    sourcemap: true,
-    outDir: 'dist-lib',
     copyPublicDir: false,
-    lib: {
-      name: 'BRL',
-      entry: resolve(__dirname, 'lib/main.ts'),
-    },
     cssCodeSplit: true,
+    lib: {
+      entry: resolve(__dirname, 'lib/main.ts'),
+      name: 'BRL',
+    },
+    outDir: 'dist-lib',
     rollupOptions: {
       external: ['react', 'react/jsx-runtime', 'react-dom'],
       output: ['es', 'cjs'].map((format) => ({
+        chunkFileNames: format === 'cjs' ? '[name].cjs' : '[name].js',
         format,
         globals: {
           react: 'React',
           'react/jsx-runtime': 'ReactJsxRuntime',
           'react-dom': 'ReactDom',
         },
-        chunkFileNames: format === 'cjs' ? '[name].cjs' : '[name].js',
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (lightweightTools.some((tool) => id.includes(`${tool}/`))) {
               return 'lite';
             }
-
             return 'vendor';
           }
 
@@ -61,19 +48,33 @@ export default defineConfig({
         },
       })) as OutputOptions[],
     },
+    sourcemap: true,
   },
+  css: {
+    devSourcemap: true,
+    modules: {
+      localsConvention: 'camelCase',
+    },
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+        silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
+      },
+    },
+  },
+  plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), mergeCssPlugin()],
   resolve: {
     alias: {
-      '@lib': resolve(__dirname, 'lib'),
       '@assets': resolve(__dirname, 'lib/assets'),
       '@components': resolve(__dirname, 'lib/components'),
-      '@hooks': resolve(__dirname, 'lib/hooks'),
-      '@hocs': resolve(__dirname, 'lib/hocs'),
-      '@pages': resolve(__dirname, 'lib/pages'),
-      '@types': resolve(__dirname, 'lib/types'),
-      '@store': resolve(__dirname, 'lib/store'),
       '@contexts': resolve(__dirname, 'lib/contexts'),
+      '@hocs': resolve(__dirname, 'lib/hocs'),
+      '@hooks': resolve(__dirname, 'lib/hooks'),
+      '@lib': resolve(__dirname, 'lib'),
+      '@pages': resolve(__dirname, 'lib/pages'),
+      '@store': resolve(__dirname, 'lib/store'),
       '@tools': resolve(__dirname, 'lib/tools'),
+      '@types': resolve(__dirname, 'lib/types'),
     },
   },
 });

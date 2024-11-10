@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { CardTitleProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const CardSubtitle = function CardSubtitle<T extends ElementType = 'div'>(props: CardTitleProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
+  const { as: Component = 'div', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card-subtitle h6', className);

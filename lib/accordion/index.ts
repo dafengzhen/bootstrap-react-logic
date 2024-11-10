@@ -2,12 +2,12 @@ import Accordion from './accordion.tsx';
 
 // types
 export type {
-  AccordionProps,
   AccordionBasicProps,
-  AccordionItemProps,
-  AccordionHeaderProps,
   AccordionBodyProps,
+  AccordionHeaderProps,
+  AccordionItemProps,
   AccordionOption,
+  AccordionProps,
 } from './types.ts';
 
 // hooks

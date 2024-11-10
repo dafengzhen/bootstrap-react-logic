@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
+
 import type {
   BaseProps,
   ListGroupItemVariablesType,
@@ -7,16 +8,21 @@ import type {
   VariantType,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, ListGroupVariablesType> & {
-  /**
-   * options.
-   */
-  options?: ListGroupOption[];
-
+type Props<T extends ElementType> = {
   /**
    * flush.
    */
   flush?: boolean;
+
+  /**
+   * horizontal.
+   */
+  horizontal?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
+
+  /**
+   * itemAction.
+   */
+  itemAction?: boolean;
 
   /**
    * numbered.
@@ -24,17 +30,12 @@ type Props<T extends ElementType> = BaseProps<T, ListGroupVariablesType> & {
   numbered?: boolean;
 
   /**
-   * horizontal.
+   * options.
    */
-  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  options?: ListGroupOption[];
+} & BaseProps<T, ListGroupVariablesType>;
 
-  /**
-   * itemAction.
-   */
-  itemAction?: boolean;
-};
-
-type ItemProps<T extends ElementType> = BaseProps<T, ListGroupItemVariablesType> & {
+type ItemProps<T extends ElementType> = {
   /**
    * active.
    */
@@ -46,30 +47,30 @@ type ItemProps<T extends ElementType> = BaseProps<T, ListGroupItemVariablesType>
   disabled?: boolean;
 
   /**
-   * itemAction.
-   */
-  itemAction?: boolean;
-
-  /**
    * flexFill.
    */
   flexFill?: boolean;
 
   /**
+   * itemAction.
+   */
+  itemAction?: boolean;
+
+  /**
    * variant.
    */
   variant?: keyof VariantType;
-};
+} & BaseProps<T, ListGroupItemVariablesType>;
 
 export interface ListGroupOption {
-  id?: string | number;
-  item?: ReactNode;
   active?: boolean;
   disabled?: boolean;
-  props?: ListGroupItemProps<ElementType>;
   flexFill?: boolean;
-  variant?: keyof VariantType;
+  id?: number | string;
+  item?: ReactNode;
   itemAction?: boolean;
+  props?: ListGroupItemProps<ElementType>;
+  variant?: keyof VariantType;
 }
 
 export type ListGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ListGroupVariablesType>;

@@ -1,17 +1,19 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { CardProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 import CardBody from './card-body.tsx';
+import CardFooter from './card-footer.tsx';
+import CardHeader from './card-header.tsx';
 import CardImg from './card-img.tsx';
-import CardTitle from './card-title.tsx';
+import CardLink from './card-link.tsx';
 import CardSubtitle from './card-subtitle.tsx';
 import CardText from './card-text.tsx';
-import CardLink from './card-link.tsx';
-import CardHeader from './card-header.tsx';
-import CardFooter from './card-footer.tsx';
+import CardTitle from './card-title.tsx';
 
 const Card = function Card<T extends ElementType = 'div'>(props: CardProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, className, style, cardBody, ...rest } = props;
+  const { as: Component = 'div', cardBody, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card', cardBody && '.card-body', className);

@@ -2,14 +2,14 @@ import Modal from './modal.tsx';
 
 // types
 export type {
-  ModalProps,
-  ModalDialogProps,
-  ModalContentProps,
-  ModalHeaderProps,
-  ModalFooterProps,
-  ModalTitleProps,
-  ModalBodyProps,
   ModalBackdropProps,
+  ModalBodyProps,
+  ModalContentProps,
+  ModalDialogProps,
+  ModalFooterProps,
+  ModalHeaderProps,
+  ModalProps,
+  ModalTitleProps,
 } from './types.ts';
 
 // hooks

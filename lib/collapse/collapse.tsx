@@ -1,10 +1,12 @@
 import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
+
 import type { CollapseProps } from './types.ts';
+
 import { capitalizeFirstLetter, clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const calculateCollapseDimension = (
   element: HTMLDivElement,
-  dimension: 'width' | 'height',
+  dimension: 'height' | 'width',
   unit: string = '',
   isVisible: boolean = false,
   fallbackDimension?: string,
@@ -25,13 +27,13 @@ const calculateCollapseDimension = (
 const Collapse = function Collapse<T extends ElementType = 'div'>(props: CollapseProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
     className,
-    style,
     collapsing: collapsingByDefault = true,
-    visible: visibleByDefault,
+    dropOldClass,
     horizontal,
+    style,
+    variables,
+    visible: visibleByDefault,
     ...rest
   } = props;
 

@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { CardGroupProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const CardGroup = function CardGroup<T extends ElementType = 'div'>(props: CardGroupProps<T>) {
-  const { as: Component = 'div', dropOldClass, variables, className, style, ...rest } = props;
+  const { as: Component = 'div', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card-group', className);

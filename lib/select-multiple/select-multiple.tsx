@@ -1,5 +1,15 @@
+import {
+  FloatingPortal,
+  size as floatingSize,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+} from '@floating-ui/react';
 import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
+
 import {
   clsxStyle,
   clsxUnique,
@@ -12,31 +22,23 @@ import {
   pickObjectProperties,
   processSlotClasses,
 } from '../tools';
-import {
-  FloatingPortal,
-  size as floatingSize,
-  useClick,
-  useDismiss,
-  useFloating,
-  useInteractions,
-} from '@floating-ui/react';
 import selectMultipleStyles from './select-multiple.module.scss';
 
 const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(props: SelectMultipleProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
     className,
-    style,
-    disabled,
-    single,
-    hideActiveOptions,
-    placeholder,
-    options: defaultOptions,
-    selectableCount,
     contentClasses,
+    disabled,
+    dropOldClass,
+    hideActiveOptions,
     onChange,
+    options: defaultOptions,
+    placeholder,
+    selectableCount,
+    single,
+    style,
+    variables,
     ...rest
   } = props;
 
@@ -55,26 +57,26 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<SelectMultipleOption[]>(initialOptions);
 
-  const { refs, floatingStyles, context } = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
+  const { context, floatingStyles, refs } = useFloating({
     middleware: [
       floatingSize({
-        apply({ rects, availableHeight, elements }) {
+        apply({ availableHeight, elements, rects }) {
           Object.assign(elements.floating.style, {
-            minWidth: `${rects.reference.width}px`,
             maxHeight: `${Math.max(0, availableHeight)}px`,
+            minWidth: `${rects.reference.width}px`,
           });
         },
       }),
     ],
+    onOpenChange: setIsOpen,
+    open: isOpen,
   });
 
   const click = useClick(context, {
     enabled: !disabled,
   });
   const dismiss = useDismiss(context);
-  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss]);
+  const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss]);
 
   const showGroupFlag = useMemo(() => options.some((item) => isDefined(item.header, true)), [options]);
   const getOptionsByHeader = useMemo(() => groupByProperty(options, 'header'), [options]);
@@ -129,17 +131,12 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   }, [dropOldClass, disabled, className, variables, style]);
 
   const slotClassName = processSlotClasses(noParamContentClasses, {
-    mainContainer: clsxWithOptions(
-      null,
-      typeof selectableCount === 'number' && 'd-flex flex-wrap justify-content-between gap-2',
-    ),
-    optionsContainer: 'd-flex flex-wrap column-gap-2 row-gap-1',
-    placeholder: 'text-secondary user-select-none',
     activeOption: clsxWithOptions(
       null,
       'd-flex align-items-center badge text-bg-secondary',
       selectMultipleStyles.brlCursorDefault,
     ),
+    bottomDivider: 'dropdown-divider',
     clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
     countDisplay: clsxWithOptions(
       null,
@@ -148,35 +145,40 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     ),
     floatingMenu: 'overflow-y-auto dropdown-menu rounded-3 shadow show',
     header: 'dropdown-header',
+    mainContainer: clsxWithOptions(
+      null,
+      typeof selectableCount === 'number' && 'd-flex flex-wrap justify-content-between gap-2',
+    ),
+    optionsContainer: 'd-flex flex-wrap column-gap-2 row-gap-1',
+    placeholder: 'text-secondary user-select-none',
     topDivider: 'dropdown-divider',
-    bottomDivider: 'dropdown-divider',
   });
 
   useEffect(() => {
-    onChange?.(getActiveOptions.map((item) => item.id) as (string | number)[]);
+    onChange?.(getActiveOptions.map((item) => item.id) as (number | string)[]);
   }, [getActiveOptions, onChange]);
 
   return (
     <Component {...getReferenceProps()} {...rest} {...renderOptions} ref={refs.setReference}>
-      <div data-slot-main-container="" className={slotClassName.mainContainer}>
-        <div data-slot-options-container="" className={slotClassName.optionsContainer}>
+      <div className={slotClassName.mainContainer} data-slot-main-container="">
+        <div className={slotClassName.optionsContainer} data-slot-options-container="">
           {placeholder && getActiveOptions.length === 0 ? (
-            <div data-slot-placeholder="" className={slotClassName.placeholder}>
+            <div className={slotClassName.placeholder} data-slot-placeholder="">
               {placeholder}
             </div>
           ) : (
             getActiveOptions.map((item) => {
               return (
-                <div data-slot-active-option="" key={item.id} className={slotClassName.activeOption}>
+                <div className={slotClassName.activeOption} data-slot-active-option="" key={item.id}>
                   {item.text}
                   <i
-                    data-slot-clear-icon=""
-                    tabIndex={-1}
                     className={slotClassName.clearIcon}
+                    data-slot-clear-icon=""
                     onClick={(e) => {
                       e.stopPropagation();
                       onClickClearOption(item);
                     }}
+                    tabIndex={-1}
                   ></i>
                 </div>
               );
@@ -186,8 +188,8 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
         {typeof selectableCount === 'number' && (
           <div
-            data-slot-count-display=""
             className={slotClassName.countDisplay}
+            data-slot-count-display=""
           >{`${getActiveOptionsLength} / ${selectableCount}`}</div>
         )}
       </div>
@@ -206,13 +208,13 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
                 <Fragment key={key}>
                   {showGroupFlag && (
                     <li key={key}>
-                      <h6 data-slot-header="" className={slotClassName.header}>
+                      <h6 className={slotClassName.header} data-slot-header="">
                         {key}
                       </h6>
                     </li>
                   )}
 
-                  {getOptionsByHeader.groupedData[key].map(({ item, index }) => {
+                  {getOptionsByHeader.groupedData[key].map(({ index, item }) => {
                     const paramSlotClassName = processSlotClasses(paramContentClasses, {
                       optionItem: clsxWithOptions(null, item.active && hideActiveOptions && 'visually-hidden'),
                       selectButton: clsxWithOptions(
@@ -227,18 +229,18 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
                       <Fragment key={item.id}>
                         {item.divider === 'top' && (
                           <li>
-                            <hr data-slot-top-divider="" className={slotClassName.topDivider} />
+                            <hr className={slotClassName.topDivider} data-slot-top-divider="" />
                           </li>
                         )}
 
-                        <li data-slot-option-item="" className={paramSlotClassName.optionItem}>
+                        <li className={paramSlotClassName.optionItem} data-slot-option-item="">
                           <button
+                            className={paramSlotClassName.selectButton}
                             data-slot-select-button=""
                             onClick={(e) => {
                               e.stopPropagation();
                               onClickSelectOption(index);
                             }}
-                            className={paramSlotClassName.selectButton}
                             type="button"
                           >
                             {item.text}
@@ -247,7 +249,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
                         {item.divider === 'bottom' && (
                           <li>
-                            <hr data-slot-bottom-divider="" className={slotClassName.bottomDivider} />
+                            <hr className={slotClassName.bottomDivider} data-slot-bottom-divider="" />
                           </li>
                         )}
                       </Fragment>

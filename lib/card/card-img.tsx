@@ -1,19 +1,21 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { CardImgProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, getFirstNonEmptyClass, isValueValid } from '../tools';
 
-const CardImg = function CardImg<T extends ElementType = 'img' | 'div'>(props: CardImgProps<T>) {
-  const { as, dropOldClass, variables, className, style, top, bottom, overlay, ...rest } = props;
+const CardImg = function CardImg<T extends ElementType = 'div' | 'img'>(props: CardImgProps<T>) {
+  const { as, bottom, className, dropOldClass, overlay, style, top, variables, ...rest } = props;
   const Component = as ? as : overlay ? 'div' : 'img';
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
-          'card-img-top': top,
+          'card-img': true,
           'card-img-bottom': bottom,
           'card-img-overlay': overlay,
-          'card-img': true,
+          'card-img-top': top,
         }),
 
       className,

@@ -1,5 +1,10 @@
+import type { FlipOptions, Placement, ShiftOptions, SizeOptions } from '@floating-ui/react';
+
+import { flip, offset, shift, size, useFloating } from '@floating-ui/react';
 import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import type { DropdownOption, DropdownProps } from './types.ts';
+
 import {
   clsxStyle,
   clsxUnique,
@@ -11,17 +16,15 @@ import {
   isValueValid,
   mergeProps,
 } from '../tools';
-import DropdownToggle from './dropdown-toggle.tsx';
+import DropdownDivider from './dropdown-divider.tsx';
+import DropdownHeader from './dropdown-header.tsx';
 import DropdownItem from './dropdown-item.tsx';
 import DropdownItemText from './dropdown-item-text.tsx';
 import DropdownMenu from './dropdown-menu.tsx';
-import DropdownDivider from './dropdown-divider.tsx';
-import DropdownHeader from './dropdown-header.tsx';
-import type { FlipOptions, Placement, ShiftOptions, SizeOptions } from '@floating-ui/react';
-import { flip, offset, shift, size, useFloating } from '@floating-ui/react';
+import DropdownToggle from './dropdown-toggle.tsx';
 
 interface IOption extends DropdownOption {
-  id: string | number;
+  id: number | string;
 }
 
 type MenuAlignment = 'end' | 'start' | false;
@@ -29,27 +32,27 @@ type MenuAlignment = 'end' | 'start' | false;
 const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: DropdownProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
-    className,
-    style,
-    options: defaultOptions,
-    toggle,
-    toggleProps,
-    buttonProps,
-    split,
+    autoClose = true,
     btnGroup,
+    buttonProps,
     center,
+    children,
+    className,
+    customMenu,
+    dropend,
+    dropOldClass,
+    dropstart,
     dropup,
     dropupCenter,
-    dropend,
-    dropstart,
-    strategy = 'absolute',
     menuProps,
-    children,
-    customMenu,
     offset: offsetByDefault,
-    autoClose = true,
+    options: defaultOptions,
+    split,
+    strategy = 'absolute',
+    style,
+    toggle,
+    toggleProps,
+    variables,
     visible,
     ...rest
   } = props;
@@ -63,24 +66,24 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   const [menuAlignment, setMenuAlignment] = useState<MenuAlignment>();
   const [mouseEnterDropdownMenu, setMouseEnterDropdownMenu] = useState(false);
 
-  const { refs, floatingStyles } = useFloating({
-    open: show,
-    onOpenChange: setShow,
+  const { floatingStyles, refs } = useFloating({
     middleware: [
       offset(() => offsetByDefault ?? 0, [show]),
       shift((state) => state as ShiftOptions, [show]),
       flip((state) => state as FlipOptions, [show]),
       size((state) => state as SizeOptions, [show]),
     ],
+    onOpenChange: setShow,
+    open: show,
     placement: getTruthyKeyOrDefault(
       {
-        'bottom-start': menuAlignment === 'start',
+        bottom: center,
         'bottom-end': menuAlignment === 'end',
+        'bottom-start': menuAlignment === 'start',
         'left-start': dropstart,
         'right-start': dropend,
         top: dropupCenter,
         'top-start': dropup,
-        bottom: center,
       },
       'bottom-start',
     ) as Placement,
@@ -91,10 +94,10 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
-          'dropup-center': dropupCenter,
-          'dropdown-center': center,
           'btn-group': split || btnGroup,
           dropdown: true,
+          'dropdown-center': center,
+          'dropup-center': dropupCenter,
         }),
       dropup && 'dropup',
       dropend && 'dropend',
@@ -115,7 +118,7 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   }, [btnGroup, center, className, dropOldClass, dropend, dropstart, dropup, dropupCenter, split, style, variables]);
 
   const handleToggle = useCallback(
-    (e?: MouseEvent<HTMLAnchorElement | HTMLButtonElement> | boolean) => {
+    (e?: boolean | MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
       if (typeof e === 'boolean') {
         setShow(e);
       } else if (e) {
@@ -156,7 +159,7 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
     }
 
     const handleClickOutside = (e: HTMLElementEventMap['click']) => {
-      const target = e.target as HTMLButtonElement | HTMLAnchorElement;
+      const target = e.target as HTMLAnchorElement | HTMLButtonElement;
       if (target.className.includes('dropdown')) {
         if (autoClose === 'outside') {
           return;
@@ -200,12 +203,12 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
           )}
 
           <DropdownToggle
-            className="dropdown-toggle-split"
             aria-expanded={show ? 'true' : 'false'}
+            className="dropdown-toggle-split"
             show={show}
             {...toggleProps}
-            onClick={handleToggle}
             data-toggle-id={dropdownToggleId.current}
+            onClick={handleToggle}
             onRef={refs.setReference}
           >
             <span className="visually-hidden">Toggle Dropdown</span>
@@ -216,8 +219,8 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
           aria-expanded={show ? 'true' : 'false'}
           show={show}
           {...toggleProps}
-          onClick={handleToggle}
           data-toggle-id={dropdownToggleId.current}
+          onClick={handleToggle}
           onRef={refs.setReference}
         >
           {dropstart && (
@@ -236,10 +239,10 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
 
       <DropdownMenu
         {...mergeProps(menuProps, { style: { ...menuProps?.style, ...floatingStyles } })}
-        show={show}
-        onRef={refs.setFloating}
         onMouseEnter={handleMouseEnterMenu}
         onMouseLeave={handleMouseLeaveMenu}
+        onRef={refs.setFloating}
+        show={show}
       >
         {customMenu ? (
           children
@@ -253,11 +256,11 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
               ) : item.divider ? (
                 <DropdownDivider key={item.id} />
               ) : item.as === 'a' ? (
-                <DropdownItem as="a" key={item.id} href={item.href} active={item.active} disabled={item.disabled}>
+                <DropdownItem active={item.active} as="a" disabled={item.disabled} href={item.href} key={item.id}>
                   {item.item}
                 </DropdownItem>
               ) : (
-                <DropdownItem as="button" key={item.id} active={item.active} disabled={item.disabled}>
+                <DropdownItem active={item.active} as="button" disabled={item.disabled} key={item.id}>
                   {item.item}
                 </DropdownItem>
               );

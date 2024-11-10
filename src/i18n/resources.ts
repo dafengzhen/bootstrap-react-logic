@@ -1,4 +1,5 @@
 import type { Resource } from 'i18next';
+
 import { kebabToCamelCase } from '@src/tools';
 
 const enFiles = import.meta.glob('./en/**/*.json', { eager: true, import: 'default' });

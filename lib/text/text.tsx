@@ -1,19 +1,21 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { TextProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, getFirstNonEmptyClass, isValueValid } from '../tools';
 
 const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
   const {
     as: Component = 'div',
-    dropOldClass,
-    variables,
     children,
     className,
+    dropOldClass,
+    invalidFeedback,
+    invalidTooltip,
     style,
     validFeedback,
-    invalidFeedback,
     validTooltip,
-    invalidTooltip,
+    variables,
     ...rest
   } = props;
 
@@ -21,11 +23,11 @@ const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
-          'valid-feedback': validFeedback,
-          'invalid-feedback': invalidFeedback,
-          'valid-tooltip': validTooltip,
-          'invalid-tooltip': invalidTooltip,
           'form-text': true,
+          'invalid-feedback': invalidFeedback,
+          'invalid-tooltip': invalidTooltip,
+          'valid-feedback': validFeedback,
+          'valid-tooltip': validTooltip,
         }),
       className,
     );

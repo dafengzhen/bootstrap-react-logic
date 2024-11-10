@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import {
   Card,
   CardBody,
@@ -15,11 +13,13 @@ import {
   CardText,
   CardTitle,
 } from '@lib/card';
-import Example from '@components/example.tsx';
 import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
-  import.meta.glob('../assets/codes/card/*.md', { eager: true, query: '?raw', import: 'default' }),
+  import.meta.glob('../assets/codes/card/*.md', { eager: true, import: 'default', query: '?raw' }),
 );
 
 export default function CardPage() {
@@ -37,26 +37,26 @@ export default function CardPage() {
       <Example hash="basic" state={state} t={tCardPage}>
         <Card style={{ width: '18rem' }}>
           <CardImg
-            top
+            aria-label="Placeholder: Image cap"
             as="svg"
+            focusable="false"
+            height="180"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
             style={{
               fontSize: '1.125rem',
-              WebkitUserSelect: 'none',
               MozUserSelect: 'none',
-              userSelect: 'none',
               textAnchor: 'middle',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
+            top
             width="100%"
-            height="180"
             xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Image cap"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
           >
             <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+            <rect fill="#868e96" height="100%" width="100%"></rect>
+            <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
               Image cap
             </text>
           </CardImg>
@@ -65,7 +65,7 @@ export default function CardPage() {
             <CardText>
               Some quick example text to build on the card title and make up the bulk of the card's content.
             </CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -95,26 +95,26 @@ export default function CardPage() {
       <Example hash="images" state={state} t={tCardPage}>
         <Card style={{ width: '18rem' }}>
           <CardImg
-            top
+            aria-label="Placeholder: Image cap"
             as="svg"
+            focusable="false"
+            height="180"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
             style={{
               fontSize: '1.125rem',
-              WebkitUserSelect: 'none',
               MozUserSelect: 'none',
-              userSelect: 'none',
               textAnchor: 'middle',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
+            top
             width="100%"
-            height="180"
             xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Image cap"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
           >
             <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+            <rect fill="#868e96" height="100%" width="100%"></rect>
+            <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
               Image cap
             </text>
           </CardImg>
@@ -157,26 +157,26 @@ export default function CardPage() {
       <Example hash="kitchenSink" state={state} t={tCardPage}>
         <Card style={{ width: '18rem' }}>
           <CardImg
-            top
+            aria-label="Placeholder: Image cap"
             as="svg"
+            focusable="false"
+            height="180"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
             style={{
               fontSize: '1.125rem',
-              WebkitUserSelect: 'none',
               MozUserSelect: 'none',
-              userSelect: 'none',
               textAnchor: 'middle',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
+            top
             width="100%"
-            height="180"
             xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Image cap"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
           >
             <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+            <rect fill="#868e96" height="100%" width="100%"></rect>
+            <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
               Image cap
             </text>
           </CardImg>
@@ -204,7 +204,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -227,7 +227,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -242,7 +242,7 @@ export default function CardPage() {
               <CardBody>
                 <CardTitle>Special title treatment</CardTitle>
                 <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                <a href="#" className="btn btn-primary">
+                <a className="btn btn-primary" href="#">
                   Go somewhere
                 </a>
               </CardBody>
@@ -253,7 +253,7 @@ export default function CardPage() {
               <CardBody>
                 <CardTitle>Special title treatment</CardTitle>
                 <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                <a href="#" className="btn btn-primary">
+                <a className="btn btn-primary" href="#">
                   Go somewhere
                 </a>
               </CardBody>
@@ -267,7 +267,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Card title</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Button
             </a>
           </CardBody>
@@ -277,7 +277,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Card title</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Button
             </a>
           </CardBody>
@@ -289,7 +289,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -301,7 +301,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -311,7 +311,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -321,7 +321,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -333,7 +333,7 @@ export default function CardPage() {
           <CardHeader>
             <ul className="nav nav-tabs card-header-tabs">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="true" href="#">
+                <a aria-current="true" className="nav-link active" href="#">
                   Active
                 </a>
               </li>
@@ -343,7 +343,7 @@ export default function CardPage() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">
+                <a aria-disabled="true" className="nav-link disabled">
                   Disabled
                 </a>
               </li>
@@ -352,7 +352,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -372,7 +372,7 @@ export default function CardPage() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">
+                <a aria-disabled="true" className="nav-link disabled">
                   Disabled
                 </a>
               </li>
@@ -381,7 +381,7 @@ export default function CardPage() {
           <CardBody>
             <CardTitle>Special title treatment</CardTitle>
             <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-            <a href="#" className="btn btn-primary">
+            <a className="btn btn-primary" href="#">
               Go somewhere
             </a>
           </CardBody>
@@ -391,26 +391,26 @@ export default function CardPage() {
       <Example hash="imageCaps" state={state} t={tCardPage}>
         <Card>
           <CardImg
-            top
+            aria-label="Placeholder: Image cap"
             as="svg"
+            focusable="false"
+            height="180"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
             style={{
               fontSize: '1.125rem',
-              WebkitUserSelect: 'none',
               MozUserSelect: 'none',
-              userSelect: 'none',
               textAnchor: 'middle',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
+            top
             width="100%"
-            height="180"
             xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Image cap"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
           >
             <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+            <rect fill="#868e96" height="100%" width="100%"></rect>
+            <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
               Image cap
             </text>
           </CardImg>
@@ -438,26 +438,26 @@ export default function CardPage() {
             </CardText>
           </CardBody>
           <CardImg
-            bottom
+            aria-label="Placeholder: Image cap"
             as="svg"
+            bottom
+            focusable="false"
+            height="180"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
             style={{
               fontSize: '1.125rem',
-              WebkitUserSelect: 'none',
               MozUserSelect: 'none',
-              userSelect: 'none',
               textAnchor: 'middle',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
             width="100%"
-            height="180"
             xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Image cap"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
           >
             <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+            <rect fill="#868e96" height="100%" width="100%"></rect>
+            <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
               Image cap
             </text>
           </CardImg>
@@ -465,25 +465,25 @@ export default function CardPage() {
 
         <Card className="text-bg-dark">
           <CardImg
+            aria-label="Placeholder: Image cap"
             as="svg"
+            focusable="false"
+            height="180"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
             style={{
               fontSize: '1.125rem',
-              WebkitUserSelect: 'none',
               MozUserSelect: 'none',
-              userSelect: 'none',
               textAnchor: 'middle',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
             width="100%"
-            height="180"
             xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Placeholder: Image cap"
-            preserveAspectRatio="xMidYMid slice"
-            focusable="false"
           >
             <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect>
-            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+            <rect fill="#868e96" height="100%" width="100%"></rect>
+            <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
               Image cap
             </text>
           </CardImg>
@@ -505,26 +505,26 @@ export default function CardPage() {
           <div className="row g-0">
             <div className="col-md-4">
               <CardImg
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -724,27 +724,27 @@ export default function CardPage() {
         <CardGroup>
           <Card>
             <CardImg
-              top
+              aria-label="Placeholder: Image cap"
               as="svg"
+              className="img-fluid rounded-start"
+              focusable="false"
+              height="180"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
               style={{
                 fontSize: '1.125rem',
-                WebkitUserSelect: 'none',
                 MozUserSelect: 'none',
-                userSelect: 'none',
                 textAnchor: 'middle',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
               }}
+              top
               width="100%"
-              height="180"
               xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: Image cap"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-              className="img-fluid rounded-start"
             >
               <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#868e96"></rect>
-              <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+              <rect fill="#868e96" height="100%" width="100%"></rect>
+              <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                 Image
               </text>
             </CardImg>
@@ -762,27 +762,27 @@ export default function CardPage() {
 
           <Card>
             <CardImg
-              top
+              aria-label="Placeholder: Image cap"
               as="svg"
+              className="img-fluid rounded-start"
+              focusable="false"
+              height="180"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
               style={{
                 fontSize: '1.125rem',
-                WebkitUserSelect: 'none',
                 MozUserSelect: 'none',
-                userSelect: 'none',
                 textAnchor: 'middle',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
               }}
+              top
               width="100%"
-              height="180"
               xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: Image cap"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-              className="img-fluid rounded-start"
             >
               <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#868e96"></rect>
-              <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+              <rect fill="#868e96" height="100%" width="100%"></rect>
+              <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                 Image
               </text>
             </CardImg>
@@ -797,27 +797,27 @@ export default function CardPage() {
 
           <Card>
             <CardImg
-              top
+              aria-label="Placeholder: Image cap"
               as="svg"
+              className="img-fluid rounded-start"
+              focusable="false"
+              height="180"
+              preserveAspectRatio="xMidYMid slice"
+              role="img"
               style={{
                 fontSize: '1.125rem',
-                WebkitUserSelect: 'none',
                 MozUserSelect: 'none',
-                userSelect: 'none',
                 textAnchor: 'middle',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
               }}
+              top
               width="100%"
-              height="180"
               xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-label="Placeholder: Image cap"
-              preserveAspectRatio="xMidYMid slice"
-              focusable="false"
-              className="img-fluid rounded-start"
             >
               <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#868e96"></rect>
-              <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+              <rect fill="#868e96" height="100%" width="100%"></rect>
+              <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                 Image
               </text>
             </CardImg>
@@ -840,27 +840,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -876,27 +876,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -912,27 +912,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -947,27 +947,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -986,27 +986,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1022,27 +1022,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1058,27 +1058,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1093,27 +1093,27 @@ export default function CardPage() {
           <div className="col">
             <Card>
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1132,27 +1132,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1168,27 +1168,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1201,27 +1201,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1236,27 +1236,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1275,27 +1275,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1314,27 +1314,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1350,27 +1350,27 @@ export default function CardPage() {
           <div className="col">
             <Card className="h-100">
               <CardImg
-                top
+                aria-label="Placeholder: Image cap"
                 as="svg"
+                className="img-fluid rounded-start"
+                focusable="false"
+                height="180"
+                preserveAspectRatio="xMidYMid slice"
+                role="img"
                 style={{
                   fontSize: '1.125rem',
-                  WebkitUserSelect: 'none',
                   MozUserSelect: 'none',
-                  userSelect: 'none',
                   textAnchor: 'middle',
+                  userSelect: 'none',
+                  WebkitUserSelect: 'none',
                 }}
+                top
                 width="100%"
-                height="180"
                 xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Image cap"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-                className="img-fluid rounded-start"
               >
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect>
-                <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                <rect fill="#868e96" height="100%" width="100%"></rect>
+                <text dy=".3em" fill="#dee2e6" x="50%" y="50%">
                   Image
                 </text>
               </CardImg>
@@ -1392,174 +1392,174 @@ export default function CardPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="cardComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: 'cardBody',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCardComponentProps('card.desc.cardBody'),
             default: '',
+            desc: tCardComponentProps('card.desc.cardBody'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardGroupComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardBodyComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardTitleComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardSubtitleComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardTextComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardImgComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: 'as',
-            type: <span className="badge text-bg-secondary">img | div</span>,
-            desc: tCardComponentProps('cardImg.desc.as'),
             default: 'img',
+            desc: tCardComponentProps('cardImg.desc.as'),
+            type: <span className="badge text-bg-secondary">img | div</span>,
           },
           {
             attr: 'top',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCardComponentProps('cardImg.desc.top'),
             default: '',
+            desc: tCardComponentProps('cardImg.desc.top'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'bottom',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCardComponentProps('cardImg.desc.bottom'),
             default: '',
+            desc: tCardComponentProps('cardImg.desc.bottom'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'overlay',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCardComponentProps('cardImg.desc.overlay'),
             default: '',
+            desc: tCardComponentProps('cardImg.desc.overlay'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardHeaderComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardFooterComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: '-',
-            type: '-',
-            desc: '-',
             default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
       <Example
-        props
         hash="cardLinkComponentProps"
-        state={state}
-        t={tCardComponentProps}
         items={[
           {
             attr: 'as',
-            type: <span className="badge text-bg-secondary">a</span>,
-            desc: tCardComponentProps('cardLink.desc.as'),
             default: 'a',
+            desc: tCardComponentProps('cardLink.desc.as'),
+            type: <span className="badge text-bg-secondary">a</span>,
           },
         ]}
+        props
+        state={state}
+        t={tCardComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

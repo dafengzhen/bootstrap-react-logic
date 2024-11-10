@@ -1,4 +1,8 @@
 {
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "downlevelIteration": true
+  },
   "files": [],
   "references": [
     {
@@ -10,9 +14,5 @@
     {
       "path": "./tsconfig.lib.json"
     }
-  ],
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "downlevelIteration": true
-  }
+  ]
 }

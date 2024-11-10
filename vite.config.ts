@@ -1,7 +1,8 @@
-import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig, loadEnv } from 'vite';
+
 import addScriptPlugin from './add-script-plugin.ts';
 
 const env = loadEnv('app', process.cwd(), '');
@@ -13,33 +14,7 @@ const outputVisualizer = env.OUTPUT_VISUALIZER === 'true';
 export default defineConfig(({ command }) => {
   return {
     base,
-    define: {
-      __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
-      __APP_PUBLIC_BASE_HREF__: JSON.stringify(href),
-    },
-    plugins: [
-      react(),
-      outputVisualizer &&
-        visualizer({
-          emitFile: true,
-          filename: 'stats.html',
-        }),
-      command === 'build' && addScriptPlugin(),
-    ],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
-        },
-      },
-      modules: {
-        localsConvention: 'camelCase',
-      },
-      devSourcemap: true,
-    },
     build: {
-      sourcemap: true,
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
@@ -57,20 +32,46 @@ export default defineConfig(({ command }) => {
           },
         },
       },
+      sourcemap: true,
     },
+    css: {
+      devSourcemap: true,
+      modules: {
+        localsConvention: 'camelCase',
+      },
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
+        },
+      },
+    },
+    define: {
+      __APP_PUBLIC_BASE_HREF__: JSON.stringify(href),
+      __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
+    },
+    plugins: [
+      react(),
+      outputVisualizer &&
+        visualizer({
+          emitFile: true,
+          filename: 'stats.html',
+        }),
+      command === 'build' && addScriptPlugin(),
+    ],
     resolve: {
       alias: {
-        '@src': resolve(__dirname, 'src'),
-        '@lib': resolve(__dirname, 'lib'),
         '@assets': resolve(__dirname, 'src/assets'),
         '@components': resolve(__dirname, 'src/components'),
-        '@hooks': resolve(__dirname, 'src/hooks'),
-        '@hocs': resolve(__dirname, 'src/hocs'),
-        '@pages': resolve(__dirname, 'src/pages'),
-        '@types': resolve(__dirname, 'src/types'),
-        '@store': resolve(__dirname, 'src/store'),
         '@contexts': resolve(__dirname, 'src/contexts'),
+        '@hocs': resolve(__dirname, 'src/hocs'),
+        '@hooks': resolve(__dirname, 'src/hooks'),
+        '@lib': resolve(__dirname, 'lib'),
+        '@pages': resolve(__dirname, 'src/pages'),
+        '@src': resolve(__dirname, 'src'),
+        '@store': resolve(__dirname, 'src/store'),
         '@tools': resolve(__dirname, 'src/tools'),
+        '@types': resolve(__dirname, 'src/types'),
       },
     },
   };

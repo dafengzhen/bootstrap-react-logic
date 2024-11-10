@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { CardTextProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const CardLink = function CardLink<T extends ElementType = 'a'>(props: CardTextProps<T>) {
-  const { as: Component = 'a', dropOldClass, variables, className, style, ...rest } = props;
+  const { as: Component = 'a', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card-link', className);

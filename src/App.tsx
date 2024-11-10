@@ -1,10 +1,10 @@
-import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
 import { MenuEnum } from '@src/routes.tsx';
-import { useTranslation } from 'react-i18next';
 import { sortByProperty } from '@src/tools';
+import clsx from 'clsx';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom';
 
 export const LOCAL_STORAGE_KEY_PREFIX = '_brl_';
 
@@ -37,7 +37,7 @@ function App() {
 
   useEffect(() => {
     if (typeof localStorage !== 'undefined') {
-      const retrieveOrSetDefault = <T extends string | boolean>(
+      const retrieveOrSetDefault = <T extends boolean | string>(
         key: string,
         defaultValue: string,
         setter: (value: T) => void,
@@ -68,7 +68,7 @@ function App() {
         (v) => v === 'true',
       );
 
-      retrieveOrSetDefault<'light' | 'dark'>(
+      retrieveOrSetDefault<'dark' | 'light'>(
         LOCAL_STORAGE_KEY_PREFIX + 'options_theme',
         'light',
         theme[1],
@@ -112,7 +112,7 @@ function App() {
   }
 
   return (
-    <GlobalContext.Provider value={{ fullscreen, theme, layout }}>
+    <GlobalContext.Provider value={{ fullscreen, layout, theme }}>
       <div className={clsx('container-fluid p-2 p-sm-4', isCenter && 'container')}>
         <div className="row g-2 g-sm-4">
           {!isFullscreen && (
@@ -127,9 +127,9 @@ function App() {
                       {location.pathname !== '/' && (
                         <div className="d-flex gap-2 mb-2">
                           <button
-                            type="button"
                             className={clsx('btn', isDark ? 'btn-dark' : 'btn-outline-light')}
                             onClick={onClickHouse}
+                            type="button"
                           >
                             <span style={{ color: '#712cf9' }}>B</span>
                             <span style={{ color: '#0074a6' }}>R</span>
@@ -137,9 +137,9 @@ function App() {
                           </button>
 
                           <button
-                            type="button"
                             className={clsx('btn w-100', isDark ? 'btn-dark' : 'btn-outline-light')}
                             onClick={onClickReturn}
+                            type="button"
                           >
                             <i className="bi bi-chevron-left" style={{ color: '#3950D0' }}></i>
                           </button>
@@ -150,7 +150,6 @@ function App() {
                         {menus.map((item) => {
                           return (
                             <NavLink
-                              key={item.name}
                               className={({ isActive, isPending }) => {
                                 return clsx(
                                   'list-group-item list-group-item-action text-truncate',
@@ -159,6 +158,7 @@ function App() {
                                   !isDark && 'rounded border-1',
                                 );
                               }}
+                              key={item.name}
                               style={{
                                 borderColor: isDark ? undefined : '#f8f9fa',
                               }}

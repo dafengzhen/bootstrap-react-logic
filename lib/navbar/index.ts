@@ -1,7 +1,17 @@
 import Navbar from './navbar.tsx';
 
 // types
-export type { NavbarProps } from './types.ts';
+export type {
+  NavbarBrandProps,
+  NavbarCollapseProps,
+  NavbarContainerProps,
+  NavbarNavItemProps,
+  NavbarNavLinkProps,
+  NavbarNavProps,
+  NavbarProps,
+  NavbarTogglerIconProps,
+  NavbarTogglerProps,
+} from './types.ts';
 
 // hooks
 

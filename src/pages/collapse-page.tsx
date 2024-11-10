@@ -1,17 +1,17 @@
-import { MouseEvent, useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Collapse } from '@lib/collapse';
+import { transformCodeObj } from '@src/tools';
+import { MouseEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/collapse/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -60,10 +60,10 @@ export default function CollapsePage() {
       <Example hash="basic" state={state} t={tCollapsePage}>
         <div>
           <p className="d-inline-flex gap-1">
-            <a className="btn btn-primary" href="" role="button" onClick={onClickVisible}>
+            <a className="btn btn-primary" href="" onClick={onClickVisible} role="button">
               Link with href
             </a>
-            <button className="btn btn-primary" type="button" onClick={onClickVisible}>
+            <button className="btn btn-primary" onClick={onClickVisible} type="button">
               Button with data-bs-target
             </button>
           </p>
@@ -80,13 +80,13 @@ export default function CollapsePage() {
       <Example hash="horizontal" state={state} t={tCollapsePage}>
         <div>
           <p>
-            <button className="btn btn-primary" type="button" onClick={onClickVisible2}>
+            <button className="btn btn-primary" onClick={onClickVisible2} type="button">
               Toggle width collapse
             </button>
           </p>
 
           <div style={{ minHeight: 130 }}>
-            <Collapse visible={visible2} horizontal>
+            <Collapse horizontal visible={visible2}>
               <div className="card card-body" style={{ width: 300 }}>
                 This is some placeholder content for a horizontal collapse. It's hidden by default and shown when
                 triggered.
@@ -99,13 +99,13 @@ export default function CollapsePage() {
       <Example hash="multipleTogglesAndTargets" state={state} t={tCollapsePage}>
         <div>
           <p className="d-inline-flex gap-1">
-            <a className="btn btn-primary" href="" role="button" onClick={onClickVisible3}>
+            <a className="btn btn-primary" href="" onClick={onClickVisible3} role="button">
               Toggle first element
             </a>
-            <button className="btn btn-primary" type="button" onClick={onClickVisible4}>
+            <button className="btn btn-primary" onClick={onClickVisible4} type="button">
               Toggle second element
             </button>
-            <button className="btn btn-primary" type="button" onClick={onClickVisible5}>
+            <button className="btn btn-primary" onClick={onClickVisible5} type="button">
               Toggle both elements
             </button>
           </p>
@@ -134,33 +134,33 @@ export default function CollapsePage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="collapseComponentProps"
-        state={state}
-        t={tCollapseComponentProps}
         items={[
           {
             attr: 'collapsing',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCollapseComponentProps('collapse.desc.collapsing'),
             default: 'true',
+            desc: tCollapseComponentProps('collapse.desc.collapsing'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'visible',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCollapseComponentProps('collapse.desc.visible'),
             default: '',
+            desc: tCollapseComponentProps('collapse.desc.visible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'horizontal',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCollapseComponentProps('collapse.desc.horizontal'),
             default: '',
+            desc: tCollapseComponentProps('collapse.desc.horizontal'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tCollapseComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

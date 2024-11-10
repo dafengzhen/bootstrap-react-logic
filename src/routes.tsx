@@ -1,54 +1,54 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from '@src/App.tsx';
-import ErrorPage from '@pages/error-page.tsx';
-import IndexPage from '@pages/index-page.tsx';
-import ButtonPage from '@pages/button-page.tsx';
-import ButtonGroupPage from '@pages/button-group-page.tsx';
-import InputPage from '@pages/input-page.tsx';
-import InputGroupPage from '@pages/input-group-page.tsx';
-import SelectPage from '@pages/select-page.tsx';
-import CheckboxPage from '@pages/checkbox-page.tsx';
-import RadioPage from '@pages/radio-page.tsx';
-import RangePage from '@pages/range-page.tsx';
-import FloatingLabelPage from '@pages/floating-label-page.tsx';
-import CardPage from '@pages/card-page.tsx';
+import AccordionPage from '@pages/accordion-page.tsx';
 import AlertPage from '@pages/alert-page.tsx';
 import BadgePage from '@pages/badge-page';
-import AccordionPage from '@pages/accordion-page.tsx';
 import BreadcrumbPage from '@pages/breadcrumb-page.tsx';
+import ButtonGroupPage from '@pages/button-group-page.tsx';
+import ButtonPage from '@pages/button-page.tsx';
+import CardPage from '@pages/card-page.tsx';
 import CarouselPage from '@pages/carousel-page.tsx';
+import CheckboxPage from '@pages/checkbox-page.tsx';
 import CloseButtonPage from '@pages/close-button-page.tsx';
 import CollapsePage from '@pages/collapse-page.tsx';
 import DropdownPage from '@pages/dropdown-page.tsx';
+import ErrorPage from '@pages/error-page.tsx';
+import FloatingLabelPage from '@pages/floating-label-page.tsx';
+import IndexPage from '@pages/index-page.tsx';
+import InputGroupPage from '@pages/input-group-page.tsx';
+import InputPage from '@pages/input-page.tsx';
 import ListGroupPage from '@pages/list-group-page.tsx';
 import ModalPage from '@pages/modal-page.tsx';
 import NavbarPage from '@pages/navbar-page.tsx';
+import RadioPage from '@pages/radio-page.tsx';
+import RangePage from '@pages/range-page.tsx';
+import SelectPage from '@pages/select-page.tsx';
+import App from '@src/App.tsx';
+import { createBrowserRouter } from 'react-router-dom';
 
 /**
  * Configure sidebar menu.
  */
 export enum MenuEnum {
-  Button = '/pages/button',
-  ButtonGroup = '/pages/button-group',
-  Input = '/pages/input',
-  InputGroup = '/pages/input-group',
-  Select = '/pages/select',
-  Checkbox = '/pages/checkbox',
-  Radio = '/pages/radio',
-  Range = '/pages/range',
-  FloatingLabel = '/pages/floating-label',
-  Card = '/pages/card',
+  Accordion = '/pages/accordion',
   Alert = '/pages/alert',
   Badge = '/pages/badge',
-  Accordion = '/pages/accordion',
   Breadcrumb = '/pages/breadcrumb',
+  Button = '/pages/button',
+  ButtonGroup = '/pages/button-group',
+  Card = '/pages/card',
   Carousel = '/pages/carousel',
+  Checkbox = '/pages/checkbox',
   CloseButton = '/pages/close-button',
   Collapse = '/pages/collapse',
   Dropdown = '/pages/dropdown',
+  FloatingLabel = '/pages/floating-label',
+  Input = '/pages/input',
+  InputGroup = '/pages/input-group',
   ListGroup = '/pages/list-group',
   Modal = '/pages/modal',
   Navbar = '/pages/navbar',
+  Radio = '/pages/radio',
+  Range = '/pages/range',
+  Select = '/pages/select',
 }
 
 /**
@@ -57,109 +57,109 @@ export enum MenuEnum {
 const router = createBrowserRouter(
   [
     {
-      path: '/',
-      element: <App />,
-      errorElement: <ErrorPage />,
       children: [
         {
-          errorElement: <ErrorPage />,
           children: [
-            { index: true, element: <IndexPage /> },
+            { element: <IndexPage />, index: true },
             {
-              path: 'pages/button',
               element: <ButtonPage />,
+              path: 'pages/button',
             },
             {
-              path: 'pages/button-group',
               element: <ButtonGroupPage />,
+              path: 'pages/button-group',
             },
             {
-              path: 'pages/input',
               element: <InputPage />,
+              path: 'pages/input',
             },
             {
-              path: 'pages/input-group',
               element: <InputGroupPage />,
+              path: 'pages/input-group',
             },
             {
-              path: 'pages/select',
               element: <SelectPage />,
+              path: 'pages/select',
             },
             {
-              path: 'pages/checkbox',
               element: <CheckboxPage />,
+              path: 'pages/checkbox',
             },
             {
-              path: 'pages/radio',
               element: <RadioPage />,
+              path: 'pages/radio',
             },
             {
-              path: 'pages/range',
               element: <RangePage />,
+              path: 'pages/range',
             },
             {
-              path: 'pages/floating-label',
               element: <FloatingLabelPage />,
+              path: 'pages/floating-label',
             },
             {
-              path: 'pages/card',
               element: <CardPage />,
+              path: 'pages/card',
             },
             {
-              path: 'pages/alert',
               element: <AlertPage />,
+              path: 'pages/alert',
             },
             {
-              path: 'pages/badge',
               element: <BadgePage />,
+              path: 'pages/badge',
             },
             {
-              path: 'pages/accordion',
               element: <AccordionPage />,
+              path: 'pages/accordion',
             },
             {
-              path: 'pages/breadcrumb',
               element: <BreadcrumbPage />,
+              path: 'pages/breadcrumb',
             },
             {
-              path: 'pages/carousel',
               element: <CarouselPage />,
+              path: 'pages/carousel',
             },
             {
-              path: 'pages/close-button',
               element: <CloseButtonPage />,
+              path: 'pages/close-button',
             },
             {
-              path: 'pages/collapse',
               element: <CollapsePage />,
+              path: 'pages/collapse',
             },
             {
-              path: 'pages/dropdown',
               element: <DropdownPage />,
+              path: 'pages/dropdown',
             },
             {
-              path: 'pages/list-group',
               element: <ListGroupPage />,
+              path: 'pages/list-group',
             },
             {
-              path: 'pages/modal',
               element: <ModalPage />,
+              path: 'pages/modal',
             },
             {
-              path: 'pages/navbar',
               element: <NavbarPage />,
+              path: 'pages/navbar',
             },
           ],
+          errorElement: <ErrorPage />,
         },
       ],
+      element: <App />,
+      errorElement: <ErrorPage />,
+      path: '/',
     },
   ],
   {
     basename: __APP_PUBLIC_BASE_PATH__,
     future: {
-      v7_partialHydration: true,
-      v7_normalizeFormMethod: true,
       v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
       v7_relativeSplatPath: true,
       v7_skipActionErrorRevalidation: true,
     },

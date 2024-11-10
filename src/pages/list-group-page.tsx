@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 import About from '@components/about.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
+import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { ListGroup, ListGroupOption } from '@lib/list-group';
 import { VariantType } from '@lib/tools';
-import OptionRow from '@components/option-row.tsx';
+import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/list-group/*.md', '../assets/codes/common/*.md'], {
     eager: true,
-    query: '?raw',
     import: 'default',
+    query: '?raw',
   }),
 );
 
@@ -29,7 +29,7 @@ export default function ListGroupPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tListGroupPage} mw400>
+      <Example hash="basic" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
@@ -51,12 +51,12 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="activeItems" state={state} t={tListGroupPage} mw400>
+      <Example hash="activeItems" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
-              item: 'An active item',
               active: true,
+              item: 'An active item',
             },
             {
               item: 'A second item',
@@ -74,12 +74,12 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="disabledItems" state={state} t={tListGroupPage} mw400>
+      <Example hash="disabledItems" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
-              item: 'A disabled item',
               disabled: true,
+              item: 'A disabled item',
             },
             {
               item: 'A second item',
@@ -97,17 +97,17 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="linksAndButtons" state={state} t={tListGroupPage} gap3 mw400>
+      <Example gap3 hash="linksAndButtons" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           as="div"
           options={[
             {
-              item: 'The current link item',
               active: true,
+              item: 'The current link item',
               props: {
+                'aria-current': 'true',
                 as: 'a',
                 href: '#',
-                'aria-current': 'true',
               },
             },
             {
@@ -145,12 +145,12 @@ export default function ListGroupPage() {
           as="div"
           options={[
             {
-              item: 'The current button',
               active: true,
+              item: 'The current button',
               props: {
+                'aria-current': 'true',
                 as: 'button',
                 type: 'button',
-                'aria-current': 'true',
               },
             },
             {
@@ -175,8 +175,8 @@ export default function ListGroupPage() {
               },
             },
             {
-              item: 'A disabled button item',
               disabled: true,
+              item: 'A disabled button item',
               props: {
                 as: 'button',
                 type: 'button',
@@ -186,7 +186,7 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="flush" state={state} t={tListGroupPage} mw400>
+      <Example hash="flush" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           flush
           options={[
@@ -209,7 +209,7 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="numbered" state={state} t={tListGroupPage} gap3 mw400>
+      <Example gap3 hash="numbered" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           numbered
           options={[
@@ -275,7 +275,7 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="horizontal" state={state} t={tListGroupPage} mw400>
+      <Example hash="horizontal" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           horizontal
           options={[
@@ -294,8 +294,8 @@ export default function ListGroupPage() {
         {['sm', 'md', 'lg', 'xl', 'xxl'].map((name) => {
           return (
             <ListGroup
+              horizontal={name as 'lg' | 'md' | 'sm' | 'xl' | 'xxl'}
               key={name}
-              horizontal={name as 'sm' | 'md' | 'lg' | 'xl' | 'xxl'}
               options={[
                 {
                   item: 'An item',
@@ -312,7 +312,7 @@ export default function ListGroupPage() {
         })}
       </Example>
 
-      <Example hash="variants" state={state} t={tListGroupPage} mw400>
+      <Example hash="variants" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
@@ -330,7 +330,7 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="forLinksAndButtons" state={state} t={tListGroupPage} mw400>
+      <Example hash="forLinksAndButtons" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           as="div"
           itemAction
@@ -347,18 +347,18 @@ export default function ListGroupPage() {
             ).map((variant) => {
               return {
                 item: `A simple ${variant} list group item`,
-                variant,
                 props: {
                   as: 'a',
                   href: '#',
                 },
+                variant,
               } as ListGroupOption;
             }),
           ]}
         />
       </Example>
 
-      <Example hash="withBadges" state={state} t={tListGroupPage} mw400>
+      <Example hash="withBadges" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
@@ -398,10 +398,11 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="customContent" state={state} t={tListGroupPage} mw400>
+      <Example hash="customContent" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
+              active: true,
               item: (
                 <>
                   <div className="d-flex w-100 justify-content-between">
@@ -412,11 +413,10 @@ export default function ListGroupPage() {
                   <small>And some small print.</small>
                 </>
               ),
-              active: true,
               props: {
+                'aria-current': 'true',
                 as: 'a',
                 href: '#',
-                'aria-current': 'true',
               },
             },
             {
@@ -455,13 +455,13 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="checkboxesAndRadios" state={state} t={tListGroupPage} mw400 gap3>
+      <Example gap3 hash="checkboxesAndRadios" mw400 state={state} t={tListGroupPage}>
         <ListGroup
           options={[
             {
               item: (
                 <>
-                  <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" />
+                  <input className="form-check-input me-1" id="firstCheckbox" type="checkbox" value="" />
                   <label className="form-check-label" htmlFor="firstCheckbox">
                     First checkbox
                   </label>
@@ -471,7 +471,7 @@ export default function ListGroupPage() {
             {
               item: (
                 <>
-                  <input className="form-check-input me-1" type="checkbox" value="" id="secondCheckbox" />
+                  <input className="form-check-input me-1" id="secondCheckbox" type="checkbox" value="" />
                   <label className="form-check-label" htmlFor="secondCheckbox">
                     Second checkbox
                   </label>
@@ -481,7 +481,7 @@ export default function ListGroupPage() {
             {
               item: (
                 <>
-                  <input className="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" />
+                  <input className="form-check-input me-1" id="thirdCheckbox" type="checkbox" value="" />
                   <label className="form-check-label" htmlFor="thirdCheckbox">
                     Third checkbox
                   </label>
@@ -498,11 +498,11 @@ export default function ListGroupPage() {
                 <>
                   <input
                     className="form-check-input me-1"
-                    type="radio"
-                    name="listGroupRadio"
-                    value=""
-                    id="firstRadio"
                     defaultChecked
+                    id="firstRadio"
+                    name="listGroupRadio"
+                    type="radio"
+                    value=""
                   />
                   <label className="form-check-label" htmlFor="firstRadio">
                     First radio
@@ -515,10 +515,10 @@ export default function ListGroupPage() {
                 <>
                   <input
                     className="form-check-input me-1"
-                    type="radio"
-                    name="listGroupRadio"
-                    value=""
                     id="secondRadio"
+                    name="listGroupRadio"
+                    type="radio"
+                    value=""
                   />
                   <label className="form-check-label" htmlFor="secondRadio">
                     Second radio
@@ -531,10 +531,10 @@ export default function ListGroupPage() {
                 <>
                   <input
                     className="form-check-input me-1"
-                    type="radio"
-                    name="listGroupRadio"
-                    value=""
                     id="thirdRadio"
+                    name="listGroupRadio"
+                    type="radio"
+                    value=""
                   />
                   <label className="form-check-label" htmlFor="thirdRadio">
                     Third radio
@@ -550,7 +550,7 @@ export default function ListGroupPage() {
             {
               item: (
                 <>
-                  <input className="form-check-input me-1" type="checkbox" value="" id="firstCheckboxStretched" />
+                  <input className="form-check-input me-1" id="firstCheckboxStretched" type="checkbox" value="" />
                   <label className="form-check-label stretched-link" htmlFor="firstCheckboxStretched">
                     First checkbox
                   </label>
@@ -560,7 +560,7 @@ export default function ListGroupPage() {
             {
               item: (
                 <>
-                  <input className="form-check-input me-1" type="checkbox" value="" id="secondCheckboxStretched" />
+                  <input className="form-check-input me-1" id="secondCheckboxStretched" type="checkbox" value="" />
                   <label className="form-check-label stretched-link" htmlFor="secondCheckboxStretched">
                     Second checkbox
                   </label>
@@ -570,7 +570,7 @@ export default function ListGroupPage() {
             {
               item: (
                 <>
-                  <input className="form-check-input me-1" type="checkbox" value="" id="thirdCheckboxStretched" />
+                  <input className="form-check-input me-1" id="thirdCheckboxStretched" type="checkbox" value="" />
                   <label className="form-check-label stretched-link" htmlFor="thirdCheckboxStretched">
                     Third checkbox
                   </label>
@@ -584,13 +584,12 @@ export default function ListGroupPage() {
       <PropsIndicator />
 
       <Example
-        props
         hash="listGroupComponentProps"
-        state={state}
-        t={tListGroupComponentProps}
         items={[
           {
             attr: 'options',
+            default: '',
+            desc: tListGroupComponentProps('listGroup.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tListGroupComponentProps('listGroup.options.id')} />
@@ -612,42 +611,43 @@ export default function ListGroupPage() {
                 />
               </div>
             ),
-            desc: tListGroupComponentProps('listGroup.desc.options'),
-            default: '',
           },
           {
             attr: 'flush',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tListGroupComponentProps('listGroup.desc.flush'),
             default: '',
+            desc: tListGroupComponentProps('listGroup.desc.flush'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'numbered',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tListGroupComponentProps('listGroup.desc.numbered'),
             default: '',
+            desc: tListGroupComponentProps('listGroup.desc.numbered'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
             attr: 'horizontal',
+            default: '',
+            desc: tListGroupComponentProps('listGroup.desc.horizontal'),
             type: (
               <div className="d-flex gap-1">
                 <span className="badge text-bg-secondary">boolean</span>
                 <span className="badge text-bg-secondary">sm | md | lg | xl | xxl</span>
               </div>
             ),
-            desc: tListGroupComponentProps('listGroup.desc.horizontal'),
-            default: '',
           },
           {
             attr: 'itemAction',
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tListGroupComponentProps('listGroup.desc.itemAction'),
             default: '',
+            desc: tListGroupComponentProps('listGroup.desc.itemAction'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
+        props
+        state={state}
+        t={tListGroupComponentProps}
       />
 
-      <Example props hash="commonComponentProps" state={state} />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

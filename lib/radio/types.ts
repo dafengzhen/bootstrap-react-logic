@@ -1,23 +1,19 @@
 import type { ElementType } from 'react';
+
 import type { BaseProps, PropsWithoutRef, RadioVariablesType, SlotValue } from '../tools';
 
-type SlotValueKeys = 'container' | 'component' | 'label';
+type SlotValueKeys = 'component' | 'container' | 'label';
 
-type Props<T extends ElementType> = BaseProps<T, RadioVariablesType> & {
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-
+type Props<T extends ElementType> = {
   /**
    * contentClasses.
    */
   contentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
 
   /**
-   * switch.
+   * disabled.
    */
-  switch?: boolean;
+  disabled?: boolean;
 
   /**
    * inline.
@@ -25,9 +21,9 @@ type Props<T extends ElementType> = BaseProps<T, RadioVariablesType> & {
   inline?: boolean;
 
   /**
-   * reverse.
+   * isInvalid,
    */
-  reverse?: boolean;
+  isInvalid?: boolean;
 
   /**
    * isValid.
@@ -35,9 +31,14 @@ type Props<T extends ElementType> = BaseProps<T, RadioVariablesType> & {
   isValid?: boolean;
 
   /**
-   * isInvalid,
+   * reverse.
    */
-  isInvalid?: boolean;
-};
+  reverse?: boolean;
+
+  /**
+   * switch.
+   */
+  switch?: boolean;
+} & BaseProps<T, RadioVariablesType>;
 
 export type RadioProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RadioVariablesType>;

@@ -1,4 +1,7 @@
 import { type ElementType, useMemo } from 'react';
+
+import type { ButtonProps } from './types.ts';
+
 import {
   BS_PREFIX,
   clsxStyle,
@@ -10,34 +13,33 @@ import {
   mapAndFilterStyles,
   resolveRoundedClass,
 } from '../tools';
-import type { ButtonProps } from './types.ts';
 
-const Button = function Button<T extends ElementType = 'button' | 'a'>(props: ButtonProps<T>) {
+const Button = function Button<T extends ElementType = 'a' | 'button'>(props: ButtonProps<T>) {
   const {
+    active,
+    'aria-disabled': ariaDisabled,
+    'aria-label': ariaLabel,
+    'aria-pressed': ariaPressed,
     as: Component = 'button' as ElementType,
-    dropOldClass,
+    btnClose,
     children,
     className,
-    style,
-    rounded,
-    'aria-disabled': ariaDisabled,
-    'aria-pressed': ariaPressed,
-    'aria-label': ariaLabel,
-    active,
     disabled,
+    dropOldClass,
+    endContent,
     isLoading,
+    onRef,
     outline,
     role,
+    rounded,
+    show,
     size,
+    startContent,
+    style,
     tabIndex,
+    type = 'button',
     variables,
     variant,
-    startContent,
-    endContent,
-    btnClose,
-    show,
-    onRef,
-    type = 'button',
     ...rest
   } = props;
 
@@ -45,8 +47,8 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
-          'btn-close': btnClose,
           btn: true,
+          'btn-close': btnClose,
         }),
       active && 'active',
       show && 'show',
@@ -61,9 +63,9 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
       {
         ...mapAndFilterStyles(
           {
-            [`${BS_PREFIX}PaddingY`]: 'paddingY',
-            [`${BS_PREFIX}paddingX`]: 'paddingX',
             [`${BS_PREFIX}fontSize`]: 'fontSize',
+            [`${BS_PREFIX}paddingX`]: 'paddingX',
+            [`${BS_PREFIX}PaddingY`]: 'paddingY',
           },
           size,
         ),
@@ -78,14 +80,14 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
 
     return filterOptions(
       {
-        className: finalClass,
-        style: finalStyle,
-        role: role ?? (Component === 'a' && 'button'),
-        disabled: disabled && Component === 'button',
-        tabIndex: tabIndex ?? (Component === 'a' && disabled && -1),
         'aria-disabled': ariaDisabled ?? (disabled ? 'true' : 'false'),
-        'aria-pressed': ariaPressed ?? (active ? 'true' : 'false'),
         'aria-label': ariaLabel ?? (btnClose && 'Close'),
+        'aria-pressed': ariaPressed ?? (active ? 'true' : 'false'),
+        className: finalClass,
+        disabled: disabled && Component === 'button',
+        role: role ?? (Component === 'a' && 'button'),
+        style: finalStyle,
+        tabIndex: tabIndex ?? (Component === 'a' && disabled && -1),
       },
       isValueValid,
     );
@@ -114,7 +116,7 @@ const Button = function Button<T extends ElementType = 'button' | 'a'>(props: Bu
     <Component type={type} {...rest} {...renderOptions} ref={onRef}>
       {isLoading && !startContent && (
         <>
-          <span className="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+          <span aria-hidden="true" className="spinner-border spinner-border-sm me-1"></span>
           <span className="visually-hidden" role="status">
             Loading...
           </span>

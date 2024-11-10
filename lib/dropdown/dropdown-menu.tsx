@@ -1,16 +1,18 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { DropdownMenuProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const DropdownMenu = function DropdownMenu<T extends ElementType = 'ul'>(props: DropdownMenuProps<T>) {
   const {
     as: Component = 'ul' as ElementType,
-    dropOldClass,
-    variables,
     className,
-    style,
-    show,
+    dropOldClass,
     onRef,
+    show,
+    style,
+    variables,
     ...rest
   } = props;
 

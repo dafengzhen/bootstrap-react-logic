@@ -1,29 +1,29 @@
 import clsx from 'clsx';
 
 export default function ExampleLink({
-  title,
-  href,
-  hash,
   className,
-  underline,
+  hash,
+  href,
   noSetId,
+  title,
+  underline,
 }: {
-  title: string;
-  href?: string;
-  hash?: string;
   className?: string;
-  underline?: boolean;
+  hash?: string;
+  href?: string;
   noSetId?: boolean;
+  title: string;
+  underline?: boolean;
 }) {
   return (
     <a
-      id={noSetId ? undefined : hash}
-      href={hash ? `#${hash}` : href ? (hash ? `${href}#${hash}` : href) : ''}
       className={clsx(
         'link-body-emphasis link-offset-2 link-underline-opacity-100-hover',
         className,
         underline ? 'link-underline-opacity-100' : 'link-underline-opacity-0',
       )}
+      href={hash ? `#${hash}` : href ? (hash ? `${href}#${hash}` : href) : ''}
+      id={noSetId ? undefined : hash}
     >
       {title}
     </a>

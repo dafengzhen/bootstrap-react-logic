@@ -1,4 +1,5 @@
 import type { ElementType } from 'react';
+
 import type {
   BaseProps,
   CardBodyVariablesType,
@@ -14,21 +15,16 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, CardVariablesType> & {
+type Props<T extends ElementType> = {
   /**
    * cardBody.
    */
   cardBody?: boolean;
-};
+} & BaseProps<T, CardVariablesType>;
 
-type BodyProps<T extends ElementType> = BaseProps<T, CardBodyVariablesType> & {};
+type BodyProps<T extends ElementType> = {} & BaseProps<T, CardBodyVariablesType>;
 
-type ImgProps<T extends ElementType> = BaseProps<T, CardImgVariablesType> & {
-  /**
-   * top.
-   */
-  top?: boolean;
-
+type ImgProps<T extends ElementType> = {
   /**
    * bottom.
    */
@@ -38,21 +34,26 @@ type ImgProps<T extends ElementType> = BaseProps<T, CardImgVariablesType> & {
    * overlay.
    */
   overlay?: boolean;
-};
 
-type TitleProps<T extends ElementType> = BaseProps<T, CardTitleVariablesType> & {};
+  /**
+   * top.
+   */
+  top?: boolean;
+} & BaseProps<T, CardImgVariablesType>;
 
-type SubtitleProps<T extends ElementType> = BaseProps<T, CardSubtitleVariablesType> & {};
+type TitleProps<T extends ElementType> = {} & BaseProps<T, CardTitleVariablesType>;
 
-type TextProps<T extends ElementType> = BaseProps<T, CardTextVariablesType> & {};
+type SubtitleProps<T extends ElementType> = {} & BaseProps<T, CardSubtitleVariablesType>;
 
-type LinkProps<T extends ElementType> = BaseProps<T, CardLinkVariablesType> & {};
+type TextProps<T extends ElementType> = {} & BaseProps<T, CardTextVariablesType>;
 
-type HeaderProps<T extends ElementType> = BaseProps<T, CardHeaderVariablesType> & {};
+type LinkProps<T extends ElementType> = {} & BaseProps<T, CardLinkVariablesType>;
 
-type FooterProps<T extends ElementType> = BaseProps<T, CardFooterVariablesType> & {};
+type HeaderProps<T extends ElementType> = {} & BaseProps<T, CardHeaderVariablesType>;
 
-type GroupProps<T extends ElementType> = BaseProps<T, CardGroupVariablesType> & {};
+type FooterProps<T extends ElementType> = {} & BaseProps<T, CardFooterVariablesType>;
+
+type GroupProps<T extends ElementType> = {} & BaseProps<T, CardGroupVariablesType>;
 
 export type CardProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CardVariablesType>;
 

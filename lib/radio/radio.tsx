@@ -1,5 +1,9 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { RadioProps } from './types.ts';
+
+import Input from '../input/input.tsx';
+import Label from '../label/label.tsx';
 import {
   clsxStyle,
   clsxUnique,
@@ -9,22 +13,20 @@ import {
   isValueValid,
   processSlotClasses,
 } from '../tools';
-import Input from '../input/input.tsx';
-import Label from '../label/label.tsx';
 
 const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<T>) {
   const {
     as: Component = 'input',
-    dropOldClass,
-    variables,
-    className,
-    style,
     children,
-    id,
+    className,
     contentClasses,
-    switch: formSwitch,
+    dropOldClass,
+    id,
     inline,
     reverse,
+    style,
+    switch: formSwitch,
+    variables,
     ...rest
   } = props;
 
@@ -45,6 +47,7 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
 
   if (children) {
     const slotClassName = processSlotClasses(contentClasses, {
+      component: 'form-check-input',
       container: clsxWithOptions(
         null,
         'form-check',
@@ -52,25 +55,24 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
         inline && 'form-check-inline',
         reverse && 'form-check-reverse',
       ),
-      component: 'form-check-input',
       label: 'form-check-label',
     });
 
     return (
-      <div data-slot-container="" className={slotClassName.container}>
+      <div className={slotClassName.container} data-slot-container="">
         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {/* @ts-expect-error */}
         <Input
           {...rest}
           {...renderOptions}
           as={Component}
-          data-slot-component=""
-          type="radio"
-          id={id}
-          dropOldClass
           className={slotClassName.component}
+          data-slot-component=""
+          dropOldClass
+          id={id}
+          type="radio"
         />
-        <Label data-slot-label="" dropOldClass className={slotClassName.label} htmlFor={id as string | undefined}>
+        <Label className={slotClassName.label} data-slot-label="" dropOldClass htmlFor={id as string | undefined}>
           {children}
         </Label>
       </div>
@@ -80,7 +82,7 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    <Input {...rest} {...renderOptions} as={Component} type="radio" id={id} />
+    <Input {...rest} {...renderOptions} as={Component} id={id} type="radio" />
   );
 };
 

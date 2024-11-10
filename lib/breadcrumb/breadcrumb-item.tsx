@@ -1,16 +1,18 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { BreadcrumbItemProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const BreadcrumbItem = function BreadcrumbItem<T extends ElementType = 'li'>(props: BreadcrumbItemProps<T>) {
   const {
-    as: Component = 'li',
-    dropOldClass,
-    variables,
-    className,
-    style,
     active,
     'aria-current': ariaCurrent,
+    as: Component = 'li',
+    className,
+    dropOldClass,
+    style,
+    variables,
     ...rest
   } = props;
 
@@ -24,9 +26,9 @@ const BreadcrumbItem = function BreadcrumbItem<T extends ElementType = 'li'>(pro
 
     return filterOptions(
       {
+        'aria-current': finalAriaCurrent,
         className: finalClass,
         style: finalStyle,
-        'aria-current': finalAriaCurrent,
       },
       isValueValid,
     );

@@ -1,21 +1,22 @@
 import type { Plugin, ResolvedConfig } from 'vite';
+
 import htmlnano from 'htmlnano';
 
 const addScriptPlugin = (): Plugin => {
   let config: ResolvedConfig;
 
   return {
-    name: 'add-script',
     configResolved(resolvedConfig) {
       config = resolvedConfig;
     },
+    name: 'add-script',
     async transformIndexHtml(html, { filename }) {
       const appPublicBaseHref = (config.define as { __APP_PUBLIC_BASE_HREF__: string })['__APP_PUBLIC_BASE_HREF__'];
       if (!appPublicBaseHref) {
         return html;
       }
 
-      const content = processHtml({ appPublicBaseHref, html, filename });
+      const content = processHtml({ appPublicBaseHref, filename, html });
       if (content) {
         try {
           return (await htmlnano.process(content)).html;
@@ -31,12 +32,12 @@ const addScriptPlugin = (): Plugin => {
 
 const processHtml = ({
   appPublicBaseHref,
-  html,
   filename,
+  html,
 }: {
   appPublicBaseHref: string;
-  html: string;
   filename: string;
+  html: string;
 }) => {
   const scriptContent = getScript(appPublicBaseHref, filename);
   if (scriptContent) {

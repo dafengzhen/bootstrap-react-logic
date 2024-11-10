@@ -1,4 +1,5 @@
 import type { ElementType } from 'react';
+
 import type {
   BaseProps,
   OmittedPropsWithoutRef,
@@ -7,21 +8,16 @@ import type {
   SelectVariablesType,
 } from '../tools';
 
-type Props<T extends ElementType> = BaseProps<T, SelectVariablesType> & {
-  /**
-   * size.
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * nativeSize.
-   */
-  nativeSize?: number | undefined;
-
+type Props<T extends ElementType> = {
   /**
    * disabled.
    */
   disabled?: boolean;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
 
   /**
    * isValid.
@@ -29,17 +25,22 @@ type Props<T extends ElementType> = BaseProps<T, SelectVariablesType> & {
   isValid?: boolean;
 
   /**
-   * isInvalid,
+   * nativeSize.
    */
-  isInvalid?: boolean;
-};
+  nativeSize?: number | undefined;
 
-type OptionProps<T extends ElementType> = BaseProps<T, SelectOptionVariablesType> & {
+  /**
+   * size.
+   */
+  size?: 'lg' | 'sm';
+} & BaseProps<T, SelectVariablesType>;
+
+type OptionProps<T extends ElementType> = {
   /**
    * disabled,
    */
   disabled?: boolean;
-};
+} & BaseProps<T, SelectOptionVariablesType>;
 
 export type SelectProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, SelectVariablesType, 'size'>;
 

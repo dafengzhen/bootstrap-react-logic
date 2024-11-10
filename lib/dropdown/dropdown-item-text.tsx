@@ -1,9 +1,11 @@
 import { type ElementType, useMemo } from 'react';
+
 import type { DropdownItemTextProps } from './types.ts';
+
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const DropdownItemText = function DropdownItemText<T extends ElementType = 'span'>(props: DropdownItemTextProps<T>) {
-  const { as: Component = 'span', variables, dropOldClass, className, style, children, ...rest } = props;
+  const { as: Component = 'span', children, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'dropdown-item-text', className);

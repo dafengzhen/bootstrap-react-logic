@@ -1,13 +1,13 @@
 import { createContext, type Dispatch, type SetStateAction } from 'react';
 
-export type Theme = 'light' | 'dark';
+export type Theme = 'dark' | 'light';
 
-export type Layout = 'default' | 'center' | 'fullscreen';
+export type Layout = 'center' | 'default' | 'fullscreen';
 
 export interface IGlobalContext {
   fullscreen?: [boolean, Dispatch<SetStateAction<boolean>>];
-  theme?: [Theme, Dispatch<SetStateAction<Theme>>];
   layout?: [Layout, Dispatch<SetStateAction<Layout>>];
+  theme?: [Theme, Dispatch<SetStateAction<Theme>>];
 }
 
 export const GlobalContext = createContext<IGlobalContext>({});

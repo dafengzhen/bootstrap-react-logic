@@ -1,55 +1,55 @@
-import { type ReactNode } from 'react';
-import { getStateByHash, kebabToCamelCase, kebabToCamelCaseLowerFirst, updateState } from '@src/tools';
 import ExampleDynamicCard from '@components/example-dynamic-card.tsx';
-import ExamplePropsCard from '@components/example-props-card.tsx';
 import ExampleGeneralPropsCard from '@components/example-general-props-card.tsx';
+import ExamplePropsCard from '@components/example-props-card.tsx';
+import { getStateByHash, kebabToCamelCase, kebabToCamelCaseLowerFirst, updateState } from '@src/tools';
 import clsx from 'clsx';
+import { type ReactNode } from 'react';
 
 export default function Example({
+  alignItemsCenter,
+  bg,
   children,
+  codeLanguage,
+  contentId,
+  dark,
+  gap3,
   hash,
+  inline,
   items,
+  mw400,
+  overflowXAuto,
+  parentClassName,
   props,
+  row,
   state,
   t,
-  codeLanguage,
-  parentClassName,
-  overflowXAuto,
-  row,
-  wrap,
   textNowrap,
-  alignItemsCenter,
-  dark,
-  inline,
-  gap3,
-  mw400,
-  bg,
-  contentId,
+  wrap,
 }: {
+  alignItemsCenter?: boolean;
+  bg?: boolean;
+  children?: ReactNode;
+  codeLanguage?: 'html' | 'javascript' | 'tsx' | 'typescript' | string;
+  contentId?: string;
+  dark?: boolean;
+  gap3?: boolean;
   hash: string;
+  inline?: boolean;
+  items?: {
+    attr: ReactNode | string;
+    default?: ReactNode;
+    desc?: ReactNode;
+    type?: ReactNode;
+  }[];
+  mw400?: boolean;
+  overflowXAuto?: boolean;
+  parentClassName?: string;
+  props?: boolean;
+  row?: boolean;
   state: any;
   t?: any;
-  children?: ReactNode;
-  props?: boolean;
-  items?: {
-    attr: string | ReactNode;
-    type?: ReactNode;
-    desc?: ReactNode;
-    default?: ReactNode;
-  }[];
-  codeLanguage?: 'html' | 'tsx' | 'javascript' | 'typescript' | string;
-  parentClassName?: string;
-  overflowXAuto?: boolean;
-  row?: boolean;
-  wrap?: boolean;
   textNowrap?: boolean;
-  alignItemsCenter?: boolean;
-  dark?: boolean;
-  inline?: boolean;
-  gap3?: boolean;
-  mw400?: boolean;
-  bg?: boolean;
-  contentId?: string;
+  wrap?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -70,11 +70,11 @@ export default function Example({
     if (hash === 'commonComponentProps') {
       return (
         <ExampleGeneralPropsCard
+          code={code}
+          codeLanguage={codeLanguage || 'typescript'}
           hash={hash}
           isOpen={isOpen}
           toggleCode={toggleCode}
-          code={code}
-          codeLanguage={codeLanguage || 'typescript'}
         >
           {children}
         </ExampleGeneralPropsCard>
@@ -86,13 +86,13 @@ export default function Example({
 
     return (
       <ExamplePropsCard
-        title={_tHash}
-        hash={hash}
-        isOpen={isOpen}
-        toggleCode={toggleCode}
         code={code}
         codeLanguage={codeLanguage || 'typescript'}
+        hash={hash}
+        isOpen={isOpen}
         items={items}
+        title={_tHash}
+        toggleCode={toggleCode}
       >
         {children}
       </ExamplePropsCard>
@@ -101,17 +101,16 @@ export default function Example({
 
   return (
     <ExampleDynamicCard
-      title={t(hash)}
-      hash={hash}
-      isOpen={isOpen}
-      toggleCode={toggleCode}
+      bg={bg}
       code={code}
       codeLanguage={codeLanguage}
       dark={dark}
-      bg={bg}
+      hash={hash}
+      isOpen={isOpen}
+      title={t(hash)}
+      toggleCode={toggleCode}
     >
       <div
-        id={contentId}
         className={clsx(
           parentClassName ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'}`,
           overflowXAuto && 'overflow-x-auto',
@@ -122,6 +121,7 @@ export default function Example({
           gap3 ? 'gap-3' : 'gap-2',
           mw400 && 'tw-w-[400px]',
         )}
+        id={contentId}
       >
         {children}
       </div>

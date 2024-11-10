@@ -1,5 +1,7 @@
 import { type ElementRef, type ElementType, type HTMLInputTypeAttribute, type LegacyRef, useMemo } from 'react';
+
 import type { InputProps } from './types.ts';
+
 import {
   clsxStyle,
   clsxUnique,
@@ -13,29 +15,29 @@ import {
 import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(
-  props: InputProps<T> & {
+  props: {
     type?: HTMLInputTypeAttribute | undefined;
-  },
+  } & InputProps<T>,
 ) {
   const {
     as: Component = 'input',
-    dropOldClass,
-    variables,
-    className,
-    style,
     children,
-    size,
-    nativeSize,
-    readonlyPlainText,
-    isValid,
-    isInvalid,
+    className,
     color,
-    nativeColor,
-    type,
-    startContent,
+    dropOldClass,
     endContent,
-    startEndContentClasses,
+    isInvalid,
+    isValid,
+    nativeColor,
+    nativeSize,
     onRef,
+    readonlyPlainText,
+    size,
+    startContent,
+    startEndContentClasses,
+    style,
+    type,
+    variables,
     ...rest
   } = props;
 
@@ -43,10 +45,10 @@ const Input = function Input<T extends ElementType = 'input'>(
     const finalClass = clsxUnique(
       !dropOldClass &&
         getFirstNonEmptyClass({
-          'form-range': type === 'range',
           'form-check-input': type === 'checkbox' || type === 'radio',
-          'form-control-plaintext': readonlyPlainText,
           'form-control': true,
+          'form-control-plaintext': readonlyPlainText,
+          'form-range': type === 'range',
         }),
       color && 'form-control-color',
       size && `form-control-${size}`,
@@ -61,9 +63,9 @@ const Input = function Input<T extends ElementType = 'input'>(
     return filterOptions(
       {
         className: finalClass,
-        style: finalStyle,
-        size: nativeSize,
         color: nativeColor,
+        size: nativeSize,
+        style: finalStyle,
         type,
       },
       isValueValid,
@@ -85,29 +87,29 @@ const Input = function Input<T extends ElementType = 'input'>(
 
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {
-      container: 'd-inline-flex align-items-center position-relative',
-      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
-      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
       component: clsxWithOptions(
         null,
         renderOptions.className,
         startContent && inputStyles.brlPs9,
         endContent && inputStyles.brlPe9,
       ),
+      container: 'd-inline-flex align-items-center position-relative',
+      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
+      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
     });
 
     return (
-      <div data-slot-container="" className={slotClassName.container}>
+      <div className={slotClassName.container} data-slot-container="">
         {startContent && (
-          <div data-slot-prefix="" className={slotClassName.start}>
+          <div className={slotClassName.start} data-slot-prefix="">
             {startContent}
           </div>
         )}
-        <Component {...rest} {...renderOptions} data-slot-component="" className={slotClassName.component}>
+        <Component {...rest} {...renderOptions} className={slotClassName.component} data-slot-component="">
           {children}
         </Component>
         {endContent && (
-          <div data-slot-suffix="" className={slotClassName.end}>
+          <div className={slotClassName.end} data-slot-suffix="">
             {endContent}
           </div>
         )}
