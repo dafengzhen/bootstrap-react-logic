@@ -937,9 +937,12 @@ export default function NavbarPage() {
                 <OptionRow label="disabled?: boolean" value={tNavbarComponentProps('navbar.options.disabled')} />
                 <OptionRow label="href?: string" value={tNavbarComponentProps('navbar.options.href')} />
                 <OptionRow label="id?: number | string" value={tNavbarComponentProps('navbar.options.id')} />
-                <OptionRow label="item?: NavbarNavItemProps<li>" value={tNavbarComponentProps('navbar.options.item')} />
-                <OptionRow label="itemProps?: ReactNode" value={tNavbarComponentProps('navbar.options.itemProps')} />
-                <OptionRow label="link?: boolean" value={tNavbarComponentProps('navbar.options.link')} />
+                <OptionRow label="item?: ReactNode" value={tNavbarComponentProps('navbar.options.item')} />
+                <OptionRow
+                  label="itemProps?: NavbarNavItemProps<li>"
+                  value={tNavbarComponentProps('navbar.options.itemProps')}
+                />
+                <OptionRow label="link?: ReactNode" value={tNavbarComponentProps('navbar.options.link')} />
                 <OptionRow
                   label="linkProps?: NavbarNavLinkProps<a>"
                   value={tNavbarComponentProps('navbar.options.linkProps')}

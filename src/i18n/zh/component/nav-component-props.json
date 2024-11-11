@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "name": "Nav",
+    "desc": {
+      "contentProps": "内容属性",
+      "fill": "填充",
+      "horizontal": "水平",
+      "justified": "对齐",
+      "onChange": "变化时触发",
+      "options": "选项",
+      "pills": "选项卡",
+      "skipItem": "跳过项目",
+      "tabs": "标签页",
+      "underline": "下划线",
+      "vertical": "垂直"
+    },
+    "options": {
+      "active": "激活",
+      "disabled": "禁用",
+      "fade": "淡出",
+      "href": "超链接",
+      "id": "ID",
+      "item": "项目",
+      "itemProps": "项目属性",
+      "link": "链接",
+      "linkProps": "链接属性",
+      "pane": "面板",
+      "paneProps": "面板属性"
+    }
+  }
+}

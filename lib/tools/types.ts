@@ -884,6 +884,39 @@ type NavbarNavLinkVariablesType = NavbarVariablesType;
 
 type NavbarTextVariablesType = NavbarVariablesType;
 
+type NavVariablesType = {
+  navLinkColor?: string;
+  navLinkDisabledColor?: string;
+  navLinkFocusBoxShadow?: string;
+  navLinkFontSize?: string;
+  navLinkFontWeight?: string;
+  navLinkHoverColor?: string;
+  navLinkPaddingX?: string;
+  navLinkPaddingY?: string;
+  navLinkTransition?: string;
+  navPillsBorderRadius?: string;
+  navPillsLinkActiveBg?: string;
+  navPillsLinkActiveColor?: string;
+  navTabsBorderColor?: string;
+  navTabsBorderRadius?: string;
+  navTabsBorderWidth?: string;
+  navTabsLinkActiveBg?: string;
+  navTabsLinkActiveBorderColor?: string;
+  navTabsLinkActiveColor?: string;
+  navTabsLinkHoverBorderColor?: string;
+  navUnderlineBorderWidth?: string;
+  navUnderlineGap?: string;
+  navUnderlineLinkActiveColor?: string;
+};
+
+type NavItemVariablesType = NavVariablesType;
+
+type NavLinkVariablesType = NavVariablesType;
+
+type NavTabContentVariablesType = NavVariablesType;
+
+type NavTabPaneVariablesType = NavVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -948,6 +981,11 @@ export type {
   NavbarTogglerIconVariablesType,
   NavbarTogglerVariablesType,
   NavbarVariablesType,
+  NavItemVariablesType,
+  NavLinkVariablesType,
+  NavTabContentVariablesType,
+  NavTabPaneVariablesType,
+  NavVariablesType,
   OutlineType,
   RadioVariablesType,
   RangeVariablesType,

@@ -1,0 +1,13 @@
+{
+  "basic": "基本",
+  "horizontalAlignment": "水平对齐",
+  "vertical": "垂直",
+  "tabs": "标签页",
+  "pills": "选项卡",
+  "underline": "下划线",
+  "fillAndJustify": "填充与对齐",
+  "workingWithFlexUtilities": "使用弹性布局工具",
+  "tabsWithDropdowns": "带下拉菜单的标签页",
+  "pillsWithDropdowns": "带下拉菜单的选项卡",
+  "javaScriptBehavior": "JavaScript 行为"
+}

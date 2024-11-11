@@ -1,0 +1,13 @@
+{
+  "basic": "Basic",
+  "horizontalAlignment": "Horizontal Alignment",
+  "vertical": "Vertical",
+  "tabs": "Tabs",
+  "pills": "Pills",
+  "underline": "Underline",
+  "fillAndJustify": "Fill and Justify",
+  "workingWithFlexUtilities": "Working with Flex Utilities",
+  "tabsWithDropdowns": "Tabs with Dropdowns",
+  "pillsWithDropdowns": "Pills with Dropdowns",
+  "javaScriptBehavior": "JavaScript Behavior"
+}

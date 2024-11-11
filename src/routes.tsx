@@ -17,6 +17,7 @@ import InputGroupPage from '@pages/input-group-page.tsx';
 import InputPage from '@pages/input-page.tsx';
 import ListGroupPage from '@pages/list-group-page.tsx';
 import ModalPage from '@pages/modal-page.tsx';
+import NavPage from '@pages/nav-page.tsx';
 import NavbarPage from '@pages/navbar-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
@@ -45,6 +46,7 @@ export enum MenuEnum {
   InputGroup = '/pages/input-group',
   ListGroup = '/pages/list-group',
   Modal = '/pages/modal',
+  Nav = '/pages/nav',
   Navbar = '/pages/navbar',
   Radio = '/pages/radio',
   Range = '/pages/range',
@@ -144,6 +146,10 @@ const router = createBrowserRouter(
             {
               element: <NavbarPage />,
               path: 'pages/navbar',
+            },
+            {
+              element: <NavPage />,
+              path: 'pages/nav',
             },
           ],
           errorElement: <ErrorPage />,

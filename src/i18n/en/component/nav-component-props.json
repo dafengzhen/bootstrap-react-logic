@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "name": "Nav",
+    "desc": {
+      "contentProps": "Content Properties",
+      "fill": "Fill",
+      "horizontal": "Horizontal",
+      "justified": "Justified",
+      "onChange": "On Change",
+      "options": "Options",
+      "pills": "Pills",
+      "skipItem": "Skip Item",
+      "tabs": "Tabs",
+      "underline": "Underline",
+      "vertical": "Vertical"
+    },
+    "options": {
+      "active": "Active",
+      "disabled": "Disabled",
+      "fade": "Fade",
+      "href": "Href",
+      "id": "ID",
+      "item": "Item",
+      "itemProps": "Item Properties",
+      "link": "Link",
+      "linkProps": "Link Properties",
+      "pane": "Pane",
+      "paneProps": "Pane Properties"
+    }
+  }
+}

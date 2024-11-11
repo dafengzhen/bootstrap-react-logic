@@ -1,10 +1,10 @@
 import { type ElementType, useMemo } from 'react';
 
-import type { NavbarNavLinkProps } from './types.ts';
+import type { NavLinkProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const NavbarNavLink = function NavbarNavLink<T extends ElementType = 'a' | 'button'>(props: NavbarNavLinkProps<T>) {
+const NavLink = function NavLink<T extends ElementType = 'a' | 'button'>(props: NavLinkProps<T>) {
   const {
     active,
     'aria-current': ariaCurrent,
@@ -46,6 +46,6 @@ const NavbarNavLink = function NavbarNavLink<T extends ElementType = 'a' | 'butt
   return <Component {...rest} {...renderOptions} />;
 };
 
-NavbarNavLink.displayName = 'BRL.NavbarNavLink';
+NavLink.displayName = 'BRL.NavLink';
 
-export default NavbarNavLink;
+export default NavLink;

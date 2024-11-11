@@ -16,6 +16,7 @@ export * from './input-otp';
 export * from './label';
 export * from './list-group';
 export * from './modal';
+export * from './nav';
 export * from './navbar';
 export * from './radio';
 export * from './range';
