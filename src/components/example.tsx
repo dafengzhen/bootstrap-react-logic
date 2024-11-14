@@ -8,6 +8,7 @@ import { type ReactNode } from 'react';
 export default function Example({
   alignItemsCenter,
   bg,
+  bodyClassName,
   children,
   codeLanguage,
   contentId,
@@ -28,6 +29,7 @@ export default function Example({
 }: {
   alignItemsCenter?: boolean;
   bg?: boolean;
+  bodyClassName?: string;
   children?: ReactNode;
   codeLanguage?: 'html' | 'javascript' | 'tsx' | 'typescript' | string;
   contentId?: string;
@@ -102,6 +104,7 @@ export default function Example({
   return (
     <ExampleDynamicCard
       bg={bg}
+      bodyClassName={bodyClassName}
       code={code}
       codeLanguage={codeLanguage}
       dark={dark}

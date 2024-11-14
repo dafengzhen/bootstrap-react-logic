@@ -225,3 +225,11 @@ pre code.hljs {
 .bd-example-cssgrid .grid + .grid {
   margin-top: 1rem;
 }
+
+.bd-example-offcanvas .offcanvas {
+  position: static;
+  display: block;
+  height: 200px;
+  visibility: visible;
+  transform: translate(0);
+}

@@ -917,6 +917,30 @@ type NavTabContentVariablesType = NavVariablesType;
 
 type NavTabPaneVariablesType = NavVariablesType;
 
+type OffcanvasVariablesType = {
+  offcanvasBackdropBg?: string;
+  offcanvasBackdropOpacity?: string;
+  offcanvasBgColor?: string;
+  offcanvasBorderColor?: string;
+  offcanvasBorderWidth?: string;
+  offcanvasBoxShadow?: string;
+  offcanvasColor?: string;
+  offcanvasHorizontalWidth?: string;
+  offcanvasPaddingX?: string;
+  offcanvasPaddingY?: string;
+  offcanvasTitleLineHeight?: string;
+  offcanvasTransitionDuration?: string;
+  offcanvasVerticalHeight?: string;
+};
+
+type OffcanvasHeaderVariablesType = OffcanvasVariablesType;
+
+type OffcanvasTitleVariablesType = OffcanvasVariablesType;
+
+type OffcanvasBodyVariablesType = OffcanvasVariablesType;
+
+type OffcanvasBackdropVariablesType = OffcanvasVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -986,6 +1010,11 @@ export type {
   NavTabContentVariablesType,
   NavTabPaneVariablesType,
   NavVariablesType,
+  OffcanvasBackdropVariablesType,
+  OffcanvasBodyVariablesType,
+  OffcanvasHeaderVariablesType,
+  OffcanvasTitleVariablesType,
+  OffcanvasVariablesType,
   OutlineType,
   RadioVariablesType,
   RangeVariablesType,

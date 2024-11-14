@@ -1,0 +1,20 @@
+{
+  "offcanvas": {
+    "name": "Offcanvas",
+    "desc": {
+      "backdrop": "背景",
+      "body": "主体",
+      "bodyProps": "主体属性",
+      "fade": "淡出",
+      "header": "头部",
+      "headerProps": "头部属性",
+      "onChange": "变化时触发",
+      "placement": "位置",
+      "responsive": "响应式",
+      "scroll": "滚动",
+      "title": "标题",
+      "titleProps": "标题属性",
+      "visible": "可见"
+    }
+  }
+}

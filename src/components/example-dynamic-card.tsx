@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function ExampleDynamicCard({
   bg,
+  bodyClassName,
   children,
   code,
   codeLanguage,
@@ -18,6 +19,7 @@ export default function ExampleDynamicCard({
   toggleCode,
 }: {
   bg?: boolean;
+  bodyClassName?: string;
   children: ReactNode;
   code?: string;
   codeLanguage?: string;
@@ -92,7 +94,7 @@ export default function ExampleDynamicCard({
           />
         </div>
       </div>
-      <div className={clsx('card-body', bg && 'bg-body-tertiary')}>{children}</div>
+      <div className={clsx('card-body', bg && 'bg-body-tertiary', bodyClassName)}>{children}</div>
       {isOpen && (
         <div className="card-footer">
           <pre>

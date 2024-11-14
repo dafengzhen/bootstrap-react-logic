@@ -1,0 +1,20 @@
+{
+  "offcanvas": {
+    "name": "Offcanvas",
+    "desc": {
+      "backdrop": "Backdrop",
+      "body": "Body",
+      "bodyProps": "Body Properties",
+      "fade": "Fade",
+      "header": "Header",
+      "headerProps": "Header Properties",
+      "onChange": "On Change",
+      "placement": "Placement",
+      "responsive": "Responsive",
+      "scroll": "Scroll",
+      "title": "Title",
+      "titleProps": "Title Properties",
+      "visible": "Visible"
+    }
+  }
+}
