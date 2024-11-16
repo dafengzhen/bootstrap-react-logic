@@ -1,0 +1,20 @@
+{
+  "pagination": {
+    "name": "Pagination",
+    "desc": {
+      "alignment": "Alignment",
+      "navProps": "Navigation Properties",
+      "options": "Options",
+      "size": "Size"
+    },
+    "options": {
+      "active": "Active",
+      "disabled": "Disabled",
+      "href": "Href",
+      "id": "ID",
+      "itemProps": "Item Properties",
+      "link": "Link",
+      "linkProps": "Link Properties"
+    }
+  }
+}

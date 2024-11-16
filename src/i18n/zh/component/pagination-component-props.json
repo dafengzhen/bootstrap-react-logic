@@ -1,0 +1,20 @@
+{
+  "pagination": {
+    "name": "Pagination",
+    "desc": {
+      "alignment": "对齐",
+      "navProps": "导航属性",
+      "options": "选项",
+      "size": "大小"
+    },
+    "options": {
+      "active": "激活",
+      "disabled": "禁用",
+      "href": "超链接",
+      "id": "ID",
+      "itemProps": "项目属性",
+      "link": "链接",
+      "linkProps": "链接属性"
+    }
+  }
+}

@@ -941,6 +941,44 @@ type OffcanvasBodyVariablesType = OffcanvasVariablesType;
 
 type OffcanvasBackdropVariablesType = OffcanvasVariablesType;
 
+type PaginationVariablesType = {
+  paginationActiveBg?: string;
+  paginationActiveBorderColor?: string;
+  paginationActiveColor?: string;
+  paginationBg?: string;
+  paginationBorderColor?: string;
+  paginationBorderRadius?: string;
+  paginationBorderRadiusLG?: string;
+  paginationBorderRadiusSm?: string;
+  paginationBorderWidth?: string;
+  paginationColor?: string;
+  paginationDisabledBg?: string;
+  paginationDisabledBorderColor?: string;
+  paginationDisabledColor?: string;
+  paginationFocusBg?: string;
+  paginationFocusBoxShadow?: string;
+  paginationFocusColor?: string;
+  paginationFocusOutline?: string;
+  paginationFontSize?: string;
+  paginationHoverBg?: string;
+  paginationHoverBorderColor?: string;
+  paginationHoverColor?: string;
+  paginationMarginStart?: string;
+  paginationPaddingX?: string;
+  paginationPaddingXLG?: string;
+  paginationPaddingXSm?: string;
+  paginationPaddingY?: string;
+  paginationPaddingYLG?: string;
+  paginationPaddingYSm?: string;
+  paginationTransition?: string;
+};
+
+type PaginationItemVariablesType = PaginationVariablesType;
+
+type PaginationNavVariablesType = PaginationVariablesType;
+
+type PaginationLinkVariablesType = PaginationVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -1016,6 +1054,10 @@ export type {
   OffcanvasTitleVariablesType,
   OffcanvasVariablesType,
   OutlineType,
+  PaginationItemVariablesType,
+  PaginationLinkVariablesType,
+  PaginationNavVariablesType,
+  PaginationVariablesType,
   RadioVariablesType,
   RangeVariablesType,
   SelectMultipleVariablesType,

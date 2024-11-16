@@ -19,6 +19,7 @@ export * from './modal';
 export * from './nav';
 export * from './navbar';
 export * from './offcanvas';
+export * from './pagination';
 export * from './radio';
 export * from './range';
 export * from './select';
