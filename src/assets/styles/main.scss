@@ -233,3 +233,11 @@ pre code.hljs {
   visibility: visible;
   transform: translate(0);
 }
+
+.bd-example-placeholder-cards::after {
+  display: none;
+}
+
+.bd-example-placeholder-cards .card {
+  width: 18rem;
+}

@@ -1,0 +1,11 @@
+{
+  "placeholder": {
+    "name": "Placeholder",
+    "desc": {
+      "animation": "动画",
+      "bg": "背景",
+      "col": "列",
+      "size": "大小"
+    }
+  }
+}

@@ -137,6 +137,7 @@ export type {
   PaginationLinkVariablesType,
   PaginationNavVariablesType,
   PaginationVariablesType,
+  PlaceholderVariablesType,
   RadioVariablesType,
   RangeVariablesType,
   SelectMultipleVariablesType,

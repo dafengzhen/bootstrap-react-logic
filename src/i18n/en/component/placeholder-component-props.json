@@ -1,0 +1,11 @@
+{
+  "placeholder": {
+    "name": "Placeholder",
+    "desc": {
+      "animation": "Animation",
+      "bg": "Background",
+      "col": "Column",
+      "size": "Size"
+    }
+  }
+}

@@ -979,6 +979,11 @@ type PaginationNavVariablesType = PaginationVariablesType;
 
 type PaginationLinkVariablesType = PaginationVariablesType;
 
+type PlaceholderVariablesType = {
+  placeholderOpacityMax?: string;
+  placeholderOpacityMin?: string;
+};
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -1058,6 +1063,7 @@ export type {
   PaginationLinkVariablesType,
   PaginationNavVariablesType,
   PaginationVariablesType,
+  PlaceholderVariablesType,
   RadioVariablesType,
   RangeVariablesType,
   SelectMultipleVariablesType,

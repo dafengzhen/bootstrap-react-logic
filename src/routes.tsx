@@ -21,6 +21,7 @@ import NavPage from '@pages/nav-page.tsx';
 import NavbarPage from '@pages/navbar-page.tsx';
 import OffcanvasPage from '@pages/offcanvas-page.tsx';
 import PaginationPage from '@pages/pagination-page.tsx';
+import PlaceholderPage from '@pages/placeholder-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
@@ -52,6 +53,7 @@ export enum MenuEnum {
   Navbar = '/pages/navbar',
   Offcanvas = '/pages/offcanvas',
   Pagination = '/pages/pagination',
+  Placeholder = '/pages/placeholder',
   Radio = '/pages/radio',
   Range = '/pages/range',
   Select = '/pages/select',
@@ -162,6 +164,10 @@ const router = createBrowserRouter(
             {
               element: <PaginationPage />,
               path: 'pages/pagination',
+            },
+            {
+              element: <PlaceholderPage />,
+              path: 'pages/placeholder',
             },
           ],
           errorElement: <ErrorPage />,

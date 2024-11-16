@@ -121,8 +121,11 @@ function App() {
                 <div className={clsx('row', isCenter && 'container')}>
                   <div className="col-10 col-sm-2">
                     <div
-                      className="vh-100 overflow-y-auto pb-5"
-                      style={{ paddingRight: 'calc(var(--bs-gutter-x) * 0.5)' }}
+                      className="overflow-y-auto"
+                      style={{
+                        height: 'calc(100vh - 3rem)',
+                        paddingRight: 'calc(var(--bs-gutter-x) * 0.5)',
+                      }}
                     >
                       {location.pathname !== '/' && (
                         <div className="d-flex gap-2 mb-2">
