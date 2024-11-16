@@ -15,6 +15,7 @@ const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(p
     size,
     style,
     variables,
+    children,
     ...rest
   } = props;
 
@@ -43,10 +44,14 @@ const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(p
     <>
       {animation ? (
         <span className={clsxWithOptions(null, animation && `placeholder-${animation}`)}>
-          <Component {...rest} {...renderOptions} />
+          <Component {...rest} {...renderOptions}>
+            {children}
+          </Component>
         </span>
       ) : (
-        <Component {...rest} {...renderOptions} />
+        <Component {...rest} {...renderOptions}>
+          {children}
+        </Component>
       )}
     </>
   );

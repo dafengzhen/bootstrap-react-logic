@@ -21,6 +21,7 @@ export * from './navbar';
 export * from './offcanvas';
 export * from './pagination';
 export * from './placeholder';
+export * from './popover';
 export * from './radio';
 export * from './range';
 export * from './select';

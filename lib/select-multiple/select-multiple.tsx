@@ -1,4 +1,5 @@
 import {
+  autoUpdate,
   FloatingPortal,
   size as floatingSize,
   useClick,
@@ -70,6 +71,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     ],
     onOpenChange: setIsOpen,
     open: isOpen,
+    whileElementsMounted: autoUpdate,
   });
 
   const click = useClick(context, {

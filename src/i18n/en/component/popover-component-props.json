@@ -1,0 +1,20 @@
+{
+  "popover": {
+    "name": "Popover",
+    "desc": {
+      "arrowProps": "Arrow properties",
+      "body": "Body content",
+      "bodyProps": "Body properties",
+      "container": "Container",
+      "fade": "Fade effect",
+      "header": "Header",
+      "headerProps": "Header properties",
+      "offset": "Offset",
+      "onChange": "State change callback",
+      "placement": "Popover placement",
+      "trigger": "Trigger",
+      "triggerType": "Trigger type",
+      "visible": "Visibility"
+    }
+  }
+}

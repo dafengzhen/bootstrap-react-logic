@@ -25,6 +25,7 @@ import PlaceholderPage from '@pages/placeholder-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
+import PopoverPage from '@pages/popover-page.tsx';
 import App from '@src/App.tsx';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -57,6 +58,7 @@ export enum MenuEnum {
   Radio = '/pages/radio',
   Range = '/pages/range',
   Select = '/pages/select',
+  Popover = '/pages/popover',
 }
 
 /**
@@ -168,6 +170,10 @@ const router = createBrowserRouter(
             {
               element: <PlaceholderPage />,
               path: 'pages/placeholder',
+            },
+            {
+              element: <PopoverPage />,
+              path: 'pages/popover',
             },
           ],
           errorElement: <ErrorPage />,

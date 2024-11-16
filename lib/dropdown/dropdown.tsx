@@ -1,6 +1,15 @@
-import type { FlipOptions, Placement, ShiftOptions, SizeOptions } from '@floating-ui/react';
-
-import { flip, offset, shift, size, useFloating } from '@floating-ui/react';
+import {
+  autoUpdate,
+  flip,
+  type FlipOptions,
+  offset,
+  type Placement,
+  shift,
+  type ShiftOptions,
+  size,
+  type SizeOptions,
+  useFloating,
+} from '@floating-ui/react';
 import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { DropdownOption, DropdownProps } from './types.ts';
@@ -88,6 +97,7 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
       'bottom-start',
     ) as Placement,
     strategy,
+    whileElementsMounted: autoUpdate,
   });
 
   const renderOptions = useMemo(() => {

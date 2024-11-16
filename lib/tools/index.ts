@@ -59,6 +59,10 @@ export {
 } from './tools';
 
 export type {
+  PopoverHeaderVariablesType,
+  PopoverBodyVariablesType,
+  PopoverArrowVariablesType,
+  PopoverVariablesType,
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
   AccordionHeaderVariablesType,

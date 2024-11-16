@@ -1,0 +1,20 @@
+{
+  "popover": {
+    "name": "Popover",
+    "desc": {
+      "arrowProps": "箭头属性",
+      "body": "主体内容",
+      "bodyProps": "主体属性",
+      "container": "容器",
+      "fade": "渐隐效果",
+      "header": "标题",
+      "headerProps": "标题属性",
+      "offset": "偏移量",
+      "onChange": "状态变更回调",
+      "placement": "弹出位置",
+      "trigger": "触发器",
+      "triggerType": "触发类型",
+      "visible": "是否可见"
+    }
+  }
+}

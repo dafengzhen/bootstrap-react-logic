@@ -140,21 +140,14 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
     setVisibleModalBackdrop(visibleByDefault);
   }, [visibleByDefault]);
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      let element: HTMLElement | null = null;
-      if (typeof containerByDefault === 'string') {
-        if (containerByDefault.startsWith('#')) {
-          element = document.getElementById(containerByDefault.slice(1));
-        } else if (containerByDefault.startsWith('.')) {
-          element = document.querySelector(containerByDefault.slice(1));
-        } else {
-          element = document.querySelector(containerByDefault);
-        }
-      } else if (containerByDefault) {
-        element = containerByDefault;
-      }
+    if (typeof containerByDefault === 'string') {
+      const selector: HTMLElement | null = containerByDefault.startsWith('#')
+        ? document.getElementById(containerByDefault.slice(1))
+        : document.querySelector(containerByDefault);
 
-      setContainer(element);
+      setContainer(selector);
+    } else {
+      setContainer(containerByDefault);
     }
   }, [containerByDefault]);
 

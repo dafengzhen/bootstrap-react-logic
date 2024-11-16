@@ -984,7 +984,38 @@ type PlaceholderVariablesType = {
   placeholderOpacityMin?: string;
 };
 
+type PopoverVariablesType = {
+  popoverFontSize?: string;
+  popoverBg?: string;
+  popoverMaxWidth?: string;
+  popoverBorderWidth?: string;
+  popoverBorderColor?: string;
+  popoverBorderRadius?: string;
+  popoverInnerBorderRadius?: string;
+  popoverBoxShadow?: string;
+  popoverHeaderFontSize?: string;
+  popoverHeaderBg?: string;
+  popoverHeaderColor?: string;
+  popoverHeaderPaddingY?: string;
+  popoverHeaderPaddingX?: string;
+  popoverBodyColor?: string;
+  popoverBodyPaddingY?: string;
+  popoverBodyPaddingX?: string;
+  popoverArrowWidth?: string;
+  popoverArrowHeight?: string;
+};
+
+type PopoverArrowVariablesType = PopoverVariablesType;
+
+type PopoverHeaderVariablesType = PopoverVariablesType;
+
+type PopoverBodyVariablesType = PopoverVariablesType;
+
 export type {
+  PopoverHeaderVariablesType,
+  PopoverBodyVariablesType,
+  PopoverArrowVariablesType,
+  PopoverVariablesType,
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
   AccordionHeaderVariablesType,

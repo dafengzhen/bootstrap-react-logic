@@ -91,7 +91,6 @@ const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: Offca
 
     currentElement.addEventListener('transitionend', onTransitionend);
 
-    let frame: number;
     if (visible) {
       setShow(true);
       setShowing(true);
@@ -100,13 +99,7 @@ const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: Offca
       setHiding(true);
     }
 
-    return () => {
-      currentElement.removeEventListener('transitionend', onTransitionend);
-
-      if (frame) {
-        cancelAnimationFrame(frame);
-      }
-    };
+    return () => currentElement.removeEventListener('transitionend', onTransitionend);
   }, [show, visible]);
   useEffect(() => {
     setVisible(visibleByDefault);
