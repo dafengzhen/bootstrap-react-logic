@@ -1,0 +1,13 @@
+{
+  "scrollspy": {
+    "name": "Scrollspy",
+    "desc": {
+      "children": "Children Elements",
+      "onActiveChange": "Active State Change Callback",
+      "rootMargin": "Root Margin",
+      "sectionIds": "Section IDs",
+      "smoothScroll": "Smooth Scroll",
+      "threshold": "Threshold"
+    }
+  }
+}

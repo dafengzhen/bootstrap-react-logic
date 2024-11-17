@@ -188,6 +188,7 @@ pre code.hljs {
   --bd-violet: #712cf9;
   --bd-violet-bg: var(--bd-violet);
   --bd-toc-color: var(--bd-violet);
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
 
   font-size: 16px;
   // font-family: 'Raleway', serif;
@@ -244,4 +245,19 @@ pre code.hljs {
 
 .bd-example-placeholder-cards .card {
   width: 18rem;
+}
+
+.scrollspy-example {
+  height: 200px;
+  margin-top: 0.5rem;
+  overflow: auto;
+}
+
+.scrollspy-example-2 {
+  height: 350px;
+  overflow: auto;
+}
+
+.simple-list-example-scrollspy .active {
+  background-color: rgba(var(--bd-violet-rgb), 0.15);
 }

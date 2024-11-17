@@ -1,0 +1,13 @@
+{
+  "scrollspy": {
+    "name": "Scrollspy",
+    "desc": {
+      "children": "子元素",
+      "onActiveChange": "激活状态变更回调",
+      "rootMargin": "根边距",
+      "sectionIds": "章节 ID",
+      "smoothScroll": "平滑滚动",
+      "threshold": "阈值"
+    }
+  }
+}

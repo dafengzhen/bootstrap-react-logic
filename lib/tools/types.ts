@@ -1038,6 +1038,8 @@ type SpinnerVariablesType = {
   spinnerWidthSm?: string;
 };
 
+type ScrollspyVariablesType = object;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -1127,6 +1129,7 @@ export type {
   ProgressVariablesType,
   RadioVariablesType,
   RangeVariablesType,
+  ScrollspyVariablesType,
   SelectMultipleVariablesType,
   SelectOptionVariablesType,
   SelectVariablesType,

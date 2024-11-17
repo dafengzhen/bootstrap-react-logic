@@ -147,6 +147,7 @@ export type {
   ProgressVariablesType,
   RadioVariablesType,
   RangeVariablesType,
+  ScrollspyVariablesType,
   SelectMultipleVariablesType,
   SelectOptionVariablesType,
   SelectVariablesType,

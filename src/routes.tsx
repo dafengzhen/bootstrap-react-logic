@@ -26,6 +26,7 @@ import PopoverPage from '@pages/popover-page.tsx';
 import ProgressPage from '@pages/progress-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
+import ScrollspyPage from '@pages/scrollspy-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
 import SpinnerPage from '@pages/spinner-page.tsx';
 import App from '@src/App.tsx';
@@ -61,6 +62,7 @@ export enum MenuEnum {
   Progress = '/pages/progress',
   Radio = '/pages/radio',
   Range = '/pages/range',
+  Scrollspy = '/pages/scrollspy',
   Select = '/pages/select',
   Spinner = '/pages/spinner',
 }
@@ -186,6 +188,10 @@ const router = createBrowserRouter(
             {
               element: <SpinnerPage />,
               path: 'pages/spinner',
+            },
+            {
+              element: <ScrollspyPage />,
+              path: 'pages/scrollspy',
             },
           ],
           errorElement: <ErrorPage />,
