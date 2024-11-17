@@ -59,10 +59,6 @@ export {
 } from './tools';
 
 export type {
-  PopoverHeaderVariablesType,
-  PopoverBodyVariablesType,
-  PopoverArrowVariablesType,
-  PopoverVariablesType,
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
   AccordionHeaderVariablesType,
@@ -142,6 +138,13 @@ export type {
   PaginationNavVariablesType,
   PaginationVariablesType,
   PlaceholderVariablesType,
+  PopoverArrowVariablesType,
+  PopoverBodyVariablesType,
+  PopoverHeaderVariablesType,
+  PopoverVariablesType,
+  ProgressBarVariablesType,
+  ProgressStackedVariablesType,
+  ProgressVariablesType,
   RadioVariablesType,
   RangeVariablesType,
   SelectMultipleVariablesType,

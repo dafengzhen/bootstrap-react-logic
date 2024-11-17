@@ -1,0 +1,24 @@
+{
+  "progress": {
+    "name": "Progress",
+    "desc": {
+      "animated": "Animated Effect",
+      "barProps": "Bar Properties",
+      "bg": "Background Color",
+      "now": "Current Progress",
+      "options": "Options",
+      "stacked": "Stacked",
+      "stackedProps": "Stacked Properties",
+      "striped": "Striped Style"
+    },
+    "options": {
+      "animated": "Animated Effect",
+      "barProps": "Bar Properties",
+      "bg": "Background Color",
+      "id": "ID",
+      "now": "Current Progress",
+      "props": "Properties",
+      "striped": "Striped Style"
+    }
+  }
+}

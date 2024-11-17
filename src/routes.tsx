@@ -22,10 +22,11 @@ import NavbarPage from '@pages/navbar-page.tsx';
 import OffcanvasPage from '@pages/offcanvas-page.tsx';
 import PaginationPage from '@pages/pagination-page.tsx';
 import PlaceholderPage from '@pages/placeholder-page.tsx';
+import PopoverPage from '@pages/popover-page.tsx';
+import ProgressPage from '@pages/progress-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
-import PopoverPage from '@pages/popover-page.tsx';
 import App from '@src/App.tsx';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -55,10 +56,11 @@ export enum MenuEnum {
   Offcanvas = '/pages/offcanvas',
   Pagination = '/pages/pagination',
   Placeholder = '/pages/placeholder',
+  Popover = '/pages/popover',
+  Progress = '/pages/progress',
   Radio = '/pages/radio',
   Range = '/pages/range',
   Select = '/pages/select',
-  Popover = '/pages/popover',
 }
 
 /**
@@ -174,6 +176,10 @@ const router = createBrowserRouter(
             {
               element: <PopoverPage />,
               path: 'pages/popover',
+            },
+            {
+              element: <ProgressPage />,
+              path: 'pages/progress',
             },
           ],
           errorElement: <ErrorPage />,

@@ -985,24 +985,24 @@ type PlaceholderVariablesType = {
 };
 
 type PopoverVariablesType = {
-  popoverFontSize?: string;
+  popoverArrowHeight?: string;
+  popoverArrowWidth?: string;
   popoverBg?: string;
-  popoverMaxWidth?: string;
-  popoverBorderWidth?: string;
+  popoverBodyColor?: string;
+  popoverBodyPaddingX?: string;
+  popoverBodyPaddingY?: string;
   popoverBorderColor?: string;
   popoverBorderRadius?: string;
-  popoverInnerBorderRadius?: string;
+  popoverBorderWidth?: string;
   popoverBoxShadow?: string;
-  popoverHeaderFontSize?: string;
+  popoverFontSize?: string;
   popoverHeaderBg?: string;
   popoverHeaderColor?: string;
-  popoverHeaderPaddingY?: string;
+  popoverHeaderFontSize?: string;
   popoverHeaderPaddingX?: string;
-  popoverBodyColor?: string;
-  popoverBodyPaddingY?: string;
-  popoverBodyPaddingX?: string;
-  popoverArrowWidth?: string;
-  popoverArrowHeight?: string;
+  popoverHeaderPaddingY?: string;
+  popoverInnerBorderRadius?: string;
+  popoverMaxWidth?: string;
 };
 
 type PopoverArrowVariablesType = PopoverVariablesType;
@@ -1011,11 +1011,23 @@ type PopoverHeaderVariablesType = PopoverVariablesType;
 
 type PopoverBodyVariablesType = PopoverVariablesType;
 
+type ProgressVariablesType = {
+  progressBarAnimationTiming?: string;
+  progressBarBg?: string;
+  progressBarColor?: string;
+  progressBarTransition?: string;
+  progressBg?: string;
+  progressBorderRadius?: string;
+  progressBoxShadow?: string;
+  progressFontSize?: string;
+  progressHeight?: string;
+};
+
+type ProgressBarVariablesType = ProgressVariablesType;
+
+type ProgressStackedVariablesType = ProgressVariablesType;
+
 export type {
-  PopoverHeaderVariablesType,
-  PopoverBodyVariablesType,
-  PopoverArrowVariablesType,
-  PopoverVariablesType,
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
   AccordionHeaderVariablesType,
@@ -1095,6 +1107,13 @@ export type {
   PaginationNavVariablesType,
   PaginationVariablesType,
   PlaceholderVariablesType,
+  PopoverArrowVariablesType,
+  PopoverBodyVariablesType,
+  PopoverHeaderVariablesType,
+  PopoverVariablesType,
+  ProgressBarVariablesType,
+  ProgressStackedVariablesType,
+  ProgressVariablesType,
   RadioVariablesType,
   RangeVariablesType,
   SelectMultipleVariablesType,

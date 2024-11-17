@@ -1,0 +1,24 @@
+{
+  "progress": {
+    "name": "Progress",
+    "desc": {
+      "animated": "动画效果",
+      "barProps": "条属性",
+      "bg": "背景颜色",
+      "now": "当前进度",
+      "options": "可选项",
+      "stacked": "堆叠",
+      "stackedProps": "堆叠属性",
+      "striped": "条纹样式"
+    },
+    "options": {
+      "animated": "动画效果",
+      "barProps": "条属性",
+      "bg": "背景颜色",
+      "id": "标识符",
+      "now": "当前进度",
+      "props": "属性",
+      "striped": "条纹样式"
+    }
+  }
+}
