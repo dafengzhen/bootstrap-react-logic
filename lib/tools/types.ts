@@ -1027,6 +1027,17 @@ type ProgressBarVariablesType = ProgressVariablesType;
 
 type ProgressStackedVariablesType = ProgressVariablesType;
 
+type SpinnerVariablesType = {
+  spinnerAnimationSpeed?: string;
+  spinnerBorderWidth?: string;
+  spinnerBorderWidthSm?: string;
+  spinnerHeight?: string;
+  spinnerHeightSm?: string;
+  spinnerVerticalAlign?: string;
+  spinnerWidth?: string;
+  spinnerWidthSm?: string;
+};
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -1119,6 +1130,7 @@ export type {
   SelectMultipleVariablesType,
   SelectOptionVariablesType,
   SelectVariablesType,
+  SpinnerVariablesType,
   TextareaVariablesType,
   TextVariablesType,
   VariantType,

@@ -116,7 +116,7 @@ export default function Example({
       <div
         className={clsx(
           'position-relative',
-          parentClassName ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'}`,
+          parentClassName || parentClassName === '' ? parentClassName : `${inline ? 'd-inline-flex' : 'd-flex'}`,
           overflowXAuto && 'overflow-x-auto',
           row ? 'flex-row' : 'flex-column',
           wrap && 'flex-wrap',

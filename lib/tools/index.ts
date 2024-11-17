@@ -150,6 +150,7 @@ export type {
   SelectMultipleVariablesType,
   SelectOptionVariablesType,
   SelectVariablesType,
+  SpinnerVariablesType,
   TextareaVariablesType,
   TextVariablesType,
   VariantType,

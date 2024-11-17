@@ -27,6 +27,7 @@ import ProgressPage from '@pages/progress-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
+import SpinnerPage from '@pages/spinner-page.tsx';
 import App from '@src/App.tsx';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -61,6 +62,7 @@ export enum MenuEnum {
   Radio = '/pages/radio',
   Range = '/pages/range',
   Select = '/pages/select',
+  Spinner = '/pages/spinner',
 }
 
 /**
@@ -180,6 +182,10 @@ const router = createBrowserRouter(
             {
               element: <ProgressPage />,
               path: 'pages/progress',
+            },
+            {
+              element: <SpinnerPage />,
+              path: 'pages/spinner',
             },
           ],
           errorElement: <ErrorPage />,

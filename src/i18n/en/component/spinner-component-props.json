@@ -1,0 +1,10 @@
+{
+  "spinner": {
+    "name": "Spinner",
+    "desc": {
+      "grow": "Grow Mode",
+      "size": "Size",
+      "variant": "Style Variant"
+    }
+  }
+}

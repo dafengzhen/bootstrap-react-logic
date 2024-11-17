@@ -27,5 +27,6 @@ export * from './radio';
 export * from './range';
 export * from './select';
 export * from './select-multiple';
+export * from './spinner';
 export * from './text';
 export * from './textarea';
