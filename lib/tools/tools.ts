@@ -721,18 +721,17 @@ const pickObjectProperties = <T extends object, K extends keyof T>(
 };
 
 /**
- * Returns the first non-empty class name from a class mapping object.
+ * Finds the first class name with a truthy condition from a list of class-value pairs.
  *
- * The function takes an object where the keys are class names and
- * the values are the corresponding conditions. It returns the first
- * class name whose value is considered "truthy" (i.e., not null, undefined,
- * false, 0, empty string, etc.).
+ * The function takes a variable-length list of tuples, where each tuple consists of a
+ * class name as the first element and its associated condition as the second element.
+ * It returns the first class name whose condition is considered "truthy".
  *
- * @param {Record<string, any>} classMap - A mapping of class names to their corresponding values.
- * @returns {string | boolean} - The first non-empty class name, or false if all values are empty.
+ * @param {[string, any][]} classEntries - A list of tuples containing class names and their associated conditions.
+ * @returns {string | boolean} - The first class name with a truthy condition, or false if no conditions are truthy.
  */
-const getFirstNonEmptyClass = (classMap: Record<string, any>): boolean | string => {
-  for (const [className, value] of Object.entries(classMap)) {
+const findFirstTruthyClass = (...classEntries: [string, any][]): boolean | string => {
+  for (const [className, value] of classEntries) {
     if (value) {
       return className;
     }
@@ -1070,8 +1069,8 @@ export {
   filterAndTransformProperties,
   filterOptions,
   filterTransformAndExcludeProperties,
+  findFirstTruthyClass,
   generateRandomId,
-  getFirstNonEmptyClass,
   getLoopIndexDirection,
   getScrollbarWidth,
   getTruthyKeyOrDefault,

@@ -8,7 +8,7 @@ import {
   clsxWithOptions,
   convertBsKeyToVar,
   filterOptions,
-  getFirstNonEmptyClass,
+  findFirstTruthyClass,
   isValueValid,
   processSlotClasses,
 } from '../tools';
@@ -44,12 +44,12 @@ const Input = function Input<T extends ElementType = 'input'>(
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        getFirstNonEmptyClass({
-          'form-check-input': type === 'checkbox' || type === 'radio',
-          'form-control': true,
-          'form-control-plaintext': readonlyPlainText,
-          'form-range': type === 'range',
-        }),
+        findFirstTruthyClass(
+          ['form-check-input', type === 'checkbox' || type === 'radio'],
+          ['form-control-plaintext', readonlyPlainText],
+          ['form-range', type === 'range'],
+          ['form-control', true],
+        ),
       color && 'form-control-color',
       size && `form-control-${size}`,
       isValid && 'is-valid',

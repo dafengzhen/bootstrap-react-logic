@@ -19,8 +19,8 @@ import {
   clsxUnique,
   convertBsKeyToVar,
   filterOptions,
+  findFirstTruthyClass,
   generateRandomId,
-  getFirstNonEmptyClass,
   getTruthyKeyOrDefault,
   isValueValid,
   mergeProps,
@@ -103,12 +103,12 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        getFirstNonEmptyClass({
-          'btn-group': split || btnGroup,
-          dropdown: true,
-          'dropdown-center': center,
-          'dropup-center': dropupCenter,
-        }),
+        findFirstTruthyClass(
+          ['btn-group', split || btnGroup],
+          ['dropdown-center', center],
+          ['dropup-center', dropupCenter],
+          ['dropdown', true],
+        ),
       dropup && 'dropup',
       dropend && 'dropend',
       dropstart && 'dropstart',
