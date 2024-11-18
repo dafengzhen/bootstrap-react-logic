@@ -1,0 +1,35 @@
+{
+  "toast": {
+    "name": "Toast",
+    "desc": {
+      "autohide": "自动隐藏",
+      "body": "主体内容",
+      "bodyProps": "主体属性",
+      "container": "容器",
+      "containerProps": "容器属性",
+      "customContent": "自定义内容",
+      "delay": "延迟时间",
+      "fade": "渐隐效果",
+      "header": "标题",
+      "headerProps": "标题属性",
+      "onChange": "状态变更回调",
+      "options": "可选项",
+      "placement": "放置位置",
+      "position": "位置",
+      "visible": "是否可见"
+    },
+    "options": {
+      "id": "标识符",
+      "autohide": "自动隐藏",
+      "body": "主体内容",
+      "bodyProps": "主体属性",
+      "customContent": "自定义内容",
+      "delay": "延迟时间",
+      "fade": "渐隐效果",
+      "header": "标题",
+      "headerProps": "标题属性",
+      "onChange": "状态变更回调",
+      "visible": "是否可见"
+    }
+  }
+}

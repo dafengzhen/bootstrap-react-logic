@@ -28,7 +28,7 @@ export default function Example({
   wrap,
 }: {
   alignItemsCenter?: boolean;
-  bg?: boolean;
+  bg?: boolean | string;
   bodyClassName?: string;
   children?: ReactNode;
   codeLanguage?: 'html' | 'javascript' | 'tsx' | 'typescript' | string;

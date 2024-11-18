@@ -29,6 +29,7 @@ import RangePage from '@pages/range-page.tsx';
 import ScrollspyPage from '@pages/scrollspy-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
 import SpinnerPage from '@pages/spinner-page.tsx';
+import ToastPage from '@pages/toast-page.tsx';
 import App from '@src/App.tsx';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -65,6 +66,7 @@ export enum MenuEnum {
   Scrollspy = '/pages/scrollspy',
   Select = '/pages/select',
   Spinner = '/pages/spinner',
+  Toast = '/pages/toast',
 }
 
 /**
@@ -192,6 +194,10 @@ const router = createBrowserRouter(
             {
               element: <ScrollspyPage />,
               path: 'pages/scrollspy',
+            },
+            {
+              element: <ToastPage />,
+              path: 'pages/toast',
             },
           ],
           errorElement: <ErrorPage />,

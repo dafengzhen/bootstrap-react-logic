@@ -1,0 +1,35 @@
+{
+  "toast": {
+    "name": "Toast",
+    "desc": {
+      "autohide": "Auto-hide",
+      "body": "Body Content",
+      "bodyProps": "Body Properties",
+      "container": "Container",
+      "containerProps": "Container Properties",
+      "customContent": "Custom Content",
+      "delay": "Delay Time",
+      "fade": "Fade Effect",
+      "header": "Header",
+      "headerProps": "Header Properties",
+      "onChange": "State Change Callback",
+      "options": "Options",
+      "placement": "Placement",
+      "position": "Position",
+      "visible": "Visibility"
+    },
+    "options": {
+      "id": "ID",
+      "autohide": "Auto-hide",
+      "body": "Body Content",
+      "bodyProps": "Body Properties",
+      "customContent": "Custom Content",
+      "delay": "Delay Time",
+      "fade": "Fade Effect",
+      "header": "Header",
+      "headerProps": "Header Properties",
+      "onChange": "State Change Callback",
+      "visible": "Visibility"
+    }
+  }
+}

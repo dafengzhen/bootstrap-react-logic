@@ -1040,6 +1040,31 @@ type SpinnerVariablesType = {
 
 type ScrollspyVariablesType = object;
 
+type ToastVariablesType = {
+  toastBackgroundColor?: string;
+  toastBorderColor?: string;
+  toastBorderRadius?: string;
+  toastBorderWidth?: string;
+  toastBoxShadow?: string;
+  toastColor?: string;
+  toastFontSize?: string;
+  toastHeaderBackgroundColor?: string;
+  toastHeaderBorderColor?: string;
+  toastHeaderColor?: string;
+  toastMaxWidth?: string;
+  toastPaddingX?: string;
+  toastPaddingY?: string;
+  toastSpacing?: string;
+};
+
+type ToastHeaderVariablesType = ToastVariablesType;
+
+type ToastBodyVariablesType = ToastVariablesType;
+
+type ToastContainerVariablesType = ToastVariablesType;
+
+type ToastItemVariablesType = ToastVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -1136,5 +1161,10 @@ export type {
   SpinnerVariablesType,
   TextareaVariablesType,
   TextVariablesType,
+  ToastBodyVariablesType,
+  ToastContainerVariablesType,
+  ToastHeaderVariablesType,
+  ToastItemVariablesType,
+  ToastVariablesType,
   VariantType,
 };

@@ -154,5 +154,10 @@ export type {
   SpinnerVariablesType,
   TextareaVariablesType,
   TextVariablesType,
+  ToastBodyVariablesType,
+  ToastContainerVariablesType,
+  ToastHeaderVariablesType,
+  ToastItemVariablesType,
+  ToastVariablesType,
   VariantType,
 } from './types.ts';

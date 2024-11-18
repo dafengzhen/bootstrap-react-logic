@@ -18,7 +18,7 @@ export default function ExampleDynamicCard({
   title,
   toggleCode,
 }: {
-  bg?: boolean;
+  bg?: boolean | string;
   bodyClassName?: string;
   children: ReactNode;
   code?: string;
@@ -94,7 +94,11 @@ export default function ExampleDynamicCard({
           />
         </div>
       </div>
-      <div className={clsx('card-body', bg && 'bg-body-tertiary', bodyClassName)}>{children}</div>
+      <div
+        className={clsx('card-body', bg && (typeof bg === 'boolean' ? 'bg-body-tertiary' : `bg-${bg}`), bodyClassName)}
+      >
+        {children}
+      </div>
       {isOpen && (
         <div className="card-footer">
           <pre>
