@@ -1065,6 +1065,25 @@ type ToastContainerVariablesType = ToastVariablesType;
 
 type ToastItemVariablesType = ToastVariablesType;
 
+type TooltipVariablesType = {
+  tooltipArrowColor?: string;
+  tooltipArrowHeight?: string;
+  tooltipArrowWidth?: string;
+  tooltipBg?: string;
+  tooltipBorderRadius?: string;
+  tooltipColor?: string;
+  tooltipFontSize?: string;
+  tooltipMargin?: string;
+  tooltipMaxWidth?: string;
+  tooltipOpacity?: string;
+  tooltipPaddingX?: string;
+  tooltipPaddingY?: string;
+};
+
+type TooltipArrowVariablesType = TooltipVariablesType;
+
+type TooltipInnerVariablesType = TooltipVariablesType;
+
 export type {
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
@@ -1166,5 +1185,8 @@ export type {
   ToastHeaderVariablesType,
   ToastItemVariablesType,
   ToastVariablesType,
+  TooltipArrowVariablesType,
+  TooltipInnerVariablesType,
+  TooltipVariablesType,
   VariantType,
 };

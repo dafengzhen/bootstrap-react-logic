@@ -159,5 +159,8 @@ export type {
   ToastHeaderVariablesType,
   ToastItemVariablesType,
   ToastVariablesType,
+  TooltipArrowVariablesType,
+  TooltipInnerVariablesType,
+  TooltipVariablesType,
   VariantType,
 } from './types.ts';

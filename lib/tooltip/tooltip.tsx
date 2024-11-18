@@ -14,7 +14,7 @@ import {
 import { type ElementType, type HTMLProps, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import type { PopoverProps } from './types.ts';
+import type { TooltipProps } from './types.ts';
 
 import {
   clsxStyle,
@@ -26,31 +26,29 @@ import {
   isValueValid,
   mergeProps,
 } from '../tools';
-import PopoverArrow from './popover-arrow.tsx';
-import PopoverBody from './popover-body.tsx';
-import PopoverHeader from './popover-header.tsx';
+import TooltipArrow from './tooltip-arrow.tsx';
+import TooltipInner from './tooltip-inner.tsx';
 
-const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverProps<T>) {
+const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipProps<T>) {
   const {
     arrowProps,
     as: Component = 'div',
-    body,
-    bodyProps,
     className,
     container: containerByDefault,
     dropOldClass,
     fade = true,
-    header,
-    headerProps,
+    html,
+    inner,
+    innerProps,
     offset: offsetByDefault,
     onChange: onChangeByDefault,
-    placement = 'end',
+    placement = 'top',
     style,
     trigger,
-    triggerType,
+    triggerType = 'hover',
     triggerWrapper,
     variables,
-    visible: visibleByDefault = false,
+    visible: visibleByDefault,
     ...rest
   } = props;
 
@@ -113,17 +111,16 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
     [onChangeByDefault],
   );
 
-  const triggerTypes = useMemo(() => (isArray(triggerType) ? triggerType : [triggerType]), [triggerType]);
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass && 'popover',
+      !dropOldClass && 'tooltip',
       fade && 'fade',
       show && 'show',
       placement && {
-        'bs-popover-bottom': placement === 'bottom',
-        'bs-popover-end': placement === 'end' || placement === 'right',
-        'bs-popover-start': placement === 'start' || placement === 'left',
-        'bs-popover-top': placement === 'top',
+        'bs-tooltip-bottom': placement === 'bottom',
+        'bs-tooltip-end': placement === 'end' || placement === 'right',
+        'bs-tooltip-start': placement === 'start' || placement === 'left',
+        'bs-tooltip-top': placement === 'top',
       },
       className,
     );
@@ -139,6 +136,7 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
       isValueValid,
     );
   }, [className, dropOldClass, fade, placement, show, style, variables]);
+  const triggerTypes = useMemo(() => (isArray(triggerType) ? triggerType : [triggerType]), [triggerType]);
   const getReferenceProps = useMemo(() => {
     return (userProps?: HTMLProps<Element>) => ({ ...userProps });
   }, []);
@@ -273,7 +271,7 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
             ref={refs.setFloating}
             style={{ ...renderOptions.style, ...floatingStyles }}
           >
-            <PopoverArrow
+            <TooltipArrow
               {...mergeProps(arrowProps, {
                 style: {
                   ...arrowProps?.style,
@@ -282,9 +280,12 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
                 },
               })}
               onRef={(instance: HTMLDivElement | null) => (arrowElement.current = instance)}
-            ></PopoverArrow>
-            <PopoverHeader {...headerProps}>{header}</PopoverHeader>
-            <PopoverBody {...bodyProps}>{body}</PopoverBody>
+            ></TooltipArrow>
+            {(inner || html) && (
+              <TooltipInner {...innerProps} html={html}>
+                {inner}
+              </TooltipInner>
+            )}
           </Component>
         ),
         container ? container : document.body,
@@ -293,12 +294,10 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
   );
 };
 
-Popover.Arrow = PopoverArrow;
+Tooltip.Arrow = TooltipArrow;
 
-Popover.Header = PopoverHeader;
+Tooltip.Inner = TooltipInner;
 
-Popover.Body = PopoverBody;
+Tooltip.displayName = 'BRL.Tooltip';
 
-Popover.displayName = 'BRL.Popover';
-
-export default Popover;
+export default Tooltip;

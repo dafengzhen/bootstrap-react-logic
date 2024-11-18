@@ -10,6 +10,7 @@ const [visible9, setVisible9] = useState(false);
     </button>
   )}
   triggerType={['focus', 'hover']}
+  triggerWrapper
   visible={visible9}
 />;
 ```

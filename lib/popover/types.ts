@@ -81,6 +81,11 @@ type Props<T extends ElementType> = {
   triggerType?: 'focus' | 'hover' | ('focus' | 'hover')[];
 
   /**
+   * triggerWrapper.
+   */
+  triggerWrapper?: boolean;
+
+  /**
    * visible.
    */
   visible?: boolean;

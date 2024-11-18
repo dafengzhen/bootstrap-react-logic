@@ -201,6 +201,7 @@ export default function BadgePage() {
               </button>
             )}
             triggerType={['focus', 'hover']}
+            triggerWrapper
             visible={visible9}
           />
         </div>
@@ -310,6 +311,12 @@ export default function BadgePage() {
             attr: 'visible',
             default: '',
             desc: tPopoverComponentProps('popover.desc.visible'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
+          },
+          {
+            attr: 'triggerWrapper',
+            default: '',
+            desc: tPopoverComponentProps('popover.desc.triggerWrapper'),
             type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
         ]}

@@ -14,6 +14,7 @@
       "placement": "Popover placement",
       "trigger": "Trigger",
       "triggerType": "Trigger type",
+      "triggerWrapper": "Trigger Wrapper",
       "visible": "Visibility"
     }
   }

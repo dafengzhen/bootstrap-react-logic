@@ -1,0 +1,20 @@
+{
+  "tooltip": {
+    "name": "Tooltip",
+    "desc": {
+      "arrowProps": "Arrow Properties",
+      "container": "Container",
+      "fade": "Fade Effect",
+      "html": "HTML Content",
+      "inner": "Inner Content",
+      "innerProps": "Inner Properties",
+      "offset": "Offset",
+      "onChange": "State Change Callback",
+      "placement": "Placement",
+      "trigger": "Trigger",
+      "triggerType": "Trigger Type",
+      "triggerWrapper": "Trigger Wrapper",
+      "visible": "Visibility"
+    }
+  }
+}
