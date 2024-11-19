@@ -721,22 +721,34 @@ const pickObjectProperties = <T extends object, K extends keyof T>(
 };
 
 /**
- * Finds the first class name with a truthy condition from a list of class-value pairs.
+ * Finds the first truthy class name from a list of class-value pairs.
  *
- * The function takes a variable-length list of tuples, where each tuple consists of a
- * class name as the first element and its associated condition as the second element.
- * It returns the first class name whose condition is considered "truthy".
- *
- * @param {[string, any][]} classEntries - A list of tuples containing class names and their associated conditions.
+ * @param {[string, any][]} entries - A list of tuples containing class names and their associated conditions.
  * @returns {string | boolean} - The first class name with a truthy condition, or false if no conditions are truthy.
  */
-const findFirstTruthyClass = (...classEntries: [string, any][]): boolean | string => {
-  for (const [className, value] of classEntries) {
+const findTruthyClass = (...entries: [string, any][]): boolean | string => {
+  for (const [className, value] of entries) {
     if (value) {
       return className;
     }
   }
   return false;
+};
+
+/**
+ * Finds the first truthy class name from a list of class-value pairs,
+ * with an optional default value.
+ *
+ * @param {[string, any][]} entries - A list of tuples containing class names and their associated conditions.
+ * @param {string | boolean} [defaultValue=false] - A default value to return if no truthy condition is found.
+ * @returns {string | boolean} - The first class name with a truthy condition, or the default value if no conditions are truthy.
+ */
+const findTruthyClassOrDefault = (
+  entries: [string, any][],
+  defaultValue: boolean | string = false,
+): boolean | string => {
+  const result = findTruthyClass(...entries);
+  return result !== false ? result : defaultValue;
 };
 
 /**
@@ -980,33 +992,6 @@ const capitalizeFirstLetter = (str: string) => {
 };
 
 /**
- * Returns the key of the first property in the object with a truthy value.
- * If all values are falsy, it returns the default value.
- *
- * @param obj - The object to check, with properties that may have truthy or falsy values
- * @param defaultValue - The default value to return if all properties have falsy values
- * @returns {string} - The key of the first truthy property or the default value
- *
- * @example
- * const obj = { a: false, b: 0, c: null, d: 'value' };
- * const result = getTruthyKeyOrDefault(obj, 'default');
- * // result is 'd'
- *
- * @example
- * const obj = { a: false, b: 0, c: null };
- * const result = getTruthyKeyOrDefault(obj, 'default');
- * // result is 'default'
- */
-const getTruthyKeyOrDefault = <T extends Record<string, any>>(obj: T, defaultValue: string): string => {
-  for (const key in obj) {
-    if (obj[key]) {
-      return key;
-    }
-  }
-  return defaultValue;
-};
-
-/**
  * Calculates the width of the scrollbar on the current page and optionally
  * appends a specified unit.
  *
@@ -1069,11 +1054,11 @@ export {
   filterAndTransformProperties,
   filterOptions,
   filterTransformAndExcludeProperties,
-  findFirstTruthyClass,
+  findTruthyClass,
+  findTruthyClassOrDefault,
   generateRandomId,
   getLoopIndexDirection,
   getScrollbarWidth,
-  getTruthyKeyOrDefault,
   getValue,
   groupByProperty,
   initializeLogger,

@@ -8,7 +8,7 @@ import {
   clsxWithOptions,
   convertBsKeyToVar,
   filterOptions,
-  findFirstTruthyClass,
+  findTruthyClass,
   isValueValid,
   processSlotClasses,
 } from '../tools';
@@ -44,7 +44,7 @@ const Input = function Input<T extends ElementType = 'input'>(
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        findFirstTruthyClass(
+        findTruthyClass(
           ['form-check-input', type === 'checkbox' || type === 'radio'],
           ['form-control-plaintext', readonlyPlainText],
           ['form-range', type === 'range'],

@@ -21,7 +21,7 @@ import {
   clsxUnique,
   convertBsKeyToVar,
   filterOptions,
-  getTruthyKeyOrDefault,
+  findTruthyClassOrDefault,
   isArray,
   isValueValid,
   mergeProps,
@@ -92,13 +92,13 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
     ],
     onOpenChange: setShow,
     open: show,
-    placement: getTruthyKeyOrDefault(
-      {
-        bottom: placement === 'bottom',
-        left: placement === 'start' || placement === 'left',
-        right: placement === 'end' || placement === 'right',
-        top: placement === 'top',
-      },
+    placement: findTruthyClassOrDefault(
+      [
+        ['bottom', placement === 'bottom'],
+        ['left', placement === 'start' || placement === 'left'],
+        ['right', placement === 'end' || placement === 'right'],
+        ['top', placement === 'top'],
+      ],
       'right',
     ) as Placement,
     whileElementsMounted: autoUpdate,

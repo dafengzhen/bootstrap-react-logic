@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TextProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, findFirstTruthyClass, isValueValid } from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, findTruthyClass, isValueValid } from '../tools';
 
 const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
   const {
@@ -22,7 +22,7 @@ const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        findFirstTruthyClass(
+        findTruthyClass(
           ['invalid-feedback', invalidFeedback],
           ['invalid-tooltip', invalidTooltip],
           ['valid-feedback', validFeedback],

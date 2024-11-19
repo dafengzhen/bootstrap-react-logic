@@ -19,9 +19,9 @@ import {
   clsxUnique,
   convertBsKeyToVar,
   filterOptions,
-  findFirstTruthyClass,
+  findTruthyClass,
+  findTruthyClassOrDefault,
   generateRandomId,
-  getTruthyKeyOrDefault,
   isValueValid,
   mergeProps,
 } from '../tools';
@@ -84,16 +84,16 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
     ],
     onOpenChange: setShow,
     open: show,
-    placement: getTruthyKeyOrDefault(
-      {
-        bottom: center,
-        'bottom-end': menuAlignment === 'end',
-        'bottom-start': menuAlignment === 'start',
-        'left-start': dropstart,
-        'right-start': dropend,
-        top: dropupCenter,
-        'top-start': dropup,
-      },
+    placement: findTruthyClassOrDefault(
+      [
+        ['bottom', center],
+        ['bottom-end', menuAlignment === 'end'],
+        ['bottom-start', menuAlignment === 'start'],
+        ['left-start', dropstart],
+        ['right-start', dropend],
+        ['top', dropupCenter],
+        ['top-start', dropup],
+      ],
       'bottom-start',
     ) as Placement,
     strategy,
@@ -103,7 +103,7 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        findFirstTruthyClass(
+        findTruthyClass(
           ['btn-group', split || btnGroup],
           ['dropdown-center', center],
           ['dropup-center', dropupCenter],

@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { LabelProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, findFirstTruthyClass, isValueValid } from '../tools';
+import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, findTruthyClass, isValueValid } from '../tools';
 
 const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<T>) {
   const {
@@ -21,7 +21,7 @@ const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
       !dropOldClass &&
-        findFirstTruthyClass(
+        findTruthyClass(
           ['col-form-label', colFormLabel],
           ['form-check-label', formCheckLabel],
           ['input-group-text', inputGroupText],

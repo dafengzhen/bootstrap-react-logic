@@ -8,7 +8,7 @@ import {
   clsxUnique,
   convertBsKeyToVar,
   filterOptions,
-  findFirstTruthyClass,
+  findTruthyClass,
   isValueValid,
   mapAndFilterStyles,
   resolveRoundedClass,
@@ -45,7 +45,7 @@ const Button = function Button<T extends ElementType = 'a' | 'button'>(props: Bu
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
-      !dropOldClass && findFirstTruthyClass(['btn-close', btnClose], ['btn', true]),
+      !dropOldClass && findTruthyClass(['btn-close', btnClose], ['btn', true]),
       active && 'active',
       show && 'show',
       variant && `btn-${variant}`,
