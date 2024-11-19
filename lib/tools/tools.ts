@@ -479,34 +479,40 @@ const isDefined = <T>(value: T, checkEmptyString: boolean = false): value is Exc
 };
 
 /**
- * A utility function that wraps the `clsx` function to process class names,
- * ensures the resulting class names are unique by removing duplicates.
+ * Combines class names using `clsx`, ensuring uniqueness by removing duplicates.
+ * Filters out empty class names to ensure a valid result.
  *
- * @param {ClassValue[]} inputs - An array of class values that can include strings,
- * arrays, objects, or any valid input that `clsx` accepts.
- *
- * @returns {string} - A string of unique class names separated by a space.
+ * @param {ClassValue[]} inputs - Class values such as strings, arrays, or objects.
+ * @returns {string | undefined} - A space-separated string of unique class names, or `undefined` if no valid class names.
  */
-const clsxUnique = (...inputs: ClassValue[]): string => {
+const clsxUnique = (...inputs: ClassValue[]): string | undefined => {
   const classNames = clsx(...inputs);
+  if (!classNames) {
+    return;
+  }
 
-  const uniqueClassNames = Array.from(new Set(classNames.split(' ').filter(Boolean)));
-
-  return uniqueClassNames.join(' ');
+  const uniqueClassNames = new Set(classNames.split(/\s+/).filter(Boolean));
+  if (uniqueClassNames.size > 0) {
+    return [...uniqueClassNames].join(' ');
+  }
 };
 
 /**
  * A utility function that wraps the `clsx` function to process class names,
- * and ensures the resulting class names are unique or not based on options.
+ * and ensures the resulting class names are unique or not based on the provided options.
  *
  * @param {Object | null | undefined} [options] - Optional configuration options for class name processing.
- * @param {boolean} [options.dedupe=false] - Whether to remove duplicate class names. Defaults to false.
+ * @param {boolean} [options.dedupe=false] - If true, duplicate class names will be removed. Defaults to false.
  * @param {ClassValue[]} inputs - An array of class values that can include strings,
  * arrays, objects, or any valid input that `clsx` accepts.
  *
- * @returns {string} - A string of class names separated by a space, with duplicates removed if `dedupe` is true.
+ * @returns {string | undefined} - A string of class names separated by a space, with duplicates removed
+ *   if `dedupe` is true, or `undefined` if no valid class names are provided.
  */
-const clsxWithOptions = (options?: { dedupe?: boolean } | null | undefined, ...inputs: ClassValue[]): string => {
+const clsxWithOptions = (
+  options?: { dedupe?: boolean } | null | undefined,
+  ...inputs: ClassValue[]
+): string | undefined => {
   const dedupe = options?.dedupe ?? false;
   return dedupe ? clsxUnique(...inputs) : clsx(...inputs);
 };
