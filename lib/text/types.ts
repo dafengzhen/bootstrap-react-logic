@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, PropsWithoutRef, TextVariablesType } from '../tools';
 
-type Props<T extends ElementType> = {
+export type TextProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, TextVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, TextVariablesType> & {
   /**
    * invalidFeedback.
    */
@@ -22,6 +24,4 @@ type Props<T extends ElementType> = {
    * validTooltip.
    */
   validTooltip?: boolean;
-} & BaseProps<T, TextVariablesType>;
-
-export type TextProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, TextVariablesType>;
+};

@@ -2,7 +2,14 @@ import type { ElementType, ReactNode } from 'react';
 
 import type { BaseProps, OmittedPropsWithoutRef, ScrollspyVariablesType } from '../tools';
 
-type Props<T extends ElementType> = {
+export type ScrollspyProps<T extends ElementType> = OmittedPropsWithoutRef<
+  Props<T>,
+  T,
+  ScrollspyVariablesType,
+  'children'
+>;
+
+type Props<T extends ElementType> = BaseProps<T, ScrollspyVariablesType> & {
   /**
    * children.
    */
@@ -32,11 +39,4 @@ type Props<T extends ElementType> = {
    * number.
    */
   threshold?: number | number[];
-} & BaseProps<T, ScrollspyVariablesType>;
-
-export type ScrollspyProps<T extends ElementType> = OmittedPropsWithoutRef<
-  Props<T>,
-  T,
-  ScrollspyVariablesType,
-  'children'
->;
+};

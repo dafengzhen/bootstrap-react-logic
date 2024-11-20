@@ -510,11 +510,11 @@ const clsxUnique = (...inputs: ClassValue[]): string | undefined => {
  *   if `dedupe` is true, or `undefined` if no valid class names are provided.
  */
 const clsxWithOptions = (
-  options?: { dedupe?: boolean } | null | undefined,
+  options?: null | undefined | { dedupe?: boolean },
   ...inputs: ClassValue[]
 ): string | undefined => {
   const dedupe = options?.dedupe ?? false;
-  return dedupe ? clsxUnique(...inputs) : clsx(...inputs);
+  return dedupe ? clsxUnique(...inputs) : clsx(...inputs) || undefined;
 };
 
 /**
@@ -866,13 +866,13 @@ const clsxStyle = (
     key: string,
     style: Record<string, any>,
   ) =>
+    | boolean
+    | string
+    | undefined
     | {
         include?: boolean;
         transformedKey?: string;
-      }
-    | boolean
-    | string
-    | undefined,
+      },
 ): Record<string, any> => {
   const finalStyle: Record<string, any> = {};
 

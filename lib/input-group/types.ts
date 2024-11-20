@@ -2,7 +2,11 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, InputGroupTextVariablesType, InputGroupVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = {
+export type InputGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, InputGroupVariablesType>;
+
+export type InputGroupTextProps<T extends ElementType> = PropsWithoutRef<TextProps<T>, T, InputGroupTextVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, InputGroupVariablesType> & {
   /**
    * hasValidation.
    */
@@ -17,10 +21,6 @@ type Props<T extends ElementType> = {
    * size.
    */
   size?: 'lg' | 'sm';
-} & BaseProps<T, InputGroupVariablesType>;
+};
 
-type TextProps<T extends ElementType> = {} & BaseProps<T, InputGroupTextVariablesType>;
-
-export type InputGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, InputGroupVariablesType>;
-
-export type InputGroupTextProps<T extends ElementType> = PropsWithoutRef<TextProps<T>, T, InputGroupTextVariablesType>;
+type TextProps<T extends ElementType> = BaseProps<T, InputGroupTextVariablesType> & {};

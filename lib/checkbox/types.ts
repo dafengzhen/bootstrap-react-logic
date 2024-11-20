@@ -2,9 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, CheckboxVariablesType, PropsWithoutRef, SlotValue } from '../tools';
 
-type SlotValueKeys = 'component' | 'container' | 'label';
+export type CheckboxProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CheckboxVariablesType>;
 
-type Props<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, CheckboxVariablesType> & {
   /**
    * contentClasses.
    */
@@ -44,6 +44,6 @@ type Props<T extends ElementType> = {
    * switch.
    */
   switch?: boolean;
-} & BaseProps<T, CheckboxVariablesType>;
+};
 
-export type CheckboxProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CheckboxVariablesType>;
+type SlotValueKeys = 'component' | 'container' | 'label';

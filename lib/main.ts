@@ -29,6 +29,7 @@ export * from './scrollspy';
 export * from './select';
 export * from './select-multiple';
 export * from './spinner';
+export * from './table';
 export * from './text';
 export * from './textarea';
 export * from './toast';

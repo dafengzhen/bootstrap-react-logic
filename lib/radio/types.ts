@@ -2,9 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, PropsWithoutRef, RadioVariablesType, SlotValue } from '../tools';
 
-type SlotValueKeys = 'component' | 'container' | 'label';
+export type RadioProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RadioVariablesType>;
 
-type Props<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, RadioVariablesType> & {
   /**
    * contentClasses.
    */
@@ -39,6 +39,6 @@ type Props<T extends ElementType> = {
    * switch.
    */
   switch?: boolean;
-} & BaseProps<T, RadioVariablesType>;
+};
 
-export type RadioProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RadioVariablesType>;
+type SlotValueKeys = 'component' | 'container' | 'label';

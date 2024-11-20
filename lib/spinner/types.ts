@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, PropsWithoutRef, SpinnerVariablesType } from '../tools';
 
-type Props<T extends ElementType> = {
+export type SpinnerProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, SpinnerVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, SpinnerVariablesType> & {
   /**
    * grow.
    */
@@ -17,6 +19,4 @@ type Props<T extends ElementType> = {
    * variant.
    */
   variant?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
-} & BaseProps<T, SpinnerVariablesType>;
-
-export type SpinnerProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, SpinnerVariablesType>;
+};

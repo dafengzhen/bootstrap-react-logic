@@ -9,7 +9,17 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type AlertHeadingProps<T extends ElementType> = PropsWithoutRef<HeadingProps<T>, T, AlertHeadingVariablesType>;
+
+export type AlertLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, AlertLinkVariablesType>;
+
+export type AlertProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, AlertVariablesType>;
+
+type HeadingProps<T extends ElementType> = BaseProps<T, AlertHeadingVariablesType> & {};
+
+type LinkProps<T extends ElementType> = BaseProps<T, AlertLinkVariablesType> & {};
+
+type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
   /**
    * clickToClose.
    */
@@ -49,14 +59,4 @@ type Props<T extends ElementType> = {
    * visible.
    */
   visible?: boolean;
-} & BaseProps<T, AlertVariablesType>;
-
-type LinkProps<T extends ElementType> = {} & BaseProps<T, AlertLinkVariablesType>;
-
-type HeadingProps<T extends ElementType> = {} & BaseProps<T, AlertHeadingVariablesType>;
-
-export type AlertProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, AlertVariablesType>;
-
-export type AlertLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, AlertLinkVariablesType>;
-
-export type AlertHeadingProps<T extends ElementType> = PropsWithoutRef<HeadingProps<T>, T, AlertHeadingVariablesType>;
+};

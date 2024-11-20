@@ -1,5 +1,5 @@
-import InputGroup from './input-group.tsx';
 import InputGroupText from './input-group-text.tsx';
+import InputGroup from './input-group.tsx';
 
 // types
 export type { InputGroupProps, InputGroupTextProps } from './types.ts';

@@ -28,7 +28,7 @@ const ListGroup = function ListGroup<T extends ElementType = 'div' | 'ol' | 'ul'
     ...item,
     id: item.id ?? index,
   }));
-  const [options] = useState<({ id: number | string } & IOption)[]>(initialOptions);
+  const [options] = useState<(IOption & { id: number | string })[]>(initialOptions);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(

@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, ButtonGroupVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = {
+export type ButtonGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonGroupVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, ButtonGroupVariablesType> & {
   /**
    * size.
    */
@@ -17,6 +19,4 @@ type Props<T extends ElementType> = {
    * vertical.
    */
   vertical?: boolean;
-} & BaseProps<T, ButtonGroupVariablesType>;
-
-export type ButtonGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonGroupVariablesType>;
+};

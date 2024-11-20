@@ -1,4 +1,3 @@
-import Card from './card.tsx';
 import CardBody from './card-body.tsx';
 import CardFooter from './card-footer.tsx';
 import CardGroup from './card-group.tsx';
@@ -8,6 +7,7 @@ import CardLink from './card-link.tsx';
 import CardSubtitle from './card-subtitle.tsx';
 import CardText from './card-text.tsx';
 import CardTitle from './card-title.tsx';
+import Card from './card.tsx';
 
 // types
 export type {

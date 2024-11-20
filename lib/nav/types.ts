@@ -11,7 +11,49 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type NavItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, NavItemVariablesType>;
+
+export type NavLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, NavLinkVariablesType>;
+
+export interface NavOption {
+  active?: boolean;
+  disabled?: boolean;
+  fade?: boolean;
+  href?: string;
+  id?: number | string;
+  item?: ReactNode;
+  itemProps?: NavItemProps<ElementType>;
+  link?: ReactNode;
+  linkProps?: NavLinkProps<ElementType>;
+  pane?: ReactNode;
+  paneProps?: NavTabPaneProps<ElementType>;
+}
+
+export type NavProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, NavVariablesType, 'onChange'>;
+
+export type NavTabContentProps<T extends ElementType> = PropsWithoutRef<
+  TabContentProps<T>,
+  T,
+  NavTabContentVariablesType
+>;
+
+export type NavTabPaneProps<T extends ElementType> = PropsWithoutRef<TabPaneProps<T>, T, NavTabPaneVariablesType>;
+
+type ItemProps<T extends ElementType> = BaseProps<T, NavItemVariablesType> & {};
+
+type LinkProps<T extends ElementType> = BaseProps<T, NavLinkVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+};
+
+type Props<T extends ElementType> = BaseProps<T, NavVariablesType> & {
   /**
    * contentProps.
    */
@@ -66,25 +108,11 @@ type Props<T extends ElementType> = {
    * vertical.
    */
   vertical?: boolean;
-} & BaseProps<T, NavVariablesType>;
+};
 
-type ItemProps<T extends ElementType> = {} & BaseProps<T, NavItemVariablesType>;
+type TabContentProps<T extends ElementType> = BaseProps<T, NavTabContentVariablesType> & {};
 
-type LinkProps<T extends ElementType> = {
-  /**
-   * active.
-   */
-  active?: boolean;
-
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-} & BaseProps<T, NavLinkVariablesType>;
-
-type TabContentProps<T extends ElementType> = {} & BaseProps<T, NavTabContentVariablesType>;
-
-type TabPaneProps<T extends ElementType> = {
+type TabPaneProps<T extends ElementType> = BaseProps<T, NavTabPaneVariablesType> & {
   /**
    * active.
    */
@@ -94,32 +122,4 @@ type TabPaneProps<T extends ElementType> = {
    * fade.
    */
   fade?: boolean;
-} & BaseProps<T, NavTabPaneVariablesType>;
-
-export interface NavOption {
-  active?: boolean;
-  disabled?: boolean;
-  fade?: boolean;
-  href?: string;
-  id?: number | string;
-  item?: ReactNode;
-  itemProps?: NavItemProps<ElementType>;
-  link?: ReactNode;
-  linkProps?: NavLinkProps<ElementType>;
-  pane?: ReactNode;
-  paneProps?: NavTabPaneProps<ElementType>;
-}
-
-export type NavProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, NavVariablesType, 'onChange'>;
-
-export type NavItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, NavItemVariablesType>;
-
-export type NavLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, NavLinkVariablesType>;
-
-export type NavTabContentProps<T extends ElementType> = PropsWithoutRef<
-  TabContentProps<T>,
-  T,
-  NavTabContentVariablesType
->;
-
-export type NavTabPaneProps<T extends ElementType> = PropsWithoutRef<TabPaneProps<T>, T, NavTabPaneVariablesType>;
+};

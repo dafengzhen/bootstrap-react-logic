@@ -8,7 +8,18 @@ import type {
   SelectVariablesType,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type SelectOptionProps<T extends ElementType> = PropsWithoutRef<OptionProps<T>, T, SelectOptionVariablesType>;
+
+export type SelectProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, SelectVariablesType, 'size'>;
+
+type OptionProps<T extends ElementType> = BaseProps<T, SelectOptionVariablesType> & {
+  /**
+   * disabled,
+   */
+  disabled?: boolean;
+};
+
+type Props<T extends ElementType> = BaseProps<T, SelectVariablesType> & {
   /**
    * disabled.
    */
@@ -33,15 +44,4 @@ type Props<T extends ElementType> = {
    * size.
    */
   size?: 'lg' | 'sm';
-} & BaseProps<T, SelectVariablesType>;
-
-type OptionProps<T extends ElementType> = {
-  /**
-   * disabled,
-   */
-  disabled?: boolean;
-} & BaseProps<T, SelectOptionVariablesType>;
-
-export type SelectProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, SelectVariablesType, 'size'>;
-
-export type SelectOptionProps<T extends ElementType> = PropsWithoutRef<OptionProps<T>, T, SelectOptionVariablesType>;
+};

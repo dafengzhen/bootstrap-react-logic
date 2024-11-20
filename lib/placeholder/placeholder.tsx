@@ -9,13 +9,13 @@ const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(p
     animation,
     as: Component = 'span',
     bg,
+    children,
     className,
     col,
     dropOldClass,
     size,
     style,
     variables,
-    children,
     ...rest
   } = props;
 

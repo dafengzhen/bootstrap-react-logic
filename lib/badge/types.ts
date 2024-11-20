@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BadgeVariablesType, BaseProps, PropsWithoutRef, RoundedClassEnum } from '../tools';
 
-type Props<T extends ElementType> = {
+export type BadgeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, BadgeVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, BadgeVariablesType> & {
   /**
    * rounded.
    */
@@ -17,6 +19,4 @@ type Props<T extends ElementType> = {
    * variantType.
    */
   variantType?: 'bg' | 'text';
-} & BaseProps<T, BadgeVariablesType>;
-
-export type BadgeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, BadgeVariablesType>;
+};

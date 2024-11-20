@@ -10,7 +10,26 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type PopoverArrowProps<T extends ElementType> = PropsWithoutRef<ArrowProps<T>, T, PopoverArrowVariablesType>;
+
+export type PopoverBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, PopoverBodyVariablesType>;
+
+export type PopoverHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, PopoverHeaderVariablesType>;
+
+export type PopoverProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, PopoverVariablesType, 'onChange'>;
+
+type ArrowProps<T extends ElementType> = BaseProps<T, PopoverArrowVariablesType> & {
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<HTMLElement>;
+};
+
+type BodyProps<T extends ElementType> = BaseProps<T, PopoverBodyVariablesType> & {};
+
+type HeaderProps<T extends ElementType> = BaseProps<T, PopoverHeaderVariablesType> & {};
+
+type Props<T extends ElementType> = BaseProps<T, PopoverVariablesType> & {
   /**
    * arrowProps.
    */
@@ -50,12 +69,12 @@ type Props<T extends ElementType> = {
    * offset.
    */
   offset?:
+    | number
     | {
         alignmentAxis?: null | number;
         crossAxis?: number;
         mainAxis?: number;
-      }
-    | number;
+      };
 
   /**
    * onChange.
@@ -89,23 +108,4 @@ type Props<T extends ElementType> = {
    * visible.
    */
   visible?: boolean;
-} & BaseProps<T, PopoverVariablesType>;
-
-type ArrowProps<T extends ElementType> = {
-  /**
-   * onRef.
-   */
-  onRef?: RefCallback<HTMLElement>;
-} & BaseProps<T, PopoverArrowVariablesType>;
-
-type HeaderProps<T extends ElementType> = {} & BaseProps<T, PopoverHeaderVariablesType>;
-
-type BodyProps<T extends ElementType> = {} & BaseProps<T, PopoverBodyVariablesType>;
-
-export type PopoverProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, PopoverVariablesType, 'onChange'>;
-
-export type PopoverArrowProps<T extends ElementType> = PropsWithoutRef<ArrowProps<T>, T, PopoverArrowVariablesType>;
-
-export type PopoverHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, PopoverHeaderVariablesType>;
-
-export type PopoverBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, PopoverBodyVariablesType>;
+};

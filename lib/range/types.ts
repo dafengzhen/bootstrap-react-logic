@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, PropsWithoutRef, RangeVariablesType } from '../tools';
 
-type Props<T extends ElementType> = {
+export type RangeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RangeVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, RangeVariablesType> & {
   /**
    * disabled.
    */
@@ -32,6 +34,4 @@ type Props<T extends ElementType> = {
    * step.
    */
   step?: number | string;
-} & BaseProps<T, RangeVariablesType>;
-
-export type RangeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, RangeVariablesType>;
+};

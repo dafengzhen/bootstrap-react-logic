@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, FloatingLabelVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = {
+export type FloatingLabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, FloatingLabelVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, FloatingLabelVariablesType> & {
   /**
    * isInvalid,
    */
@@ -12,6 +14,4 @@ type Props<T extends ElementType> = {
    * isValid.
    */
   isValid?: boolean;
-} & BaseProps<T, FloatingLabelVariablesType>;
-
-export type FloatingLabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, FloatingLabelVariablesType>;
+};

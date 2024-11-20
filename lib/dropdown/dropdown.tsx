@@ -27,8 +27,8 @@ import {
 } from '../tools';
 import DropdownDivider from './dropdown-divider.tsx';
 import DropdownHeader from './dropdown-header.tsx';
-import DropdownItem from './dropdown-item.tsx';
 import DropdownItemText from './dropdown-item-text.tsx';
+import DropdownItem from './dropdown-item.tsx';
 import DropdownMenu from './dropdown-menu.tsx';
 import DropdownToggle from './dropdown-toggle.tsx';
 

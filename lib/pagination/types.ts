@@ -9,7 +9,41 @@ import type {
   PropsWithoutRef,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type PaginationItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, PaginationItemVariablesType>;
+
+export type PaginationLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, PaginationLinkVariablesType>;
+
+export type PaginationNavProps<T extends ElementType> = PropsWithoutRef<NavProps<T>, T, PaginationNavVariablesType>;
+
+export interface PaginationOption {
+  active?: boolean;
+  disabled?: boolean;
+  href?: string;
+  id?: number | string;
+  itemProps?: PaginationItemProps<ElementType>;
+  link?: ReactNode;
+  linkProps?: PaginationLinkProps<ElementType>;
+}
+
+export type PaginationProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, PaginationVariablesType>;
+
+type ItemProps<T extends ElementType> = BaseProps<T, PaginationItemVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+};
+
+type LinkProps<T extends ElementType> = BaseProps<T, PaginationLinkVariablesType> & {};
+
+type NavProps<T extends ElementType> = BaseProps<T, PaginationNavVariablesType> & {};
+
+type Props<T extends ElementType> = BaseProps<T, PaginationVariablesType> & {
   /**
    * alignment.
    */
@@ -29,38 +63,4 @@ type Props<T extends ElementType> = {
    * size.
    */
   size?: 'lg' | 'sm';
-} & BaseProps<T, PaginationVariablesType>;
-
-type ItemProps<T extends ElementType> = {
-  /**
-   * active.
-   */
-  active?: boolean;
-
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-} & BaseProps<T, PaginationItemVariablesType>;
-
-type NavProps<T extends ElementType> = {} & BaseProps<T, PaginationNavVariablesType>;
-
-type LinkProps<T extends ElementType> = {} & BaseProps<T, PaginationLinkVariablesType>;
-
-export interface PaginationOption {
-  active?: boolean;
-  disabled?: boolean;
-  href?: string;
-  id?: number | string;
-  itemProps?: PaginationItemProps<ElementType>;
-  link?: ReactNode;
-  linkProps?: PaginationLinkProps<ElementType>;
-}
-
-export type PaginationProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, PaginationVariablesType>;
-
-export type PaginationItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, PaginationItemVariablesType>;
-
-export type PaginationNavProps<T extends ElementType> = PropsWithoutRef<NavProps<T>, T, PaginationNavVariablesType>;
-
-export type PaginationLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, PaginationLinkVariablesType>;
+};

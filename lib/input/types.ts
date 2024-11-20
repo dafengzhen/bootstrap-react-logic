@@ -2,9 +2,14 @@ import type { ElementRef, ElementType, LegacyRef, ReactNode } from 'react';
 
 import type { BaseProps, InputVariablesType, OmittedPropsWithoutRef, SlotValue } from '../tools';
 
-type SlotValueKeys = 'component' | 'container' | 'end' | 'start';
+export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
+  Props<T>,
+  T,
+  InputVariablesType,
+  'color' | 'size'
+>;
 
-type Props<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, InputVariablesType> & {
   /**
    * color
    */
@@ -59,11 +64,6 @@ type Props<T extends ElementType> = {
    * startEndContentClasses.
    */
   startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
-} & BaseProps<T, InputVariablesType>;
+};
 
-export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
-  Props<T>,
-  T,
-  InputVariablesType,
-  'color' | 'size'
->;
+type SlotValueKeys = 'component' | 'container' | 'end' | 'start';

@@ -9,7 +9,27 @@ import type {
   TooltipVariablesType,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type TooltipArrowProps<T extends ElementType> = PropsWithoutRef<ArrowProps<T>, T, TooltipArrowVariablesType>;
+
+export type TooltipInnerProps<T extends ElementType> = PropsWithoutRef<InnerProps<T>, T, TooltipInnerVariablesType>;
+
+export type TooltipProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, TooltipVariablesType, 'onChange'>;
+
+type ArrowProps<T extends ElementType> = BaseProps<T, TooltipArrowVariablesType> & {
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<HTMLElement>;
+};
+
+type InnerProps<T extends ElementType> = BaseProps<T, TooltipInnerVariablesType> & {
+  /**
+   * html.
+   */
+  html?: string;
+};
+
+type Props<T extends ElementType> = BaseProps<T, TooltipVariablesType> & {
   /**
    * arrowProps.
    */
@@ -44,12 +64,12 @@ type Props<T extends ElementType> = {
    * offset.
    */
   offset?:
+    | number
     | {
         alignmentAxis?: null | number;
         crossAxis?: number;
         mainAxis?: number;
-      }
-    | number;
+      };
 
   /**
    * onChange.
@@ -83,24 +103,4 @@ type Props<T extends ElementType> = {
    * visible.
    */
   visible?: boolean;
-} & BaseProps<T, TooltipVariablesType>;
-
-type ArrowProps<T extends ElementType> = {
-  /**
-   * onRef.
-   */
-  onRef?: RefCallback<HTMLElement>;
-} & BaseProps<T, TooltipArrowVariablesType>;
-
-type InnerProps<T extends ElementType> = {
-  /**
-   * html.
-   */
-  html?: string;
-} & BaseProps<T, TooltipInnerVariablesType>;
-
-export type TooltipProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, TooltipVariablesType, 'onChange'>;
-
-export type TooltipArrowProps<T extends ElementType> = PropsWithoutRef<ArrowProps<T>, T, TooltipArrowVariablesType>;
-
-export type TooltipInnerProps<T extends ElementType> = PropsWithoutRef<InnerProps<T>, T, TooltipInnerVariablesType>;
+};

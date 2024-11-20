@@ -27,8 +27,8 @@ export default defineConfig({
         format,
         globals: {
           react: 'React',
-          'react/jsx-runtime': 'ReactJsxRuntime',
           'react-dom': 'ReactDom',
+          'react/jsx-runtime': 'ReactJsxRuntime',
         },
         manualChunks(id) {
           if (id.includes('node_modules')) {

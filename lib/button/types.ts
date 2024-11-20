@@ -10,7 +10,18 @@ import type {
   VariantType,
 } from '../tools';
 
-type Props<T extends ElementType> = {
+export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;
+
+export type CloseButtonProps<T extends ElementType> = PropsWithoutRef<CloseProps<T>, T, CloseButtonVariableType>;
+
+type CloseProps<T extends ElementType> = BaseProps<T, CloseButtonVariableType> & {
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+};
+
+type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   /**
    * active.
    */
@@ -77,15 +88,4 @@ type Props<T extends ElementType> = {
    * variant.
    */
   variant?: keyof VariantType;
-} & BaseProps<T, ButtonVariableType>;
-
-type CloseProps<T extends ElementType> = {
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-} & BaseProps<T, CloseButtonVariableType>;
-
-export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;
-
-export type CloseButtonProps<T extends ElementType> = PropsWithoutRef<CloseProps<T>, T, CloseButtonVariableType>;
+};

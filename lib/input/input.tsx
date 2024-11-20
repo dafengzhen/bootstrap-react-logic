@@ -15,9 +15,9 @@ import {
 import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(
-  props: {
+  props: InputProps<T> & {
     type?: HTMLInputTypeAttribute | undefined;
-  } & InputProps<T>,
+  },
 ) {
   const {
     as: Component = 'input',

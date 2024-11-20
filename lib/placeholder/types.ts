@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, PlaceholderVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = {
+export type PlaceholderProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, PlaceholderVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, PlaceholderVariablesType> & {
   /**
    * animation.
    */
@@ -22,6 +24,4 @@ type Props<T extends ElementType> = {
    * size.
    */
   size?: 'lg' | 'sm' | 'xs';
-} & BaseProps<T, PlaceholderVariablesType>;
-
-export type PlaceholderProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, PlaceholderVariablesType>;
+};

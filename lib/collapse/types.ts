@@ -2,7 +2,9 @@ import type { ElementType } from 'react';
 
 import type { BaseProps, CollapseVariablesType, PropsWithoutRef } from '../tools';
 
-type Props<T extends ElementType> = {
+export type CollapseProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CollapseVariablesType>;
+
+type Props<T extends ElementType> = BaseProps<T, CollapseVariablesType> & {
   /**
    * collapsing.
    */
@@ -17,6 +19,4 @@ type Props<T extends ElementType> = {
    * visible.
    */
   visible?: boolean;
-} & BaseProps<T, CollapseVariablesType>;
-
-export type CollapseProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, CollapseVariablesType>;
+};

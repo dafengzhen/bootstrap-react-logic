@@ -8,34 +8,22 @@ import type {
   VariantType,
 } from '../tools';
 
-type Props<T extends ElementType> = {
-  /**
-   * flush.
-   */
-  flush?: boolean;
+export type ListGroupItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, ListGroupItemVariablesType>;
 
-  /**
-   * horizontal.
-   */
-  horizontal?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
-
-  /**
-   * itemAction.
-   */
+export interface ListGroupOption {
+  active?: boolean;
+  disabled?: boolean;
+  flexFill?: boolean;
+  id?: number | string;
+  item?: ReactNode;
   itemAction?: boolean;
+  props?: ListGroupItemProps<ElementType>;
+  variant?: keyof VariantType;
+}
 
-  /**
-   * numbered.
-   */
-  numbered?: boolean;
+export type ListGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ListGroupVariablesType>;
 
-  /**
-   * options.
-   */
-  options?: ListGroupOption[];
-} & BaseProps<T, ListGroupVariablesType>;
-
-type ItemProps<T extends ElementType> = {
+type ItemProps<T extends ElementType> = BaseProps<T, ListGroupItemVariablesType> & {
   /**
    * active.
    */
@@ -60,19 +48,31 @@ type ItemProps<T extends ElementType> = {
    * variant.
    */
   variant?: keyof VariantType;
-} & BaseProps<T, ListGroupItemVariablesType>;
+};
 
-export interface ListGroupOption {
-  active?: boolean;
-  disabled?: boolean;
-  flexFill?: boolean;
-  id?: number | string;
-  item?: ReactNode;
+type Props<T extends ElementType> = BaseProps<T, ListGroupVariablesType> & {
+  /**
+   * flush.
+   */
+  flush?: boolean;
+
+  /**
+   * horizontal.
+   */
+  horizontal?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
+
+  /**
+   * itemAction.
+   */
   itemAction?: boolean;
-  props?: ListGroupItemProps<ElementType>;
-  variant?: keyof VariantType;
-}
 
-export type ListGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ListGroupVariablesType>;
+  /**
+   * numbered.
+   */
+  numbered?: boolean;
 
-export type ListGroupItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, ListGroupItemVariablesType>;
+  /**
+   * options.
+   */
+  options?: ListGroupOption[];
+};

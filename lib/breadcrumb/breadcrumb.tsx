@@ -22,7 +22,7 @@ const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: Bre
     ...item,
     id: item.id ?? index,
   }));
-  const [options] = useState<({ id: number | string } & BreadcrumbOption)[]>(initialOptions);
+  const [options] = useState<(BreadcrumbOption & { id: number | string })[]>(initialOptions);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', className);

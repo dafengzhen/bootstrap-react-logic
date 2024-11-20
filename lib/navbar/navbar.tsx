@@ -6,12 +6,12 @@ import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid }
 import NavbarBrand from './navbar-brand.tsx';
 import NavbarCollapse from './navbar-collapse.tsx';
 import NavbarContainer from './navbar-container.tsx';
-import NavbarNav from './navbar-nav.tsx';
 import NavbarNavItem from './navbar-nav-item.tsx';
 import NavbarNavLink from './navbar-nav-link.tsx';
+import NavbarNav from './navbar-nav.tsx';
 import NavbarText from './navbar-text.tsx';
-import NavbarToggler from './navbar-toggler.tsx';
 import NavbarTogglerIcon from './navbar-toggler-icon.tsx';
+import NavbarToggler from './navbar-toggler.tsx';
 
 interface IOption extends NavbarOption {
   id: number | string;
