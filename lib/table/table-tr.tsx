@@ -5,10 +5,15 @@ import type { TableTrProps } from './types.ts';
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const TableTr = function TableTr<T extends ElementType = 'tr'>(props: TableTrProps<T>) {
-  const { as: Component = 'tr', className, dropOldClass, style, variables, variant, ...rest } = props;
+  const { active, as: Component = 'tr', className, dropOldClass, style, variables, variant, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', variant && `table-${variant}`, className);
+    const finalClass = clsxUnique(
+      !dropOldClass && '',
+      variant && `table-${variant}`,
+      active && 'table-active',
+      className,
+    );
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -20,7 +25,7 @@ const TableTr = function TableTr<T extends ElementType = 'tr'>(props: TableTrPro
       },
       isValueValid,
     );
-  }, [className, dropOldClass, style, variables, variant]);
+  }, [active, className, dropOldClass, style, variables, variant]);
 
   return <Component {...rest} {...renderOptions} />;
 };

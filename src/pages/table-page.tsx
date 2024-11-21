@@ -31,232 +31,534 @@ export default function TablePage() {
         <Table
           body={[
             {
-              id: 1,
               scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
             },
             {
-              id: 2,
               scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
             },
             {
-              colSpan: { firstName: 2 },
-              id: 3,
               scope: 'row',
-              values: ['3', 'Larry the Bird', null, '@twitter'],
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
             },
           ]}
           head={[
-            { key: 'id', label: '#', scope: 'col' },
-            { key: 'firstName', label: 'First', scope: 'col' },
-            { key: 'lastName', label: 'Last', scope: 'col' },
-            { key: 'handle', label: 'Handle', scope: 'col' },
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
           ]}
         />
 
-        <Table
-          body={[
-            {
-              cells: [
-                { key: 'id', value: '1' },
-                { key: 'firstName', value: 'Mark' },
-                { key: 'lastName', value: 'Otto' },
-                { key: 'handle', value: '@mdo' },
-              ],
-              id: 1,
-              scope: 'row',
-            },
-            {
-              cells: [
-                { key: 'id', value: '2' },
-                { key: 'firstName', value: 'Jacob' },
-                { key: 'lastName', value: 'Thornton' },
-                { key: 'handle', value: '@fat' },
-              ],
-              id: 2,
-              scope: 'row',
-            },
-            {
-              cells: [
-                { key: 'id', value: '3' },
-                { colSpan: 2, key: 'firstName', value: 'Larry the Bird' },
-                { key: 'handle', value: '@twitter' },
-              ],
-              id: 3,
-              scope: 'row',
-            },
-          ]}
-          head={[
-            { key: 'id', label: '#', scope: 'col' },
-            { key: 'firstName', label: 'First', scope: 'col' },
-            { key: 'lastName', label: 'Last', scope: 'col' },
-            { key: 'handle', label: 'Handle', scope: 'col' },
-          ]}
-        />
+        {/*<Table*/}
+        {/*  body={[*/}
+        {/*    {*/}
+        {/*      cells: [{ value: '1' }, { value: 'Mark' }, { value: 'Otto' }, { value: '@mdo' }],*/}
+        {/*      scope: 'row',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: '2' }, { value: 'Jacob' }, { value: 'Thornton' }, { value: '@fat' }],*/}
+        {/*      scope: 'row',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: '3' }, { colSpan: 2, value: 'Larry the Bird' }, { value: '@twitter' }],*/}
+        {/*      scope: 'row',*/}
+        {/*    },*/}
+        {/*  ]}*/}
+        {/*  head={[*/}
+        {/*    { label: '#', scope: 'col' },*/}
+        {/*    { label: 'First', scope: 'col' },*/}
+        {/*    { label: 'Last', scope: 'col' },*/}
+        {/*    { label: 'Handle', scope: 'col' },*/}
+        {/*  ]}*/}
+        {/*/>*/}
       </Example>
 
       <Example hash="variants" state={state} t={tTablePage}>
         <Table
           body={[
             {
-              id: 1,
               scope: 'row',
               values: ['Default', 'Cell', 'Cell'],
             },
             {
-              id: 2,
               scope: 'row',
               values: ['Primary', 'Cell', 'Cell'],
               variant: 'primary',
             },
             {
-              id: 3,
               scope: 'row',
               values: ['Secondary', 'Cell', 'Cell'],
               variant: 'secondary',
             },
             {
-              id: 4,
               scope: 'row',
               values: ['Success', 'Cell', 'Cell'],
               variant: 'success',
             },
             {
-              id: 5,
               scope: 'row',
               values: ['Danger', 'Cell', 'Cell'],
               variant: 'danger',
             },
             {
-              id: 6,
               scope: 'row',
               values: ['Warning', 'Cell', 'Cell'],
               variant: 'warning',
             },
             {
-              id: 7,
               scope: 'row',
               values: ['Info', 'Cell', 'Cell'],
               variant: 'info',
             },
             {
-              id: 8,
               scope: 'row',
               values: ['Light', 'Cell', 'Cell'],
               variant: 'light',
             },
             {
-              id: 9,
               scope: 'row',
               values: ['Dark', 'Cell', 'Cell'],
               variant: 'dark',
             },
           ]}
           head={[
-            { key: 'class', label: 'Class', scope: 'col' },
-            { key: 'heading1', label: 'Heading', scope: 'col' },
-            { key: 'heading2', label: 'Heading', scope: 'col' },
+            { label: 'Class', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+        />
+
+        {/*<Table*/}
+        {/*  body={[*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Default' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Primary' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'primary',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Secondary' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'secondary',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Success' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'success',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Danger' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'danger',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Warning' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'warning',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Info' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'info',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Light' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'light',*/}
+        {/*    },*/}
+        {/*    {*/}
+        {/*      cells: [{ value: 'Dark' }, { value: 'Cell' }, { value: 'Cell' }],*/}
+        {/*      scope: 'row',*/}
+        {/*      variant: 'dark',*/}
+        {/*    },*/}
+        {/*  ]}*/}
+        {/*  head={[*/}
+        {/*    { label: 'Class', scope: 'col' },*/}
+        {/*    { label: 'Heading', scope: 'col' },*/}
+        {/*    { label: 'Heading', scope: 'col' },*/}
+        {/*  ]}*/}
+        {/*/>*/}
+      </Example>
+
+      <Example hash="stripedRows" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          striped
+        />
+      </Example>
+
+      <Example hash="stripedColumns" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          stripedColumns
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          stripedColumns
+          variant="dark"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          striped
+          variant="dark"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          striped
+          variant="success"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          stripedColumns
+          variant="success"
+        />
+      </Example>
+
+      <Example hash="hoverableRows" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          hover
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          hover
+          variant="dark"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          hover
+          striped
+        />
+      </Example>
+
+      <Example hash="activeTables" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              active: true,
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  active: true,
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
           ]}
         />
 
         <Table
           body={[
             {
-              cells: [
-                { key: 'class', value: 'Default' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 1,
+              active: true,
               scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
             },
             {
-              cells: [
-                { key: 'class', value: 'Primary' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 2,
               scope: 'row',
-              variant: 'primary',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
             },
             {
-              cells: [
-                { key: 'class', value: 'Secondary' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 3,
               scope: 'row',
-              variant: 'secondary',
-            },
-            {
-              cells: [
-                { key: 'class', value: 'Success' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
+              values: [
+                '3',
+                {
+                  active: true,
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
               ],
-              id: 4,
-              scope: 'row',
-              variant: 'success',
-            },
-            {
-              cells: [
-                { key: 'class', value: 'Danger' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 5,
-              scope: 'row',
-              variant: 'danger',
-            },
-            {
-              cells: [
-                { key: 'class', value: 'Warning' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 6,
-              scope: 'row',
-              variant: 'warning',
-            },
-            {
-              cells: [
-                { key: 'class', value: 'Info' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 7,
-              scope: 'row',
-              variant: 'info',
-            },
-            {
-              cells: [
-                { key: 'class', value: 'Light' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 8,
-              scope: 'row',
-              variant: 'light',
-            },
-            {
-              cells: [
-                { key: 'class', value: 'Dark' },
-                { key: 'heading1', value: 'Cell' },
-                { key: 'heading2', value: 'Cell' },
-              ],
-              id: 9,
-              scope: 'row',
-              variant: 'dark',
             },
           ]}
           head={[
-            { key: 'class', label: 'Class', scope: 'col' },
-            { key: 'heading1', label: 'Heading', scope: 'col' },
-            { key: 'heading2', label: 'Heading', scope: 'col' },
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
           ]}
+          variant="dark"
         />
       </Example>
 

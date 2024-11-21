@@ -12,6 +12,7 @@ import type {
 } from '../tools';
 
 export interface TableBodyCellOption<Key extends string = string> {
+  active?: boolean;
   colSpan?: number;
   key?: Key;
   rowSpan?: number;
@@ -23,29 +24,34 @@ export interface TableBodyCells<Key extends string = string> {
   cells?: TableBodyCellOption<Key>[];
   id?: number | string;
   scope?: 'col' | 'colgroup' | 'row' | 'rowgroup';
-  variant?: Record<'td' | 'th' | 'tr', Variant> | Variant;
+  variant?: Variant;
 }
 
-export interface TableBodyOption<Key extends string = string> extends TableBodyCells<Key>, TableBodyValues {}
+export interface TableBodyOption extends TableBodyCells, TableBodyValues {}
 
-export type TableBodyValueOption = ReactNode;
+export type TableBodyValueOption<Key extends string = string> =
+  | ReactNode
+  | (TableBodyCellOption<Key> & { value?: ReactNode });
 
-export interface TableBodyValues {
-  colSpan?: Record<string, number>;
+export interface TableBodyValues<Key extends string = string> {
+  active?: boolean;
+  colSpan?: number;
   id?: number | string;
-  rowSpan?: Record<string, number>;
+  rowSpan?: number;
   scope?: 'col' | 'colgroup' | 'row' | 'rowgroup';
-  values?: TableBodyValueOption[];
-  variant?: Record<'td' | 'th' | 'tr', Variant> | Variant;
+  values?: TableBodyValueOption<Key>[];
+  variant?: Variant;
 }
 
 export interface TableHeadOption<Key extends string = string> {
+  active?: boolean;
   colSpan?: number;
   id?: number | string;
-  key: Key;
+  key?: Key;
   label: ReactNode;
   rowspan?: number;
   scope?: 'col' | 'colgroup' | 'row' | 'rowgroup';
+  variant?: Variant;
 }
 
 export type TableProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, TableVariablesType>;
@@ -82,6 +88,21 @@ type Props<T extends ElementType> = BaseProps<T, TableVariablesType> & {
   headProps?: TableTheadProps<ElementType>;
 
   /**
+   * hover.
+   */
+  hover?: boolean;
+
+  /**
+   * striped.
+   */
+  striped?: boolean;
+
+  /**
+   * stripedColumns.
+   */
+  stripedColumns?: boolean;
+
+  /**
    * variant.
    */
   variant?: Variant;
@@ -90,16 +111,40 @@ type Props<T extends ElementType> = BaseProps<T, TableVariablesType> & {
 type TbodyProps<T extends ElementType> = BaseProps<T, TableTbodyVariablesType> & {};
 
 type TdProps<T extends ElementType> = BaseProps<T, TableTdVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+
+  /**
+   * variant.
+   */
   variant?: Variant;
 };
 
 type TheadProps<T extends ElementType> = BaseProps<T, TableTheadVariablesType> & {};
 
 type ThProps<T extends ElementType> = BaseProps<T, TableThVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+
+  /**
+   * variant.
+   */
   variant?: Variant;
 };
 
 type TrProps<T extends ElementType> = BaseProps<T, TableTrVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+
+  /**
+   * variant.
+   */
   variant?: Variant;
 };
 

@@ -15,68 +15,78 @@ import TableTh from './table-th.tsx';
 import TableThead from './table-thead.tsx';
 import TableTr from './table-tr.tsx';
 
-interface IBodyOption extends TableBodyOption {
+interface AugmentedBodyOption extends TableBodyOption {
   id: number | string;
 }
 
-interface IHeadOption extends TableHeadOption {
+interface AugmentedHeadOption extends TableHeadOption {
   id: number | string;
 }
 
-const isCellOption = (cell: any): cell is TableBodyCellOption => {
+const isCellOption = (cell: unknown): cell is TableBodyCellOption => {
   return isPlainObject(cell);
 };
 
-const generateInitialOptions = (options: (TableBodyOption | TableHeadOption)[] = []): (IBodyOption | IHeadOption)[] =>
-  options.map((item, index) => ({
-    ...item,
-    id: item.id ?? index,
+const createOptionsWithId = <T extends TableBodyOption | TableHeadOption>(
+  options: T[] = [],
+): (T & { id: number | string })[] =>
+  options.map((option, index) => ({
+    ...option,
+    id: option.id ?? index,
   }));
 
-const renderCell = (
-  cell: null | TableBodyCellOption | TableBodyValueOption | undefined,
-  headerItem: IHeadOption,
-  rowItem: IBodyOption,
-  index: number,
+const renderTableCell = (
+  cellItem: TableBodyCellOption | TableBodyValueOption,
+  headerItem: AugmentedHeadOption,
+  rowItem: AugmentedBodyOption,
+  _rowIndex: number,
+  colIndex: number,
   isRowScope: boolean,
 ) => {
-  if (!cell) {
-    return;
-  }
+  const key = `${headerItem.id}${rowItem.id}`;
+  const isCell = isCellOption(cellItem);
+  const colSpan = isCell ? cellItem.colSpan : undefined;
+  const rowSpan = isCell ? cellItem.rowSpan : undefined;
+  const variant = isCell ? cellItem.variant : undefined;
+  const active = isCell ? cellItem.active : undefined;
+  const value = isCell ? cellItem.value : cellItem;
 
-  const key = headerItem.key ?? headerItem.id;
-  const isCell = isCellOption(cell);
-  const colSpan = isCell ? cell.colSpan : rowItem.colSpan?.[headerItem.key];
-  const rowSpan = isCell ? cell.rowSpan : rowItem.rowSpan?.[headerItem.key];
-  const cellValue = isCell ? cell.value : cell;
-
-  if (isRowScope && index === 0) {
-    const variant = isCell ? cell.variant : typeof rowItem.variant === 'string' ? rowItem.variant : rowItem.variant?.th;
-
+  if (isRowScope && colIndex === 0) {
     return (
-      <TableTh colSpan={colSpan} key={key} rowSpan={rowSpan} scope={rowItem.scope} variant={variant}>
-        {cellValue}
+      <TableTh active={active} colSpan={colSpan} key={key} rowSpan={rowSpan} scope={rowItem.scope} variant={variant}>
+        {value}
       </TableTh>
     );
   } else {
-    const variant = isCell ? cell.variant : typeof rowItem.variant === 'string' ? rowItem.variant : rowItem.variant?.td;
-
     return (
-      <TableTd colSpan={colSpan} key={key} rowSpan={rowSpan} variant={variant}>
-        {cellValue}
+      <TableTd active={active} colSpan={colSpan} key={key} rowSpan={rowSpan} variant={variant}>
+        {value}
       </TableTd>
     );
   }
 };
 
-const ValueRow = ({ headOptions, rowItem }: { headOptions: IHeadOption[]; rowItem: IBodyOption }) =>
-  headOptions.map((headerItem, index) => {
-    return renderCell(rowItem.values![index], headerItem, rowItem, index, rowItem.scope === 'row');
-  });
+const RowCells = ({
+  headOptions,
+  rowIndex,
+  rowItem,
+  type = 'values',
+}: {
+  headOptions: AugmentedHeadOption[];
+  rowIndex: number;
+  rowItem: AugmentedBodyOption;
+  type: 'cells' | 'values';
+}) =>
+  headOptions.map((headerItem, colIndex) => {
+    const items = rowItem[type]!;
+    const cellItem =
+      items.find(
+        (item) => 'key' in headerItem && isPlainObject(item) && (item as TableBodyCellOption).key === headerItem.key,
+      ) ?? items[colIndex];
 
-const CellRow = ({ headOptions, rowItem }: { headOptions: IHeadOption[]; rowItem: IBodyOption }) =>
-  headOptions.map((headerItem, index) => {
-    return renderCell(rowItem.cells![index], headerItem, rowItem, index, rowItem.scope === 'row');
+    return cellItem
+      ? renderTableCell(cellItem, headerItem, rowItem, rowIndex, colIndex, rowItem.scope === 'row')
+      : null;
   });
 
 const Table = function Table<T extends ElementType = 'table'>(props: TableProps<T>) {
@@ -88,16 +98,26 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
     dropOldClass,
     head: headerByDefault = [],
     headProps,
+    hover,
+    striped,
+    stripedColumns,
     style,
     variables,
     variant,
     ...rest
   } = props;
-  const [headOptions] = useState<IHeadOption[]>(generateInitialOptions(headerByDefault) as IHeadOption[]);
-  const [bodyOptions] = useState<IBodyOption[]>(generateInitialOptions(bodyByDefault) as IBodyOption[]);
+  const [headOptions] = useState<AugmentedHeadOption[]>(createOptionsWithId(headerByDefault));
+  const [bodyOptions] = useState<AugmentedBodyOption[]>(createOptionsWithId(bodyByDefault));
 
-  const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'table', variant && `table-${variant}`, className);
+  const computedProps = useMemo(() => {
+    const finalClass = clsxUnique(
+      !dropOldClass && 'table',
+      variant && `table-${variant}`,
+      striped && 'table-striped',
+      stripedColumns && 'table-striped-columns',
+      hover && 'table-hover',
+      className,
+    );
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -109,29 +129,26 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
       },
       isValueValid,
     );
-  }, [className, dropOldClass, style, variables, variant]);
+  }, [className, dropOldClass, hover, striped, stripedColumns, style, variables, variant]);
 
   return (
-    <Component {...rest} {...renderOptions}>
+    <Component {...rest} {...computedProps}>
       <TableThead {...headProps}>
         <TableTr>
           {headOptions.map((item) => (
-            <TableTh key={item.key ?? item.id} scope={item.scope}>
+            <TableTh active={item.active} key={item.id} scope={item.scope} variant={item.variant}>
               {item.label}
             </TableTh>
           ))}
         </TableTr>
       </TableThead>
       <TableTbody {...bodyProps}>
-        {bodyOptions.map((rowItem) => (
-          <TableTr
-            key={rowItem.id}
-            variant={typeof rowItem.variant === 'string' ? rowItem.variant : rowItem.variant?.tr}
-          >
+        {bodyOptions.map((rowItem, rowIndex) => (
+          <TableTr active={rowItem.active} key={rowItem.id} variant={rowItem.variant}>
             {rowItem.values ? (
-              <ValueRow headOptions={headOptions} rowItem={rowItem} />
+              <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="values" />
             ) : rowItem.cells ? (
-              <CellRow headOptions={headOptions} rowItem={rowItem} />
+              <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="cells" />
             ) : (
               <></>
             )}

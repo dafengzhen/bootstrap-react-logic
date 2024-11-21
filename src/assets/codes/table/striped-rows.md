@@ -28,5 +28,6 @@
     { label: 'Last', scope: 'col' },
     { label: 'Handle', scope: 'col' },
   ]}
+  striped
 />
 ```
