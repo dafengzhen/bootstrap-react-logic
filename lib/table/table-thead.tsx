@@ -5,10 +5,15 @@ import type { TableTheadProps } from './types.ts';
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const TableThead = function TableThead<T extends ElementType = 'thead'>(props: TableTheadProps<T>) {
-  const { as: Component = 'thead', className, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'thead', className, divider, dropOldClass, style, variables, variant, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = clsxUnique(
+      !dropOldClass && '',
+      divider && 'table-group-divider',
+      variant && `table-${variant}`,
+      className,
+    );
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -20,7 +25,7 @@ const TableThead = function TableThead<T extends ElementType = 'thead'>(props: T
       },
       isValueValid,
     );
-  }, [className, dropOldClass, style, variables]);
+  }, [className, divider, dropOldClass, style, variables, variant]);
 
   return <Component {...rest} {...renderOptions} />;
 };

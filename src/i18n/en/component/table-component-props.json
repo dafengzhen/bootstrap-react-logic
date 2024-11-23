@@ -2,10 +2,23 @@
   "table": {
     "name": "Table",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "body": "Table Body",
+      "bodyProps": "Body Properties",
+      "bordered": "Bordered",
+      "borderless": "Borderless",
+      "caption": "Caption",
+      "captionProps": "Caption Properties",
+      "foot": "Table Foot",
+      "head": "Table Head",
+      "headProps": "Head Properties",
+      "hover": "Hover Effect",
+      "middle": "Middle",
+      "responsive": "Responsive",
+      "responsiveProps": "Responsive Properties",
+      "size": "Size",
+      "striped": "Striped",
+      "stripedColumns": "Striped Columns",
+      "variant": "Variant"
     }
   }
 }

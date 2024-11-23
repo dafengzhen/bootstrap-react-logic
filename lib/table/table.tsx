@@ -1,16 +1,20 @@
-import { type ElementType, useMemo, useState } from 'react';
+import { type ElementType, isValidElement, useMemo, useState } from 'react';
 
 import type {
   TableBodyCellOption,
   TableBodyOption,
   TableBodyValueOption,
+  TableFootOption,
   TableHeadOption,
   TableProps,
 } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isPlainObject, isValueValid } from '../tools';
+import TableCaption from './table-caption.tsx';
+import TableResponsive from './table-responsive.tsx';
 import TableTbody from './table-tbody.tsx';
 import TableTd from './table-td.tsx';
+import TableTfoot from './table-tfoot.tsx';
 import TableTh from './table-th.tsx';
 import TableThead from './table-thead.tsx';
 import TableTr from './table-tr.tsx';
@@ -19,12 +23,16 @@ interface AugmentedBodyOption extends TableBodyOption {
   id: number | string;
 }
 
+interface AugmentedFootOption extends TableFootOption {
+  id: number | string;
+}
+
 interface AugmentedHeadOption extends TableHeadOption {
   id: number | string;
 }
 
 const isCellOption = (cell: unknown): cell is TableBodyCellOption => {
-  return isPlainObject(cell);
+  return isPlainObject(cell) && !isValidElement(cell);
 };
 
 const createOptionsWithId = <T extends TableBodyOption | TableHeadOption>(
@@ -43,23 +51,33 @@ const renderTableCell = (
   colIndex: number,
   isRowScope: boolean,
 ) => {
-  const key = `${headerItem.id}${rowItem.id}`;
+  const key = `${headerItem.key ?? headerItem.id}${rowItem.id}`;
   const isCell = isCellOption(cellItem);
   const colSpan = isCell ? cellItem.colSpan : undefined;
   const rowSpan = isCell ? cellItem.rowSpan : undefined;
   const variant = isCell ? cellItem.variant : undefined;
   const active = isCell ? cellItem.active : undefined;
+  const thProps = isCell ? cellItem.thProps : undefined;
+  const tdProps = isCell ? cellItem.tdProps : undefined;
   const value = isCell ? cellItem.value : cellItem;
 
   if (isRowScope && colIndex === 0) {
     return (
-      <TableTh active={active} colSpan={colSpan} key={key} rowSpan={rowSpan} scope={rowItem.scope} variant={variant}>
+      <TableTh
+        {...thProps}
+        active={active}
+        colSpan={colSpan}
+        key={key}
+        rowSpan={rowSpan}
+        scope={rowItem.scope}
+        variant={variant}
+      >
         {value}
       </TableTh>
     );
   } else {
     return (
-      <TableTd active={active} colSpan={colSpan} key={key} rowSpan={rowSpan} variant={variant}>
+      <TableTd {...tdProps} active={active} colSpan={colSpan} key={key} rowSpan={rowSpan} variant={variant}>
         {value}
       </TableTd>
     );
@@ -94,11 +112,21 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
     as: Component = 'table',
     body: bodyByDefault = [],
     bodyProps,
+    bordered,
+    borderless,
+    caption,
+    captionProps,
     className,
     dropOldClass,
+    foot: footerByDefault = [],
+    footProps,
     head: headerByDefault = [],
     headProps,
     hover,
+    middle,
+    responsive,
+    responsiveProps,
+    size,
     striped,
     stripedColumns,
     style,
@@ -107,6 +135,7 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
     ...rest
   } = props;
   const [headOptions] = useState<AugmentedHeadOption[]>(createOptionsWithId(headerByDefault));
+  const [footOptions] = useState<AugmentedFootOption[]>(createOptionsWithId(footerByDefault));
   const [bodyOptions] = useState<AugmentedBodyOption[]>(createOptionsWithId(bodyByDefault));
 
   const computedProps = useMemo(() => {
@@ -116,6 +145,10 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
       striped && 'table-striped',
       stripedColumns && 'table-striped-columns',
       hover && 'table-hover',
+      bordered && 'table-bordered',
+      borderless && `table-borderless`,
+      size && `table-${size}`,
+      middle && 'table align-middle',
       className,
     );
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
@@ -129,45 +162,101 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
       },
       isValueValid,
     );
-  }, [className, dropOldClass, hover, striped, stripedColumns, style, variables, variant]);
+  }, [
+    bordered,
+    borderless,
+    className,
+    dropOldClass,
+    hover,
+    middle,
+    size,
+    striped,
+    stripedColumns,
+    style,
+    variables,
+    variant,
+  ]);
 
-  return (
+  const TableComponent = (
     <Component {...rest} {...computedProps}>
-      <TableThead {...headProps}>
-        <TableTr>
-          {headOptions.map((item) => (
-            <TableTh active={item.active} key={item.id} scope={item.scope} variant={item.variant}>
-              {item.label}
-            </TableTh>
-          ))}
-        </TableTr>
-      </TableThead>
-      <TableTbody {...bodyProps}>
-        {bodyOptions.map((rowItem, rowIndex) => (
-          <TableTr active={rowItem.active} key={rowItem.id} variant={rowItem.variant}>
-            {rowItem.values ? (
-              <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="values" />
-            ) : rowItem.cells ? (
-              <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="cells" />
-            ) : (
-              <></>
-            )}
+      {caption && <TableCaption {...captionProps}>{caption}</TableCaption>}
+
+      {headOptions.length > 0 && (
+        <TableThead {...headProps}>
+          <TableTr>
+            {headOptions.map((item) => (
+              <TableTh
+                {...item.props}
+                active={item.active}
+                key={item.key ?? item.id}
+                scope={item.scope}
+                variant={item.variant}
+              >
+                {item.label}
+              </TableTh>
+            ))}
           </TableTr>
-        ))}
-      </TableTbody>
+        </TableThead>
+      )}
+
+      {bodyOptions.length > 0 && (
+        <TableTbody {...bodyProps}>
+          {bodyOptions.map((rowItem, rowIndex) => (
+            <TableTr {...rowItem.props} active={rowItem.active} key={rowItem.id} variant={rowItem.variant}>
+              {rowItem.values ? (
+                <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="values" />
+              ) : rowItem.cells ? (
+                <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="cells" />
+              ) : (
+                <></>
+              )}
+            </TableTr>
+          ))}
+        </TableTbody>
+      )}
+
+      {footOptions.length > 0 && (
+        <TableTfoot {...footProps}>
+          {footOptions.map((rowItem, rowIndex) => (
+            <TableTr {...rowItem.props} active={rowItem.active} key={rowItem.id} variant={rowItem.variant}>
+              {rowItem.values ? (
+                <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="values" />
+              ) : rowItem.cells ? (
+                <RowCells headOptions={headOptions} rowIndex={rowIndex} rowItem={rowItem} type="cells" />
+              ) : (
+                <></>
+              )}
+            </TableTr>
+          ))}
+        </TableTfoot>
+      )}
     </Component>
+  );
+
+  return responsive ? (
+    <TableResponsive {...responsiveProps} responsive={responsive}>
+      {TableComponent}
+    </TableResponsive>
+  ) : (
+    TableComponent
   );
 };
 
-Table.Thead = TableThead;
+Table.Caption = TableCaption;
+
+Table.Responsive = TableResponsive;
 
 Table.Tbody = TableTbody;
 
+Table.Td = TableTd;
+
+Table.Tfoot = TableTfoot;
+
 Table.Th = TableTh;
 
-Table.Tr = TableTr;
+Table.Thead = TableThead;
 
-Table.Td = TableTd;
+Table.Tr = TableTr;
 
 Table.displayName = 'BRL.Table';
 

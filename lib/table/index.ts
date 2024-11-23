@@ -3,14 +3,16 @@ import Table from './table.tsx';
 // types
 export type {
   TableBodyCellOption,
-  TableBodyCells,
   TableBodyOption,
   TableBodyValueOption,
-  TableBodyValues,
+  TableCaptionProps,
+  TableFootOption,
   TableHeadOption,
   TableProps,
+  TableResponsiveProps,
   TableTbodyProps,
   TableTdProps,
+  TableTfootProps,
   TableTheadProps,
   TableThProps,
   TableTrProps,

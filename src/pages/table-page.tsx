@@ -562,9 +562,841 @@ export default function TablePage() {
         />
       </Example>
 
+      <Example hash="borderedTables" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          bordered
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          bordered
+          className="border-primary"
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+        />
+      </Example>
+
+      <Example hash="tablesWithoutBorders" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          borderless
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          borderless
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          variant="dark"
+        />
+      </Example>
+
+      <Example hash="smallTables" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          size="sm"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          size="sm"
+          variant="dark"
+        />
+      </Example>
+
+      <Example hash="tableGroupDividers" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          bodyProps={{
+            divider: true,
+          }}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+        />
+      </Example>
+
+      <Example hash="verticalAlignment" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              values: [
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This here is some placeholder text, intended to take up quite a bit of vertical space, to demonstrate
+                  how the vertical alignment works in the preceding cells.
+                </>,
+              ],
+            },
+            {
+              props: {
+                className: 'align-bottom',
+              },
+              values: [
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This here is some placeholder text, intended to take up quite a bit of vertical space, to demonstrate
+                  how the vertical alignment works in the preceding cells.
+                </>,
+              ],
+            },
+            {
+              values: [
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                <>
+                  This cell inherits <code>vertical-align: middle;</code> from the table
+                </>,
+                {
+                  tdProps: {
+                    className: 'align-top',
+                  },
+                  value: (
+                    <>
+                      This cell inherits <code>vertical-align: middle;</code> from the table
+                    </>
+                  ),
+                },
+                <>
+                  This here is some placeholder text, intended to take up quite a bit of vertical space, to demonstrate
+                  how the vertical alignment works in the preceding cells.
+                </>,
+              ],
+            },
+          ]}
+          head={[
+            {
+              label: 'Heading 1',
+              props: {
+                className: 'w-25',
+              },
+              scope: 'col',
+            },
+            {
+              label: 'Heading 2',
+              props: {
+                className: 'w-25',
+              },
+              scope: 'col',
+            },
+            {
+              label: 'Heading 3',
+              props: {
+                className: 'w-25',
+              },
+              scope: 'col',
+            },
+            {
+              label: 'Heading 4',
+              props: {
+                className: 'w-25',
+              },
+              scope: 'col',
+            },
+          ]}
+          middle
+          responsive
+        />
+      </Example>
+
+      <Example hash="nesting" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              values: [
+                {
+                  colSpan: 4,
+                  value: (
+                    <Table
+                      body={[
+                        {
+                          scope: 'row',
+                          values: ['A', 'First', 'Last'],
+                        },
+                        {
+                          scope: 'row',
+                          values: ['B', 'First', 'Last'],
+                        },
+                        {
+                          scope: 'row',
+                          values: ['C', 'First', 'Last'],
+                        },
+                      ]}
+                      className="mb-0"
+                      head={[
+                        { label: 'Header', scope: 'col' },
+                        { label: 'Header', scope: 'col' },
+                        { label: 'Header', scope: 'col' },
+                      ]}
+                    />
+                  ),
+                },
+              ],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
+          bordered
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          striped
+        />
+      </Example>
+
+      <Example hash="tableHead" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          headProps={{
+            variant: 'light',
+          }}
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+          headProps={{
+            variant: 'dark',
+          }}
+        />
+      </Example>
+
+      <Example hash="tableFoot" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
+            },
+          ]}
+          foot={[
+            {
+              values: ['Footer', 'Footer', 'Footer', 'Footer'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+        />
+      </Example>
+
+      <Example hash="captions" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
+            },
+          ]}
+          caption="List of users"
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
+        />
+      </Example>
+
+      <Example hash="alwaysResponsive" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive
+        />
+      </Example>
+
+      <Example hash="breakpointSpecific" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive="sm"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive="md"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive="lg"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive="xl"
+        />
+
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
+            },
+          ]}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+            { label: 'Heading', scope: 'col' },
+          ]}
+          responsive="xxl"
+        />
+      </Example>
+
       <PropsIndicator />
 
-      <Example hash="tableComponentProps" items={[]} props state={state} t={tTableComponentProps} />
+      <Example
+        hash="tableComponentProps"
+        items={[
+          {
+            attr: 'body',
+            default: '',
+            desc: tTableComponentProps('table.desc.body'),
+            type: <span className="badge text-bg-secondary">TableBodyOption[]</span>,
+          },
+          {
+            attr: 'bodyProps',
+            default: '',
+            desc: tTableComponentProps('table.desc.bodyProps'),
+            type: <span className="badge text-bg-secondary">TableTbodyProps</span>,
+          },
+          {
+            attr: 'bordered',
+            default: '',
+            desc: tTableComponentProps('table.desc.bordered'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+          {
+            attr: 'borderless',
+            default: '',
+            desc: tTableComponentProps('table.desc.borderless'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+          {
+            attr: 'caption',
+            default: '',
+            desc: tTableComponentProps('table.desc.caption'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+          },
+          {
+            attr: 'captionProps',
+            default: '',
+            desc: tTableComponentProps('table.desc.captionProps'),
+            type: <span className="badge text-bg-secondary">TableCaptionProps</span>,
+          },
+          {
+            attr: 'foot',
+            default: '',
+            desc: tTableComponentProps('table.desc.foot'),
+            type: <span className="badge text-bg-secondary">TableFootOption</span>,
+          },
+          {
+            attr: 'head',
+            default: '',
+            desc: tTableComponentProps('table.desc.head'),
+            type: <span className="badge text-bg-secondary">TableHeadOption</span>,
+          },
+          {
+            attr: 'headProps',
+            default: '',
+            desc: tTableComponentProps('table.desc.headProps'),
+            type: <span className="badge text-bg-secondary">TableTheadProps</span>,
+          },
+          {
+            attr: 'hover',
+            default: '',
+            desc: tTableComponentProps('table.desc.hover'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+          {
+            attr: 'middle',
+            default: '',
+            desc: tTableComponentProps('table.desc.middle'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+          {
+            attr: 'responsive',
+            default: '',
+            desc: tTableComponentProps('table.desc.responsive'),
+            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl | boolean</span>,
+          },
+          {
+            attr: 'responsiveProps',
+            default: '',
+            desc: tTableComponentProps('table.desc.responsiveProps'),
+            type: <span className="badge text-bg-secondary">TableResponsiveProps</span>,
+          },
+          {
+            attr: 'size',
+            default: '',
+            desc: tTableComponentProps('table.desc.size'),
+            type: <span className="badge text-bg-secondary">sm</span>,
+          },
+          {
+            attr: 'striped',
+            default: '',
+            desc: tTableComponentProps('table.desc.striped'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+          {
+            attr: 'stripedColumns',
+            default: '',
+            desc: tTableComponentProps('table.desc.stripedColumns'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+          {
+            attr: 'variant',
+            default: '',
+            desc: tTableComponentProps('table.desc.variant'),
+            type: <span className="badge text-bg-secondary">Variant</span>,
+          },
+        ]}
+        props
+        state={state}
+        t={tTableComponentProps}
+      />
 
       <Example hash="commonComponentProps" props state={state} />
 

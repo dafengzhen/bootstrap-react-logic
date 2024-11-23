@@ -2,10 +2,23 @@
   "table": {
     "name": "Table",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "body": "表格主体",
+      "bodyProps": "主体属性",
+      "bordered": "带边框",
+      "borderless": "无边框",
+      "caption": "标题",
+      "captionProps": "标题属性",
+      "foot": "表格底部",
+      "head": "表格头部",
+      "headProps": "表头属性",
+      "hover": "悬停效果",
+      "middle": "中部",
+      "responsive": "响应式",
+      "responsiveProps": "响应式属性",
+      "size": "尺寸",
+      "striped": "条纹",
+      "stripedColumns": "条纹列",
+      "variant": "变体"
     }
   }
 }

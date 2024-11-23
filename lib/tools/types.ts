@@ -1000,9 +1000,15 @@ type SpinnerVariablesType = {
   spinnerWidthSm?: string;
 };
 
+type TableCaptionVariablesType = TableVariablesType;
+
+type TableResponsiveVariablesType = TableVariablesType;
+
 type TableTbodyVariablesType = TableVariablesType;
 
 type TableTdVariablesType = TableVariablesType;
+
+type TableTfootVariablesType = TableVariablesType;
 
 type TableTheadVariablesType = TableVariablesType;
 
@@ -1216,8 +1222,11 @@ export type {
   SelectOptionVariablesType,
   SelectVariablesType,
   SpinnerVariablesType,
+  TableCaptionVariablesType,
+  TableResponsiveVariablesType,
   TableTbodyVariablesType,
   TableTdVariablesType,
+  TableTfootVariablesType,
   TableTheadVariablesType,
   TableThVariablesType,
   TableTrVariablesType,

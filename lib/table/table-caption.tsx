@@ -1,14 +1,14 @@
 import { type ElementType, useMemo } from 'react';
 
-import type { TableTbodyProps } from './types.ts';
+import type { TableCaptionProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const TableTbody = function TableTbody<T extends ElementType = 'tbody'>(props: TableTbodyProps<T>) {
-  const { as: Component = 'tbody', className, divider, dropOldClass, style, variables, ...rest } = props;
+const TableCaption = function TableCaption<T extends ElementType = 'caption'>(props: TableCaptionProps<T>) {
+  const { as: Component = 'caption', className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', divider && 'table-group-divider', className);
+    const finalClass = clsxUnique(!dropOldClass && '', className);
     const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
       return convertBsKeyToVar(key);
     });
@@ -20,11 +20,11 @@ const TableTbody = function TableTbody<T extends ElementType = 'tbody'>(props: T
       },
       isValueValid,
     );
-  }, [className, divider, dropOldClass, style, variables]);
+  }, [className, dropOldClass, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;
 };
 
-TableTbody.displayName = 'BRL.TableTbody';
+TableCaption.displayName = 'BRL.TableCaption';
 
-export default TableTbody;
+export default TableCaption;

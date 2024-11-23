@@ -1,7 +1,19 @@
 {
   "basic": "Basic",
-  "buttons": "Buttons",
-  "positioned": "Positioned",
-  "backgroundColors": "Background Colors",
-  "pillBadges": "Pill Badges"
+  "variants": "Variants",
+  "stripedRows": "Striped Rows",
+  "stripedColumns": "Striped Columns",
+  "hoverableRows": "Hoverable Rows",
+  "activeTables": "Active Tables",
+  "borderedTables": "Bordered Tables",
+  "tablesWithoutBorders": "Tables Without Borders",
+  "smallTables": "Small Tables",
+  "tableGroupDividers": "Table Group Dividers",
+  "verticalAlignment": "Vertical Alignment",
+  "nesting": "Nesting",
+  "tableHead": "Table Head",
+  "tableFoot": "Table Foot",
+  "captions": "Captions",
+  "alwaysResponsive": "Always Responsive",
+  "breakpointSpecific": "Breakpoint Specific"
 }

@@ -17,7 +17,8 @@
       "types": "./dist-lib/main.d.ts",
       "import": "./dist-lib/bootstrap-react-logic.js",
       "require": "./dist-lib/bootstrap-react-logic.cjs"
-    }
+    },
+    "./bootstrap-react-logic.css": "./dist-lib/bootstrap-react-logic.css"
   },
   "engines": {
     "node": ">=20",
@@ -57,7 +58,8 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.28",
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "cssmix": "^0.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",

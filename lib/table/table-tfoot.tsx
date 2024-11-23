@@ -1,11 +1,11 @@
 import { type ElementType, useMemo } from 'react';
 
-import type { TableTbodyProps } from './types.ts';
+import type { TableTfootProps } from './types.ts';
 
 import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
-const TableTbody = function TableTbody<T extends ElementType = 'tbody'>(props: TableTbodyProps<T>) {
-  const { as: Component = 'tbody', className, divider, dropOldClass, style, variables, ...rest } = props;
+const TableTfoot = function TableTfoot<T extends ElementType = 'tfoot'>(props: TableTfootProps<T>) {
+  const { as: Component = 'tfoot', className, divider, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', divider && 'table-group-divider', className);
@@ -25,6 +25,6 @@ const TableTbody = function TableTbody<T extends ElementType = 'tbody'>(props: T
   return <Component {...rest} {...renderOptions} />;
 };
 
-TableTbody.displayName = 'BRL.TableTbody';
+TableTfoot.displayName = 'BRL.TableTfoot';
 
-export default TableTbody;
+export default TableTfoot;

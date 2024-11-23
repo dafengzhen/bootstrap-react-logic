@@ -1,7 +1,19 @@
 {
-  "basic": "Basic",
-  "buttons": "Buttons",
-  "positioned": "Positioned",
-  "backgroundColors": "Background Colors",
-  "pillBadges": "Pill Badges"
+  "basic": "基础",
+  "variants": "变体",
+  "stripedRows": "条纹行",
+  "stripedColumns": "条纹列",
+  "hoverableRows": "可悬停行",
+  "activeTables": "激活表格",
+  "borderedTables": "带边框表格",
+  "tablesWithoutBorders": "无边框表格",
+  "smallTables": "小型表格",
+  "tableGroupDividers": "表格组分隔符",
+  "verticalAlignment": "垂直对齐",
+  "nesting": "嵌套",
+  "tableHead": "表头",
+  "tableFoot": "表尾",
+  "captions": "标题",
+  "alwaysResponsive": "始终响应式",
+  "breakpointSpecific": "特定断点"
 }

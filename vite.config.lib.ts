@@ -8,7 +8,7 @@ import dts from 'vite-plugin-dts';
 import mergeCssPlugin from './merge-css-plugin';
 
 // lite tools
-const lightweightTools = ['clsx'];
+const lightweightTools = ['clsx', 'cssmix'];
 
 // https://vitejs.dev/config/
 export default defineConfig({
