@@ -8,12 +8,12 @@
 </Button>
 
 <Button
-  variant="secondary"
-  size={{
-    paddingY: '0.25rem',
-    paddingX: '0.5rem',
-    fontSize: '0.75rem',
+  variables={{
+    bsBtnFontSize: '0.75rem',
+    bsBtnPaddingY: '0.25rem',
+    bsBtnPaddingX: '0.5rem',
   }}
+  variant="secondary"
 >
   Custom
 </Button>

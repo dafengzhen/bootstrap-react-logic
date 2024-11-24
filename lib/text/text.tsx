@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TextProps } from './types.ts';
 
-import { convertBsKeyToVar, findTruthyClass, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
 
 const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
   const {
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     invalidFeedback,
     invalidTooltip,
     validFeedback,
@@ -31,18 +31,13 @@ const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
         ),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
-  }, [dropOldClass, validFeedback, invalidFeedback, validTooltip, invalidTooltip, className, variables, style]);
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
+  }, [className, dropOldClass, invalidFeedback, invalidTooltip, style, validFeedback, validTooltip, variables]);
 
   return (
     <Component {...rest} {...renderOptions}>

@@ -3,6 +3,7 @@
     "name": "Input",
     "desc": {
       "onRef": "On Ref",
+      "onChange": "On Change",
       "size": "Size",
       "nativeSize": "Size (HTMLAttributes)",
       "disabled": "Disabled",
@@ -20,6 +21,7 @@
   "inputOtp": {
     "name": "InputOtp",
     "desc": {
+      "onChange": "On Change",
       "length": "Length",
       "defaultValue": "Default Value",
       "inputProps": "Input Props"
@@ -28,6 +30,8 @@
   "textarea": {
     "name": "Textarea",
     "desc": {
+      "onRef": "On Ref",
+      "onChange": "On Change",
       "disabled": "Disabled",
       "readonly": "Readonly",
       "isValid": "Class (.is-valid)",

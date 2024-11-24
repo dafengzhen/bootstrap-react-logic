@@ -12,16 +12,7 @@ import {
 
 import type { InputOtpProps } from './types.ts';
 
-import {
-  convertBsKeyToVar,
-  generateRandomId,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  mergeProps,
-  clsxStyle,
-  isArray,
-} from '../tools';
+import { convertBsKeyToVar, generateRandomId, clsxUnique, mergeProps, isArray, stylex } from '../tools';
 import { Input } from '../input';
 
 interface IOtp {
@@ -29,9 +20,9 @@ interface IOtp {
   id: string;
 }
 
-const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOtpProps<T>) {
+const InputOtp = function InputOtp<T extends ElementType = 'input'>(props: InputOtpProps<T>) {
   const {
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     maxLength = 1,
     defaultValue,
     dropOldClass,
@@ -67,12 +58,10 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'd-flex gap-4', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions({ className: finalClass, style: finalStyle }, isValueValid);
-  }, [dropOldClass, className, variables, style]);
+    return { className: finalClass, style: finalStyle };
+  }, [className, dropOldClass, style, variables]);
 
   const focusInput = useCallback(
     (index: number) => {

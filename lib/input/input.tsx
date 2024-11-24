@@ -1,26 +1,13 @@
-import { type HTMLInputTypeAttribute, type ElementType, type ElementRef, type LegacyRef, useMemo } from 'react';
+import { type ElementType, useMemo } from 'react';
 
 import type { InputProps } from './types.ts';
 
-import {
-  processSlotClasses,
-  convertBsKeyToVar,
-  clsxWithOptions,
-  findTruthyClass,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  clsxStyle,
-} from '../tools';
+import { processSlotClasses, convertBsKeyToVar, clsxWithOptions, findTruthyClass, clsxUnique, stylex } from '../tools';
 import inputStyles from './input.module.scss';
 
-const Input = function Input<T extends ElementType = 'input'>(
-  props: {
-    type?: HTMLInputTypeAttribute | undefined;
-  } & InputProps<T>,
-) {
+const Input = function Input<T extends ElementType = 'input'>(props: InputProps<T>) {
   const {
-    as: Component = 'input',
+    as: Component = 'input' as ElementType,
     startEndContentClasses,
     readonlyPlainText,
     dropOldClass,
@@ -56,33 +43,28 @@ const Input = function Input<T extends ElementType = 'input'>(
       isInvalid && 'is-invalid',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        color: nativeColor,
-        style: finalStyle,
-        size: nativeSize,
-        type,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      color: nativeColor,
+      style: finalStyle,
+      size: nativeSize,
+      type,
+    };
   }, [
-    dropOldClass,
-    type,
-    readonlyPlainText,
-    color,
-    size,
-    isValid,
-    isInvalid,
     className,
-    variables,
-    style,
-    nativeSize,
+    color,
+    dropOldClass,
+    isInvalid,
+    isValid,
     nativeColor,
+    nativeSize,
+    readonlyPlainText,
+    size,
+    style,
+    type,
+    variables,
   ]);
 
   if (startContent || endContent) {
@@ -118,7 +100,7 @@ const Input = function Input<T extends ElementType = 'input'>(
   }
 
   return (
-    <Component {...rest} {...renderOptions} ref={onRef as LegacyRef<ElementRef<'input'>>}>
+    <Component {...rest} {...renderOptions} ref={onRef}>
       {children}
     </Component>
   );

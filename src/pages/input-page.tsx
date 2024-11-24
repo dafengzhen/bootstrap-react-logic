@@ -1,3 +1,4 @@
+import EventsIndicator from '@components/events-indicator.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useNavigation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -250,19 +251,13 @@ export default function InputPage() {
       <Example
         items={[
           {
-            type: <span className="badge text-bg-secondary">RefCallback&lt;input&gt;</span>,
-            desc: tInputComponentProps('input.desc.onRef'),
-            attr: 'onRef',
-            default: '',
-          },
-          {
             type: <span className="badge text-bg-secondary">lg | sm</span>,
             desc: tInputComponentProps('input.desc.size'),
             attr: 'size',
             default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">number | undefined</span>,
+            type: <span className="badge text-bg-secondary">number</span>,
             desc: tInputComponentProps('input.desc.nativeSize'),
             attr: 'nativeSize',
             default: '',
@@ -304,7 +299,7 @@ export default function InputPage() {
             default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">string | undefined</span>,
+            type: <span className="badge text-bg-secondary">string</span>,
             desc: tInputComponentProps('input.desc.nativeColor'),
             attr: 'nativeColor',
             default: '',
@@ -323,13 +318,13 @@ export default function InputPage() {
           },
           {
             type: (
-              <div className="d-flex flex-column gap-2">
+              <div className="d-flex flex-column">
                 <div>
                   <span className="badge text-bg-secondary">Key : container | start | end | component</span>
                 </div>
                 <div>
                   <span className="badge text-bg-secondary">
-                    Value : string | ((originalClass: string) =&gt; string | undefined)
+                    {'Value : string | ((originalClass: string) => string)'}
                   </span>
                 </div>
               </div>
@@ -360,7 +355,7 @@ export default function InputPage() {
             default: '-',
           },
           {
-            type: <span className="badge text-bg-secondary">InputProps&lt;input&gt;</span>,
+            type: <span className="badge text-bg-secondary">InputProps</span>,
             desc: tInputComponentProps('inputOtp.desc.inputProps'),
             attr: 'inputProps',
             default: '-',
@@ -463,6 +458,65 @@ export default function InputPage() {
         t={tInputComponentProps}
         state={state}
         props
+      />
+
+      <EventsIndicator />
+
+      <Example
+        items={[
+          {
+            type: <span className="badge text-bg-secondary">RefCallback</span>,
+            desc: tInputComponentProps('input.desc.onRef'),
+            attr: 'onRef',
+            default: '',
+          },
+          {
+            type: <span className="badge text-bg-secondary">Function</span>,
+            desc: tInputComponentProps('input.desc.onChange'),
+            attr: 'onChange',
+            default: '',
+          },
+        ]}
+        hash="inputComponentProps"
+        t={tInputComponentProps}
+        state={state}
+        events
+      />
+
+      <Example
+        items={[
+          {
+            type: <span className="badge text-bg-secondary">Function</span>,
+            desc: tInputComponentProps('inputOtp.desc.onChange'),
+            attr: 'onChange',
+            default: '',
+          },
+        ]}
+        hash="inputOtpComponentProps"
+        t={tInputComponentProps}
+        state={state}
+        events
+      />
+
+      <Example
+        items={[
+          {
+            type: <span className="badge text-bg-secondary">RefCallback</span>,
+            desc: tInputComponentProps('textarea.desc.onRef'),
+            attr: 'onRef',
+            default: '',
+          },
+          {
+            type: <span className="badge text-bg-secondary">Function</span>,
+            desc: tInputComponentProps('textarea.desc.onChange'),
+            attr: 'onChange',
+            default: '',
+          },
+        ]}
+        hash="textareaComponentProps"
+        t={tInputComponentProps}
+        state={state}
+        events
       />
 
       <Example hash="commonComponentProps" state={state} props />

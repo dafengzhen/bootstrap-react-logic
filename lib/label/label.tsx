@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { LabelProps } from './types.ts';
 
-import { convertBsKeyToVar, findTruthyClass, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
 
 const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<T>) {
   const {
-    as: Component = 'label',
+    as: Component = 'label' as ElementType,
     formCheckLabel,
     inputGroupText,
     colFormLabel,
@@ -29,18 +29,13 @@ const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<
         ),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
-  }, [dropOldClass, formCheckLabel, inputGroupText, colFormLabel, className, variables, style]);
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
+  }, [className, colFormLabel, dropOldClass, formCheckLabel, inputGroupText, style, variables]);
 
   return (
     <Component {...rest} {...renderOptions}>

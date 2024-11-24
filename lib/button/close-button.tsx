@@ -5,8 +5,8 @@ import type { CloseButtonProps } from './types.ts';
 import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import Button from './button.tsx';
 
-const CloseButton = function CloseButton(props: CloseButtonProps<ElementType>) {
-  const { className, variables, style, ...rest } = props;
+const CloseButton = function CloseButton<T extends ElementType = 'button'>(props: CloseButtonProps<T>) {
+  const { as: Component = 'button' as ElementType, className, variables, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(className);
@@ -18,7 +18,7 @@ const CloseButton = function CloseButton(props: CloseButtonProps<ElementType>) {
     };
   }, [className, style, variables]);
 
-  return <Button btnClose {...rest} {...renderOptions} />;
+  return <Button btnClose {...rest} {...renderOptions} as={Component} />;
 };
 
 CloseButton.displayName = 'BRL.CloseButton';

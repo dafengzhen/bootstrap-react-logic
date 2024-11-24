@@ -4,9 +4,9 @@ import type { ButtonProps } from './types.ts';
 
 import { resolveRoundedClass, convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
 
-const Button = function Button(props: ButtonProps<ElementType>) {
+const Button = function Button<T extends ElementType = 'button'>(props: ButtonProps<T>) {
   const {
-    as: Component = 'button',
+    as: Component = 'button' as ElementType,
     type = 'button',
     dropOldClass,
     startContent,
@@ -40,12 +40,7 @@ const Button = function Button(props: ButtonProps<ElementType>) {
       rounded && resolveRoundedClass(rounded),
       className,
     );
-    const finalStyle = stylex(
-      (_, key) => ({ tKey: convertBsKeyToVar(key) }),
-
-      variables,
-      style,
-    );
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
       disabled: disabled && Component === 'button',

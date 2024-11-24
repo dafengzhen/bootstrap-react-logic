@@ -1,4 +1,4 @@
-import type { ElementType, ElementRef, LegacyRef, ReactNode } from 'react';
+import type { ElementType, RefCallback, ElementRef, ReactNode } from 'react';
 
 import type { OmittedPropsWithoutRef, InputVariablesType, BaseProps, SlotValue } from '../tools';
 
@@ -16,19 +16,9 @@ type Props<T extends ElementType> = {
   startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
 
   /**
-   * nativeColor.
-   */
-  nativeColor?: undefined | string;
-
-  /**
    * onRef.
    */
-  onRef?: LegacyRef<ElementRef<T>>;
-
-  /**
-   * nativeSize.
-   */
-  nativeSize?: undefined | number;
+  onRef?: RefCallback<ElementRef<T>>;
 
   /**
    * readonlyPlainText.
@@ -44,6 +34,16 @@ type Props<T extends ElementType> = {
    * endContent.
    */
   endContent?: ReactNode;
+
+  /**
+   * nativeColor.
+   */
+  nativeColor?: string;
+
+  /**
+   * nativeSize.
+   */
+  nativeSize?: number;
 
   /**
    * isInvalid,
