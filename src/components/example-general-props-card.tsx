@@ -7,6 +7,7 @@ export default function ExampleGeneralPropsCard(props: any) {
   const hash = props.hash;
   const _hash = kebabToCamelCase(hash.endsWith('ComponentProps') ? hash.split('ComponentProps')[0] : hash);
   const _tHash = t(`${kebabToCamelCaseLowerFirst(_hash)}.name`) || _hash;
+  const showCode = props.showCode;
 
   return (
     <ExamplePropsCard
@@ -61,10 +62,11 @@ export default function ExampleGeneralPropsCard(props: any) {
           default: '',
         },
       ]}
+      showCode={showCode}
       title={_tHash}
       hash={hash}
       customBody
       {...props}
-    ></ExamplePropsCard>
+    />
   );
 }

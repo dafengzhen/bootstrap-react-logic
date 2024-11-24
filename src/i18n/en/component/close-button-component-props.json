@@ -3,7 +3,8 @@
     "name": "CloseButton",
     "desc": {
       "disabled": "Disabled",
-      "ariaLabel": "ARIA Label"
+      "ariaLabel": "ARIA Label",
+      "onClick": "On Click"
     }
   }
 }

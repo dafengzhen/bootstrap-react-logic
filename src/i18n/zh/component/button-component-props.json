@@ -14,7 +14,8 @@
       "startContent": "开始内容",
       "endContent": "结束内容",
       "btnClose": "类 (.btn-close)",
-      "onRef": "引用"
+      "onRef": "引用",
+      "onClick": "点击"
     }
   }
 }

@@ -4,6 +4,7 @@ import useHighlightCode from '@hooks/use-highlight-code.ts';
 import { ActionIcons } from '@components/action-icons.tsx';
 import ExampleLink from '@components/example-link.tsx';
 import { useTranslation } from 'react-i18next';
+import { sortByProperty } from '@src/tools';
 import clsx from 'clsx';
 
 export default function ExamplePropsCard({
@@ -16,6 +17,7 @@ export default function ExamplePropsCard({
   toggleCode,
   children,
   colgroup,
+  showCode,
   isOpen,
   title,
   code,
@@ -40,6 +42,7 @@ export default function ExamplePropsCard({
   codeLanguage?: string;
   children?: ReactNode;
   customBody?: boolean;
+  showCode?: boolean;
   isOpen: boolean;
   code?: string;
   title: string;
@@ -65,6 +68,7 @@ export default function ExamplePropsCard({
     },
   );
   const [setElement] = useHighlightCode({ codeLanguage, isOpen, code });
+  const _items = sortByProperty(items, 'attr');
 
   return (
     <div className="card">
@@ -82,6 +86,7 @@ export default function ExamplePropsCard({
                 fullscreenState={fullscreen}
                 onClickCode={toggleCode}
                 layoutState={layout}
+                showCode={showCode}
                 themeState={theme}
                 isOpen={isOpen}
                 code={code}
@@ -91,7 +96,7 @@ export default function ExamplePropsCard({
           </div>
           <div className={clsx('card-body', codeDisplayMode === 'direct' && isOpen && 'd-none')}>
             <div className="table-responsive">
-              <table className="table tw-table-fixed">
+              <table className="table tw-table-fixed table-borderless">
                 <colgroup>
                   <col style={_colgroup.attr} />
                   <col style={_colgroup.type} />
@@ -116,7 +121,7 @@ export default function ExamplePropsCard({
                   </tr>
                 </thead>
                 <tbody>
-                  {items.map((item, index) => (
+                  {_items.map((item, index) => (
                     <tr key={typeof item.attr === 'string' ? item.attr : index}>
                       <td>{item.attr}</td>
                       <td>{item.type}</td>

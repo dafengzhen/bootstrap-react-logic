@@ -14,7 +14,8 @@
       "startContent": "Start Content",
       "endContent": "End Content",
       "btnClose": "Class (.btn-close)",
-      "onRef": "On Ref"
+      "onRef": "On Ref",
+      "onClick": "On Click"
     }
   }
 }

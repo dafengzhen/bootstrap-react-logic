@@ -1,3 +1,4 @@
+import EventsIndicator from '@components/events-indicator.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { useNavigation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -27,20 +28,16 @@ export default function CloseButtonPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tCloseButtonPage} state={state} hash="basic">
-        <div>
-          <CloseButton />
-        </div>
+      <Example t={tCloseButtonPage} state={state} hash="basic" row>
+        <CloseButton />
       </Example>
 
-      <Example hash="disabledState" t={tCloseButtonPage} state={state}>
-        <div>
-          <CloseButton disabled />
-        </div>
+      <Example hash="disabledState" t={tCloseButtonPage} state={state} row>
+        <CloseButton disabled />
       </Example>
 
       <Example t={tCloseButtonPage} hash="darkVariant" state={state} dark>
-        <div data-bs-theme="dark">
+        <div className="d-flex gap-2" data-bs-theme="dark">
           <CloseButton />
           <CloseButton disabled />
         </div>
@@ -56,17 +53,28 @@ export default function CloseButtonPage() {
             attr: 'disabled',
             default: '',
           },
-          {
-            desc: tCloseButtonComponentProps('closeButton.desc.ariaLabel'),
-            type: <span className="badge text-bg-secondary">string</span>,
-            attr: 'aria-label',
-            default: 'Close',
-          },
         ]}
         hash="closeButtonComponentProps"
         t={tCloseButtonComponentProps}
         state={state}
         props
+      />
+
+      <EventsIndicator />
+
+      <Example
+        items={[
+          {
+            type: <span className="badge text-bg-secondary">Function</span>,
+            desc: tCloseButtonComponentProps('closeButton.desc.onClick'),
+            attr: 'onClick',
+            default: '',
+          },
+        ]}
+        hash="closeButtonComponentProps"
+        t={tCloseButtonComponentProps}
+        state={state}
+        events
       />
 
       <Example hash="commonComponentProps" state={state} props />

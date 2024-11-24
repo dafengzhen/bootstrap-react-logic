@@ -1,6 +1,7 @@
 import EventsIndicator from '@components/events-indicator.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
+import TypesIndicator from '@components/types-indicator.tsx';
+import { useNavigation, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Example from '@components/example.tsx';
 import { transformCodeObj } from '@src/tools';
@@ -204,17 +205,12 @@ export default function ButtonPage() {
           },
           {
             type: (
-              <div className="d-flex flex-column">
-                {['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'link'].map(
-                  (item) => {
-                    return (
-                      <div key={item}>
-                        <span className="badge text-bg-secondary">{item}</span>
-                      </div>
-                    );
-                  },
-                )}
-              </div>
+              <Link to="#buttonComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  Variant
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
             ),
             desc: tButtonComponentProps('button.desc.variant'),
             attr: 'variant',
@@ -222,9 +218,12 @@ export default function ButtonPage() {
           },
           {
             type: (
-              <span>
-                Reference <span className="fw-bold">variant</span>
-              </span>
+              <Link to="#buttonComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  Outline
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
             ),
             desc: tButtonComponentProps('button.desc.outline'),
             attr: 'outline',
@@ -262,10 +261,13 @@ export default function ButtonPage() {
           },
           {
             type: (
-              <>
-                <span className="badge text-bg-secondary">xs | sm | md | lg | xl | xxl | circle | pill</span>
-                <span className="badge text-bg-secondary ms-1">boolean</span>
-              </>
+              <Link to="#buttonComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  Rounded
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+                <span className="badge text-bg-secondary d-inline ms-1">boolean</span>
+              </Link>
             ),
             desc: tButtonComponentProps('button.desc.rounded'),
             attr: 'rounded',
@@ -289,12 +291,6 @@ export default function ButtonPage() {
             attr: 'btnClose',
             default: '',
           },
-          {
-            type: <span className="badge text-bg-secondary">onRef?: RefCallback</span>,
-            desc: tButtonComponentProps('button.desc.onRef'),
-            attr: 'onRef',
-            default: '',
-          },
         ]}
         hash="buttonComponentProps"
         t={tButtonComponentProps}
@@ -303,6 +299,140 @@ export default function ButtonPage() {
       />
 
       <EventsIndicator />
+
+      <Example
+        items={[
+          {
+            type: <span className="badge text-bg-secondary">RefCallback</span>,
+            desc: tButtonComponentProps('button.desc.onRef'),
+            attr: 'onRef',
+            default: '',
+          },
+          {
+            type: <span className="badge text-bg-secondary">Function</span>,
+            desc: tButtonComponentProps('button.desc.onClick'),
+            attr: 'onClick',
+            default: '',
+          },
+        ]}
+        hash="buttonComponentProps"
+        t={tButtonComponentProps}
+        state={state}
+        events
+      />
+
+      <TypesIndicator />
+
+      <Example
+        items={[
+          {
+            type: (
+              <div className="row row-cols-auto g-1">
+                <div className="col">
+                  <span className="badge text-bg-secondary">circle</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">pill</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">xxl</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">lg</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">md</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">sm</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">xl</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">xs</span>
+                </div>
+              </div>
+            ),
+            desc: tButtonComponentProps('button.desc.rounded'),
+            attr: 'Rounded',
+            default: '',
+          },
+          {
+            type: (
+              <div className="row row-cols-auto g-1">
+                <div className="col">
+                  <span className="badge text-bg-secondary">secondary</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">primary</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">success</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">warning</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">danger</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">light</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">dark</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">info</span>
+                </div>
+              </div>
+            ),
+            desc: tButtonComponentProps('button.desc.outline'),
+            attr: 'Outline',
+            default: '',
+          },
+          {
+            type: (
+              <div className="row row-cols-auto g-1">
+                <div className="col">
+                  <span className="badge text-bg-secondary">secondary</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">primary</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">success</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">warning</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">danger</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">light</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">dark</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">info</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">link</span>
+                </div>
+              </div>
+            ),
+            desc: tButtonComponentProps('button.desc.variant'),
+            attr: 'Variant',
+            default: '',
+          },
+        ]}
+        hash="buttonComponentProps"
+        t={tButtonComponentProps}
+        state={state}
+        types
+      />
 
       <Example hash="commonComponentProps" state={state} props />
 

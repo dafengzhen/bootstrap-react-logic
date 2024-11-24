@@ -9,6 +9,7 @@ import clsx from 'clsx';
 
 export const ActionIcons = ({
   fullscreenState,
+  showCode = true,
   layoutState,
   onClickCode,
   fullscreen,
@@ -22,6 +23,7 @@ export const ActionIcons = ({
   onClickCode: () => void;
   fullscreen?: boolean;
   fullscreenState: any;
+  showCode?: boolean;
   center?: boolean;
   layoutState: any;
   isOpen: boolean;
@@ -31,13 +33,17 @@ export const ActionIcons = ({
   i18n: any;
 }) => {
   return (
-    <div className="d-flex gap-2">
-      <i
-        className={clsx('bi tw-cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
-        onClick={onClickCode}
-        title="Code"
-      ></i>
-      <i className="bi bi-clipboard2 tw-cursor-pointer" onClick={() => handleClipboard(code)} title="Clipboard"></i>
+    <div className="d-flex align-items-center gap-2">
+      {showCode && (
+        <>
+          <i
+            className={clsx('bi tw-cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
+            onClick={onClickCode}
+            title="Code"
+          ></i>
+          <i className="bi bi-clipboard2 tw-cursor-pointer" onClick={() => handleClipboard(code)} title="Clipboard"></i>
+        </>
+      )}
       <i
         className={clsx('bi tw-cursor-pointer', fullscreen ? 'bi-fullscreen-exit text-primary' : 'bi-fullscreen')}
         onClick={() => handleToggleState(fullscreenState, 'options_fullscreen', 'true', 'false')}
@@ -53,11 +59,18 @@ export const ActionIcons = ({
         onClick={() => handleToggleTheme(themeState)}
         title="Light / Dark"
       ></i>
-      <i
-        className={clsx('bi tw-cursor-pointer', i18n.language !== 'en' ? 'bi-translate text-primary' : 'bi-translate')}
-        onClick={() => handleToggleLanguage(i18n)}
-        title="En / Zh"
-      ></i>
+
+      <select
+        onChange={() => {
+          handleToggleLanguage(i18n);
+        }}
+        style={{ backgroundImage: 'none', paddingRight: '0.5rem' }}
+        className="form-select form-select-sm"
+        value={i18n.language}
+      >
+        <option value="en">EN</option>
+        <option value="zh">ZH</option>
+      </select>
     </div>
   );
 };

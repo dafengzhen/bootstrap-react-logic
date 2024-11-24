@@ -3,7 +3,8 @@
     "name": "CloseButton",
     "desc": {
       "disabled": "禁用",
-      "ariaLabel": "ARIA 标签"
+      "ariaLabel": "ARIA 标签",
+      "onClick": "点击"
     }
   }
 }

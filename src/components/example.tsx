@@ -15,9 +15,11 @@ export default function Example({
   contentId,
   children,
   inline,
+  events,
   items,
   mw400,
   props,
+  types,
   state,
   dark,
   gap3,
@@ -42,9 +44,12 @@ export default function Example({
   children?: ReactNode;
   textNowrap?: boolean;
   contentId?: string;
+  showCode?: boolean;
   inline?: boolean;
+  events?: boolean;
   mw400?: boolean;
   props?: boolean;
+  types?: boolean;
   dark?: boolean;
   gap3?: boolean;
   wrap?: boolean;
@@ -68,12 +73,13 @@ export default function Example({
     updateState(setState, `${path}.openCode`, !isOpen);
   }
 
-  if (props) {
+  if (props || events || types) {
     if (hash === 'commonComponentProps') {
       return (
         <ExampleGeneralPropsCard
           codeLanguage={codeLanguage || 'typescript'}
           toggleCode={toggleCode}
+          showCode={false}
           isOpen={isOpen}
           code={code}
           hash={hash}
@@ -88,13 +94,14 @@ export default function Example({
 
     return (
       <ExamplePropsCard
+        hash={props ? hash : events ? _hash + 'ComponentEvents' : types ? _hash + 'ComponentTypes' : hash}
         codeLanguage={codeLanguage || 'typescript'}
         toggleCode={toggleCode}
+        showCode={false}
         isOpen={isOpen}
         title={_tHash}
         items={items}
         code={code}
-        hash={hash}
       >
         {children}
       </ExamplePropsCard>
