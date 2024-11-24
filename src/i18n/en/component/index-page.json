@@ -1,17 +1,3 @@
 {
-  "p0": "\uD83D\uDCCB In Development",
-  "p1": "Bootstrap React Logic (BRL) is a logic operation library designed specifically for <0>React</0> applications. It seamlessly integrates with <1>Bootstrap</1> styles, helping developers easily build rich, interactive user interfaces.",
-  "p2": "BRL offers a series of powerful and flexible logic components, simplifying state management and event handling, making it more efficient to create dynamic, responsive UIs. Whether it's complex form handling, data presentation, or user interactions, BRL provides a smooth experience, empowering developers to quickly implement creative designs and improve development efficiency.",
-  "p3": "一、Installation",
-  "p4": "Tip: Before installation, please ensure that the bootstrap dependency is already in place.",
-  "p5": "Install BRL using npm:",
-  "p6": "二、Usage",
-  "p7": "Import the component: import { Button } from 'bootstrap-react-logic'",
-  "p7.2": "Import global styles: import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css'",
-  "p8": "Basic usage:",
-  "p9": "三、FAQ",
-  "p10": "Q: How is this different from other third-party libraries?",
-  "p11": "1. It is encapsulated into components, which enhances reusability and development efficiency.",
-  "p12": "2. Compared to other third-party libraries, BRL is developed based on specific project needs, so it may not suit every user's requirements.",
-  "p13": "3. It builds on top of Bootstrap and provides more commonly used components."
+  "p0": "\uD83D\uDCCB In Development"
 }

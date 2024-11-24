@@ -1,10 +1,10 @@
+import { stackoverflowDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 import { useTranslation, Trans } from 'react-i18next';
-import clsx from 'clsx';
+import Markdown from 'react-markdown';
 
-const onClickLanguage = (i18n: any) => {
-  const language = i18n.language;
-  i18n.changeLanguage(language === 'en' ? 'zh' : 'en');
-};
+import readmeZh from '../../README.zh.md?raw';
+import readme from '../../README.md?raw';
 
 export default function IndexPage() {
   const { t: tIndexPage } = useTranslation(['indexPage']);
@@ -18,19 +18,10 @@ export default function IndexPage() {
         <div className="card-header">
           <div className="d-flex align-items-center justify-content-between">
             <div>Getting started</div>
-            <div className="d-flex gap-2">
+            <div className="d-flex align-items-center gap-2">
               <a href="https://github.com/dafengzhen/bootstrap-react-logic" className="link-dark" target="_blank">
                 <i className="bi bi-github tw-cursor-pointer"></i>
               </a>
-
-              <i
-                className={clsx(
-                  'bi tw-cursor-pointer',
-                  language !== 'en' ? 'bi-translate text-primary' : 'bi-translate',
-                )}
-                onClick={() => onClickLanguage(i18n)}
-                title="En / Zh"
-              ></i>
             </div>
           </div>
         </div>
@@ -40,92 +31,28 @@ export default function IndexPage() {
             <Trans t={tIndexPage} i18nKey="p0" />
           </div>
 
-          <div className="mb-4">
-            <div className="card-title">
-              <Trans
-                components={[
-                  <a href="https://react.dev" target="_blank">
-                    &nbsp;React&nbsp;
-                  </a>,
-                  <a href="https://getbootstrap.com" target="_blank">
-                    &nbsp;Bootstrap&nbsp;
-                  </a>,
-                ]}
-                t={tIndexPage}
-                i18nKey="p1"
-              />
-            </div>
-
-            <div className="card-text">
-              <Trans t={tIndexPage} i18nKey="p2" />
-            </div>
-          </div>
-
-          <div className="h5 mb-4">
-            <Trans t={tIndexPage} i18nKey="p3" />
-          </div>
-          <div className="mb-4">
-            <div className="mb-4">
-              <Trans t={tIndexPage} i18nKey="p4" />
-            </div>
-
-            <div className="mb-2">
-              <Trans t={tIndexPage} i18nKey="p5" />
-            </div>
-            <div className="d-flex gap-2">
-              <div className="user-select-none">#</div>
-              <pre>
-                <code className="nohighlight">
-                  npm <span className="text-danger">install&nbsp;</span>
-                  bootstrap-react-logic
-                </code>
-              </pre>
-            </div>
-          </div>
-
-          <div className="h5 mb-4">
-            <Trans t={tIndexPage} i18nKey="p6" />
-          </div>
-          <div className="mb-4">
-            <div className="mb-2">
-              <Trans i18nKey="p7.2" t={tIndexPage} />
-            </div>
-            <div className="mb-4">
-              <Trans t={tIndexPage} i18nKey="p7" />
-            </div>
-
-            <div className="mb-2">
-              <Trans t={tIndexPage} i18nKey="p8" />
-            </div>
-            <div className="d-flex gap-2">
-              <div className="user-select-none">#</div>
-              <pre>
-                <code className="nohighlight">
-                  <span className="text-danger">&lt;Button variant="primary"&gt;Primary&lt;/Button&gt;</span>
-                </code>
-              </pre>
-            </div>
-          </div>
-
-          <div className="h5 mb-4">
-            <Trans t={tIndexPage} i18nKey="p9" />
-          </div>
-          <div className="mb-4">
-            <div className="mb-2">
-              <Trans t={tIndexPage} i18nKey="p10" />
-            </div>
-            <div>
-              <div>
-                <Trans t={tIndexPage} i18nKey="p11" />
-              </div>
-              <div>
-                <Trans t={tIndexPage} i18nKey="p12" />
-              </div>
-              <div>
-                <Trans t={tIndexPage} i18nKey="p13" />
-              </div>
-            </div>
-          </div>
+          <Markdown
+            components={{
+              code(props) {
+                const { className, children, ...rest } = props;
+                const match = /language-(\w+)/.exec(className || '');
+                return match ? (
+                  <SyntaxHighlighter
+                    {...(rest as any)}
+                    children={String(children).replace(/\n$/, '')}
+                    style={stackoverflowDark}
+                    language={match[1]}
+                    PreTag="div"
+                  />
+                ) : (
+                  <code {...rest} className={className}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+            children={language === 'en' ? readme : readmeZh}
+          />
         </div>
       </div>
     </div>

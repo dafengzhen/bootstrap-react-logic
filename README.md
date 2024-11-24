@@ -1,17 +1,20 @@
 # Bootstrap React Logic
 
-Bootstrap React Logic (BRL) is a logic operation library designed specifically for [React](https://react.dev) applications. It seamlessly integrates with [Bootstrap](https://getbootstrap.com) styles, helping developers easily build rich, interactive user interfaces.
-
-BRL offers a series of powerful and flexible logic components, simplifying state management and event handling, making it more efficient to create dynamic, responsive UIs. Whether it's complex form handling, data presentation, or user interactions, BRL provides a smooth experience, empowering
-developers to quickly implement creative designs and improve development efficiency.
+BRL is a React component library integrated with [Bootstrap](https://getbootstrap.com), offering a set of components and
+utilities to help developers build user interfaces in [React](https://react.dev) applications, enhancing development
+efficiency.
 
 [简体中文](./README.zh.md)
 
+## Features
+
+- **Bootstrap Integration**: Consistent with Bootstrap UI elements, ensuring unified appearance and behavior.
+- **Built with React**: Components are built using React, following React development patterns, making them easy to
+  integrate and maintain.
+
 ## Installation
 
-Tip: Before installation, please ensure that the **bootstrap** dependency is already in place.
-
-Install BRL using npm:
+Before installation, ensure that **Bootstrap** is already installed in your project. You can install it via npm:
 
 ```bash
 npm install bootstrap-react-logic
@@ -19,23 +22,25 @@ npm install bootstrap-react-logic
 
 ## Usage
 
-Import global styles: `import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css'`
+Import Bootstrap styles: To ensure BRL components are styled correctly, first import the global CSS file:
 
-Import the component: `import { Button } from 'bootstrap-react-logic'`
-
-Basic usage:
-
-```jsx
-<Button variant="primary">Primary</Button>
+```js
+import 'bootstrap-react-logic/dist-lib/bootstrap-react-logic.css';
 ```
 
-## FAQ
+Import and use BRL components: Now you can use the components provided by BRL just like any other React component. For
+example, to use the Button component:
 
-Q: How is this different from other third-party libraries?
+```jsx
+import { Button } from 'bootstrap-react-logic';
 
-- It is encapsulated into components, which enhances reusability and development efficiency.
-- Compared to other third-party libraries, BRL is developed based on specific project needs, so it may not suit every user's requirements.
-- It builds on top of Bootstrap and provides more commonly used components.
+<Button variant="primary">Primary</Button>;
+```
+
+## Available Components
+
+For more examples and complete component documentation, please refer to
+the [documentation](https://dafengzhen.github.io/bootstrap-react-logic).
 
 ## License
 
