@@ -2,24 +2,19 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarNavProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const NavbarNav = function NavbarNav<T extends ElementType = 'div' | 'ul'>(props: NavbarNavProps<T>) {
-  const { as: Component = 'ul', dropOldClass, className, variables, scroll, style, ...rest } = props;
+  const { as: Component = 'ul' as ElementType, dropOldClass, className, variables, scroll, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'navbar-nav', scroll && 'navbar-nav-scroll', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, scroll, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;

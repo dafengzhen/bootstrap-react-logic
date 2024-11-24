@@ -2,10 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SpinnerProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const Spinner = function Spinner<T extends ElementType = 'div'>(props: SpinnerProps<T>) {
-  const { as: Component = 'div', dropOldClass, className, variables, variant, style, grow, size, ...rest } = props;
+  const {
+    as: Component = 'div' as ElementType,
+    dropOldClass,
+    className,
+    variables,
+    variant,
+    style,
+    grow,
+    size,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
@@ -14,17 +24,12 @@ const Spinner = function Spinner<T extends ElementType = 'div'>(props: SpinnerPr
       size && (grow ? 'spinner-grow-sm' : 'spinner-border-sm'),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, grow, size, style, variables, variant]);
 
   return <Component {...rest} {...renderOptions} />;

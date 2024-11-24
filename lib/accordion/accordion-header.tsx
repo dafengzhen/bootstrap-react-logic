@@ -2,20 +2,12 @@ import { type ElementType, useMemo } from 'react';
 
 import type { AccordionHeaderProps } from './types.ts';
 
-import {
-  convertBsKeyToVar,
-  clsxWithOptions,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  mergeProps,
-  clsxStyle,
-} from '../tools';
+import { convertBsKeyToVar, clsxWithOptions, clsxUnique, mergeProps, stylex } from '../tools';
 import Button from '../button/button.tsx';
 
 const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(props: AccordionHeaderProps<T>) {
   const {
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     dropOldClass,
     buttonProps,
     className,
@@ -28,17 +20,12 @@ const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'accordion-header h2', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, style, variables]);
 
   return (

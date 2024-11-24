@@ -16,26 +16,17 @@ import { createPortal } from 'react-dom';
 
 import type { TooltipProps } from './types.ts';
 
-import {
-  findTruthyClassOrDefault,
-  convertBsKeyToVar,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  mergeProps,
-  clsxStyle,
-  isArray,
-} from '../tools';
+import { findTruthyClassOrDefault, convertBsKeyToVar, clsxUnique, mergeProps, isArray, stylex } from '../tools';
 import TooltipArrow from './tooltip-arrow.tsx';
 import TooltipInner from './tooltip-inner.tsx';
 
 const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     container: containerByDefault,
     onChange: onChangeByDefault,
     visible: visibleByDefault,
     offset: offsetByDefault,
-    as: Component = 'div',
     triggerType = 'hover',
     placement = 'top',
     triggerWrapper,
@@ -124,17 +115,12 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
       },
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, fade, placement, show, style, variables]);
   const triggerTypes = useMemo(() => (isArray(triggerType) ? triggerType : [triggerType]), [triggerType]);
   const getReferenceProps = useMemo(() => {

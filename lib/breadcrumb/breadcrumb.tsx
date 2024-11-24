@@ -2,16 +2,16 @@ import { type ElementType, type MouseEvent, useCallback, useState, useMemo } fro
 
 import type { BreadcrumbOption, BreadcrumbProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import BreadcrumbBasic from './breadcrumb-basic.tsx';
 import BreadcrumbItem from './breadcrumb-item.tsx';
 
 const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: BreadcrumbProps<T>) {
   const {
+    as: Component = 'nav' as ElementType,
     onClick: onClickByDefault,
     'aria-label': ariaLabel,
     options: defaultOptions,
-    as: Component = 'nav',
     dropOldClass,
     className,
     variables,
@@ -26,20 +26,15 @@ const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: Bre
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     const finalAriaLabel = ariaLabel ? ariaLabel : 'breadcrumb';
 
-    return filterOptions(
-      {
-        'aria-label': finalAriaLabel,
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      'aria-label': finalAriaLabel,
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [ariaLabel, className, dropOldClass, style, variables]);
 
   const onClick = useCallback(

@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ModalDialogProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const ModalDialog = function ModalDialog<T extends ElementType = 'div'>(props: ModalDialogProps<T>) {
   const {
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     dropOldClass,
     fullscreen,
     scrollable,
@@ -27,17 +27,12 @@ const ModalDialog = function ModalDialog<T extends ElementType = 'div'>(props: M
       fullscreen && (typeof fullscreen === 'boolean' ? 'modal-fullscreen' : `modal-fullscreen-${fullscreen}-down`),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [centered, className, dropOldClass, fullscreen, scrollable, size, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;

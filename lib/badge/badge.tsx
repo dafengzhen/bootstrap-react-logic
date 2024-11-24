@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { BadgeProps } from './types.ts';
 
-import { resolveRoundedClass, convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { resolveRoundedClass, convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const Badge = function Badge<T extends ElementType = 'span'>(props: BadgeProps<T>) {
   const {
-    as: Component = 'span',
+    as: Component = 'span' as ElementType,
     dropOldClass,
     variantType,
     className,
@@ -24,17 +24,12 @@ const Badge = function Badge<T extends ElementType = 'span'>(props: BadgeProps<T
       rounded && resolveRoundedClass(rounded),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, rounded, style, variables, variant, variantType]);
 
   return <Component {...rest} {...renderOptions} />;

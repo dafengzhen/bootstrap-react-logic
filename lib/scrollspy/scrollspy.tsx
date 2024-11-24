@@ -2,14 +2,14 @@ import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { ScrollspyProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import scrollspyStyles from './scrollspy.module.scss';
 
 const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: ScrollspyProps<T>) {
   const {
     onActiveChange: onActiveChangeByDefault,
+    as: Component = 'div' as ElementType,
     rootMargin = '0px 0px -25%',
-    as: Component = 'div',
     sectionIds = [],
     threshold = 0.5,
     dropOldClass,
@@ -26,17 +26,12 @@ const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: Scrol
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', smoothScroll && scrollspyStyles.brlScrollSmooth, className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, smoothScroll, style, variables]);
 
   useEffect(() => {

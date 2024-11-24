@@ -2,13 +2,13 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ListGroupItemProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, stylex } from '../tools';
 
 const ListGroupItem = function ListGroupItem<T extends ElementType = 'button' | 'li' | 'a'>(
   props: ListGroupItemProps<T>,
 ) {
   const {
-    as: Component = 'li',
+    as: Component = 'li' as ElementType,
     dropOldClass,
     itemAction,
     className,
@@ -31,9 +31,7 @@ const ListGroupItem = function ListGroupItem<T extends ElementType = 'button' | 
       variant && `list-group-item-${variant}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return filterOptions(
       {

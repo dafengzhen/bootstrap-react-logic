@@ -2,7 +2,7 @@ import { type ElementType, useState, useMemo } from 'react';
 
 import type { ListGroupOption, ListGroupProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import ListGroupItem from './list-group-item.tsx';
 
 interface IOption extends ListGroupOption {
@@ -11,8 +11,8 @@ interface IOption extends ListGroupOption {
 
 const ListGroup = function ListGroup<T extends ElementType = 'div' | 'ol' | 'ul'>(props: ListGroupProps<T>) {
   const {
+    as: Component = 'ul' as ElementType,
     options: defaultOptions,
-    as: Component = 'ul',
     dropOldClass,
     horizontal,
     itemAction,
@@ -39,17 +39,12 @@ const ListGroup = function ListGroup<T extends ElementType = 'div' | 'ol' | 'ul'
       variant && `list-group-item-${variant}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, flush, horizontal, numbered, style, variables, variant]);
 
   const isActive = useMemo(() => options.some((item) => item.active), [options]);

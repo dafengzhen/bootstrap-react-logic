@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ProgressBarProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const ProgressBar = function ProgressBar<T extends ElementType = 'div'>(props: ProgressBarProps<T>) {
   const {
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     dropOldClass,
     className,
     variables,
@@ -26,23 +26,19 @@ const ProgressBar = function ProgressBar<T extends ElementType = 'div'>(props: P
       animated && 'progress-bar-animated',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style, width: now && `${now}%` }, true, (value, key) => {
-      if (value === false) {
-        return {
-          include: false,
-        };
-      }
-
-      return convertBsKeyToVar(key);
-    });
-
-    return filterOptions(
+    const finalStyle = stylex(
+      (_, key) => ({ tKey: convertBsKeyToVar(key) }),
       {
-        className: finalClass,
-        style: finalStyle,
+        width: now && `${now}%`,
       },
-      isValueValid,
+      variables,
+      style,
     );
+
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [animated, bg, className, dropOldClass, now, striped, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;

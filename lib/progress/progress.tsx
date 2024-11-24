@@ -2,7 +2,7 @@ import { type ElementType, useState, useMemo } from 'react';
 
 import type { ProgressStackedOption, ProgressProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import ProgressStacked from './progress-stacked.tsx';
 import ProgressBar from './progress-bar.tsx';
 
@@ -36,17 +36,12 @@ const Progress = function Progress<T extends ElementType = 'div'>(props: Progres
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'progress', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, style, variables]);
 
   return (

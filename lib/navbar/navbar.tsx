@@ -2,7 +2,7 @@ import { type ElementType, useState, useMemo } from 'react';
 
 import type { NavbarOption, NavbarProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import NavbarTogglerIcon from './navbar-toggler-icon.tsx';
 import NavbarContainer from './navbar-container.tsx';
 import NavbarCollapse from './navbar-collapse.tsx';
@@ -19,8 +19,8 @@ interface IOption extends NavbarOption {
 
 const Navbar = function Navbar<T extends ElementType = 'nav'>(props: NavbarProps<T>) {
   const {
+    as: Component = 'nav' as ElementType,
     options: defaultOptions,
-    as: Component = 'nav',
     togglerIconProps,
     externalContent,
     containerProps,
@@ -61,17 +61,12 @@ const Navbar = function Navbar<T extends ElementType = 'nav'>(props: NavbarProps
       sticky && `sticky-${sticky}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, expand, fixed, sticky, style, variables]);
 
   return (

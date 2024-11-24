@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TextareaProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: TextareaProps<T>) {
   const {
-    as: Component = 'textarea',
+    as: Component = 'textarea' as ElementType,
     defaultValue,
     dropOldClass,
     className,
@@ -25,17 +25,12 @@ const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: Te
       isInvalid && 'is-invalid',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [dropOldClass, isValid, isInvalid, className, variables, style]);
 
   return (

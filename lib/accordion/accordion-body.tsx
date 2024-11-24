@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { AccordionBodyProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChange?: (onChange: boolean) => void) => {
   const [show, setShow] = useState(showByDefault);
@@ -87,8 +87,8 @@ const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChang
 const AccordionBody = function AccordionBody<T extends ElementType = 'div'>(props: AccordionBodyProps<T>) {
   const {
     collapsing: collapsingByDefault = true,
+    as: Component = 'div' as ElementType,
     show: showByDefault = true,
-    as: Component = 'div',
     dropOldClass,
     className,
     variables,
@@ -114,24 +114,19 @@ const AccordionBody = function AccordionBody<T extends ElementType = 'div'>(prop
       !isCollapsing && (show ? 'collapse show' : 'collapse'),
       className,
     );
-
-    const finalStyle = clsxStyle(
-      { ...variables, ...style, height: collapseHeight },
+    const finalStyle = stylex(
+      (_, key) => ({ tKey: convertBsKeyToVar(key) }),
       {
-        height: isCollapsing,
+        height: isCollapsing && collapseHeight,
       },
-      (_, key) => {
-        return convertBsKeyToVar(key);
-      },
+      variables,
+      style,
     );
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, collapse, collapseHeight, collapsing, dropOldClass, isCollapsing, show, style, variables, visible]);
 
   return (

@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PlaceholderProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxWithOptions, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxWithOptions, clsxUnique, stylex } from '../tools';
 
 const Placeholder = function Placeholder<T extends ElementType = 'span' | 'a'>(props: PlaceholderProps<T>) {
   const {
-    as: Component = 'span',
+    as: Component = 'span' as ElementType,
     dropOldClass,
     animation,
     className,
@@ -27,17 +27,12 @@ const Placeholder = function Placeholder<T extends ElementType = 'span' | 'a'>(p
       size && `placeholder-${size}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [bg, className, col, dropOldClass, size, style, variables]);
 
   return (

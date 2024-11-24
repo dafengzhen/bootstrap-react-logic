@@ -2,10 +2,18 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableResponsiveProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const TableResponsive = function TableResponsive<T extends ElementType = 'div'>(props: TableResponsiveProps<T>) {
-  const { as: Component = 'div', dropOldClass, responsive, className, variables, style, ...rest } = props;
+  const {
+    as: Component = 'div' as ElementType,
+    dropOldClass,
+    responsive,
+    className,
+    variables,
+    style,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
@@ -14,17 +22,12 @@ const TableResponsive = function TableResponsive<T extends ElementType = 'div'>(
         (typeof responsive === 'boolean' ? 'table-responsive' : `table-responsive-${responsive}`),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, responsive, style, variables]);
 
   return <Component {...rest} {...renderOptions} />;

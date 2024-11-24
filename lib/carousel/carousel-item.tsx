@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useMemo, useRef } from 'react';
 
 import type { CarouselItemProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const CarouselItem = function CarouselItem<T extends ElementType = 'div'>(props: CarouselItemProps<T>) {
   const {
@@ -10,8 +10,8 @@ const CarouselItem = function CarouselItem<T extends ElementType = 'div'>(props:
     carouselItemNext: carouselItemNextByDefault = false,
     carouselItemPrev: carouselItemPrevByDefault = false,
     carouselItemEnd: carouselItemEndByDefault = false,
+    as: Component = 'div' as ElementType,
     active: activeByDefault = false,
-    as: Component = 'div',
     dropOldClass,
     className,
     variables,
@@ -23,9 +23,9 @@ const CarouselItem = function CarouselItem<T extends ElementType = 'div'>(props:
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'carousel-item', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => convertBsKeyToVar(key));
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions({ className: finalClass, style: finalStyle }, isValueValid);
+    return { className: finalClass, style: finalStyle };
   }, [className, dropOldClass, style, variables]);
 
   useEffect(() => {

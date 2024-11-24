@@ -7,10 +7,8 @@ import {
   calculateLoopIndex,
   convertBsKeyToVar,
   clsxWithOptions,
-  filterOptions,
-  isValueValid,
   clsxUnique,
-  clsxStyle,
+  stylex,
 } from '../tools';
 import CarouselCaption from './carousel-caption.tsx';
 import CarouselItem from './carousel-item.tsx';
@@ -27,9 +25,9 @@ interface IOption extends CarouselOption {
 
 const Carousel = function Carousel<T extends ElementType = 'div'>(props: CarouselProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     onChange: onChangeByDefault,
     options: defaultOptions,
-    as: Component = 'div',
     controls = true,
     dropOldClass,
     slide = true,
@@ -57,9 +55,9 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'carousel', slide && 'slide', fade && 'carousel-fade', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => convertBsKeyToVar(key));
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions({ className: finalClass, style: finalStyle }, isValueValid);
+    return { className: finalClass, style: finalStyle };
   }, [className, dropOldClass, fade, slide, style, variables]);
 
   const updateItemsState = useCallback(

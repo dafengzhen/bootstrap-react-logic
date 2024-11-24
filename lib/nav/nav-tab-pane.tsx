@@ -2,12 +2,12 @@ import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { NavTabPaneProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const NavTabPane = function NavTabPane<T extends ElementType = 'div'>(props: NavTabPaneProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     active: activeByDefault = false,
-    as: Component = 'div',
     dropOldClass,
     fade = true,
     className,
@@ -28,17 +28,12 @@ const NavTabPane = function NavTabPane<T extends ElementType = 'div'>(props: Nav
       show && 'show',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [active, className, dropOldClass, fade, show, style, variables]);
 
   useEffect(() => {

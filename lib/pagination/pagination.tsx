@@ -2,7 +2,7 @@ import { type ElementType, useState, useMemo } from 'react';
 
 import type { PaginationOption, PaginationProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import PaginationItem from './pagination-item.tsx';
 import PaginationLink from './pagination-link.tsx';
 import PaginationNav from './pagination-nav.tsx';
@@ -13,8 +13,8 @@ interface IOption extends PaginationOption {
 
 const Pagination = function Pagination<T extends ElementType = 'ul'>(props: PaginationProps<T>) {
   const {
+    as: Component = 'ul' as ElementType,
     options: defaultOptions,
-    as: Component = 'ul',
     dropOldClass,
     alignment,
     className,
@@ -37,17 +37,12 @@ const Pagination = function Pagination<T extends ElementType = 'ul'>(props: Pagi
       alignment && `justify-content-${alignment}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [alignment, className, dropOldClass, size, style, variables]);
 
   return (

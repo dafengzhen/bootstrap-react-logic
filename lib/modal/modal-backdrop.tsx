@@ -2,12 +2,12 @@ import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { ModalBackdropProps } from './types.ts';
 
-import { convertBsKeyToVar, getScrollbarWidth, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, getScrollbarWidth, clsxUnique, stylex } from '../tools';
 
 const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(props: ModalBackdropProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault,
-    as: Component = 'div',
     dropOldClass,
     className,
     variables,
@@ -23,17 +23,12 @@ const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(prop
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'modal-backdrop', fade && 'fade', show && 'show', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, fade, show, style, variables]);
 
   useEffect(() => {

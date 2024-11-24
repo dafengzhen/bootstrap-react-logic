@@ -2,7 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useState, useMemo } fro
 
 import type { NavOption, NavProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import NavTabContent from './nav-tab-content.tsx';
 import NavTabPane from './nav-tab-pane.tsx';
 import NavItem from './nav-item.tsx';
@@ -14,9 +14,9 @@ interface IOption extends NavOption {
 
 const Nav = function Nav<T extends ElementType = 'nav' | 'ul'>(props: NavProps<T>) {
   const {
+    as: Component = 'ul' as ElementType,
     onChange: onChangeByDefault,
     options: defaultOptions,
-    as: Component = 'ul',
     contentProps,
     dropOldClass,
     horizontal,
@@ -53,17 +53,12 @@ const Nav = function Nav<T extends ElementType = 'nav' | 'ul'>(props: NavProps<T
       justified && 'nav-justified',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, fill, horizontal, justified, pills, style, tabs, underline, variables, vertical]);
 
   const onClickLink = useCallback(

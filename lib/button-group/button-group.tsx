@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ButtonGroupProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: ButtonGroupProps<T>) {
   const {
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     dropOldClass,
     className,
     variables,
@@ -24,18 +24,13 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: B
       size && `btn-group-${size}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
-  }, [dropOldClass, vertical, toolbar, size, className, variables, style]);
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
+  }, [className, dropOldClass, size, style, toolbar, variables, vertical]);
 
   return (
     <Component {...rest} {...renderOptions}>

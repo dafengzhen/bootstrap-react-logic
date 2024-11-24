@@ -9,7 +9,7 @@ import type {
   TableProps,
 } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isPlainObject, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, isPlainObject, clsxUnique, stylex } from '../tools';
 import TableResponsive from './table-responsive.tsx';
 import TableCaption from './table-caption.tsx';
 import TableTbody from './table-tbody.tsx';
@@ -109,10 +109,10 @@ const RowCells = ({
 
 const Table = function Table<T extends ElementType = 'table'>(props: TableProps<T>) {
   const {
+    as: Component = 'table' as ElementType,
     foot: footerByDefault = [],
     head: headerByDefault = [],
     body: bodyByDefault = [],
-    as: Component = 'table',
     responsiveProps,
     stripedColumns,
     captionProps,
@@ -151,17 +151,12 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
       middle && 'table align-middle',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [
     bordered,
     borderless,

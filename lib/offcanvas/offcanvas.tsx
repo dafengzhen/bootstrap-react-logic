@@ -2,7 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useState, us
 
 import type { OffcanvasProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import OffcanvasBackdrop from './offcanvas-backdrop.tsx';
 import OffcanvasHeader from './offcanvas-header.tsx';
 import OffcanvasTitle from './offcanvas-title.tsx';
@@ -10,9 +10,9 @@ import OffcanvasBody from './offcanvas-body.tsx';
 
 const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: OffcanvasProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault = false,
     onChange: onChangeByDefault,
-    as: Component = 'div',
     backdrop = true,
     dropOldClass,
     fade = true,
@@ -46,17 +46,12 @@ const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: Offca
       show && 'show',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, hiding, placement, responsive, show, showing, style, variables]);
 
   const onClick = useCallback(

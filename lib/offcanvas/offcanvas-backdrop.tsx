@@ -2,13 +2,13 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useState, us
 
 import type { OffcanvasBackdropProps } from './types.ts';
 
-import { convertBsKeyToVar, getScrollbarWidth, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, getScrollbarWidth, clsxUnique, stylex } from '../tools';
 
 const OffcanvasBackdrop = function OffcanvasBackdrop<T extends ElementType = 'div'>(props: OffcanvasBackdropProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault = false,
     onChange: onChangeByDefault,
-    as: Component = 'div',
     dropOldClass,
     fade = true,
     className,
@@ -25,17 +25,12 @@ const OffcanvasBackdrop = function OffcanvasBackdrop<T extends ElementType = 'di
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'offcanvas-backdrop', fade && 'fade', show && 'show', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, fade, show, style, variables]);
 
   const onClick = useCallback(

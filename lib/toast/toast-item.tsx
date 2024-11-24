@@ -2,16 +2,16 @@ import { type ElementType, useCallback, useEffect, useState, useMemo, useRef } f
 
 import type { ToastItemProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import ToastContainer from './toast-container.tsx';
 import ToastHeader from './toast-header.tsx';
 import ToastBody from './toast-body.tsx';
 
 const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: ToastItemProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault = false,
     onChange: onChangeByDefault,
-    as: Component = 'div',
     autohide = true,
     customContent,
     delay = 5000,
@@ -38,17 +38,12 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
       showing && 'showing',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, fade, show, showing, style, variables]);
 
   const onChange = useCallback(

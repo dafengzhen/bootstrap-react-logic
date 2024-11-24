@@ -19,11 +19,9 @@ import {
   convertBsKeyToVar,
   generateRandomId,
   findTruthyClass,
-  filterOptions,
-  isValueValid,
   clsxUnique,
   mergeProps,
-  clsxStyle,
+  stylex,
 } from '../tools';
 import DropdownItemText from './dropdown-item-text.tsx';
 import DropdownDivider from './dropdown-divider.tsx';
@@ -40,9 +38,9 @@ type MenuAlignment = 'start' | 'end' | false;
 
 const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: DropdownProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     offset: offsetByDefault,
     options: defaultOptions,
-    as: Component = 'div',
     strategy = 'absolute',
     autoClose = true,
     dropOldClass,
@@ -114,17 +112,12 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
       dropstart && 'dropstart',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [btnGroup, center, className, dropOldClass, dropend, dropstart, dropup, dropupCenter, split, style, variables]);
 
   const handleToggle = useCallback(

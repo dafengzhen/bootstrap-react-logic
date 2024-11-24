@@ -16,27 +16,18 @@ import { createPortal } from 'react-dom';
 
 import type { PopoverProps } from './types.ts';
 
-import {
-  findTruthyClassOrDefault,
-  convertBsKeyToVar,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  mergeProps,
-  clsxStyle,
-  isArray,
-} from '../tools';
+import { findTruthyClassOrDefault, convertBsKeyToVar, clsxUnique, mergeProps, isArray, stylex } from '../tools';
 import PopoverHeader from './popover-header.tsx';
 import PopoverArrow from './popover-arrow.tsx';
 import PopoverBody from './popover-body.tsx';
 
 const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault = false,
     container: containerByDefault,
     onChange: onChangeByDefault,
     offset: offsetByDefault,
-    as: Component = 'div',
     placement = 'end',
     triggerWrapper,
     dropOldClass,
@@ -127,17 +118,12 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
       },
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, dropOldClass, fade, placement, show, style, variables]);
   const getReferenceProps = useMemo(() => {
     return (userProps?: HTMLProps<Element>) => ({ ...userProps });

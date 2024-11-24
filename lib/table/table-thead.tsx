@@ -2,10 +2,19 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableTheadProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const TableThead = function TableThead<T extends ElementType = 'thead'>(props: TableTheadProps<T>) {
-  const { as: Component = 'thead', dropOldClass, className, variables, divider, variant, style, ...rest } = props;
+  const {
+    as: Component = 'thead' as ElementType,
+    dropOldClass,
+    className,
+    variables,
+    divider,
+    variant,
+    style,
+    ...rest
+  } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
@@ -14,17 +23,12 @@ const TableThead = function TableThead<T extends ElementType = 'thead'>(props: T
       variant && `table-${variant}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [className, divider, dropOldClass, style, variables, variant]);
 
   return <Component {...rest} {...renderOptions} />;

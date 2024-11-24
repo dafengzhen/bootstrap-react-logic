@@ -2,15 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useState, us
 
 import type { AlertProps } from './types.ts';
 
-import {
-  convertBsKeyToVar,
-  initializeLogger,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  mergeProps,
-  clsxStyle,
-} from '../tools';
+import { convertBsKeyToVar, initializeLogger, clsxUnique, mergeProps, stylex } from '../tools';
 import AlertHeading from './alert-heading.tsx';
 import Button from '../button/button.tsx';
 import AlertLink from './alert-link.tsx';
@@ -120,7 +112,7 @@ const useAlertVisibility = (props: {
 const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>) {
   const {
     clickToClose = DEFAULTS.clickToClose,
-    as: Component = 'div',
+    as: Component = 'div' as ElementType,
     closeButtonProps,
     dropOldClass,
     closeButton,
@@ -160,17 +152,12 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
       isShowing && 'show',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClassName,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClassName,
+      style: finalStyle,
+    };
   }, [className, dismissible, dropOldClass, fade, isShowing, style, variables, variant]);
 
   return (

@@ -2,21 +2,13 @@ import { type ElementType, useCallback, useEffect, useMemo, useRef } from 'react
 
 import type { CheckboxProps } from './types.ts';
 
-import {
-  processSlotClasses,
-  convertBsKeyToVar,
-  clsxWithOptions,
-  filterOptions,
-  isValueValid,
-  clsxUnique,
-  clsxStyle,
-} from '../tools';
+import { processSlotClasses, convertBsKeyToVar, clsxWithOptions, clsxUnique, stylex } from '../tools';
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
 
 const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: CheckboxProps<T>) {
   const {
-    as: Component = 'input',
+    as: Component = 'input' as ElementType,
     switch: formSwitch,
     contentClasses,
     indeterminate,
@@ -44,17 +36,12 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-check-input', className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [dropOldClass, className, variables, style]);
 
   if (children) {
@@ -72,8 +59,6 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
 
     return (
       <div className={slotClassName.container} data-slot-container="">
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-expect-error */}
         <Input
           {...rest}
           {...renderOptions}
@@ -92,11 +77,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
     );
   }
 
-  return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    <Input {...rest} {...renderOptions} onRef={setInstance} type="checkbox" as={Component} id={id} />
-  );
+  return <Input {...rest} {...renderOptions} onRef={setInstance} type="checkbox" as={Component} id={id} />;
 };
 
 Checkbox.displayName = 'BRL.Checkbox';

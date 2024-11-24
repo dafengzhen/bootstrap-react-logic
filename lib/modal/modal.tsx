@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import type { ModalProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import ModalBackdrop from './modal-backdrop.tsx';
 import ModalContent from './modal-content.tsx';
 import ModalDialog from './modal-dialog.tsx';
@@ -14,10 +14,10 @@ import ModalBody from './modal-body.tsx';
 
 const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault = false,
     container: containerByDefault,
     static: staticByDefault,
-    as: Component = 'div',
     onVisibleChange,
     backdropProps,
     contentProps,
@@ -63,17 +63,12 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
       modalStatic && 'modal-static',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [block, className, container, dropOldClass, fade, modalStatic, show, style, variables]);
 
   const onClickModal = useCallback(() => {

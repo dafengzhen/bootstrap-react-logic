@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { CollapseProps } from './types.ts';
 
-import { capitalizeFirstLetter, convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { capitalizeFirstLetter, convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const calculateCollapseDimension = (
   element: HTMLDivElement,
@@ -27,8 +27,8 @@ const calculateCollapseDimension = (
 const Collapse = function Collapse<T extends ElementType = 'div'>(props: CollapseProps<T>) {
   const {
     collapsing: collapsingByDefault = true,
+    as: Component = 'div' as ElementType,
     visible: visibleByDefault,
-    as: Component = 'div',
     dropOldClass,
     horizontal,
     className,
@@ -47,9 +47,9 @@ const Collapse = function Collapse<T extends ElementType = 'div'>(props: Collaps
       show && 'show',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => convertBsKeyToVar(key));
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions({ className: finalClass, style: finalStyle }, isValueValid);
+    return { className: finalClass, style: finalStyle };
   }, [className, dropOldClass, horizontal, show, style, variables]);
 
   useEffect(() => {

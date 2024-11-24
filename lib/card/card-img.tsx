@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CardImgProps } from './types.ts';
 
-import { convertBsKeyToVar, findTruthyClass, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
 
-const CardImg = function CardImg<T extends ElementType = 'div' | 'img'>(props: CardImgProps<T>) {
+const CardImg = function CardImg<T extends ElementType = 'img'>(props: CardImgProps<T>) {
   const { dropOldClass, className, variables, overlay, bottom, style, top, as, ...rest } = props;
-  const Component = as ? as : overlay ? 'div' : 'img';
+  const Component = (as ? as : overlay ? 'div' : 'img') as ElementType;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(
@@ -19,18 +19,13 @@ const CardImg = function CardImg<T extends ElementType = 'div' | 'img'>(props: C
         ),
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
-  }, [dropOldClass, top, bottom, overlay, className, variables, style]);
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
+  }, [bottom, className, dropOldClass, overlay, style, top, variables]);
 
   return <Component {...rest} {...renderOptions}></Component>;
 };
