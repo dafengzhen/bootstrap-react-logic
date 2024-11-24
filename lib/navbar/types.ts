@@ -1,26 +1,35 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
-  BaseProps,
-  NavbarBrandVariablesType,
-  NavbarCollapseVariablesType,
+  NavbarTogglerIconVariablesType,
   NavbarContainerVariablesType,
+  NavbarCollapseVariablesType,
   NavbarNavItemVariablesType,
   NavbarNavLinkVariablesType,
-  NavbarNavVariablesType,
-  NavbarTextVariablesType,
-  NavbarTogglerIconVariablesType,
   NavbarTogglerVariablesType,
+  NavbarBrandVariablesType,
+  NavbarTextVariablesType,
+  NavbarNavVariablesType,
   NavbarVariablesType,
   PropsWithoutRef,
+  BaseProps,
 } from '../tools';
 
-export type NavbarBrandProps<T extends ElementType> = PropsWithoutRef<BrandProps<T>, T, NavbarBrandVariablesType>;
+export interface NavbarOption {
+  itemProps?: NavbarNavItemProps<ElementType>;
+  linkProps?: NavbarNavLinkProps<ElementType>;
+  id?: number | string;
+  disabled?: boolean;
+  active?: boolean;
+  item?: ReactNode;
+  link?: ReactNode;
+  href?: string;
+}
 
-export type NavbarCollapseProps<T extends ElementType> = PropsWithoutRef<
-  CollapseProps<T>,
+export type NavbarTogglerIconProps<T extends ElementType> = PropsWithoutRef<
+  TogglerIconProps<T>,
   T,
-  NavbarCollapseVariablesType
+  NavbarTogglerIconVariablesType
 >;
 
 export type NavbarContainerProps<T extends ElementType> = PropsWithoutRef<
@@ -29,92 +38,36 @@ export type NavbarContainerProps<T extends ElementType> = PropsWithoutRef<
   NavbarContainerVariablesType
 >;
 
+export type NavbarCollapseProps<T extends ElementType> = PropsWithoutRef<
+  CollapseProps<T>,
+  T,
+  NavbarCollapseVariablesType
+>;
+
 export type NavbarNavItemProps<T extends ElementType> = PropsWithoutRef<NavItemProps<T>, T, NavbarNavItemVariablesType>;
 
 export type NavbarNavLinkProps<T extends ElementType> = PropsWithoutRef<NavLinkProps<T>, T, NavbarNavLinkVariablesType>;
 
-export type NavbarNavProps<T extends ElementType> = PropsWithoutRef<NavProps<T>, T, NavbarNavVariablesType>;
+export type NavbarTogglerProps<T extends ElementType> = PropsWithoutRef<TogglerProps<T>, T, NavbarTogglerVariablesType>;
 
-export interface NavbarOption {
-  active?: boolean;
-  disabled?: boolean;
-  href?: string;
-  id?: number | string;
-  item?: ReactNode;
-  itemProps?: NavbarNavItemProps<ElementType>;
-  link?: ReactNode;
-  linkProps?: NavbarNavLinkProps<ElementType>;
-}
-
-export type NavbarProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, NavbarVariablesType>;
+export type NavbarBrandProps<T extends ElementType> = PropsWithoutRef<BrandProps<T>, T, NavbarBrandVariablesType>;
 
 export type NavbarTextProps<T extends ElementType> = PropsWithoutRef<TextProps<T>, T, NavbarTextVariablesType>;
 
-export type NavbarTogglerIconProps<T extends ElementType> = PropsWithoutRef<
-  TogglerIconProps<T>,
-  T,
-  NavbarTogglerIconVariablesType
->;
+export type NavbarNavProps<T extends ElementType> = PropsWithoutRef<NavProps<T>, T, NavbarNavVariablesType>;
 
-export type NavbarTogglerProps<T extends ElementType> = PropsWithoutRef<TogglerProps<T>, T, NavbarTogglerVariablesType>;
+export type NavbarProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, NavbarVariablesType>;
 
-type BrandProps<T extends ElementType> = BaseProps<T, NavbarBrandVariablesType> & {};
-
-type CollapseProps<T extends ElementType> = BaseProps<T, NavbarCollapseVariablesType> & {};
-
-type ContainerProps<T extends ElementType> = BaseProps<T, NavbarContainerVariablesType> & {};
-
-type NavItemProps<T extends ElementType> = BaseProps<T, NavbarNavItemVariablesType> & {};
-
-type NavLinkProps<T extends ElementType> = BaseProps<T, NavbarNavLinkVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * active.
+   * togglerIconProps.
    */
-  active?: boolean;
+  togglerIconProps?: NavbarTogglerIconProps<ElementType>;
 
   /**
-   * disabled.
+   * expand,
    */
-  disabled?: boolean;
-};
-
-type NavProps<T extends ElementType> = BaseProps<T, NavbarNavVariablesType> & {
-  /**
-   * scroll.
-   */
-  scroll?: boolean;
-};
-
-type Props<T extends ElementType> = BaseProps<T, NavbarVariablesType> & {
-  /**
-   * brand.
-   */
-  brand?: ReactNode;
-
-  /**
-   * brandPosition.
-   */
-  brandPosition?: 'hidden' | 'left' | 'right';
-
-  /**
-   * brandProps.
-   */
-  brandProps?: NavbarBrandProps<ElementType>;
-
-  /**
-   * collapse.
-   */
-  collapse?: ReactNode;
-
-  /**
-   * collapseProps.
-   */
-  collapseProps?: NavbarCollapseProps<ElementType>;
-
-  /**
-   * container.
-   */
-  container?: ReactNode;
+  expand?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
 
   /**
    * containerProps.
@@ -122,54 +75,24 @@ type Props<T extends ElementType> = BaseProps<T, NavbarVariablesType> & {
   containerProps?: NavbarContainerProps<ElementType>;
 
   /**
-   * expand,
+   * collapseProps.
    */
-  expand?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
+  collapseProps?: NavbarCollapseProps<ElementType>;
 
   /**
-   * externalContent.
+   * togglerProps.
    */
-  externalContent?: ReactNode;
+  togglerProps?: NavbarTogglerProps<ElementType>;
 
   /**
-   * fixed.
+   * brandPosition.
    */
-  fixed?: 'bottom' | 'top';
+  brandPosition?: 'hidden' | 'right' | 'left';
 
   /**
-   * nav.
+   * brandProps.
    */
-  nav?: ReactNode;
-
-  /**
-   * navProps.
-   */
-  navProps?: NavbarNavProps<ElementType>;
-
-  /**
-   * options.
-   */
-  options?: NavbarOption[];
-
-  /**
-   * scroll.
-   */
-  scroll?: boolean;
-
-  /**
-   * skipItem.
-   */
-  skipItem?: boolean;
-
-  /**
-   * sticky.
-   */
-  sticky?: 'bottom' | 'top';
-
-  /**
-   * text.
-   */
-  text?: ReactNode;
+  brandProps?: NavbarBrandProps<ElementType>;
 
   /**
    * togglerIconProps.
@@ -177,23 +100,100 @@ type Props<T extends ElementType> = BaseProps<T, NavbarVariablesType> & {
   textProps?: NavbarTextProps<ElementType>;
 
   /**
+   * navProps.
+   */
+  navProps?: NavbarNavProps<ElementType>;
+
+  /**
+   * externalContent.
+   */
+  externalContent?: ReactNode;
+
+  /**
+   * sticky.
+   */
+  sticky?: 'bottom' | 'top';
+
+  /**
+   * fixed.
+   */
+  fixed?: 'bottom' | 'top';
+
+  /**
+   * options.
+   */
+  options?: NavbarOption[];
+
+  /**
+   * container.
+   */
+  container?: ReactNode;
+
+  /**
+   * collapse.
+   */
+  collapse?: ReactNode;
+
+  /**
    * toggler.
    */
   toggler?: ReactNode;
 
   /**
-   * togglerIconProps.
+   * skipItem.
    */
-  togglerIconProps?: NavbarTogglerIconProps<ElementType>;
+  skipItem?: boolean;
 
   /**
-   * togglerProps.
+   * brand.
    */
-  togglerProps?: NavbarTogglerProps<ElementType>;
-};
+  brand?: ReactNode;
 
-type TextProps<T extends ElementType> = BaseProps<T, NavbarTextVariablesType> & {};
+  /**
+   * scroll.
+   */
+  scroll?: boolean;
+
+  /**
+   * text.
+   */
+  text?: ReactNode;
+
+  /**
+   * nav.
+   */
+  nav?: ReactNode;
+} & BaseProps<T, NavbarVariablesType>;
+
+type NavLinkProps<T extends ElementType> = {
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * active.
+   */
+  active?: boolean;
+} & BaseProps<T, NavbarNavLinkVariablesType>;
+
+type NavProps<T extends ElementType> = {
+  /**
+   * scroll.
+   */
+  scroll?: boolean;
+} & BaseProps<T, NavbarNavVariablesType>;
 
 type TogglerIconProps<T extends ElementType> = BaseProps<T, NavbarTogglerIconVariablesType> & {};
 
+type ContainerProps<T extends ElementType> = BaseProps<T, NavbarContainerVariablesType> & {};
+
+type CollapseProps<T extends ElementType> = BaseProps<T, NavbarCollapseVariablesType> & {};
+
+type NavItemProps<T extends ElementType> = BaseProps<T, NavbarNavItemVariablesType> & {};
+
 type TogglerProps<T extends ElementType> = BaseProps<T, NavbarTogglerVariablesType> & {};
+
+type BrandProps<T extends ElementType> = BaseProps<T, NavbarBrandVariablesType> & {};
+
+type TextProps<T extends ElementType> = BaseProps<T, NavbarTextVariablesType> & {};

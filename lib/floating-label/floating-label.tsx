@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { FloatingLabelProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const FloatingLabel = function FloatingLabel<T extends ElementType = 'div'>(props: FloatingLabelProps<T>) {
-  const { as: Component = 'div', className, dropOldClass, isInvalid, isValid, style, variables, ...rest } = props;
+  const { as: Component = 'div', dropOldClass, className, isInvalid, variables, isValid, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(

@@ -1,45 +1,45 @@
-import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, useCallback, useEffect, useState, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import type { ModalProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 import ModalBackdrop from './modal-backdrop.tsx';
-import ModalBody from './modal-body.tsx';
 import ModalContent from './modal-content.tsx';
 import ModalDialog from './modal-dialog.tsx';
 import ModalFooter from './modal-footer.tsx';
 import ModalHeader from './modal-header.tsx';
 import ModalTitle from './modal-title.tsx';
+import ModalBody from './modal-body.tsx';
 
 const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>) {
   const {
-    as: Component = 'div',
-    backdropProps,
-    body,
-    bodyProps,
-    centered,
-    className,
+    visible: visibleByDefault = false,
     container: containerByDefault,
-    contentProps,
-    dialogProps,
-    dropOldClass,
-    fade = true,
-    footer,
-    footerProps,
-    fullscreen,
-    header,
-    headerProps,
-    onVisibleChange,
-    scrollable,
-    size,
     static: staticByDefault,
+    as: Component = 'div',
+    onVisibleChange,
+    backdropProps,
+    contentProps,
+    dropOldClass,
+    dialogProps,
+    fade = true,
+    footerProps,
+    headerProps,
+    fullscreen,
+    scrollable,
+    titleProps,
+    bodyProps,
+    className,
+    variables,
+    centered,
+    footer,
+    header,
+    toggle,
     style,
     title,
-    titleProps,
-    toggle,
-    variables,
-    visible: visibleByDefault = false,
+    body,
+    size,
     ...rest
   } = props;
 
@@ -49,7 +49,7 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
   const [visibleModal, setVisibleModal] = useState(visibleByDefault);
   const [visibleModalBackdrop, setVisibleModalBackdrop] = useState(visibleByDefault);
   const [mouseEnterModalContent, setMouseEnterModalContent] = useState(false);
-  const [container, setContainer] = useState<HTMLElement | null | undefined>(
+  const [container, setContainer] = useState<HTMLElement | undefined | null>(
     typeof containerByDefault !== 'string' ? containerByDefault : null,
   );
   const element = useRef<HTMLDivElement | null>(null);
@@ -159,9 +159,9 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
             <Component {...rest} {...renderOptions} onClick={onClickModal} ref={element}>
               <ModalDialog
                 {...dialogProps}
-                centered={centered}
                 fullscreen={fullscreen}
                 scrollable={scrollable}
+                centered={centered}
                 size={size}
               >
                 <ModalContent
@@ -192,9 +192,9 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
           {createPortal(
             <ModalBackdrop
               {...backdropProps}
-              fade={fade}
-              toggle={toggle}
               visible={visibleModalBackdrop}
+              toggle={toggle}
+              fade={fade}
             ></ModalBackdrop>,
             container ? container : document.body,
           )}

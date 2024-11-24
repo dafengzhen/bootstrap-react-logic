@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TooltipArrowProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const TooltipArrow = function TooltipArrow<T extends ElementType = 'div'>(props: TooltipArrowProps<T>) {
-  const { as: Component = 'div', className, dropOldClass, onRef, style, variables, ...rest } = props;
+  const { as: Component = 'div', dropOldClass, className, variables, onRef, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'tooltip-arrow position-absolute', className);

@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { RangeProps } from './types.ts';
 
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 import Input from '../input/input.tsx';
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
 
 const Range = function Range<T extends ElementType = 'input'>(props: RangeProps<T>) {
-  const { as: Component = 'input', className, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'input', dropOldClass, className, variables, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'form-range', className);

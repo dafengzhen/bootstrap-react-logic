@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarNavProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const NavbarNav = function NavbarNav<T extends ElementType = 'div' | 'ul'>(props: NavbarNavProps<T>) {
-  const { as: Component = 'ul', className, dropOldClass, scroll, style, variables, ...rest } = props;
+  const { as: Component = 'ul', dropOldClass, className, variables, scroll, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'navbar-nav', scroll && 'navbar-nav-scroll', className);

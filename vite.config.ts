@@ -1,7 +1,7 @@
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
 import addScriptPlugin from './add-script-plugin.ts';
 
@@ -13,13 +13,8 @@ const outputVisualizer = env.OUTPUT_VISUALIZER === 'true';
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   return {
-    base,
     build: {
       rollupOptions: {
-        input: {
-          main: resolve(__dirname, 'index.html'),
-          notFound: resolve(__dirname, '404.html'),
-        },
         output: {
           manualChunks(id) {
             if (id.includes('highlight.js')) {
@@ -31,48 +26,53 @@ export default defineConfig(({ command }) => {
             }
           },
         },
+        input: {
+          notFound: resolve(__dirname, '404.html'),
+          main: resolve(__dirname, 'index.html'),
+        },
       },
       sourcemap: true,
     },
+    resolve: {
+      alias: {
+        '@components': resolve(__dirname, 'src/components'),
+        '@contexts': resolve(__dirname, 'src/contexts'),
+        '@assets': resolve(__dirname, 'src/assets'),
+        '@hooks': resolve(__dirname, 'src/hooks'),
+        '@pages': resolve(__dirname, 'src/pages'),
+        '@store': resolve(__dirname, 'src/store'),
+        '@tools': resolve(__dirname, 'src/tools'),
+        '@types': resolve(__dirname, 'src/types'),
+        '@hocs': resolve(__dirname, 'src/hocs'),
+        '@lib': resolve(__dirname, 'lib'),
+        '@src': resolve(__dirname, 'src'),
+      },
+    },
     css: {
-      devSourcemap: true,
+      preprocessorOptions: {
+        scss: {
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
+          api: 'modern-compiler',
+        },
+      },
       modules: {
         localsConvention: 'camelCase',
       },
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
-        },
-      },
-    },
-    define: {
-      __APP_PUBLIC_BASE_HREF__: JSON.stringify(href),
-      __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
+      devSourcemap: true,
     },
     plugins: [
       react(),
       outputVisualizer &&
         visualizer({
-          emitFile: true,
           filename: 'stats.html',
+          emitFile: true,
         }),
       command === 'build' && addScriptPlugin(),
     ],
-    resolve: {
-      alias: {
-        '@assets': resolve(__dirname, 'src/assets'),
-        '@components': resolve(__dirname, 'src/components'),
-        '@contexts': resolve(__dirname, 'src/contexts'),
-        '@hocs': resolve(__dirname, 'src/hocs'),
-        '@hooks': resolve(__dirname, 'src/hooks'),
-        '@lib': resolve(__dirname, 'lib'),
-        '@pages': resolve(__dirname, 'src/pages'),
-        '@src': resolve(__dirname, 'src'),
-        '@store': resolve(__dirname, 'src/store'),
-        '@tools': resolve(__dirname, 'src/tools'),
-        '@types': resolve(__dirname, 'src/types'),
-      },
+    define: {
+      __APP_PUBLIC_BASE_HREF__: JSON.stringify(href),
+      __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
     },
+    base,
   };
 });

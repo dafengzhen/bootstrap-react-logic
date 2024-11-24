@@ -2,18 +2,18 @@ import clsx from 'clsx';
 
 export default function ExampleLink({
   className,
-  hash,
-  href,
+  underline,
   noSetId,
   title,
-  underline,
+  hash,
+  href,
 }: {
+  underline?: boolean;
   className?: string;
+  noSetId?: boolean;
   hash?: string;
   href?: string;
-  noSetId?: boolean;
   title: string;
-  underline?: boolean;
 }) {
   return (
     <a

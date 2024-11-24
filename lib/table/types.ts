@@ -1,65 +1,55 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
-  BaseProps,
-  PropsWithoutRef,
-  TableCaptionVariablesType,
   TableResponsiveVariablesType,
+  TableCaptionVariablesType,
   TableTbodyVariablesType,
-  TableTdVariablesType,
   TableTfootVariablesType,
   TableTheadVariablesType,
+  TableTdVariablesType,
   TableThVariablesType,
   TableTrVariablesType,
   TableVariablesType,
+  PropsWithoutRef,
+  BaseProps,
 } from '../tools';
 
-export interface TableBodyCellOption<Key extends string = string> {
+export interface TableBodyOption<Key extends string = string> {
+  scope?: 'colgroup' | 'rowgroup' | 'col' | 'row';
+  values?: TableBodyValueOption<Key>[];
+  tdProps?: TableTdProps<ElementType>;
+  thProps?: TableThProps<ElementType>;
+  cells?: TableBodyCellOption<Key>[];
+  props?: TableTrProps<ElementType>;
+  id?: number | string;
+  variant?: Variant;
   active?: boolean;
   colSpan?: number;
-  key?: Key;
   rowSpan?: number;
+}
+
+export interface TableHeadOption<Key extends string = string> {
+  scope?: 'colgroup' | 'rowgroup' | 'col' | 'row';
+  props?: TableThProps<ElementType>;
+  id?: number | string;
+  variant?: Variant;
+  active?: boolean;
+  colSpan?: number;
+  label: ReactNode;
+  rowspan?: number;
+  key?: Key;
+}
+
+export interface TableBodyCellOption<Key extends string = string> {
   tdProps?: TableTdProps<ElementType>;
   thProps?: TableThProps<ElementType>;
   value?: ReactNode;
   variant?: Variant;
-}
-
-export interface TableBodyOption<Key extends string = string> {
   active?: boolean;
-  cells?: TableBodyCellOption<Key>[];
   colSpan?: number;
-  id?: number | string;
-  props?: TableTrProps<ElementType>;
   rowSpan?: number;
-  scope?: 'col' | 'colgroup' | 'row' | 'rowgroup';
-  tdProps?: TableTdProps<ElementType>;
-  thProps?: TableThProps<ElementType>;
-  values?: TableBodyValueOption<Key>[];
-  variant?: Variant;
-}
-
-export type TableBodyValueOption<Key extends string = string> =
-  | ReactNode
-  | (TableBodyCellOption<Key> & { value?: ReactNode });
-
-export type TableCaptionProps<T extends ElementType> = PropsWithoutRef<CaptionProps<T>, T, TableCaptionVariablesType>;
-
-export type TableFootOption<Key extends string = string> = TableBodyOption<Key>;
-
-export interface TableHeadOption<Key extends string = string> {
-  active?: boolean;
-  colSpan?: number;
-  id?: number | string;
   key?: Key;
-  label: ReactNode;
-  props?: TableThProps<ElementType>;
-  rowspan?: number;
-  scope?: 'col' | 'colgroup' | 'row' | 'rowgroup';
-  variant?: Variant;
 }
-
-export type TableProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, TableVariablesType>;
 
 export type TableResponsiveProps<T extends ElementType> = PropsWithoutRef<
   ResponsiveProps<T>,
@@ -67,25 +57,43 @@ export type TableResponsiveProps<T extends ElementType> = PropsWithoutRef<
   TableResponsiveVariablesType
 >;
 
-export type TableTbodyProps<T extends ElementType> = PropsWithoutRef<TbodyProps<T>, T, TableTbodyVariablesType>;
+export type TableBodyValueOption<Key extends string = string> =
+  | (TableBodyCellOption<Key> & { value?: ReactNode })
+  | ReactNode;
 
-export type TableTdProps<T extends ElementType> = PropsWithoutRef<TdProps<T>, T, TableTdVariablesType>;
+export type TableCaptionProps<T extends ElementType> = PropsWithoutRef<CaptionProps<T>, T, TableCaptionVariablesType>;
+
+export type TableTbodyProps<T extends ElementType> = PropsWithoutRef<TbodyProps<T>, T, TableTbodyVariablesType>;
 
 export type TableTfootProps<T extends ElementType> = PropsWithoutRef<TfootProps<T>, T, TableTfootVariablesType>;
 
 export type TableTheadProps<T extends ElementType> = PropsWithoutRef<TheadProps<T>, T, TableTheadVariablesType>;
 
+export type TableTdProps<T extends ElementType> = PropsWithoutRef<TdProps<T>, T, TableTdVariablesType>;
+
 export type TableThProps<T extends ElementType> = PropsWithoutRef<ThProps<T>, T, TableThVariablesType>;
 
 export type TableTrProps<T extends ElementType> = PropsWithoutRef<TrProps<T>, T, TableTrVariablesType>;
 
-type CaptionProps<T extends ElementType> = BaseProps<T, TableCaptionVariablesType> & {};
+export type TableProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, TableVariablesType>;
 
-type Props<T extends ElementType> = BaseProps<T, TableVariablesType> & {
+export type TableFootOption<Key extends string = string> = TableBodyOption<Key>;
+
+type Props<T extends ElementType> = {
   /**
-   * body.
+   * responsive.
    */
-  body?: TableBodyOption[];
+  responsive?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
+
+  /**
+   * responsiveProps.
+   */
+  responsiveProps?: TableResponsiveProps<ElementType>;
+
+  /**
+   * captionProps.
+   */
+  captionProps?: TableCaptionProps<ElementType>;
 
   /**
    * bodyProps.
@@ -93,9 +101,34 @@ type Props<T extends ElementType> = BaseProps<T, TableVariablesType> & {
   bodyProps?: TableTbodyProps<ElementType>;
 
   /**
-   * bordered.
+   * footProps.
    */
-  bordered?: boolean;
+  footProps?: TableTfootProps<ElementType>;
+
+  /**
+   * headProps.
+   */
+  headProps?: TableTheadProps<ElementType>;
+
+  /**
+   * body.
+   */
+  body?: TableBodyOption[];
+
+  /**
+   * foot.
+   */
+  foot?: TableFootOption[];
+
+  /**
+   * head.
+   */
+  head?: TableHeadOption[];
+
+  /**
+   * stripedColumns.
+   */
+  stripedColumns?: boolean;
 
   /**
    * borderless.
@@ -108,54 +141,9 @@ type Props<T extends ElementType> = BaseProps<T, TableVariablesType> & {
   caption?: ReactNode;
 
   /**
-   * captionProps.
+   * bordered.
    */
-  captionProps?: TableCaptionProps<ElementType>;
-
-  /**
-   * foot.
-   */
-  foot?: TableFootOption[];
-
-  /**
-   * footProps.
-   */
-  footProps?: TableTfootProps<ElementType>;
-
-  /**
-   * head.
-   */
-  head?: TableHeadOption[];
-
-  /**
-   * headProps.
-   */
-  headProps?: TableTheadProps<ElementType>;
-
-  /**
-   * hover.
-   */
-  hover?: boolean;
-
-  /**
-   * middle.
-   */
-  middle?: boolean;
-
-  /**
-   * responsive.
-   */
-  responsive?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
-
-  /**
-   * responsiveProps.
-   */
-  responsiveProps?: TableResponsiveProps<ElementType>;
-
-  /**
-   * size.
-   */
-  size?: 'sm';
+  bordered?: boolean;
 
   /**
    * striped.
@@ -163,50 +151,34 @@ type Props<T extends ElementType> = BaseProps<T, TableVariablesType> & {
   striped?: boolean;
 
   /**
-   * stripedColumns.
-   */
-  stripedColumns?: boolean;
-
-  /**
    * variant.
    */
   variant?: Variant;
-};
 
-type ResponsiveProps<T extends ElementType> = BaseProps<T, TableResponsiveVariablesType> & {
+  /**
+   * middle.
+   */
+  middle?: boolean;
+
+  /**
+   * hover.
+   */
+  hover?: boolean;
+
+  /**
+   * size.
+   */
+  size?: 'sm';
+} & BaseProps<T, TableVariablesType>;
+
+type ResponsiveProps<T extends ElementType> = {
   /**
    * responsive.
    */
-  responsive?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
-};
+  responsive?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
+} & BaseProps<T, TableResponsiveVariablesType>;
 
-type TbodyProps<T extends ElementType> = BaseProps<T, TableTbodyVariablesType> & {
-  /**
-   * divider.
-   */
-  divider?: boolean;
-};
-
-type TdProps<T extends ElementType> = BaseProps<T, TableTdVariablesType> & {
-  /**
-   * active.
-   */
-  active?: boolean;
-
-  /**
-   * variant.
-   */
-  variant?: Variant;
-};
-
-type TfootProps<T extends ElementType> = BaseProps<T, TableTfootVariablesType> & {
-  /**
-   * divider.
-   */
-  divider?: boolean;
-};
-
-type TheadProps<T extends ElementType> = BaseProps<T, TableTheadVariablesType> & {
+type TheadProps<T extends ElementType> = {
   /**
    * divider.
    */
@@ -216,30 +188,58 @@ type TheadProps<T extends ElementType> = BaseProps<T, TableTheadVariablesType> &
    * variant.
    */
   variant?: Variant;
-};
+} & BaseProps<T, TableTheadVariablesType>;
 
-type ThProps<T extends ElementType> = BaseProps<T, TableThVariablesType> & {
-  /**
-   * active.
-   */
-  active?: boolean;
-
+type TdProps<T extends ElementType> = {
   /**
    * variant.
    */
   variant?: Variant;
-};
 
-type TrProps<T extends ElementType> = BaseProps<T, TableTrVariablesType> & {
   /**
    * active.
    */
   active?: boolean;
+} & BaseProps<T, TableTdVariablesType>;
 
+type ThProps<T extends ElementType> = {
   /**
    * variant.
    */
   variant?: Variant;
-};
 
-type Variant = 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
+  /**
+   * active.
+   */
+  active?: boolean;
+} & BaseProps<T, TableThVariablesType>;
+
+type TrProps<T extends ElementType> = {
+  /**
+   * variant.
+   */
+  variant?: Variant;
+
+  /**
+   * active.
+   */
+  active?: boolean;
+} & BaseProps<T, TableTrVariablesType>;
+
+type TbodyProps<T extends ElementType> = {
+  /**
+   * divider.
+   */
+  divider?: boolean;
+} & BaseProps<T, TableTbodyVariablesType>;
+
+type TfootProps<T extends ElementType> = {
+  /**
+   * divider.
+   */
+  divider?: boolean;
+} & BaseProps<T, TableTfootVariablesType>;
+
+type Variant = 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
+
+type CaptionProps<T extends ElementType> = BaseProps<T, TableCaptionVariablesType> & {};

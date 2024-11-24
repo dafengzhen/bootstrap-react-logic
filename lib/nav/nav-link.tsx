@@ -2,20 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavLinkProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
-const NavLink = function NavLink<T extends ElementType = 'a' | 'button'>(props: NavLinkProps<T>) {
+const NavLink = function NavLink<T extends ElementType = 'button' | 'a'>(props: NavLinkProps<T>) {
   const {
-    active,
-    'aria-current': ariaCurrent,
-    'aria-disabled': ariaDisabled,
     as: Component = 'a' as ElementType,
-    className,
-    disabled,
+    'aria-disabled': ariaDisabled,
+    'aria-current': ariaCurrent,
     dropOldClass,
+    className,
+    variables,
+    disabled,
+    active,
     style,
     type,
-    variables,
     ...rest
   } = props;
 
@@ -32,12 +32,12 @@ const NavLink = function NavLink<T extends ElementType = 'a' | 'button'>(props: 
 
     return filterOptions(
       {
-        'aria-current': ariaCurrent ?? (active ? 'page' : undefined),
         'aria-disabled': ariaDisabled ?? (disabled ? 'true' : undefined),
-        className: finalClass,
         disabled: disabled && Component === 'button' ? true : undefined,
-        style: finalStyle,
         type: type ?? (Component === 'button' ? 'button' : undefined),
+        'aria-current': ariaCurrent ?? (active ? 'page' : undefined),
+        className: finalClass,
+        style: finalStyle,
       },
       isValueValid,
     );

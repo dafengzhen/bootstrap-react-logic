@@ -1,18 +1,18 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
-import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { Breadcrumb } from '@lib/breadcrumb';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import OptionRow from '@components/option-row.tsx';
 import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import { Breadcrumb } from '@lib/breadcrumb';
+import About from '@components/about.tsx';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/breadcrumb/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -28,7 +28,7 @@ export default function BreadcrumbPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tBreadcrumbPage}>
+      <Example t={tBreadcrumbPage} state={state} hash="basic">
         <Breadcrumb
           options={[
             {
@@ -43,8 +43,8 @@ export default function BreadcrumbPage() {
               title: <a href="#">Home</a>,
             },
             {
-              active: true,
               title: 'Library',
+              active: true,
             },
           ]}
         />
@@ -58,22 +58,22 @@ export default function BreadcrumbPage() {
               title: <a href="#">Library</a>,
             },
             {
-              active: true,
               title: 'Data',
+              active: true,
             },
           ]}
         />
       </Example>
 
-      <Example hash="dividers" state={state} t={tBreadcrumbPage}>
+      <Example t={tBreadcrumbPage} hash="dividers" state={state}>
         <Breadcrumb
           options={[
             {
               title: <a href="#">Home</a>,
             },
             {
-              active: true,
               title: 'Library',
+              active: true,
             },
           ]}
           variables={{
@@ -82,18 +82,18 @@ export default function BreadcrumbPage() {
         />
 
         <Breadcrumb
+          variables={{
+            bsBreadcrumbDivider: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E")`,
+          }}
           options={[
             {
               title: <a href="#">Home</a>,
             },
             {
-              active: true,
               title: 'Library',
+              active: true,
             },
           ]}
-          variables={{
-            bsBreadcrumbDivider: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E")`,
-          }}
         />
 
         <Breadcrumb
@@ -102,8 +102,8 @@ export default function BreadcrumbPage() {
               title: <a href="#">Home</a>,
             },
             {
-              active: true,
               title: 'Library',
+              active: true,
             },
           ]}
           variables={{
@@ -115,35 +115,35 @@ export default function BreadcrumbPage() {
       <PropsIndicator />
 
       <Example
-        hash="breadcrumbComponentProps"
         items={[
           {
-            attr: 'options',
-            default: '',
-            desc: tBreadcrumbComponentProps('breadcrumb.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
-                <OptionRow label="id?: string | number" value={tBreadcrumbComponentProps('breadcrumb.options.id')} />
-                <OptionRow label="title?: ReactNode" value={tBreadcrumbComponentProps('breadcrumb.options.title')} />
-                <OptionRow label="active?: boolean" value={tBreadcrumbComponentProps('breadcrumb.options.active')} />
+                <OptionRow value={tBreadcrumbComponentProps('breadcrumb.options.id')} label="id?: string | number" />
+                <OptionRow value={tBreadcrumbComponentProps('breadcrumb.options.title')} label="title?: ReactNode" />
+                <OptionRow value={tBreadcrumbComponentProps('breadcrumb.options.active')} label="active?: boolean" />
               </div>
             ),
+            desc: tBreadcrumbComponentProps('breadcrumb.desc.options'),
+            attr: 'options',
+            default: '',
           },
           {
-            attr: 'onClick',
-            default: '',
-            desc: tBreadcrumbComponentProps('breadcrumb.desc.onClick'),
             type: (
               <span className="badge text-bg-secondary">(id: string | number, event: HTMLLIElement) =&gt; void</span>
             ),
+            desc: tBreadcrumbComponentProps('breadcrumb.desc.onClick'),
+            attr: 'onClick',
+            default: '',
           },
         ]}
-        props
-        state={state}
+        hash="breadcrumbComponentProps"
         t={tBreadcrumbComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

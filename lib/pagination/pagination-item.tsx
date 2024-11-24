@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PaginationItemProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const PaginationItem = function PaginationItem<T extends ElementType = 'li'>(props: PaginationItemProps<T>) {
-  const { active, as: Component = 'li', className, disabled, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'li', dropOldClass, className, variables, disabled, active, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'page-item', disabled && 'disabled', active && 'active', className);

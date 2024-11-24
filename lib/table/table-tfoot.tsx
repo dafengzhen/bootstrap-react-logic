@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableTfootProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const TableTfoot = function TableTfoot<T extends ElementType = 'tfoot'>(props: TableTfootProps<T>) {
-  const { as: Component = 'tfoot', className, divider, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'tfoot', dropOldClass, className, variables, divider, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', divider && 'table-group-divider', className);

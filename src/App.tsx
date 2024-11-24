@@ -1,10 +1,10 @@
+import { ScrollRestoration, useLocation, useNavigate, NavLink, Outlet } from 'react-router-dom';
 import { GlobalContext, type Layout, type Theme } from '@contexts/global-context.ts';
-import { MenuEnum } from '@src/routes.tsx';
-import { sortByProperty } from '@src/tools';
-import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router-dom';
+import { sortByProperty } from '@src/tools';
+import { MenuEnum } from '@src/routes.tsx';
+import clsx from 'clsx';
 
 export const LOCAL_STORAGE_KEY_PREFIX = '_brl_';
 
@@ -25,8 +25,8 @@ function App() {
   >(
     sortByProperty(
       Object.keys(MenuEnum).map((key) => ({
-        name: key,
         to: MenuEnum[key as keyof typeof MenuEnum],
+        name: key,
       })),
       'name',
     ),
@@ -68,7 +68,7 @@ function App() {
         (v) => v === 'true',
       );
 
-      retrieveOrSetDefault<'dark' | 'light'>(
+      retrieveOrSetDefault<'light' | 'dark'>(
         LOCAL_STORAGE_KEY_PREFIX + 'options_theme',
         'light',
         theme[1],
@@ -78,7 +78,7 @@ function App() {
         },
       );
 
-      retrieveOrSetDefault<'center' | 'fullscreen'>(
+      retrieveOrSetDefault<'fullscreen' | 'center'>(
         LOCAL_STORAGE_KEY_PREFIX + 'options_layout',
         'default',
         layout[1],
@@ -121,14 +121,14 @@ function App() {
                 <div className={clsx('row', isCenter && 'container')}>
                   <div className="col-10 col-sm-2">
                     <div
-                      className="overflow-y-auto"
                       style={{
-                        height: 'calc(100vh - 3rem)',
                         paddingRight: 'calc(var(--bs-gutter-x) * 0.5)',
+                        height: 'calc(100vh - 3rem)',
                       }}
+                      className="overflow-y-auto"
                     >
                       {location.pathname !== '/' && (
-                        <div className="d-flex gap-2 mb-2">
+                        <div className="d-flex flex-wrap gap-2 mb-2">
                           <button
                             className={clsx('btn', isDark ? 'btn-dark' : 'btn-outline-light')}
                             onClick={onClickHouse}
@@ -153,7 +153,7 @@ function App() {
                         {menus.map((item) => {
                           return (
                             <NavLink
-                              className={({ isActive, isPending }) => {
+                              className={({ isPending, isActive }) => {
                                 return clsx(
                                   'list-group-item list-group-item-action text-truncate',
                                   isActive && 'active',
@@ -161,10 +161,10 @@ function App() {
                                   !isDark && 'rounded border-1',
                                 );
                               }}
-                              key={item.name}
                               style={{
                                 borderColor: isDark ? undefined : '#f8f9fa',
                               }}
+                              key={item.name}
                               to={item.to}
                             >
                               {item.name}

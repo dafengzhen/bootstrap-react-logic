@@ -1,17 +1,17 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { Popover } from '@lib/popover';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
+import { Popover } from '@lib/popover';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/popover/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -65,144 +65,144 @@ export default function BadgePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tPopoverPage}>
+      <Example t={tPopoverPage} state={state} hash="basic">
         <div>
           <Popover
-            body="And here's some amazing content. It's very engaging. Right?"
-            header="Popover title"
             trigger={(setRef) => (
-              <button className="btn btn-lg btn-danger" onClick={onClickVisible} ref={setRef} type="button">
+              <button className="btn btn-lg btn-danger" onClick={onClickVisible} type="button" ref={setRef}>
                 Click to toggle popover
               </button>
             )}
+            body="And here's some amazing content. It's very engaging. Right?"
+            header="Popover title"
             visible={visible}
           />
         </div>
       </Example>
 
-      <Example hash="fourDirections" row state={state} t={tPopoverPage}>
+      <Example hash="fourDirections" t={tPopoverPage} state={state} row>
         <div>
           <Popover
-            body="Top popover"
-            placement="top"
             trigger={(setRef) => (
-              <button className="btn btn-secondary" onClick={onClickVisible2} ref={setRef} type="button">
+              <button className="btn btn-secondary" onClick={onClickVisible2} type="button" ref={setRef}>
                 Popover on top
               </button>
             )}
+            body="Top popover"
             visible={visible2}
+            placement="top"
           />
         </div>
 
         <div>
           <Popover
-            body="Right popover"
-            placement="right"
             trigger={(setRef) => (
-              <button className="btn btn-secondary" onClick={onClickVisible3} ref={setRef} type="button">
+              <button className="btn btn-secondary" onClick={onClickVisible3} type="button" ref={setRef}>
                 Popover on right
               </button>
             )}
+            body="Right popover"
             visible={visible3}
+            placement="right"
           />
         </div>
 
         <div>
           <Popover
-            body="Bottom popover"
-            placement="bottom"
             trigger={(setRef) => (
-              <button className="btn btn-secondary" onClick={onClickVisible4} ref={setRef} type="button">
+              <button className="btn btn-secondary" onClick={onClickVisible4} type="button" ref={setRef}>
                 Popover on bottom
               </button>
             )}
+            body="Bottom popover"
+            placement="bottom"
             visible={visible4}
           />
         </div>
 
         <div>
           <Popover
-            body="Left popover"
-            placement="left"
             trigger={(setRef) => (
-              <button className="btn btn-secondary" onClick={onClickVisible5} ref={setRef} type="button">
+              <button className="btn btn-secondary" onClick={onClickVisible5} type="button" ref={setRef}>
                 Popover on left
               </button>
             )}
+            body="Left popover"
             visible={visible5}
+            placement="left"
           />
         </div>
       </Example>
 
-      <Example hash="customContainer" state={state} t={tPopoverPage}>
+      <Example hash="customContainer" t={tPopoverPage} state={state}>
         <div id="custom-popover-ontainer">
           <Popover
-            body="And here's some amazing content. It's very engaging. Right?"
-            container="#custom-popover-ontainer"
-            header="Popover title"
             trigger={(setRef) => (
-              <button className="btn btn-secondary" onClick={onClickVisible6} ref={setRef} type="button">
+              <button className="btn btn-secondary" onClick={onClickVisible6} type="button" ref={setRef}>
                 Custom container
               </button>
             )}
+            body="And here's some amazing content. It's very engaging. Right?"
+            container="#custom-popover-ontainer"
+            header="Popover title"
             visible={visible6}
           />
         </div>
       </Example>
 
-      <Example hash="customPopovers" state={state} t={tPopoverPage}>
+      <Example hash="customPopovers" t={tPopoverPage} state={state}>
         <div>
           <Popover
-            body="This popover is themed via CSS variables."
-            header="Custom popover"
-            trigger={(setRef) => (
-              <button className="btn btn-secondary" onClick={onClickVisible7} ref={setRef} type="button">
-                Custom popover
-              </button>
-            )}
             variables={{
-              bsPopoverBodyPaddingX: '1rem',
-              bsPopoverBodyPaddingY: '.5rem',
               bsPopoverBorderColor: 'var(--bd-violet-bg)',
               bsPopoverHeaderBg: 'var(--bd-violet-bg)',
               bsPopoverHeaderColor: 'var(--bs-white)',
+              bsPopoverBodyPaddingY: '.5rem',
+              bsPopoverBodyPaddingX: '1rem',
               bsPopoverMaxWidth: '200px',
             }}
+            trigger={(setRef) => (
+              <button className="btn btn-secondary" onClick={onClickVisible7} type="button" ref={setRef}>
+                Custom popover
+              </button>
+            )}
+            body="This popover is themed via CSS variables."
+            header="Custom popover"
             visible={visible7}
           />
         </div>
       </Example>
 
-      <Example hash="dismissOnNextClick" state={state} t={tPopoverPage}>
+      <Example hash="dismissOnNextClick" t={tPopoverPage} state={state}>
         <div>
           <Popover
-            body="And here's some amazing content. It's very engaging. Right?"
-            header="Dismissible popover"
-            onChange={setVisible8}
             trigger={(setRef) => (
-              <a className="btn btn-lg btn-danger" ref={setRef} role="button" tabIndex={0}>
+              <a className="btn btn-lg btn-danger" role="button" ref={setRef} tabIndex={0}>
                 Dismissible popover
               </a>
             )}
+            body="And here's some amazing content. It's very engaging. Right?"
+            header="Dismissible popover"
+            onChange={setVisible8}
             triggerType="focus"
             visible={visible8}
           />
         </div>
       </Example>
 
-      <Example hash="disabledElements" state={state} t={tPopoverPage}>
+      <Example hash="disabledElements" t={tPopoverPage} state={state}>
         <div>
           <Popover
-            body="Disabled popover"
-            onChange={setVisible9}
             trigger={(setRef) => (
-              <button className="btn btn-primary" disabled ref={setRef} type="button">
+              <button className="btn btn-primary" type="button" ref={setRef} disabled>
                 Disabled button
               </button>
             )}
             triggerType={['focus', 'hover']}
-            triggerWrapper
+            body="Disabled popover"
+            onChange={setVisible9}
             visible={visible9}
+            triggerWrapper
           />
         </div>
       </Example>
@@ -210,54 +210,50 @@ export default function BadgePage() {
       <PropsIndicator />
 
       <Example
-        hash="popoverComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary ms-1">PopoverArrowProps&lt;div&gt;</span>,
+            desc: tPopoverComponentProps('popover.desc.arrowProps'),
             attr: 'arrowProps',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.arrowProps'),
-            type: <span className="badge text-bg-secondary ms-1">PopoverArrowProps&lt;div&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
+            desc: tPopoverComponentProps('popover.desc.body'),
             attr: 'body',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.body'),
-            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">PopoverBodyProps&lt;div&gt;</span>,
+            desc: tPopoverComponentProps('popover.desc.bodyProps'),
             attr: 'bodyProps',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.bodyProps'),
-            type: <span className="badge text-bg-secondary ms-1">PopoverBodyProps&lt;div&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">HTMLElement | string</span>,
+            desc: tPopoverComponentProps('popover.desc.container'),
             attr: 'container',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.container'),
-            type: <span className="badge text-bg-secondary ms-1">HTMLElement | string</span>,
           },
           {
-            attr: 'fade',
-            default: 'true',
-            desc: tPopoverComponentProps('popover.desc.body'),
             type: <span className="badge text-bg-secondary ms-1">boolean</span>,
+            desc: tPopoverComponentProps('popover.desc.body'),
+            default: 'true',
+            attr: 'fade',
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
+            desc: tPopoverComponentProps('popover.desc.header'),
             attr: 'header',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.header'),
-            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">PopoverHeaderProps&lt;div&gt;</span>,
+            desc: tPopoverComponentProps('popover.desc.headerProps'),
             attr: 'headerProps',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.headerProps'),
-            type: <span className="badge text-bg-secondary ms-1">PopoverHeaderProps&lt;div&gt;</span>,
           },
           {
-            attr: 'offset',
-            default: '',
-            desc: tPopoverComponentProps('popover.desc.offset'),
             type: (
               <div className="d-flex gap-2">
                 <div>
@@ -274,58 +270,62 @@ export default function BadgePage() {
                 </div>
               </div>
             ),
+            desc: tPopoverComponentProps('popover.desc.offset'),
+            attr: 'offset',
+            default: '',
           },
           {
-            attr: 'onChange',
-            default: '',
-            desc: tPopoverComponentProps('popover.desc.onChange'),
             type: (
               <span className="badge text-bg-secondary ms-1">
                 (visible: boolean, event?: MouseEvent&lt;HTMLElement&gt;) =&gt; void
               </span>
             ),
+            desc: tPopoverComponentProps('popover.desc.onChange'),
+            attr: 'onChange',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">bottom | end | left | right | start | top</span>,
+            desc: tPopoverComponentProps('popover.desc.placement'),
             attr: 'placement',
             default: 'end',
-            desc: tPopoverComponentProps('popover.desc.placement'),
-            type: <span className="badge text-bg-secondary ms-1">bottom | end | left | right | start | top</span>,
           },
           {
-            attr: 'trigger',
-            default: '',
-            desc: tPopoverComponentProps('popover.desc.placement'),
             type: (
               <span className="badge text-bg-secondary ms-1">
                 ( setRef, getProps) =&gt; Record&lt;string, unknown&gt;, ) =&gt; ReactNode
               </span>
             ),
+            desc: tPopoverComponentProps('popover.desc.placement'),
+            attr: 'trigger',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">focus | hover | (focus | hover)[]</span>,
+            desc: tPopoverComponentProps('popover.desc.placement'),
             attr: 'triggerType',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.placement'),
-            type: <span className="badge text-bg-secondary ms-1">focus | hover | (focus | hover)[]</span>,
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
+            desc: tPopoverComponentProps('popover.desc.visible'),
             attr: 'visible',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.visible'),
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
+            desc: tPopoverComponentProps('popover.desc.triggerWrapper'),
             attr: 'triggerWrapper',
             default: '',
-            desc: tPopoverComponentProps('popover.desc.triggerWrapper'),
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="popoverComponentProps"
         t={tPopoverComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

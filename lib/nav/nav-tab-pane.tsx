@@ -1,18 +1,18 @@
-import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { NavTabPaneProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const NavTabPane = function NavTabPane<T extends ElementType = 'div'>(props: NavTabPaneProps<T>) {
   const {
     active: activeByDefault = false,
     as: Component = 'div',
-    className,
     dropOldClass,
     fade = true,
-    style,
+    className,
     variables,
+    style,
     ...rest
   } = props;
 

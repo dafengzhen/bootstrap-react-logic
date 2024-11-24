@@ -1,18 +1,18 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
 import { Label } from '@lib/label';
 import { Range } from '@lib/range';
-import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/range/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -28,82 +28,82 @@ export default function RangePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tRangePage}>
+      <Example t={tRangePage} state={state} hash="basic">
         <div>
           <Label htmlFor="customRange1">Example range</Label>
           <Range id="customRange1" />
         </div>
       </Example>
 
-      <Example hash="disabled" state={state} t={tRangePage}>
+      <Example hash="disabled" t={tRangePage} state={state}>
         <div>
           <Label htmlFor="disabledRange">Disabled range</Label>
-          <Range disabled id="disabledRange" />
+          <Range id="disabledRange" disabled />
         </div>
       </Example>
 
-      <Example hash="minAndMax" state={state} t={tRangePage}>
+      <Example hash="minAndMax" t={tRangePage} state={state}>
         <div>
           <Label htmlFor="customRange2">Example range</Label>
           <Range id="customRange2" max="5" min="0" />
         </div>
       </Example>
 
-      <Example hash="steps" state={state} t={tRangePage}>
+      <Example t={tRangePage} state={state} hash="steps">
         <div>
           <Label htmlFor="customRange3">Example range</Label>
-          <Range id="customRange3" max="5" min="0" step="0.5" />
+          <Range id="customRange3" step="0.5" max="5" min="0" />
         </div>
       </Example>
 
       <PropsIndicator />
 
       <Example
-        hash="rangeComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRangeComponentProps('range.desc.disabled'),
             attr: 'disabled',
             default: '',
-            desc: tRangeComponentProps('range.desc.disabled'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">string | number</span>,
+            desc: tRangeComponentProps('range.desc.min'),
             attr: 'min',
             default: '',
-            desc: tRangeComponentProps('range.desc.min'),
-            type: <span className="badge text-bg-secondary">string | number</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">string | number</span>,
+            desc: tRangeComponentProps('range.desc.max'),
             attr: 'max',
             default: '',
-            desc: tRangeComponentProps('range.desc.max'),
-            type: <span className="badge text-bg-secondary">string | number</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">string | number</span>,
+            desc: tRangeComponentProps('range.desc.step'),
             attr: 'step',
             default: '',
-            desc: tRangeComponentProps('range.desc.step'),
-            type: <span className="badge text-bg-secondary">string | number</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRangeComponentProps('range.desc.isValid'),
             attr: 'isValid',
             default: '',
-            desc: tRangeComponentProps('range.desc.isValid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tRangeComponentProps('range.desc.isInvalid'),
             attr: 'isInvalid',
             default: '',
-            desc: tRangeComponentProps('range.desc.isInvalid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="rangeComponentProps"
         t={tRangeComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

@@ -1,65 +1,38 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
-  BaseProps,
   ListGroupItemVariablesType,
   ListGroupVariablesType,
   PropsWithoutRef,
   VariantType,
+  BaseProps,
 } from '../tools';
+
+export interface ListGroupOption {
+  props?: ListGroupItemProps<ElementType>;
+  variant?: keyof VariantType;
+  id?: number | string;
+  itemAction?: boolean;
+  disabled?: boolean;
+  flexFill?: boolean;
+  active?: boolean;
+  item?: ReactNode;
+}
 
 export type ListGroupItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, ListGroupItemVariablesType>;
 
-export interface ListGroupOption {
-  active?: boolean;
-  disabled?: boolean;
-  flexFill?: boolean;
-  id?: number | string;
-  item?: ReactNode;
-  itemAction?: boolean;
-  props?: ListGroupItemProps<ElementType>;
-  variant?: keyof VariantType;
-}
-
 export type ListGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ListGroupVariablesType>;
 
-type ItemProps<T extends ElementType> = BaseProps<T, ListGroupItemVariablesType> & {
-  /**
-   * active.
-   */
-  active?: boolean;
-
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-
-  /**
-   * flexFill.
-   */
-  flexFill?: boolean;
-
-  /**
-   * itemAction.
-   */
-  itemAction?: boolean;
-
-  /**
-   * variant.
-   */
-  variant?: keyof VariantType;
-};
-
-type Props<T extends ElementType> = BaseProps<T, ListGroupVariablesType> & {
-  /**
-   * flush.
-   */
-  flush?: boolean;
-
+type Props<T extends ElementType> = {
   /**
    * horizontal.
    */
-  horizontal?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
+  horizontal?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
+
+  /**
+   * options.
+   */
+  options?: ListGroupOption[];
 
   /**
    * itemAction.
@@ -72,7 +45,34 @@ type Props<T extends ElementType> = BaseProps<T, ListGroupVariablesType> & {
   numbered?: boolean;
 
   /**
-   * options.
+   * flush.
    */
-  options?: ListGroupOption[];
-};
+  flush?: boolean;
+} & BaseProps<T, ListGroupVariablesType>;
+
+type ItemProps<T extends ElementType> = {
+  /**
+   * variant.
+   */
+  variant?: keyof VariantType;
+
+  /**
+   * itemAction.
+   */
+  itemAction?: boolean;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * flexFill.
+   */
+  flexFill?: boolean;
+
+  /**
+   * active.
+   */
+  active?: boolean;
+} & BaseProps<T, ListGroupItemVariablesType>;

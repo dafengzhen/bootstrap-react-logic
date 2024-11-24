@@ -47,7 +47,7 @@ export const getStateByHash = <T extends object>(hash: string, states: T): Found
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
         const newPath = currentPath ? `${currentPath}.${key}` : key;
         if (key === hash) {
-          return { path: newPath, value: (obj as any)[key] };
+          return { value: (obj as any)[key], path: newPath };
         }
 
         const value = (obj as any)[key];

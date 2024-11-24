@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableThProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const TableTh = function TableTh<T extends ElementType = 'th'>(props: TableThProps<T>) {
-  const { active, as: Component = 'th', className, dropOldClass, style, variables, variant, ...rest } = props;
+  const { as: Component = 'th', dropOldClass, className, variables, variant, active, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(

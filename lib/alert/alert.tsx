@@ -1,18 +1,18 @@
-import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { AlertProps } from './types.ts';
 
-import Button from '../button/button.tsx';
 import {
-  clsxStyle,
-  clsxUnique,
   convertBsKeyToVar,
-  filterOptions,
   initializeLogger,
+  filterOptions,
   isValueValid,
+  clsxUnique,
   mergeProps,
+  clsxStyle,
 } from '../tools';
 import AlertHeading from './alert-heading.tsx';
+import Button from '../button/button.tsx';
 import AlertLink from './alert-link.tsx';
 
 const { logWarning } = initializeLogger();
@@ -22,13 +22,13 @@ const DEFAULTS = {
 };
 
 const useAlertVisibility = (props: {
+  onClose?: (close?: () => void) => void;
   clickToClose?: boolean;
   dismissible?: boolean;
-  fade?: boolean;
-  onClose?: (close?: () => void) => void;
   visible?: boolean;
+  fade?: boolean;
 }) => {
-  const { clickToClose, dismissible, fade, onClose, visible } = props;
+  const { clickToClose, dismissible, onClose, visible, fade } = props;
   const [isVisible, setIsVisible] = useState(!fade && typeof visible === 'boolean' ? visible : true);
   const [isShowing, setIsShowing] = useState(false);
   const alertElement = useRef<HTMLDivElement | null>(null);
@@ -38,9 +38,9 @@ const useAlertVisibility = (props: {
     isInit.current = true;
     if (typeof visible === 'boolean' && dismissible && clickToClose && typeof onClose !== 'function') {
       logWarning({
-        component: 'Alert',
         message:
           "When using 'visible' and 'dismissible' to control the Alert component, please manually handle the close event of the dismissible close button to avoid inconsistencies with the 'visible' state.",
+        component: 'Alert',
         param: 'visible',
       });
     }
@@ -119,28 +119,28 @@ const useAlertVisibility = (props: {
 
 const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>) {
   const {
-    as: Component = 'div',
-    className,
     clickToClose = DEFAULTS.clickToClose,
-    closeButton,
+    as: Component = 'div',
     closeButtonProps,
-    dismissible,
     dropOldClass,
-    fade,
-    onClose,
-    style,
+    closeButton,
+    dismissible,
+    className,
     variables,
+    onClose,
     variant,
     visible,
+    style,
+    fade,
     ...rest
   } = props;
 
   const { alertElement, handleClose, isShowing, isVisible } = useAlertVisibility({
     clickToClose,
     dismissible,
-    fade,
     onClose,
     visible,
+    fade,
   });
 
   const onClick = useCallback(

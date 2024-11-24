@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarNavItemProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
-const NavbarNavItem = function NavbarNavItem<T extends ElementType = 'a' | 'li'>(props: NavbarNavItemProps<T>) {
-  const { as: Component = 'li', className, dropOldClass, style, variables, ...rest } = props;
+const NavbarNavItem = function NavbarNavItem<T extends ElementType = 'li' | 'a'>(props: NavbarNavItemProps<T>) {
+  const { as: Component = 'li', dropOldClass, className, variables, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'nav-item', className);

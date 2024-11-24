@@ -2,13 +2,13 @@ import hljs from 'highlight.js/lib/common';
 import { useEffect, useRef } from 'react';
 
 const useHighlightCode = ({
-  code,
   codeLanguage,
   isOpen,
+  code,
 }: {
-  code?: string;
   codeLanguage?: string;
   isOpen?: boolean;
+  code?: string;
 }) => {
   const element = useRef<HTMLElement | null>(null);
 

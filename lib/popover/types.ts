@@ -1,44 +1,67 @@
-import type { ElementType, HTMLProps, MouseEvent, ReactNode, RefCallback } from 'react';
+import type { ElementType, RefCallback, MouseEvent, HTMLProps, ReactNode } from 'react';
 
 import type {
-  BaseProps,
-  OmittedPropsWithoutRef,
+  PopoverHeaderVariablesType,
   PopoverArrowVariablesType,
   PopoverBodyVariablesType,
-  PopoverHeaderVariablesType,
+  OmittedPropsWithoutRef,
   PopoverVariablesType,
   PropsWithoutRef,
+  BaseProps,
 } from '../tools';
+
+export type PopoverProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, PopoverVariablesType, 'onChange'>;
+
+export type PopoverHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, PopoverHeaderVariablesType>;
 
 export type PopoverArrowProps<T extends ElementType> = PropsWithoutRef<ArrowProps<T>, T, PopoverArrowVariablesType>;
 
 export type PopoverBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, PopoverBodyVariablesType>;
 
-export type PopoverHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, PopoverHeaderVariablesType>;
-
-export type PopoverProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, PopoverVariablesType, 'onChange'>;
-
-type ArrowProps<T extends ElementType> = BaseProps<T, PopoverArrowVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * onRef.
+   * trigger.
    */
-  onRef?: RefCallback<HTMLElement>;
-};
+  trigger?: (
+    setRef: RefCallback<HTMLElement>,
+    getProps: (userProps?: HTMLProps<Element>) => Record<string, unknown>,
+  ) => ReactNode;
 
-type BodyProps<T extends ElementType> = BaseProps<T, PopoverBodyVariablesType> & {};
+  /**
+   * offset.
+   */
+  offset?:
+    | {
+        alignmentAxis?: number | null;
+        crossAxis?: number;
+        mainAxis?: number;
+      }
+    | number;
 
-type HeaderProps<T extends ElementType> = BaseProps<T, PopoverHeaderVariablesType> & {};
+  /**
+   * onChange.
+   */
+  onChange?: (visible: boolean, event?: MouseEvent<HTMLElement>) => void;
 
-type Props<T extends ElementType> = BaseProps<T, PopoverVariablesType> & {
+  /**
+   * placement.
+   */
+  placement?: 'bottom' | 'right' | 'start' | 'left' | 'end' | 'top';
+
+  /**
+   * triggerType.
+   */
+  triggerType?: ('focus' | 'hover')[] | 'focus' | 'hover';
+
+  /**
+   * headerProps.
+   */
+  headerProps?: PopoverHeaderProps<ElementType>;
+
   /**
    * arrowProps.
    */
   arrowProps?: PopoverArrowProps<ElementType>;
-
-  /**
-   * body.
-   */
-  body?: ReactNode;
 
   /**
    * bodyProps.
@@ -51,9 +74,9 @@ type Props<T extends ElementType> = BaseProps<T, PopoverVariablesType> & {
   container?: HTMLElement | string;
 
   /**
-   * fade.
+   * triggerWrapper.
    */
-  fade?: boolean;
+  triggerWrapper?: boolean;
 
   /**
    * header.
@@ -61,51 +84,28 @@ type Props<T extends ElementType> = BaseProps<T, PopoverVariablesType> & {
   header?: ReactNode;
 
   /**
-   * headerProps.
-   */
-  headerProps?: PopoverHeaderProps<ElementType>;
-
-  /**
-   * offset.
-   */
-  offset?:
-    | number
-    | {
-        alignmentAxis?: null | number;
-        crossAxis?: number;
-        mainAxis?: number;
-      };
-
-  /**
-   * onChange.
-   */
-  onChange?: (visible: boolean, event?: MouseEvent<HTMLElement>) => void;
-
-  /**
-   * placement.
-   */
-  placement?: 'bottom' | 'end' | 'left' | 'right' | 'start' | 'top';
-
-  /**
-   * trigger.
-   */
-  trigger?: (
-    setRef: RefCallback<HTMLElement>,
-    getProps: (userProps?: HTMLProps<Element>) => Record<string, unknown>,
-  ) => ReactNode;
-
-  /**
-   * triggerType.
-   */
-  triggerType?: 'focus' | 'hover' | ('focus' | 'hover')[];
-
-  /**
-   * triggerWrapper.
-   */
-  triggerWrapper?: boolean;
-
-  /**
    * visible.
    */
   visible?: boolean;
-};
+
+  /**
+   * body.
+   */
+  body?: ReactNode;
+
+  /**
+   * fade.
+   */
+  fade?: boolean;
+} & BaseProps<T, PopoverVariablesType>;
+
+type ArrowProps<T extends ElementType> = {
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<HTMLElement>;
+} & BaseProps<T, PopoverArrowVariablesType>;
+
+type HeaderProps<T extends ElementType> = BaseProps<T, PopoverHeaderVariablesType> & {};
+
+type BodyProps<T extends ElementType> = BaseProps<T, PopoverBodyVariablesType> & {};

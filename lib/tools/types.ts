@@ -1,815 +1,990 @@
-type AccordionBasicVariablesType = AccordionVariablesType;
-
-type AccordionBodyVariablesType = AccordionVariablesType;
-
-type AccordionHeaderVariablesType = AccordionVariablesType;
-
-type AccordionItemVariablesType = AccordionVariablesType;
-
-type AccordionVariablesType = {
-  accordionBg?: string;
-  accordionBodyPaddingX?: string;
-  accordionBodyPaddingY?: string;
-  accordionBorderColor?: string;
-  accordionBorderRadius?: string;
-  accordionBorderWidth?: string;
-  accordionButtonActiveBg?: string;
-  accordionButtonActiveColor?: string;
-  accordionButtonActiveIcon?: string;
-  accordionButtonBg?: string;
-  accordionButtonColor?: string;
-  accordionButtonFocusBorderColor?: string;
-  accordionButtonFocusBoxShadow?: string;
-  accordionButtonIcon?: string;
-  accordionButtonPaddingX?: string;
-  accordionButtonPaddingY?: string;
-  accordionColor?: string;
-  accordionIconActiveColor?: string;
-  accordionIconColor?: string;
-  accordionIconTransform?: string;
-  accordionIconTransition?: string;
-  accordionIconWidth?: string;
-  accordionInnerBorderRadius?: string;
-  accordionPaddingX?: string;
-  accordionPaddingY?: string;
-  accordionTransition?: string;
+type CheckboxVariablesType = {
+  formCheckInputIndeterminateBorderColor?: string;
+  formCheckInputIndeterminateBgColor?: string;
+  formCheckInputIndeterminateBgImage?: string;
+  formCheckBtnCheckDisabledOpacity?: string;
+  formCheckInputCheckedBorderColor?: string;
+  formCheckInputIndeterminateColor?: string;
+  formCheckInputDisabledOpacity?: string;
+  formCheckLabelDisabledOpacity?: string;
+  formCheckInputCheckedBgColor?: string;
+  formCheckInputCheckedBgImage?: string;
+  formCheckInputFocusBoxShadow?: string;
+  formCheckRadioCheckedBgImage?: string;
+  formSwitchCheckedBgPosition?: string;
+  formCheckInputActiveFilter?: string;
+  formCheckInputBorderRadius?: string;
+  formCheckInputCheckedColor?: string;
+  formCheckRadioBorderRadius?: string;
+  formInvalidBorderColorDark?: string;
+  formCheckInputFocusBorder?: string;
+  formCheckInlineMarginEnd?: string;
+  formSwitchCheckedBgImage?: string;
+  formValidBorderColorDark?: string;
+  formInvalidBorderColor?: string;
+  formSwitchBorderRadius?: string;
+  formSwitchCheckedColor?: string;
+  formSwitchFocusBgImage?: string;
+  formSwitchPaddingStart?: string;
+  formCheckMarginBottom?: string;
+  formCheckPaddingStart?: string;
+  formCheckInputBorder?: string;
+  formCheckLabelCursor?: string;
+  formInvalidColorDark?: string;
+  formSwitchFocusColor?: string;
+  formSwitchTransition?: string;
+  formValidBorderColor?: string;
+  formCheckInputWidth?: string;
+  formCheckLabelColor?: string;
+  formCheckTransition?: string;
+  formCheckMinHeight?: string;
+  formValidColorDark?: string;
+  formSwitchBgImage?: string;
+  formCheckInputBg?: string;
+  formInvalidColor?: string;
+  formSwitchColor?: string;
+  formSwitchWidth?: string;
+  formValidColor?: string;
 };
 
-type AlertHeadingVariablesType = {
-  alertBorderRadius?: string;
-  alertBorderWidth?: string;
-  alertDismissiblePaddingR?: string;
-  alertLinkFontWeight?: string;
-  alertMarginBottom?: string;
-  alertPaddingX?: string;
-  alertPaddingY?: string;
+type RadioVariablesType = {
+  formCheckInputIndeterminateBorderColor?: string;
+  formCheckInputIndeterminateBgColor?: string;
+  formCheckInputIndeterminateBgImage?: string;
+  formCheckBtnCheckDisabledOpacity?: string;
+  formCheckInputCheckedBorderColor?: string;
+  formCheckInputIndeterminateColor?: string;
+  formCheckInputDisabledOpacity?: string;
+  formCheckLabelDisabledOpacity?: string;
+  formCheckInputCheckedBgColor?: string;
+  formCheckInputCheckedBgImage?: string;
+  formCheckInputFocusBoxShadow?: string;
+  formCheckRadioCheckedBgImage?: string;
+  formSwitchCheckedBgPosition?: string;
+  formCheckInputActiveFilter?: string;
+  formCheckInputBorderRadius?: string;
+  formCheckInputCheckedColor?: string;
+  formCheckRadioBorderRadius?: string;
+  formInvalidBorderColorDark?: string;
+  formCheckInputFocusBorder?: string;
+  formCheckInlineMarginEnd?: string;
+  formSwitchCheckedBgImage?: string;
+  formValidBorderColorDark?: string;
+  formInvalidBorderColor?: string;
+  formSwitchBorderRadius?: string;
+  formSwitchCheckedColor?: string;
+  formSwitchFocusBgImage?: string;
+  formSwitchPaddingStart?: string;
+  formCheckMarginBottom?: string;
+  formCheckPaddingStart?: string;
+  formCheckInputBorder?: string;
+  formCheckLabelCursor?: string;
+  formInvalidColorDark?: string;
+  formSwitchFocusColor?: string;
+  formSwitchTransition?: string;
+  formValidBorderColor?: string;
+  formCheckInputWidth?: string;
+  formCheckLabelColor?: string;
+  formCheckTransition?: string;
+  formCheckMinHeight?: string;
+  formValidColorDark?: string;
+  formSwitchBgImage?: string;
+  formCheckInputBg?: string;
+  formInvalidColor?: string;
+  formSwitchColor?: string;
+  formSwitchWidth?: string;
+  formValidColor?: string;
 };
 
-type AlertLinkVariablesType = {
-  alertBorderRadius?: string;
-  alertBorderWidth?: string;
-  alertDismissiblePaddingR?: string;
-  alertLinkFontWeight?: string;
-  alertMarginBottom?: string;
-  alertPaddingX?: string;
-  alertPaddingY?: string;
+type InputVariablesType = {
+  formInvalidBorderColorDark?: string;
+  formValidBorderColorDark?: string;
+  inputDisabledBorderColor?: string;
+  inputHeightInnerQuarter?: string;
+  formInvalidBorderColor?: string;
+  formFileButtonHoverBg?: string;
+  inputFocusBorderColor?: string;
+  inputPlaceholderColor?: string;
+  formInvalidColorDark?: string;
+  formValidBorderColor?: string;
+  inputHeightInnerHalf?: string;
+  formFileButtonColor?: string;
+  inputBorderRadiusLg?: string;
+  inputBorderRadiusSm?: string;
+  inputFocusBoxShadow?: string;
+  inputPlaintextColor?: string;
+  formValidColorDark?: string;
+  inputDisabledColor?: string;
+  inputBorderRadius?: string;
+  inputHeightBorder?: string;
+  formFileButtonBg?: string;
+  formInvalidColor?: string;
+  inputBorderColor?: string;
+  inputBorderWidth?: string;
+  inputHeightInner?: string;
+  inputDisabledBg?: string;
+  inputFocusColor?: string;
+  inputFocusWidth?: string;
+  inputFontFamily?: string;
+  inputFontSizeLg?: string;
+  inputFontSizeSm?: string;
+  inputFontWeight?: string;
+  inputLineHeight?: string;
+  inputPaddingXLg?: string;
+  inputPaddingXSm?: string;
+  inputPaddingYLg?: string;
+  inputPaddingYSm?: string;
+  inputTransition?: string;
+  formColorWidth?: string;
+  formValidColor?: string;
+  inputBoxShadow?: string;
+  inputFontSize?: string;
+  inputHeightLg?: string;
+  inputHeightSm?: string;
+  inputPaddingX?: string;
+  inputPaddingY?: string;
+  inputFocusBg?: string;
+  inputHeight?: string;
+  inputColor?: string;
+  inputBg?: string;
 };
 
-type AlertVariablesType = {
-  alertBorderRadius?: string;
-  alertBorderWidth?: string;
-  alertDismissiblePaddingR?: string;
-  alertLinkFontWeight?: string;
-  alertMarginBottom?: string;
-  alertPaddingX?: string;
-  alertPaddingY?: string;
+type SelectVariablesType = {
+  formSelectFeedbackIconPaddingEnd?: string;
+  formSelectFeedbackIconPosition?: string;
+  formSelectDisabledBorderColor?: string;
+  formInvalidBorderColorDark?: string;
+  formSelectFeedbackIconSize?: string;
+  formSelectFocusBorderColor?: string;
+  formSelectIndicatorPadding?: string;
+  formSelectBorderRadiusLg?: string;
+  formSelectBorderRadiusSm?: string;
+  formSelectFocusBoxShadow?: string;
+  formSelectIndicatorColor?: string;
+  formValidBorderColorDark?: string;
+  formSelectDisabledColor?: string;
+  formInvalidBorderColor?: string;
+  formSelectBorderRadius?: string;
+  formSelectBorderColor?: string;
+  formSelectBorderWidth?: string;
+  formInvalidColorDark?: string;
+  formSelectBgPosition?: string;
+  formSelectDisabledBg?: string;
+  formSelectFocusWidth?: string;
+  formSelectFontFamily?: string;
+  formSelectFontSizeLg?: string;
+  formSelectFontSizeSm?: string;
+  formSelectFontWeight?: string;
+  formSelectLineHeight?: string;
+  formSelectPaddingXLg?: string;
+  formSelectPaddingXSm?: string;
+  formSelectPaddingYLg?: string;
+  formSelectPaddingYSm?: string;
+  formSelectTransition?: string;
+  formValidBorderColor?: string;
+  formSelectBoxShadow?: string;
+  formSelectIndicator?: string;
+  formSelectFontSize?: string;
+  formSelectPaddingX?: string;
+  formSelectPaddingY?: string;
+  formValidColorDark?: string;
+  formInvalidColor?: string;
+  formSelectBgSize?: string;
+  formSelectColor?: string;
+  formValidColor?: string;
+  formSelectBg?: string;
 };
 
-type BadgeVariablesType = {
-  badgeBorderRadius?: string;
-  badgeColor?: string;
-  badgeFontSize?: string;
-  badgeFontWeight?: string;
-  badgePaddingX?: string;
-  badgePaddingY?: string;
+type NavbarVariablesType = {
+  navbarLightTogglerBorderColor?: string;
+  navbarDarkTogglerBorderColor?: string;
+  navbarLightBrandHoverColor?: string;
+  navbarDarkBrandHoverColor?: string;
+  navbarTogglerBorderRadius?: string;
+  navbarLightDisabledColor?: string;
+  navbarLightTogglerIconBg?: string;
+  navbarDarkDisabledColor?: string;
+  navbarDarkTogglerIconBg?: string;
+  navbarTogglerFocusWidth?: string;
+  navbarTogglerTransition?: string;
+  navbarLightActiveColor?: string;
+  navbarDarkActiveColor?: string;
+  navbarLightBrandColor?: string;
+  navbarLightHoverColor?: string;
+  navbarNavLinkPaddingX?: string;
+  navbarTogglerFontSize?: string;
+  navbarTogglerPaddingX?: string;
+  navbarTogglerPaddingY?: string;
+  navbarBrandMarginEnd?: string;
+  navbarDarkBrandColor?: string;
+  navbarDarkHoverColor?: string;
+  navbarLightIconColor?: string;
+  navbarBrandFontSize?: string;
+  navbarBrandPaddingY?: string;
+  navbarDarkIconColor?: string;
+  navbarBrandHeight?: string;
+  navbarLightColor?: string;
+  navbarDarkColor?: string;
+  navbarPaddingX?: string;
+  navbarPaddingY?: string;
+  navLinkHeight?: string;
 };
-
-type BreadcrumbBasicVariablesType = BreadcrumbVariablesType;
-
-type BreadcrumbItemVariablesType = BreadcrumbVariablesType;
-
-type BreadcrumbVariablesType = {
-  breadcrumbActiveColor?: string;
-  breadcrumbBg?: string;
-  breadcrumbBorderRadius?: string;
-  breadcrumbDivider?: string;
-  breadcrumbDividerColor?: string;
-  breadcrumbDividerFlipped?: string;
-  breadcrumbFontSize?: string;
-  breadcrumbItemPaddingX?: string;
-  breadcrumbMarginBottom?: string;
-  breadcrumbPaddingX?: string;
-  breadcrumbPaddingY?: string;
-};
-
-type ButtonGroupVariablesType = object;
 
 type ButtonVariableType = {
-  btnActiveBgShadeAmount?: string;
-  btnActiveBgTintAmount?: string;
   btnActiveBorderShadeAmount?: string;
   btnActiveBorderTintAmount?: string;
+  btnHoverBorderShadeAmount?: string;
+  btnHoverBorderTintAmount?: string;
+  btnActiveBgShadeAmount?: string;
+  btnActiveBgTintAmount?: string;
+  btnHoverBgShadeAmount?: string;
+  btnLinkFocusShadowRgb?: string;
+  btnHoverBgTintAmount?: string;
+  btnLinkDisabledColor?: string;
   btnActiveBoxShadow?: string;
-  btnBorderRadius?: string;
+  btnDisabledOpacity?: string;
   btnBorderRadiusLg?: string;
   btnBorderRadiusSm?: string;
-  btnBorderWidth?: string;
-  btnBoxShadow?: string;
-  btnColor?: string;
-  btnDisabledOpacity?: string;
   btnFocusBoxShadow?: string;
+  btnLinkHoverColor?: string;
+  btnBorderRadius?: string;
+  btnBorderWidth?: string;
   btnFocusWidth?: string;
   btnFontFamily?: string;
-  btnFontSize?: string;
   btnFontSizeLg?: string;
   btnFontSizeSm?: string;
   btnFontWeight?: string;
-  btnHoverBgShadeAmount?: string;
-  btnHoverBgTintAmount?: string;
-  btnHoverBorderShadeAmount?: string;
-  btnHoverBorderTintAmount?: string;
   btnLineHeight?: string;
-  btnLinkColor?: string;
-  btnLinkDisabledColor?: string;
-  btnLinkFocusShadowRgb?: string;
-  btnLinkHoverColor?: string;
-  btnPaddingX?: string;
   btnPaddingXLg?: string;
   btnPaddingXSm?: string;
-  btnPaddingY?: string;
   btnPaddingYLg?: string;
   btnPaddingYSm?: string;
   btnTransition?: string;
   btnWhiteSpace?: string;
+  btnBoxShadow?: string;
+  btnLinkColor?: string;
+  btnFontSize?: string;
+  btnPaddingX?: string;
+  btnPaddingY?: string;
+  btnColor?: string;
 };
 
-type CardBodyVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
+type PaginationVariablesType = {
+  paginationDisabledBorderColor?: string;
+  paginationActiveBorderColor?: string;
+  paginationHoverBorderColor?: string;
+  paginationBorderRadiusLG?: string;
+  paginationBorderRadiusSm?: string;
+  paginationFocusBoxShadow?: string;
+  paginationDisabledColor?: string;
+  paginationBorderRadius?: string;
+  paginationFocusOutline?: string;
+  paginationActiveColor?: string;
+  paginationBorderColor?: string;
+  paginationBorderWidth?: string;
+  paginationMarginStart?: string;
+  paginationDisabledBg?: string;
+  paginationFocusColor?: string;
+  paginationHoverColor?: string;
+  paginationPaddingXLG?: string;
+  paginationPaddingXSm?: string;
+  paginationPaddingYLG?: string;
+  paginationPaddingYSm?: string;
+  paginationTransition?: string;
+  paginationActiveBg?: string;
+  paginationFontSize?: string;
+  paginationPaddingX?: string;
+  paginationPaddingY?: string;
+  paginationFocusBg?: string;
+  paginationHoverBg?: string;
+  paginationColor?: string;
+  paginationBg?: string;
 };
 
-type CardFooterVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
+type ModalVariablesType = {
+  modalContentInnerBorderRadius?: string;
+  modalContentBoxShadowSmUp?: string;
+  modalContentBorderRadius?: string;
+  modalFooterMarginBetween?: string;
+  modalContentBorderColor?: string;
+  modalContentBorderWidth?: string;
+  modalContentBoxShadowXs?: string;
+  modalDialogMarginYSmUp?: string;
+  modalFooterBorderColor?: string;
+  modalFooterBorderWidth?: string;
+  modalHeaderBorderColor?: string;
+  modalHeaderBorderWidth?: string;
+  modalBackdropOpacity?: string;
+  modalTitleLineHeight?: string;
+  modalHeaderPaddingX?: string;
+  modalHeaderPaddingY?: string;
+  modalScaleTransform?: string;
+  modalFadeTransform?: string;
+  modalHeaderPadding?: string;
+  modalShowTransform?: string;
+  modalContentColor?: string;
+  modalDialogMargin?: string;
+  modalInnerPadding?: string;
+  modalBackdropBg?: string;
+  modalTransition?: string;
+  modalContentBg?: string;
+  modalFooterBg?: string;
+  modalLg?: string;
+  modalMd?: string;
+  modalSm?: string;
+  modalXl?: string;
 };
 
-type CardGroupVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
+type AccordionVariablesType = {
+  accordionButtonFocusBorderColor?: string;
+  accordionButtonFocusBoxShadow?: string;
+  accordionButtonActiveColor?: string;
+  accordionInnerBorderRadius?: string;
+  accordionButtonActiveIcon?: string;
+  accordionIconActiveColor?: string;
+  accordionButtonActiveBg?: string;
+  accordionButtonPaddingX?: string;
+  accordionButtonPaddingY?: string;
+  accordionIconTransition?: string;
+  accordionIconTransform?: string;
+  accordionBodyPaddingX?: string;
+  accordionBodyPaddingY?: string;
+  accordionBorderRadius?: string;
+  accordionBorderColor?: string;
+  accordionBorderWidth?: string;
+  accordionButtonColor?: string;
+  accordionButtonIcon?: string;
+  accordionTransition?: string;
+  accordionIconColor?: string;
+  accordionIconWidth?: string;
+  accordionButtonBg?: string;
+  accordionPaddingX?: string;
+  accordionPaddingY?: string;
+  accordionColor?: string;
+  accordionBg?: string;
 };
 
-type CardHeaderVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CardImgVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CardLinkVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CardSubtitleVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CardTextVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CardTitleVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CardVariablesType = {
-  cardBg?: string;
-  cardBorderColor?: string;
-  cardBorderRadius?: string;
-  cardBorderWidth?: string;
-  cardBoxShadow?: string;
-  cardCapBg?: string;
-  cardCapColor?: string;
-  cardCapPaddingX?: string;
-  cardCapPaddingY?: string;
-  cardColor?: string;
-  cardGroupMargin?: string;
-  cardHeight?: string;
-  cardImgOverlayPadding?: string;
-  cardInnerBorderRadius?: string;
-  cardSpacerX?: string;
-  cardSpacerY?: string;
-  cardSubtitleColor?: string;
-  cardTitleColor?: string;
-  cardTitleSpacerY?: string;
-};
-
-type CarouselCaptionVariablesType = CarouselVariablesType;
-
-type CarouselItemVariablesType = CarouselVariablesType;
-
-type CarouselVariablesType = {
-  carouselCaptionColor?: string;
-  carouselCaptionPaddingY?: string;
-  carouselCaptionSpacer?: string;
-  carouselCaptionWidth?: string;
-  carouselControlColor?: string;
-  carouselControlHoverOpacity?: string;
-  carouselControlIconWidth?: string;
-  carouselControlNextIconBg?: string;
-  carouselControlOpacity?: string;
-  carouselControlPrevIconBg?: string;
-  carouselControlTransition?: string;
-  carouselControlWidth?: string;
-  carouselIndicatorActiveBg?: string;
-  carouselIndicatorActiveOpacity?: string;
-  carouselIndicatorHeight?: string;
-  carouselIndicatorHitAreaHeight?: string;
-  carouselIndicatorOpacity?: string;
-  carouselIndicatorSpacer?: string;
-  carouselIndicatorTransition?: string;
-  carouselIndicatorWidth?: string;
-  carouselTransition?: string;
-  carouselTransitionDuration?: string;
-};
-
-type CheckboxVariablesType = {
-  formCheckBtnCheckDisabledOpacity?: string;
-  formCheckInlineMarginEnd?: string;
-  formCheckInputActiveFilter?: string;
-  formCheckInputBg?: string;
-  formCheckInputBorder?: string;
-  formCheckInputBorderRadius?: string;
-  formCheckInputCheckedBgColor?: string;
-  formCheckInputCheckedBgImage?: string;
-  formCheckInputCheckedBorderColor?: string;
-  formCheckInputCheckedColor?: string;
-  formCheckInputDisabledOpacity?: string;
-  formCheckInputFocusBorder?: string;
-  formCheckInputFocusBoxShadow?: string;
-  formCheckInputIndeterminateBgColor?: string;
-  formCheckInputIndeterminateBgImage?: string;
-  formCheckInputIndeterminateBorderColor?: string;
-  formCheckInputIndeterminateColor?: string;
-  formCheckInputWidth?: string;
-  formCheckLabelColor?: string;
-  formCheckLabelCursor?: string;
-  formCheckLabelDisabledOpacity?: string;
-  formCheckMarginBottom?: string;
-  formCheckMinHeight?: string;
-  formCheckPaddingStart?: string;
-  formCheckRadioBorderRadius?: string;
-  formCheckRadioCheckedBgImage?: string;
-  formCheckTransition?: string;
-  formInvalidBorderColor?: string;
+type RangeVariablesType = {
+  formRangeThumbFocusBoxShadowWidth?: string;
+  formRangeThumbFocusBoxShadow?: string;
   formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
-  formInvalidColorDark?: string;
-  formSwitchBgImage?: string;
-  formSwitchBorderRadius?: string;
-  formSwitchCheckedBgImage?: string;
-  formSwitchCheckedBgPosition?: string;
-  formSwitchCheckedColor?: string;
-  formSwitchColor?: string;
-  formSwitchFocusBgImage?: string;
-  formSwitchFocusColor?: string;
-  formSwitchPaddingStart?: string;
-  formSwitchTransition?: string;
-  formSwitchWidth?: string;
-  formValidBorderColor?: string;
+  formRangeThumbBorderRadius?: string;
+  formRangeTrackBorderRadius?: string;
+  formRangeThumbDisabledBg?: string;
+  formRangeThumbTransition?: string;
   formValidBorderColorDark?: string;
-  formValidColor?: string;
+  formRangeThumbBoxShadow?: string;
+  formRangeTrackBoxShadow?: string;
+  formInvalidBorderColor?: string;
+  formRangeThumbActiveBg?: string;
+  formInvalidColorDark?: string;
+  formRangeThumbBorder?: string;
+  formRangeThumbHeight?: string;
+  formRangeTrackCursor?: string;
+  formRangeTrackHeight?: string;
+  formValidBorderColor?: string;
+  formRangeThumbWidth?: string;
+  formRangeTrackWidth?: string;
   formValidColorDark?: string;
+  formInvalidColor?: string;
+  formRangeThumbBg?: string;
+  formRangeTrackBg?: string;
+  formValidColor?: string;
 };
-
-type CloseButtonVariableType = {
-  btnCloseBg?: string;
-  btnCloseColor?: string;
-  btnCloseDisabledOpacity?: string;
-  btnCloseFocusOpacity?: string;
-  btnCloseFocusShadow?: string;
-  btnCloseHoverOpacity?: string;
-  btnCloseOpacity?: string;
-  btnCloseWhiteFilter?: string;
-};
-
-type CollapseVariablesType = object;
-
-type DropdownDividerVariablesType = DropdownVariablesType;
-
-type DropdownHeaderVariablesType = DropdownVariablesType;
-
-type DropdownItemTextVariablesType = DropdownVariablesType;
-
-type DropdownItemVariablesType = DropdownVariablesType;
-
-type DropdownMenuVariablesType = DropdownVariablesType;
-
-type DropdownToggleVariablesType = DropdownVariablesType;
 
 type DropdownVariablesType = {
-  dropdownBg?: string;
-  dropdownBorderColor?: string;
-  dropdownBorderRadius?: string;
-  dropdownBorderWidth?: string;
-  dropdownBoxShadow?: string;
-  dropdownColor?: string;
-  dropdownDividerBg?: string;
+  dropdownInnerBorderRadius?: string;
+  dropdownLinkDisabledColor?: string;
+  dropdownLinkActiveColor?: string;
   dropdownDividerMarginY?: string;
-  dropdownFontSize?: string;
-  dropdownHeaderColor?: string;
   dropdownHeaderPaddingX?: string;
   dropdownHeaderPaddingY?: string;
-  dropdownInnerBorderRadius?: string;
+  dropdownLinkHoverColor?: string;
+  dropdownBorderRadius?: string;
   dropdownItemPaddingX?: string;
   dropdownItemPaddingY?: string;
   dropdownLinkActiveBg?: string;
-  dropdownLinkActiveColor?: string;
-  dropdownLinkColor?: string;
-  dropdownLinkDisabledColor?: string;
+  dropdownBorderColor?: string;
+  dropdownBorderWidth?: string;
+  dropdownHeaderColor?: string;
   dropdownLinkHoverBg?: string;
-  dropdownLinkHoverColor?: string;
+  dropdownBoxShadow?: string;
+  dropdownDividerBg?: string;
+  dropdownLinkColor?: string;
+  dropdownFontSize?: string;
   dropdownMinWidth?: string;
   dropdownPaddingX?: string;
   dropdownPaddingY?: string;
   dropdownSpacer?: string;
   dropdownZindex?: string;
+  dropdownColor?: string;
+  dropdownBg?: string;
+};
+
+type CarouselVariablesType = {
+  carouselIndicatorActiveOpacity?: string;
+  carouselIndicatorHitAreaHeight?: string;
+  carouselControlHoverOpacity?: string;
+  carouselIndicatorTransition?: string;
+  carouselTransitionDuration?: string;
+  carouselControlNextIconBg?: string;
+  carouselControlPrevIconBg?: string;
+  carouselControlTransition?: string;
+  carouselIndicatorActiveBg?: string;
+  carouselControlIconWidth?: string;
+  carouselIndicatorOpacity?: string;
+  carouselCaptionPaddingY?: string;
+  carouselIndicatorHeight?: string;
+  carouselIndicatorSpacer?: string;
+  carouselControlOpacity?: string;
+  carouselIndicatorWidth?: string;
+  carouselCaptionSpacer?: string;
+  carouselCaptionColor?: string;
+  carouselCaptionWidth?: string;
+  carouselControlColor?: string;
+  carouselControlWidth?: string;
+  carouselTransition?: string;
+};
+
+type TableVariablesType = {
+  tableGroupSeparatorColor?: string;
+  tableStripedColumnsOrder?: string;
+  tableCellVerticalAlign?: string;
+  tableStripedBgFactor?: string;
+  tableActiveBgFactor?: string;
+  tableCellPaddingXSm?: string;
+  tableCellPaddingYSm?: string;
+  tableHoverBgFactor?: string;
+  tableBorderFactor?: string;
+  tableCaptionColor?: string;
+  tableCellPaddingX?: string;
+  tableCellPaddingY?: string;
+  tableStripedColor?: string;
+  tableStripedOrder?: string;
+  tableThFontWeight?: string;
+  tableActiveColor?: string;
+  tableBorderColor?: string;
+  tableBorderWidth?: string;
+  tableHoverColor?: string;
+  tableStripedBg?: string;
+  tableAccentBg?: string;
+  tableActiveBg?: string;
+  tableBgScale?: string;
+  tableColor?: string;
+  tableBg?: string;
+};
+
+type NavVariablesType = {
+  navTabsLinkActiveBorderColor?: string;
+  navTabsLinkHoverBorderColor?: string;
+  navUnderlineLinkActiveColor?: string;
+  navPillsLinkActiveColor?: string;
+  navUnderlineBorderWidth?: string;
+  navTabsLinkActiveColor?: string;
+  navLinkFocusBoxShadow?: string;
+  navLinkDisabledColor?: string;
+  navPillsBorderRadius?: string;
+  navPillsLinkActiveBg?: string;
+  navTabsBorderRadius?: string;
+  navTabsLinkActiveBg?: string;
+  navTabsBorderColor?: string;
+  navTabsBorderWidth?: string;
+  navLinkFontWeight?: string;
+  navLinkHoverColor?: string;
+  navLinkTransition?: string;
+  navLinkFontSize?: string;
+  navLinkPaddingX?: string;
+  navLinkPaddingY?: string;
+  navUnderlineGap?: string;
+  navLinkColor?: string;
 };
 
 type FloatingLabelVariablesType = {
-  formFloatingHeight?: string;
+  formFloatingLabelDisabledColor?: string;
+  formFloatingLabelTransform?: string;
+  formInvalidBorderColorDark?: string;
   formFloatingInputPaddingB?: string;
   formFloatingInputPaddingT?: string;
-  formFloatingLabelDisabledColor?: string;
-  formFloatingLabelHeight?: string;
   formFloatingLabelOpacity?: string;
-  formFloatingLabelTransform?: string;
+  formValidBorderColorDark?: string;
+  formFloatingLabelHeight?: string;
   formFloatingLineHeight?: string;
-  formFloatingPaddingX?: string;
-  formFloatingPaddingY?: string;
   formFloatingTransition?: string;
   formInvalidBorderColor?: string;
-  formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
+  formFloatingPaddingX?: string;
+  formFloatingPaddingY?: string;
   formInvalidColorDark?: string;
   formValidBorderColor?: string;
-  formValidBorderColorDark?: string;
-  formValidColor?: string;
+  formFloatingHeight?: string;
   formValidColorDark?: string;
+  formInvalidColor?: string;
+  formValidColor?: string;
 };
 
-type InputGroupTextVariablesType = object;
+type ListGroupVariablesType = {
+  listGroupActionActiveColor?: string;
+  listGroupActiveBorderColor?: string;
+  listGroupActionHoverColor?: string;
+  listGroupActionActiveBg?: string;
+  listGroupItemColorScale?: string;
+  listGroupDisabledColor?: string;
+  listGroupBorderRadius?: string;
+  listGroupItemPaddingX?: string;
+  listGroupItemPaddingY?: string;
+  listGroupActionColor?: string;
+  listGroupActiveColor?: string;
+  listGroupBorderColor?: string;
+  listGroupBorderWidth?: string;
+  listGroupItemBgScale?: string;
+  listGroupDisabledBg?: string;
+  listGroupActiveBg?: string;
+  listGroupHoverBg?: string;
+  listGroupColor?: string;
+  listGroupBg?: string;
+};
+
+type PopoverVariablesType = {
+  popoverInnerBorderRadius?: string;
+  popoverHeaderFontSize?: string;
+  popoverHeaderPaddingX?: string;
+  popoverHeaderPaddingY?: string;
+  popoverBodyPaddingX?: string;
+  popoverBodyPaddingY?: string;
+  popoverBorderRadius?: string;
+  popoverArrowHeight?: string;
+  popoverBorderColor?: string;
+  popoverBorderWidth?: string;
+  popoverHeaderColor?: string;
+  popoverArrowWidth?: string;
+  popoverBodyColor?: string;
+  popoverBoxShadow?: string;
+  popoverFontSize?: string;
+  popoverHeaderBg?: string;
+  popoverMaxWidth?: string;
+  popoverBg?: string;
+};
+
+type CardSubtitleVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardFooterVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardHeaderVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardGroupVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardTitleVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardBodyVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardLinkVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardTextVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardImgVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type CardVariablesType = {
+  cardImgOverlayPadding?: string;
+  cardInnerBorderRadius?: string;
+  cardSubtitleColor?: string;
+  cardBorderRadius?: string;
+  cardTitleSpacerY?: string;
+  cardBorderColor?: string;
+  cardBorderWidth?: string;
+  cardCapPaddingX?: string;
+  cardCapPaddingY?: string;
+  cardGroupMargin?: string;
+  cardTitleColor?: string;
+  cardBoxShadow?: string;
+  cardCapColor?: string;
+  cardSpacerX?: string;
+  cardSpacerY?: string;
+  cardHeight?: string;
+  cardCapBg?: string;
+  cardColor?: string;
+  cardBg?: string;
+};
+
+type TextVariablesType = {
+  formFeedbackIconInvalidColor?: string;
+  formFeedbackIconValidColor?: string;
+  formFeedbackInvalidColor?: string;
+  formFeedbackIconInvalid?: string;
+  formFeedbackValidColor?: string;
+  formFeedbackFontStyle?: string;
+  formFeedbackIconValid?: string;
+  formFeedbackMarginTop?: string;
+  formFeedbackFontSize?: string;
+  formTextFontWeight?: string;
+  formTextFontStyle?: string;
+  formTextMarginTop?: string;
+  formTextFontSize?: string;
+  formTextColor?: string;
+};
+
+type OffcanvasVariablesType = {
+  offcanvasTransitionDuration?: string;
+  offcanvasBackdropOpacity?: string;
+  offcanvasHorizontalWidth?: string;
+  offcanvasTitleLineHeight?: string;
+  offcanvasVerticalHeight?: string;
+  offcanvasBorderColor?: string;
+  offcanvasBorderWidth?: string;
+  offcanvasBackdropBg?: string;
+  offcanvasBoxShadow?: string;
+  offcanvasPaddingX?: string;
+  offcanvasPaddingY?: string;
+  offcanvasBgColor?: string;
+  offcanvasColor?: string;
+};
+
+type ToastVariablesType = {
+  toastHeaderBackgroundColor?: string;
+  toastHeaderBorderColor?: string;
+  toastBackgroundColor?: string;
+  toastBorderRadius?: string;
+  toastBorderColor?: string;
+  toastBorderWidth?: string;
+  toastHeaderColor?: string;
+  toastBoxShadow?: string;
+  toastFontSize?: string;
+  toastMaxWidth?: string;
+  toastPaddingX?: string;
+  toastPaddingY?: string;
+  toastSpacing?: string;
+  toastColor?: string;
+};
+
+type BreadcrumbVariablesType = {
+  breadcrumbDividerFlipped?: string;
+  breadcrumbBorderRadius?: string;
+  breadcrumbDividerColor?: string;
+  breadcrumbItemPaddingX?: string;
+  breadcrumbMarginBottom?: string;
+  breadcrumbActiveColor?: string;
+  breadcrumbFontSize?: string;
+  breadcrumbPaddingX?: string;
+  breadcrumbPaddingY?: string;
+  breadcrumbDivider?: string;
+  breadcrumbBg?: string;
+};
+
+type TooltipVariablesType = {
+  tooltipBorderRadius?: string;
+  tooltipArrowHeight?: string;
+  tooltipArrowColor?: string;
+  tooltipArrowWidth?: string;
+  tooltipFontSize?: string;
+  tooltipMaxWidth?: string;
+  tooltipPaddingX?: string;
+  tooltipPaddingY?: string;
+  tooltipOpacity?: string;
+  tooltipMargin?: string;
+  tooltipColor?: string;
+  tooltipBg?: string;
+};
+
+type ProgressVariablesType = {
+  progressBarAnimationTiming?: string;
+  progressBarTransition?: string;
+  progressBorderRadius?: string;
+  progressBoxShadow?: string;
+  progressBarColor?: string;
+  progressFontSize?: string;
+  progressHeight?: string;
+  progressBarBg?: string;
+  progressBg?: string;
+};
+
+type TextareaVariablesType = {
+  formInvalidBorderColorDark?: string;
+  formValidBorderColorDark?: string;
+  formInvalidBorderColor?: string;
+  formInvalidColorDark?: string;
+  formValidBorderColor?: string;
+  formValidColorDark?: string;
+  formInvalidColor?: string;
+  formValidColor?: string;
+};
+
+type CloseButtonVariableType = {
+  btnCloseDisabledOpacity?: string;
+  btnCloseFocusOpacity?: string;
+  btnCloseHoverOpacity?: string;
+  btnCloseFocusShadow?: string;
+  btnCloseWhiteFilter?: string;
+  btnCloseOpacity?: string;
+  btnCloseColor?: string;
+  btnCloseBg?: string;
+};
+
+type SpinnerVariablesType = {
+  spinnerAnimationSpeed?: string;
+  spinnerBorderWidthSm?: string;
+  spinnerVerticalAlign?: string;
+  spinnerBorderWidth?: string;
+  spinnerHeightSm?: string;
+  spinnerWidthSm?: string;
+  spinnerHeight?: string;
+  spinnerWidth?: string;
+};
+
+type AlertHeadingVariablesType = {
+  alertDismissiblePaddingR?: string;
+  alertLinkFontWeight?: string;
+  alertBorderRadius?: string;
+  alertMarginBottom?: string;
+  alertBorderWidth?: string;
+  alertPaddingX?: string;
+  alertPaddingY?: string;
+};
 
 type InputGroupVariablesType = {
-  inputGroupAddonBg?: string;
   inputGroupAddonBorderColor?: string;
-  inputGroupAddonColor?: string;
   inputGroupAddonFontWeight?: string;
   inputGroupAddonPaddingX?: string;
   inputGroupAddonPaddingY?: string;
+  inputGroupAddonColor?: string;
+  inputGroupAddonBg?: string;
 };
 
-type InputOtpVariablesType = object;
+type AlertLinkVariablesType = {
+  alertDismissiblePaddingR?: string;
+  alertLinkFontWeight?: string;
+  alertBorderRadius?: string;
+  alertMarginBottom?: string;
+  alertBorderWidth?: string;
+  alertPaddingX?: string;
+  alertPaddingY?: string;
+};
 
-type InputVariablesType = {
-  formColorWidth?: string;
-  formFileButtonBg?: string;
-  formFileButtonColor?: string;
-  formFileButtonHoverBg?: string;
-  formInvalidBorderColor?: string;
-  formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
-  formInvalidColorDark?: string;
-  formValidBorderColor?: string;
-  formValidBorderColorDark?: string;
-  formValidColor?: string;
-  formValidColorDark?: string;
-  inputBg?: string;
-  inputBorderColor?: string;
-  inputBorderRadius?: string;
-  inputBorderRadiusLg?: string;
-  inputBorderRadiusSm?: string;
-  inputBorderWidth?: string;
-  inputBoxShadow?: string;
-  inputColor?: string;
-  inputDisabledBg?: string;
-  inputDisabledBorderColor?: string;
-  inputDisabledColor?: string;
-  inputFocusBg?: string;
-  inputFocusBorderColor?: string;
-  inputFocusBoxShadow?: string;
-  inputFocusColor?: string;
-  inputFocusWidth?: string;
-  inputFontFamily?: string;
-  inputFontSize?: string;
-  inputFontSizeLg?: string;
-  inputFontSizeSm?: string;
-  inputFontWeight?: string;
-  inputHeight?: string;
-  inputHeightBorder?: string;
-  inputHeightInner?: string;
-  inputHeightInnerHalf?: string;
-  inputHeightInnerQuarter?: string;
-  inputHeightLg?: string;
-  inputHeightSm?: string;
-  inputLineHeight?: string;
-  inputPaddingX?: string;
-  inputPaddingXLg?: string;
-  inputPaddingXSm?: string;
-  inputPaddingY?: string;
-  inputPaddingYLg?: string;
-  inputPaddingYSm?: string;
-  inputPlaceholderColor?: string;
-  inputPlaintextColor?: string;
-  inputTransition?: string;
+type AlertVariablesType = {
+  alertDismissiblePaddingR?: string;
+  alertLinkFontWeight?: string;
+  alertBorderRadius?: string;
+  alertMarginBottom?: string;
+  alertBorderWidth?: string;
+  alertPaddingX?: string;
+  alertPaddingY?: string;
+};
+
+type VariantType = {
+  secondary?: string;
+  primary?: string;
+  success?: string;
+  warning?: string;
+  danger?: string;
+  light?: string;
+  dark?: string;
+  info?: string;
+  link?: string;
+};
+
+type BadgeVariablesType = {
+  badgeBorderRadius?: string;
+  badgeFontWeight?: string;
+  badgeFontSize?: string;
+  badgePaddingX?: string;
+  badgePaddingY?: string;
+  badgeColor?: string;
 };
 
 type LabelVariablesType = {
-  formLabelColor?: string;
-  formLabelFontSize?: string;
-  formLabelFontStyle?: string;
-  formLabelFontWeight?: string;
   formLabelMarginBottom?: string;
-};
-
-type ListGroupItemVariablesType = ListGroupVariablesType;
-
-type ListGroupVariablesType = {
-  listGroupActionActiveBg?: string;
-  listGroupActionActiveColor?: string;
-  listGroupActionColor?: string;
-  listGroupActionHoverColor?: string;
-  listGroupActiveBg?: string;
-  listGroupActiveBorderColor?: string;
-  listGroupActiveColor?: string;
-  listGroupBg?: string;
-  listGroupBorderColor?: string;
-  listGroupBorderRadius?: string;
-  listGroupBorderWidth?: string;
-  listGroupColor?: string;
-  listGroupDisabledBg?: string;
-  listGroupDisabledColor?: string;
-  listGroupHoverBg?: string;
-  listGroupItemBgScale?: string;
-  listGroupItemColorScale?: string;
-  listGroupItemPaddingX?: string;
-  listGroupItemPaddingY?: string;
-};
-
-type ModalBackdropVariablesType = ModalVariablesType;
-
-type ModalBodyVariablesType = ModalVariablesType;
-
-type ModalContentVariablesType = ModalVariablesType;
-
-type ModalDialogVariablesType = ModalVariablesType;
-
-type ModalFooterVariablesType = ModalVariablesType;
-
-type ModalHeaderVariablesType = ModalVariablesType;
-
-type ModalTitleVariablesType = ModalVariablesType;
-
-type ModalVariablesType = {
-  modalBackdropBg?: string;
-  modalBackdropOpacity?: string;
-  modalContentBg?: string;
-  modalContentBorderColor?: string;
-  modalContentBorderRadius?: string;
-  modalContentBorderWidth?: string;
-  modalContentBoxShadowSmUp?: string;
-  modalContentBoxShadowXs?: string;
-  modalContentColor?: string;
-  modalContentInnerBorderRadius?: string;
-  modalDialogMargin?: string;
-  modalDialogMarginYSmUp?: string;
-  modalFadeTransform?: string;
-  modalFooterBg?: string;
-  modalFooterBorderColor?: string;
-  modalFooterBorderWidth?: string;
-  modalFooterMarginBetween?: string;
-  modalHeaderBorderColor?: string;
-  modalHeaderBorderWidth?: string;
-  modalHeaderPadding?: string;
-  modalHeaderPaddingX?: string;
-  modalHeaderPaddingY?: string;
-  modalInnerPadding?: string;
-  modalLg?: string;
-  modalMd?: string;
-  modalScaleTransform?: string;
-  modalShowTransform?: string;
-  modalSm?: string;
-  modalTitleLineHeight?: string;
-  modalTransition?: string;
-  modalXl?: string;
-};
-
-type NavbarBrandVariablesType = NavbarVariablesType;
-
-type NavbarCollapseVariablesType = NavbarVariablesType;
-
-type NavbarContainerVariablesType = NavbarVariablesType;
-
-type NavbarNavItemVariablesType = NavbarVariablesType;
-
-type NavbarNavLinkVariablesType = NavbarVariablesType;
-
-type NavbarNavVariablesType = NavbarVariablesType;
-
-type NavbarTextVariablesType = NavbarVariablesType;
-
-type NavbarTogglerIconVariablesType = NavbarVariablesType;
-
-type NavbarTogglerVariablesType = NavbarVariablesType;
-
-type NavbarVariablesType = {
-  navbarBrandFontSize?: string;
-  navbarBrandHeight?: string;
-  navbarBrandMarginEnd?: string;
-  navbarBrandPaddingY?: string;
-  navbarDarkActiveColor?: string;
-  navbarDarkBrandColor?: string;
-  navbarDarkBrandHoverColor?: string;
-  navbarDarkColor?: string;
-  navbarDarkDisabledColor?: string;
-  navbarDarkHoverColor?: string;
-  navbarDarkIconColor?: string;
-  navbarDarkTogglerBorderColor?: string;
-  navbarDarkTogglerIconBg?: string;
-  navbarLightActiveColor?: string;
-  navbarLightBrandColor?: string;
-  navbarLightBrandHoverColor?: string;
-  navbarLightColor?: string;
-  navbarLightDisabledColor?: string;
-  navbarLightHoverColor?: string;
-  navbarLightIconColor?: string;
-  navbarLightTogglerBorderColor?: string;
-  navbarLightTogglerIconBg?: string;
-  navbarNavLinkPaddingX?: string;
-  navbarPaddingX?: string;
-  navbarPaddingY?: string;
-  navbarTogglerBorderRadius?: string;
-  navbarTogglerFocusWidth?: string;
-  navbarTogglerFontSize?: string;
-  navbarTogglerPaddingX?: string;
-  navbarTogglerPaddingY?: string;
-  navbarTogglerTransition?: string;
-  navLinkHeight?: string;
-};
-
-type NavItemVariablesType = NavVariablesType;
-
-type NavLinkVariablesType = NavVariablesType;
-
-type NavTabContentVariablesType = NavVariablesType;
-
-type NavTabPaneVariablesType = NavVariablesType;
-
-type NavVariablesType = {
-  navLinkColor?: string;
-  navLinkDisabledColor?: string;
-  navLinkFocusBoxShadow?: string;
-  navLinkFontSize?: string;
-  navLinkFontWeight?: string;
-  navLinkHoverColor?: string;
-  navLinkPaddingX?: string;
-  navLinkPaddingY?: string;
-  navLinkTransition?: string;
-  navPillsBorderRadius?: string;
-  navPillsLinkActiveBg?: string;
-  navPillsLinkActiveColor?: string;
-  navTabsBorderColor?: string;
-  navTabsBorderRadius?: string;
-  navTabsBorderWidth?: string;
-  navTabsLinkActiveBg?: string;
-  navTabsLinkActiveBorderColor?: string;
-  navTabsLinkActiveColor?: string;
-  navTabsLinkHoverBorderColor?: string;
-  navUnderlineBorderWidth?: string;
-  navUnderlineGap?: string;
-  navUnderlineLinkActiveColor?: string;
-};
-
-type OffcanvasBackdropVariablesType = OffcanvasVariablesType;
-
-type OffcanvasBodyVariablesType = OffcanvasVariablesType;
-
-type OffcanvasHeaderVariablesType = OffcanvasVariablesType;
-
-type OffcanvasTitleVariablesType = OffcanvasVariablesType;
-
-type OffcanvasVariablesType = {
-  offcanvasBackdropBg?: string;
-  offcanvasBackdropOpacity?: string;
-  offcanvasBgColor?: string;
-  offcanvasBorderColor?: string;
-  offcanvasBorderWidth?: string;
-  offcanvasBoxShadow?: string;
-  offcanvasColor?: string;
-  offcanvasHorizontalWidth?: string;
-  offcanvasPaddingX?: string;
-  offcanvasPaddingY?: string;
-  offcanvasTitleLineHeight?: string;
-  offcanvasTransitionDuration?: string;
-  offcanvasVerticalHeight?: string;
+  formLabelFontWeight?: string;
+  formLabelFontStyle?: string;
+  formLabelFontSize?: string;
+  formLabelColor?: string;
 };
 
 type OutlineType = {
-  danger?: string;
-  dark?: string;
-  info?: string;
-  light?: string;
-  primary?: string;
   secondary?: string;
+  primary?: string;
   success?: string;
   warning?: string;
-};
-
-type PaginationItemVariablesType = PaginationVariablesType;
-
-type PaginationLinkVariablesType = PaginationVariablesType;
-
-type PaginationNavVariablesType = PaginationVariablesType;
-
-type PaginationVariablesType = {
-  paginationActiveBg?: string;
-  paginationActiveBorderColor?: string;
-  paginationActiveColor?: string;
-  paginationBg?: string;
-  paginationBorderColor?: string;
-  paginationBorderRadius?: string;
-  paginationBorderRadiusLG?: string;
-  paginationBorderRadiusSm?: string;
-  paginationBorderWidth?: string;
-  paginationColor?: string;
-  paginationDisabledBg?: string;
-  paginationDisabledBorderColor?: string;
-  paginationDisabledColor?: string;
-  paginationFocusBg?: string;
-  paginationFocusBoxShadow?: string;
-  paginationFocusColor?: string;
-  paginationFocusOutline?: string;
-  paginationFontSize?: string;
-  paginationHoverBg?: string;
-  paginationHoverBorderColor?: string;
-  paginationHoverColor?: string;
-  paginationMarginStart?: string;
-  paginationPaddingX?: string;
-  paginationPaddingXLG?: string;
-  paginationPaddingXSm?: string;
-  paginationPaddingY?: string;
-  paginationPaddingYLG?: string;
-  paginationPaddingYSm?: string;
-  paginationTransition?: string;
+  danger?: string;
+  light?: string;
+  dark?: string;
+  info?: string;
 };
 
 type PlaceholderVariablesType = {
@@ -817,429 +992,254 @@ type PlaceholderVariablesType = {
   placeholderOpacityMin?: string;
 };
 
-type PopoverArrowVariablesType = PopoverVariablesType;
+type OffcanvasBackdropVariablesType = OffcanvasVariablesType;
 
-type PopoverBodyVariablesType = PopoverVariablesType;
+type BreadcrumbBasicVariablesType = BreadcrumbVariablesType;
 
-type PopoverHeaderVariablesType = PopoverVariablesType;
+type AccordionHeaderVariablesType = AccordionVariablesType;
 
-type PopoverVariablesType = {
-  popoverArrowHeight?: string;
-  popoverArrowWidth?: string;
-  popoverBg?: string;
-  popoverBodyColor?: string;
-  popoverBodyPaddingX?: string;
-  popoverBodyPaddingY?: string;
-  popoverBorderColor?: string;
-  popoverBorderRadius?: string;
-  popoverBorderWidth?: string;
-  popoverBoxShadow?: string;
-  popoverFontSize?: string;
-  popoverHeaderBg?: string;
-  popoverHeaderColor?: string;
-  popoverHeaderFontSize?: string;
-  popoverHeaderPaddingX?: string;
-  popoverHeaderPaddingY?: string;
-  popoverInnerBorderRadius?: string;
-  popoverMaxWidth?: string;
-};
+type BreadcrumbItemVariablesType = BreadcrumbVariablesType;
 
-type ProgressBarVariablesType = ProgressVariablesType;
+type DropdownItemTextVariablesType = DropdownVariablesType;
+
+type OffcanvasHeaderVariablesType = OffcanvasVariablesType;
+
+type PaginationItemVariablesType = PaginationVariablesType;
+
+type PaginationLinkVariablesType = PaginationVariablesType;
+
+type AccordionBasicVariablesType = AccordionVariablesType;
+
+type CarouselCaptionVariablesType = CarouselVariablesType;
+
+type DropdownDividerVariablesType = DropdownVariablesType;
+
+type NavbarTogglerIconVariablesType = NavbarVariablesType;
+
+type OffcanvasTitleVariablesType = OffcanvasVariablesType;
+
+type PaginationNavVariablesType = PaginationVariablesType;
 
 type ProgressStackedVariablesType = ProgressVariablesType;
 
-type ProgressVariablesType = {
-  progressBarAnimationTiming?: string;
-  progressBarBg?: string;
-  progressBarColor?: string;
-  progressBarTransition?: string;
-  progressBg?: string;
-  progressBorderRadius?: string;
-  progressBoxShadow?: string;
-  progressFontSize?: string;
-  progressHeight?: string;
-};
+type AccordionBodyVariablesType = AccordionVariablesType;
 
-type RadioVariablesType = {
-  formCheckBtnCheckDisabledOpacity?: string;
-  formCheckInlineMarginEnd?: string;
-  formCheckInputActiveFilter?: string;
-  formCheckInputBg?: string;
-  formCheckInputBorder?: string;
-  formCheckInputBorderRadius?: string;
-  formCheckInputCheckedBgColor?: string;
-  formCheckInputCheckedBgImage?: string;
-  formCheckInputCheckedBorderColor?: string;
-  formCheckInputCheckedColor?: string;
-  formCheckInputDisabledOpacity?: string;
-  formCheckInputFocusBorder?: string;
-  formCheckInputFocusBoxShadow?: string;
-  formCheckInputIndeterminateBgColor?: string;
-  formCheckInputIndeterminateBgImage?: string;
-  formCheckInputIndeterminateBorderColor?: string;
-  formCheckInputIndeterminateColor?: string;
-  formCheckInputWidth?: string;
-  formCheckLabelColor?: string;
-  formCheckLabelCursor?: string;
-  formCheckLabelDisabledOpacity?: string;
-  formCheckMarginBottom?: string;
-  formCheckMinHeight?: string;
-  formCheckPaddingStart?: string;
-  formCheckRadioBorderRadius?: string;
-  formCheckRadioCheckedBgImage?: string;
-  formCheckTransition?: string;
-  formInvalidBorderColor?: string;
-  formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
-  formInvalidColorDark?: string;
-  formSwitchBgImage?: string;
-  formSwitchBorderRadius?: string;
-  formSwitchCheckedBgImage?: string;
-  formSwitchCheckedBgPosition?: string;
-  formSwitchCheckedColor?: string;
-  formSwitchColor?: string;
-  formSwitchFocusBgImage?: string;
-  formSwitchFocusColor?: string;
-  formSwitchPaddingStart?: string;
-  formSwitchTransition?: string;
-  formSwitchWidth?: string;
-  formValidBorderColor?: string;
-  formValidBorderColorDark?: string;
-  formValidColor?: string;
-  formValidColorDark?: string;
-};
+type AccordionItemVariablesType = AccordionVariablesType;
 
-type RangeVariablesType = {
-  formInvalidBorderColor?: string;
-  formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
-  formInvalidColorDark?: string;
-  formRangeThumbActiveBg?: string;
-  formRangeThumbBg?: string;
-  formRangeThumbBorder?: string;
-  formRangeThumbBorderRadius?: string;
-  formRangeThumbBoxShadow?: string;
-  formRangeThumbDisabledBg?: string;
-  formRangeThumbFocusBoxShadow?: string;
-  formRangeThumbFocusBoxShadowWidth?: string;
-  formRangeThumbHeight?: string;
-  formRangeThumbTransition?: string;
-  formRangeThumbWidth?: string;
-  formRangeTrackBg?: string;
-  formRangeTrackBorderRadius?: string;
-  formRangeTrackBoxShadow?: string;
-  formRangeTrackCursor?: string;
-  formRangeTrackHeight?: string;
-  formRangeTrackWidth?: string;
-  formValidBorderColor?: string;
-  formValidBorderColorDark?: string;
-  formValidColor?: string;
-  formValidColorDark?: string;
-};
+type DropdownHeaderVariablesType = DropdownVariablesType;
 
-type ScrollspyVariablesType = object;
+type DropdownToggleVariablesType = DropdownVariablesType;
 
-type SelectMultipleVariablesType = object;
+type ListGroupItemVariablesType = ListGroupVariablesType;
 
-type SelectOptionVariablesType = object;
+type OffcanvasBodyVariablesType = OffcanvasVariablesType;
 
-type SelectVariablesType = {
-  formInvalidBorderColor?: string;
-  formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
-  formInvalidColorDark?: string;
-  formSelectBg?: string;
-  formSelectBgPosition?: string;
-  formSelectBgSize?: string;
-  formSelectBorderColor?: string;
-  formSelectBorderRadius?: string;
-  formSelectBorderRadiusLg?: string;
-  formSelectBorderRadiusSm?: string;
-  formSelectBorderWidth?: string;
-  formSelectBoxShadow?: string;
-  formSelectColor?: string;
-  formSelectDisabledBg?: string;
-  formSelectDisabledBorderColor?: string;
-  formSelectDisabledColor?: string;
-  formSelectFeedbackIconPaddingEnd?: string;
-  formSelectFeedbackIconPosition?: string;
-  formSelectFeedbackIconSize?: string;
-  formSelectFocusBorderColor?: string;
-  formSelectFocusBoxShadow?: string;
-  formSelectFocusWidth?: string;
-  formSelectFontFamily?: string;
-  formSelectFontSize?: string;
-  formSelectFontSizeLg?: string;
-  formSelectFontSizeSm?: string;
-  formSelectFontWeight?: string;
-  formSelectIndicator?: string;
-  formSelectIndicatorColor?: string;
-  formSelectIndicatorPadding?: string;
-  formSelectLineHeight?: string;
-  formSelectPaddingX?: string;
-  formSelectPaddingXLg?: string;
-  formSelectPaddingXSm?: string;
-  formSelectPaddingY?: string;
-  formSelectPaddingYLg?: string;
-  formSelectPaddingYSm?: string;
-  formSelectTransition?: string;
-  formValidBorderColor?: string;
-  formValidBorderColorDark?: string;
-  formValidColor?: string;
-  formValidColorDark?: string;
-};
+type NavbarContainerVariablesType = NavbarVariablesType;
 
-type SpinnerVariablesType = {
-  spinnerAnimationSpeed?: string;
-  spinnerBorderWidth?: string;
-  spinnerBorderWidthSm?: string;
-  spinnerHeight?: string;
-  spinnerHeightSm?: string;
-  spinnerVerticalAlign?: string;
-  spinnerWidth?: string;
-  spinnerWidthSm?: string;
-};
+type CarouselItemVariablesType = CarouselVariablesType;
 
-type TableCaptionVariablesType = TableVariablesType;
+type DropdownItemVariablesType = DropdownVariablesType;
+
+type DropdownMenuVariablesType = DropdownVariablesType;
+
+type NavbarCollapseVariablesType = NavbarVariablesType;
+
+type PopoverHeaderVariablesType = PopoverVariablesType;
 
 type TableResponsiveVariablesType = TableVariablesType;
 
-type TableTbodyVariablesType = TableVariablesType;
+type NavbarNavItemVariablesType = NavbarVariablesType;
 
-type TableTdVariablesType = TableVariablesType;
+type NavbarNavLinkVariablesType = NavbarVariablesType;
 
-type TableTfootVariablesType = TableVariablesType;
+type NavbarTogglerVariablesType = NavbarVariablesType;
 
-type TableTheadVariablesType = TableVariablesType;
+type PopoverArrowVariablesType = PopoverVariablesType;
 
-type TableThVariablesType = TableVariablesType;
-
-type TableTrVariablesType = TableVariablesType;
-
-type TableVariablesType = {
-  tableAccentBg?: string;
-  tableActiveBg?: string;
-  tableActiveBgFactor?: string;
-  tableActiveColor?: string;
-  tableBg?: string;
-  tableBgScale?: string;
-  tableBorderColor?: string;
-  tableBorderFactor?: string;
-  tableBorderWidth?: string;
-  tableCaptionColor?: string;
-  tableCellPaddingX?: string;
-  tableCellPaddingXSm?: string;
-  tableCellPaddingY?: string;
-  tableCellPaddingYSm?: string;
-  tableCellVerticalAlign?: string;
-  tableColor?: string;
-  tableGroupSeparatorColor?: string;
-  tableHoverBgFactor?: string;
-  tableHoverColor?: string;
-  tableStripedBg?: string;
-  tableStripedBgFactor?: string;
-  tableStripedColor?: string;
-  tableStripedColumnsOrder?: string;
-  tableStripedOrder?: string;
-  tableThFontWeight?: string;
-};
-
-type TextareaVariablesType = {
-  formInvalidBorderColor?: string;
-  formInvalidBorderColorDark?: string;
-  formInvalidColor?: string;
-  formInvalidColorDark?: string;
-  formValidBorderColor?: string;
-  formValidBorderColorDark?: string;
-  formValidColor?: string;
-  formValidColorDark?: string;
-};
-
-type TextVariablesType = {
-  formFeedbackFontSize?: string;
-  formFeedbackFontStyle?: string;
-  formFeedbackIconInvalid?: string;
-  formFeedbackIconInvalidColor?: string;
-  formFeedbackIconValid?: string;
-  formFeedbackIconValidColor?: string;
-  formFeedbackInvalidColor?: string;
-  formFeedbackMarginTop?: string;
-  formFeedbackValidColor?: string;
-  formTextColor?: string;
-  formTextFontSize?: string;
-  formTextFontStyle?: string;
-  formTextFontWeight?: string;
-  formTextMarginTop?: string;
-};
-
-type ToastBodyVariablesType = ToastVariablesType;
+type ProgressBarVariablesType = ProgressVariablesType;
 
 type ToastContainerVariablesType = ToastVariablesType;
-
-type ToastHeaderVariablesType = ToastVariablesType;
-
-type ToastItemVariablesType = ToastVariablesType;
-
-type ToastVariablesType = {
-  toastBackgroundColor?: string;
-  toastBorderColor?: string;
-  toastBorderRadius?: string;
-  toastBorderWidth?: string;
-  toastBoxShadow?: string;
-  toastColor?: string;
-  toastFontSize?: string;
-  toastHeaderBackgroundColor?: string;
-  toastHeaderBorderColor?: string;
-  toastHeaderColor?: string;
-  toastMaxWidth?: string;
-  toastPaddingX?: string;
-  toastPaddingY?: string;
-  toastSpacing?: string;
-};
 
 type TooltipArrowVariablesType = TooltipVariablesType;
 
 type TooltipInnerVariablesType = TooltipVariablesType;
 
-type TooltipVariablesType = {
-  tooltipArrowColor?: string;
-  tooltipArrowHeight?: string;
-  tooltipArrowWidth?: string;
-  tooltipBg?: string;
-  tooltipBorderRadius?: string;
-  tooltipColor?: string;
-  tooltipFontSize?: string;
-  tooltipMargin?: string;
-  tooltipMaxWidth?: string;
-  tooltipOpacity?: string;
-  tooltipPaddingX?: string;
-  tooltipPaddingY?: string;
-};
+type ModalBackdropVariablesType = ModalVariablesType;
 
-type VariantType = {
-  danger?: string;
-  dark?: string;
-  info?: string;
-  light?: string;
-  link?: string;
-  primary?: string;
-  secondary?: string;
-  success?: string;
-  warning?: string;
-};
+type PopoverBodyVariablesType = PopoverVariablesType;
+
+type ModalContentVariablesType = ModalVariablesType;
+
+type NavbarBrandVariablesType = NavbarVariablesType;
+
+type TableCaptionVariablesType = TableVariablesType;
+
+type ModalDialogVariablesType = ModalVariablesType;
+
+type ModalFooterVariablesType = ModalVariablesType;
+
+type ModalHeaderVariablesType = ModalVariablesType;
+
+type NavbarTextVariablesType = NavbarVariablesType;
+
+type NavTabContentVariablesType = NavVariablesType;
+
+type ToastHeaderVariablesType = ToastVariablesType;
+
+type ModalTitleVariablesType = ModalVariablesType;
+
+type NavbarNavVariablesType = NavbarVariablesType;
+
+type TableTbodyVariablesType = TableVariablesType;
+
+type TableTfootVariablesType = TableVariablesType;
+
+type TableTheadVariablesType = TableVariablesType;
+
+type ModalBodyVariablesType = ModalVariablesType;
+
+type ToastBodyVariablesType = ToastVariablesType;
+
+type ToastItemVariablesType = ToastVariablesType;
+
+type NavTabPaneVariablesType = NavVariablesType;
+
+type TableTdVariablesType = TableVariablesType;
+
+type TableThVariablesType = TableVariablesType;
+
+type TableTrVariablesType = TableVariablesType;
+
+type NavItemVariablesType = NavVariablesType;
+
+type NavLinkVariablesType = NavVariablesType;
+
+type InputGroupTextVariablesType = object;
+
+type SelectMultipleVariablesType = object;
+
+type SelectOptionVariablesType = object;
+
+type ButtonGroupVariablesType = object;
+
+type ScrollspyVariablesType = object;
+
+type CollapseVariablesType = object;
+
+type InputOtpVariablesType = object;
 
 export type {
-  AccordionBasicVariablesType,
-  AccordionBodyVariablesType,
-  AccordionHeaderVariablesType,
-  AccordionItemVariablesType,
-  AccordionVariablesType,
-  AlertHeadingVariablesType,
-  AlertLinkVariablesType,
-  AlertVariablesType,
-  BadgeVariablesType,
-  BreadcrumbBasicVariablesType,
-  BreadcrumbItemVariablesType,
-  BreadcrumbVariablesType,
-  ButtonGroupVariablesType,
-  ButtonVariableType,
-  CardBodyVariablesType,
-  CardFooterVariablesType,
-  CardGroupVariablesType,
-  CardHeaderVariablesType,
-  CardImgVariablesType,
-  CardLinkVariablesType,
-  CardSubtitleVariablesType,
-  CardTextVariablesType,
-  CardTitleVariablesType,
-  CardVariablesType,
-  CarouselCaptionVariablesType,
-  CarouselItemVariablesType,
-  CarouselVariablesType,
-  CheckboxVariablesType,
-  CloseButtonVariableType,
-  CollapseVariablesType,
-  DropdownDividerVariablesType,
-  DropdownHeaderVariablesType,
+  NavbarTogglerIconVariablesType,
+  OffcanvasBackdropVariablesType,
   DropdownItemTextVariablesType,
+  AccordionHeaderVariablesType,
+  BreadcrumbBasicVariablesType,
+  CarouselCaptionVariablesType,
+  DropdownDividerVariablesType,
+  NavbarContainerVariablesType,
+  OffcanvasHeaderVariablesType,
+  ProgressStackedVariablesType,
+  TableResponsiveVariablesType,
+  AccordionBasicVariablesType,
+  BreadcrumbItemVariablesType,
+  DropdownHeaderVariablesType,
+  DropdownToggleVariablesType,
+  InputGroupTextVariablesType,
+  NavbarCollapseVariablesType,
+  OffcanvasTitleVariablesType,
+  PaginationItemVariablesType,
+  PaginationLinkVariablesType,
+  SelectMultipleVariablesType,
+  ToastContainerVariablesType,
+  AccordionBodyVariablesType,
+  AccordionItemVariablesType,
+  FloatingLabelVariablesType,
+  ListGroupItemVariablesType,
+  ModalBackdropVariablesType,
+  NavbarNavItemVariablesType,
+  NavbarNavLinkVariablesType,
+  NavbarTogglerVariablesType,
+  NavTabContentVariablesType,
+  OffcanvasBodyVariablesType,
+  PaginationNavVariablesType,
+  PopoverHeaderVariablesType,
+  AlertHeadingVariablesType,
+  CardSubtitleVariablesType,
+  CarouselItemVariablesType,
   DropdownItemVariablesType,
   DropdownMenuVariablesType,
-  DropdownToggleVariablesType,
-  DropdownVariablesType,
-  FloatingLabelVariablesType,
-  InputGroupTextVariablesType,
-  InputGroupVariablesType,
-  InputOtpVariablesType,
-  InputVariablesType,
-  LabelVariablesType,
-  ListGroupItemVariablesType,
-  ListGroupVariablesType,
-  ModalBackdropVariablesType,
-  ModalBodyVariablesType,
   ModalContentVariablesType,
+  PopoverArrowVariablesType,
+  SelectOptionVariablesType,
+  TableCaptionVariablesType,
+  TooltipArrowVariablesType,
+  TooltipInnerVariablesType,
+  ButtonGroupVariablesType,
   ModalDialogVariablesType,
   ModalFooterVariablesType,
   ModalHeaderVariablesType,
-  ModalTitleVariablesType,
-  ModalVariablesType,
   NavbarBrandVariablesType,
-  NavbarCollapseVariablesType,
-  NavbarContainerVariablesType,
-  NavbarNavItemVariablesType,
-  NavbarNavLinkVariablesType,
-  NavbarNavVariablesType,
-  NavbarTextVariablesType,
-  NavbarTogglerIconVariablesType,
-  NavbarTogglerVariablesType,
-  NavbarVariablesType,
-  NavItemVariablesType,
-  NavLinkVariablesType,
-  NavTabContentVariablesType,
-  NavTabPaneVariablesType,
-  NavVariablesType,
-  OffcanvasBackdropVariablesType,
-  OffcanvasBodyVariablesType,
-  OffcanvasHeaderVariablesType,
-  OffcanvasTitleVariablesType,
-  OffcanvasVariablesType,
-  OutlineType,
-  PaginationItemVariablesType,
-  PaginationLinkVariablesType,
-  PaginationNavVariablesType,
-  PaginationVariablesType,
   PlaceholderVariablesType,
-  PopoverArrowVariablesType,
   PopoverBodyVariablesType,
-  PopoverHeaderVariablesType,
-  PopoverVariablesType,
   ProgressBarVariablesType,
-  ProgressStackedVariablesType,
-  ProgressVariablesType,
-  RadioVariablesType,
-  RangeVariablesType,
-  ScrollspyVariablesType,
-  SelectMultipleVariablesType,
-  SelectOptionVariablesType,
-  SelectVariablesType,
-  SpinnerVariablesType,
-  TableCaptionVariablesType,
-  TableResponsiveVariablesType,
+  ToastHeaderVariablesType,
+  BreadcrumbVariablesType,
+  CardFooterVariablesType,
+  CardHeaderVariablesType,
+  CloseButtonVariableType,
+  InputGroupVariablesType,
+  ModalTitleVariablesType,
+  NavbarTextVariablesType,
+  NavTabPaneVariablesType,
+  PaginationVariablesType,
   TableTbodyVariablesType,
-  TableTdVariablesType,
   TableTfootVariablesType,
   TableTheadVariablesType,
+  AccordionVariablesType,
+  AlertLinkVariablesType,
+  CardGroupVariablesType,
+  CardTitleVariablesType,
+  ListGroupVariablesType,
+  ModalBodyVariablesType,
+  NavbarNavVariablesType,
+  OffcanvasVariablesType,
+  ScrollspyVariablesType,
+  ToastBodyVariablesType,
+  ToastItemVariablesType,
+  CardBodyVariablesType,
+  CardLinkVariablesType,
+  CardTextVariablesType,
+  CarouselVariablesType,
+  CheckboxVariablesType,
+  CollapseVariablesType,
+  DropdownVariablesType,
+  InputOtpVariablesType,
+  ProgressVariablesType,
+  TextareaVariablesType,
+  CardImgVariablesType,
+  NavItemVariablesType,
+  NavLinkVariablesType,
+  PopoverVariablesType,
+  SpinnerVariablesType,
+  TableTdVariablesType,
   TableThVariablesType,
   TableTrVariablesType,
-  TableVariablesType,
-  TextareaVariablesType,
-  TextVariablesType,
-  ToastBodyVariablesType,
-  ToastContainerVariablesType,
-  ToastHeaderVariablesType,
-  ToastItemVariablesType,
-  ToastVariablesType,
-  TooltipArrowVariablesType,
-  TooltipInnerVariablesType,
   TooltipVariablesType,
+  NavbarVariablesType,
+  SelectVariablesType,
+  AlertVariablesType,
+  BadgeVariablesType,
+  ButtonVariableType,
+  InputVariablesType,
+  LabelVariablesType,
+  ModalVariablesType,
+  RadioVariablesType,
+  RangeVariablesType,
+  TableVariablesType,
+  ToastVariablesType,
+  CardVariablesType,
+  TextVariablesType,
+  NavVariablesType,
+  OutlineType,
   VariantType,
 };

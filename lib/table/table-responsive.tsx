@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableResponsiveProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const TableResponsive = function TableResponsive<T extends ElementType = 'div'>(props: TableResponsiveProps<T>) {
-  const { as: Component = 'div', className, dropOldClass, responsive, style, variables, ...rest } = props;
+  const { as: Component = 'div', dropOldClass, responsive, className, variables, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(

@@ -1,19 +1,19 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
-import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { ListGroup, ListGroupOption } from '@lib/list-group';
-import { VariantType } from '@lib/tools';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ListGroupOption, ListGroup } from '@lib/list-group';
+import OptionRow from '@components/option-row.tsx';
 import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
+import { VariantType } from '@lib/tools';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/list-group/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -29,7 +29,7 @@ export default function ListGroupPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" mw400 state={state} t={tListGroupPage}>
+      <Example t={tListGroupPage} state={state} hash="basic" mw400>
         <ListGroup
           options={[
             {
@@ -51,12 +51,12 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="activeItems" mw400 state={state} t={tListGroupPage}>
+      <Example hash="activeItems" t={tListGroupPage} state={state} mw400>
         <ListGroup
           options={[
             {
-              active: true,
               item: 'An active item',
+              active: true,
             },
             {
               item: 'A second item',
@@ -74,124 +74,12 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="disabledItems" mw400 state={state} t={tListGroupPage}>
+      <Example hash="disabledItems" t={tListGroupPage} state={state} mw400>
         <ListGroup
           options={[
             {
-              disabled: true,
               item: 'A disabled item',
-            },
-            {
-              item: 'A second item',
-            },
-            {
-              item: 'A third item',
-            },
-            {
-              item: 'A fourth item',
-            },
-            {
-              item: 'And a fifth one',
-            },
-          ]}
-        />
-      </Example>
-
-      <Example gap3 hash="linksAndButtons" mw400 state={state} t={tListGroupPage}>
-        <ListGroup
-          as="div"
-          options={[
-            {
-              active: true,
-              item: 'The current link item',
-              props: {
-                'aria-current': 'true',
-                as: 'a',
-                href: '#',
-              },
-            },
-            {
-              item: 'A second link item',
-              props: {
-                as: 'a',
-                href: '#',
-              },
-            },
-            {
-              item: 'A third link item',
-              props: {
-                as: 'a',
-                href: '#',
-              },
-            },
-            {
-              item: 'A fourth link item',
-              props: {
-                as: 'a',
-                href: '#',
-              },
-            },
-            {
-              item: 'A disabled link item',
-              props: {
-                as: 'a',
-                href: '#',
-              },
-            },
-          ]}
-        />
-
-        <ListGroup
-          as="div"
-          options={[
-            {
-              active: true,
-              item: 'The current button',
-              props: {
-                'aria-current': 'true',
-                as: 'button',
-                type: 'button',
-              },
-            },
-            {
-              item: 'A second button item',
-              props: {
-                as: 'button',
-                type: 'button',
-              },
-            },
-            {
-              item: 'A third button item',
-              props: {
-                as: 'button',
-                type: 'button',
-              },
-            },
-            {
-              item: 'A fourth button item',
-              props: {
-                as: 'button',
-                type: 'button',
-              },
-            },
-            {
               disabled: true,
-              item: 'A disabled button item',
-              props: {
-                as: 'button',
-                type: 'button',
-              },
-            },
-          ]}
-        />
-      </Example>
-
-      <Example hash="flush" mw400 state={state} t={tListGroupPage}>
-        <ListGroup
-          flush
-          options={[
-            {
-              item: 'An item',
             },
             {
               item: 'A second item',
@@ -209,75 +97,186 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example gap3 hash="numbered" mw400 state={state} t={tListGroupPage}>
+      <Example hash="linksAndButtons" t={tListGroupPage} state={state} mw400 gap3>
         <ListGroup
-          numbered
           options={[
             {
-              item: 'A list item',
+              props: {
+                'aria-current': 'true',
+                href: '#',
+                as: 'a',
+              },
+              item: 'The current link item',
+              active: true,
             },
             {
-              item: 'A list item',
+              props: {
+                href: '#',
+                as: 'a',
+              },
+              item: 'A second link item',
             },
             {
-              item: 'A list item',
+              props: {
+                href: '#',
+                as: 'a',
+              },
+              item: 'A third link item',
+            },
+            {
+              props: {
+                href: '#',
+                as: 'a',
+              },
+              item: 'A fourth link item',
+            },
+            {
+              props: {
+                href: '#',
+                as: 'a',
+              },
+              item: 'A disabled link item',
             },
           ]}
+          as="div"
         />
 
         <ListGroup
-          as="ol"
-          numbered
           options={[
             {
-              item: (
-                <>
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Subheading</div>
-                    Content for list item
-                  </div>
-                  <span className="badge text-bg-primary rounded-pill">14</span>
-                </>
-              ),
               props: {
-                className: 'd-flex justify-content-between align-items-start',
+                'aria-current': 'true',
+                type: 'button',
+                as: 'button',
               },
+              item: 'The current button',
+              active: true,
             },
             {
-              item: (
-                <>
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Subheading</div>
-                    Content for list item
-                  </div>
-                  <span className="badge text-bg-primary rounded-pill">14</span>
-                </>
-              ),
               props: {
-                className: 'd-flex justify-content-between align-items-start',
+                type: 'button',
+                as: 'button',
               },
+              item: 'A second button item',
             },
             {
-              item: (
-                <>
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Subheading</div>
-                    Content for list item
-                  </div>
-                  <span className="badge text-bg-primary rounded-pill">14</span>
-                </>
-              ),
               props: {
-                className: 'd-flex justify-content-between align-items-start',
+                type: 'button',
+                as: 'button',
               },
+              item: 'A third button item',
+            },
+            {
+              props: {
+                type: 'button',
+                as: 'button',
+              },
+              item: 'A fourth button item',
+            },
+            {
+              props: {
+                type: 'button',
+                as: 'button',
+              },
+              item: 'A disabled button item',
+              disabled: true,
             },
           ]}
+          as="div"
         />
       </Example>
 
-      <Example hash="horizontal" mw400 state={state} t={tListGroupPage}>
+      <Example t={tListGroupPage} state={state} hash="flush" mw400>
         <ListGroup
-          horizontal
+          options={[
+            {
+              item: 'An item',
+            },
+            {
+              item: 'A second item',
+            },
+            {
+              item: 'A third item',
+            },
+            {
+              item: 'A fourth item',
+            },
+            {
+              item: 'And a fifth one',
+            },
+          ]}
+          flush
+        />
+      </Example>
+
+      <Example t={tListGroupPage} hash="numbered" state={state} mw400 gap3>
+        <ListGroup
+          options={[
+            {
+              item: 'A list item',
+            },
+            {
+              item: 'A list item',
+            },
+            {
+              item: 'A list item',
+            },
+          ]}
+          numbered
+        />
+
+        <ListGroup
+          options={[
+            {
+              item: (
+                <>
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">Subheading</div>
+                    Content for list item
+                  </div>
+                  <span className="badge text-bg-primary rounded-pill">14</span>
+                </>
+              ),
+              props: {
+                className: 'd-flex justify-content-between align-items-start',
+              },
+            },
+            {
+              item: (
+                <>
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">Subheading</div>
+                    Content for list item
+                  </div>
+                  <span className="badge text-bg-primary rounded-pill">14</span>
+                </>
+              ),
+              props: {
+                className: 'd-flex justify-content-between align-items-start',
+              },
+            },
+            {
+              item: (
+                <>
+                  <div className="ms-2 me-auto">
+                    <div className="fw-bold">Subheading</div>
+                    Content for list item
+                  </div>
+                  <span className="badge text-bg-primary rounded-pill">14</span>
+                </>
+              ),
+              props: {
+                className: 'd-flex justify-content-between align-items-start',
+              },
+            },
+          ]}
+          numbered
+          as="ol"
+        />
+      </Example>
+
+      <Example t={tListGroupPage} hash="horizontal" state={state} mw400>
+        <ListGroup
           options={[
             {
               item: 'An item',
@@ -289,13 +288,12 @@ export default function ListGroupPage() {
               item: 'A third item',
             },
           ]}
+          horizontal
         />
 
         {['sm', 'md', 'lg', 'xl', 'xxl'].map((name) => {
           return (
             <ListGroup
-              horizontal={name as 'lg' | 'md' | 'sm' | 'xl' | 'xxl'}
-              key={name}
               options={[
                 {
                   item: 'An item',
@@ -307,12 +305,14 @@ export default function ListGroupPage() {
                   item: 'A third item',
                 },
               ]}
+              horizontal={name as 'xxl' | 'lg' | 'md' | 'sm' | 'xl'}
+              key={name}
             />
           );
         })}
       </Example>
 
-      <Example hash="variants" mw400 state={state} t={tListGroupPage}>
+      <Example t={tListGroupPage} hash="variants" state={state} mw400>
         <ListGroup
           options={[
             {
@@ -330,35 +330,35 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="forLinksAndButtons" mw400 state={state} t={tListGroupPage}>
+      <Example hash="forLinksAndButtons" t={tListGroupPage} state={state} mw400>
         <ListGroup
-          as="div"
-          itemAction
           options={[
             {
-              item: 'A simple default list group item',
               props: {
-                as: 'a',
                 href: '#',
+                as: 'a',
               },
+              item: 'A simple default list group item',
             },
             ...(
               ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'] as (keyof VariantType)[]
             ).map((variant) => {
               return {
-                item: `A simple ${variant} list group item`,
                 props: {
-                  as: 'a',
                   href: '#',
+                  as: 'a',
                 },
+                item: `A simple ${variant} list group item`,
                 variant,
               } as ListGroupOption;
             }),
           ]}
+          itemAction
+          as="div"
         />
       </Example>
 
-      <Example hash="withBadges" mw400 state={state} t={tListGroupPage}>
+      <Example t={tListGroupPage} hash="withBadges" state={state} mw400>
         <ListGroup
           options={[
             {
@@ -398,11 +398,10 @@ export default function ListGroupPage() {
         />
       </Example>
 
-      <Example hash="customContent" mw400 state={state} t={tListGroupPage}>
+      <Example hash="customContent" t={tListGroupPage} state={state} mw400>
         <ListGroup
           options={[
             {
-              active: true,
               item: (
                 <>
                   <div className="d-flex w-100 justify-content-between">
@@ -415,8 +414,25 @@ export default function ListGroupPage() {
               ),
               props: {
                 'aria-current': 'true',
-                as: 'a',
                 href: '#',
+                as: 'a',
+              },
+              active: true,
+            },
+            {
+              item: (
+                <>
+                  <div className="d-flex w-100 justify-content-between">
+                    <h5 className="mb-1">List group item heading</h5>
+                    <small className="text-body-secondary">3 days ago</small>
+                  </div>
+                  <p className="mb-1">Some placeholder content in a paragraph.</p>
+                  <small className="text-body-secondary">And some muted small print.</small>
+                </>
+              ),
+              props: {
+                href: '#',
+                as: 'a',
               },
             },
             {
@@ -431,31 +447,15 @@ export default function ListGroupPage() {
                 </>
               ),
               props: {
-                as: 'a',
                 href: '#',
-              },
-            },
-            {
-              item: (
-                <>
-                  <div className="d-flex w-100 justify-content-between">
-                    <h5 className="mb-1">List group item heading</h5>
-                    <small className="text-body-secondary">3 days ago</small>
-                  </div>
-                  <p className="mb-1">Some placeholder content in a paragraph.</p>
-                  <small className="text-body-secondary">And some muted small print.</small>
-                </>
-              ),
-              props: {
                 as: 'a',
-                href: '#',
               },
             },
           ]}
         />
       </Example>
 
-      <Example gap3 hash="checkboxesAndRadios" mw400 state={state} t={tListGroupPage}>
+      <Example hash="checkboxesAndRadios" t={tListGroupPage} state={state} mw400 gap3>
         <ListGroup
           options={[
             {
@@ -498,9 +498,9 @@ export default function ListGroupPage() {
                 <>
                   <input
                     className="form-check-input me-1"
-                    defaultChecked
-                    id="firstRadio"
                     name="listGroupRadio"
+                    id="firstRadio"
+                    defaultChecked
                     type="radio"
                     value=""
                   />
@@ -515,8 +515,8 @@ export default function ListGroupPage() {
                 <>
                   <input
                     className="form-check-input me-1"
-                    id="secondRadio"
                     name="listGroupRadio"
+                    id="secondRadio"
                     type="radio"
                     value=""
                   />
@@ -531,8 +531,8 @@ export default function ListGroupPage() {
                 <>
                   <input
                     className="form-check-input me-1"
-                    id="thirdRadio"
                     name="listGroupRadio"
+                    id="thirdRadio"
                     type="radio"
                     value=""
                   />
@@ -584,70 +584,70 @@ export default function ListGroupPage() {
       <PropsIndicator />
 
       <Example
-        hash="listGroupComponentProps"
         items={[
           {
-            attr: 'options',
-            default: '',
-            desc: tListGroupComponentProps('listGroup.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
-                <OptionRow label="id?: string | number" value={tListGroupComponentProps('listGroup.options.id')} />
-                <OptionRow label="item?: ReactNode" value={tListGroupComponentProps('listGroup.options.item')} />
-                <OptionRow label="active?: boolean" value={tListGroupComponentProps('listGroup.options.active')} />
-                <OptionRow label="disabled?: boolean" value={tListGroupComponentProps('listGroup.options.disabled')} />
+                <OptionRow value={tListGroupComponentProps('listGroup.options.id')} label="id?: string | number" />
+                <OptionRow value={tListGroupComponentProps('listGroup.options.item')} label="item?: ReactNode" />
+                <OptionRow value={tListGroupComponentProps('listGroup.options.active')} label="active?: boolean" />
+                <OptionRow value={tListGroupComponentProps('listGroup.options.disabled')} label="disabled?: boolean" />
                 <OptionRow
-                  label="props?: ListGroupItemProps"
                   value={tListGroupComponentProps('listGroup.options.props')}
+                  label="props?: ListGroupItemProps"
                 />
-                <OptionRow label="flexFill?: boolean" value={tListGroupComponentProps('listGroup.options.flexFill')} />
+                <OptionRow value={tListGroupComponentProps('listGroup.options.flexFill')} label="flexFill?: boolean" />
                 <OptionRow
-                  label="variant?: VariantType"
                   value={tListGroupComponentProps('listGroup.options.variant')}
+                  label="variant?: VariantType"
                 />
                 <OptionRow
-                  label="itemAction?: boolean"
                   value={tListGroupComponentProps('listGroup.options.itemAction')}
+                  label="itemAction?: boolean"
                 />
               </div>
             ),
+            desc: tListGroupComponentProps('listGroup.desc.options'),
+            attr: 'options',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tListGroupComponentProps('listGroup.desc.flush'),
             attr: 'flush',
             default: '',
-            desc: tListGroupComponentProps('listGroup.desc.flush'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tListGroupComponentProps('listGroup.desc.numbered'),
             attr: 'numbered',
             default: '',
-            desc: tListGroupComponentProps('listGroup.desc.numbered'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            attr: 'horizontal',
-            default: '',
-            desc: tListGroupComponentProps('listGroup.desc.horizontal'),
             type: (
               <div className="d-flex gap-1">
                 <span className="badge text-bg-secondary">boolean</span>
                 <span className="badge text-bg-secondary">sm | md | lg | xl | xxl</span>
               </div>
             ),
+            desc: tListGroupComponentProps('listGroup.desc.horizontal'),
+            attr: 'horizontal',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tListGroupComponentProps('listGroup.desc.itemAction'),
             attr: 'itemAction',
             default: '',
-            desc: tListGroupComponentProps('listGroup.desc.itemAction'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="listGroupComponentProps"
         t={tListGroupComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

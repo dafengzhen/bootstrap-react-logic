@@ -1,15 +1,11 @@
-import type * as React from 'react';
 import type { ComponentPropsWithoutRef, ComponentPropsWithRef, CSSProperties, ElementType } from 'react';
-
-export type AddPrefixToKeys<T extends object, Prefix extends string> = {
-  [K in keyof T as `${Prefix}${Capitalize<K & string>}`]: T[K];
-};
+import type * as React from 'react';
 
 export type BaseProps<T extends ElementType, V extends object> = {
   /**
-   * as.
+   * variables.
    */
-  as?: T;
+  variables?: VariablesFromType<V>;
 
   /**
    * dropOldClass.
@@ -17,15 +13,16 @@ export type BaseProps<T extends ElementType, V extends object> = {
   dropOldClass?: boolean;
 
   /**
-   * variables.
+   * as.
    */
-  variables?: VariablesFromType<V>;
+  as?: T;
 };
 
-export type IntrinsicElements = React.JSX.IntrinsicElements;
-
-export type OmittedPropsWithAs<P, T extends ElementType, V extends object, O extends keyof any> = P &
-  (OmittedPropsWithoutRef<P, T, V, O> | OmittedPropsWithRef<P, T, V, O>);
+export type OmittedPropsWithAs<P, T extends ElementType, V extends object, O extends keyof any> = (
+  | OmittedPropsWithoutRef<P, T, V, O>
+  | OmittedPropsWithRef<P, T, V, O>
+) &
+  P;
 
 export type OmittedPropsWithoutRef<P, T extends ElementType, V extends object, O extends keyof any> = Omit<
   Omit<ComponentPropsWithoutRef<T>, O>,
@@ -39,14 +36,15 @@ export type OmittedPropsWithRef<P, T extends ElementType, V extends object, O ex
 > &
   P;
 
-export type PropsWithAs<P, T extends ElementType, V extends object> = P &
-  (PropsWithoutRef<P, T, V> | PropsWithRef<P, T, V>);
-
 export type PropsWithoutRef<P, T extends ElementType, V extends object> = Omit<
   ComponentPropsWithoutRef<T>,
   keyof BaseProps<T, V>
 > &
   P;
+
+export type AddPrefixToKeys<T extends object, Prefix extends string> = {
+  [K in keyof T as `${Prefix}${Capitalize<string & K>}`]: T[K];
+};
 
 export type PropsWithRef<P, T extends ElementType, V extends object> = Omit<
   ComponentPropsWithRef<T>,
@@ -54,6 +52,14 @@ export type PropsWithRef<P, T extends ElementType, V extends object> = Omit<
 > &
   P;
 
-export type SlotValue = ((originalClass: string) => string | undefined) | string;
+export type PropsWithAs<P, T extends ElementType, V extends object> = (
+  | PropsWithoutRef<P, T, V>
+  | PropsWithRef<P, T, V>
+) &
+  P;
 
 export type VariablesFromType<T extends object> = AddPrefixToKeys<T, 'bs'> & CSSProperties;
+
+export type SlotValue = ((originalClass: string) => undefined | string) | string;
+
+export type IntrinsicElements = React.JSX.IntrinsicElements;

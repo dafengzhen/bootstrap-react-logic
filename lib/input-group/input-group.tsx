@@ -2,20 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { InputGroupProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 import InputGroupText from './input-group-text.tsx';
 
 const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: InputGroupProps<T>) {
   const {
     as: Component = 'div',
-    children,
-    className,
-    dropOldClass,
     hasValidation,
-    nowrap,
-    size,
-    style,
+    dropOldClass,
+    className,
     variables,
+    children,
+    nowrap,
+    style,
+    size,
     ...rest
   } = props;
 

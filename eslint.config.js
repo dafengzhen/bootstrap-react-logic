@@ -1,31 +1,32 @@
-import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import perfectionist from 'eslint-plugin-perfectionist';
-import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import { configs, config } from 'typescript-eslint';
+import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
-import { config, configs } from 'typescript-eslint';
+import js from '@eslint/js';
 
 export default config(
   { ignores: ['dist', 'dist-lib'] },
   {
-    extends: [js.configs.recommended, perfectionist.configs['recommended-natural'], ...configs.recommended],
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-    ignores: ['eslint.config.mjs', '**/exports-unused.ts'],
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
     languageOptions: {
-      ecmaVersion: 'latest',
       globals: globals.browser,
+      ecmaVersion: 'latest',
       sourceType: 'module',
     },
     plugins: {
-      'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'react-hooks': reactHooks,
     },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      '@typescript-eslint/no-explicit-any': 'off',
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    },
+    extends: [js.configs.recommended, ...configs.recommended],
+    ignores: ['eslint.config.mjs', '**/exports-unused.ts'],
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
   },
+  perfectionist.configs['recommended-line-length'],
   eslintConfigPrettier,
 );

@@ -1,13 +1,13 @@
 import type { ElementType } from 'react';
 
-import type { BaseProps, OmittedPropsWithoutRef, SelectMultipleVariablesType, SlotValue } from '../tools';
+import type { SelectMultipleVariablesType, OmittedPropsWithoutRef, BaseProps, SlotValue } from '../tools';
 
 export interface SelectMultipleOption {
-  active?: boolean;
-  disabled?: boolean;
   divider?: 'bottom' | 'top';
-  header?: string;
   id?: number | string;
+  disabled?: boolean;
+  active?: boolean;
+  header?: string;
   text: string;
 }
 
@@ -18,21 +18,11 @@ export type SelectMultipleProps<T extends ElementType> = OmittedPropsWithoutRef<
   'onChange'
 >;
 
-type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & {
+type Props<T extends ElementType> = {
   /**
    * contentClasses.
    */
   contentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
-
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-
-  /**
-   * hideActiveOptions.
-   */
-  hideActiveOptions?: boolean;
 
   /**
    * onChange.
@@ -45,9 +35,9 @@ type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & 
   options?: SelectMultipleOption[];
 
   /**
-   * placeholder.
+   * hideActiveOptions.
    */
-  placeholder?: string;
+  hideActiveOptions?: boolean;
 
   /**
    * selectableCount.
@@ -55,21 +45,31 @@ type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & 
   selectableCount?: number;
 
   /**
+   * placeholder.
+   */
+  placeholder?: string;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+
+  /**
    * single.
    */
   single?: boolean;
-};
+} & BaseProps<T, SelectMultipleVariablesType>;
 
 type SlotValueKeys =
-  | 'activeOption'
+  | 'optionsContainer'
   | 'bottomDivider'
-  | 'clearIcon'
+  | 'mainContainer'
+  | 'activeOption'
   | 'countDisplay'
   | 'floatingMenu'
-  | 'header'
-  | 'mainContainer'
-  | 'optionItem'
-  | 'optionsContainer'
-  | 'placeholder'
   | 'selectButton'
-  | 'topDivider';
+  | 'placeholder'
+  | 'optionItem'
+  | 'topDivider'
+  | 'clearIcon'
+  | 'header';

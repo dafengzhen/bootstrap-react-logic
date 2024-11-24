@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CardBodyProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const CardBody = function CardBody<T extends ElementType = 'div'>(props: CardBodyProps<T>) {
-  const { as: Component = 'div', className, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'div', dropOldClass, className, variables, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'card-body', className);

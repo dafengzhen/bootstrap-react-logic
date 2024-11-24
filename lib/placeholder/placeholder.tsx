@@ -2,20 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PlaceholderProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, clsxWithOptions, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, clsxWithOptions, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
-const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(props: PlaceholderProps<T>) {
+const Placeholder = function Placeholder<T extends ElementType = 'span' | 'a'>(props: PlaceholderProps<T>) {
   const {
-    animation,
     as: Component = 'span',
-    bg,
-    children,
-    className,
-    col,
     dropOldClass,
-    size,
-    style,
+    animation,
+    className,
     variables,
+    children,
+    style,
+    size,
+    col,
+    bg,
     ...rest
   } = props;
 

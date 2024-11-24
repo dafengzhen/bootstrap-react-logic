@@ -1,14 +1,14 @@
 import type { ElementType, MouseEvent, ReactNode } from 'react';
 
 import type {
-  BaseProps,
   OffcanvasBackdropVariablesType,
-  OffcanvasBodyVariablesType,
   OffcanvasHeaderVariablesType,
   OffcanvasTitleVariablesType,
+  OffcanvasBodyVariablesType,
   OffcanvasVariablesType,
   OmittedPropsWithoutRef,
   PropsWithoutRef,
+  BaseProps,
 } from '../tools';
 
 export type OffcanvasBackdropProps<T extends ElementType> = OmittedPropsWithoutRef<
@@ -18,14 +18,6 @@ export type OffcanvasBackdropProps<T extends ElementType> = OmittedPropsWithoutR
   'onChange'
 >;
 
-export type OffcanvasBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, OffcanvasBodyVariablesType>;
-
-export type OffcanvasHeaderProps<T extends ElementType> = PropsWithoutRef<
-  HeaderProps<T>,
-  T,
-  OffcanvasHeaderVariablesType
->;
-
 export type OffcanvasProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
   T,
@@ -33,64 +25,21 @@ export type OffcanvasProps<T extends ElementType> = OmittedPropsWithoutRef<
   'onChange'
 >;
 
+export type OffcanvasHeaderProps<T extends ElementType> = PropsWithoutRef<
+  HeaderProps<T>,
+  T,
+  OffcanvasHeaderVariablesType
+>;
+
 export type OffcanvasTitleProps<T extends ElementType> = PropsWithoutRef<TitleProps<T>, T, OffcanvasTitleVariablesType>;
 
-type BackdropProps<T extends ElementType> = BaseProps<T, OffcanvasBackdropVariablesType> & {
-  /**
-   * backdrop.
-   */
-  backdrop?: 'static' | boolean;
+export type OffcanvasBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, OffcanvasBodyVariablesType>;
 
-  /**
-   * fade.
-   */
-  fade?: boolean;
-
+type Props<T extends ElementType> = {
   /**
    * onChange.
    */
   onChange?: (visible: boolean, event: MouseEvent<HTMLElement>) => void;
-
-  /**
-   * scroll.
-   */
-  scroll?: boolean;
-
-  /**
-   * visible.
-   */
-  visible?: boolean;
-};
-
-type BodyProps<T extends ElementType> = BaseProps<T, OffcanvasBodyVariablesType> & {};
-
-type HeaderProps<T extends ElementType> = BaseProps<T, OffcanvasHeaderVariablesType> & {};
-
-type Props<T extends ElementType> = BaseProps<T, OffcanvasVariablesType> & {
-  /**
-   * backdrop.
-   */
-  backdrop?: 'static' | boolean;
-
-  /**
-   * body.
-   */
-  body?: ReactNode;
-
-  /**
-   * bodyProps.
-   */
-  bodyProps?: OffcanvasBodyProps<ElementType>;
-
-  /**
-   * fade.
-   */
-  fade?: boolean;
-
-  /**
-   * header.
-   */
-  header?: ReactNode;
 
   /**
    * headerProps.
@@ -98,29 +47,14 @@ type Props<T extends ElementType> = BaseProps<T, OffcanvasVariablesType> & {
   headerProps?: OffcanvasHeaderProps<ElementType>;
 
   /**
-   * onChange.
-   */
-  onChange?: (visible: boolean, event: MouseEvent<HTMLElement>) => void;
-
-  /**
    * placement.
    */
-  placement?: 'bottom' | 'end' | 'start' | 'top';
+  placement?: 'bottom' | 'start' | 'end' | 'top';
 
   /**
    * responsive.
    */
-  responsive?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl';
-
-  /**
-   * scroll.
-   */
-  scroll?: boolean;
-
-  /**
-   * title.
-   */
-  title?: ReactNode;
+  responsive?: 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
 
   /**
    * titleProps.
@@ -128,9 +62,75 @@ type Props<T extends ElementType> = BaseProps<T, OffcanvasVariablesType> & {
   titleProps?: OffcanvasTitleProps<ElementType>;
 
   /**
+   * bodyProps.
+   */
+  bodyProps?: OffcanvasBodyProps<ElementType>;
+
+  /**
+   * backdrop.
+   */
+  backdrop?: 'static' | boolean;
+
+  /**
+   * header.
+   */
+  header?: ReactNode;
+
+  /**
+   * title.
+   */
+  title?: ReactNode;
+
+  /**
    * visible.
    */
   visible?: boolean;
-};
+
+  /**
+   * body.
+   */
+  body?: ReactNode;
+
+  /**
+   * scroll.
+   */
+  scroll?: boolean;
+
+  /**
+   * fade.
+   */
+  fade?: boolean;
+} & BaseProps<T, OffcanvasVariablesType>;
+
+type BackdropProps<T extends ElementType> = {
+  /**
+   * onChange.
+   */
+  onChange?: (visible: boolean, event: MouseEvent<HTMLElement>) => void;
+
+  /**
+   * backdrop.
+   */
+  backdrop?: 'static' | boolean;
+
+  /**
+   * visible.
+   */
+  visible?: boolean;
+
+  /**
+   * scroll.
+   */
+  scroll?: boolean;
+
+  /**
+   * fade.
+   */
+  fade?: boolean;
+} & BaseProps<T, OffcanvasBackdropVariablesType>;
+
+type HeaderProps<T extends ElementType> = BaseProps<T, OffcanvasHeaderVariablesType> & {};
 
 type TitleProps<T extends ElementType> = BaseProps<T, OffcanvasTitleVariablesType> & {};
+
+type BodyProps<T extends ElementType> = BaseProps<T, OffcanvasBodyVariablesType> & {};

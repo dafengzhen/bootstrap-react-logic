@@ -1,56 +1,56 @@
 import {
+  type KeyboardEvent,
   type ChangeEvent,
   type ElementType,
   type FocusEvent,
-  type KeyboardEvent,
   useCallback,
   useEffect,
+  useState,
   useMemo,
   useRef,
-  useState,
 } from 'react';
 
 import type { InputOtpProps } from './types.ts';
 
-import { Input } from '../input';
 import {
-  clsxStyle,
-  clsxUnique,
   convertBsKeyToVar,
-  filterOptions,
   generateRandomId,
-  isArray,
+  filterOptions,
   isValueValid,
+  clsxUnique,
   mergeProps,
+  clsxStyle,
+  isArray,
 } from '../tools';
+import { Input } from '../input';
 
 interface IOtp {
-  id: string;
   value: string;
+  id: string;
 }
 
 const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOtpProps<T>) {
   const {
     as: Component = 'div',
-    className,
+    maxLength = 1,
     defaultValue,
     dropOldClass,
     inputProps,
     length = 4,
-    maxLength = 1,
-    style,
+    className,
     variables,
+    style,
     ...rest
   } = props;
 
   const [otp, setOtp] = useState<IOtp[]>(() =>
     Array.from({ length }).map((_, index) => ({
-      id: generateRandomId(),
       value: isArray(defaultValue) ? String(defaultValue[index]) : '',
+      id: generateRandomId(),
     })),
   );
 
-  const otpRefs = useRef<Map<string, HTMLInputElement | null | undefined>>(new Map());
+  const otpRefs = useRef<Map<string, HTMLInputElement | undefined | null>>(new Map());
 
   const mountedRef = useRef(false);
 
@@ -159,14 +159,14 @@ const InputOtp = function InputOtp<T extends ElementType = 'div'>(props: InputOt
           <Input
             className="text-center"
             {...mergeProps(inputProps, {
-              onChange: (e: ChangeEvent<HTMLInputElement>) => onChange(e, index),
-              onFocus: (e: FocusEvent<HTMLInputElement>) => onFocus(e, index),
               onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => onKeyDown(e, index),
               onRef: (instance: HTMLInputElement | null) => onRef(instance, item),
+              onChange: (e: ChangeEvent<HTMLInputElement>) => onChange(e, index),
+              onFocus: (e: FocusEvent<HTMLInputElement>) => onFocus(e, index),
             })}
-            key={item.id}
             maxLength={maxLength}
             value={item.value}
+            key={item.id}
           />
         );
       })}

@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PaginationNavProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const PaginationNav = function PaginationNav<T extends ElementType = 'nav'>(props: PaginationNavProps<T>) {
-  const { as: Component = 'nav', className, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'nav', dropOldClass, className, variables, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', className);

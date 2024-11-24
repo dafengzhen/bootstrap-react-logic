@@ -2,44 +2,29 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ButtonProps } from './types.ts';
 
-import {
-  BS_PREFIX,
-  clsxStyle,
-  clsxUnique,
-  convertBsKeyToVar,
-  filterOptions,
-  findTruthyClass,
-  isValueValid,
-  mapAndFilterStyles,
-  resolveRoundedClass,
-} from '../tools';
+import { resolveRoundedClass, convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
 
-const Button = function Button<T extends ElementType = 'a' | 'button'>(props: ButtonProps<T>) {
+const Button = function Button(props: ButtonProps<ElementType>) {
   const {
-    active,
-    'aria-disabled': ariaDisabled,
-    'aria-label': ariaLabel,
-    'aria-pressed': ariaPressed,
-    as: Component = 'button' as ElementType,
+    as: Component = 'button',
+    type = 'button',
+    dropOldClass,
+    startContent,
+    endContent,
+    className,
+    isLoading,
+    variables,
     btnClose,
     children,
-    className,
     disabled,
-    dropOldClass,
-    endContent,
-    isLoading,
-    onRef,
     outline,
-    role,
     rounded,
+    variant,
+    active,
+    onRef,
+    style,
     show,
     size,
-    startContent,
-    style,
-    tabIndex,
-    type = 'button',
-    variables,
-    variant,
     ...rest
   } = props;
 
@@ -50,60 +35,35 @@ const Button = function Button<T extends ElementType = 'a' | 'button'>(props: Bu
       show && 'show',
       variant && `btn-${variant}`,
       outline && `btn-outline-${outline}`,
-      typeof size === 'string' && `btn-${size}`,
+      size && `btn-${size}`,
       Component === 'a' && disabled && 'disabled',
       rounded && resolveRoundedClass(rounded),
       className,
     );
-    const finalStyle = clsxStyle(
-      {
-        ...mapAndFilterStyles(
-          {
-            [`${BS_PREFIX}fontSize`]: 'fontSize',
-            [`${BS_PREFIX}paddingX`]: 'paddingX',
-            [`${BS_PREFIX}PaddingY`]: 'paddingY',
-          },
-          size,
-        ),
-        ...variables,
-        ...style,
-      },
-      true,
-      (_, key) => {
-        return convertBsKeyToVar(key);
-      },
+    const finalStyle = stylex(
+      (_, key) => ({ tKey: convertBsKeyToVar(key) }),
+
+      variables,
+      style,
     );
 
-    return filterOptions(
-      {
-        'aria-disabled': ariaDisabled ?? (disabled ? 'true' : 'false'),
-        'aria-label': ariaLabel ?? (btnClose && 'Close'),
-        'aria-pressed': ariaPressed ?? (active ? 'true' : 'false'),
-        className: finalClass,
-        disabled: disabled && Component === 'button',
-        role: role ?? (Component === 'a' && 'button'),
-        style: finalStyle,
-        tabIndex: tabIndex ?? (Component === 'a' && disabled && -1),
-      },
-      isValueValid,
-    );
+    return {
+      disabled: disabled && Component === 'button',
+      className: finalClass,
+      style: finalStyle,
+    };
   }, [
     Component,
     active,
-    ariaDisabled,
-    ariaLabel,
-    ariaPressed,
     btnClose,
     className,
     disabled,
     dropOldClass,
     outline,
-    role,
     rounded,
     show,
     size,
     style,
-    tabIndex,
     variables,
     variant,
   ]);
@@ -112,7 +72,7 @@ const Button = function Button<T extends ElementType = 'a' | 'button'>(props: Bu
     <Component type={type} {...rest} {...renderOptions} ref={onRef}>
       {isLoading && !startContent && (
         <>
-          <span aria-hidden="true" className="spinner-border spinner-border-sm me-1"></span>
+          <span className="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
           <span className="visually-hidden" role="status">
             Loading...
           </span>

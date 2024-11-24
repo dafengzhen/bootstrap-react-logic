@@ -1,15 +1,10 @@
 import type { ElementType } from 'react';
 
-import type { BaseProps, LabelVariablesType, PropsWithoutRef } from '../tools';
+import type { LabelVariablesType, PropsWithoutRef, BaseProps } from '../tools';
 
 export type LabelProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, LabelVariablesType>;
 
-type Props<T extends ElementType> = BaseProps<T, LabelVariablesType> & {
-  /**
-   * colFormLabel.
-   */
-  colFormLabel?: boolean;
-
+type Props<T extends ElementType> = {
   /**
    * formCheckLabel.
    */
@@ -19,4 +14,9 @@ type Props<T extends ElementType> = BaseProps<T, LabelVariablesType> & {
    * inputGroupText.
    */
   inputGroupText?: boolean;
-};
+
+  /**
+   * colFormLabel.
+   */
+  colFormLabel?: boolean;
+} & BaseProps<T, LabelVariablesType>;

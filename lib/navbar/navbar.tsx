@@ -1,17 +1,17 @@
-import { type ElementType, useMemo, useState } from 'react';
+import { type ElementType, useState, useMemo } from 'react';
 
 import type { NavbarOption, NavbarProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
-import NavbarBrand from './navbar-brand.tsx';
-import NavbarCollapse from './navbar-collapse.tsx';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import NavbarTogglerIcon from './navbar-toggler-icon.tsx';
 import NavbarContainer from './navbar-container.tsx';
+import NavbarCollapse from './navbar-collapse.tsx';
 import NavbarNavItem from './navbar-nav-item.tsx';
 import NavbarNavLink from './navbar-nav-link.tsx';
-import NavbarNav from './navbar-nav.tsx';
-import NavbarText from './navbar-text.tsx';
-import NavbarTogglerIcon from './navbar-toggler-icon.tsx';
 import NavbarToggler from './navbar-toggler.tsx';
+import NavbarBrand from './navbar-brand.tsx';
+import NavbarText from './navbar-text.tsx';
+import NavbarNav from './navbar-nav.tsx';
 
 interface IOption extends NavbarOption {
   id: number | string;
@@ -19,32 +19,32 @@ interface IOption extends NavbarOption {
 
 const Navbar = function Navbar<T extends ElementType = 'nav'>(props: NavbarProps<T>) {
   const {
+    options: defaultOptions,
     as: Component = 'nav',
-    brand,
+    togglerIconProps,
+    externalContent,
+    containerProps,
     brandPosition,
+    collapseProps,
+    dropOldClass,
+    togglerProps,
     brandProps,
     className,
-    collapse,
-    collapseProps,
     container,
-    containerProps,
-    dropOldClass,
-    expand,
-    externalContent,
-    fixed,
-    nav,
+    textProps,
+    variables,
+    collapse,
     navProps,
-    options: defaultOptions,
-    scroll,
     skipItem,
+    toggler,
+    expand,
+    scroll,
     sticky,
+    brand,
+    fixed,
     style,
     text,
-    textProps,
-    toggler,
-    togglerIconProps,
-    togglerProps,
-    variables,
+    nav,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
@@ -106,9 +106,9 @@ const Navbar = function Navbar<T extends ElementType = 'nav'>(props: NavbarProps
                         {options.map((item) => {
                           return skipItem || (typeof item.item === 'boolean' && !item.item) ? (
                             <NavbarNavLink
-                              active={item.active}
                               aria-current={item.active ? 'page' : undefined}
                               disabled={item.disabled}
+                              active={item.active}
                               href={item.href}
                               key={item.id}
                               {...item.linkProps}
@@ -118,9 +118,9 @@ const Navbar = function Navbar<T extends ElementType = 'nav'>(props: NavbarProps
                           ) : (
                             <NavbarNavItem {...item.itemProps} key={item.id}>
                               <NavbarNavLink
-                                active={item.active}
                                 aria-current={item.active ? 'page' : undefined}
                                 disabled={item.disabled}
+                                active={item.active}
                                 href={item.href}
                                 {...item.linkProps}
                               >

@@ -1,35 +1,29 @@
 import type { ElementType, MouseEvent, ReactNode } from 'react';
 
 import type {
-  BaseProps,
-  NavItemVariablesType,
-  NavLinkVariablesType,
   NavTabContentVariablesType,
   NavTabPaneVariablesType,
-  NavVariablesType,
   OmittedPropsWithoutRef,
+  NavItemVariablesType,
+  NavLinkVariablesType,
+  NavVariablesType,
   PropsWithoutRef,
+  BaseProps,
 } from '../tools';
 
-export type NavItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, NavItemVariablesType>;
-
-export type NavLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, NavLinkVariablesType>;
-
 export interface NavOption {
-  active?: boolean;
+  paneProps?: NavTabPaneProps<ElementType>;
+  itemProps?: NavItemProps<ElementType>;
+  linkProps?: NavLinkProps<ElementType>;
+  id?: number | string;
   disabled?: boolean;
+  active?: boolean;
+  item?: ReactNode;
+  link?: ReactNode;
+  pane?: ReactNode;
   fade?: boolean;
   href?: string;
-  id?: number | string;
-  item?: ReactNode;
-  itemProps?: NavItemProps<ElementType>;
-  link?: ReactNode;
-  linkProps?: NavLinkProps<ElementType>;
-  pane?: ReactNode;
-  paneProps?: NavTabPaneProps<ElementType>;
 }
-
-export type NavProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, NavVariablesType, 'onChange'>;
 
 export type NavTabContentProps<T extends ElementType> = PropsWithoutRef<
   TabContentProps<T>,
@@ -39,45 +33,27 @@ export type NavTabContentProps<T extends ElementType> = PropsWithoutRef<
 
 export type NavTabPaneProps<T extends ElementType> = PropsWithoutRef<TabPaneProps<T>, T, NavTabPaneVariablesType>;
 
-type ItemProps<T extends ElementType> = BaseProps<T, NavItemVariablesType> & {};
+export type NavProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, NavVariablesType, 'onChange'>;
 
-type LinkProps<T extends ElementType> = BaseProps<T, NavLinkVariablesType> & {
+export type NavItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, NavItemVariablesType>;
+
+export type NavLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, NavLinkVariablesType>;
+
+type Props<T extends ElementType> = {
   /**
-   * active.
+   * onChange.
    */
-  active?: boolean;
+  onChange?: (id: number | string, event: MouseEvent<HTMLElement>) => void;
 
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-};
-
-type Props<T extends ElementType> = BaseProps<T, NavVariablesType> & {
   /**
    * contentProps.
    */
   contentProps?: NavTabContentProps<ElementType>;
 
   /**
-   * fill.
-   */
-  fill?: boolean;
-
-  /**
    * horizontal.
    */
-  horizontal?: 'center' | 'end' | 'start';
-
-  /**
-   * justified.
-   */
-  justified?: boolean;
-
-  /**
-   * onChange.
-   */
-  onChange?: (id: number | string, event: MouseEvent<HTMLElement>) => void;
+  horizontal?: 'center' | 'start' | 'end';
 
   /**
    * options.
@@ -85,19 +61,9 @@ type Props<T extends ElementType> = BaseProps<T, NavVariablesType> & {
   options?: NavOption[];
 
   /**
-   * pills.
+   * justified.
    */
-  pills?: boolean;
-
-  /**
-   * skipItem.
-   */
-  skipItem?: boolean;
-
-  /**
-   * tabs.
-   */
-  tabs?: boolean;
+  justified?: boolean;
 
   /**
    * underline.
@@ -105,14 +71,44 @@ type Props<T extends ElementType> = BaseProps<T, NavVariablesType> & {
   underline?: boolean;
 
   /**
+   * skipItem.
+   */
+  skipItem?: boolean;
+
+  /**
    * vertical.
    */
   vertical?: boolean;
-};
 
-type TabContentProps<T extends ElementType> = BaseProps<T, NavTabContentVariablesType> & {};
+  /**
+   * pills.
+   */
+  pills?: boolean;
 
-type TabPaneProps<T extends ElementType> = BaseProps<T, NavTabPaneVariablesType> & {
+  /**
+   * fill.
+   */
+  fill?: boolean;
+
+  /**
+   * tabs.
+   */
+  tabs?: boolean;
+} & BaseProps<T, NavVariablesType>;
+
+type LinkProps<T extends ElementType> = {
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * active.
+   */
+  active?: boolean;
+} & BaseProps<T, NavLinkVariablesType>;
+
+type TabPaneProps<T extends ElementType> = {
   /**
    * active.
    */
@@ -122,4 +118,8 @@ type TabPaneProps<T extends ElementType> = BaseProps<T, NavTabPaneVariablesType>
    * fade.
    */
   fade?: boolean;
-};
+} & BaseProps<T, NavTabPaneVariablesType>;
+
+type TabContentProps<T extends ElementType> = BaseProps<T, NavTabContentVariablesType> & {};
+
+type ItemProps<T extends ElementType> = BaseProps<T, NavItemVariablesType> & {};

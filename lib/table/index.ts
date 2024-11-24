@@ -2,20 +2,20 @@ import Table from './table.tsx';
 
 // types
 export type {
-  TableBodyCellOption,
-  TableBodyOption,
   TableBodyValueOption,
+  TableResponsiveProps,
+  TableBodyCellOption,
   TableCaptionProps,
+  TableBodyOption,
   TableFootOption,
   TableHeadOption,
-  TableProps,
-  TableResponsiveProps,
   TableTbodyProps,
-  TableTdProps,
   TableTfootProps,
   TableTheadProps,
+  TableTdProps,
   TableThProps,
   TableTrProps,
+  TableProps,
 } from './types.ts';
 
 // hooks

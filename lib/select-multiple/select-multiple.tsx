@@ -1,45 +1,45 @@
 import {
-  autoUpdate,
-  FloatingPortal,
   size as floatingSize,
-  useClick,
-  useDismiss,
-  useFloating,
   useInteractions,
+  FloatingPortal,
+  useFloating,
+  autoUpdate,
+  useDismiss,
+  useClick,
 } from '@floating-ui/react';
-import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import { type ElementType, useCallback, useEffect, Fragment, useState, useMemo } from 'react';
 
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 
 import {
-  clsxStyle,
-  clsxUnique,
-  clsxWithOptions,
-  convertBsKeyToVar,
-  filterOptions,
-  groupByProperty,
-  isDefined,
-  isValueValid,
   pickObjectProperties,
   processSlotClasses,
+  convertBsKeyToVar,
+  clsxWithOptions,
+  groupByProperty,
+  filterOptions,
+  isValueValid,
+  clsxUnique,
+  clsxStyle,
+  isDefined,
 } from '../tools';
 import selectMultipleStyles from './select-multiple.module.scss';
 
 const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(props: SelectMultipleProps<T>) {
   const {
-    as: Component = 'div',
-    className,
-    contentClasses,
-    disabled,
-    dropOldClass,
-    hideActiveOptions,
-    onChange,
     options: defaultOptions,
-    placeholder,
+    as: Component = 'div',
+    hideActiveOptions,
     selectableCount,
+    contentClasses,
+    dropOldClass,
+    placeholder,
+    className,
+    variables,
+    disabled,
+    onChange,
     single,
     style,
-    variables,
     ...rest
   } = props;
 
@@ -49,16 +49,16 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   }));
   const noParamContentClasses = pickObjectProperties(contentClasses, ['optionItem', 'selectButton'], true) as Omit<
     keyof typeof contentClasses,
-    'optionItem' | 'selectButton'
+    'selectButton' | 'optionItem'
   >;
   const paramContentClasses = pickObjectProperties(contentClasses, ['optionItem', 'selectButton']) as Pick<
     keyof typeof contentClasses,
-    'optionItem' | 'selectButton'
+    'selectButton' | 'optionItem'
   >;
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<SelectMultipleOption[]>(initialOptions);
 
-  const { context, floatingStyles, refs } = useFloating({
+  const { floatingStyles, context, refs } = useFloating({
     middleware: [
       floatingSize({
         apply({ availableHeight, elements, rects }) {
@@ -69,16 +69,16 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
         },
       }),
     ],
+    whileElementsMounted: autoUpdate,
     onOpenChange: setIsOpen,
     open: isOpen,
-    whileElementsMounted: autoUpdate,
   });
 
   const click = useClick(context, {
     enabled: !disabled,
   });
   const dismiss = useDismiss(context);
-  const { getFloatingProps, getReferenceProps } = useInteractions([click, dismiss]);
+  const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss]);
 
   const showGroupFlag = useMemo(() => options.some((item) => isDefined(item.header, true)), [options]);
   const getOptionsByHeader = useMemo(() => groupByProperty(options, 'header'), [options]);
@@ -124,9 +124,9 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
     return filterOptions(
       {
+        tabIndex: disabled ? undefined : 0,
         className: finalClass,
         style: finalStyle,
-        tabIndex: disabled ? undefined : 0,
       },
       isValueValid,
     );
@@ -138,22 +138,22 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
       'd-flex align-items-center badge text-bg-secondary',
       selectMultipleStyles.brlCursorDefault,
     ),
-    bottomDivider: 'dropdown-divider',
-    clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
+    mainContainer: clsxWithOptions(
+      null,
+      typeof selectableCount === 'number' && 'd-flex flex-wrap justify-content-between gap-2',
+    ),
     countDisplay: clsxWithOptions(
       null,
       'align-self-center flex-shrink-0 text-secondary',
       selectMultipleStyles.brlScale75,
     ),
+    clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
     floatingMenu: 'overflow-y-auto dropdown-menu rounded-3 shadow show',
-    header: 'dropdown-header',
-    mainContainer: clsxWithOptions(
-      null,
-      typeof selectableCount === 'number' && 'd-flex flex-wrap justify-content-between gap-2',
-    ),
     optionsContainer: 'd-flex flex-wrap column-gap-2 row-gap-1',
     placeholder: 'text-secondary user-select-none',
+    bottomDivider: 'dropdown-divider',
     topDivider: 'dropdown-divider',
+    header: 'dropdown-header',
   });
 
   useEffect(() => {
@@ -174,12 +174,12 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
                 <div className={slotClassName.activeOption} data-slot-active-option="" key={item.id}>
                   {item.text}
                   <i
-                    className={slotClassName.clearIcon}
-                    data-slot-clear-icon=""
                     onClick={(e) => {
                       e.stopPropagation();
                       onClickClearOption(item);
                     }}
+                    className={slotClassName.clearIcon}
+                    data-slot-clear-icon=""
                     tabIndex={-1}
                   ></i>
                 </div>
@@ -218,13 +218,13 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
                   {getOptionsByHeader.groupedData[key].map(({ index, item }) => {
                     const paramSlotClassName = processSlotClasses(paramContentClasses, {
-                      optionItem: clsxWithOptions(null, item.active && hideActiveOptions && 'visually-hidden'),
                       selectButton: clsxWithOptions(
                         null,
                         'dropdown-item',
                         item.active && 'active',
                         (item.disabled || selectableCount === getActiveOptionsLength) && 'disabled',
                       ),
+                      optionItem: clsxWithOptions(null, item.active && hideActiveOptions && 'visually-hidden'),
                     });
 
                     return (
@@ -237,12 +237,12 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
                         <li className={paramSlotClassName.optionItem} data-slot-option-item="">
                           <button
-                            className={paramSlotClassName.selectButton}
-                            data-slot-select-button=""
                             onClick={(e) => {
                               e.stopPropagation();
                               onClickSelectOption(index);
                             }}
+                            className={paramSlotClassName.selectButton}
+                            data-slot-select-button=""
                             type="button"
                           >
                             {item.text}

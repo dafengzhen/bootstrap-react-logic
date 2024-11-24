@@ -2,27 +2,27 @@ import { type ElementType, useMemo } from 'react';
 
 import type { AccordionHeaderProps } from './types.ts';
 
-import Button from '../button/button.tsx';
 import {
-  clsxStyle,
-  clsxUnique,
-  clsxWithOptions,
   convertBsKeyToVar,
+  clsxWithOptions,
   filterOptions,
   isValueValid,
+  clsxUnique,
   mergeProps,
+  clsxStyle,
 } from '../tools';
+import Button from '../button/button.tsx';
 
 const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(props: AccordionHeaderProps<T>) {
   const {
     as: Component = 'div',
+    dropOldClass,
     buttonProps,
-    children,
     className,
     collapsed,
-    dropOldClass,
-    style,
     variables,
+    children,
+    style,
     ...rest
   } = props;
 

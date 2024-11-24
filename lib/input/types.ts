@@ -1,6 +1,6 @@
-import type { ElementRef, ElementType, LegacyRef, ReactNode } from 'react';
+import type { ElementType, ElementRef, LegacyRef, ReactNode } from 'react';
 
-import type { BaseProps, InputVariablesType, OmittedPropsWithoutRef, SlotValue } from '../tools';
+import type { OmittedPropsWithoutRef, InputVariablesType, BaseProps, SlotValue } from '../tools';
 
 export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
@@ -9,11 +9,36 @@ export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
   'color' | 'size'
 >;
 
-type Props<T extends ElementType> = BaseProps<T, InputVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * color
+   * startEndContentClasses.
    */
-  color?: boolean;
+  startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
+
+  /**
+   * nativeColor.
+   */
+  nativeColor?: undefined | string;
+
+  /**
+   * onRef.
+   */
+  onRef?: LegacyRef<ElementRef<T>>;
+
+  /**
+   * nativeSize.
+   */
+  nativeSize?: undefined | number;
+
+  /**
+   * readonlyPlainText.
+   */
+  readonlyPlainText?: boolean;
+
+  /**
+   * startContent.
+   */
+  startContent?: ReactNode;
 
   /**
    * endContent.
@@ -26,44 +51,19 @@ type Props<T extends ElementType> = BaseProps<T, InputVariablesType> & {
   isInvalid?: boolean;
 
   /**
-   * isValid.
-   */
-  isValid?: boolean;
-
-  /**
-   * nativeColor.
-   */
-  nativeColor?: string | undefined;
-
-  /**
-   * nativeSize.
-   */
-  nativeSize?: number | undefined;
-
-  /**
-   * onRef.
-   */
-  onRef?: LegacyRef<ElementRef<T>>;
-
-  /**
-   * readonlyPlainText.
-   */
-  readonlyPlainText?: boolean;
-
-  /**
    * size.
    */
   size?: 'lg' | 'sm';
 
   /**
-   * startContent.
+   * isValid.
    */
-  startContent?: ReactNode;
+  isValid?: boolean;
 
   /**
-   * startEndContentClasses.
+   * color
    */
-  startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
-};
+  color?: boolean;
+} & BaseProps<T, InputVariablesType>;
 
-type SlotValueKeys = 'component' | 'container' | 'end' | 'start';
+type SlotValueKeys = 'component' | 'container' | 'start' | 'end';

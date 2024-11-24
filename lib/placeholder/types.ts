@@ -1,27 +1,27 @@
 import type { ElementType } from 'react';
 
-import type { BaseProps, PlaceholderVariablesType, PropsWithoutRef } from '../tools';
+import type { PlaceholderVariablesType, PropsWithoutRef, BaseProps } from '../tools';
 
 export type PlaceholderProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, PlaceholderVariablesType>;
 
-type Props<T extends ElementType> = BaseProps<T, PlaceholderVariablesType> & {
+type Props<T extends ElementType> = {
+  /**
+   * bg.
+   */
+  bg?: 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
+
   /**
    * animation.
    */
   animation?: 'glow' | 'wave';
 
   /**
-   * bg.
+   * size.
    */
-  bg?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
+  size?: 'lg' | 'sm' | 'xs';
 
   /**
    * col.
    */
   col?: number;
-
-  /**
-   * size.
-   */
-  size?: 'lg' | 'sm' | 'xs';
-};
+} & BaseProps<T, PlaceholderVariablesType>;

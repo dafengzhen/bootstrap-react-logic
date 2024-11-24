@@ -2,17 +2,17 @@ import { type ElementType, useMemo } from 'react';
 
 import type { BreadcrumbItemProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const BreadcrumbItem = function BreadcrumbItem<T extends ElementType = 'li'>(props: BreadcrumbItemProps<T>) {
   const {
-    active,
     'aria-current': ariaCurrent,
     as: Component = 'li',
-    className,
     dropOldClass,
-    style,
+    className,
     variables,
+    active,
+    style,
     ...rest
   } = props;
 
@@ -22,7 +22,7 @@ const BreadcrumbItem = function BreadcrumbItem<T extends ElementType = 'li'>(pro
       return convertBsKeyToVar(key);
     });
 
-    const finalAriaCurrent = (ariaCurrent ? ariaCurrent : active ? 'page' : undefined) as 'page' | undefined;
+    const finalAriaCurrent = (ariaCurrent ? ariaCurrent : active ? 'page' : undefined) as undefined | 'page';
 
     return filterOptions(
       {

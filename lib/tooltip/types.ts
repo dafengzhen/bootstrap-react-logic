@@ -1,44 +1,84 @@
-import type { ElementType, HTMLProps, ReactNode, RefCallback } from 'react';
+import type { ElementType, RefCallback, HTMLProps, ReactNode } from 'react';
 
 import type {
-  BaseProps,
-  OmittedPropsWithoutRef,
-  PropsWithoutRef,
   TooltipArrowVariablesType,
   TooltipInnerVariablesType,
+  OmittedPropsWithoutRef,
   TooltipVariablesType,
+  PropsWithoutRef,
+  BaseProps,
 } from '../tools';
+
+export type TooltipProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, TooltipVariablesType, 'onChange'>;
 
 export type TooltipArrowProps<T extends ElementType> = PropsWithoutRef<ArrowProps<T>, T, TooltipArrowVariablesType>;
 
 export type TooltipInnerProps<T extends ElementType> = PropsWithoutRef<InnerProps<T>, T, TooltipInnerVariablesType>;
 
-export type TooltipProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, TooltipVariablesType, 'onChange'>;
-
-type ArrowProps<T extends ElementType> = BaseProps<T, TooltipArrowVariablesType> & {
+type Props<T extends ElementType> = {
   /**
-   * onRef.
+   * trigger.
    */
-  onRef?: RefCallback<HTMLElement>;
-};
+  trigger?: (
+    setRef: RefCallback<HTMLElement>,
+    getProps: (userProps?: HTMLProps<Element>) => Record<string, unknown>,
+  ) => ReactNode;
 
-type InnerProps<T extends ElementType> = BaseProps<T, TooltipInnerVariablesType> & {
   /**
-   * html.
+   * offset.
    */
-  html?: string;
-};
+  offset?:
+    | {
+        alignmentAxis?: number | null;
+        crossAxis?: number;
+        mainAxis?: number;
+      }
+    | number;
 
-type Props<T extends ElementType> = BaseProps<T, TooltipVariablesType> & {
+  /**
+   * placement.
+   */
+  placement?: 'bottom' | 'right' | 'start' | 'left' | 'end' | 'top';
+
+  /**
+   * triggerType.
+   */
+  triggerType?: ('focus' | 'hover')[] | 'focus' | 'hover';
+
   /**
    * arrowProps.
    */
   arrowProps?: TooltipArrowProps<ElementType>;
 
   /**
+   * innerProps.
+   */
+  innerProps?: TooltipInnerProps<ElementType>;
+
+  /**
+   * onChange.
+   */
+  onChange?: (visible: boolean) => void;
+
+  /**
    * container.
    */
   container?: HTMLElement | string;
+
+  /**
+   * triggerWrapper.
+   */
+  triggerWrapper?: boolean;
+
+  /**
+   * inner.
+   */
+  inner?: ReactNode;
+
+  /**
+   * visible.
+   */
+  visible?: boolean;
 
   /**
    * fade.
@@ -49,58 +89,18 @@ type Props<T extends ElementType> = BaseProps<T, TooltipVariablesType> & {
    * html.
    */
   html?: string;
+} & BaseProps<T, TooltipVariablesType>;
 
+type ArrowProps<T extends ElementType> = {
   /**
-   * inner.
+   * onRef.
    */
-  inner?: ReactNode;
+  onRef?: RefCallback<HTMLElement>;
+} & BaseProps<T, TooltipArrowVariablesType>;
 
+type InnerProps<T extends ElementType> = {
   /**
-   * innerProps.
+   * html.
    */
-  innerProps?: TooltipInnerProps<ElementType>;
-
-  /**
-   * offset.
-   */
-  offset?:
-    | number
-    | {
-        alignmentAxis?: null | number;
-        crossAxis?: number;
-        mainAxis?: number;
-      };
-
-  /**
-   * onChange.
-   */
-  onChange?: (visible: boolean) => void;
-
-  /**
-   * placement.
-   */
-  placement?: 'bottom' | 'end' | 'left' | 'right' | 'start' | 'top';
-
-  /**
-   * trigger.
-   */
-  trigger?: (
-    setRef: RefCallback<HTMLElement>,
-    getProps: (userProps?: HTMLProps<Element>) => Record<string, unknown>,
-  ) => ReactNode;
-
-  /**
-   * triggerType.
-   */
-  triggerType?: 'focus' | 'hover' | ('focus' | 'hover')[];
-
-  /**
-   * triggerWrapper.
-   */
-  triggerWrapper?: boolean;
-
-  /**
-   * visible.
-   */
-  visible?: boolean;
-};
+  html?: string;
+} & BaseProps<T, TooltipInnerVariablesType>;

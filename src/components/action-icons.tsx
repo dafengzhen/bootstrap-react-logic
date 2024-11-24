@@ -1,34 +1,34 @@
 import {
-  handleClipboard,
   handleToggleLanguage,
   handleToggleLayout,
   handleToggleState,
   handleToggleTheme,
+  handleClipboard,
 } from '@tools/handlers';
 import clsx from 'clsx';
 
 export const ActionIcons = ({
-  center,
-  code,
-  dark,
-  fullscreen,
   fullscreenState,
-  i18n,
-  isOpen,
   layoutState,
   onClickCode,
+  fullscreen,
   themeState,
+  center,
+  isOpen,
+  code,
+  dark,
+  i18n,
 }: {
-  center?: boolean;
-  code?: string;
-  dark?: boolean;
+  onClickCode: () => void;
   fullscreen?: boolean;
   fullscreenState: any;
-  i18n: any;
-  isOpen: boolean;
+  center?: boolean;
   layoutState: any;
-  onClickCode: () => void;
+  isOpen: boolean;
   themeState: any;
+  dark?: boolean;
+  code?: string;
+  i18n: any;
 }) => {
   return (
     <div className="d-flex gap-2">

@@ -1,34 +1,34 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { Placeholder } from '@lib/placeholder';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigation } from 'react-router-dom';
+import { Placeholder } from '@lib/placeholder';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/placeholder/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
 const ExampleCardImg = ({ fill }: { fill?: string }) => {
   return (
     <svg
-      aria-label="Placeholder"
       className="bd-placeholder-img card-img-top"
+      preserveAspectRatio="xMidYMid slice"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Placeholder"
       focusable="false"
       height="180"
-      preserveAspectRatio="xMidYMid slice"
-      role="img"
       width="100%"
-      xmlns="http://www.w3.org/2000/svg"
+      role="img"
     >
       <title>Placeholder</title>
-      <rect fill={fill} height="100%" width="100%"></rect>
+      <rect height="100%" width="100%" fill={fill}></rect>
     </svg>
   );
 };
@@ -46,11 +46,11 @@ export default function PlaceholderPage() {
   return (
     <div className="d-flex flex-column gap-3">
       <Example
-        hash="basic"
         parentClassName="d-flex bd-example-placeholder-cards justify-content-around"
-        row
-        state={state}
         t={tPlaceholderPage}
+        state={state}
+        hash="basic"
+        row
       >
         <div className="card">
           <ExampleCardImg fill="#20c997" />
@@ -80,26 +80,26 @@ export default function PlaceholderPage() {
               <Placeholder col={8} />
             </p>
 
-            <Placeholder as="a" className="btn btn-primary disabled" col={6} ria-disabled="true" />
+            <Placeholder className="btn btn-primary disabled" ria-disabled="true" col={6} as="a" />
           </div>
         </div>
       </Example>
 
-      <Example hash="howItWorks" state={state} t={tPlaceholderPage}>
+      <Example t={tPlaceholderPage} hash="howItWorks" state={state}>
         <p aria-hidden="true">
           <Placeholder col={6} />
         </p>
 
-        <Placeholder as="a" className="btn btn-primary disabled" col={4} />
+        <Placeholder className="btn btn-primary disabled" col={4} as="a" />
       </Example>
 
-      <Example hash="width" state={state} t={tPlaceholderPage}>
+      <Example t={tPlaceholderPage} state={state} hash="width">
         <Placeholder col={6} />
         <Placeholder className="w-75" />
         <Placeholder style={{ width: '25%' }} />
       </Example>
 
-      <Example hash="color" state={state} t={tPlaceholderPage}>
+      <Example t={tPlaceholderPage} state={state} hash="color">
         <Placeholder col={12} />
         <Placeholder bg="primary" col={12} />
         <Placeholder bg="secondary" col={12} />
@@ -111,33 +111,29 @@ export default function PlaceholderPage() {
         <Placeholder bg="dark" col={12} />
       </Example>
 
-      <Example hash="sizing" state={state} t={tPlaceholderPage}>
-        <Placeholder col={12} size="lg" />
+      <Example t={tPlaceholderPage} hash="sizing" state={state}>
+        <Placeholder size="lg" col={12} />
         <Placeholder col={12} />
-        <Placeholder col={12} size="sm" />
-        <Placeholder col={12} size="xs" />
+        <Placeholder size="sm" col={12} />
+        <Placeholder size="xs" col={12} />
       </Example>
 
-      <Example hash="animation" state={state} t={tPlaceholderPage}>
-        <Placeholder animation="glow" as="p" col={12} />
-        <Placeholder animation="wave" as="p" col={12} />
+      <Example t={tPlaceholderPage} hash="animation" state={state}>
+        <Placeholder animation="glow" col={12} as="p" />
+        <Placeholder animation="wave" col={12} as="p" />
       </Example>
 
       <PropsIndicator />
 
       <Example
-        hash="placeholderComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">glow | wave</span>,
+            desc: tPlaceholderComponentProps('placeholder.desc.animation'),
             attr: 'animation',
             default: '',
-            desc: tPlaceholderComponentProps('placeholder.desc.animation'),
-            type: <span className="badge text-bg-secondary">glow | wave</span>,
           },
           {
-            attr: 'bg',
-            default: '',
-            desc: tPlaceholderComponentProps('placeholder.desc.bg'),
             type: (
               <div className="row">
                 <div className="col-auto">
@@ -166,26 +162,30 @@ export default function PlaceholderPage() {
                 </div>
               </div>
             ),
+            desc: tPlaceholderComponentProps('placeholder.desc.bg'),
+            default: '',
+            attr: 'bg',
           },
           {
+            type: <span className="badge text-bg-secondary">number</span>,
+            desc: tPlaceholderComponentProps('placeholder.desc.col'),
             attr: 'col',
             default: '',
-            desc: tPlaceholderComponentProps('placeholder.desc.col'),
-            type: <span className="badge text-bg-secondary">number</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">lg | sm | xs</span>,
+            desc: tPlaceholderComponentProps('placeholder.desc.size'),
             attr: 'size',
             default: '',
-            desc: tPlaceholderComponentProps('placeholder.desc.size'),
-            type: <span className="badge text-bg-secondary">lg | sm | xs</span>,
           },
         ]}
-        props
-        state={state}
+        hash="placeholderComponentProps"
         t={tPlaceholderComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

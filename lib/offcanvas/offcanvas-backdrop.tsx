@@ -1,21 +1,21 @@
-import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { OffcanvasBackdropProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, getScrollbarWidth, isValueValid } from '../tools';
+import { convertBsKeyToVar, getScrollbarWidth, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const OffcanvasBackdrop = function OffcanvasBackdrop<T extends ElementType = 'div'>(props: OffcanvasBackdropProps<T>) {
   const {
+    visible: visibleByDefault = false,
+    onChange: onChangeByDefault,
     as: Component = 'div',
-    backdrop,
-    className,
     dropOldClass,
     fade = true,
-    onChange: onChangeByDefault,
+    className,
+    variables,
+    backdrop,
     scroll,
     style,
-    variables,
-    visible: visibleByDefault = false,
     ...rest
   } = props;
 

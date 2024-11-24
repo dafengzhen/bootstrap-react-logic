@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CardImgProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, findTruthyClass, isValueValid } from '../tools';
+import { convertBsKeyToVar, findTruthyClass, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const CardImg = function CardImg<T extends ElementType = 'div' | 'img'>(props: CardImgProps<T>) {
-  const { as, bottom, className, dropOldClass, overlay, style, top, variables, ...rest } = props;
+  const { dropOldClass, className, variables, overlay, bottom, style, top, as, ...rest } = props;
   const Component = as ? as : overlay ? 'div' : 'img';
 
   const renderOptions = useMemo(() => {

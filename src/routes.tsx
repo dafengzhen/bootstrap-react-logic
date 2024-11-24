@@ -1,76 +1,76 @@
-import AccordionPage from '@pages/accordion-page.tsx';
-import AlertPage from '@pages/alert-page.tsx';
-import BadgePage from '@pages/badge-page';
-import BreadcrumbPage from '@pages/breadcrumb-page.tsx';
+import FloatingLabelPage from '@pages/floating-label-page.tsx';
 import ButtonGroupPage from '@pages/button-group-page.tsx';
-import ButtonPage from '@pages/button-page.tsx';
-import CardPage from '@pages/card-page.tsx';
+import CloseButtonPage from '@pages/close-button-page.tsx';
+import PlaceholderPage from '@pages/placeholder-page.tsx';
+import InputGroupPage from '@pages/input-group-page.tsx';
+import BreadcrumbPage from '@pages/breadcrumb-page.tsx';
+import PaginationPage from '@pages/pagination-page.tsx';
+import ListGroupPage from '@pages/list-group-page.tsx';
+import { createBrowserRouter } from 'react-router-dom';
+import AccordionPage from '@pages/accordion-page.tsx';
+import OffcanvasPage from '@pages/offcanvas-page.tsx';
+import ScrollspyPage from '@pages/scrollspy-page.tsx';
 import CarouselPage from '@pages/carousel-page.tsx';
 import CheckboxPage from '@pages/checkbox-page.tsx';
-import CloseButtonPage from '@pages/close-button-page.tsx';
 import CollapsePage from '@pages/collapse-page.tsx';
 import DropdownPage from '@pages/dropdown-page.tsx';
-import ErrorPage from '@pages/error-page.tsx';
-import FloatingLabelPage from '@pages/floating-label-page.tsx';
-import IndexPage from '@pages/index-page.tsx';
-import InputGroupPage from '@pages/input-group-page.tsx';
-import InputPage from '@pages/input-page.tsx';
-import ListGroupPage from '@pages/list-group-page.tsx';
-import ModalPage from '@pages/modal-page.tsx';
-import NavPage from '@pages/nav-page.tsx';
-import NavbarPage from '@pages/navbar-page.tsx';
-import OffcanvasPage from '@pages/offcanvas-page.tsx';
-import PaginationPage from '@pages/pagination-page.tsx';
-import PlaceholderPage from '@pages/placeholder-page.tsx';
-import PopoverPage from '@pages/popover-page.tsx';
 import ProgressPage from '@pages/progress-page.tsx';
+import PopoverPage from '@pages/popover-page.tsx';
+import SpinnerPage from '@pages/spinner-page.tsx';
+import TooltipPage from '@pages/tooltip-page.tsx';
+import ButtonPage from '@pages/button-page.tsx';
+import NavbarPage from '@pages/navbar-page.tsx';
+import SelectPage from '@pages/select-page.tsx';
+import AlertPage from '@pages/alert-page.tsx';
+import ErrorPage from '@pages/error-page.tsx';
+import IndexPage from '@pages/index-page.tsx';
+import InputPage from '@pages/input-page.tsx';
+import ModalPage from '@pages/modal-page.tsx';
 import RadioPage from '@pages/radio-page.tsx';
 import RangePage from '@pages/range-page.tsx';
-import ScrollspyPage from '@pages/scrollspy-page.tsx';
-import SelectPage from '@pages/select-page.tsx';
-import SpinnerPage from '@pages/spinner-page.tsx';
 import TablePage from '@pages/table-page.tsx';
 import ToastPage from '@pages/toast-page.tsx';
-import TooltipPage from '@pages/tooltip-page.tsx';
+import CardPage from '@pages/card-page.tsx';
+import BadgePage from '@pages/badge-page';
+import NavPage from '@pages/nav-page.tsx';
 import App from '@src/App.tsx';
-import { createBrowserRouter } from 'react-router-dom';
 
 /**
  * Configure sidebar menu.
  */
 export enum MenuEnum {
-  Accordion = '/pages/accordion',
-  Alert = '/pages/alert',
-  Badge = '/pages/badge',
-  Breadcrumb = '/pages/breadcrumb',
-  Button = '/pages/button',
+  FloatingLabel = '/pages/floating-label',
   ButtonGroup = '/pages/button-group',
-  Card = '/pages/card',
+  CloseButton = '/pages/close-button',
+  Placeholder = '/pages/placeholder',
+  InputGroup = '/pages/input-group',
+  Breadcrumb = '/pages/breadcrumb',
+  Pagination = '/pages/pagination',
+  ListGroup = '/pages/list-group',
+  Accordion = '/pages/accordion',
+  Offcanvas = '/pages/offcanvas',
+  Scrollspy = '/pages/scrollspy',
   Carousel = '/pages/carousel',
   Checkbox = '/pages/checkbox',
-  CloseButton = '/pages/close-button',
   Collapse = '/pages/collapse',
   Dropdown = '/pages/dropdown',
-  FloatingLabel = '/pages/floating-label',
-  Input = '/pages/input',
-  InputGroup = '/pages/input-group',
-  ListGroup = '/pages/list-group',
-  Modal = '/pages/modal',
-  Nav = '/pages/nav',
-  Navbar = '/pages/navbar',
-  Offcanvas = '/pages/offcanvas',
-  Pagination = '/pages/pagination',
-  Placeholder = '/pages/placeholder',
-  Popover = '/pages/popover',
   Progress = '/pages/progress',
+  Popover = '/pages/popover',
+  Spinner = '/pages/spinner',
+  Tooltip = '/pages/tooltip',
+  Button = '/pages/button',
+  Navbar = '/pages/navbar',
+  Select = '/pages/select',
+  Alert = '/pages/alert',
+  Badge = '/pages/badge',
+  Input = '/pages/input',
+  Modal = '/pages/modal',
   Radio = '/pages/radio',
   Range = '/pages/range',
-  Scrollspy = '/pages/scrollspy',
-  Select = '/pages/select',
-  Spinner = '/pages/spinner',
   Table = '/pages/table',
   Toast = '/pages/toast',
-  Tooltip = '/pages/tooltip',
+  Card = '/pages/card',
+  Nav = '/pages/nav',
 }
 
 /**
@@ -215,20 +215,20 @@ const router = createBrowserRouter(
           errorElement: <ErrorPage />,
         },
       ],
-      element: <App />,
       errorElement: <ErrorPage />,
+      element: <App />,
       path: '/',
     },
   ],
   {
-    basename: __APP_PUBLIC_BASE_PATH__,
     future: {
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-      v7_partialHydration: true,
-      v7_relativeSplatPath: true,
       v7_skipActionErrorRevalidation: true,
+      v7_normalizeFormMethod: true,
+      v7_relativeSplatPath: true,
+      v7_partialHydration: true,
+      v7_fetcherPersist: true,
     },
+    basename: __APP_PUBLIC_BASE_PATH__,
   },
 );
 

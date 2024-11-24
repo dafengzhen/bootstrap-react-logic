@@ -1,22 +1,22 @@
 import type { ElementType } from 'react';
 
-import type { BadgeVariablesType, BaseProps, PropsWithoutRef, RoundedClassEnum } from '../tools';
+import type { BadgeVariablesType, RoundedClassEnum, PropsWithoutRef, BaseProps } from '../tools';
 
 export type BadgeProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, BadgeVariablesType>;
 
-type Props<T extends ElementType> = BaseProps<T, BadgeVariablesType> & {
-  /**
-   * rounded.
-   */
-  rounded?: boolean | keyof typeof RoundedClassEnum;
-
+type Props<T extends ElementType> = {
   /**
    * variant.
    */
-  variant?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
+  variant?: 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
+
+  /**
+   * rounded.
+   */
+  rounded?: keyof typeof RoundedClassEnum | boolean;
 
   /**
    * variantType.
    */
-  variantType?: 'bg' | 'text';
-};
+  variantType?: 'text' | 'bg';
+} & BaseProps<T, BadgeVariablesType>;

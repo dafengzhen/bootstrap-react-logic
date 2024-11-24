@@ -1,5 +1,5 @@
+import { useTranslation, Trans } from 'react-i18next';
 import clsx from 'clsx';
-import { Trans, useTranslation } from 'react-i18next';
 
 const onClickLanguage = (i18n: any) => {
   const language = i18n.language;
@@ -19,7 +19,7 @@ export default function IndexPage() {
           <div className="d-flex align-items-center justify-content-between">
             <div>Getting started</div>
             <div className="d-flex gap-2">
-              <a className="link-dark" href="https://github.com/dafengzhen/bootstrap-react-logic" target="_blank">
+              <a href="https://github.com/dafengzhen/bootstrap-react-logic" className="link-dark" target="_blank">
                 <i className="bi bi-github tw-cursor-pointer"></i>
               </a>
 
@@ -37,7 +37,7 @@ export default function IndexPage() {
 
         <div className="card-body">
           <div className="mb-4 display-6">
-            <Trans i18nKey="p0" t={tIndexPage} />
+            <Trans t={tIndexPage} i18nKey="p0" />
           </div>
 
           <div className="mb-4">
@@ -51,26 +51,26 @@ export default function IndexPage() {
                     &nbsp;Bootstrap&nbsp;
                   </a>,
                 ]}
-                i18nKey="p1"
                 t={tIndexPage}
+                i18nKey="p1"
               />
             </div>
 
             <div className="card-text">
-              <Trans i18nKey="p2" t={tIndexPage} />
+              <Trans t={tIndexPage} i18nKey="p2" />
             </div>
           </div>
 
           <div className="h5 mb-4">
-            <Trans i18nKey="p3" t={tIndexPage} />
+            <Trans t={tIndexPage} i18nKey="p3" />
           </div>
           <div className="mb-4">
             <div className="mb-4">
-              <Trans i18nKey="p4" t={tIndexPage} />
+              <Trans t={tIndexPage} i18nKey="p4" />
             </div>
 
             <div className="mb-2">
-              <Trans i18nKey="p5" t={tIndexPage} />
+              <Trans t={tIndexPage} i18nKey="p5" />
             </div>
             <div className="d-flex gap-2">
               <div className="user-select-none">#</div>
@@ -84,18 +84,18 @@ export default function IndexPage() {
           </div>
 
           <div className="h5 mb-4">
-            <Trans i18nKey="p6" t={tIndexPage} />
+            <Trans t={tIndexPage} i18nKey="p6" />
           </div>
           <div className="mb-4">
             <div className="mb-2">
               <Trans i18nKey="p7.2" t={tIndexPage} />
             </div>
             <div className="mb-4">
-              <Trans i18nKey="p7" t={tIndexPage} />
+              <Trans t={tIndexPage} i18nKey="p7" />
             </div>
 
             <div className="mb-2">
-              <Trans i18nKey="p8" t={tIndexPage} />
+              <Trans t={tIndexPage} i18nKey="p8" />
             </div>
             <div className="d-flex gap-2">
               <div className="user-select-none">#</div>
@@ -108,21 +108,21 @@ export default function IndexPage() {
           </div>
 
           <div className="h5 mb-4">
-            <Trans i18nKey="p9" t={tIndexPage} />
+            <Trans t={tIndexPage} i18nKey="p9" />
           </div>
           <div className="mb-4">
             <div className="mb-2">
-              <Trans i18nKey="p10" t={tIndexPage} />
+              <Trans t={tIndexPage} i18nKey="p10" />
             </div>
             <div>
               <div>
-                <Trans i18nKey="p11" t={tIndexPage} />
+                <Trans t={tIndexPage} i18nKey="p11" />
               </div>
               <div>
-                <Trans i18nKey="p12" t={tIndexPage} />
+                <Trans t={tIndexPage} i18nKey="p12" />
               </div>
               <div>
-                <Trans i18nKey="p13" t={tIndexPage} />
+                <Trans t={tIndexPage} i18nKey="p13" />
               </div>
             </div>
           </div>

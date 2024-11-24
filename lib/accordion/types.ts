@@ -1,18 +1,16 @@
 import type { ElementType, ReactNode } from 'react';
 
-import type { ButtonProps } from '../button';
 import type {
+  AccordionHeaderVariablesType,
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
-  AccordionHeaderVariablesType,
   AccordionItemVariablesType,
   AccordionVariablesType,
-  BaseProps,
   OmittedPropsWithoutRef,
   PropsWithoutRef,
+  BaseProps,
 } from '../tools';
-
-export type AccordionBasicProps<T extends ElementType> = PropsWithoutRef<BasicProps<T>, T, AccordionBasicVariablesType>;
+import type { ButtonProps } from '../button';
 
 export type AccordionBodyProps<T extends ElementType> = OmittedPropsWithoutRef<
   BodyProps<T>,
@@ -21,19 +19,11 @@ export type AccordionBodyProps<T extends ElementType> = OmittedPropsWithoutRef<
   'onChange'
 >;
 
-export type AccordionHeaderProps<T extends ElementType> = PropsWithoutRef<
-  HeaderProps<T>,
-  T,
-  AccordionHeaderVariablesType
->;
-
-export type AccordionItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, AccordionItemVariablesType>;
-
 export interface AccordionOption {
-  body?: ReactNode;
-  collapsed?: boolean;
-  header?: string;
   id?: number | string;
+  collapsed?: boolean;
+  body?: ReactNode;
+  header?: string;
   show?: boolean;
 }
 
@@ -44,45 +34,27 @@ export type AccordionProps<T extends ElementType> = OmittedPropsWithoutRef<
   'onChange'
 >;
 
-type BasicProps<T extends ElementType> = BaseProps<T, AccordionBasicVariablesType> & {
-  /**
-   * flush.
-   */
-  flush?: boolean;
-};
+export type AccordionHeaderProps<T extends ElementType> = PropsWithoutRef<
+  HeaderProps<T>,
+  T,
+  AccordionHeaderVariablesType
+>;
 
-type BodyProps<T extends ElementType> = BaseProps<T, AccordionBodyVariablesType> & {
-  /**
-   * collapsing.
-   */
-  collapsing?: boolean;
+export type AccordionBasicProps<T extends ElementType> = PropsWithoutRef<BasicProps<T>, T, AccordionBasicVariablesType>;
 
+export type AccordionItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, AccordionItemVariablesType>;
+
+type Props<T extends ElementType> = {
   /**
    * onChange.
    */
-  onChange?: (visible: boolean) => void;
+  onChange?: (id: number | string, visible: boolean) => void;
 
   /**
-   * show.
+   * options.
    */
-  show?: boolean;
-};
+  options?: AccordionOption[];
 
-type HeaderProps<T extends ElementType> = BaseProps<T, AccordionHeaderVariablesType> & {
-  /**
-   * buttonProps.
-   */
-  buttonProps?: ButtonProps<ElementType>;
-
-  /**
-   * collapsed.
-   */
-  collapsed?: boolean;
-};
-
-type ItemProps<T extends ElementType> = BaseProps<T, AccordionItemVariablesType> & {};
-
-type Props<T extends ElementType> = BaseProps<T, AccordionVariablesType> & {
   /**
    * alwaysOpen.
    */
@@ -97,14 +69,42 @@ type Props<T extends ElementType> = BaseProps<T, AccordionVariablesType> & {
    * flush.
    */
   flush?: boolean;
+} & BaseProps<T, AccordionVariablesType>;
 
+type BodyProps<T extends ElementType> = {
   /**
    * onChange.
    */
-  onChange?: (id: number | string, visible: boolean) => void;
+  onChange?: (visible: boolean) => void;
 
   /**
-   * options.
+   * collapsing.
    */
-  options?: AccordionOption[];
-};
+  collapsing?: boolean;
+
+  /**
+   * show.
+   */
+  show?: boolean;
+} & BaseProps<T, AccordionBodyVariablesType>;
+
+type HeaderProps<T extends ElementType> = {
+  /**
+   * buttonProps.
+   */
+  buttonProps?: ButtonProps<ElementType>;
+
+  /**
+   * collapsed.
+   */
+  collapsed?: boolean;
+} & BaseProps<T, AccordionHeaderVariablesType>;
+
+type BasicProps<T extends ElementType> = {
+  /**
+   * flush.
+   */
+  flush?: boolean;
+} & BaseProps<T, AccordionBasicVariablesType>;
+
+type ItemProps<T extends ElementType> = BaseProps<T, AccordionItemVariablesType> & {};

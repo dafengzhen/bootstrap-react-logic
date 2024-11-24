@@ -2,25 +2,25 @@ import { type ElementType, useCallback, useState } from 'react';
 
 import type { AccordionOption, AccordionProps } from './types.ts';
 
+import AccordionHeader from './accordion-header.tsx';
 import AccordionBasic from './accordion-basic.tsx';
 import AccordionBody from './accordion-body.tsx';
-import AccordionHeader from './accordion-header.tsx';
 import AccordionItem from './accordion-item.tsx';
 
 const Accordion = function Accordion<T extends ElementType = 'div'>(props: AccordionProps<T>) {
   const {
-    alwaysOpen,
-    as: Component = 'div',
-    collapsing,
     onChange: onChangeByDefault,
     options: defaultOptions,
+    as: Component = 'div',
+    alwaysOpen,
+    collapsing,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
     ...item,
     collapsed: item.collapsed === undefined ? false : item.collapsed,
-    id: item.id ?? index,
     show: item.show === undefined ? true : item.show,
+    id: item.id ?? index,
   }));
   const [options, setOptions] = useState<AccordionOption[]>(initialOptions);
   const [currentOption, setCurrentOption] = useState<AccordionOption | undefined>(

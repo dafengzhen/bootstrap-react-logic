@@ -9,4 +9,4 @@ export type { SelectOptionProps, SelectProps } from './types.ts';
 // context
 
 // component
-export { Select, SelectOption };
+export { SelectOption, Select };

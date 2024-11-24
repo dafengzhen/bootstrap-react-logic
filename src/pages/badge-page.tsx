@@ -1,17 +1,17 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { Badge } from '@lib/badge';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
+import { Badge } from '@lib/badge';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/badge/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -27,7 +27,7 @@ export default function BadgePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tBadgePage}>
+      <Example t={tBadgePage} state={state} hash="basic">
         <h1>
           Example heading <Badge variant="secondary">New</Badge>
         </h1>
@@ -53,7 +53,7 @@ export default function BadgePage() {
         </h6>
       </Example>
 
-      <Example hash="buttons" state={state} t={tBadgePage}>
+      <Example hash="buttons" t={tBadgePage} state={state}>
         <div>
           <button className="btn btn-primary" type="button">
             Notifications <Badge variant="secondary">4</Badge>
@@ -61,15 +61,15 @@ export default function BadgePage() {
         </div>
       </Example>
 
-      <Example hash="positioned" state={state} t={tBadgePage}>
+      <Example hash="positioned" t={tBadgePage} state={state}>
         <div>
           <button className="btn btn-primary position-relative" type="button">
             Inbox
             <Badge
               className="position-absolute top-0 start-100 translate-middle"
-              rounded="pill"
               variant="danger"
               variantType="bg"
+              rounded="pill"
             >
               99+
               <span className="visually-hidden">unread messages</span>
@@ -92,7 +92,7 @@ export default function BadgePage() {
         </div>
       </Example>
 
-      <Example hash="backgroundColors" row state={state} t={tBadgePage} wrap>
+      <Example hash="backgroundColors" t={tBadgePage} state={state} wrap row>
         <Badge variant="primary">Primary</Badge>
         <Badge variant="secondary">Secondary</Badge>
         <Badge variant="success">Success</Badge>
@@ -103,26 +103,26 @@ export default function BadgePage() {
         <Badge variant="dark">Dark</Badge>
       </Example>
 
-      <Example hash="pillBadges" row state={state} t={tBadgePage} wrap>
-        <Badge rounded="pill" variant="primary">
+      <Example hash="pillBadges" t={tBadgePage} state={state} wrap row>
+        <Badge variant="primary" rounded="pill">
           Primary
         </Badge>
-        <Badge rounded="pill" variant="secondary">
+        <Badge variant="secondary" rounded="pill">
           Secondary
         </Badge>
-        <Badge rounded="pill" variant="success">
+        <Badge variant="success" rounded="pill">
           Success
         </Badge>
-        <Badge rounded="pill" variant="danger">
+        <Badge variant="danger" rounded="pill">
           Danger
         </Badge>
-        <Badge rounded="pill" variant="warning">
+        <Badge variant="warning" rounded="pill">
           Warning
         </Badge>
         <Badge rounded="pill" variant="info">
           Info
         </Badge>
-        <Badge rounded="pill" variant="light">
+        <Badge variant="light" rounded="pill">
           Light
         </Badge>
         <Badge rounded="pill" variant="dark">
@@ -133,18 +133,14 @@ export default function BadgePage() {
       <PropsIndicator />
 
       <Example
-        hash="badgeComponentProps"
         items={[
           {
-            attr: 'as',
-            default: 'span',
-            desc: tBadgeComponentProps('badge.desc.as'),
             type: <span className="badge text-bg-secondary">span</span>,
+            desc: tBadgeComponentProps('badge.desc.as'),
+            default: 'span',
+            attr: 'as',
           },
           {
-            attr: 'variant',
-            default: '',
-            desc: tBadgeComponentProps('badge.desc.variant'),
             type: (
               <div className="d-flex flex-column">
                 {['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'link'].map(
@@ -158,31 +154,35 @@ export default function BadgePage() {
                 )}
               </div>
             ),
+            desc: tBadgeComponentProps('badge.desc.variant'),
+            attr: 'variant',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary">text | bg</span>,
+            desc: tBadgeComponentProps('badge.desc.variantType'),
             attr: 'variantType',
             default: 'text',
-            desc: tBadgeComponentProps('badge.desc.variantType'),
-            type: <span className="badge text-bg-secondary">text | bg</span>,
           },
           {
-            attr: 'rounded',
-            default: '',
-            desc: tBadgeComponentProps('badge.desc.rounded'),
             type: (
               <>
                 <span className="badge text-bg-secondary">xs | sm | md | lg | xl | xxl | circle | pill</span>
                 <span className="badge text-bg-secondary ms-1">boolean</span>
               </>
             ),
+            desc: tBadgeComponentProps('badge.desc.rounded'),
+            attr: 'rounded',
+            default: '',
           },
         ]}
-        props
-        state={state}
+        hash="badgeComponentProps"
         t={tBadgeComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

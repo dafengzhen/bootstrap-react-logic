@@ -1,19 +1,19 @@
 import bootstrapLogo from '@assets/images/bootstrap-logo.svg';
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
-import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { Navbar } from '@lib/navbar';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import OptionRow from '@components/option-row.tsx';
 import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
+import { Navbar } from '@lib/navbar';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/navbar/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -31,37 +31,19 @@ export default function NavbarPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tNavbarPage}>
+      <Example t={tNavbarPage} state={state} hash="basic">
         <Navbar
-          brand="Navbar"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
-          collapse={
-            <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          }
-          expand="lg"
-          navProps={{
-            className: 'me-auto mb-2 mb-lg-0',
-          }}
           options={[
             {
               active: true,
-              href: '#',
               link: 'Home',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Link',
+              href: '#',
             },
             {
-              href: '#',
               item: (
                 <ul className="dropdown-menu">
                   <li>
@@ -84,47 +66,65 @@ export default function NavbarPage() {
                   </li>
                 </ul>
               ),
+              linkProps: {
+                className: 'dropdown-toggle',
+                'aria-disabled': 'true',
+                role: 'button',
+              },
               itemProps: {
                 className: 'dropdown',
               },
               link: 'Dropdown',
-              linkProps: {
-                'aria-disabled': 'true',
-                className: 'dropdown-toggle',
-                role: 'button',
-              },
+              href: '#',
             },
             {
-              disabled: true,
               link: 'Disabled',
+              disabled: true,
             },
           ]}
-          toggler
-        />
-      </Example>
-
-      <Example hash="brand" state={state} t={tNavbarPage}>
-        <Navbar
-          brand="Navbar"
+          collapse={
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          }
+          navProps={{
+            className: 'me-auto mb-2 mb-lg-0',
+          }}
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
+          brand="Navbar"
+          expand="lg"
+          toggler
+        />
+      </Example>
+
+      <Example t={tNavbarPage} state={state} hash="brand">
+        <Navbar
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
+          brand="Navbar"
         />
 
         <Navbar
-          brand="Navbar"
           brandProps={{
             className: 'mb-0 h1',
             href: '#',
           }}
           className="bg-body-tertiary"
+          brand="Navbar"
         />
       </Example>
 
-      <Example hash="image" state={state} t={tNavbarPage}>
+      <Example t={tNavbarPage} state={state} hash="image">
         <Navbar
-          brand={<img alt="Bootstrap" height="24" src={bootstrapLogo} width="30" />}
+          brand={<img src={bootstrapLogo} alt="Bootstrap" height="24" width="30" />}
           brandProps={{
             href: '#',
           }}
@@ -132,11 +132,11 @@ export default function NavbarPage() {
         />
       </Example>
 
-      <Example hash="imageAndText" state={state} t={tNavbarPage}>
+      <Example hash="imageAndText" t={tNavbarPage} state={state}>
         <Navbar
           brand={
             <>
-              <img alt="Logo" className="d-inline-block align-text-top" height="24" src={bootstrapLogo} width="30" />
+              <img className="d-inline-block align-text-top" src={bootstrapLogo} height="24" alt="Logo" width="30" />
               {' Bootstrap '}
             </>
           }
@@ -147,94 +147,87 @@ export default function NavbarPage() {
         />
       </Example>
 
-      <Example hash="nav" state={state} t={tNavbarPage}>
+      <Example t={tNavbarPage} state={state} hash="nav">
         <Navbar
-          brand="Navbar"
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Features',
+              href: '#',
+            },
+            {
+              link: 'Pricing',
+              href: '#',
+            },
+            {
+              link: 'Disabled',
+              disabled: true,
+              href: '#',
+            },
+          ]}
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
+          brand="Navbar"
           expand="lg"
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Features',
-            },
-            {
-              href: '#',
-              link: 'Pricing',
-            },
-            {
-              disabled: true,
-              href: '#',
-              link: 'Disabled',
-            },
-          ]}
           toggler
         />
 
         <Navbar
-          brand="Navbar"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
-          expand="lg"
-          navProps={{
-            as: 'div',
-          }}
           options={[
             {
               active: true,
-              href: '#',
               link: 'Home',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Features',
-            },
-            {
               href: '#',
-              link: 'Pricing',
             },
             {
+              link: 'Pricing',
+              href: '#',
+            },
+            {
+              link: 'Disabled',
               disabled: true,
               href: '#',
-              link: 'Disabled',
             },
           ]}
+          brandProps={{
+            href: '#',
+          }}
+          navProps={{
+            as: 'div',
+          }}
+          className="bg-body-tertiary"
+          brand="Navbar"
+          expand="lg"
           skipItem
           toggler
         />
 
         <Navbar
-          brand="Navbar"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
-          expand="lg"
           options={[
             {
               active: true,
-              href: '#',
               link: 'Home',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Features',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Pricing',
+              href: '#',
             },
             {
-              href: '#',
               item: (
                 <ul className="dropdown-menu">
                   <li>
@@ -254,50 +247,56 @@ export default function NavbarPage() {
                   </li>
                 </ul>
               ),
-              itemProps: {
-                className: 'dropdown',
-              },
-              link: 'Dropdown link',
               linkProps: {
                 className: 'dropdown-toggle',
                 role: 'button',
               },
+              itemProps: {
+                className: 'dropdown',
+              },
+              link: 'Dropdown link',
+              href: '#',
             },
           ]}
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
+          brand="Navbar"
+          expand="lg"
           toggler
         />
       </Example>
 
-      <Example hash="forms" state={state} t={tNavbarPage}>
+      <Example t={tNavbarPage} state={state} hash="forms">
         <Navbar
-          className="bg-body-tertiary"
           container={
             <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </form>
           }
+          className="bg-body-tertiary"
         />
 
         <Navbar
-          className="bg-body-tertiary"
           container={
             <>
               <a className="navbar-brand">Navbar</a>
               <form className="d-flex" role="search">
-                <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+                <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
                 <button className="btn btn-outline-success" type="submit">
                   Search
                 </button>
               </form>
             </>
           }
+          className="bg-body-tertiary"
         />
 
         <Navbar
-          className="bg-body-tertiary"
           container={
             <div className="input-group">
               <span className="input-group-text" id="basic-addon1">
@@ -305,9 +304,9 @@ export default function NavbarPage() {
               </span>
               <input
                 aria-describedby="basic-addon1"
-                aria-label="Username"
                 className="form-control"
                 placeholder="Username"
+                aria-label="Username"
                 type="text"
               />
             </div>
@@ -315,10 +314,10 @@ export default function NavbarPage() {
           containerProps={{
             as: 'form',
           }}
+          className="bg-body-tertiary"
         />
 
         <Navbar
-          className="bg-body-tertiary"
           container={
             <>
               <button className="btn btn-outline-success me-2" type="button">
@@ -330,273 +329,256 @@ export default function NavbarPage() {
             </>
           }
           containerProps={{
-            as: 'form',
             className: 'justify-content-start',
+            as: 'form',
           }}
+          className="bg-body-tertiary"
         />
       </Example>
 
-      <Example hash="text" state={state} t={tNavbarPage}>
+      <Example t={tNavbarPage} state={state} hash="text">
         <Navbar
-          className="bg-body-tertiary"
           container={<span className="navbar-text">Navbar text with an inline element</span>}
+          className="bg-body-tertiary"
         />
 
         <Navbar
-          brand="Navbar w/ text"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
-          expand="lg"
-          navProps={{
-            className: 'me-auto mb-2 mb-lg-0',
-          }}
           options={[
             {
               active: true,
-              href: '#',
               link: 'Home',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Features',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Pricing',
+              href: '#',
             },
           ]}
+          navProps={{
+            className: 'me-auto mb-2 mb-lg-0',
+          }}
+          brandProps={{
+            href: '#',
+          }}
           text="Navbar text with an inline element"
+          className="bg-body-tertiary"
+          brand="Navbar w/ text"
+          expand="lg"
           toggler
         />
       </Example>
 
-      <Example hash="colorSchemes" state={state} t={tNavbarPage}>
+      <Example hash="colorSchemes" t={tNavbarPage} state={state}>
         <Navbar
-          brand="Navbar"
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Features',
+              href: '#',
+            },
+            {
+              link: 'Pricing',
+              href: '#',
+            },
+            {
+              link: 'About',
+              href: '#',
+            },
+          ]}
+          collapse={
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
+              <button className="btn btn-outline-light" type="submit">
+                Search
+              </button>
+            </form>
+          }
+          navProps={{
+            className: 'me-auto mb-2 mb-lg-0',
+          }}
           brandProps={{
             href: '#',
           }}
           className="bg-dark border-bottom border-body"
+          data-bs-theme="dark"
+          brand="Navbar"
+          expand="lg"
+          toggler
+        />
+
+        <Navbar
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Features',
+              href: '#',
+            },
+            {
+              link: 'Pricing',
+              href: '#',
+            },
+            {
+              link: 'About',
+              href: '#',
+            },
+          ]}
           collapse={
             <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
               <button className="btn btn-outline-light" type="submit">
                 Search
               </button>
             </form>
           }
-          data-bs-theme="dark"
-          expand="lg"
           navProps={{
             className: 'me-auto mb-2 mb-lg-0',
           }}
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Features',
-            },
-            {
-              href: '#',
-              link: 'Pricing',
-            },
-            {
-              href: '#',
-              link: 'About',
-            },
-          ]}
-          toggler
-        />
-
-        <Navbar
-          brand="Navbar"
           brandProps={{
             href: '#',
           }}
           className="bg-primary"
-          collapse={
-            <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
-              <button className="btn btn-outline-light" type="submit">
-                Search
-              </button>
-            </form>
-          }
           data-bs-theme="dark"
+          brand="Navbar"
           expand="lg"
-          navProps={{
-            className: 'me-auto mb-2 mb-lg-0',
-          }}
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Features',
-            },
-            {
-              href: '#',
-              link: 'Pricing',
-            },
-            {
-              href: '#',
-              link: 'About',
-            },
-          ]}
           toggler
         />
 
         <Navbar
-          brand="Navbar"
-          brandProps={{
-            href: '#',
-          }}
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Features',
+              href: '#',
+            },
+            {
+              link: 'Pricing',
+              href: '#',
+            },
+            {
+              link: 'About',
+              href: '#',
+            },
+          ]}
           collapse={
             <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
               <button className="btn btn-outline-primary" type="submit">
                 Search
               </button>
             </form>
           }
-          data-bs-theme="light"
-          expand="lg"
           navProps={{
             className: 'me-auto mb-2 mb-lg-0',
           }}
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Features',
-            },
-            {
-              href: '#',
-              link: 'Pricing',
-            },
-            {
-              href: '#',
-              link: 'About',
-            },
-          ]}
           style={{
             backgroundColor: '#e3f2fd',
           }}
+          brandProps={{
+            href: '#',
+          }}
+          data-bs-theme="light"
+          brand="Navbar"
+          expand="lg"
           toggler
         />
       </Example>
 
-      <Example hash="containers" state={state} t={tNavbarPage}>
+      <Example hash="containers" t={tNavbarPage} state={state}>
         <div className="container">
           <Navbar
-            brand="Navbar"
             brandProps={{
               href: '#',
             }}
             className="bg-body-tertiary"
+            brand="Navbar"
             expand="lg"
           />
         </div>
 
         <Navbar
-          brand="Navbar"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
           containerProps={{
             className: 'container-md',
           }}
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
+          brand="Navbar"
           expand="lg"
         />
       </Example>
 
-      <Example hash="placement" state={state} t={tNavbarPage}>
+      <Example hash="placement" t={tNavbarPage} state={state}>
         <Navbar
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
           brand="Default"
+        />
+
+        <Navbar
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
-        />
-
-        <Navbar
           brand="Fixed top"
+        />
+
+        <Navbar
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
-        />
-
-        <Navbar
           brand="Fixed bottom"
+        />
+
+        <Navbar
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
-        />
-
-        <Navbar
           brand="Sticky top"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
         />
 
         <Navbar
-          brand="Sticky bottom"
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
+          brand="Sticky bottom"
         />
       </Example>
 
-      <Example hash="scrolling" state={state} t={tNavbarPage}>
+      <Example hash="scrolling" t={tNavbarPage} state={state}>
         <Navbar
-          brand="Navbar scroll"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
-          collapse={
-            <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          }
-          expand="lg"
-          navProps={{
-            className: 'me-auto mb-2 mb-lg-0',
-          }}
           options={[
             {
               active: true,
-              href: '#',
               link: 'Home',
+              href: '#',
             },
             {
-              href: '#',
               link: 'Link',
+              href: '#',
             },
             {
-              href: '#',
               item: (
                 <ul className="dropdown-menu">
                   <li>
@@ -619,184 +601,200 @@ export default function NavbarPage() {
                   </li>
                 </ul>
               ),
-              itemProps: {
-                className: 'dropdown',
-              },
-              link: 'Link',
               linkProps: {
                 className: 'dropdown-toggle',
                 role: 'button',
               },
+              itemProps: {
+                className: 'dropdown',
+              },
+              link: 'Link',
+              href: '#',
             },
             {
               disabled: true,
               link: 'Link',
             },
           ]}
+          collapse={
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          }
+          navProps={{
+            className: 'me-auto mb-2 mb-lg-0',
+          }}
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
+          brand="Navbar scroll"
+          expand="lg"
+          toggler
           scroll
-          toggler
         />
       </Example>
 
-      <Example hash="toggler" state={state} t={tNavbarPage}>
+      <Example t={tNavbarPage} hash="toggler" state={state}>
         <Navbar
-          brand="Hidden brand"
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Link',
+              href: '#',
+            },
+            {
+              link: 'Disabled',
+              disabled: true,
+              href: '#',
+            },
+          ]}
+          collapse={
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          }
+          navProps={{
+            className: 'me-auto mb-2 mb-lg-0',
+          }}
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
           brandPosition="hidden"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
+          brand="Hidden brand"
+          expand="lg"
+          toggler
+        />
+
+        <Navbar
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Link',
+              href: '#',
+            },
+            {
+              link: 'Disabled',
+              disabled: true,
+              href: '#',
+            },
+          ]}
           collapse={
             <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </form>
           }
-          expand="lg"
           navProps={{
             className: 'me-auto mb-2 mb-lg-0',
           }}
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Link',
-            },
-            {
-              disabled: true,
-              href: '#',
-              link: 'Disabled',
-            },
-          ]}
-          toggler
-        />
-
-        <Navbar
-          brand="Navbar"
           brandProps={{
             href: '#',
           }}
           className="bg-body-tertiary"
+          brand="Navbar"
+          expand="lg"
+          toggler
+        />
+
+        <Navbar
+          options={[
+            {
+              active: true,
+              link: 'Home',
+              href: '#',
+            },
+            {
+              link: 'Link',
+              href: '#',
+            },
+            {
+              link: 'Disabled',
+              disabled: true,
+              href: '#',
+            },
+          ]}
           collapse={
             <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+              <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </form>
           }
-          expand="lg"
           navProps={{
             className: 'me-auto mb-2 mb-lg-0',
           }}
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Link',
-            },
-            {
-              disabled: true,
-              href: '#',
-              link: 'Disabled',
-            },
-          ]}
-          toggler
-        />
-
-        <Navbar
-          brand="Navbar"
+          brandProps={{
+            href: '#',
+          }}
+          className="bg-body-tertiary"
           brandPosition="right"
-          brandProps={{
-            href: '#',
-          }}
-          className="bg-body-tertiary"
-          collapse={
-            <form className="d-flex" role="search">
-              <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          }
+          brand="Navbar"
           expand="lg"
-          navProps={{
-            className: 'me-auto mb-2 mb-lg-0',
-          }}
-          options={[
-            {
-              active: true,
-              href: '#',
-              link: 'Home',
-            },
-            {
-              href: '#',
-              link: 'Link',
-            },
-            {
-              disabled: true,
-              href: '#',
-              link: 'Disabled',
-            },
-          ]}
           toggler
         />
       </Example>
 
-      <Example hash="externalContent" state={state} t={tNavbarPage}>
+      <Example hash="externalContent" t={tNavbarPage} state={state}>
         <Navbar
-          className="navbar-dark bg-dark"
           externalContent={
-            <div className={`collapse ${show ? 'show' : ''}`} data-bs-theme="dark" id="navbarToggleExternalContent">
+            <div className={`collapse ${show ? 'show' : ''}`} id="navbarToggleExternalContent" data-bs-theme="dark">
               <div className="bg-dark p-4">
                 <h5 className="text-body-emphasis h4">Collapsed content</h5>
                 <span className="text-body-secondary">Toggleable via the navbar brand.</span>
               </div>
             </div>
           }
-          toggler
           togglerProps={{
             onClick: () => setShow(!show),
           }}
+          className="navbar-dark bg-dark"
+          toggler
         />
       </Example>
 
-      <Example hash="offcanvas" state={state} t={tNavbarPage}>
+      <Example hash="offcanvas" t={tNavbarPage} state={state}>
         <Navbar
-          brand="Offcanvas navbar"
-          className="navbar-dark bg-dark"
           container={
             <div
-              aria-labelledby="offcanvasDarkNavbarLabel"
               className="offcanvas offcanvas-end text-bg-dark"
+              aria-labelledby="offcanvasDarkNavbarLabel"
               id="offcanvasDarkNavbar"
               tabIndex={-1}
             >
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                <h5 id="offcanvasDarkNavbarLabel" className="offcanvas-title">
                   Dark offcanvas
                 </h5>
                 <button
-                  aria-label="Close"
                   className="btn-close btn-close-white"
                   data-bs-dismiss="offcanvas"
+                  aria-label="Close"
                   type="button"
                 ></button>
               </div>
               <div className="offcanvas-body">
                 <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                   <li className="nav-item">
-                    <a aria-current="page" className="nav-link active" href="#">
+                    <a className="nav-link active" aria-current="page" href="#">
                       Home
                     </a>
                   </li>
@@ -807,11 +805,11 @@ export default function NavbarPage() {
                   </li>
                   <li className="nav-item dropdown">
                     <a
-                      aria-expanded="false"
                       className="nav-link dropdown-toggle"
                       data-bs-toggle="dropdown"
-                      href="#"
+                      aria-expanded="false"
                       role="button"
+                      href="#"
                     >
                       Dropdown
                     </a>
@@ -838,7 +836,7 @@ export default function NavbarPage() {
                   </li>
                 </ul>
                 <form className="d-flex mt-3" role="search">
-                  <input aria-label="Search" className="form-control me-2" placeholder="Search" type="search" />
+                  <input className="form-control me-2" placeholder="Search" aria-label="Search" type="search" />
                   <button className="btn btn-success" type="submit">
                     Search
                   </button>
@@ -846,6 +844,8 @@ export default function NavbarPage() {
               </div>
             </div>
           }
+          className="navbar-dark bg-dark"
+          brand="Offcanvas navbar"
           toggler
         />
       </Example>
@@ -853,158 +853,158 @@ export default function NavbarPage() {
       <PropsIndicator />
 
       <Example
-        hash="navbarComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.brand'),
             attr: 'brand',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.brand'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">hidden | left | right</span>,
+            desc: tNavbarComponentProps('navbar.desc.brandPosition'),
             attr: 'brandPosition',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.brandPosition'),
-            type: <span className="badge text-bg-secondary">hidden | left | right</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarBrandProps&lt;a&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.brandProps'),
             attr: 'brandProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.brandProps'),
-            type: <span className="badge text-bg-secondary">NavbarBrandProps&lt;a&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.collapse'),
             attr: 'collapse',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.collapse'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarCollapseProps&lt;div&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.collapseProps'),
             attr: 'collapseProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.collapseProps'),
-            type: <span className="badge text-bg-secondary">NavbarCollapseProps&lt;div&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.container'),
             attr: 'container',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.container'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarContainerProps&lt;div&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.containerProps'),
             attr: 'containerProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.containerProps'),
-            type: <span className="badge text-bg-secondary">NavbarContainerProps&lt;div&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl | boolean</span>,
+            desc: tNavbarComponentProps('navbar.desc.expand'),
             attr: 'expand',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.expand'),
-            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl | boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.externalContent'),
             attr: 'externalContent',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.externalContent'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">bottom | top</span>,
+            desc: tNavbarComponentProps('navbar.desc.fixed'),
             attr: 'fixed',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.fixed'),
-            type: <span className="badge text-bg-secondary">bottom | top</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.nav'),
             attr: 'nav',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.nav'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarNavProps&lt;nav&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.nav'),
             attr: 'navProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.nav'),
-            type: <span className="badge text-bg-secondary">NavbarNavProps&lt;nav&gt;</span>,
           },
           {
-            attr: 'options',
-            default: '',
-            desc: tNavbarComponentProps('navbar.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
-                <OptionRow label="active?: boolean" value={tNavbarComponentProps('navbar.options.active')} />
-                <OptionRow label="disabled?: boolean" value={tNavbarComponentProps('navbar.options.disabled')} />
-                <OptionRow label="href?: string" value={tNavbarComponentProps('navbar.options.href')} />
-                <OptionRow label="id?: number | string" value={tNavbarComponentProps('navbar.options.id')} />
-                <OptionRow label="item?: ReactNode" value={tNavbarComponentProps('navbar.options.item')} />
+                <OptionRow value={tNavbarComponentProps('navbar.options.active')} label="active?: boolean" />
+                <OptionRow value={tNavbarComponentProps('navbar.options.disabled')} label="disabled?: boolean" />
+                <OptionRow value={tNavbarComponentProps('navbar.options.href')} label="href?: string" />
+                <OptionRow value={tNavbarComponentProps('navbar.options.id')} label="id?: number | string" />
+                <OptionRow value={tNavbarComponentProps('navbar.options.item')} label="item?: ReactNode" />
                 <OptionRow
-                  label="itemProps?: NavbarNavItemProps<li>"
                   value={tNavbarComponentProps('navbar.options.itemProps')}
+                  label="itemProps?: NavbarNavItemProps<li>"
                 />
-                <OptionRow label="link?: ReactNode" value={tNavbarComponentProps('navbar.options.link')} />
+                <OptionRow value={tNavbarComponentProps('navbar.options.link')} label="link?: ReactNode" />
                 <OptionRow
-                  label="linkProps?: NavbarNavLinkProps<a>"
                   value={tNavbarComponentProps('navbar.options.linkProps')}
+                  label="linkProps?: NavbarNavLinkProps<a>"
                 />
               </div>
             ),
+            desc: tNavbarComponentProps('navbar.desc.options'),
+            attr: 'options',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tNavbarComponentProps('navbar.desc.scroll'),
             attr: 'scroll',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.scroll'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tNavbarComponentProps('navbar.desc.skipItem'),
             attr: 'skipItem',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.skipItem'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">bottom | top</span>,
+            desc: tNavbarComponentProps('navbar.desc.sticky'),
             attr: 'sticky',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.sticky'),
-            type: <span className="badge text-bg-secondary">bottom | top</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.text'),
             attr: 'text',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.text'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarTextProps&lt;span&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.textProps'),
             attr: 'textProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.textProps'),
-            type: <span className="badge text-bg-secondary">NavbarTextProps&lt;span&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tNavbarComponentProps('navbar.desc.toggler'),
             attr: 'toggler',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.toggler'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarTogglerIconProps&lt;span&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.togglerIconProps'),
             attr: 'togglerIconProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.togglerIconProps'),
-            type: <span className="badge text-bg-secondary">NavbarTogglerIconProps&lt;span&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">NavbarTogglerProps&lt;button&gt;</span>,
+            desc: tNavbarComponentProps('navbar.desc.togglerProps'),
             attr: 'togglerProps',
             default: '',
-            desc: tNavbarComponentProps('navbar.desc.togglerProps'),
-            type: <span className="badge text-bg-secondary">NavbarTogglerProps&lt;button&gt;</span>,
           },
         ]}
-        props
-        state={state}
+        hash="navbarComponentProps"
         t={tNavbarComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

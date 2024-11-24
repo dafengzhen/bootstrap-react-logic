@@ -1,23 +1,23 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import About from '@components/about.tsx';
+import { InputOtp } from '@lib/input-otp';
+import { Textarea } from '@lib/textarea';
 import { Button } from '@lib/button';
 import { Input } from '@lib/input';
-import { InputOtp } from '@lib/input-otp';
 import { Label } from '@lib/label';
-import { Textarea } from '@lib/textarea';
-import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from 'react-router-dom';
 
 import Text from '../../lib/text/text.tsx';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/input/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -33,10 +33,10 @@ export default function InputPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tInputPage}>
+      <Example t={tInputPage} state={state} hash="basic">
         <div>
           <Label htmlFor="exampleFormControlInput1">Email address</Label>
-          <Input id="exampleFormControlInput1" placeholder="name@example.com" type="email"></Input>
+          <Input placeholder="name@example.com" id="exampleFormControlInput1" type="email"></Input>
         </div>
 
         <div>
@@ -45,16 +45,16 @@ export default function InputPage() {
         </div>
       </Example>
 
-      <Example hash="size" state={state} t={tInputPage}>
-        <Input aria-label=".form-control-lg example" placeholder=".form-control-lg" size="lg" type="text" />
+      <Example t={tInputPage} state={state} hash="size">
+        <Input aria-label=".form-control-lg example" placeholder=".form-control-lg" type="text" size="lg" />
         <Input aria-label="default input example" placeholder="Default input" type="text" />
-        <Input aria-label=".form-control-sm example" placeholder=".form-control-sm" size="sm" type="text" />
+        <Input aria-label=".form-control-sm example" placeholder=".form-control-sm" type="text" size="sm" />
       </Example>
 
-      <Example hash="text" state={state} t={tInputPage}>
+      <Example t={tInputPage} state={state} hash="text">
         <form>
           <Label htmlFor="inputPassword5">Password</Label>
-          <Input autoComplete="username" className="d-none" defaultValue="hiddenUsername" name="username" type="text" />
+          <Input defaultValue="hiddenUsername" autoComplete="username" className="d-none" name="username" type="text" />
           <Input aria-describedby="passwordHelpBlock" autoComplete="new-password" id="inputPassword5" type="password" />
           <Text>
             Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
@@ -65,15 +65,15 @@ export default function InputPage() {
         <form>
           <div className="row g-3 align-items-center">
             <div className="col-auto">
-              <Label colFormLabel htmlFor="inputPassword6">
+              <Label htmlFor="inputPassword6" colFormLabel>
                 Password
               </Label>
             </div>
             <div className="col-auto">
               <Input
+                defaultValue="hiddenUsername"
                 autoComplete="username"
                 className="d-none"
-                defaultValue="hiddenUsername"
                 name="username"
                 type="text"
               />
@@ -91,36 +91,36 @@ export default function InputPage() {
         </form>
       </Example>
 
-      <Example hash="disabled" state={state} t={tInputPage}>
-        <Input aria-label="Disabled input example" disabled placeholder="Disabled input" type="text" />
+      <Example hash="disabled" t={tInputPage} state={state}>
+        <Input aria-label="Disabled input example" placeholder="Disabled input" type="text" disabled />
 
-        <Input aria-label="Disabled input example" disabled readOnly type="text" value="Disabled readonly input" />
+        <Input aria-label="Disabled input example" value="Disabled readonly input" type="text" disabled readOnly />
       </Example>
 
-      <Example hash="readonly" state={state} t={tInputPage}>
-        <Input aria-label="readonly input example" readOnly type="text" value="Readonly input here..." />
+      <Example hash="readonly" t={tInputPage} state={state}>
+        <Input aria-label="readonly input example" value="Readonly input here..." type="text" readOnly />
       </Example>
 
-      <Example hash="readonlyPlaintext" state={state} t={tInputPage}>
+      <Example hash="readonlyPlaintext" t={tInputPage} state={state}>
         <div className="row">
-          <Label className="col-sm-2" htmlFor="staticEmail">
+          <Label htmlFor="staticEmail" className="col-sm-2">
             Email
           </Label>
           <div className="col-sm-10">
-            <Input id="staticEmail" readOnly readonlyPlainText type="text" value="email@example.com" />
+            <Input value="email@example.com" readonlyPlainText id="staticEmail" type="text" readOnly />
           </div>
         </div>
 
         <form>
           <div className="row">
-            <Label className="col-sm-2" htmlFor="inputPassword">
+            <Label htmlFor="inputPassword" className="col-sm-2">
               Password
             </Label>
             <div className="col-sm-10">
               <Input
+                defaultValue="hiddenUsername"
                 autoComplete="username"
                 className="d-none"
-                defaultValue="hiddenUsername"
                 name="username"
                 type="text"
               />
@@ -135,12 +135,12 @@ export default function InputPage() {
               Email
             </Label>
             <Input
+              value="email@example.com"
               autoComplete="username"
               id="staticEmail2"
-              readOnly
               readonlyPlainText
               type="text"
-              value="email@example.com"
+              readOnly
             />
           </div>
           <div className="col-auto">
@@ -148,23 +148,23 @@ export default function InputPage() {
               Password
             </Label>
             <Input
+              defaultValue="hiddenUsername"
               autoComplete="username"
               className="d-none"
-              defaultValue="hiddenUsername"
               name="username"
               type="text"
             />
-            <Input autoComplete="new-password" id="inputPassword2" placeholder="Password" type="password" />
+            <Input autoComplete="new-password" placeholder="Password" id="inputPassword2" type="password" />
           </div>
           <div className="col-auto">
-            <Button type="button" variant="primary">
+            <Button variant="primary" type="button">
               Confirm identity
             </Button>
           </div>
         </form>
       </Example>
 
-      <Example hash="file" state={state} t={tInputPage}>
+      <Example t={tInputPage} state={state} hash="file">
         <div>
           <Label htmlFor="formFile">Default file input example</Label>
           <Input id="formFile" type="file" />
@@ -172,36 +172,36 @@ export default function InputPage() {
 
         <div>
           <Label htmlFor="formFileMultiple">Multiple files input example</Label>
-          <Input id="formFileMultiple" multiple type="file" />
+          <Input id="formFileMultiple" type="file" multiple />
         </div>
 
         <div>
           <Label htmlFor="formFileDisabled">Disabled file input example</Label>
-          <Input disabled id="formFileDisabled" type="file" />
+          <Input id="formFileDisabled" type="file" disabled />
         </div>
 
         <div>
           <Label htmlFor="formFileSm">Small file input example</Label>
-          <Input id="formFileSm" size="sm" type="file" />
+          <Input id="formFileSm" type="file" size="sm" />
         </div>
 
         <div>
           <Label htmlFor="formFileLg">Large file input example</Label>
-          <Input id="formFileLg" size="lg" type="file" />
+          <Input id="formFileLg" type="file" size="lg" />
         </div>
       </Example>
 
-      <Example hash="color" state={state} t={tInputPage}>
+      <Example t={tInputPage} state={state} hash="color">
         <div>
           <Label htmlFor="exampleColorInput">Color picker</Label>
-          <Input color defaultValue="#563d7c" id="exampleColorInput" title="Choose your color" type="color" />
+          <Input title="Choose your color" defaultValue="#563d7c" id="exampleColorInput" type="color" color />
         </div>
       </Example>
 
-      <Example hash="datalist" state={state} t={tInputPage}>
+      <Example hash="datalist" t={tInputPage} state={state}>
         <div>
           <Label htmlFor="exampleDataList">Datalist example</Label>
-          <Input id="exampleDataList" list="datalistOptions" placeholder="Type to search..." />
+          <Input placeholder="Type to search..." list="datalistOptions" id="exampleDataList" />
           <datalist id="datalistOptions">
             <option value="San Francisco"></option>
             <option value="New York"></option>
@@ -212,22 +212,22 @@ export default function InputPage() {
         </div>
       </Example>
 
-      <Example hash="startEndContent" state={state} t={tInputPage}>
-        <Input placeholder="Username" startContent={<i className="bi bi-person"></i>} />
+      <Example hash="startEndContent" t={tInputPage} state={state}>
+        <Input startContent={<i className="bi bi-person"></i>} placeholder="Username" />
         <Input endContent={<i className="bi bi-eye"></i>} placeholder="Password" />
         <Input
-          className="!tw-pe-[3.25rem]"
           endContent={
             <>
               <i className="bi bi-x"></i>
               <i className="bi bi-eye ms-1"></i>
             </>
           }
+          className="!tw-pe-[3.25rem]"
           placeholder="Password"
         />
       </Example>
 
-      <Example hash="otp" state={state} t={tInputPage}>
+      <Example t={tInputPage} state={state} hash="otp">
         <div className="tw-w-full sm:tw-w-1/4">
           <InputOtp defaultValue={['1', '2', '3', '4']}></InputOtp>
         </div>
@@ -248,84 +248,80 @@ export default function InputPage() {
       <PropsIndicator />
 
       <Example
-        hash="inputComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">RefCallback&lt;input&gt;</span>,
+            desc: tInputComponentProps('input.desc.onRef'),
             attr: 'onRef',
             default: '',
-            desc: tInputComponentProps('input.desc.onRef'),
-            type: <span className="badge text-bg-secondary">RefCallback&lt;input&gt;</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
+            desc: tInputComponentProps('input.desc.size'),
             attr: 'size',
             default: '',
-            desc: tInputComponentProps('input.desc.size'),
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">number | undefined</span>,
+            desc: tInputComponentProps('input.desc.nativeSize'),
             attr: 'nativeSize',
             default: '',
-            desc: tInputComponentProps('input.desc.nativeSize'),
-            type: <span className="badge text-bg-secondary">number | undefined</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('input.desc.disabled'),
             attr: 'disabled',
             default: '',
-            desc: tInputComponentProps('input.desc.disabled'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('input.desc.readonly'),
             attr: 'readonly',
             default: '',
-            desc: tInputComponentProps('input.desc.readonly'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('input.desc.readonlyPlainText'),
             attr: 'readonlyPlainText',
             default: '',
-            desc: tInputComponentProps('input.desc.readonlyPlainText'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('input.desc.isValid'),
             attr: 'isValid',
             default: '',
-            desc: tInputComponentProps('input.desc.isValid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('input.desc.isInvalid'),
             attr: 'isInvalid',
             default: '',
-            desc: tInputComponentProps('input.desc.isInvalid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('input.desc.color'),
             attr: 'color',
             default: '',
-            desc: tInputComponentProps('input.desc.color'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">string | undefined</span>,
+            desc: tInputComponentProps('input.desc.nativeColor'),
             attr: 'nativeColor',
             default: '',
-            desc: tInputComponentProps('input.desc.nativeColor'),
-            type: <span className="badge text-bg-secondary">string | undefined</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tInputComponentProps('input.desc.startContent'),
             attr: 'startContent',
             default: '',
-            desc: tInputComponentProps('input.desc.startContent'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
+            desc: tInputComponentProps('input.desc.endContent'),
             attr: 'endContent',
             default: '',
-            desc: tInputComponentProps('input.desc.endContent'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            attr: 'startEndContentClasses',
-            default: '',
-            desc: tInputComponentProps('input.desc.startEndContentClasses'),
             type: (
               <div className="d-flex flex-column gap-2">
                 <div>
@@ -338,134 +334,138 @@ export default function InputPage() {
                 </div>
               </div>
             ),
+            desc: tInputComponentProps('input.desc.startEndContentClasses'),
+            attr: 'startEndContentClasses',
+            default: '',
           },
         ]}
-        props
-        state={state}
+        hash="inputComponentProps"
         t={tInputComponentProps}
+        state={state}
+        props
       />
 
       <Example
-        hash="inputOtpComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">number</span>,
+            desc: tInputComponentProps('inputOtp.desc.length'),
             attr: 'length',
             default: '4',
-            desc: tInputComponentProps('inputOtp.desc.length'),
-            type: <span className="badge text-bg-secondary">number</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">(string | number)[]</span>,
+            desc: tInputComponentProps('inputOtp.desc.defaultValue'),
             attr: 'defaultValue',
             default: '-',
-            desc: tInputComponentProps('inputOtp.desc.defaultValue'),
-            type: <span className="badge text-bg-secondary">(string | number)[]</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">InputProps&lt;input&gt;</span>,
+            desc: tInputComponentProps('inputOtp.desc.inputProps'),
             attr: 'inputProps',
             default: '-',
-            desc: tInputComponentProps('inputOtp.desc.inputProps'),
-            type: <span className="badge text-bg-secondary">InputProps&lt;input&gt;</span>,
           },
         ]}
-        props
-        state={state}
+        hash="inputOtpComponentProps"
         t={tInputComponentProps}
+        state={state}
+        props
       />
 
       <Example
-        hash="textareaComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('textarea.desc.disabled'),
             attr: 'disabled',
             default: '-',
-            desc: tInputComponentProps('textarea.desc.disabled'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('textarea.desc.readonly'),
             attr: 'readonly',
             default: '-',
-            desc: tInputComponentProps('textarea.desc.readonly'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('textarea.desc.isValid'),
             attr: 'isValid',
             default: '',
-            desc: tInputComponentProps('textarea.desc.isValid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('textarea.desc.isInvalid'),
             attr: 'isInvalid',
             default: '',
-            desc: tInputComponentProps('textarea.desc.isInvalid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="textareaComponentProps"
         t={tInputComponentProps}
+        state={state}
+        props
       />
 
       <Example
-        hash="labelComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('label.desc.colFormLabel'),
             attr: 'colFormLabel',
             default: '-',
-            desc: tInputComponentProps('label.desc.colFormLabel'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('label.desc.inputGroupText'),
             attr: 'inputGroupText',
             default: '-',
-            desc: tInputComponentProps('label.desc.inputGroupText'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('label.desc.formCheckLabel'),
             attr: 'formCheckLabel',
             default: '-',
-            desc: tInputComponentProps('label.desc.formCheckLabel'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="labelComponentProps"
         t={tInputComponentProps}
+        state={state}
+        props
       />
 
       <Example
-        hash="textComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('text.desc.validFeedback'),
             attr: 'validFeedback',
             default: '',
-            desc: tInputComponentProps('text.desc.validFeedback'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('text.desc.invalidFeedback'),
             attr: 'invalidFeedback',
             default: '',
-            desc: tInputComponentProps('text.desc.invalidFeedback'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('text.desc.validTooltip'),
             attr: 'validTooltip',
             default: '',
-            desc: tInputComponentProps('text.desc.validTooltip'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tInputComponentProps('text.desc.invalidTooltip'),
             attr: 'invalidTooltip',
             default: '',
-            desc: tInputComponentProps('text.desc.invalidTooltip'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="textComponentProps"
         t={tInputComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

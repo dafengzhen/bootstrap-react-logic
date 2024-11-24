@@ -2,9 +2,9 @@ import Accordion from './accordion.tsx';
 
 // types
 export type {
+  AccordionHeaderProps,
   AccordionBasicProps,
   AccordionBodyProps,
-  AccordionHeaderProps,
   AccordionItemProps,
   AccordionOption,
   AccordionProps,

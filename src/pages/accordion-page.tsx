@@ -1,18 +1,18 @@
-import About from '@components/about.tsx';
-import Example from '@components/example.tsx';
-import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { Accordion } from '@lib/accordion';
-import { transformCodeObj } from '@src/tools';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import OptionRow from '@components/option-row.tsx';
 import { useNavigation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Example from '@components/example.tsx';
+import { transformCodeObj } from '@src/tools';
+import { Accordion } from '@lib/accordion';
+import About from '@components/about.tsx';
+import { useState } from 'react';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/accordion/*.md', '../assets/codes/common/*.md'], {
-    eager: true,
     import: 'default',
     query: '?raw',
+    eager: true,
   }),
 );
 
@@ -28,7 +28,7 @@ export default function AccordionPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example hash="basic" state={state} t={tAccordionPage}>
+      <Example t={tAccordionPage} state={state} hash="basic">
         <Accordion
           options={[
             {
@@ -53,8 +53,8 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #2',
+              collapsed: true,
               show: false,
             },
             {
@@ -67,17 +67,16 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #3',
+              collapsed: true,
               show: false,
             },
           ]}
         />
       </Example>
 
-      <Example hash="flush" state={state} t={tAccordionPage}>
+      <Example t={tAccordionPage} state={state} hash="flush">
         <Accordion
-          flush
           options={[
             {
               body: (
@@ -86,8 +85,8 @@ export default function AccordionPage() {
                   <code>.accordion-flush</code> class. This is the first item's accordion body.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #1',
+              collapsed: true,
               show: false,
             },
             {
@@ -98,8 +97,8 @@ export default function AccordionPage() {
                   being filled with some actual content.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #2',
+              collapsed: true,
               show: false,
             },
             {
@@ -111,17 +110,17 @@ export default function AccordionPage() {
                   glance, a bit more representative of how this would look in a real-world application.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #3',
+              collapsed: true,
               show: false,
             },
           ]}
+          flush
         />
       </Example>
 
-      <Example hash="alwaysOpen" state={state} t={tAccordionPage}>
+      <Example t={tAccordionPage} hash="alwaysOpen" state={state}>
         <Accordion
-          alwaysOpen
           options={[
             {
               body: (
@@ -145,8 +144,8 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #2',
+              collapsed: true,
               show: false,
             },
             {
@@ -159,67 +158,68 @@ export default function AccordionPage() {
                   can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                 </>
               ),
-              collapsed: true,
               header: 'Accordion Item #3',
+              collapsed: true,
               show: false,
             },
           ]}
+          alwaysOpen
         />
       </Example>
 
       <PropsIndicator />
 
       <Example
-        hash="accordionComponentProps"
         items={[
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tAccordionComponentProps('accordion.desc.flush'),
             attr: 'flush',
             default: '',
-            desc: tAccordionComponentProps('accordion.desc.flush'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tAccordionComponentProps('accordion.desc.alwaysOpen'),
             attr: 'alwaysOpen',
             default: '',
-            desc: tAccordionComponentProps('accordion.desc.alwaysOpen'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            attr: 'options',
-            default: '',
-            desc: tAccordionComponentProps('accordion.desc.options'),
             type: (
               <div className="d-flex flex-column gap-1">
-                <OptionRow label="id?: string | number" value={tAccordionComponentProps('accordion.options.id')} />
-                <OptionRow label="header?: string" value={tAccordionComponentProps('accordion.options.header')} />
-                <OptionRow label="body?: ReactNode" value={tAccordionComponentProps('accordion.options.body')} />
+                <OptionRow value={tAccordionComponentProps('accordion.options.id')} label="id?: string | number" />
+                <OptionRow value={tAccordionComponentProps('accordion.options.header')} label="header?: string" />
+                <OptionRow value={tAccordionComponentProps('accordion.options.body')} label="body?: ReactNode" />
                 <OptionRow
-                  label="collapsed?: boolean"
                   value={tAccordionComponentProps('accordion.options.collapsed')}
+                  label="collapsed?: boolean"
                 />
-                <OptionRow label="show?: boolean" value={tAccordionComponentProps('accordion.options.show')} />
+                <OptionRow value={tAccordionComponentProps('accordion.options.show')} label="show?: boolean" />
               </div>
             ),
+            desc: tAccordionComponentProps('accordion.desc.options'),
+            attr: 'options',
+            default: '',
           },
           {
+            type: <span className="badge text-bg-secondary">(id: string | number, visible: boolean) =&gt; void</span>,
+            desc: tAccordionComponentProps('accordion.desc.onChange'),
             attr: 'onChange',
             default: '',
-            desc: tAccordionComponentProps('accordion.desc.onChange'),
-            type: <span className="badge text-bg-secondary">(id: string | number, visible: boolean) =&gt; void</span>,
           },
           {
+            type: <span className="badge text-bg-secondary">boolean</span>,
+            desc: tAccordionComponentProps('accordion.desc.collapsing'),
             attr: 'collapsing',
             default: 'true',
-            desc: tAccordionComponentProps('accordion.desc.collapsing'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        props
-        state={state}
+        hash="accordionComponentProps"
         t={tAccordionComponentProps}
+        state={state}
+        props
       />
 
-      <Example hash="commonComponentProps" props state={state} />
+      <Example hash="commonComponentProps" state={state} props />
 
       <About />
     </div>

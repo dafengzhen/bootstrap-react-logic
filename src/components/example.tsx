@@ -1,57 +1,57 @@
-import ExampleDynamicCard from '@components/example-dynamic-card.tsx';
+import { kebabToCamelCaseLowerFirst, kebabToCamelCase, getStateByHash, updateState } from '@src/tools';
 import ExampleGeneralPropsCard from '@components/example-general-props-card.tsx';
+import ExampleDynamicCard from '@components/example-dynamic-card.tsx';
 import ExamplePropsCard from '@components/example-props-card.tsx';
-import { getStateByHash, kebabToCamelCase, kebabToCamelCaseLowerFirst, updateState } from '@src/tools';
-import clsx from 'clsx';
 import { type ReactNode } from 'react';
+import clsx from 'clsx';
 
 export default function Example({
   alignItemsCenter,
-  bg,
+  parentClassName,
   bodyClassName,
-  children,
+  overflowXAuto,
   codeLanguage,
+  textNowrap,
   contentId,
-  dark,
-  gap3,
-  hash,
+  children,
   inline,
   items,
   mw400,
-  overflowXAuto,
-  parentClassName,
   props,
-  row,
   state,
-  t,
-  textNowrap,
+  dark,
+  gap3,
+  hash,
   wrap,
+  row,
+  bg,
+  t,
 }: {
-  alignItemsCenter?: boolean;
-  bg?: boolean | string;
-  bodyClassName?: string;
-  children?: ReactNode;
-  codeLanguage?: 'html' | 'javascript' | 'tsx' | 'typescript' | string;
-  contentId?: string;
-  dark?: boolean;
-  gap3?: boolean;
-  hash: string;
-  inline?: boolean;
   items?: {
     attr: ReactNode | string;
     default?: ReactNode;
     desc?: ReactNode;
     type?: ReactNode;
   }[];
-  mw400?: boolean;
-  overflowXAuto?: boolean;
+  codeLanguage?: 'javascript' | 'typescript' | 'html' | string | 'tsx';
+  alignItemsCenter?: boolean;
   parentClassName?: string;
+  overflowXAuto?: boolean;
+  bodyClassName?: string;
+  bg?: boolean | string;
+  children?: ReactNode;
+  textNowrap?: boolean;
+  contentId?: string;
+  inline?: boolean;
+  mw400?: boolean;
   props?: boolean;
+  dark?: boolean;
+  gap3?: boolean;
+  wrap?: boolean;
   row?: boolean;
+  hash: string;
   state: any;
   t?: any;
-  textNowrap?: boolean;
-  wrap?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -72,11 +72,11 @@ export default function Example({
     if (hash === 'commonComponentProps') {
       return (
         <ExampleGeneralPropsCard
-          code={code}
           codeLanguage={codeLanguage || 'typescript'}
-          hash={hash}
-          isOpen={isOpen}
           toggleCode={toggleCode}
+          isOpen={isOpen}
+          code={code}
+          hash={hash}
         >
           {children}
         </ExampleGeneralPropsCard>
@@ -88,13 +88,13 @@ export default function Example({
 
     return (
       <ExamplePropsCard
-        code={code}
         codeLanguage={codeLanguage || 'typescript'}
-        hash={hash}
-        isOpen={isOpen}
-        items={items}
-        title={_tHash}
         toggleCode={toggleCode}
+        isOpen={isOpen}
+        title={_tHash}
+        items={items}
+        code={code}
+        hash={hash}
       >
         {children}
       </ExamplePropsCard>
@@ -103,15 +103,15 @@ export default function Example({
 
   return (
     <ExampleDynamicCard
-      bg={bg}
       bodyClassName={bodyClassName}
-      code={code}
       codeLanguage={codeLanguage}
-      dark={dark}
-      hash={hash}
+      toggleCode={toggleCode}
       isOpen={isOpen}
       title={t(hash)}
-      toggleCode={toggleCode}
+      code={code}
+      dark={dark}
+      hash={hash}
+      bg={bg}
     >
       <div
         className={clsx(

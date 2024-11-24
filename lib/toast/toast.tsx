@@ -16,9 +16,9 @@ const generateInitialOptions = (options: IToastOption[] = []): IOption[] =>
   }));
 
 const Toast = <T extends ElementType = 'div'>({
-  container,
-  containerProps,
   options: defaultOptions = [],
+  containerProps,
+  container,
   placement,
   position,
   ...rest

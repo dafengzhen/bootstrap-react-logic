@@ -1,8 +1,8 @@
-import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
 
 import type { AccordionBodyProps } from './types.ts';
 
-import { clsxStyle, clsxUnique, convertBsKeyToVar, filterOptions, isValueValid } from '../tools';
+import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
 
 const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChange?: (onChange: boolean) => void) => {
   const [show, setShow] = useState(showByDefault);
@@ -74,32 +74,32 @@ const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChang
   }, [collapse, visible, show, isCollapsing]);
 
   return {
-    bodyElement,
-    collapse,
     collapseElement,
     collapseHeight,
+    bodyElement,
     collapsing,
-    show,
+    collapse,
     visible,
+    show,
   };
 };
 
 const AccordionBody = function AccordionBody<T extends ElementType = 'div'>(props: AccordionBodyProps<T>) {
   const {
-    as: Component = 'div',
-    children,
-    className,
     collapsing: collapsingByDefault = true,
-    dropOldClass,
-    onChange,
     show: showByDefault = true,
-    style,
+    as: Component = 'div',
+    dropOldClass,
+    className,
     variables,
+    children,
+    onChange,
+    style,
     ...rest
   } = props;
 
   const isCollapsing = collapsingByDefault === undefined || collapsingByDefault;
-  const { bodyElement, collapse, collapseElement, collapseHeight, collapsing, show, visible } = useAccordionBody(
+  const { collapseElement, collapseHeight, bodyElement, collapsing, collapse, visible, show } = useAccordionBody(
     showByDefault,
     isCollapsing,
     onChange,

@@ -1,60 +1,60 @@
-import { ActionIcons } from '@components/action-icons.tsx';
-import ExampleLink from '@components/example-link.tsx';
+import { type CSSProperties, type ReactNode, useContext, useState } from 'react';
 import { GlobalContext } from '@contexts/global-context.ts';
 import useHighlightCode from '@hooks/use-highlight-code.ts';
-import clsx from 'clsx';
-import { type CSSProperties, type ReactNode, useContext, useState } from 'react';
+import { ActionIcons } from '@components/action-icons.tsx';
+import ExampleLink from '@components/example-link.tsx';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 export default function ExamplePropsCard({
-  children,
-  code,
-  codeDisplayMode = 'direct',
   codeLanguage = 'typescript',
-  colgroup,
-  customBody,
-  customCaption,
-  hash,
+  codeDisplayMode = 'direct',
   headerClassName,
-  isOpen,
+  customCaption,
+  customBody,
   items = [],
-  title,
   toggleCode,
+  children,
+  colgroup,
+  isOpen,
+  title,
+  code,
+  hash,
 }: {
-  children?: ReactNode;
-  code?: string;
-  codeDisplayMode?: 'direct' | 'indirectly';
-  codeLanguage?: string;
   colgroup?: {
-    attr: CSSProperties;
     default: CSSProperties;
+    attr: CSSProperties;
     desc: CSSProperties;
     type: CSSProperties;
   };
-  customBody?: boolean;
-  customCaption?: ReactNode;
-  hash: string;
-  headerClassName?: string;
-  isOpen: boolean;
   items?: {
     attr: ReactNode | string;
     default?: ReactNode;
     desc?: ReactNode;
     type?: ReactNode;
   }[];
-  title: string;
+  codeDisplayMode?: 'indirectly' | 'direct';
+  customCaption?: ReactNode;
+  headerClassName?: string;
   toggleCode: () => void;
+  codeLanguage?: string;
+  children?: ReactNode;
+  customBody?: boolean;
+  isOpen: boolean;
+  code?: string;
+  title: string;
+  hash: string;
 }) {
   const globalContext = useContext(GlobalContext);
   const { fullscreen, layout, theme } = globalContext;
   const { i18n } = useTranslation();
   const [_colgroup] = useState(
     colgroup ?? {
-      attr: {
-        width: '150px',
-      },
       default: {
         width: '100px',
+      },
+      attr: {
+        width: '150px',
       },
       desc: {
         width: '100px',
@@ -64,7 +64,7 @@ export default function ExamplePropsCard({
       },
     },
   );
-  const [setElement] = useHighlightCode({ code, codeLanguage, isOpen });
+  const [setElement] = useHighlightCode({ codeLanguage, isOpen, code });
 
   return (
     <div className="card">
@@ -74,18 +74,18 @@ export default function ExamplePropsCard({
         <>
           <div className={clsx('card-header', headerClassName)}>
             <div className="d-flex align-items-center flex-wrap justify-content-between gap-2">
-              <ExampleLink hash={hash} title={title} />
+              <ExampleLink title={title} hash={hash} />
               <ActionIcons
                 center={layout?.[0] === 'center'}
-                code={code}
                 dark={theme?.[0] === 'dark'}
                 fullscreen={fullscreen?.[0]}
                 fullscreenState={fullscreen}
-                i18n={i18n}
-                isOpen={isOpen}
-                layoutState={layout}
                 onClickCode={toggleCode}
+                layoutState={layout}
                 themeState={theme}
+                isOpen={isOpen}
+                code={code}
+                i18n={i18n}
               />
             </div>
           </div>

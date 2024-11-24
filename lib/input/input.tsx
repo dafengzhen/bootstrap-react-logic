@@ -1,43 +1,43 @@
-import { type ElementRef, type ElementType, type HTMLInputTypeAttribute, type LegacyRef, useMemo } from 'react';
+import { type HTMLInputTypeAttribute, type ElementType, type ElementRef, type LegacyRef, useMemo } from 'react';
 
 import type { InputProps } from './types.ts';
 
 import {
-  clsxStyle,
-  clsxUnique,
-  clsxWithOptions,
-  convertBsKeyToVar,
-  filterOptions,
-  findTruthyClass,
-  isValueValid,
   processSlotClasses,
+  convertBsKeyToVar,
+  clsxWithOptions,
+  findTruthyClass,
+  filterOptions,
+  isValueValid,
+  clsxUnique,
+  clsxStyle,
 } from '../tools';
 import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(
-  props: InputProps<T> & {
+  props: {
     type?: HTMLInputTypeAttribute | undefined;
-  },
+  } & InputProps<T>,
 ) {
   const {
     as: Component = 'input',
-    children,
-    className,
-    color,
-    dropOldClass,
-    endContent,
-    isInvalid,
-    isValid,
-    nativeColor,
-    nativeSize,
-    onRef,
-    readonlyPlainText,
-    size,
-    startContent,
     startEndContentClasses,
-    style,
-    type,
+    readonlyPlainText,
+    dropOldClass,
+    startContent,
+    nativeColor,
+    endContent,
+    nativeSize,
+    className,
+    isInvalid,
     variables,
+    children,
+    isValid,
+    color,
+    onRef,
+    style,
+    size,
+    type,
     ...rest
   } = props;
 
@@ -64,8 +64,8 @@ const Input = function Input<T extends ElementType = 'input'>(
       {
         className: finalClass,
         color: nativeColor,
-        size: nativeSize,
         style: finalStyle,
+        size: nativeSize,
         type,
       },
       isValueValid,
@@ -93,9 +93,9 @@ const Input = function Input<T extends ElementType = 'input'>(
         startContent && inputStyles.brlPs9,
         endContent && inputStyles.brlPe9,
       ),
-      container: 'd-inline-flex align-items-center position-relative',
-      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
       start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
+      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
+      container: 'd-inline-flex align-items-center position-relative',
     });
 
     return (
