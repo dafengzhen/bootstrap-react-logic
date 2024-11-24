@@ -2,19 +2,18 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SelectProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import SelectOption from './select-option.tsx';
 
 const Select = function Select<T extends ElementType = 'select'>(props: SelectProps<T>) {
   const {
-    as: Component = 'select',
+    as: Component = 'select' as ElementType,
     dropOldClass,
     nativeSize,
     className,
     isInvalid,
     variables,
     children,
-    disabled,
     isValid,
     style,
     size,
@@ -29,20 +28,14 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
       size && `form-select-${size}`,
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-        size: nativeSize,
-        disabled,
-      },
-      isValueValid,
-    );
-  }, [dropOldClass, isValid, isInvalid, size, className, variables, style, nativeSize, disabled]);
+    return {
+      className: finalClass,
+      style: finalStyle,
+      size: nativeSize,
+    };
+  }, [className, dropOldClass, isInvalid, isValid, nativeSize, size, style, variables]);
 
   return (
     <Component {...rest} {...renderOptions}>

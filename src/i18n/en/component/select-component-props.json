@@ -6,7 +6,8 @@
       "nativeSize": "Size (HTMLAttributes)",
       "disabled": "Disabled",
       "isValid": "Class (.is-valid)",
-      "isInvalid": "Class (.is-invalid)"
+      "isInvalid": "Class (.is-invalid)",
+      "onChange": "On Change"
     }
   },
   "selectOption": {

@@ -17,18 +17,16 @@ import {
   convertBsKeyToVar,
   clsxWithOptions,
   groupByProperty,
-  filterOptions,
-  isValueValid,
   clsxUnique,
-  clsxStyle,
   isDefined,
+  stylex,
 } from '../tools';
 import selectMultipleStyles from './select-multiple.module.scss';
 
 const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(props: SelectMultipleProps<T>) {
   const {
+    as: Component = 'div' as ElementType,
     options: defaultOptions,
-    as: Component = 'div',
     hideActiveOptions,
     selectableCount,
     contentClasses,
@@ -118,19 +116,14 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
       disabled && 'bg-body-secondary',
       className,
     );
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        tabIndex: disabled ? undefined : 0,
-        className: finalClass,
-        style: finalStyle,
-      },
-      isValueValid,
-    );
-  }, [dropOldClass, disabled, className, variables, style]);
+    return {
+      tabIndex: disabled ? undefined : 0,
+      className: finalClass,
+      style: finalStyle,
+    };
+  }, [className, disabled, dropOldClass, style, variables]);
 
   const slotClassName = processSlotClasses(noParamContentClasses, {
     activeOption: clsxWithOptions(

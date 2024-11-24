@@ -2,26 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SelectOptionProps } from './types.ts';
 
-import { convertBsKeyToVar, filterOptions, isValueValid, clsxUnique, clsxStyle } from '../tools';
+import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 
 const SelectOption = function SelectOption<T extends ElementType = 'option'>(props: SelectOptionProps<T>) {
-  const { as: Component = 'option', className, variables, children, disabled, style, ...rest } = props;
+  const { as: Component = 'option' as ElementType, className, variables, children, style, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(className);
-    const finalStyle = clsxStyle({ ...variables, ...style }, true, (_, key) => {
-      return convertBsKeyToVar(key);
-    });
+    const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
-    return filterOptions(
-      {
-        className: finalClass,
-        style: finalStyle,
-        disabled,
-      },
-      isValueValid,
-    );
-  }, [className, variables, style, disabled]);
+    return {
+      className: finalClass,
+      style: finalStyle,
+    };
+  }, [className, style, variables]);
 
   return (
     <Component {...rest} {...renderOptions}>

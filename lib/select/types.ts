@@ -16,7 +16,7 @@ type Props<T extends ElementType> = {
   /**
    * nativeSize.
    */
-  nativeSize?: undefined | number;
+  nativeSize?: number;
 
   /**
    * isInvalid,

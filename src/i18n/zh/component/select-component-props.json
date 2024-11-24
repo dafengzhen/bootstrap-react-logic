@@ -6,7 +6,8 @@
       "nativeSize": "大小 (HTML属性)",
       "disabled": "禁用",
       "isValid": "类 (.is-valid)",
-      "isInvalid": "类 (.is-invalid)"
+      "isInvalid": "类 (.is-invalid)",
+      "onChange": "改变时执行"
     }
   },
   "selectOption": {

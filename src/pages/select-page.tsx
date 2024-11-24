@@ -1,3 +1,4 @@
+import EventsIndicator from '@components/events-indicator.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { SelectMultiple } from '@lib/select-multiple';
 import OptionRow from '@components/option-row.tsx';
@@ -408,8 +409,34 @@ export default function SelectPage() {
             attr: 'contentClasses',
             default: '',
           },
+        ]}
+        hash="selectMultipleComponentProps"
+        t={tSelectComponentProps}
+        state={state}
+        props
+      />
+
+      <EventsIndicator />
+
+      <Example
+        items={[
           {
-            type: <span className="badge text-bg-secondary">(id: (string | number)[]) =&gt; void</span>,
+            type: <span className="badge text-bg-secondary">Function</span>,
+            desc: tSelectComponentProps('select.desc.onChange'),
+            attr: 'onChange',
+            default: '',
+          },
+        ]}
+        hash="selectComponentProps"
+        t={tSelectComponentProps}
+        state={state}
+        events
+      />
+
+      <Example
+        items={[
+          {
+            type: <span className="badge text-bg-secondary">Function</span>,
             desc: tSelectComponentProps('selectMultiple.desc.onChange'),
             attr: 'onChange',
             default: '',
@@ -418,7 +445,7 @@ export default function SelectPage() {
         hash="selectMultipleComponentProps"
         t={tSelectComponentProps}
         state={state}
-        props
+        events
       />
 
       <Example hash="commonComponentProps" state={state} props />
