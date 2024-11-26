@@ -31,6 +31,7 @@ export default defineConfig(({ command }) => {
           main: resolve(__dirname, 'index.html'),
         },
       },
+      chunkSizeWarningLimit: 1024,
       sourcemap: true,
     },
     resolve: {

@@ -3,7 +3,7 @@
     "name": "Alert",
     "desc": {
       "variant": "Variant",
-      "onClose": "On Close",
+      "onVisibleChange": "On Change",
       "clickToClose": "Click to Close",
       "dismissible": "Dismissible",
       "fade": "Class (.fade)",

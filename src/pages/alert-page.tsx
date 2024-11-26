@@ -23,10 +23,16 @@ export default function AlertPage() {
   const { t: tAlertComponentProps } = useTranslation(['alertComponentProps']);
   const { t: tAlertPage } = useTranslation(['alertPage']);
   const state = useState(codes);
-  const [alerts, setAlerts] = useState<number[]>([]);
+  const [visible, setVisible] = useState(true);
+  const [alerts, setAlerts] = useState<
+    {
+      visible: boolean;
+      id: number;
+    }[]
+  >([]);
 
   function onClickShowLiveAlertTest() {
-    setAlerts([...alerts, alerts.length + 1]);
+    setAlerts((prevAlerts) => [...prevAlerts, { id: (prevAlerts.at(-1)?.id ?? 0) + 1, visible: true }]);
   }
 
   if (navigation.state === 'loading') {
@@ -70,17 +76,22 @@ export default function AlertPage() {
       </Example>
 
       <Example hash="liveExample" t={tAlertPage} state={state}>
-        {alerts.map((item) => {
+        {alerts.map((item, index) => {
           return (
             <Alert
-              onClose={(close) => {
-                close?.();
-              }}
+              onVisibleChange={(visible) =>
+                setAlerts((prevState) => [
+                  ...prevState.slice(0, index),
+                  { ...prevState[index], visible },
+                  ...prevState.slice(index + 1),
+                ])
+              }
+              visible={item.visible}
               clickToClose={false}
               variant="success"
+              key={item.id}
               role="alert"
               dismissible
-              key={item}
               fade
             >
               <div>A simple primary alert—check it out!</div>
@@ -174,17 +185,16 @@ export default function AlertPage() {
         </Alert>
 
         <Alert
-          closeButton={({ close }) => {
-            return (
-              <button
-                data-bs-dismiss="alert"
-                className="btn-close"
-                aria-label="Close"
-                onClick={close}
-                type="button"
-              ></button>
-            );
-          }}
+          closeButton={
+            <button
+              onClick={() => setVisible(!visible)}
+              data-bs-dismiss="alert"
+              className="btn-close"
+              aria-label="Close"
+              type="button"
+            />
+          }
+          visible={visible}
           variant="warning"
           role="alert"
           dismissible
@@ -215,9 +225,9 @@ export default function AlertPage() {
             default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">(close?: () =&gt; void) =&gt; void</span>,
-            desc: tAlertComponentProps('alert.desc.onClose'),
-            attr: 'onClose',
+            type: <span className="badge text-bg-secondary">{'onVisibleChange: (visible: boolean) => void'}</span>,
+            desc: tAlertComponentProps('alert.desc.onVisibleChange'),
+            attr: 'onVisibleChange',
             default: '',
           },
           {
@@ -239,13 +249,13 @@ export default function AlertPage() {
             default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">{'({ close }: { close: () => void }) => ReactNode'}</span>,
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
             desc: tAlertComponentProps('alert.desc.closeButton'),
             attr: 'closeButton',
             default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">ButtonProps&lt;button&gt;</span>,
+            type: <span className="badge text-bg-secondary">ButtonProps</span>,
             desc: tAlertComponentProps('alert.desc.closeButtonProps'),
             attr: 'closeButtonProps',
             default: '',

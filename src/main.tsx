@@ -7,11 +7,6 @@ import { StrictMode } from 'react';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider
-      future={{
-        v7_startTransition: true,
-      }}
-      router={router}
-    />
+    <RouterProvider router={router} />
   </StrictMode>,
 );

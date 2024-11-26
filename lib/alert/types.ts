@@ -22,9 +22,9 @@ type Props<T extends ElementType> = {
   variant?: 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
 
   /**
-   * closeButton.
+   * onVisibleChange.
    */
-  closeButton?: ({ close }: { close: () => void }) => ReactNode;
+  onVisibleChange?: (visible: boolean) => void;
 
   /**
    * closeButtonProps.
@@ -32,9 +32,9 @@ type Props<T extends ElementType> = {
   closeButtonProps?: ButtonProps<ElementType>;
 
   /**
-   * onClose.
+   * closeButton.
    */
-  onClose?: (close?: () => void) => void;
+  closeButton?: ReactNode;
 
   /**
    * clickToClose.
