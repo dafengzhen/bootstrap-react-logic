@@ -996,6 +996,10 @@ type OffcanvasBackdropVariablesType = OffcanvasVariablesType;
 
 type BreadcrumbBasicVariablesType = BreadcrumbVariablesType;
 
+type PaginationBasicVariablesType = PaginationVariablesType;
+
+type PaginationSpanVariablesType = PaginationVariablesType;
+
 type AccordionHeaderVariablesType = AccordionVariablesType;
 
 type BreadcrumbItemVariablesType = BreadcrumbVariablesType;
@@ -1132,6 +1136,7 @@ export type {
   NavbarTogglerIconVariablesType,
   OffcanvasBackdropVariablesType,
   DropdownItemTextVariablesType,
+  PaginationBasicVariablesType,
   AccordionHeaderVariablesType,
   BreadcrumbBasicVariablesType,
   CarouselCaptionVariablesType,
@@ -1140,6 +1145,7 @@ export type {
   OffcanvasHeaderVariablesType,
   ProgressStackedVariablesType,
   TableResponsiveVariablesType,
+  PaginationSpanVariablesType,
   AccordionBasicVariablesType,
   BreadcrumbItemVariablesType,
   DropdownHeaderVariablesType,

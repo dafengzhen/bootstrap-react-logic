@@ -2,19 +2,19 @@
   "pagination": {
     "name": "Pagination",
     "desc": {
-      "alignment": "对齐",
+      "option": "选项",
+      "onChange": "更改回调",
+      "previousOption": "上一页选项",
+      "nextOption": "下一页选项",
       "navProps": "导航属性",
-      "options": "选项",
-      "size": "大小"
-    },
-    "options": {
-      "active": "激活",
-      "disabled": "禁用",
-      "href": "超链接",
-      "id": "ID",
-      "itemProps": "项目属性",
-      "link": "链接",
-      "linkProps": "链接属性"
+      "alignment": "对齐方式",
+      "alwaysShowEllipsis": "始终显示省略号",
+      "maxVisible": "最大可见页数",
+      "previous": "上一页",
+      "size": "尺寸",
+      "next": "下一页",
+      "total": "总页数",
+      "page": "当前页"
     }
   }
 }

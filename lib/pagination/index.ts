@@ -2,8 +2,10 @@ import Pagination from './pagination.tsx';
 
 // types
 export type {
+  PaginationBasicProps,
   PaginationItemProps,
   PaginationLinkProps,
+  PaginationSpanProps,
   PaginationNavProps,
   PaginationOption,
   PaginationProps,

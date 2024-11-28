@@ -3,43 +3,21 @@
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      active: true,
-      href: '#',
-      link: '1',
-    },
-    {
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-  ]}
+  previous={false}
+  next={false}
+  total={3}
   size="lg"
+  page={1}
 />
 
 <Pagination
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      active: true,
-      href: '#',
-      link: '1',
-    },
-    {
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-  ]}
+  previous={false}
+  next={false}
+  total={3}
   size="sm"
+  page={1}
 />
 ```

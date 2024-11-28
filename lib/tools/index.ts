@@ -10,6 +10,7 @@ export type {
   OffcanvasHeaderVariablesType,
   ProgressStackedVariablesType,
   TableResponsiveVariablesType,
+  PaginationBasicVariablesType,
   AccordionBasicVariablesType,
   BreadcrumbItemVariablesType,
   DropdownHeaderVariablesType,
@@ -21,6 +22,7 @@ export type {
   PaginationLinkVariablesType,
   SelectMultipleVariablesType,
   ToastContainerVariablesType,
+  PaginationSpanVariablesType,
   AccordionBodyVariablesType,
   AccordionItemVariablesType,
   FloatingLabelVariablesType,
@@ -126,6 +128,7 @@ export {
   calculateLoopIndex,
   mapAndFilterStyles,
   processSlotClasses,
+  generatePagination,
   convertBsKeyToVar,
   getScrollbarWidth,
   generateRandomId,
@@ -170,6 +173,8 @@ export type {
 } from './elements.ts';
 
 export { VARIABLE_BS_PREFIX, EMPTY_GROUP_FLAG, VARIABLE_PREFIX, DEVELOPMENT, BS_PREFIX } from './constants';
+
+export { BiChevronDoubleRight, BiChevronDoubleLeft, BiThreeDots } from './icons.tsx';
 
 export { RoundedClassEnum } from './enums';
 

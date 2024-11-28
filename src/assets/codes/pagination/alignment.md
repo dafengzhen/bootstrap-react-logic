@@ -1,61 +1,37 @@
 ```jsx
 <Pagination
-  alignment="center"
+  previousOption={{
+    link: 'Previous',
+    disabled: true,
+    href: '#',
+  }}
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      disabled: true,
-      href: '#',
-      link: 'Previous',
-    },
-    {
-      href: '#',
-      link: '1',
-    },
-    {
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-    {
-      href: '#',
-      link: 'Next',
-    },
-  ]}
+  nextOption={{
+    link: 'Next',
+    href: '#',
+  }}
+  alignment="center"
+  total={3}
+  page={0}
 />
 
 <Pagination
-  alignment="end"
+  previousOption={{
+    link: 'Previous',
+    disabled: true,
+    href: '#',
+  }}
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      disabled: true,
-      href: '#',
-      link: 'Previous',
-    },
-    {
-      href: '#',
-      link: '1',
-    },
-    {
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-    {
-      href: '#',
-      link: 'Next',
-    },
-  ]}
+  nextOption={{
+    link: 'Next',
+    href: '#',
+  }}
+  alignment="end"
+  total={3}
+  page={0}
 />
 ```

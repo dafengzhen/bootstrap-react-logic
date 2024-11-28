@@ -1086,6 +1086,83 @@ const removeClasses = (className: undefined | string | null, classesToRemove: st
   return filteredClasses.join(' ');
 };
 
+/**
+ * Generates a pagination array for a given current page, total pages, and maximum visible page links.
+ * Includes controls ('<' and '>') for navigating to previous and next pages if necessary.
+ *
+ * @param {number} [current] - The current active page. Defaults to 1 if not provided.
+ * @param {number} [total] - The total number of pages. Returns an empty array if not provided or 0.
+ * @param {number} [maxVisible=4] - The maximum number of visible page links excluding the first and last pages. Defaults to 4.
+ * @param {boolean} [alwaysShowEllipsis=false] - Whether to always show '<' and '>' controls, even when not strictly necessary. Defaults to false.
+ * @returns {(number | '<' | '>')[]} - An array representing the pagination structure, where:
+ *   - Numbers are page numbers.
+ *   - '<' represents the previous-page control.
+ *   - '>' represents the next-page control.
+ *
+ * @example
+ * // Simple case with fewer total pages than maxVisible
+ * generatePagination(2, 4, 5);
+ * // Output: [1, 2, 3, 4]
+ *
+ * @example
+ * // Pagination with controls ('<' and '>') and ellipsis
+ * generatePagination(5, 10, 5);
+ * // Output: [1, '<', 4, 5, 6, '>', 10]
+ *
+ * @example
+ * // Pagination with no controls due to alwaysShowEllipsis being false
+ * generatePagination(2, 6, 5);
+ * // Output: [1, 2, 3, 4, 5, 6]
+ *
+ * @example
+ * // Pagination with alwaysShowEllipsis enabled
+ * generatePagination(2, 6, 5, true);
+ * // Output: [1, '<', 2, 3, 4, '>', 6]
+ */
+const generatePagination = (
+  current?: number,
+  total?: number,
+  maxVisible: number = 4,
+  alwaysShowEllipsis: boolean = false,
+): (number | '<' | '>')[] => {
+  if (typeof current !== 'number' || typeof total !== 'number' || total === 0) {
+    return [];
+  }
+
+  if (total <= maxVisible + 2) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  const pagination: (number | '<' | '>')[] = [1];
+  const half = Math.floor(maxVisible / 2);
+
+  let start = Math.max(2, current - half);
+  let end = Math.min(total - 1, current + half);
+
+  // Adjust start/end to ensure the range contains maxVisible items if possible
+  if (end - start + 1 < maxVisible) {
+    if (start === 2) {
+      end = Math.min(total - 1, start + maxVisible - 1);
+    } else if (end === total - 1) {
+      start = Math.max(2, end - maxVisible + 1);
+    }
+  }
+
+  if (alwaysShowEllipsis || start > 2) {
+    pagination.push('<');
+  }
+
+  pagination.push(...Array.from({ length: end - start + 1 }, (_, i) => start + i));
+
+  if (alwaysShowEllipsis || end < total - 1) {
+    pagination.push('>');
+  }
+
+  pagination.push(total);
+
+  return pagination;
+};
+
 export {
   filterTransformAndExcludeProperties,
   filterAndTransformProperties,
@@ -1095,6 +1172,7 @@ export {
   getLoopIndexDirection,
   pickObjectProperties,
   resolveRoundedClass,
+  generatePagination,
   calculateLoopIndex,
   mapAndFilterStyles,
   processSlotClasses,

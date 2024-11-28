@@ -1,29 +1,17 @@
 ```jsx
 <Pagination
+  previousOption={{
+    link: <span aria-hidden="true">&laquo;</span>,
+    href: '#',
+  }}
+  nextOption={{
+    link: <span aria-hidden="true">&raquo;</span>,
+    href: '#',
+  }}
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      href: '#',
-      link: <span aria-hidden="true">&laquo;</span>,
-    },
-    {
-      href: '#',
-      link: '1',
-    },
-    {
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-    {
-      href: '#',
-      link: <span aria-hidden="true">&raquo;</span>,
-    },
-  ]}
+  total={3}
+  page={0}
 />
 ```

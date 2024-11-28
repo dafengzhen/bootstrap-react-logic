@@ -1,60 +1,38 @@
 ```jsx
 <Pagination
+  previousOption={{
+    link: 'Previous',
+    disabled: true,
+    href: '#',
+  }}
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      disabled: true,
-      href: '#',
-      link: 'Previous',
-    },
-    {
-      href: '#',
-      link: '1',
-    },
-    {
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-    {
-      href: '#',
-      link: 'Next',
-    },
-  ]}
+  nextOption={{
+    link: 'Next',
+    href: '#',
+  }}
+  option={{
+    clickableActive: true,
+  }}
+  total={3}
+  page={2}
 />
 
 <Pagination
+  previousOption={{
+    link: 'Previous',
+    disabled: true,
+    href: '#',
+  }}
   navProps={{
     'aria-label': 'Page navigation example',
   }}
-  options={[
-    {
-      disabled: true,
-      href: '#',
-      link: 'Previous',
-    },
-    {
-      href: '#',
-      link: '1',
-    },
-    {
-      active: true,
-      href: '#',
-      link: '2',
-    },
-    {
-      href: '#',
-      link: '3',
-    },
-    {
-      href: '#',
-      link: 'Next',
-    },
-  ]}
+  nextOption={{
+    link: 'Next',
+    href: '#',
+  }}
+  total={3}
+  page={2}
 />
 ```

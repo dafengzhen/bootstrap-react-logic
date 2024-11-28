@@ -2,19 +2,19 @@
   "pagination": {
     "name": "Pagination",
     "desc": {
-      "alignment": "Alignment",
+      "option": "Option",
+      "onChange": "Change Callback",
+      "previousOption": "Previous Option",
+      "nextOption": "Next Option",
       "navProps": "Navigation Properties",
-      "options": "Options",
-      "size": "Size"
-    },
-    "options": {
-      "active": "Active",
-      "disabled": "Disabled",
-      "href": "Href",
-      "id": "ID",
-      "itemProps": "Item Properties",
-      "link": "Link",
-      "linkProps": "Link Properties"
+      "alignment": "Alignment",
+      "alwaysShowEllipsis": "Always Show Ellipsis",
+      "maxVisible": "Max Visible Pages",
+      "previous": "Previous",
+      "size": "Size",
+      "next": "Next",
+      "total": "Total Pages",
+      "page": "Current Page"
     }
   }
 }
