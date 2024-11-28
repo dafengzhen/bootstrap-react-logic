@@ -1,16 +1,16 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
+  BaseProps,
   ModalBackdropVariablesType,
+  ModalBodyVariablesType,
   ModalContentVariablesType,
   ModalDialogVariablesType,
   ModalFooterVariablesType,
   ModalHeaderVariablesType,
   ModalTitleVariablesType,
-  ModalBodyVariablesType,
   ModalVariablesType,
   PropsWithoutRef,
-  BaseProps,
 } from '../tools';
 
 export type ModalBackdropProps<T extends ElementType> = PropsWithoutRef<
@@ -18,6 +18,8 @@ export type ModalBackdropProps<T extends ElementType> = PropsWithoutRef<
   T,
   ModalBackdropVariablesType
 >;
+
+export type ModalBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, ModalBodyVariablesType>;
 
 export type ModalContentProps<T extends ElementType> = PropsWithoutRef<ContentProps<T>, T, ModalContentVariablesType>;
 
@@ -27,67 +29,41 @@ export type ModalFooterProps<T extends ElementType> = PropsWithoutRef<FooterProp
 
 export type ModalHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, ModalHeaderVariablesType>;
 
-export type ModalTitleProps<T extends ElementType> = PropsWithoutRef<TitleProps<T>, T, ModalTitleVariablesType>;
-
-export type ModalBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, ModalBodyVariablesType>;
-
 export type ModalProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ModalVariablesType>;
 
-type Props<T extends ElementType> = {
+export type ModalTitleProps<T extends ElementType> = PropsWithoutRef<TitleProps<T>, T, ModalTitleVariablesType>;
+
+type BackdropProps<T extends ElementType> = BaseProps<T, ModalBackdropVariablesType> & {
+  /**
+   * fade.
+   */
+  fade?: boolean;
+
+  /**
+   * toggle.
+   */
+  toggle?: boolean;
+
+  /**
+   * visible.
+   */
+  visible?: boolean;
+};
+
+type BodyProps<T extends ElementType> = BaseProps<T, ModalBodyVariablesType> & {};
+
+type ContentProps<T extends ElementType> = BaseProps<T, ModalContentVariablesType> & {};
+
+type DialogProps<T extends ElementType> = BaseProps<T, ModalDialogVariablesType> & {
+  /**
+   * centered.
+   */
+  centered?: boolean;
+
   /**
    * fullscreen.
    */
-  fullscreen?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
-
-  /**
-   * contentProps.
-   */
-  contentProps?: ModalContentProps<ElementType>;
-
-  /**
-   * onVisibleChange.
-   */
-  onVisibleChange?: (visible: boolean) => void;
-
-  /**
-   * dialogProps.
-   */
-  dialogProps?: ModalDialogProps<ElementType>;
-
-  /**
-   * footerProps.
-   */
-  footerProps?: ModalFooterProps<ElementType>;
-
-  /**
-   * headerProps.
-   */
-  headerProps?: ModalHeaderProps<ElementType>;
-
-  /**
-   * backdropProps.
-   */
-  backdropProps?: BackdropProps<ElementType>;
-
-  /**
-   * titleProps.
-   */
-  titleProps?: ModalTitleProps<ElementType>;
-
-  /**
-   * bodyProps.
-   */
-  bodyProps?: ModalBodyProps<ElementType>;
-
-  /**
-   * container.
-   */
-  container?: HTMLElement | string;
-
-  /**
-   * size.
-   */
-  size?: 'lg' | 'sm' | 'xl';
+  fullscreen?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
 
   /**
    * scrollable.
@@ -95,29 +71,20 @@ type Props<T extends ElementType> = {
   scrollable?: boolean;
 
   /**
-   * centered.
+   * size.
    */
-  centered?: boolean;
+  size?: 'lg' | 'sm' | 'xl';
+};
 
-  /**
-   * footer.
-   */
-  footer?: ReactNode;
+type FooterProps<T extends ElementType> = BaseProps<T, ModalFooterVariablesType> & {};
 
-  /**
-   * header.
-   */
-  header?: ReactNode;
+type HeaderProps<T extends ElementType> = BaseProps<T, ModalHeaderVariablesType> & {};
 
+type Props<T extends ElementType> = BaseProps<T, ModalVariablesType> & {
   /**
-   * title.
+   * backdropProps.
    */
-  title?: ReactNode;
-
-  /**
-   * visible.
-   */
-  visible?: boolean;
+  backdropProps?: BackdropProps<ElementType>;
 
   /**
    * body.
@@ -125,31 +92,64 @@ type Props<T extends ElementType> = {
   body?: ReactNode;
 
   /**
-   * static.
+   * bodyProps.
    */
-  static?: boolean;
+  bodyProps?: ModalBodyProps<ElementType>;
 
   /**
-   * toggle.
+   * centered.
    */
-  toggle?: boolean;
+  centered?: boolean;
+
+  /**
+   * container.
+   */
+  container?: HTMLElement | string;
+
+  /**
+   * contentProps.
+   */
+  contentProps?: ModalContentProps<ElementType>;
+
+  /**
+   * dialogProps.
+   */
+  dialogProps?: ModalDialogProps<ElementType>;
 
   /**
    * fade.
    */
   fade?: boolean;
-} & BaseProps<T, ModalVariablesType>;
 
-type DialogProps<T extends ElementType> = {
+  /**
+   * footer.
+   */
+  footer?: ReactNode;
+
+  /**
+   * footerProps.
+   */
+  footerProps?: ModalFooterProps<ElementType>;
+
   /**
    * fullscreen.
    */
-  fullscreen?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
+  fullscreen?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
 
   /**
-   * size.
+   * header.
    */
-  size?: 'lg' | 'sm' | 'xl';
+  header?: ReactNode;
+
+  /**
+   * headerProps.
+   */
+  headerProps?: ModalHeaderProps<ElementType>;
+
+  /**
+   * onVisibleChange.
+   */
+  onVisibleChange?: (visible: boolean) => void;
 
   /**
    * scrollable.
@@ -157,16 +157,24 @@ type DialogProps<T extends ElementType> = {
   scrollable?: boolean;
 
   /**
-   * centered.
+   * size.
    */
-  centered?: boolean;
-} & BaseProps<T, ModalDialogVariablesType>;
+  size?: 'lg' | 'sm' | 'xl';
 
-type BackdropProps<T extends ElementType> = {
   /**
-   * visible.
+   * static.
    */
-  visible?: boolean;
+  static?: boolean;
+
+  /**
+   * title.
+   */
+  title?: ReactNode;
+
+  /**
+   * titleProps.
+   */
+  titleProps?: ModalTitleProps<ElementType>;
 
   /**
    * toggle.
@@ -174,17 +182,9 @@ type BackdropProps<T extends ElementType> = {
   toggle?: boolean;
 
   /**
-   * fade.
+   * visible.
    */
-  fade?: boolean;
-} & BaseProps<T, ModalBackdropVariablesType>;
-
-type ContentProps<T extends ElementType> = BaseProps<T, ModalContentVariablesType> & {};
-
-type FooterProps<T extends ElementType> = BaseProps<T, ModalFooterVariablesType> & {};
-
-type HeaderProps<T extends ElementType> = BaseProps<T, ModalHeaderVariablesType> & {};
+  visible?: boolean;
+};
 
 type TitleProps<T extends ElementType> = BaseProps<T, ModalTitleVariablesType> & {};
-
-type BodyProps<T extends ElementType> = BaseProps<T, ModalBodyVariablesType> & {};

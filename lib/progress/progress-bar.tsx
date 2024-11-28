@@ -2,19 +2,19 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ProgressBarProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const ProgressBar = function ProgressBar<T extends ElementType = 'div'>(props: ProgressBarProps<T>) {
   const {
-    as: Component = 'div' as ElementType,
-    dropOldClass,
-    className,
-    variables,
     animated,
+    as: Component = 'div' as ElementType,
+    bg,
+    className,
+    dropOldClass,
+    now,
     striped,
     style,
-    now,
-    bg,
+    variables,
     ...rest
   } = props;
 

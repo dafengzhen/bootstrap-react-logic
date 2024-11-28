@@ -1,24 +1,24 @@
-import { type ElementType, type TouchEvent, useCallback, useEffect, useState, useMemo } from 'react';
+import { type ElementType, type TouchEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 import type { CarouselOption, CarouselProps } from './types.ts';
 
+import Button from '../button/button.tsx';
 import {
-  getLoopIndexDirection,
   calculateLoopIndex,
-  convertBsKeyToVar,
-  clsxWithOptions,
   clsxUnique,
+  clsxWithOptions,
+  convertBsKeyToVar,
+  getLoopIndexDirection,
   stylex,
 } from '../tools';
 import CarouselCaption from './carousel-caption.tsx';
 import CarouselItem from './carousel-item.tsx';
-import Button from '../button/button.tsx';
 
 interface IOption extends CarouselOption {
-  carouselItemStart?: boolean;
+  carouselItemEnd?: boolean;
   carouselItemNext?: boolean;
   carouselItemPrev?: boolean;
-  carouselItemEnd?: boolean;
+  carouselItemStart?: boolean;
   id: number | string;
   interval: number;
 }
@@ -26,32 +26,32 @@ interface IOption extends CarouselOption {
 const Carousel = function Carousel<T extends ElementType = 'div'>(props: CarouselProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    onChange: onChangeByDefault,
-    options: defaultOptions,
+    className,
     controls = true,
     dropOldClass,
-    slide = true,
+    fade,
     indicators,
-    className,
-    variables,
+    onChange: onChangeByDefault,
+    options: defaultOptions,
     pause,
+    ride,
+    slide = true,
     style,
     touch,
-    fade,
-    ride,
+    variables,
     ...rest
   } = props;
 
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
     ...item,
-    interval: item.interval ?? 3000,
     id: item.id ?? index,
+    interval: item.interval ?? 3000,
   }));
 
   const [options, setOptions] = useState<IOption[]>(initialOptions);
   const [carouselItemIndex, setCarouselItemIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<null | number>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'carousel', slide && 'slide', fade && 'carousel-fade', className);
@@ -61,7 +61,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
   }, [className, dropOldClass, fade, slide, style, variables]);
 
   const updateItemsState = useCallback(
-    (currentIndex: number, nextIndex: number, type: 'nextIndicator' | 'prevIndicator' | 'next' | 'prev') => {
+    (currentIndex: number, nextIndex: number, type: 'next' | 'nextIndicator' | 'prev' | 'prevIndicator') => {
       const currentItem = options[currentIndex];
       const nextItem = options[nextIndex];
 
@@ -83,7 +83,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
   );
 
   const handleClick = useCallback(
-    (type: 'nextIndicator' | 'prevIndicator' | 'next' | 'prev') => {
+    (type: 'next' | 'nextIndicator' | 'prev' | 'prevIndicator') => {
       const length = options.length;
       if (length === 0) {
         return;
@@ -181,8 +181,8 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
       {...renderOptions}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onTouchStart={handleTouchStart}
     >
       {indicators && (
         <div className="carousel-indicators">
@@ -190,13 +190,13 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
             const { isNext } = getLoopIndexDirection(carouselItemIndex, index, options.length);
             return (
               <Button
-                className={clsxWithOptions(null, index === carouselItemIndex && 'active')}
-                onClick={() => handleClick(isNext ? 'nextIndicator' : 'prevIndicator')}
                 aria-current={index === carouselItemIndex ? 'true' : 'false'}
                 aria-label={`Slide ${index + 1}`}
+                className={clsxWithOptions(null, index === carouselItemIndex && 'active')}
                 data-bs-target=""
-                key={item.id}
                 dropOldClass
+                key={item.id}
+                onClick={() => handleClick(isNext ? 'nextIndicator' : 'prevIndicator')}
               ></Button>
             );
           })}
@@ -205,11 +205,11 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
       <div className="carousel-inner">
         {options.map((item) => (
           <CarouselItem
-            carouselItemStart={item.carouselItemStart}
+            active={item.active}
+            carouselItemEnd={item.carouselItemEnd}
             carouselItemNext={item.carouselItemNext}
             carouselItemPrev={item.carouselItemPrev}
-            carouselItemEnd={item.carouselItemEnd}
-            active={item.active}
+            carouselItemStart={item.carouselItemStart}
             key={item.id}
           >
             {item.item}
@@ -219,12 +219,12 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
       </div>
       {controls && (
         <>
-          <Button onClick={() => handleClick('prev')} className="carousel-control-prev" dropOldClass>
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <Button className="carousel-control-prev" dropOldClass onClick={() => handleClick('prev')}>
+            <span aria-hidden="true" className="carousel-control-prev-icon"></span>
             <span className="visually-hidden">Previous</span>
           </Button>
-          <Button onClick={() => handleClick('next')} className="carousel-control-next" dropOldClass>
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <Button className="carousel-control-next" dropOldClass onClick={() => handleClick('next')}>
+            <span aria-hidden="true" className="carousel-control-next-icon"></span>
             <span className="visually-hidden">Next</span>
           </Button>
         </>

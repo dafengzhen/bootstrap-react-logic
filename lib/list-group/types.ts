@@ -1,65 +1,33 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
+  BaseProps,
   ListGroupItemVariablesType,
   ListGroupVariablesType,
   PropsWithoutRef,
   VariantType,
-  BaseProps,
 } from '../tools';
-
-export interface ListGroupOption {
-  props?: ListGroupItemProps<ElementType>;
-  variant?: keyof VariantType;
-  id?: number | string;
-  itemAction?: boolean;
-  disabled?: boolean;
-  flexFill?: boolean;
-  active?: boolean;
-  item?: ReactNode;
-}
 
 export type ListGroupItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, ListGroupItemVariablesType>;
 
+export interface ListGroupOption {
+  active?: boolean;
+  disabled?: boolean;
+  flexFill?: boolean;
+  id?: number | string;
+  item?: ReactNode;
+  itemAction?: boolean;
+  props?: ListGroupItemProps<ElementType>;
+  variant?: keyof VariantType;
+}
+
 export type ListGroupProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ListGroupVariablesType>;
 
-type Props<T extends ElementType> = {
+type ItemProps<T extends ElementType> = BaseProps<T, ListGroupItemVariablesType> & {
   /**
-   * horizontal.
+   * active.
    */
-  horizontal?: boolean | 'xxl' | 'lg' | 'md' | 'sm' | 'xl';
-
-  /**
-   * options.
-   */
-  options?: ListGroupOption[];
-
-  /**
-   * itemAction.
-   */
-  itemAction?: boolean;
-
-  /**
-   * numbered.
-   */
-  numbered?: boolean;
-
-  /**
-   * flush.
-   */
-  flush?: boolean;
-} & BaseProps<T, ListGroupVariablesType>;
-
-type ItemProps<T extends ElementType> = {
-  /**
-   * variant.
-   */
-  variant?: keyof VariantType;
-
-  /**
-   * itemAction.
-   */
-  itemAction?: boolean;
+  active?: boolean;
 
   /**
    * disabled.
@@ -72,7 +40,39 @@ type ItemProps<T extends ElementType> = {
   flexFill?: boolean;
 
   /**
-   * active.
+   * itemAction.
    */
-  active?: boolean;
-} & BaseProps<T, ListGroupItemVariablesType>;
+  itemAction?: boolean;
+
+  /**
+   * variant.
+   */
+  variant?: keyof VariantType;
+};
+
+type Props<T extends ElementType> = BaseProps<T, ListGroupVariablesType> & {
+  /**
+   * flush.
+   */
+  flush?: boolean;
+
+  /**
+   * horizontal.
+   */
+  horizontal?: 'lg' | 'md' | 'sm' | 'xl' | 'xxl' | boolean;
+
+  /**
+   * itemAction.
+   */
+  itemAction?: boolean;
+
+  /**
+   * numbered.
+   */
+  numbered?: boolean;
+
+  /**
+   * options.
+   */
+  options?: ListGroupOption[];
+};

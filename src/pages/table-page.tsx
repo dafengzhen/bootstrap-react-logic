@@ -1,17 +1,17 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Table } from '@lib/table';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/table/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -27,32 +27,32 @@ export default function TablePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tTablePage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -83,52 +83,52 @@ export default function TablePage() {
         {/*/>*/}
       </Example>
 
-      <Example hash="variants" t={tTablePage} state={state}>
+      <Example hash="variants" state={state} t={tTablePage}>
         <Table
           body={[
             {
-              values: ['Default', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['Default', 'Cell', 'Cell'],
             },
             {
+              scope: 'row',
               values: ['Primary', 'Cell', 'Cell'],
               variant: 'primary',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Secondary', 'Cell', 'Cell'],
               variant: 'secondary',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Success', 'Cell', 'Cell'],
               variant: 'success',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Danger', 'Cell', 'Cell'],
               variant: 'danger',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Warning', 'Cell', 'Cell'],
               variant: 'warning',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Info', 'Cell', 'Cell'],
               variant: 'info',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Light', 'Cell', 'Cell'],
               variant: 'light',
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['Dark', 'Cell', 'Cell'],
               variant: 'dark',
-              scope: 'row',
             },
           ]}
           head={[
@@ -193,32 +193,32 @@ export default function TablePage() {
         {/*/>*/}
       </Example>
 
-      <Example hash="stripedRows" t={tTablePage} state={state}>
+      <Example hash="stripedRows" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -227,32 +227,32 @@ export default function TablePage() {
         />
       </Example>
 
-      <Example hash="stripedColumns" t={tTablePage} state={state}>
+      <Example hash="stripedColumns" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -263,28 +263,28 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -296,129 +296,129 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
-          variant="dark"
           striped
+          variant="dark"
         />
 
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
+          striped
           variant="success"
-          striped
         />
 
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
-          variant="success"
           stripedColumns
+          variant="success"
         />
       </Example>
 
-      <Example hash="hoverableRows" t={tTablePage} state={state}>
+      <Example hash="hoverableRows" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -429,98 +429,98 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
+          hover
           variant="dark"
-          hover
         />
 
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
-          striped
           hover
+          striped
         />
       </Example>
 
-      <Example hash="activeTables" t={tTablePage} state={state}>
+      <Example hash="activeTables" state={state} t={tTablePage}>
         <Table
           body={[
             {
-              values: ['1', 'Mark', 'Otto', '@mdo'],
               active: true,
               scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
             },
             {
-              values: ['2', 'Jacob', 'Thornton', '@fat'],
               scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   active: true,
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -530,30 +530,30 @@ export default function TablePage() {
         <Table
           body={[
             {
-              values: ['1', 'Mark', 'Otto', '@mdo'],
               active: true,
               scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
             },
             {
-              values: ['2', 'Jacob', 'Thornton', '@fat'],
               scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   active: true,
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -562,166 +562,166 @@ export default function TablePage() {
         />
       </Example>
 
-      <Example hash="borderedTables" t={tTablePage} state={state}>
+      <Example hash="borderedTables" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
-          ]}
-          head={[
-            { scope: 'col', label: '#' },
-            { label: 'First', scope: 'col' },
-            { label: 'Last', scope: 'col' },
-            { label: 'Handle', scope: 'col' },
           ]}
           bordered
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
         />
 
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
-          head={[
-            { scope: 'col', label: '#' },
-            { label: 'First', scope: 'col' },
-            { label: 'Last', scope: 'col' },
-            { label: 'Handle', scope: 'col' },
-          ]}
+          bordered
           className="border-primary"
-          bordered
-        />
-      </Example>
-
-      <Example hash="tablesWithoutBorders" t={tTablePage} state={state}>
-        <Table
-          body={[
-            {
-              values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
-            },
-            {
-              values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
-            },
-            {
-              values: [
-                '3',
-                {
-                  value: 'Larry the Bird',
-                  colSpan: 2,
-                },
-                null,
-                '@twitter',
-              ],
-              scope: 'row',
-            },
-          ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
+        />
+      </Example>
+
+      <Example hash="tablesWithoutBorders" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: [
+                '3',
+                {
+                  colSpan: 2,
+                  value: 'Larry the Bird',
+                },
+                null,
+                '@twitter',
+              ],
+            },
+          ]}
           borderless
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
         />
 
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
+          borderless
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
           variant="dark"
-          borderless
         />
       </Example>
 
-      <Example hash="smallTables" t={tTablePage} state={state}>
+      <Example hash="smallTables" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -732,74 +732,74 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
-          variant="dark"
           size="sm"
+          variant="dark"
         />
       </Example>
 
-      <Example hash="tableGroupDividers" t={tTablePage} state={state}>
+      <Example hash="tableGroupDividers" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
-          ]}
-          head={[
-            { scope: 'col', label: '#' },
-            { label: 'First', scope: 'col' },
-            { label: 'Last', scope: 'col' },
-            { label: 'Handle', scope: 'col' },
           ]}
           bodyProps={{
             divider: true,
           }}
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
         />
       </Example>
 
-      <Example hash="verticalAlignment" t={tTablePage} state={state}>
+      <Example hash="verticalAlignment" state={state} t={tTablePage}>
         <Table
           body={[
             {
@@ -820,6 +820,9 @@ export default function TablePage() {
               ],
             },
             {
+              props: {
+                className: 'align-bottom',
+              },
               values: [
                 <>
                   This cell inherits <code>vertical-align: middle;</code> from the table
@@ -835,9 +838,6 @@ export default function TablePage() {
                   how the vertical alignment works in the preceding cells.
                 </>,
               ],
-              props: {
-                className: 'align-bottom',
-              },
             },
             {
               values: [
@@ -848,14 +848,14 @@ export default function TablePage() {
                   This cell inherits <code>vertical-align: middle;</code> from the table
                 </>,
                 {
+                  tdProps: {
+                    className: 'align-top',
+                  },
                   value: (
                     <>
                       This cell inherits <code>vertical-align: middle;</code> from the table
                     </>
                   ),
-                  tdProps: {
-                    className: 'align-top',
-                  },
                 },
                 <>
                   This here is some placeholder text, intended to take up quite a bit of vertical space, to demonstrate
@@ -866,119 +866,119 @@ export default function TablePage() {
           ]}
           head={[
             {
-              props: {
-                className: 'w-25',
-              },
               label: 'Heading 1',
-              scope: 'col',
-            },
-            {
               props: {
                 className: 'w-25',
               },
+              scope: 'col',
+            },
+            {
               label: 'Heading 2',
-              scope: 'col',
-            },
-            {
               props: {
                 className: 'w-25',
               },
+              scope: 'col',
+            },
+            {
               label: 'Heading 3',
-              scope: 'col',
-            },
-            {
               props: {
                 className: 'w-25',
               },
+              scope: 'col',
+            },
+            {
               label: 'Heading 4',
+              props: {
+                className: 'w-25',
+              },
               scope: 'col',
             },
           ]}
-          responsive
           middle
+          responsive
         />
       </Example>
 
-      <Example hash="nesting" t={tTablePage} state={state}>
+      <Example hash="nesting" state={state} t={tTablePage}>
         <Table
           body={[
             {
-              values: ['1', 'Mark', 'Otto', '@mdo'],
               scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
             },
             {
               values: [
                 {
+                  colSpan: 4,
                   value: (
                     <Table
                       body={[
                         {
+                          scope: 'row',
                           values: ['A', 'First', 'Last'],
-                          scope: 'row',
                         },
                         {
+                          scope: 'row',
                           values: ['B', 'First', 'Last'],
-                          scope: 'row',
                         },
                         {
-                          values: ['C', 'First', 'Last'],
                           scope: 'row',
+                          values: ['C', 'First', 'Last'],
                         },
                       ]}
+                      className="mb-0"
                       head={[
                         { label: 'Header', scope: 'col' },
                         { label: 'Header', scope: 'col' },
                         { label: 'Header', scope: 'col' },
                       ]}
-                      className="mb-0"
                     />
                   ),
-                  colSpan: 4,
                 },
               ],
             },
             {
+              scope: 'row',
               values: [
                 '3',
                 {
-                  value: 'Larry the Bird',
                   colSpan: 2,
+                  value: 'Larry the Bird',
                 },
                 null,
                 '@twitter',
               ],
-              scope: 'row',
             },
           ]}
+          bordered
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
-          bordered
           striped
         />
       </Example>
 
-      <Example hash="tableHead" t={tTablePage} state={state}>
+      <Example hash="tableHead" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Larry', 'the Bird', '@twitter'],
               scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -991,20 +991,20 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Larry', 'the Bird', '@twitter'],
               scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
@@ -1015,80 +1015,80 @@ export default function TablePage() {
         />
       </Example>
 
-      <Example hash="tableFoot" t={tTablePage} state={state}>
+      <Example hash="tableFoot" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Larry', 'the Bird', '@twitter'],
               scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
             },
-          ]}
-          head={[
-            { scope: 'col', label: '#' },
-            { label: 'First', scope: 'col' },
-            { label: 'Last', scope: 'col' },
-            { label: 'Handle', scope: 'col' },
           ]}
           foot={[
             {
               values: ['Footer', 'Footer', 'Footer', 'Footer'],
             },
           ]}
-        />
-      </Example>
-
-      <Example hash="captions" t={tTablePage} state={state}>
-        <Table
-          body={[
-            {
-              values: ['1', 'Mark', 'Otto', '@mdo'],
-              scope: 'row',
-            },
-            {
-              values: ['2', 'Jacob', 'Thornton', '@fat'],
-              scope: 'row',
-            },
-            {
-              values: ['3', 'Larry', 'the Bird', '@twitter'],
-              scope: 'row',
-            },
-          ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'First', scope: 'col' },
             { label: 'Last', scope: 'col' },
             { label: 'Handle', scope: 'col' },
           ]}
+        />
+      </Example>
+
+      <Example hash="captions" state={state} t={tTablePage}>
+        <Table
+          body={[
+            {
+              scope: 'row',
+              values: ['1', 'Mark', 'Otto', '@mdo'],
+            },
+            {
+              scope: 'row',
+              values: ['2', 'Jacob', 'Thornton', '@fat'],
+            },
+            {
+              scope: 'row',
+              values: ['3', 'Larry', 'the Bird', '@twitter'],
+            },
+          ]}
           caption="List of users"
+          head={[
+            { label: '#', scope: 'col' },
+            { label: 'First', scope: 'col' },
+            { label: 'Last', scope: 'col' },
+            { label: 'Handle', scope: 'col' },
+          ]}
         />
       </Example>
 
-      <Example hash="alwaysResponsive" t={tTablePage} state={state}>
+      <Example hash="alwaysResponsive" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1103,24 +1103,24 @@ export default function TablePage() {
         />
       </Example>
 
-      <Example hash="breakpointSpecific" t={tTablePage} state={state}>
+      <Example hash="breakpointSpecific" state={state} t={tTablePage}>
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1137,20 +1137,20 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1167,20 +1167,20 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1197,20 +1197,20 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1227,20 +1227,20 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1257,20 +1257,20 @@ export default function TablePage() {
         <Table
           body={[
             {
+              scope: 'row',
               values: ['1', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
+              scope: 'row',
               values: ['2', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
-              scope: 'row',
             },
             {
-              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
               scope: 'row',
+              values: ['3', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell', 'Cell'],
             },
           ]}
           head={[
-            { scope: 'col', label: '#' },
+            { label: '#', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
             { label: 'Heading', scope: 'col' },
@@ -1288,117 +1288,117 @@ export default function TablePage() {
       <PropsIndicator />
 
       <Example
+        hash="tableComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">TableBodyOption[]</span>,
-            desc: tTableComponentProps('table.desc.body'),
             attr: 'body',
             default: '',
+            desc: tTableComponentProps('table.desc.body'),
+            type: <span className="badge text-bg-secondary">TableBodyOption[]</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">TableTbodyProps</span>,
-            desc: tTableComponentProps('table.desc.bodyProps'),
             attr: 'bodyProps',
             default: '',
+            desc: tTableComponentProps('table.desc.bodyProps'),
+            type: <span className="badge text-bg-secondary">TableTbodyProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tTableComponentProps('table.desc.bordered'),
             attr: 'bordered',
             default: '',
+            desc: tTableComponentProps('table.desc.bordered'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tTableComponentProps('table.desc.borderless'),
             attr: 'borderless',
             default: '',
+            desc: tTableComponentProps('table.desc.borderless'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tTableComponentProps('table.desc.caption'),
             attr: 'caption',
             default: '',
+            desc: tTableComponentProps('table.desc.caption'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">TableCaptionProps</span>,
-            desc: tTableComponentProps('table.desc.captionProps'),
             attr: 'captionProps',
             default: '',
+            desc: tTableComponentProps('table.desc.captionProps'),
+            type: <span className="badge text-bg-secondary">TableCaptionProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">TableFootOption</span>,
-            desc: tTableComponentProps('table.desc.foot'),
             attr: 'foot',
             default: '',
+            desc: tTableComponentProps('table.desc.foot'),
+            type: <span className="badge text-bg-secondary">TableFootOption</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">TableHeadOption</span>,
-            desc: tTableComponentProps('table.desc.head'),
             attr: 'head',
             default: '',
+            desc: tTableComponentProps('table.desc.head'),
+            type: <span className="badge text-bg-secondary">TableHeadOption</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">TableTheadProps</span>,
-            desc: tTableComponentProps('table.desc.headProps'),
             attr: 'headProps',
             default: '',
+            desc: tTableComponentProps('table.desc.headProps'),
+            type: <span className="badge text-bg-secondary">TableTheadProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tTableComponentProps('table.desc.hover'),
             attr: 'hover',
             default: '',
+            desc: tTableComponentProps('table.desc.hover'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tTableComponentProps('table.desc.middle'),
             attr: 'middle',
             default: '',
+            desc: tTableComponentProps('table.desc.middle'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl | boolean</span>,
-            desc: tTableComponentProps('table.desc.responsive'),
             attr: 'responsive',
             default: '',
+            desc: tTableComponentProps('table.desc.responsive'),
+            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl | boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">TableResponsiveProps</span>,
-            desc: tTableComponentProps('table.desc.responsiveProps'),
             attr: 'responsiveProps',
             default: '',
+            desc: tTableComponentProps('table.desc.responsiveProps'),
+            type: <span className="badge text-bg-secondary">TableResponsiveProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">sm</span>,
-            desc: tTableComponentProps('table.desc.size'),
             attr: 'size',
             default: '',
+            desc: tTableComponentProps('table.desc.size'),
+            type: <span className="badge text-bg-secondary">sm</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tTableComponentProps('table.desc.striped'),
             attr: 'striped',
             default: '',
+            desc: tTableComponentProps('table.desc.striped'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tTableComponentProps('table.desc.stripedColumns'),
             attr: 'stripedColumns',
             default: '',
+            desc: tTableComponentProps('table.desc.stripedColumns'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">Variant</span>,
-            desc: tTableComponentProps('table.desc.variant'),
             attr: 'variant',
             default: '',
+            desc: tTableComponentProps('table.desc.variant'),
+            type: <span className="badge text-bg-secondary">Variant</span>,
           },
         ]}
-        hash="tableComponentProps"
-        t={tTableComponentProps}
-        state={state}
         props
+        state={state}
+        t={tTableComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

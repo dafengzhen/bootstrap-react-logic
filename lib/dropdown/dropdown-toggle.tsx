@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { DropdownToggleProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import Button from '../button/button.tsx';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
-const DropdownToggle = function DropdownToggle<T extends ElementType = 'button' | 'a'>(props: DropdownToggleProps<T>) {
-  const { as: Component = 'button' as ElementType, dropOldClass, className, variables, onRef, style, ...rest } = props;
+const DropdownToggle = function DropdownToggle<T extends ElementType = 'a' | 'button'>(props: DropdownToggleProps<T>) {
+  const { as: Component = 'button' as ElementType, className, dropOldClass, onRef, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'dropdown-toggle', className);

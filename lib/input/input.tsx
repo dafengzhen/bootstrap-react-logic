@@ -2,29 +2,29 @@ import { type ElementType, useMemo } from 'react';
 
 import type { InputProps } from './types.ts';
 
-import { processSlotClasses, convertBsKeyToVar, clsxWithOptions, findTruthyClass, clsxUnique, stylex } from '../tools';
+import { clsxUnique, clsxWithOptions, convertBsKeyToVar, findTruthyClass, processSlotClasses, stylex } from '../tools';
 import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(props: InputProps<T>) {
   const {
     as: Component = 'input' as ElementType,
-    startEndContentClasses,
-    readonlyPlainText,
-    dropOldClass,
-    startContent,
-    nativeColor,
-    endContent,
-    nativeSize,
-    className,
-    isInvalid,
-    variables,
     children,
-    isValid,
+    className,
     color,
+    dropOldClass,
+    endContent,
+    isInvalid,
+    isValid,
+    nativeColor,
+    nativeSize,
     onRef,
-    style,
+    readonlyPlainText,
     size,
+    startContent,
+    startEndContentClasses,
+    style,
     type,
+    variables,
     ...rest
   } = props;
 
@@ -48,8 +48,8 @@ const Input = function Input<T extends ElementType = 'input'>(props: InputProps<
     return {
       className: finalClass,
       color: nativeColor,
-      style: finalStyle,
       size: nativeSize,
+      style: finalStyle,
       type,
     };
   }, [
@@ -75,9 +75,9 @@ const Input = function Input<T extends ElementType = 'input'>(props: InputProps<
         startContent && inputStyles.brlPs9,
         endContent && inputStyles.brlPe9,
       ),
-      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
-      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
       container: 'd-inline-flex align-items-center position-relative',
+      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
+      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
     });
 
     return (

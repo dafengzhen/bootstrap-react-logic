@@ -1,18 +1,18 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Checkbox } from '@lib/checkbox';
 import { Label } from '@lib/label';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/checkbox/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -28,170 +28,170 @@ export default function CheckboxPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tCheckboxPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tCheckboxPage}>
         <div className="form-check">
           <Checkbox id="flexCheckDefault" value=""></Checkbox>
-          <Label htmlFor="flexCheckDefault" formCheckLabel>
+          <Label formCheckLabel htmlFor="flexCheckDefault">
             Default checkbox
           </Label>
         </div>
 
-        <Checkbox id="flexCheckChecked" defaultChecked value="">
+        <Checkbox defaultChecked id="flexCheckChecked" value="">
           Checked checkbox
         </Checkbox>
       </Example>
 
-      <Example hash="indeterminate" t={tCheckboxPage} state={state}>
+      <Example hash="indeterminate" state={state} t={tCheckboxPage}>
         <div className="form-check">
           <Checkbox id="flexCheckIndeterminate" indeterminate value=""></Checkbox>
-          <Label htmlFor="flexCheckIndeterminate" formCheckLabel>
+          <Label formCheckLabel htmlFor="flexCheckIndeterminate">
             Indeterminate checkbox
           </Label>
         </div>
       </Example>
 
-      <Example t={tCheckboxPage} hash="disabled" state={state}>
+      <Example hash="disabled" state={state} t={tCheckboxPage}>
         <div className="form-check">
-          <Checkbox id="flexCheckIndeterminateDisabled" indeterminate disabled value=""></Checkbox>
-          <Label htmlFor="flexCheckIndeterminateDisabled" formCheckLabel>
+          <Checkbox disabled id="flexCheckIndeterminateDisabled" indeterminate value=""></Checkbox>
+          <Label formCheckLabel htmlFor="flexCheckIndeterminateDisabled">
             Disabled indeterminate checkbox
           </Label>
         </div>
 
         <div className="form-check">
-          <Checkbox id="flexCheckDisabled" disabled value=""></Checkbox>
-          <Label htmlFor="flexCheckDisabled" formCheckLabel>
+          <Checkbox disabled id="flexCheckDisabled" value=""></Checkbox>
+          <Label formCheckLabel htmlFor="flexCheckDisabled">
             Disabled checkbox
           </Label>
         </div>
 
         <div className="form-check">
-          <Checkbox id="flexCheckCheckedDisabled" defaultChecked disabled value=""></Checkbox>
-          <Label htmlFor="flexCheckCheckedDisabled" formCheckLabel>
+          <Checkbox defaultChecked disabled id="flexCheckCheckedDisabled" value=""></Checkbox>
+          <Label formCheckLabel htmlFor="flexCheckCheckedDisabled">
             Disabled checked checkbox
           </Label>
         </div>
       </Example>
 
-      <Example t={tCheckboxPage} hash="switch" state={state}>
-        <Checkbox id="flexSwitchCheckDefault" value="" switch>
+      <Example hash="switch" state={state} t={tCheckboxPage}>
+        <Checkbox id="flexSwitchCheckDefault" switch value="">
           Default switch checkbox input
         </Checkbox>
 
         <div className="form-check form-switch">
-          <Checkbox id="flexSwitchCheckChecked" defaultChecked role="switch" value=""></Checkbox>
-          <Label htmlFor="flexSwitchCheckChecked" formCheckLabel>
+          <Checkbox defaultChecked id="flexSwitchCheckChecked" role="switch" value=""></Checkbox>
+          <Label formCheckLabel htmlFor="flexSwitchCheckChecked">
             Checked switch checkbox input
           </Label>
         </div>
 
         <div className="form-check form-switch">
-          <Checkbox id="flexSwitchCheckDisabled" role="switch" disabled value=""></Checkbox>
-          <Label htmlFor="flexSwitchCheckDisabled" formCheckLabel>
+          <Checkbox disabled id="flexSwitchCheckDisabled" role="switch" value=""></Checkbox>
+          <Label formCheckLabel htmlFor="flexSwitchCheckDisabled">
             Disabled switch checkbox input
           </Label>
         </div>
 
         <div className="form-check form-switch">
-          <Checkbox id="flexSwitchCheckCheckedDisabled" defaultChecked role="switch" disabled value=""></Checkbox>
-          <Label htmlFor="flexSwitchCheckCheckedDisabled" formCheckLabel>
+          <Checkbox defaultChecked disabled id="flexSwitchCheckCheckedDisabled" role="switch" value=""></Checkbox>
+          <Label formCheckLabel htmlFor="flexSwitchCheckCheckedDisabled">
             Disabled checked switch checkbox input
           </Label>
         </div>
       </Example>
 
-      <Example t={tCheckboxPage} hash="inline" state={state}>
-        <Checkbox id="inlineCheckbox1" value="option1" inline>
+      <Example hash="inline" state={state} t={tCheckboxPage}>
+        <Checkbox id="inlineCheckbox1" inline value="option1">
           1
         </Checkbox>
 
         <div className="form-check form-check-inline">
           <Checkbox id="inlineCheckbox2" value="option2"></Checkbox>
-          <Label htmlFor="inlineCheckbox2" formCheckLabel>
+          <Label formCheckLabel htmlFor="inlineCheckbox2">
             2
           </Label>
         </div>
 
         <div className="form-check form-check-inline">
-          <Checkbox id="inlineCheckbox3" value="option3" disabled></Checkbox>
-          <Label htmlFor="inlineCheckbox3" formCheckLabel>
+          <Checkbox disabled id="inlineCheckbox3" value="option3"></Checkbox>
+          <Label formCheckLabel htmlFor="inlineCheckbox3">
             3 (disabled)
           </Label>
         </div>
       </Example>
 
-      <Example t={tCheckboxPage} hash="reverse" state={state}>
-        <Checkbox id="reverseCheck1" value="" reverse>
+      <Example hash="reverse" state={state} t={tCheckboxPage}>
+        <Checkbox id="reverseCheck1" reverse value="">
           Reverse checkbox
         </Checkbox>
 
         <div className="form-check form-check-reverse">
-          <Checkbox id="reverseCheck2" disabled value=""></Checkbox>
-          <Label htmlFor="reverseCheck2" formCheckLabel>
+          <Checkbox disabled id="reverseCheck2" value=""></Checkbox>
+          <Label formCheckLabel htmlFor="reverseCheck2">
             Disabled reverse checkbox
           </Label>
         </div>
 
         <div className="form-check form-switch form-check-reverse">
           <Checkbox id="flexSwitchCheckReverse" value=""></Checkbox>
-          <Label htmlFor="flexSwitchCheckReverse" formCheckLabel>
+          <Label formCheckLabel htmlFor="flexSwitchCheckReverse">
             Reverse switch checkbox input
           </Label>
         </div>
       </Example>
 
-      <Example hash="withoutLabels" t={tCheckboxPage} state={state}>
+      <Example hash="withoutLabels" state={state} t={tCheckboxPage}>
         <Checkbox value="" />
       </Example>
 
-      <Example hash="toggleButtons" t={tCheckboxPage} overflowXAuto state={state} textNowrap row>
+      <Example hash="toggleButtons" overflowXAuto row state={state} t={tCheckboxPage} textNowrap>
         <div>
-          <Checkbox className="btn-check" autoComplete="off" id="btn-check" dropOldClass value=""></Checkbox>
-          <Label className="btn btn-primary" htmlFor="btn-check" dropOldClass>
+          <Checkbox autoComplete="off" className="btn-check" dropOldClass id="btn-check" value=""></Checkbox>
+          <Label className="btn btn-primary" dropOldClass htmlFor="btn-check">
             Single toggle
           </Label>
         </div>
 
         <div>
           <Checkbox
-            className="btn-check"
             autoComplete="off"
-            id="btn-check-2"
+            className="btn-check"
             defaultChecked
             dropOldClass
+            id="btn-check-2"
             value=""
           ></Checkbox>
-          <Label className="btn btn-primary" htmlFor="btn-check-2" dropOldClass>
+          <Label className="btn btn-primary" dropOldClass htmlFor="btn-check-2">
             Checked
           </Label>
         </div>
 
         <div>
-          <Checkbox className="btn-check" autoComplete="off" id="btn-check-3" dropOldClass disabled value=""></Checkbox>
-          <Label className="btn btn-primary" htmlFor="btn-check-3" dropOldClass>
+          <Checkbox autoComplete="off" className="btn-check" disabled dropOldClass id="btn-check-3" value=""></Checkbox>
+          <Label className="btn btn-primary" dropOldClass htmlFor="btn-check-3">
             Disabled
           </Label>
         </div>
       </Example>
 
-      <Example hash="outlinedStyles" t={tCheckboxPage} overflowXAuto state={state} textNowrap row>
+      <Example hash="outlinedStyles" overflowXAuto row state={state} t={tCheckboxPage} textNowrap>
         <div>
-          <Checkbox id="btn-check-outlined" className="btn-check" autoComplete="off" dropOldClass value=""></Checkbox>
-          <Label className="btn btn-outline-primary" htmlFor="btn-check-outlined" dropOldClass>
+          <Checkbox autoComplete="off" className="btn-check" dropOldClass id="btn-check-outlined" value=""></Checkbox>
+          <Label className="btn btn-outline-primary" dropOldClass htmlFor="btn-check-outlined">
             Single toggle
           </Label>
         </div>
 
         <div>
           <Checkbox
-            id="btn-check-2-outlined"
-            className="btn-check"
             autoComplete="off"
+            className="btn-check"
             defaultChecked
             dropOldClass
+            id="btn-check-2-outlined"
             value=""
           ></Checkbox>
-          <Label className="btn btn-outline-secondary" htmlFor="btn-check-2-outlined" dropOldClass>
+          <Label className="btn btn-outline-secondary" dropOldClass htmlFor="btn-check-2-outlined">
             Checked
           </Label>
         </div>
@@ -200,20 +200,24 @@ export default function CheckboxPage() {
       <PropsIndicator />
 
       <Example
+        hash="checkboxComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.indeterminate'),
             attr: 'indeterminate',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.indeterminate'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.disabled'),
             attr: 'disabled',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            attr: 'contentClasses',
+            default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.contentClasses'),
             type: (
               <div className="d-flex flex-column gap-2">
                 <div>
@@ -226,48 +230,44 @@ export default function CheckboxPage() {
                 </div>
               </div>
             ),
-            desc: tCheckboxComponentProps('checkbox.desc.contentClasses'),
-            attr: 'contentClasses',
-            default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.switch'),
             attr: 'switch',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.switch'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.inline'),
             attr: 'inline',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.inline'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.reverse'),
             attr: 'reverse',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.reverse'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.isValid'),
             attr: 'isValid',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.isValid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCheckboxComponentProps('checkbox.desc.isInvalid'),
             attr: 'isInvalid',
             default: '',
+            desc: tCheckboxComponentProps('checkbox.desc.isInvalid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="checkboxComponentProps"
-        t={tCheckboxComponentProps}
-        state={state}
         props
+        state={state}
+        t={tCheckboxComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

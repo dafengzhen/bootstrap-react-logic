@@ -1,36 +1,36 @@
 import {
+  handleClipboard,
   handleToggleLanguage,
   handleToggleLayout,
   handleToggleState,
   handleToggleTheme,
-  handleClipboard,
 } from '@tools/handlers';
 import clsx from 'clsx';
 
 export const ActionIcons = ({
-  fullscreenState,
-  showCode = true,
-  layoutState,
-  onClickCode,
-  fullscreen,
-  themeState,
   center,
-  isOpen,
   code,
   dark,
+  fullscreen,
+  fullscreenState,
   i18n,
+  isOpen,
+  layoutState,
+  onClickCode,
+  showCode = true,
+  themeState,
 }: {
-  onClickCode: () => void;
+  center?: boolean;
+  code?: string;
+  dark?: boolean;
   fullscreen?: boolean;
   fullscreenState: any;
-  showCode?: boolean;
-  center?: boolean;
-  layoutState: any;
-  isOpen: boolean;
-  themeState: any;
-  dark?: boolean;
-  code?: string;
   i18n: any;
+  isOpen: boolean;
+  layoutState: any;
+  onClickCode: () => void;
+  showCode?: boolean;
+  themeState: any;
 }) => {
   return (
     <div className="d-flex align-items-center gap-2">
@@ -61,11 +61,11 @@ export const ActionIcons = ({
       ></i>
 
       <select
+        className="form-select form-select-sm"
         onChange={() => {
           handleToggleLanguage(i18n);
         }}
         style={{ backgroundImage: 'none', paddingRight: '0.5rem' }}
-        className="form-select form-select-sm"
         value={i18n.language}
       >
         <option value="en">EN</option>

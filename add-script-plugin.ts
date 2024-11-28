@@ -1,4 +1,4 @@
-import type { ResolvedConfig, Plugin } from 'vite';
+import type { Plugin, ResolvedConfig } from 'vite';
 
 import htmlnano from 'htmlnano';
 
@@ -6,6 +6,10 @@ const addScriptPlugin = (): Plugin => {
   let config: ResolvedConfig;
 
   return {
+    configResolved(resolvedConfig) {
+      config = resolvedConfig;
+    },
+    name: 'add-script',
     async transformIndexHtml(html, { filename }) {
       const appPublicBaseHref = (config.define as { __APP_PUBLIC_BASE_HREF__: string })['__APP_PUBLIC_BASE_HREF__'];
       if (!appPublicBaseHref) {
@@ -23,10 +27,6 @@ const addScriptPlugin = (): Plugin => {
 
       return html;
     },
-    configResolved(resolvedConfig) {
-      config = resolvedConfig;
-    },
-    name: 'add-script',
   };
 };
 
@@ -45,7 +45,7 @@ const processHtml = ({
   }
 };
 
-const getScript = (appPublicBaseHref: string, filename: string): undefined | string => {
+const getScript = (appPublicBaseHref: string, filename: string): string | undefined => {
   if (filename.endsWith('/index.html')) {
     return `
       <script>

@@ -2,18 +2,18 @@ import { type ElementType, useMemo } from 'react';
 
 import type { BadgeProps } from './types.ts';
 
-import { resolveRoundedClass, convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, resolveRoundedClass, stylex } from '../tools';
 
 const Badge = function Badge<T extends ElementType = 'span'>(props: BadgeProps<T>) {
   const {
     as: Component = 'span' as ElementType,
-    dropOldClass,
-    variantType,
     className,
-    variables,
+    dropOldClass,
     rounded,
-    variant,
     style,
+    variables,
+    variant,
+    variantType,
     ...rest
   } = props;
 

@@ -1,7 +1,7 @@
 import Progress from './progress.tsx';
 
 // types
-export type { ProgressStackedOption, ProgressStackedProps, ProgressBarProps, ProgressProps } from './types.ts';
+export type { ProgressBarProps, ProgressProps, ProgressStackedOption, ProgressStackedProps } from './types.ts';
 
 // hooks
 

@@ -1,12 +1,12 @@
-import { type ElementType, type MouseEvent, useCallback, useState, useMemo } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useMemo, useState } from 'react';
 
 import type { NavOption, NavProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
-import NavTabContent from './nav-tab-content.tsx';
-import NavTabPane from './nav-tab-pane.tsx';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import NavItem from './nav-item.tsx';
 import NavLink from './nav-link.tsx';
+import NavTabContent from './nav-tab-content.tsx';
+import NavTabPane from './nav-tab-pane.tsx';
 
 interface IOption extends NavOption {
   id: number | string;
@@ -15,21 +15,21 @@ interface IOption extends NavOption {
 const Nav = function Nav<T extends ElementType = 'nav' | 'ul'>(props: NavProps<T>) {
   const {
     as: Component = 'ul' as ElementType,
-    onChange: onChangeByDefault,
-    options: defaultOptions,
+    className,
     contentProps,
     dropOldClass,
+    fill,
     horizontal,
-    className,
     justified,
+    onChange: onChangeByDefault,
+    options: defaultOptions,
+    pills,
+    skipItem,
+    style,
+    tabs,
     underline,
     variables,
-    skipItem,
     vertical,
-    pills,
-    style,
-    fill,
-    tabs,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
@@ -90,20 +90,20 @@ const Nav = function Nav<T extends ElementType = 'nav' | 'ul'>(props: NavProps<T
         {options.map((item, index) => {
           return skipItem ? (
             <NavLink
-              disabled={item.disabled}
               active={item.active}
+              disabled={item.disabled}
               href={item.href}
               {...item.linkProps}
-              onClick={(e: MouseEvent<HTMLElement>) => onClickLink(item, index, e)}
               key={item.id}
+              onClick={(e: MouseEvent<HTMLElement>) => onClickLink(item, index, e)}
             >
               {item.link}
             </NavLink>
           ) : (
             <NavItem {...item.itemProps} key={item.id}>
               <NavLink
-                disabled={item.disabled}
                 active={item.active}
+                disabled={item.disabled}
                 href={item.href}
                 {...item.linkProps}
                 onClick={(e: MouseEvent<HTMLElement>) => onClickLink(item, index, e)}

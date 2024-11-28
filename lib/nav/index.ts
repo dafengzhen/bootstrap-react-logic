@@ -1,7 +1,7 @@
 import Nav from './nav.tsx';
 
 // types
-export type { NavTabContentProps, NavTabPaneProps, NavItemProps, NavLinkProps, NavOption, NavProps } from './types.ts';
+export type { NavItemProps, NavLinkProps, NavOption, NavProps, NavTabContentProps, NavTabPaneProps } from './types.ts';
 
 // hooks
 

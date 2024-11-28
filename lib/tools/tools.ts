@@ -1,8 +1,17 @@
-import cssmix, { type StyleInput } from 'cssmix';
 import clsx, { type ClassValue } from 'clsx';
+import cssmix, { type StyleInput } from 'cssmix';
 
-import { VARIABLE_BS_PREFIX, EMPTY_GROUP_FLAG, BS_PREFIX } from './constants.ts';
+import { BS_PREFIX, EMPTY_GROUP_FLAG, VARIABLE_BS_PREFIX } from './constants.ts';
 import { RoundedClassEnum } from './enums.ts';
+
+/**
+ * A type that represents either a value of type T or a function returning a value of type T.
+ * This utility type is useful for allowing lazy evaluation, where a value can either be
+ * provided directly or deferred by wrapping it in a function.
+ *
+ * @template T - The type of the value or the return type of the function.
+ */
+type MaybeFunction<T> = (() => T) | T;
 
 /**
  * Type definition for the deepMerge function.
@@ -19,15 +28,6 @@ import { RoundedClassEnum } from './enums.ts';
  * @returns A merged object that combines properties from both obj1 and obj2.
  */
 type MergeFn = <T, U>(obj1: T, obj2: U, shouldAssign?: (path: string, value1: any, value2: any) => boolean) => T & U;
-
-/**
- * A type that represents either a value of type T or a function returning a value of type T.
- * This utility type is useful for allowing lazy evaluation, where a value can either be
- * provided directly or deferred by wrapping it in a function.
- *
- * @template T - The type of the value or the return type of the function.
- */
-type MaybeFunction<T> = (() => T) | T;
 
 /**
  * Checks if a value is a plain object.
@@ -80,7 +80,7 @@ const isArray = <T>(obj: T): obj is Array<any> & T => {
  * console.log(isFunctionOrClass(classInstance)); // true
  * console.log(isFunctionOrClass(notFuncOrClass)); // false
  */
-const isFunctionOrClass = (obj: unknown): obj is (...args: any[]) => object | any => {
+const isFunctionOrClass = (obj: unknown): obj is (...args: any[]) => any | object => {
   return typeof obj === 'function' || (typeof obj === 'object' && obj !== null && obj.constructor !== Object);
 };
 
@@ -100,7 +100,7 @@ const isFunctionOrClass = (obj: unknown): obj is (...args: any[]) => object | an
  * console.log(isSpecialObject(regExpObj)); // true
  * console.log(isSpecialObject(plainObj)); // false
  */
-const isSpecialObject = (obj: any): obj is RegExp | Date => {
+const isSpecialObject = (obj: any): obj is Date | RegExp => {
   return obj instanceof Date || obj instanceof RegExp;
 };
 
@@ -152,7 +152,7 @@ const mapAndFilterStyles = (
 const filterTransformAndExcludeProperties = <T>(
   sourceObject: T,
   exclusionValues: Array<any> = [undefined],
-  transformFn?: (value: any, key: keyof T) => { transformedKey?: string; transformedValue?: any; include: boolean },
+  transformFn?: (value: any, key: keyof T) => { include: boolean; transformedKey?: string; transformedValue?: any },
 ): Partial<T> => {
   const result: Partial<T> = {};
 
@@ -162,7 +162,7 @@ const filterTransformAndExcludeProperties = <T>(
       const isNotExcluded = !exclusionValues.includes(value);
 
       if (isNotExcluded) {
-        const { transformedValue, transformedKey, include } = transformFn
+        const { include, transformedKey, transformedValue } = transformFn
           ? transformFn(value, key as keyof T)
           : { include: true };
 
@@ -190,14 +190,14 @@ const filterTransformAndExcludeProperties = <T>(
  */
 const filterAndTransformProperties = <T>(
   sourceObject: T,
-  transformFn?: (value: any, key: keyof T) => { transformedKey?: string; transformedValue?: any; include: boolean },
+  transformFn?: (value: any, key: keyof T) => { include: boolean; transformedKey?: string; transformedValue?: any },
 ): Partial<T> => {
   const result: Partial<T> = {};
 
   for (const key in sourceObject) {
     if (Object.prototype.hasOwnProperty.call(sourceObject, key)) {
       const value = sourceObject[key];
-      const { transformedValue, transformedKey, include } = transformFn
+      const { include, transformedKey, transformedValue } = transformFn
         ? transformFn(value, key as keyof T)
         : { include: true };
 
@@ -235,7 +235,7 @@ const camelToKebab = (str: string): string => {
  * @returns The result of the callback if provided, otherwise the parsed object or original object.
  * @throws Will throw an error if the input is a string that is not valid JSON.
  */
-const parseJson = (input: string | any, callback?: (result: object, isString: boolean) => object | void): object => {
+const parseJson = (input: any | string, callback?: (result: object, isString: boolean) => object | void): object => {
   let result: object;
   const isString = typeof input === 'string';
 
@@ -265,7 +265,7 @@ const parseJson = (input: string | any, callback?: (result: object, isString: bo
  * @returns The first parameter if it's defined, otherwise the resolved value of the second parameter
  *          if provided and truthy; otherwise, returns undefined.
  */
-const getValue = <T>(param1: MaybeFunction<T>, param2?: MaybeFunction<T>): undefined | T => {
+const getValue = <T>(param1: MaybeFunction<T>, param2?: MaybeFunction<T>): T | undefined => {
   const resolve = (val: MaybeFunction<T>): T => (typeof val === 'function' ? (val as () => T)() : val);
 
   const resolvedParam1 = resolve(param1);
@@ -394,19 +394,19 @@ const initializeLogger = (
   project: string = 'BRL',
 ): {
   logWarning: (options: {
-    level?: 'error' | 'info' | 'warn';
-    expectedType?: string;
-    currentValue?: any;
     component: string;
+    currentValue?: any;
+    expectedType?: string;
+    level?: 'error' | 'info' | 'warn';
     message?: string;
     param: string;
   }) => void;
 } => {
   type LogOptions = {
-    level?: 'error' | 'info' | 'warn';
-    expectedType?: string;
-    currentValue?: any;
     component: string;
+    currentValue?: any;
+    expectedType?: string;
+    level?: 'error' | 'info' | 'warn';
     message?: string;
     param: string;
   };
@@ -417,11 +417,11 @@ const initializeLogger = (
    * @param {LogOptions} options - Configuration object for the log message.
    */
   const logWarning = ({
-    expectedType = 'string',
-    message: customMessage,
-    level = 'warn',
-    currentValue,
     component,
+    currentValue,
+    expectedType = 'string',
+    level = 'warn',
+    message: customMessage,
     param,
   }: LogOptions) => {
     const baseMessage = `Parameter "${param}" is missing${expectedType ? `, expected type: "${expectedType}"` : ''}${currentValue !== undefined ? `, current value: "${currentValue}"` : ''}.`;
@@ -475,7 +475,7 @@ const checkObjectProperties = <T extends object>(
  * @param {boolean} [checkEmptyString=false] - Whether to consider an empty string as undefined.
  * @returns {boolean} - Returns true if the value is neither undefined, null, nor an empty string (if checked); otherwise, false.
  */
-const isDefined = <T>(value: T, checkEmptyString: boolean = false): value is Exclude<T, undefined | null> => {
+const isDefined = <T>(value: T, checkEmptyString: boolean = false): value is Exclude<T, null | undefined> => {
   return value !== undefined && value !== null && (!checkEmptyString || value !== '');
 };
 
@@ -486,7 +486,7 @@ const isDefined = <T>(value: T, checkEmptyString: boolean = false): value is Exc
  * @param {ClassValue[]} inputs - Class values such as strings, arrays, or objects.
  * @returns {string | undefined} - A space-separated string of unique class names, or `undefined` if no valid class names.
  */
-const clsxUnique = (...inputs: ClassValue[]): undefined | string => {
+const clsxUnique = (...inputs: ClassValue[]): string | undefined => {
   const classNames = clsx(...inputs);
   if (!classNames) {
     return;
@@ -511,9 +511,9 @@ const clsxUnique = (...inputs: ClassValue[]): undefined | string => {
  *   if `dedupe` is true, or `undefined` if no valid class names are provided.
  */
 const clsxWithOptions = (
-  options?: { dedupe?: boolean } | undefined | null,
+  options?: null | undefined | { dedupe?: boolean },
   ...inputs: ClassValue[]
-): undefined | string => {
+): string | undefined => {
   const dedupe = options?.dedupe ?? false;
   return dedupe ? clsxUnique(...inputs) : clsx(...inputs) || undefined;
 };
@@ -533,7 +533,7 @@ const clsxWithOptions = (
  */
 const processClassName = (
   className: string,
-  processors?: ((classNames: string[]) => undefined | string[])[],
+  processors?: ((classNames: string[]) => string[] | undefined)[],
 ): string => {
   if (!processors || processors.length === 0) {
     return className;
@@ -562,7 +562,7 @@ const processClassName = (
  * @returns {string} - A single string of class names, with no duplicates.
  * The class names are joined by a single space.
  */
-const mergeClassNames = (originalClass: undefined | string, newClass: string): string => {
+const mergeClassNames = (originalClass: string | undefined, newClass: string): string => {
   const classSet = new Set([...(originalClass || '').split(' '), ...newClass.split(' ')].filter(Boolean));
   return Array.from(classSet).join(' ');
 };
@@ -587,7 +587,7 @@ const mergeClassNames = (originalClass: undefined | string, newClass: string): s
  *                                                  the processed class names based on the
  *                                                  provided or original class names.
  */
-const processSlotClasses = <T extends Record<string, ((originalClass: string) => undefined | string) | string>>(
+const processSlotClasses = <T extends Record<string, ((originalClass: string) => string | undefined) | string>>(
   slotClasses?: T,
   originalClasses?: Partial<Record<keyof T, string>>,
 ): Partial<{ [K in keyof T]: string }> => {
@@ -679,8 +679,8 @@ const groupByProperty = <T>(
   );
 
   return {
-    keys: Object.keys(groupedData),
     groupedData,
+    keys: Object.keys(groupedData),
   };
 };
 
@@ -699,7 +699,7 @@ const groupByProperty = <T>(
  * @returns {Pick<T, K> | Omit<T, K>} The new object generated according to the parameters. If the input object is null or undefined, an empty object is returned.
  */
 const pickObjectProperties = <T extends object, K extends keyof T>(
-  inputObj: undefined | null | T,
+  inputObj: null | T | undefined,
   propertyKeys: K[],
   isExcludeKeys: boolean = false,
 ): Omit<T, K> | Pick<T, K> => {
@@ -852,7 +852,7 @@ const stylex = (
         value: number | string,
         key: string,
         style: Record<string, number | string>,
-      ) => { tValue?: number | string; tKey?: string } | undefined | boolean | null)
+      ) => boolean | null | undefined | { tKey?: string; tValue?: number | string })
     | null,
   ...inputs: StyleInput[]
 ) => {
@@ -861,7 +861,7 @@ const stylex = (
     for (const [key, value] of Object.entries(styles)) {
       const result = transformer(value, key, styles);
       if (result && typeof result === 'object') {
-        const { tValue, tKey } = result;
+        const { tKey, tValue } = result;
         const tVal = tValue ?? value;
         if (tKey) {
           delete styles[key];
@@ -905,19 +905,19 @@ const stylex = (
  */
 const clsxStyle = (
   style: Record<string, any> = {},
-  conditions?: Record<string, undefined | boolean> | boolean,
+  conditions?: boolean | Record<string, boolean | undefined>,
   transformer?: (
     value: any,
     key: string,
     style: Record<string, any>,
   ) =>
-    | {
-        transformedKey?: string;
-        include?: boolean;
-      }
-    | undefined
     | boolean
-    | string,
+    | string
+    | undefined
+    | {
+        include?: boolean;
+        transformedKey?: string;
+      },
 ): Record<string, any> => {
   const finalStyle: Record<string, any> = {};
 
@@ -932,7 +932,7 @@ const clsxStyle = (
 
   conditionKeys.forEach((key) => {
     const value = style[key];
-    const transformed = transformer ? transformer(value, key, style) : { transformedKey: key, include: true };
+    const transformed = transformer ? transformer(value, key, style) : { include: true, transformedKey: key };
 
     if (typeof transformed === 'string') {
       finalStyle[transformed] = value;
@@ -981,7 +981,7 @@ const convertBsKeyToVar = (key: string): string => {
  *
  * @returns The corresponding rounded class string or boolean value.
  */
-const resolveRoundedClass = (key: keyof typeof RoundedClassEnum | boolean) => {
+const resolveRoundedClass = (key: boolean | keyof typeof RoundedClassEnum) => {
   return typeof key === 'boolean' ? key && 'rounded' : `rounded-${RoundedClassEnum[key]}`;
 };
 
@@ -1076,7 +1076,7 @@ const getScrollbarWidth = (unit?: string): number | string => {
  * @returns A string with the specified classes removed. If no className is provided, returns an empty string.
  *          If no matching classes are found to remove, the original className is returned as is.
  */
-const removeClasses = (className: undefined | string | null, classesToRemove: string[]): string => {
+const removeClasses = (className: null | string | undefined, classesToRemove: string[]): string => {
   if (!className) {
     return '';
   }
@@ -1124,7 +1124,7 @@ const generatePagination = (
   total?: number,
   maxVisible: number = 4,
   alwaysShowEllipsis: boolean = false,
-): (number | '<' | '>')[] => {
+): ('<' | '>' | number)[] => {
   if (typeof current !== 'number' || typeof total !== 'number' || total === 0) {
     return [];
   }
@@ -1133,7 +1133,7 @@ const generatePagination = (
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
-  const pagination: (number | '<' | '>')[] = [1];
+  const pagination: ('<' | '>' | number)[] = [1];
   const half = Math.floor(maxVisible / 2);
 
   let start = Math.max(2, current - half);
@@ -1164,44 +1164,44 @@ const generatePagination = (
 };
 
 export {
-  filterTransformAndExcludeProperties,
-  filterAndTransformProperties,
-  findTruthyClassOrDefault,
+  calculateLoopIndex,
+  camelToKebab,
   capitalizeFirstLetter,
   checkObjectProperties,
-  getLoopIndexDirection,
-  pickObjectProperties,
-  resolveRoundedClass,
-  generatePagination,
-  calculateLoopIndex,
-  mapAndFilterStyles,
-  processSlotClasses,
-  convertBsKeyToVar,
-  getScrollbarWidth,
-  generateRandomId,
-  initializeLogger,
-  processClassName,
+  clsxStyle,
+  clsxUnique,
   clsxWithOptions,
-  findTruthyClass,
-  groupByProperty,
-  isSpecialObject,
-  mergeClassNames,
+  convertBsKeyToVar,
+  deepMerge,
+  filterAndTransformProperties,
   filterOptions,
+  filterTransformAndExcludeProperties,
+  findTruthyClass,
+  findTruthyClassOrDefault,
+  generatePagination,
+  generateRandomId,
+  getLoopIndexDirection,
+  getScrollbarWidth,
+  getValue,
+  groupByProperty,
+  initializeLogger,
+  isArray,
+  isDefined,
+  isNumber,
   isPlainObject,
-  removeClasses,
-  camelToKebab,
+  isSpecialObject,
   isValueValid,
-  toPascalCase,
+  mapAndFilterStyles,
+  mergeClassNames,
+  mergeProps,
+  parseJson,
+  pickObjectProperties,
+  processClassName,
+  processSlotClasses,
+  removeClasses,
+  resolveRoundedClass,
+  stylex,
   toCamelCase,
   toKebabCase,
-  clsxUnique,
-  mergeProps,
-  clsxStyle,
-  deepMerge,
-  isDefined,
-  parseJson,
-  getValue,
-  isNumber,
-  isArray,
-  stylex,
+  toPascalCase,
 };

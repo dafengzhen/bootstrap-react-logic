@@ -2,24 +2,24 @@ import { type ElementType, useCallback, useEffect, useMemo, useRef } from 'react
 
 import type { CheckboxProps } from './types.ts';
 
-import { processSlotClasses, convertBsKeyToVar, clsxWithOptions, clsxUnique, stylex } from '../tools';
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
+import { clsxUnique, clsxWithOptions, convertBsKeyToVar, processSlotClasses, stylex } from '../tools';
 
 const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: CheckboxProps<T>) {
   const {
     as: Component = 'input' as ElementType,
-    switch: formSwitch,
-    contentClasses,
-    indeterminate,
-    dropOldClass,
-    className,
-    variables,
     children,
-    reverse,
-    inline,
-    style,
+    className,
+    contentClasses,
+    dropOldClass,
     id,
+    indeterminate,
+    inline,
+    reverse,
+    style,
+    switch: formSwitch,
+    variables,
     ...rest
   } = props;
 
@@ -46,6 +46,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
 
   if (children) {
     const slotClassName = processSlotClasses(contentClasses, {
+      component: 'form-check-input',
       container: clsxWithOptions(
         null,
         'form-check',
@@ -53,7 +54,6 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
         inline && 'form-check-inline',
         reverse && 'form-check-reverse',
       ),
-      component: 'form-check-input',
       label: 'form-check-label',
     });
 
@@ -62,22 +62,22 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
         <Input
           {...rest}
           {...renderOptions}
+          as={Component}
           className={slotClassName.component}
           data-slot-component=""
-          onRef={setInstance}
-          type="checkbox"
-          as={Component}
           dropOldClass
           id={id}
+          onRef={setInstance}
+          type="checkbox"
         />
-        <Label htmlFor={id as undefined | string} className={slotClassName.label} data-slot-label="" dropOldClass>
+        <Label className={slotClassName.label} data-slot-label="" dropOldClass htmlFor={id as string | undefined}>
           {children}
         </Label>
       </div>
     );
   }
 
-  return <Input {...rest} {...renderOptions} onRef={setInstance} type="checkbox" as={Component} id={id} />;
+  return <Input {...rest} {...renderOptions} as={Component} id={id} onRef={setInstance} type="checkbox" />;
 };
 
 Checkbox.displayName = 'BRL.Checkbox';

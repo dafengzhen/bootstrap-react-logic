@@ -1,33 +1,33 @@
-import { type ElementType, type MouseEvent, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { OffcanvasProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import OffcanvasBackdrop from './offcanvas-backdrop.tsx';
+import OffcanvasBody from './offcanvas-body.tsx';
 import OffcanvasHeader from './offcanvas-header.tsx';
 import OffcanvasTitle from './offcanvas-title.tsx';
-import OffcanvasBody from './offcanvas-body.tsx';
 
 const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: OffcanvasProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    visible: visibleByDefault = false,
-    onChange: onChangeByDefault,
     backdrop = true,
-    dropOldClass,
-    fade = true,
-    headerProps,
-    responsive,
-    titleProps,
+    body,
     bodyProps,
     className,
-    placement,
-    variables,
+    dropOldClass,
+    fade = true,
     header,
+    headerProps,
+    onChange: onChangeByDefault,
+    placement,
+    responsive,
     scroll,
     style,
     title,
-    body,
+    titleProps,
+    variables,
+    visible: visibleByDefault = false,
     ...rest
   } = props;
 
@@ -109,9 +109,9 @@ const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: Offca
           <OffcanvasHeader {...headerProps}>
             <OffcanvasTitle {...titleProps}>{title}</OffcanvasTitle>
             <button
-              data-bs-dismiss="offcanvas"
-              className="btn-close"
               aria-label="Close"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
               onClick={onClick}
               type="button"
             ></button>
@@ -125,11 +125,11 @@ const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: Offca
 
       {backdrop && (
         <OffcanvasBackdrop
-          onChange={onChangeBackdrop}
           backdrop={backdrop}
-          visible={visible}
-          scroll={scroll}
           fade={fade}
+          onChange={onChangeBackdrop}
+          scroll={scroll}
+          visible={visible}
         ></OffcanvasBackdrop>
       )}
     </>

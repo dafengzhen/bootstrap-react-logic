@@ -1,20 +1,20 @@
+import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import { Alert } from '@lib/alert';
 import AlertHeading from '@lib/alert/alert-heading.tsx';
 import AlertLink from '@lib/alert/alert-link.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import About from '@components/about.tsx';
 import { Button } from '@lib/button';
-import { Alert } from '@lib/alert';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/alert/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -26,8 +26,8 @@ export default function AlertPage() {
   const [visible, setVisible] = useState(true);
   const [alerts, setAlerts] = useState<
     {
-      visible: boolean;
       id: number;
+      visible: boolean;
     }[]
   >([]);
 
@@ -41,44 +41,48 @@ export default function AlertPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tAlertPage} state={state} hash="basic">
-        <Alert variant="primary" role="alert">
+      <Example hash="basic" state={state} t={tAlertPage}>
+        <Alert role="alert" variant="primary">
           A simple primary alert—check it out!
         </Alert>
 
-        <Alert variant="secondary" role="alert">
+        <Alert role="alert" variant="secondary">
           A simple secondary alert—check it out!
         </Alert>
 
-        <Alert variant="success" role="alert">
+        <Alert role="alert" variant="success">
           A simple success alert—check it out!
         </Alert>
 
-        <Alert variant="danger" role="alert">
+        <Alert role="alert" variant="danger">
           A simple danger alert—check it out!
         </Alert>
 
-        <Alert variant="warning" role="alert">
+        <Alert role="alert" variant="warning">
           A simple warning alert—check it out!
         </Alert>
 
-        <Alert variant="info" role="alert">
+        <Alert role="alert" variant="info">
           A simple info alert—check it out!
         </Alert>
 
-        <Alert variant="light" role="alert">
+        <Alert role="alert" variant="light">
           A simple light alert—check it out!
         </Alert>
 
-        <Alert variant="dark" role="alert">
+        <Alert role="alert" variant="dark">
           A simple dark alert—check it out!
         </Alert>
       </Example>
 
-      <Example hash="liveExample" t={tAlertPage} state={state}>
+      <Example hash="liveExample" state={state} t={tAlertPage}>
         {alerts.map((item, index) => {
           return (
             <Alert
+              clickToClose={false}
+              dismissible
+              fade
+              key={item.id}
               onVisibleChange={(visible) =>
                 setAlerts((prevState) => [
                   ...prevState.slice(0, index),
@@ -86,13 +90,9 @@ export default function AlertPage() {
                   ...prevState.slice(index + 1),
                 ])
               }
-              visible={item.visible}
-              clickToClose={false}
-              variant="success"
-              key={item.id}
               role="alert"
-              dismissible
-              fade
+              variant="success"
+              visible={item.visible}
             >
               <div>A simple primary alert—check it out!</div>
             </Alert>
@@ -106,42 +106,42 @@ export default function AlertPage() {
         </div>
       </Example>
 
-      <Example hash="linkColor" t={tAlertPage} state={state}>
-        <Alert variant="primary" role="alert">
+      <Example hash="linkColor" state={state} t={tAlertPage}>
+        <Alert role="alert" variant="primary">
           A simple primary alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="secondary" role="alert">
+        <Alert role="alert" variant="secondary">
           A simple secondary alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="success" role="alert">
+        <Alert role="alert" variant="success">
           A simple success alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="danger" role="alert">
+        <Alert role="alert" variant="danger">
           A simple danger alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="warning" role="alert">
+        <Alert role="alert" variant="warning">
           A simple warning alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="info" role="alert">
+        <Alert role="alert" variant="info">
           A simple info alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="light" role="alert">
+        <Alert role="alert" variant="light">
           A simple light alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
 
-        <Alert variant="dark" role="alert">
+        <Alert role="alert" variant="dark">
           A simple dark alert with <AlertLink href="#">an example link</AlertLink>. Give it a click if you like.
         </Alert>
       </Example>
 
-      <Example hash="additionalContent" t={tAlertPage} state={state}>
-        <Alert variant="success" role="alert">
+      <Example hash="additionalContent" state={state} t={tAlertPage}>
+        <Alert role="alert" variant="success">
           <AlertHeading>Well done!</AlertHeading>
           <p>
             Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer
@@ -152,53 +152,53 @@ export default function AlertPage() {
         </Alert>
       </Example>
 
-      <Example t={tAlertPage} state={state} hash="icons">
-        <Alert className="d-flex align-items-center" variant="primary" role="alert">
+      <Example hash="icons" state={state} t={tAlertPage}>
+        <Alert className="d-flex align-items-center" role="alert" variant="primary">
           <i className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
           <div>An example alert with an icon</div>
         </Alert>
 
-        <Alert className="d-flex align-items-center" variant="primary" role="alert">
+        <Alert className="d-flex align-items-center" role="alert" variant="primary">
           <i className="bi bi-exclamation-circle-fill flex-shrink-0 me-2"></i>
           <div>An example alert with an icon</div>
         </Alert>
 
-        <Alert className="d-flex align-items-center" variant="success" role="alert">
+        <Alert className="d-flex align-items-center" role="alert" variant="success">
           <i className="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
           <div>An example success alert with an icon</div>
         </Alert>
 
-        <Alert className="d-flex align-items-center" variant="warning" role="alert">
+        <Alert className="d-flex align-items-center" role="alert" variant="warning">
           <i className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
           <div>An example warning alert with an icon</div>
         </Alert>
 
-        <Alert className="d-flex align-items-center" variant="danger" role="alert">
+        <Alert className="d-flex align-items-center" role="alert" variant="danger">
           <i className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
           <div>An example danger alert with an icon</div>
         </Alert>
       </Example>
 
-      <Example hash="dismissing" t={tAlertPage} state={state}>
-        <Alert variant="warning" role="alert" dismissible fade>
+      <Example hash="dismissing" state={state} t={tAlertPage}>
+        <Alert dismissible fade role="alert" variant="warning">
           <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </Alert>
 
         <Alert
           closeButton={
             <button
-              onClick={() => setVisible(!visible)}
-              data-bs-dismiss="alert"
-              className="btn-close"
               aria-label="Close"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              onClick={() => setVisible(!visible)}
               type="button"
             />
           }
-          visible={visible}
-          variant="warning"
-          role="alert"
           dismissible
           fade
+          role="alert"
+          variant="warning"
+          visible={visible}
         >
           <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </Alert>
@@ -207,8 +207,12 @@ export default function AlertPage() {
       <PropsIndicator />
 
       <Example
+        hash="alertComponentProps"
         items={[
           {
+            attr: 'variant',
+            default: '',
+            desc: tAlertComponentProps('alert.desc.variant'),
             type: (
               <div className="d-flex flex-column">
                 {['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'].map((item) => {
@@ -220,90 +224,86 @@ export default function AlertPage() {
                 })}
               </div>
             ),
-            desc: tAlertComponentProps('alert.desc.variant'),
-            attr: 'variant',
-            default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">{'onVisibleChange: (visible: boolean) => void'}</span>,
-            desc: tAlertComponentProps('alert.desc.onVisibleChange'),
             attr: 'onVisibleChange',
             default: '',
+            desc: tAlertComponentProps('alert.desc.onVisibleChange'),
+            type: <span className="badge text-bg-secondary">{'onVisibleChange: (visible: boolean) => void'}</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAlertComponentProps('alert.desc.clickToClose'),
             attr: 'clickToClose',
             default: 'true',
+            desc: tAlertComponentProps('alert.desc.clickToClose'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAlertComponentProps('alert.desc.dismissible'),
             attr: 'dismissible',
             default: '',
+            desc: tAlertComponentProps('alert.desc.dismissible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAlertComponentProps('alert.desc.fade'),
             attr: 'fade',
             default: '',
+            desc: tAlertComponentProps('alert.desc.fade'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tAlertComponentProps('alert.desc.closeButton'),
             attr: 'closeButton',
             default: '',
+            desc: tAlertComponentProps('alert.desc.closeButton'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ButtonProps</span>,
-            desc: tAlertComponentProps('alert.desc.closeButtonProps'),
             attr: 'closeButtonProps',
             default: '',
+            desc: tAlertComponentProps('alert.desc.closeButtonProps'),
+            type: <span className="badge text-bg-secondary">ButtonProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tAlertComponentProps('alert.desc.visible'),
             attr: 'visible',
             default: '',
+            desc: tAlertComponentProps('alert.desc.visible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="alertComponentProps"
-        t={tAlertComponentProps}
-        state={state}
         props
+        state={state}
+        t={tAlertComponentProps}
       />
 
       <Example
-        items={[
-          {
-            default: '-',
-            attr: '-',
-            desc: '-',
-            type: '-',
-          },
-        ]}
         hash="alertLinkComponentProps"
-        t={tAlertComponentProps}
-        state={state}
-        props
-      />
-
-      <Example
         items={[
           {
-            default: '-',
             attr: '-',
+            default: '-',
             desc: '-',
             type: '-',
           },
         ]}
-        hash="alertHeadingComponentProps"
-        t={tAlertComponentProps}
-        state={state}
         props
+        state={state}
+        t={tAlertComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example
+        hash="alertHeadingComponentProps"
+        items={[
+          {
+            attr: '-',
+            default: '-',
+            desc: '-',
+            type: '-',
+          },
+        ]}
+        props
+        state={state}
+        t={tAlertComponentProps}
+      />
+
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

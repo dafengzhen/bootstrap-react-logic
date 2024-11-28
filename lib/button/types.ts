@@ -1,54 +1,31 @@
-import type { ElementType, RefCallback, ElementRef, ReactNode } from 'react';
+import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
 
 import type {
-  CloseButtonVariableType,
-  ButtonVariableType,
-  RoundedClassEnum,
-  PropsWithoutRef,
-  OutlineType,
-  VariantType,
   BaseProps,
+  ButtonVariableType,
+  CloseButtonVariableType,
+  OutlineType,
+  PropsWithoutRef,
+  RoundedClassEnum,
+  VariantType,
 } from '../tools';
-
-export type CloseButtonProps<T extends ElementType> = PropsWithoutRef<CloseProps<T>, T, CloseButtonVariableType>;
 
 export type ButtonProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ButtonVariableType>;
 
-type Props<T extends ElementType> = {
-  /**
-   * rounded.
-   */
-  rounded?: keyof typeof RoundedClassEnum | boolean;
+export type CloseButtonProps<T extends ElementType> = PropsWithoutRef<CloseProps<T>, T, CloseButtonVariableType>;
 
+type CloseProps<T extends ElementType> = BaseProps<T, CloseButtonVariableType> & {
   /**
-   * onRef.
+   * disabled.
    */
-  onRef?: RefCallback<ElementRef<T>>;
+  disabled?: boolean;
+};
 
+type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   /**
-   * outline.
+   * active.
    */
-  outline?: keyof OutlineType;
-
-  /**
-   * variant.
-   */
-  variant?: keyof VariantType;
-
-  /**
-   * startContent.
-   */
-  startContent?: ReactNode;
-
-  /**
-   * endContent.
-   */
-  endContent?: ReactNode;
-
-  /**
-   * isLoading.
-   */
-  isLoading?: boolean;
+  active?: boolean;
 
   /**
    * btnClose.
@@ -61,24 +38,47 @@ type Props<T extends ElementType> = {
   disabled?: boolean;
 
   /**
-   * size.
+   * endContent.
    */
-  size?: 'lg' | 'sm';
+  endContent?: ReactNode;
 
   /**
-   * active.
+   * isLoading.
    */
-  active?: boolean;
+  isLoading?: boolean;
+
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<ElementRef<T>>;
+
+  /**
+   * outline.
+   */
+  outline?: keyof OutlineType;
+
+  /**
+   * rounded.
+   */
+  rounded?: boolean | keyof typeof RoundedClassEnum;
 
   /**
    * show.
    */
   show?: boolean;
-} & BaseProps<T, ButtonVariableType>;
 
-type CloseProps<T extends ElementType> = {
   /**
-   * disabled.
+   * size.
    */
-  disabled?: boolean;
-} & BaseProps<T, CloseButtonVariableType>;
+  size?: 'lg' | 'sm';
+
+  /**
+   * startContent.
+   */
+  startContent?: ReactNode;
+
+  /**
+   * variant.
+   */
+  variant?: keyof VariantType;
+};

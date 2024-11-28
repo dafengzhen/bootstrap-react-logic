@@ -1,27 +1,29 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
+  BaseProps,
   CarouselCaptionVariablesType,
   CarouselItemVariablesType,
-  OmittedPropsWithoutRef,
   CarouselVariablesType,
+  OmittedPropsWithoutRef,
   PropsWithoutRef,
-  BaseProps,
 } from '../tools';
-
-export interface CarouselOption {
-  id?: number | string;
-  caption?: ReactNode;
-  interval?: number;
-  active?: boolean;
-  item?: ReactNode;
-}
 
 export type CarouselCaptionProps<T extends ElementType> = PropsWithoutRef<
   CaptionProps<T>,
   T,
   CarouselCaptionVariablesType
 >;
+
+export type CarouselItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, CarouselItemVariablesType>;
+
+export interface CarouselOption {
+  active?: boolean;
+  caption?: ReactNode;
+  id?: number | string;
+  interval?: number;
+  item?: ReactNode;
+}
 
 export type CarouselProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
@@ -30,60 +32,18 @@ export type CarouselProps<T extends ElementType> = OmittedPropsWithoutRef<
   'onChange'
 >;
 
-export type CarouselItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, CarouselItemVariablesType>;
+type CaptionProps<T extends ElementType> = BaseProps<T, CarouselCaptionVariablesType> & {};
 
-type Props<T extends ElementType> = {
+type ItemProps<T extends ElementType> = BaseProps<T, CarouselItemVariablesType> & {
   /**
-   * onChange.
+   * active.
    */
-  onChange?: (id: number | string, type: 'nextIndicator' | 'prevIndicator' | 'next' | 'prev') => void;
-
-  /**
-   * ride.
-   */
-  ride?: 'carousel' | boolean;
+  active?: boolean;
 
   /**
-   * options.
+   * carouselItemEnd.
    */
-  options?: CarouselOption[];
-
-  /**
-   * indicators.
-   */
-  indicators?: boolean;
-
-  /**
-   * controls.
-   */
-  controls?: boolean;
-
-  /**
-   * pause.
-   */
-  pause?: boolean;
-
-  /**
-   * slide.
-   */
-  slide?: boolean;
-
-  /**
-   * touch.
-   */
-  touch?: boolean;
-
-  /**
-   * fade.
-   */
-  fade?: boolean;
-} & BaseProps<T, CarouselVariablesType>;
-
-type ItemProps<T extends ElementType> = {
-  /**
-   * carouselItemStart.
-   */
-  carouselItemStart?: boolean;
+  carouselItemEnd?: boolean;
 
   /**
    * carouselItemNext.
@@ -96,14 +56,54 @@ type ItemProps<T extends ElementType> = {
   carouselItemPrev?: boolean;
 
   /**
-   * carouselItemEnd.
+   * carouselItemStart.
    */
-  carouselItemEnd?: boolean;
+  carouselItemStart?: boolean;
+};
+
+type Props<T extends ElementType> = BaseProps<T, CarouselVariablesType> & {
+  /**
+   * controls.
+   */
+  controls?: boolean;
 
   /**
-   * active.
+   * fade.
    */
-  active?: boolean;
-} & BaseProps<T, CarouselItemVariablesType>;
+  fade?: boolean;
 
-type CaptionProps<T extends ElementType> = BaseProps<T, CarouselCaptionVariablesType> & {};
+  /**
+   * indicators.
+   */
+  indicators?: boolean;
+
+  /**
+   * onChange.
+   */
+  onChange?: (id: number | string, type: 'next' | 'nextIndicator' | 'prev' | 'prevIndicator') => void;
+
+  /**
+   * options.
+   */
+  options?: CarouselOption[];
+
+  /**
+   * pause.
+   */
+  pause?: boolean;
+
+  /**
+   * ride.
+   */
+  ride?: 'carousel' | boolean;
+
+  /**
+   * slide.
+   */
+  slide?: boolean;
+
+  /**
+   * touch.
+   */
+  touch?: boolean;
+};

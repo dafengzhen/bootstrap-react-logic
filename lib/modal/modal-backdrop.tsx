@@ -1,19 +1,19 @@
-import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ModalBackdropProps } from './types.ts';
 
-import { convertBsKeyToVar, getScrollbarWidth, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, getScrollbarWidth, stylex } from '../tools';
 
 const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(props: ModalBackdropProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    visible: visibleByDefault,
-    dropOldClass,
     className,
-    variables,
-    toggle,
-    style,
+    dropOldClass,
     fade,
+    style,
+    toggle,
+    variables,
+    visible: visibleByDefault,
     ...rest
   } = props;
 

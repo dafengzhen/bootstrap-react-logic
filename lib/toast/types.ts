@@ -1,20 +1,17 @@
 import type { ElementType, MouseEvent, ReactNode } from 'react';
 
 import type {
+  BaseProps,
+  OmittedPropsWithoutRef,
+  PropsWithoutRef,
+  ToastBodyVariablesType,
   ToastContainerVariablesType,
   ToastHeaderVariablesType,
-  OmittedPropsWithoutRef,
-  ToastBodyVariablesType,
   ToastItemVariablesType,
   ToastVariablesType,
-  PropsWithoutRef,
-  BaseProps,
 } from '../tools';
 
-export interface ToastOption
-  extends Omit<ToastProps<ElementType>, 'containerProps' | 'container' | 'position' | 'options'> {
-  id?: number | string;
-}
+export type ToastBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, ToastBodyVariablesType>;
 
 export type ToastContainerProps<T extends ElementType> = PropsWithoutRef<
   ContainerProps<T>,
@@ -22,43 +19,54 @@ export type ToastContainerProps<T extends ElementType> = PropsWithoutRef<
   ToastContainerVariablesType
 >;
 
-export type ToastProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, ToastVariablesType, 'onChange'>;
-
 export type ToastHeaderProps<T extends ElementType> = PropsWithoutRef<HeaderProps<T>, T, ToastHeaderVariablesType>;
-
-export type ToastBodyProps<T extends ElementType> = PropsWithoutRef<BodyProps<T>, T, ToastBodyVariablesType>;
 
 export type ToastItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, ToastItemVariablesType>;
 
-type Props<T extends ElementType> = {
+export interface ToastOption
+  extends Omit<ToastProps<ElementType>, 'container' | 'containerProps' | 'options' | 'position'> {
+  id?: number | string;
+}
+
+export type ToastProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, ToastVariablesType, 'onChange'>;
+
+type BodyProps<T extends ElementType> = BaseProps<T, ToastBodyVariablesType> & {};
+
+type ContainerProps<T extends ElementType> = BaseProps<T, ToastContainerVariablesType> & {
   /**
    * placement.
    */
   placement?:
     | 'bottom-center'
-    | 'middle-center'
-    | 'bottom-start'
-    | 'middle-right'
-    | 'middle-left'
     | 'bottom-end'
+    | 'bottom-start'
+    | 'middle-center'
+    | 'middle-left'
+    | 'middle-right'
     | 'top-center'
-    | 'top-start'
-    | 'top-end';
+    | 'top-end'
+    | 'top-start';
 
   /**
-   * onChange.
+   * position.
    */
-  onChange?: (visible: boolean, event?: MouseEvent<HTMLElement>) => void;
+  position?: 'fixed' | 'static';
+};
+
+type HeaderProps<T extends ElementType> = BaseProps<T, ToastHeaderVariablesType> & {};
+
+type ItemProps<T extends ElementType> = BaseProps<T, ToastItemVariablesType> & Props<T> & {};
+
+type Props<T extends ElementType> = BaseProps<T, ToastVariablesType> & {
+  /**
+   * autohide.
+   */
+  autohide?: boolean;
 
   /**
-   * containerProps.
+   * body.
    */
-  containerProps?: ToastContainerProps<ElementType>;
-
-  /**
-   * headerProps.
-   */
-  headerProps?: ToastHeaderProps<ElementType>;
+  body?: ReactNode;
 
   /**
    * bodyProps.
@@ -66,44 +74,19 @@ type Props<T extends ElementType> = {
   bodyProps?: ToastBodyProps<ElementType>;
 
   /**
-   * position.
-   */
-  position?: 'static' | 'fixed';
-
-  /**
-   * customContent.
-   */
-  customContent?: ReactNode;
-
-  /**
-   * options.
-   */
-  options?: ToastOption[];
-
-  /**
    * container.
    */
   container?: boolean;
 
   /**
-   * autohide.
+   * containerProps.
    */
-  autohide?: boolean;
+  containerProps?: ToastContainerProps<ElementType>;
 
   /**
-   * header.
+   * customContent.
    */
-  header?: ReactNode;
-
-  /**
-   * visible.
-   */
-  visible?: boolean;
-
-  /**
-   * body.
-   */
-  body?: ReactNode;
+  customContent?: ReactNode;
 
   /**
    * delay.
@@ -114,31 +97,48 @@ type Props<T extends ElementType> = {
    * fade.
    */
   fade?: boolean;
-} & BaseProps<T, ToastVariablesType>;
 
-type ContainerProps<T extends ElementType> = {
+  /**
+   * header.
+   */
+  header?: ReactNode;
+
+  /**
+   * headerProps.
+   */
+  headerProps?: ToastHeaderProps<ElementType>;
+
+  /**
+   * onChange.
+   */
+  onChange?: (visible: boolean, event?: MouseEvent<HTMLElement>) => void;
+
+  /**
+   * options.
+   */
+  options?: ToastOption[];
+
   /**
    * placement.
    */
   placement?:
     | 'bottom-center'
-    | 'middle-center'
-    | 'bottom-start'
-    | 'middle-right'
-    | 'middle-left'
     | 'bottom-end'
+    | 'bottom-start'
+    | 'middle-center'
+    | 'middle-left'
+    | 'middle-right'
     | 'top-center'
-    | 'top-start'
-    | 'top-end';
+    | 'top-end'
+    | 'top-start';
 
   /**
    * position.
    */
-  position?: 'static' | 'fixed';
-} & BaseProps<T, ToastContainerVariablesType>;
+  position?: 'fixed' | 'static';
 
-type ItemProps<T extends ElementType> = BaseProps<T, ToastItemVariablesType> & Props<T> & {};
-
-type HeaderProps<T extends ElementType> = BaseProps<T, ToastHeaderVariablesType> & {};
-
-type BodyProps<T extends ElementType> = BaseProps<T, ToastBodyVariablesType> & {};
+  /**
+   * visible.
+   */
+  visible?: boolean;
+};

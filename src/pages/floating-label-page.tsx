@@ -1,23 +1,23 @@
-import { InputGroupText, InputGroup } from '@lib/input-group';
+import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { FloatingLabel } from '@lib/floating-label';
-import { SelectOption, Select } from '@lib/select';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import About from '@components/about.tsx';
-import { Textarea } from '@lib/textarea';
 import { Input } from '@lib/input';
+import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Label } from '@lib/label';
+import { Select, SelectOption } from '@lib/select';
 import { Text } from '@lib/text';
+import { Textarea } from '@lib/textarea';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/floating-label/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -33,48 +33,48 @@ export default function FloatingLabelPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tFloatingLabelPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tFloatingLabelPage}>
         <FloatingLabel>
-          <Input placeholder="name@example.com" id="floatingInput" type="email" />
+          <Input id="floatingInput" placeholder="name@example.com" type="email" />
           <Label htmlFor="floatingInput">Email address</Label>
         </FloatingLabel>
 
         <FloatingLabel as="form">
-          <Input defaultValue="hiddenUsername" autoComplete="username" className="d-none" name="username" type="text" />
-          <Input autoComplete="new-password" placeholder="Password" id="floatingPassword" type="password" />
+          <Input autoComplete="username" className="d-none" defaultValue="hiddenUsername" name="username" type="text" />
+          <Input autoComplete="new-password" id="floatingPassword" placeholder="Password" type="password" />
           <Label htmlFor="floatingPassword">Password</Label>
         </FloatingLabel>
 
         <FloatingLabel as="form">
-          <Input defaultValue="test@example.com" placeholder="name@example.com" id="floatingInputValue" type="email" />
+          <Input defaultValue="test@example.com" id="floatingInputValue" placeholder="name@example.com" type="email" />
           <Label htmlFor="floatingInputValue">Input with value</Label>
         </FloatingLabel>
 
         <FloatingLabel as="form">
           <Input
             defaultValue="test@example.com"
-            placeholder="name@example.com"
             id="floatingInputInvalid"
-            type="email"
             isInvalid
+            placeholder="name@example.com"
+            type="email"
           />
           <Label htmlFor="floatingInputInvalid">Invalid input</Label>
         </FloatingLabel>
       </Example>
 
-      <Example t={tFloatingLabelPage} hash="textarea" state={state}>
+      <Example hash="textarea" state={state} t={tFloatingLabelPage}>
         <FloatingLabel>
-          <Textarea placeholder="Leave a comment here" id="floatingTextarea"></Textarea>
+          <Textarea id="floatingTextarea" placeholder="Leave a comment here"></Textarea>
           <Label htmlFor="floatingTextarea">Comments</Label>
         </FloatingLabel>
 
         <FloatingLabel>
-          <Textarea placeholder="Leave a comment here" style={{ height: 100 }} id="floatingTextarea2"></Textarea>
+          <Textarea id="floatingTextarea2" placeholder="Leave a comment here" style={{ height: 100 }}></Textarea>
           <Label htmlFor="floatingTextarea2">Comments</Label>
         </FloatingLabel>
       </Example>
 
-      <Example t={tFloatingLabelPage} hash="select" state={state}>
+      <Example hash="select" state={state} t={tFloatingLabelPage}>
         <FloatingLabel>
           <Select aria-label="Floating label select example" id="floatingSelect">
             <SelectOption defaultChecked>Open this select menu</SelectOption>
@@ -86,26 +86,26 @@ export default function FloatingLabelPage() {
         </FloatingLabel>
       </Example>
 
-      <Example t={tFloatingLabelPage} hash="disabled" state={state}>
+      <Example hash="disabled" state={state} t={tFloatingLabelPage}>
         <FloatingLabel>
-          <Input placeholder="name@example.com" id="floatingInputDisabled" type="email" disabled />
+          <Input disabled id="floatingInputDisabled" placeholder="name@example.com" type="email" />
           <Label htmlFor="floatingInputDisabled">Email address</Label>
         </FloatingLabel>
 
         <FloatingLabel>
-          <Textarea placeholder="Leave a comment here" id="floatingTextareaDisabled" disabled></Textarea>
+          <Textarea disabled id="floatingTextareaDisabled" placeholder="Leave a comment here"></Textarea>
           <Label htmlFor="floatingTextareaDisabled">Comments</Label>
         </FloatingLabel>
 
         <FloatingLabel>
-          <Textarea placeholder="Leave a comment here" id="floatingTextarea2Disabled" style={{ height: 100 }} disabled>
+          <Textarea disabled id="floatingTextarea2Disabled" placeholder="Leave a comment here" style={{ height: 100 }}>
             Disabled textarea with some text inside
           </Textarea>
           <Label htmlFor="floatingTextarea2Disabled">Comments</Label>
         </FloatingLabel>
 
         <FloatingLabel>
-          <Select aria-label="Floating label disabled select example" id="floatingSelectDisabled" disabled>
+          <Select aria-label="Floating label disabled select example" disabled id="floatingSelectDisabled">
             <SelectOption defaultChecked>Open this select menu</SelectOption>
             <SelectOption value="1">One</SelectOption>
             <SelectOption value="2">Two</SelectOption>
@@ -115,32 +115,32 @@ export default function FloatingLabelPage() {
         </FloatingLabel>
       </Example>
 
-      <Example hash="readonlyPlaintext" t={tFloatingLabelPage} state={state}>
+      <Example hash="readonlyPlaintext" state={state} t={tFloatingLabelPage}>
         <FloatingLabel>
           <Input
             id="floatingEmptyPlaintextInput"
             placeholder="name@example.com"
+            readOnly
             readonlyPlainText
             type="email"
-            readOnly
           />
           <Label htmlFor="floatingEmptyPlaintextInput">Empty input</Label>
         </FloatingLabel>
 
         <FloatingLabel>
           <Input
-            placeholder="name@example.com"
             id="floatingPlaintextInput"
-            value="name@example.com"
+            placeholder="name@example.com"
+            readOnly
             readonlyPlainText
             type="email"
-            readOnly
+            value="name@example.com"
           />
           <Label htmlFor="floatingPlaintextInput">Input with value</Label>
         </FloatingLabel>
       </Example>
 
-      <Example t={tFloatingLabelPage} hash="inputGroups" state={state}>
+      <Example hash="inputGroups" state={state} t={tFloatingLabelPage}>
         <InputGroup>
           <InputGroupText>@</InputGroupText>
           <FloatingLabel>
@@ -152,21 +152,21 @@ export default function FloatingLabelPage() {
         <InputGroup hasValidation>
           <InputGroupText>@</InputGroupText>
           <FloatingLabel isInvalid>
-            <Input id="floatingInputGroup2" placeholder="Username" type="text" isInvalid required />
+            <Input id="floatingInputGroup2" isInvalid placeholder="Username" required type="text" />
             <Label htmlFor="floatingInputGroup2">Username</Label>
           </FloatingLabel>
           <Text invalidFeedback>Please choose a username.</Text>
         </InputGroup>
       </Example>
 
-      <Example t={tFloatingLabelPage} hash="layout" state={state}>
+      <Example hash="layout" state={state} t={tFloatingLabelPage}>
         <div className="row g-2">
           <div className="col-md">
             <FloatingLabel>
               <Input
                 defaultValue="mdo@example.com"
-                placeholder="name@example.com"
                 id="floatingInputGrid"
+                placeholder="name@example.com"
                 type="email"
               />
               <Label htmlFor="floatingInputGrid">Email address</Label>
@@ -190,33 +190,33 @@ export default function FloatingLabelPage() {
       <PropsIndicator />
 
       <Example
+        hash="floatingLabelComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">div | form</span>,
-            desc: tFloatingLabelComponentProps('floatingLabel.desc.as'),
-            default: 'div',
             attr: 'as',
+            default: 'div',
+            desc: tFloatingLabelComponentProps('floatingLabel.desc.as'),
+            type: <span className="badge text-bg-secondary">div | form</span>,
           },
           {
-            desc: tFloatingLabelComponentProps('floatingLabel.desc.isValid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
             attr: 'isValid',
             default: '',
+            desc: tFloatingLabelComponentProps('floatingLabel.desc.isValid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            desc: tFloatingLabelComponentProps('floatingLabel.desc.isInvalid'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
             attr: 'isInvalid',
             default: '',
+            desc: tFloatingLabelComponentProps('floatingLabel.desc.isInvalid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="floatingLabelComponentProps"
-        t={tFloatingLabelComponentProps}
-        state={state}
         props
+        state={state}
+        t={tFloatingLabelComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

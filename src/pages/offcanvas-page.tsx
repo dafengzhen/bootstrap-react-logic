@@ -1,17 +1,17 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import { Offcanvas } from '@lib/offcanvas';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Offcanvas } from '@lib/offcanvas';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/offcanvas/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -68,25 +68,25 @@ export default function OffcanvasPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example parentClassName="bd-example-offcanvas" bodyClassName="p-0" t={tOffcanvasPage} state={state} hash="basic">
+      <Example bodyClassName="p-0" hash="basic" parentClassName="bd-example-offcanvas" state={state} t={tOffcanvasPage}>
         <Offcanvas
           body="Content for the offcanvas goes here. You can place just about any Bootstrap component or custom elements here."
+          className="show"
           placement="start"
           title="Offcanvas"
-          className="show"
         />
       </Example>
 
-      <Example t={tOffcanvasPage} hash="liveDemo" state={state}>
+      <Example hash="liveDemo" state={state} t={tOffcanvasPage}>
         <div className="d-flex gap-2">
           <a
+            className="btn btn-primary"
+            href="#"
             onClick={(e) => {
               e.preventDefault();
               onClickVisible();
             }}
-            className="btn btn-primary"
             role="button"
-            href="#"
           >
             Link with href
           </a>
@@ -133,7 +133,7 @@ export default function OffcanvasPage() {
         />
       </Example>
 
-      <Example hash="bodyScrolling" t={tOffcanvasPage} state={state}>
+      <Example hash="bodyScrolling" state={state} t={tOffcanvasPage}>
         <div>
           <button className="btn btn-primary" onClick={onClickVisible2} type="button">
             Enable body scrolling
@@ -141,17 +141,17 @@ export default function OffcanvasPage() {
         </div>
 
         <Offcanvas
-          body={<p>Try scrolling the rest of the page to see this option in action.</p>}
-          title="Offcanvas with body scrolling"
-          onChange={setVisible2}
-          visible={visible2}
-          placement="start"
           backdrop={false}
+          body={<p>Try scrolling the rest of the page to see this option in action.</p>}
+          onChange={setVisible2}
+          placement="start"
           scroll
+          title="Offcanvas with body scrolling"
+          visible={visible2}
         />
       </Example>
 
-      <Example hash="bodyScrollingAndBackdrop" t={tOffcanvasPage} state={state}>
+      <Example hash="bodyScrollingAndBackdrop" state={state} t={tOffcanvasPage}>
         <div>
           <button className="btn btn-primary" onClick={onClickVisible3} type="button">
             Enable both scrolling & backdrop
@@ -160,15 +160,15 @@ export default function OffcanvasPage() {
 
         <Offcanvas
           body={<p>Try scrolling the rest of the page to see this option in action.</p>}
-          title="Backdrop with scrolling"
           onChange={setVisible3}
-          visible={visible3}
           placement="start"
           scroll
+          title="Backdrop with scrolling"
+          visible={visible3}
         />
       </Example>
 
-      <Example hash="staticBackdrop" t={tOffcanvasPage} state={state}>
+      <Example hash="staticBackdrop" state={state} t={tOffcanvasPage}>
         <div>
           <button className="btn btn-primary" onClick={onClickVisible4} type="button">
             Toggle static offcanvas
@@ -176,21 +176,21 @@ export default function OffcanvasPage() {
         </div>
 
         <Offcanvas
+          backdrop="static"
           body={<div>I will not close if you click outside of me.</div>}
           onChange={setVisible4}
-          visible={visible4}
-          backdrop="static"
           placement="start"
           title="Offcanvas"
+          visible={visible4}
         />
       </Example>
 
       <Example
-        parentClassName="bd-example-offcanvas"
-        hash="darkOffcanvas"
         bodyClassName="p-0"
-        t={tOffcanvasPage}
+        hash="darkOffcanvas"
+        parentClassName="bd-example-offcanvas"
         state={state}
+        t={tOffcanvasPage}
       >
         <Offcanvas
           body={<p>Place offcanvas content here.</p>}
@@ -201,7 +201,7 @@ export default function OffcanvasPage() {
         />
       </Example>
 
-      <Example t={tOffcanvasPage} hash="responsive" state={state}>
+      <Example hash="responsive" state={state} t={tOffcanvasPage}>
         <div>
           <button className="btn btn-primary d-lg-none" onClick={onClickVisible5} type="button">
             Toggle offcanvas
@@ -217,22 +217,22 @@ export default function OffcanvasPage() {
                 This is content within an <code>.offcanvas-lg</code>.
               </p>
             }
-            title="Responsive offcanvas"
             onChange={setVisible5}
-            visible={visible5}
             placement="end"
             responsive="lg"
+            title="Responsive offcanvas"
+            visible={visible5}
           />
         </div>
       </Example>
 
-      <Example t={tOffcanvasPage} hash="placement" state={state}>
+      <Example hash="placement" state={state} t={tOffcanvasPage}>
         <div>
           <button className="btn btn-primary" onClick={onClickVisible6} type="button">
             Toggle top offcanvas
           </button>
 
-          <Offcanvas onChange={setVisible6} title="Offcanvas top" visible={visible6} placement="top" body="..." />
+          <Offcanvas body="..." onChange={setVisible6} placement="top" title="Offcanvas top" visible={visible6} />
         </div>
 
         <div>
@@ -240,7 +240,7 @@ export default function OffcanvasPage() {
             Toggle right offcanvas
           </button>
 
-          <Offcanvas title="Offcanvas right" onChange={setVisible7} visible={visible7} placement="end" body="..." />
+          <Offcanvas body="..." onChange={setVisible7} placement="end" title="Offcanvas right" visible={visible7} />
         </div>
 
         <div>
@@ -248,104 +248,104 @@ export default function OffcanvasPage() {
             Toggle bottom offcanvas
           </button>
 
-          <Offcanvas title="Offcanvas bottom" onChange={setVisible8} placement="bottom" visible={visible8} body="..." />
+          <Offcanvas body="..." onChange={setVisible8} placement="bottom" title="Offcanvas bottom" visible={visible8} />
         </div>
       </Example>
 
       <PropsIndicator />
 
       <Example
+        hash="offcanvasComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">static | boolean</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.backdrop'),
             attr: 'backdrop',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.backdrop'),
+            type: <span className="badge text-bg-secondary">static | boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.body'),
             attr: 'body',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.body'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">OffcanvasBodyProps&lt;div&gt;</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.bodyProps'),
             attr: 'bodyProps',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.bodyProps'),
+            type: <span className="badge text-bg-secondary">OffcanvasBodyProps&lt;div&gt;</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.fade'),
             attr: 'fade',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.fade'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.header'),
             attr: 'header',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.header'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">OffcanvasHeaderProps&lt;div&gt;</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.headerProps'),
             attr: 'headerProps',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.headerProps'),
+            type: <span className="badge text-bg-secondary">OffcanvasHeaderProps&lt;div&gt;</span>,
           },
           {
+            attr: 'onChange',
+            default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.onChange'),
             type: (
               <span className="badge text-bg-secondary">
                 (visible: boolean, event: MouseEvent&lt;HTMLElement&gt;) =&gt; void
               </span>
             ),
-            desc: tOffcanvasComponentProps('offcanvas.desc.onChange'),
-            attr: 'onChange',
-            default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">bottom | end | start | top</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.placement'),
             attr: 'placement',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.placement'),
+            type: <span className="badge text-bg-secondary">bottom | end | start | top</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.responsive'),
             attr: 'responsive',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.responsive'),
+            type: <span className="badge text-bg-secondary">lg | md | sm | xl | xxl</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.scroll'),
             attr: 'scroll',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.scroll'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.title'),
             attr: 'title',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.title'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">OffcanvasTitleProps&lt;div&gt;</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.titleProps'),
             attr: 'titleProps',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.titleProps'),
+            type: <span className="badge text-bg-secondary">OffcanvasTitleProps&lt;div&gt;</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tOffcanvasComponentProps('offcanvas.desc.visible'),
             attr: 'visible',
             default: '',
+            desc: tOffcanvasComponentProps('offcanvas.desc.visible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="offcanvasComponentProps"
-        t={tOffcanvasComponentProps}
-        state={state}
         props
+        state={state}
+        t={tOffcanvasComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

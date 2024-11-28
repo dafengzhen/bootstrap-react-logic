@@ -1,66 +1,66 @@
 import {
-  type ShiftOptions,
-  type FlipOptions,
-  type SizeOptions,
-  type Placement,
-  useFloating,
   autoUpdate,
-  offset,
-  shift,
   flip,
+  type FlipOptions,
+  offset,
+  type Placement,
+  shift,
+  type ShiftOptions,
   size,
+  type SizeOptions,
+  useFloating,
 } from '@floating-ui/react';
-import { type ElementType, type MouseEvent, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { DropdownOption, DropdownProps } from './types.ts';
 
 import {
-  findTruthyClassOrDefault,
-  convertBsKeyToVar,
-  generateRandomId,
-  findTruthyClass,
   clsxUnique,
+  convertBsKeyToVar,
+  findTruthyClass,
+  findTruthyClassOrDefault,
+  generateRandomId,
   mergeProps,
   stylex,
 } from '../tools';
-import DropdownItemText from './dropdown-item-text.tsx';
 import DropdownDivider from './dropdown-divider.tsx';
 import DropdownHeader from './dropdown-header.tsx';
-import DropdownToggle from './dropdown-toggle.tsx';
+import DropdownItemText from './dropdown-item-text.tsx';
 import DropdownItem from './dropdown-item.tsx';
 import DropdownMenu from './dropdown-menu.tsx';
+import DropdownToggle from './dropdown-toggle.tsx';
 
 interface IOption extends DropdownOption {
   id: number | string;
 }
 
-type MenuAlignment = 'start' | 'end' | false;
+type MenuAlignment = 'end' | 'start' | false;
 
 const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: DropdownProps<T>) {
   const {
     as: Component = 'div' as ElementType,
+    autoClose = true,
+    btnGroup,
+    buttonProps,
+    center,
+    children,
+    className,
+    customMenu,
+    dropend,
+    dropOldClass,
+    dropstart,
+    dropup,
+    dropupCenter,
+    menuProps,
     offset: offsetByDefault,
     options: defaultOptions,
-    strategy = 'absolute',
-    autoClose = true,
-    dropOldClass,
-    dropupCenter,
-    buttonProps,
-    toggleProps,
-    customMenu,
-    className,
-    dropstart,
-    menuProps,
-    variables,
-    btnGroup,
-    children,
-    dropend,
-    visible,
-    center,
-    dropup,
-    toggle,
     split,
+    strategy = 'absolute',
     style,
+    toggle,
+    toggleProps,
+    variables,
+    visible,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
@@ -74,6 +74,14 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   const [mouseEnterDropdownMenu, setMouseEnterDropdownMenu] = useState(false);
 
   const { floatingStyles, refs } = useFloating({
+    middleware: [
+      offset(() => offsetByDefault ?? 0, [show]),
+      shift((state) => state as ShiftOptions, [show]),
+      flip((state) => state as FlipOptions, [show]),
+      size((state) => state as SizeOptions, [show]),
+    ],
+    onOpenChange: setShow,
+    open: show,
     placement: findTruthyClassOrDefault(
       [
         ['bottom', center],
@@ -86,16 +94,8 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
       ],
       'bottom-start',
     ) as Placement,
-    middleware: [
-      offset(() => offsetByDefault ?? 0, [show]),
-      shift((state) => state as ShiftOptions, [show]),
-      flip((state) => state as FlipOptions, [show]),
-      size((state) => state as SizeOptions, [show]),
-    ],
-    whileElementsMounted: autoUpdate,
-    onOpenChange: setShow,
-    open: show,
     strategy,
+    whileElementsMounted: autoUpdate,
   });
 
   const renderOptions = useMemo(() => {
@@ -121,7 +121,7 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   }, [btnGroup, center, className, dropOldClass, dropend, dropstart, dropup, dropupCenter, split, style, variables]);
 
   const handleToggle = useCallback(
-    (e?: MouseEvent<HTMLAnchorElement | HTMLButtonElement> | boolean) => {
+    (e?: boolean | MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
       if (typeof e === 'boolean') {
         setShow(e);
       } else if (e) {
@@ -211,8 +211,8 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
             show={show}
             {...toggleProps}
             data-toggle-id={dropdownToggleId.current}
-            onRef={refs.setReference}
             onClick={handleToggle}
+            onRef={refs.setReference}
           >
             <span className="visually-hidden">Toggle Dropdown</span>
           </DropdownToggle>
@@ -223,17 +223,17 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
           show={show}
           {...toggleProps}
           data-toggle-id={dropdownToggleId.current}
-          onRef={refs.setReference}
           onClick={handleToggle}
+          onRef={refs.setReference}
         >
           {dropstart && (
-            <span data-toggle-id={dropdownToggleId.current} className="dropdown-nbsp">
+            <span className="dropdown-nbsp" data-toggle-id={dropdownToggleId.current}>
               &nbsp;
             </span>
           )}
           {toggle}
           {!dropstart && (
-            <span data-toggle-id={dropdownToggleId.current} className="dropdown-nbsp">
+            <span className="dropdown-nbsp" data-toggle-id={dropdownToggleId.current}>
               &nbsp;
             </span>
           )}
@@ -259,11 +259,11 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
               ) : item.divider ? (
                 <DropdownDivider key={item.id} />
               ) : item.as === 'a' ? (
-                <DropdownItem disabled={item.disabled} active={item.active} href={item.href} key={item.id} as="a">
+                <DropdownItem active={item.active} as="a" disabled={item.disabled} href={item.href} key={item.id}>
                   {item.item}
                 </DropdownItem>
               ) : (
-                <DropdownItem disabled={item.disabled} active={item.active} key={item.id} as="button">
+                <DropdownItem active={item.active} as="button" disabled={item.disabled} key={item.id}>
                   {item.item}
                 </DropdownItem>
               );

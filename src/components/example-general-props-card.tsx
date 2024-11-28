@@ -1,6 +1,6 @@
-import { kebabToCamelCaseLowerFirst, kebabToCamelCase } from '@src/tools';
 import ExamplePropsCard from '@components/example-props-card.tsx';
-import { useTranslation, Trans } from 'react-i18next';
+import { kebabToCamelCase, kebabToCamelCaseLowerFirst } from '@src/tools';
+import { Trans, useTranslation } from 'react-i18next';
 
 export default function ExampleGeneralPropsCard(props: any) {
   const { t } = useTranslation(['commonComponentProps']);
@@ -11,6 +11,7 @@ export default function ExampleGeneralPropsCard(props: any) {
 
   return (
     <ExamplePropsCard
+      customBody
       customCaption={
         <div className="d-flex gap-2">
           <div>
@@ -42,30 +43,29 @@ export default function ExampleGeneralPropsCard(props: any) {
           </div>
         </div>
       }
+      hash={hash}
       items={[
         {
-          type: <span className="badge text-bg-secondary">ElementType</span>,
-          desc: t('common.desc.as'),
-          default: '',
           attr: 'as',
+          default: '',
+          desc: t('common.desc.as'),
+          type: <span className="badge text-bg-secondary">ElementType</span>,
         },
         {
-          type: <span className="badge text-bg-secondary">boolean</span>,
-          desc: t('common.desc.dropOldClass'),
           attr: 'dropOldClass',
           default: '',
+          desc: t('common.desc.dropOldClass'),
+          type: <span className="badge text-bg-secondary">boolean</span>,
         },
         {
-          type: <span className="badge text-bg-secondary">CSSProperties</span>,
-          desc: t('common.desc.variables'),
           attr: 'variables',
           default: '',
+          desc: t('common.desc.variables'),
+          type: <span className="badge text-bg-secondary">CSSProperties</span>,
         },
       ]}
       showCode={showCode}
       title={_tHash}
-      hash={hash}
-      customBody
       {...props}
     />
   );

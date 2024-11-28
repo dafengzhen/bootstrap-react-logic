@@ -1,18 +1,18 @@
-import EventsIndicator from '@components/events-indicator.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import { Pagination } from '@lib/pagination';
 import About from '@components/about.tsx';
+import EventsIndicator from '@components/events-indicator.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Pagination } from '@lib/pagination';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/pagination/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -28,254 +28,254 @@ export default function BadgePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tPaginationPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tPaginationPage}>
         <Pagination
-          previousOption={{
-            link: 'Previous',
-            href: '#',
-          }}
           navProps={{
             'aria-label': 'Page navigation example',
           }}
           nextOption={{
-            link: 'Next',
             href: '#',
+            link: 'Next',
+          }}
+          page={0}
+          previousOption={{
+            href: '#',
+            link: 'Previous',
           }}
           total={3}
-          page={0}
         />
       </Example>
 
-      <Example hash="workingWithIcons" t={tPaginationPage} state={state}>
+      <Example hash="workingWithIcons" state={state} t={tPaginationPage}>
         <Pagination
-          previousOption={{
-            link: <span aria-hidden="true">&laquo;</span>,
-            href: '#',
+          navProps={{
+            'aria-label': 'Page navigation example',
           }}
           nextOption={{
+            href: '#',
             link: <span aria-hidden="true">&raquo;</span>,
-            href: '#',
           }}
-          navProps={{
-            'aria-label': 'Page navigation example',
+          page={0}
+          previousOption={{
+            href: '#',
+            link: <span aria-hidden="true">&laquo;</span>,
           }}
           total={3}
-          page={0}
         />
       </Example>
 
-      <Example hash="disabledAndActiveStates" t={tPaginationPage} state={state}>
+      <Example hash="disabledAndActiveStates" state={state} t={tPaginationPage}>
         <Pagination
-          previousOption={{
-            link: 'Previous',
-            disabled: true,
-            href: '#',
-          }}
           navProps={{
             'aria-label': 'Page navigation example',
           }}
           nextOption={{
-            link: 'Next',
             href: '#',
+            link: 'Next',
           }}
           option={{
             clickableActive: true,
           }}
-          total={3}
           page={2}
+          previousOption={{
+            disabled: true,
+            href: '#',
+            link: 'Previous',
+          }}
+          total={3}
         />
 
         <Pagination
-          previousOption={{
-            link: 'Previous',
-            disabled: true,
-            href: '#',
-          }}
           navProps={{
             'aria-label': 'Page navigation example',
           }}
           nextOption={{
-            link: 'Next',
             href: '#',
+            link: 'Next',
+          }}
+          page={2}
+          previousOption={{
+            disabled: true,
+            href: '#',
+            link: 'Previous',
           }}
           total={3}
-          page={2}
         />
       </Example>
 
-      <Example t={tPaginationPage} hash="sizing" state={state}>
+      <Example hash="sizing" state={state} t={tPaginationPage}>
         <Pagination
           navProps={{
             'aria-label': 'Page navigation example',
           }}
-          previous={false}
           next={false}
-          total={3}
+          page={1}
+          previous={false}
           size="lg"
-          page={1}
+          total={3}
         />
 
         <Pagination
           navProps={{
             'aria-label': 'Page navigation example',
           }}
-          previous={false}
           next={false}
-          total={3}
-          size="sm"
           page={1}
+          previous={false}
+          size="sm"
+          total={3}
         />
       </Example>
 
-      <Example t={tPaginationPage} hash="alignment" state={state}>
+      <Example hash="alignment" state={state} t={tPaginationPage}>
         <Pagination
-          previousOption={{
-            link: 'Previous',
-            disabled: true,
-            href: '#',
-          }}
-          navProps={{
-            'aria-label': 'Page navigation example',
-          }}
-          nextOption={{
-            link: 'Next',
-            href: '#',
-          }}
           alignment="center"
-          total={3}
-          page={0}
-        />
-
-        <Pagination
-          previousOption={{
-            link: 'Previous',
-            disabled: true,
-            href: '#',
-          }}
           navProps={{
             'aria-label': 'Page navigation example',
           }}
           nextOption={{
-            link: 'Next',
             href: '#',
+            link: 'Next',
           }}
-          alignment="end"
-          total={3}
           page={0}
+          previousOption={{
+            disabled: true,
+            href: '#',
+            link: 'Previous',
+          }}
+          total={3}
+        />
+
+        <Pagination
+          alignment="end"
+          navProps={{
+            'aria-label': 'Page navigation example',
+          }}
+          nextOption={{
+            href: '#',
+            link: 'Next',
+          }}
+          page={0}
+          previousOption={{
+            disabled: true,
+            href: '#',
+            link: 'Previous',
+          }}
+          total={3}
         />
       </Example>
 
-      <Example t={tPaginationPage} hash="example" state={state}>
+      <Example hash="example" state={state} t={tPaginationPage}>
         <Pagination
           onChange={(page, type) => {
             console.log(page, type);
           }}
-          total={10}
           page={0}
+          total={10}
         />
       </Example>
 
       <PropsIndicator />
 
       <Example
+        hash="paginationComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">IOption</span>,
-            desc: tPaginationComponentProps('pagination.desc.option'),
             attr: 'option',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.option'),
+            type: <span className="badge text-bg-secondary">IOption</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">IPreviousOption</span>,
-            desc: tPaginationComponentProps('pagination.desc.previousOption'),
             attr: 'previousOption',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.previousOption'),
+            type: <span className="badge text-bg-secondary">IPreviousOption</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">INextOption</span>,
-            desc: tPaginationComponentProps('pagination.desc.nextOption'),
             attr: 'nextOption',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.nextOption'),
+            type: <span className="badge text-bg-secondary">INextOption</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">PaginationNavProps</span>,
-            desc: tPaginationComponentProps('pagination.desc.navProps'),
             attr: 'navProps',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.navProps'),
+            type: <span className="badge text-bg-secondary">PaginationNavProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">center | end | start</span>,
-            desc: tPaginationComponentProps('pagination.desc.alignment'),
             attr: 'alignment',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.alignment'),
+            type: <span className="badge text-bg-secondary">center | end | start</span>,
           },
           {
-            desc: tPaginationComponentProps('pagination.desc.alwaysShowEllipsis'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
             attr: 'alwaysShowEllipsis',
             default: 'false',
+            desc: tPaginationComponentProps('pagination.desc.alwaysShowEllipsis'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tPaginationComponentProps('pagination.desc.maxVisible'),
             attr: 'maxVisible',
             default: '4',
+            desc: tPaginationComponentProps('pagination.desc.maxVisible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tPaginationComponentProps('pagination.desc.previous'),
             attr: 'previous',
             default: 'true',
+            desc: tPaginationComponentProps('pagination.desc.previous'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tPaginationComponentProps('pagination.desc.size'),
             attr: 'size',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.size'),
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tPaginationComponentProps('pagination.desc.next'),
-            default: 'true',
             attr: 'next',
+            default: 'true',
+            desc: tPaginationComponentProps('pagination.desc.next'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">number</span>,
-            desc: tPaginationComponentProps('pagination.desc.total'),
             attr: 'total',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.total'),
+            type: <span className="badge text-bg-secondary">number</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">number</span>,
-            desc: tPaginationComponentProps('pagination.desc.page'),
             attr: 'page',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.page'),
+            type: <span className="badge text-bg-secondary">number</span>,
           },
         ]}
-        hash="paginationComponentProps"
-        t={tPaginationComponentProps}
-        state={state}
         props
+        state={state}
+        t={tPaginationComponentProps}
       />
 
       <EventsIndicator />
 
       <Example
+        events
+        hash="paginationComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">Function</span>,
-            desc: tPaginationComponentProps('pagination.desc.onChange'),
             attr: 'onChange',
             default: '',
+            desc: tPaginationComponentProps('pagination.desc.onChange'),
+            type: <span className="badge text-bg-secondary">Function</span>,
           },
         ]}
-        hash="paginationComponentProps"
-        t={tPaginationComponentProps}
         state={state}
-        events
+        t={tPaginationComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

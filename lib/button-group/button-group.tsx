@@ -2,19 +2,19 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ButtonGroupProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: ButtonGroupProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    dropOldClass,
-    className,
-    variables,
     children,
-    vertical,
-    toolbar,
-    style,
+    className,
+    dropOldClass,
     size,
+    style,
+    toolbar,
+    variables,
+    vertical,
     ...rest
   } = props;
 

@@ -1,29 +1,29 @@
-import { type ElementType, type MouseEvent, useCallback, useState, useMemo } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useMemo, useState } from 'react';
 
 import type { PaginationProps } from './types.ts';
 
 import {
-  BiChevronDoubleRight,
   BiChevronDoubleLeft,
-  generatePagination,
-  convertBsKeyToVar,
+  BiChevronDoubleRight,
   BiThreeDots,
   clsxUnique,
+  convertBsKeyToVar,
+  generatePagination,
   mergeProps,
   stylex,
 } from '../tools';
 import PaginationBasic from './pagination-basic.tsx';
 import PaginationItem from './pagination-item.tsx';
 import PaginationLink from './pagination-link.tsx';
-import PaginationSpan from './pagination-span.tsx';
 import PaginationNav from './pagination-nav.tsx';
+import PaginationSpan from './pagination-span.tsx';
 
 interface IOption {
-  value: number | '<' | '>';
-  id: number | string;
   active: boolean;
-  hover: boolean;
   dots: boolean;
+  hover: boolean;
+  id: number | string;
+  value: '<' | '>' | number;
 }
 
 const generateOptions = (
@@ -33,33 +33,33 @@ const generateOptions = (
   alwaysShowEllipsis: boolean,
 ): IOption[] =>
   generatePagination(currentPage, total, maxVisible, alwaysShowEllipsis).map((item, index) => ({
-    dots: typeof item === 'string',
     active: currentPage === item,
+    dots: typeof item === 'string',
     hover: false,
-    value: item,
     id: index,
+    value: item,
   }));
 
 const Pagination = function Pagination<T extends ElementType = 'ul'>(props: PaginationProps<T>) {
   const {
-    previous: defaultPrevious = true,
-    alwaysShowEllipsis = false,
-    onChange: defaultOnChange,
-    next: defaultNext = true,
-    option: defaultOption,
-    as: Component = 'ul',
-    maxVisible = 4,
-    previousOption,
-    dropOldClass,
-    nextOption,
     alignment,
+    alwaysShowEllipsis = false,
+    as: Component = 'ul',
     className,
-    variables,
-    total = 0,
+    dropOldClass,
+    maxVisible = 4,
     navProps,
+    next: defaultNext = true,
+    nextOption,
+    onChange: defaultOnChange,
+    option: defaultOption,
     page = 0,
-    style,
+    previous: defaultPrevious = true,
+    previousOption,
     size,
+    style,
+    total = 0,
+    variables,
     ...rest
   } = props;
 
@@ -80,8 +80,8 @@ const Pagination = function Pagination<T extends ElementType = 'ul'>(props: Pagi
   }, [alignment, className, dropOldClass, size, style, variables]);
 
   const handlePageClick = useCallback(
-    (value: number | '<' | '>', type: 'previous' | 'next' | 'page' | '<' | '>') => {
-      const currentPage = (dynamicOptions.find((option) => option.active)?.value as undefined | number) ?? 0;
+    (value: '<' | '>' | number, type: '<' | '>' | 'next' | 'page' | 'previous') => {
+      const currentPage = (dynamicOptions.find((option) => option.active)?.value as number | undefined) ?? 0;
 
       let newPage: number;
       if (value === '<') {
@@ -132,23 +132,23 @@ const Pagination = function Pagination<T extends ElementType = 'ul'>(props: Pagi
             {item.dots ? (
               <PaginationLink
                 {...defaultOption?.linkProps}
-                onMouseLeave={() =>
-                  setDynamicOptions((prev) => {
-                    prev[index].hover = false;
-                    return [...prev];
-                  })
-                }
+                href=""
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                  e.preventDefault();
+                  handlePageClick(item.value, item.value as '<' | '>');
+                }}
                 onMouseEnter={() =>
                   setDynamicOptions((prev) => {
                     prev[index].hover = true;
                     return [...prev];
                   })
                 }
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-                  e.preventDefault();
-                  handlePageClick(item.value, item.value as '<' | '>');
-                }}
-                href=""
+                onMouseLeave={() =>
+                  setDynamicOptions((prev) => {
+                    prev[index].hover = false;
+                    return [...prev];
+                  })
+                }
               >
                 {item.hover ? item.value === '<' ? <BiChevronDoubleLeft /> : <BiChevronDoubleRight /> : <BiThreeDots />}
               </PaginationLink>
@@ -157,11 +157,11 @@ const Pagination = function Pagination<T extends ElementType = 'ul'>(props: Pagi
             ) : (
               <PaginationLink
                 {...defaultOption?.linkProps}
+                href=""
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
                   handlePageClick(item.value, 'page');
                 }}
-                href=""
               >
                 {item.value}
               </PaginationLink>

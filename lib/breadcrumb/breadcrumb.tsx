@@ -1,28 +1,28 @@
-import { type ElementType, type MouseEvent, useCallback, useState, useMemo } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useMemo, useState } from 'react';
 
 import type { BreadcrumbOption, BreadcrumbProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import BreadcrumbBasic from './breadcrumb-basic.tsx';
 import BreadcrumbItem from './breadcrumb-item.tsx';
 
 const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: BreadcrumbProps<T>) {
   const {
-    as: Component = 'nav' as ElementType,
-    onClick: onClickByDefault,
     'aria-label': ariaLabel,
-    options: defaultOptions,
-    dropOldClass,
+    as: Component = 'nav' as ElementType,
     className,
-    variables,
+    dropOldClass,
+    onClick: onClickByDefault,
+    options: defaultOptions,
     style,
+    variables,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
     ...item,
     id: item.id ?? index,
   }));
-  const [options] = useState<({ id: number | string } & BreadcrumbOption)[]>(initialOptions);
+  const [options] = useState<(BreadcrumbOption & { id: number | string })[]>(initialOptions);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', className);
@@ -51,9 +51,9 @@ const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: Bre
         {options.map((item, index) => {
           return (
             <BreadcrumbItem
-              onClick={(event: MouseEvent<HTMLLIElement>) => onClick(index, event)}
               active={item.active}
               key={item.id}
+              onClick={(event: MouseEvent<HTMLLIElement>) => onClick(index, event)}
             >
               {item.title}
             </BreadcrumbItem>

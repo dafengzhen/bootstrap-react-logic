@@ -1,6 +1,6 @@
-import type { ElementType, RefCallback, ElementRef, ReactNode } from 'react';
+import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
 
-import type { OmittedPropsWithoutRef, InputVariablesType, BaseProps, SlotValue } from '../tools';
+import type { BaseProps, InputVariablesType, OmittedPropsWithoutRef, SlotValue } from '../tools';
 
 export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
@@ -9,31 +9,26 @@ export type InputProps<T extends ElementType> = OmittedPropsWithoutRef<
   'color' | 'size'
 >;
 
-type Props<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, InputVariablesType> & {
   /**
-   * startEndContentClasses.
+   * color
    */
-  startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
-
-  /**
-   * onRef.
-   */
-  onRef?: RefCallback<ElementRef<T>>;
-
-  /**
-   * readonlyPlainText.
-   */
-  readonlyPlainText?: boolean;
-
-  /**
-   * startContent.
-   */
-  startContent?: ReactNode;
+  color?: boolean;
 
   /**
    * endContent.
    */
   endContent?: ReactNode;
+
+  /**
+   * isInvalid,
+   */
+  isInvalid?: boolean;
+
+  /**
+   * isValid.
+   */
+  isValid?: boolean;
 
   /**
    * nativeColor.
@@ -46,9 +41,14 @@ type Props<T extends ElementType> = {
   nativeSize?: number;
 
   /**
-   * isInvalid,
+   * onRef.
    */
-  isInvalid?: boolean;
+  onRef?: RefCallback<ElementRef<T>>;
+
+  /**
+   * readonlyPlainText.
+   */
+  readonlyPlainText?: boolean;
 
   /**
    * size.
@@ -56,14 +56,14 @@ type Props<T extends ElementType> = {
   size?: 'lg' | 'sm';
 
   /**
-   * isValid.
+   * startContent.
    */
-  isValid?: boolean;
+  startContent?: ReactNode;
 
   /**
-   * color
+   * startEndContentClasses.
    */
-  color?: boolean;
-} & BaseProps<T, InputVariablesType>;
+  startEndContentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
+};
 
-type SlotValueKeys = 'component' | 'container' | 'start' | 'end';
+type SlotValueKeys = 'component' | 'container' | 'end' | 'start';

@@ -1,17 +1,17 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
-import { Scrollspy } from '@lib/scrollspy';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
+import { Scrollspy } from '@lib/scrollspy';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/scrollspy/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -33,25 +33,25 @@ const sectionIds: SectionId[] = [
 ];
 
 const sections = {
-  scrollspyHeading2: {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
-    h4: 'Second heading',
-  },
-  scrollspyHeading4: {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
-    h4: 'Fourth heading',
-  },
   scrollspyHeading1: {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'First heading',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
+  },
+  scrollspyHeading2: {
+    h4: 'Second heading',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   scrollspyHeading3: {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Third heading',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
+  },
+  scrollspyHeading4: {
+    h4: 'Fourth heading',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   scrollspyHeading5: {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Fifth heading',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
 };
 
@@ -67,45 +67,45 @@ const Section = ({ sectionId }: { sectionId: SectionId }) => {
 
 /// nestedNav
 
-type SectionId2 = 'item-1-1' | 'item-1-2' | 'item-3-1' | 'item-3-2' | 'item-1' | 'item-2' | 'item-3';
+type SectionId2 = 'item-1' | 'item-1-1' | 'item-1-2' | 'item-2' | 'item-3' | 'item-3-1' | 'item-3-2';
 
 const sectionIds2: SectionId2[] = ['item-1', 'item-1-1', 'item-1-2', 'item-2', 'item-3', 'item-3-1', 'item-3-2'];
 
 const sections2 = {
-  'item-1-1': {
+  'item-1': {
+    h4: 'Item 1',
     p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
+  },
+  'item-1-1': {
     h4: 'Item 1-1',
+    p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
+    p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
   },
   'item-1-2': {
-    p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
-    p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
     h4: 'Item 1-2',
-  },
-  'item-3-1': {
     p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
-    h4: 'Item 3-1',
-  },
-  'item-3-2': {
-    p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
-    p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
-    h4: 'Item 3-2',
-  },
-  'item-1': {
-    p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
-    p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
-    h4: 'Item 1',
   },
   'item-2': {
+    h4: 'Item 2',
     p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
-    h4: 'Item 2',
   },
   'item-3': {
+    h4: 'Item 3',
     p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
-    h4: 'Item 3',
+  },
+  'item-3-1': {
+    h4: 'Item 3-1',
+    p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
+    p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
+  },
+  'item-3-2': {
+    h4: 'Item 3-2',
+    p1: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
+    p2: 'Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.',
   },
 };
 
@@ -128,20 +128,20 @@ const sectionIds3: SectionId3[] = ['list-item-1', 'list-item-2', 'list-item-3', 
 
 const sections3 = {
   'list-item-1': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 1',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'list-item-2': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 2',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'list-item-3': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 3',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'list-item-4': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 4',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
 };
 
@@ -174,24 +174,24 @@ const sectionIds4: SectionId4[] = [
 
 const sections4 = {
   'simple-list-item-1': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 1',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'simple-list-item-2': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 2',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'simple-list-item-3': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 3',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'simple-list-item-4': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 4',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
   'simple-list-item-5': {
-    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
     h4: 'Item 4',
+    p: "This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.",
   },
 };
 
@@ -213,10 +213,10 @@ export default function BadgePage() {
   const { t: tScrollspyPage } = useTranslation(['scrollspyPage']);
   const state = useState(codes);
 
-  const [activeSection, setActiveSection] = useState<string | null>(sectionIds[0]);
-  const [activeSection2, setActiveSection2] = useState<string | null>(sectionIds2[0]);
-  const [activeSection3, setActiveSection3] = useState<string | null>(sectionIds3[0]);
-  const [activeSection4, setActiveSection4] = useState<string | null>(sectionIds4[0]);
+  const [activeSection, setActiveSection] = useState<null | string>(sectionIds[0]);
+  const [activeSection2, setActiveSection2] = useState<null | string>(sectionIds2[0]);
+  const [activeSection3, setActiveSection3] = useState<null | string>(sectionIds3[0]);
+  const [activeSection4, setActiveSection4] = useState<null | string>(sectionIds4[0]);
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -224,7 +224,7 @@ export default function BadgePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tScrollspyPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tScrollspyPage}>
         <nav className="navbar bg-body-tertiary px-3 mb-3" id="navbar-example2">
           <a className="navbar-brand" href="#">
             Navbar
@@ -248,11 +248,11 @@ export default function BadgePage() {
             </li>
             <li className="nav-item dropdown">
               <a
+                aria-expanded="false"
                 className={`nav-link dropdown-toggle ${activeSection === 'scrollspyHeading3' || activeSection === 'scrollspyHeading4' || activeSection === 'scrollspyHeading5' ? 'active' : ''}`}
                 data-bs-toggle="dropdown"
-                aria-expanded="false"
-                role="button"
                 href="#"
+                role="button"
               >
                 Dropdown
               </a>
@@ -296,11 +296,11 @@ export default function BadgePage() {
           smoothScroll
           tabIndex={0}
         >
-          {() => sectionIds.map((sectionId) => <Section sectionId={sectionId} key={sectionId} />)}
+          {() => sectionIds.map((sectionId) => <Section key={sectionId} sectionId={sectionId} />)}
         </Scrollspy>
       </Example>
 
-      <Example t={tScrollspyPage} hash="nestedNav" state={state}>
+      <Example hash="nestedNav" state={state} t={tScrollspyPage}>
         <div className="row">
           <div className="col-4">
             <nav className="h-100 flex-column align-items-stretch pe-4 border-end" id="navbar-example3">
@@ -341,19 +341,19 @@ export default function BadgePage() {
           </div>
           <div className="col-8">
             <Scrollspy
-              onActiveChange={setActiveSection2}
               className="scrollspy-example-2"
+              onActiveChange={setActiveSection2}
               sectionIds={sectionIds2}
               smoothScroll
               tabIndex={0}
             >
-              {() => sectionIds2.map((sectionId) => <Section2 sectionId={sectionId} key={sectionId} />)}
+              {() => sectionIds2.map((sectionId) => <Section2 key={sectionId} sectionId={sectionId} />)}
             </Scrollspy>
           </div>
         </div>
       </Example>
 
-      <Example t={tScrollspyPage} hash="listGroup" state={state}>
+      <Example hash="listGroup" state={state} t={tScrollspyPage}>
         <div className="row">
           <div className="col-4">
             <div className="list-group" id="list-example">
@@ -385,19 +385,19 @@ export default function BadgePage() {
           </div>
           <div className="col-8">
             <Scrollspy
-              onActiveChange={setActiveSection3}
               className="scrollspy-example"
+              onActiveChange={setActiveSection3}
               sectionIds={sectionIds3}
               smoothScroll
               tabIndex={0}
             >
-              {() => sectionIds3.map((sectionId) => <Section3 sectionId={sectionId} key={sectionId} />)}
+              {() => sectionIds3.map((sectionId) => <Section3 key={sectionId} sectionId={sectionId} />)}
             </Scrollspy>
           </div>
         </div>
       </Example>
 
-      <Example hash="simpleAnchors" t={tScrollspyPage} state={state}>
+      <Example hash="simpleAnchors" state={state} t={tScrollspyPage}>
         <div className="row">
           <div className="col-4">
             <div
@@ -438,13 +438,13 @@ export default function BadgePage() {
           </div>
           <div className="col-8">
             <Scrollspy
-              onActiveChange={setActiveSection4}
               className="scrollspy-example"
+              onActiveChange={setActiveSection4}
               sectionIds={sectionIds4}
               smoothScroll
               tabIndex={0}
             >
-              {() => sectionIds4.map((sectionId) => <Section4 sectionId={sectionId} key={sectionId} />)}
+              {() => sectionIds4.map((sectionId) => <Section4 key={sectionId} sectionId={sectionId} />)}
             </Scrollspy>
           </div>
         </div>
@@ -453,51 +453,51 @@ export default function BadgePage() {
       <PropsIndicator />
 
       <Example
+        hash="scrollspyComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary ms-1">(activeId: null | string) =&gt; ReactNode</span>,
-            desc: tScrollspyComponentProps('scrollspy.desc.children'),
             attr: 'children',
             default: '',
+            desc: tScrollspyComponentProps('scrollspy.desc.children'),
+            type: <span className="badge text-bg-secondary ms-1">(activeId: null | string) =&gt; ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">(id: null | string) =&gt; void</span>,
-            desc: tScrollspyComponentProps('scrollspy.desc.onActiveChange'),
             attr: 'onActiveChange',
             default: '',
+            desc: tScrollspyComponentProps('scrollspy.desc.onActiveChange'),
+            type: <span className="badge text-bg-secondary ms-1">(id: null | string) =&gt; void</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-            desc: tScrollspyComponentProps('scrollspy.desc.rootMargin'),
-            default: '0px 0px -25%',
             attr: 'rootMargin',
+            default: '0px 0px -25%',
+            desc: tScrollspyComponentProps('scrollspy.desc.rootMargin'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">string[]</span>,
-            desc: tScrollspyComponentProps('scrollspy.desc.sectionIds'),
             attr: 'sectionIds',
             default: '',
+            desc: tScrollspyComponentProps('scrollspy.desc.sectionIds'),
+            type: <span className="badge text-bg-secondary ms-1">string[]</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-            desc: tScrollspyComponentProps('scrollspy.desc.smoothScroll'),
             attr: 'smoothScroll',
             default: '',
+            desc: tScrollspyComponentProps('scrollspy.desc.smoothScroll'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">number | number[]</span>,
-            desc: tScrollspyComponentProps('scrollspy.desc.threshold'),
             attr: 'threshold',
             default: '0.5',
+            desc: tScrollspyComponentProps('scrollspy.desc.threshold'),
+            type: <span className="badge text-bg-secondary ms-1">number | number[]</span>,
           },
         ]}
-        hash="scrollspyComponentProps"
-        t={tScrollspyComponentProps}
-        state={state}
         props
+        state={state}
+        t={tScrollspyComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

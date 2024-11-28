@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarBrandProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const NavbarBrand = function NavbarBrand<T extends ElementType = 'a'>(props: NavbarBrandProps<T>) {
-  const { as: Component = 'a' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'a' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'navbar-brand', className);

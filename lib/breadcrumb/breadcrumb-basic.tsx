@@ -2,11 +2,11 @@ import { type ElementType, useMemo } from 'react';
 
 import type { BreadcrumbBasicProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import BreadcrumbItem from './breadcrumb-item.tsx';
 
 const BreadcrumbBasic = function BreadcrumbBasic<T extends ElementType = 'ol'>(props: BreadcrumbBasicProps<T>) {
-  const { as: Component = 'ol' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'ol' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'breadcrumb', className);

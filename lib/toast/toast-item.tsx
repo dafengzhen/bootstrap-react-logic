@@ -1,29 +1,29 @@
-import { type ElementType, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ToastItemProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import ToastBody from './toast-body.tsx';
 import ToastContainer from './toast-container.tsx';
 import ToastHeader from './toast-header.tsx';
-import ToastBody from './toast-body.tsx';
 
 const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: ToastItemProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    visible: visibleByDefault = false,
-    onChange: onChangeByDefault,
     autohide = true,
+    body,
+    bodyProps,
+    className,
     customContent,
     delay = 5000,
     dropOldClass,
     fade = true,
-    headerProps,
-    bodyProps,
-    className,
-    variables,
     header,
+    headerProps,
+    onChange: onChangeByDefault,
     style,
-    body,
+    variables,
+    visible: visibleByDefault = false,
     ...rest
   } = props;
   const [show, setShow] = useState(false);
@@ -54,7 +54,7 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
   );
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined | number | string;
+    let timeout: NodeJS.Timeout | number | string | undefined;
     if (autohide && show) {
       timeout = setTimeout(() => {
         onChange(false);

@@ -2,18 +2,18 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SpinnerProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const Spinner = function Spinner<T extends ElementType = 'div'>(props: SpinnerProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    dropOldClass,
     className,
-    variables,
-    variant,
-    style,
+    dropOldClass,
     grow,
     size,
+    style,
+    variables,
+    variant,
     ...rest
   } = props;
 

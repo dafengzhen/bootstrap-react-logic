@@ -1,13 +1,13 @@
 import type { ElementType } from 'react';
 
-import type { SelectMultipleVariablesType, OmittedPropsWithoutRef, BaseProps, SlotValue } from '../tools';
+import type { BaseProps, OmittedPropsWithoutRef, SelectMultipleVariablesType, SlotValue } from '../tools';
 
 export interface SelectMultipleOption {
-  divider?: 'bottom' | 'top';
-  id?: number | string;
-  disabled?: boolean;
   active?: boolean;
+  disabled?: boolean;
+  divider?: 'bottom' | 'top';
   header?: string;
+  id?: number | string;
   text: string;
 }
 
@@ -18,11 +18,21 @@ export type SelectMultipleProps<T extends ElementType> = OmittedPropsWithoutRef<
   'onChange'
 >;
 
-type Props<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, SelectMultipleVariablesType> & {
   /**
    * contentClasses.
    */
   contentClasses?: Partial<Record<SlotValueKeys, SlotValue>>;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * hideActiveOptions.
+   */
+  hideActiveOptions?: boolean;
 
   /**
    * onChange.
@@ -35,9 +45,9 @@ type Props<T extends ElementType> = {
   options?: SelectMultipleOption[];
 
   /**
-   * hideActiveOptions.
+   * placeholder.
    */
-  hideActiveOptions?: boolean;
+  placeholder?: string;
 
   /**
    * selectableCount.
@@ -45,31 +55,21 @@ type Props<T extends ElementType> = {
   selectableCount?: number;
 
   /**
-   * placeholder.
-   */
-  placeholder?: string;
-
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
-
-  /**
    * single.
    */
   single?: boolean;
-} & BaseProps<T, SelectMultipleVariablesType>;
+};
 
 type SlotValueKeys =
-  | 'optionsContainer'
-  | 'bottomDivider'
-  | 'mainContainer'
   | 'activeOption'
+  | 'bottomDivider'
+  | 'clearIcon'
   | 'countDisplay'
   | 'floatingMenu'
-  | 'selectButton'
-  | 'placeholder'
+  | 'header'
+  | 'mainContainer'
   | 'optionItem'
-  | 'topDivider'
-  | 'clearIcon'
-  | 'header';
+  | 'optionsContainer'
+  | 'placeholder'
+  | 'selectButton'
+  | 'topDivider';

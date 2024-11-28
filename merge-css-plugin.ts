@@ -1,11 +1,11 @@
-import type { PluginContext, OutputAsset, SourceMap } from 'rollup';
+import type { OutputAsset, PluginContext, SourceMap } from 'rollup';
 
-import { SourceMapGenerator, SourceMapConsumer } from 'source-map';
-import postcssLoadConfig from 'postcss-load-config';
-import { normalizePath, type Plugin } from 'vite';
 import cssnano from 'cssnano';
-import postcss from 'postcss';
 import path from 'path';
+import postcss from 'postcss';
+import postcssLoadConfig from 'postcss-load-config';
+import { SourceMapConsumer, SourceMapGenerator } from 'source-map';
+import { normalizePath, type Plugin } from 'vite';
 
 const mergeCssPlugin = (): Plugin => {
   const combinedSourcemap = new Map<string, SourceMap>();
@@ -36,17 +36,17 @@ const mergeCssPlugin = (): Plugin => {
         emitUpdatedSourceMaps(cssFiles, combinedSourcemap, this);
       }
     },
+    name: 'merge-css',
     async transform(_, id) {
       if (id.endsWith('.scss')) {
         combinedSourcemap.set(id, this.getCombinedSourcemap());
       }
       return null;
     },
-    name: 'merge-css',
   };
 };
 
-const normalizeRelativePath = (from: string, to: undefined | string): string => {
+const normalizeRelativePath = (from: string, to: string | undefined): string => {
   return normalizePath(path.relative(from, to || ''));
 };
 
@@ -79,12 +79,12 @@ const mergeSourceMaps = async (combinedSourcemap: Map<string, SourceMap>) => {
           column: mapping.generatedColumn,
           line: mapping.generatedLine,
         },
+        name: mapping.name,
         original: {
           column: mapping.originalColumn,
           line: mapping.originalLine,
         },
         source: normalizeRelativePath(process.cwd(), mapping.source),
-        name: mapping.name,
       });
     });
 
@@ -110,9 +110,9 @@ const emitUpdatedSourceMaps = (
     updateSourcemapSources(sourcemap, outputDir);
 
     pluginContext.emitFile({
-      source: sourcemap.toString(),
-      originalFileName: filePath,
       fileName: outputMapPath,
+      originalFileName: filePath,
+      source: sourcemap.toString(),
       type: 'asset',
     });
 

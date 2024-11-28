@@ -1,5 +1,5 @@
 import ExampleLink from '@components/example-link.tsx';
-import { useTranslation, Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 export default function About() {
   const { t } = useTranslation(['about']);
@@ -7,7 +7,7 @@ export default function About() {
   return (
     <div className="card">
       <div className="card-header">
-        <ExampleLink title={t('other')} hash="other" />
+        <ExampleLink hash="other" title={t('other')} />
       </div>
       <div className="card-body">
         <div>
@@ -30,7 +30,7 @@ export default function About() {
           <p className="small">
             <Trans
               components={[
-                <a href="https://github.com/dafengzhen/bootstrap-react-logic/issues" className="small" target="_blank">
+                <a className="small" href="https://github.com/dafengzhen/bootstrap-react-logic/issues" target="_blank">
                   issue
                 </a>,
               ]}

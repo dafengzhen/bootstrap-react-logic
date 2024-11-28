@@ -1,6 +1,6 @@
 import type { ElementType, ReactNode } from 'react';
 
-import type { OmittedPropsWithoutRef, ScrollspyVariablesType, BaseProps } from '../tools';
+import type { BaseProps, OmittedPropsWithoutRef, ScrollspyVariablesType } from '../tools';
 
 export type ScrollspyProps<T extends ElementType> = OmittedPropsWithoutRef<
   Props<T>,
@@ -9,26 +9,21 @@ export type ScrollspyProps<T extends ElementType> = OmittedPropsWithoutRef<
   'children'
 >;
 
-type Props<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, ScrollspyVariablesType> & {
   /**
    * children.
    */
-  children: (activeId: string | null) => ReactNode;
+  children: (activeId: null | string) => ReactNode;
 
   /**
    * onActiveChange.
    */
-  onActiveChange?: (id: string | null) => void;
+  onActiveChange?: (id: null | string) => void;
 
   /**
-   * number.
+   * offset.
    */
-  threshold?: number[] | number;
-
-  /**
-   * smoothScroll.
-   */
-  smoothScroll?: boolean;
+  rootMargin?: string;
 
   /**
    * sectionIds.
@@ -36,7 +31,12 @@ type Props<T extends ElementType> = {
   sectionIds?: string[];
 
   /**
-   * offset.
+   * smoothScroll.
    */
-  rootMargin?: string;
-} & BaseProps<T, ScrollspyVariablesType>;
+  smoothScroll?: boolean;
+
+  /**
+   * number.
+   */
+  threshold?: number | number[];
+};

@@ -1,7 +1,7 @@
 import Popover from './popover.tsx';
 
 // types
-export type { PopoverHeaderProps, PopoverArrowProps, PopoverBodyProps, PopoverProps } from './types.ts';
+export type { PopoverArrowProps, PopoverBodyProps, PopoverHeaderProps, PopoverProps } from './types.ts';
 
 // hooks
 

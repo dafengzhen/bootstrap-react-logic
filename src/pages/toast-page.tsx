@@ -1,33 +1,33 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import OptionRow from '@components/option-row.tsx';
-import { type ChangeEvent, useState } from 'react';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Toast } from '@lib/toast';
+import { transformCodeObj } from '@src/tools';
+import { type ChangeEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/toast/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
-const SquareIcon = ({ fill = '#007aff', className = '', height = 20, width = 20 }) => {
+const SquareIcon = ({ className = '', fill = '#007aff', height = 20, width = 20 }) => {
   return (
     <svg
-      className={`bd-placeholder-img rounded me-2 ${className}`}
-      preserveAspectRatio="xMidYMid slice"
-      xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
+      className={`bd-placeholder-img rounded me-2 ${className}`}
       focusable="false"
       height={height}
+      preserveAspectRatio="xMidYMid slice"
       width={width}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <rect height="100%" width="100%" fill={fill} />
+      <rect fill={fill} height="100%" width="100%" />
     </svg>
   );
 };
@@ -109,32 +109,32 @@ export default function BadgePage() {
   function onChangeSelect(e: ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
     switch (value) {
+      case 'bottom-0 end-0':
+        setPlacement('bottom-end');
+        break;
+      case 'bottom-0 start-0':
+        setPlacement('bottom-start');
+        break;
       case 'bottom-0 start-50 translate-middle-x':
         setPlacement('bottom-center');
         break;
+      case 'top-0 end-0':
+        setPlacement('top-end');
+        break;
+      case 'top-0 start-0':
+        setPlacement('top-start');
+        break;
       case 'top-0 start-50 translate-middle-x':
         setPlacement('top-center');
+        break;
+      case 'top-50 end-0 translate-middle-y':
+        setPlacement('middle-right');
         break;
       case 'top-50 start-0 translate-middle-y':
         setPlacement('middle-left');
         break;
       case 'top-50 start-50 translate-middle':
         setPlacement('middle-center');
-        break;
-      case 'top-50 end-0 translate-middle-y':
-        setPlacement('middle-right');
-        break;
-      case 'bottom-0 start-0':
-        setPlacement('bottom-start');
-        break;
-      case 'bottom-0 end-0':
-        setPlacement('bottom-end');
-        break;
-      case 'top-0 start-0':
-        setPlacement('top-start');
-        break;
-      case 'top-0 end-0':
-        setPlacement('top-end');
         break;
     }
   }
@@ -145,32 +145,32 @@ export default function BadgePage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tToastPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tToastPage}>
         <Toast
+          aria-atomic="true"
+          aria-live="assertive"
+          autohide={false}
+          body="Hello, world! This is a toast message."
           header={
             <>
               <SquareIcon />
               <strong className="me-auto">Bootstrap</strong>
               <small>11 mins ago</small>
               <button
-                onClick={onClickVisible}
-                data-bs-dismiss="toast"
-                className="btn-close"
                 aria-label="Close"
+                className="btn-close"
+                data-bs-dismiss="toast"
+                onClick={onClickVisible}
                 type="button"
               ></button>
             </>
           }
-          body="Hello, world! This is a toast message."
-          aria-live="assertive"
-          aria-atomic="true"
-          visible={visible}
-          autohide={false}
           role="alert"
+          visible={visible}
         />
       </Example>
 
-      <Example hash="liveExample" t={tToastPage} state={state}>
+      <Example hash="liveExample" state={state} t={tToastPage}>
         <div>
           <button className="btn btn-primary" onClick={onClickVisible2} type="button">
             Show live toast
@@ -178,138 +178,141 @@ export default function BadgePage() {
         </div>
 
         <Toast
+          container
+          containerProps={{
+            className: 'bottom-0 end-0 p-3',
+          }}
           options={[
             {
+              'aria-atomic': 'true',
+              'aria-live': 'assertive',
+              body: 'Hello, world! This is a toast message.',
               header: (
                 <>
                   <SquareIcon />
                   <strong className="me-auto">Bootstrap</strong>
                   <small>11 mins ago</small>
                   <button
-                    onClick={onClickVisible2}
-                    data-bs-dismiss="toast"
-                    className="btn-close"
                     aria-label="Close"
+                    className="btn-close"
+                    data-bs-dismiss="toast"
+                    onClick={onClickVisible2}
                     type="button"
                   ></button>
                 </>
               ),
-              body: 'Hello, world! This is a toast message.',
-              'aria-live': 'assertive',
-              'aria-atomic': 'true',
               onChange: setVisible2,
-              visible: visible2,
               role: 'alert',
+              visible: visible2,
             },
           ]}
-          containerProps={{
-            className: 'bottom-0 end-0 p-3',
-          }}
           position="fixed"
-          container
         />
       </Example>
 
-      <Example hash="translucent" t={tToastPage} state={state} bg="dark">
+      <Example bg="dark" hash="translucent" state={state} t={tToastPage}>
         <Toast
+          aria-atomic="true"
+          aria-live="assertive"
+          autohide={false}
+          body="Hello, world! This is a toast message."
           header={
             <>
               <SquareIcon />
               <strong className="me-auto">Bootstrap</strong>
               <small>11 mins ago</small>
               <button
-                onClick={onClickVisible3}
-                data-bs-dismiss="toast"
-                className="btn-close"
                 aria-label="Close"
+                className="btn-close"
+                data-bs-dismiss="toast"
+                onClick={onClickVisible3}
                 type="button"
               ></button>
             </>
           }
-          body="Hello, world! This is a toast message."
-          aria-live="assertive"
-          aria-atomic="true"
-          visible={visible3}
-          autohide={false}
           role="alert"
+          visible={visible3}
         />
       </Example>
 
-      <Example hash="stacking" t={tToastPage} state={state}>
+      <Example hash="stacking" state={state} t={tToastPage}>
         <Toast
+          container
           options={[
             {
+              'aria-atomic': 'true',
+              'aria-live': 'assertive',
+              autohide: false,
+              body: 'See? Just like this.',
               header: (
                 <>
                   <SquareIcon />
                   <strong className="me-auto">Bootstrap</strong>
                   <small className="text-body-secondary">just now</small>
                   <button
-                    onClick={onClickVisible4}
-                    data-bs-dismiss="toast"
-                    className="btn-close"
                     aria-label="Close"
+                    className="btn-close"
+                    data-bs-dismiss="toast"
+                    onClick={onClickVisible4}
                     type="button"
                   ></button>
                 </>
               ),
-              body: 'See? Just like this.',
-              'aria-live': 'assertive',
-              'aria-atomic': 'true',
-              visible: visible4,
-              autohide: false,
               role: 'alert',
+              visible: visible4,
             },
             {
+              'aria-atomic': 'true',
+              'aria-live': 'assertive',
+              body: 'Heads up, toasts will stack automatically',
               header: (
                 <>
                   <SquareIcon />
                   <strong className="me-auto">Bootstrap</strong>
                   <small className="text-body-secondary">2 seconds ago</small>
                   <button
-                    onClick={onClickVisible5}
-                    data-bs-dismiss="toast"
-                    className="btn-close"
                     aria-label="Close"
+                    className="btn-close"
+                    data-bs-dismiss="toast"
+                    onClick={onClickVisible5}
                     type="button"
                   ></button>
                 </>
               ),
-              body: 'Heads up, toasts will stack automatically',
-              'aria-live': 'assertive',
-              'aria-atomic': 'true',
-              visible: visible5,
               role: 'alert',
+              visible: visible5,
             },
           ]}
           position="static"
-          container
         />
       </Example>
 
-      <Example hash="customContent" t={tToastPage} state={state} gap3>
+      <Example gap3 hash="customContent" state={state} t={tToastPage}>
         <Toast
+          aria-atomic="true"
+          aria-live="assertive"
+          autohide={false}
+          className="align-items-center"
           customContent={
             <div className="d-flex">
               <div className="toast-body">Hello, world! This is a toast message.</div>
               <button
-                className="btn-close me-2 m-auto"
-                onClick={onClickVisible6}
-                data-bs-dismiss="toast"
                 aria-label="Close"
+                className="btn-close me-2 m-auto"
+                data-bs-dismiss="toast"
+                onClick={onClickVisible6}
                 type="button"
               ></button>
             </div>
           }
-          className="align-items-center"
-          aria-live="assertive"
-          aria-atomic="true"
-          visible={visible6}
-          autohide={false}
           role="alert"
+          visible={visible6}
         />
 
         <Toast
+          aria-atomic="true"
+          aria-live="assertive"
+          autohide={false}
           customContent={
             <div className="toast-body">
               Hello, world! This is a toast message.
@@ -319,8 +322,8 @@ export default function BadgePage() {
                 </button>
                 <button
                   className="btn btn-secondary btn-sm"
-                  onClick={onClickVisible7}
                   data-bs-dismiss="toast"
+                  onClick={onClickVisible7}
                   type="button"
                 >
                   Close
@@ -328,38 +331,35 @@ export default function BadgePage() {
               </div>
             </div>
           }
-          aria-live="assertive"
-          aria-atomic="true"
-          visible={visible7}
-          autohide={false}
           role="alert"
+          visible={visible7}
         />
       </Example>
 
-      <Example hash="colorSchemes" t={tToastPage} state={state}>
+      <Example hash="colorSchemes" state={state} t={tToastPage}>
         <Toast
+          aria-atomic="true"
+          aria-live="assertive"
+          autohide={false}
+          className="align-items-center text-bg-primary border-0"
           customContent={
             <div className="d-flex">
               <div className="toast-body">Hello, world! This is a toast message.</div>
               <button
-                className="btn-close btn-close-white me-2 m-auto"
-                onClick={onClickVisible8}
-                data-bs-dismiss="toast"
                 aria-label="Close"
+                className="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast"
+                onClick={onClickVisible8}
                 type="button"
               ></button>
             </div>
           }
-          className="align-items-center text-bg-primary border-0"
-          aria-live="assertive"
-          aria-atomic="true"
-          visible={visible8}
-          autohide={false}
           role="alert"
+          visible={visible8}
         />
       </Example>
 
-      <Example hash="placement" t={tToastPage} state={state} gap3>
+      <Example gap3 hash="placement" state={state} t={tToastPage}>
         <form>
           <div className="mb-3">
             <label htmlFor="selectToastPlacement">Toast placement</label>
@@ -381,251 +381,255 @@ export default function BadgePage() {
         </form>
 
         <div
-          className="bg-body-secondary position-relative bd-example-toasts rounded-3"
           aria-atomic="true"
           aria-live="polite"
+          className="bg-body-secondary position-relative bd-example-toasts rounded-3"
         >
           <Toast
+            container
+            containerProps={{
+              className: 'p-3',
+            }}
             options={[
               {
+                'aria-atomic': 'true',
+                'aria-live': 'assertive',
+                autohide: false,
+                body: 'Hello, world! This is a toast message.',
                 header: (
                   <>
                     <SquareIcon />
                     <strong className="me-auto">Bootstrap</strong>
                     <small>11 mins ago</small>
                     <button
-                      onClick={onClickVisible9}
-                      data-bs-dismiss="toast"
-                      className="btn-close"
                       aria-label="Close"
+                      className="btn-close"
+                      data-bs-dismiss="toast"
+                      onClick={onClickVisible9}
                       type="button"
                     ></button>
                   </>
                 ),
-                body: 'Hello, world! This is a toast message.',
-                'aria-live': 'assertive',
-                'aria-atomic': 'true',
-                visible: visible9,
-                autohide: false,
                 role: 'alert',
+                visible: visible9,
               },
             ]}
-            containerProps={{
-              className: 'p-3',
-            }}
             placement={placement}
-            container
           />
         </div>
 
         <div className="bd-example-toasts">
-          <div className="position-relative" aria-atomic="true" aria-live="polite">
+          <div aria-atomic="true" aria-live="polite" className="position-relative">
             <Toast
+              container
+              containerProps={{
+                className: 'top-0 end-0 p-3',
+              }}
               options={[
                 {
+                  'aria-atomic': 'true',
+                  'aria-live': 'assertive',
+                  autohide: false,
+                  body: 'See? Just like this.',
                   header: (
                     <>
                       <SquareIcon />
                       <strong className="me-auto">Bootstrap</strong>
                       <small className="text-body-secondary">just now</small>
                       <button
-                        onClick={onClickVisible10}
-                        data-bs-dismiss="toast"
-                        className="btn-close"
                         aria-label="Close"
+                        className="btn-close"
+                        data-bs-dismiss="toast"
+                        onClick={onClickVisible10}
                         type="button"
                       ></button>
                     </>
                   ),
-                  body: 'See? Just like this.',
-                  'aria-live': 'assertive',
-                  'aria-atomic': 'true',
-                  visible: visible10,
-                  autohide: false,
                   role: 'alert',
+                  visible: visible10,
                 },
                 {
+                  'aria-atomic': 'true',
+                  'aria-live': 'assertive',
+                  autohide: false,
+                  body: 'Heads up, toasts will stack automatically',
                   header: (
                     <>
                       <SquareIcon />
                       <strong className="me-auto">Bootstrap</strong>
                       <small className="text-body-secondary">2 seconds ago</small>
                       <button
-                        onClick={onClickVisible11}
-                        data-bs-dismiss="toast"
-                        className="btn-close"
                         aria-label="Close"
+                        className="btn-close"
+                        data-bs-dismiss="toast"
+                        onClick={onClickVisible11}
                         type="button"
                       ></button>
                     </>
                   ),
-                  body: 'Heads up, toasts will stack automatically',
-                  'aria-live': 'assertive',
-                  'aria-atomic': 'true',
-                  visible: visible11,
-                  autohide: false,
                   role: 'alert',
+                  visible: visible11,
                 },
               ]}
-              containerProps={{
-                className: 'top-0 end-0 p-3',
-              }}
-              container
             />
           </div>
         </div>
 
         <div className="bd-example-toasts">
-          <div className="d-flex justify-content-center align-items-center w-100" aria-atomic="true" aria-live="polite">
+          <div aria-atomic="true" aria-live="polite" className="d-flex justify-content-center align-items-center w-100">
             <Toast
+              aria-atomic="true"
+              aria-live="assertive"
+              autohide={false}
+              body="Hello, world! This is a toast message."
               header={
                 <>
                   <SquareIcon />
                   <strong className="me-auto">Bootstrap</strong>
                   <small>11 mins ago</small>
                   <button
-                    onClick={onClickVisible12}
-                    data-bs-dismiss="toast"
-                    className="btn-close"
                     aria-label="Close"
+                    className="btn-close"
+                    data-bs-dismiss="toast"
+                    onClick={onClickVisible12}
                     type="button"
                   ></button>
                 </>
               }
-              body="Hello, world! This is a toast message."
-              aria-live="assertive"
-              visible={visible12}
-              aria-atomic="true"
-              autohide={false}
               role="alert"
+              visible={visible12}
             />
           </div>
         </div>
       </Example>
 
-      <Example hash="accessibility" t={tToastPage} state={state}>
+      <Example hash="accessibility" state={state} t={tToastPage}>
         <Toast
+          aria-atomic="true"
+          aria-live="assertive"
+          autohide={false}
+          body="Hello, world! This is a toast message."
           header={
             <>
               <SquareIcon />
               <strong className="me-auto">Bootstrap</strong>
               <small>11 mins ago</small>
               <button
-                onClick={onClickVisible13}
-                data-bs-dismiss="toast"
-                className="btn-close"
                 aria-label="Close"
+                className="btn-close"
+                data-bs-dismiss="toast"
+                onClick={onClickVisible13}
                 type="button"
               ></button>
             </>
           }
-          body="Hello, world! This is a toast message."
-          aria-live="assertive"
-          visible={visible13}
-          aria-atomic="true"
-          autohide={false}
           role="alert"
+          visible={visible13}
         />
       </Example>
 
       <PropsIndicator />
 
       <Example
+        hash="toastComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-            desc: tToastComponentProps('toast.desc.autohide'),
             attr: 'autohide',
             default: '',
+            desc: tToastComponentProps('toast.desc.autohide'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
-            desc: tToastComponentProps('toast.desc.body'),
             attr: 'body',
             default: '',
+            desc: tToastComponentProps('toast.desc.body'),
+            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">ToastBodyProps</span>,
-            desc: tToastComponentProps('toast.desc.bodyProps'),
             attr: 'bodyProps',
             default: '',
+            desc: tToastComponentProps('toast.desc.bodyProps'),
+            type: <span className="badge text-bg-secondary ms-1">ToastBodyProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-            desc: tToastComponentProps('toast.desc.container'),
             attr: 'container',
             default: '',
+            desc: tToastComponentProps('toast.desc.container'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">ToastContainerProps</span>,
-            desc: tToastComponentProps('toast.desc.containerProps'),
             attr: 'containerProps',
             default: '',
+            desc: tToastComponentProps('toast.desc.containerProps'),
+            type: <span className="badge text-bg-secondary ms-1">ToastContainerProps</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
-            desc: tToastComponentProps('toast.desc.customContent'),
             attr: 'customContent',
             default: '',
+            desc: tToastComponentProps('toast.desc.customContent'),
+            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">number</span>,
-            desc: tToastComponentProps('toast.desc.delay'),
             attr: 'delay',
             default: '',
+            desc: tToastComponentProps('toast.desc.delay'),
+            type: <span className="badge text-bg-secondary ms-1">number</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-            desc: tToastComponentProps('toast.desc.fade'),
             attr: 'fade',
             default: '',
+            desc: tToastComponentProps('toast.desc.fade'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
-            desc: tToastComponentProps('toast.desc.header'),
             attr: 'header',
             default: '',
+            desc: tToastComponentProps('toast.desc.header'),
+            type: <span className="badge text-bg-secondary ms-1">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">ToastHeaderProps</span>,
-            desc: tToastComponentProps('toast.desc.headerProps'),
             attr: 'headerProps',
             default: '',
+            desc: tToastComponentProps('toast.desc.headerProps'),
+            type: <span className="badge text-bg-secondary ms-1">ToastHeaderProps</span>,
           },
           {
+            attr: 'onChange',
+            default: '',
+            desc: tToastComponentProps('toast.desc.onChange'),
             type: (
               <span className="badge text-bg-secondary ms-1">(visible: boolean, event?: MouseEvent) =&gt; void</span>
             ),
-            desc: tToastComponentProps('toast.desc.onChange'),
-            attr: 'onChange',
-            default: '',
           },
           {
-            type: (
-              <div className="d-flex flex-column gap-1">
-                <OptionRow value={tToastComponentProps('toast.options.id')} label="id?: number | string" />
-                <OptionRow value={tToastComponentProps('toast.options.autohide')} label="autohide?: boolean" />
-                <OptionRow value={tToastComponentProps('toast.options.body')} label="body?: ReactNode" />
-                <OptionRow value={tToastComponentProps('toast.options.bodyProps')} label="bodyProps?: ToastBodyProps" />
-                <OptionRow value={tToastComponentProps('toast.options.delay')} label="delay?: number" />
-                <OptionRow value={tToastComponentProps('toast.options.fade')} label="fade?: boolean" />
-                <OptionRow value={tToastComponentProps('toast.options.header')} label="header?: ReactNode" />
-                <OptionRow
-                  value={tToastComponentProps('toast.options.headerProps')}
-                  label="headerProps?: ToastHeaderProps"
-                />
-                <OptionRow
-                  value={tToastComponentProps('toast.options.onChange')}
-                  label="onChange?: (visible: boolean) => void"
-                />
-                <OptionRow value={tToastComponentProps('toast.options.visible')} label="visible?: boolean" />
-              </div>
-            ),
-            desc: tToastComponentProps('toast.desc.options'),
             attr: 'options',
             default: '',
+            desc: tToastComponentProps('toast.desc.options'),
+            type: (
+              <div className="d-flex flex-column gap-1">
+                <OptionRow label="id?: number | string" value={tToastComponentProps('toast.options.id')} />
+                <OptionRow label="autohide?: boolean" value={tToastComponentProps('toast.options.autohide')} />
+                <OptionRow label="body?: ReactNode" value={tToastComponentProps('toast.options.body')} />
+                <OptionRow label="bodyProps?: ToastBodyProps" value={tToastComponentProps('toast.options.bodyProps')} />
+                <OptionRow label="delay?: number" value={tToastComponentProps('toast.options.delay')} />
+                <OptionRow label="fade?: boolean" value={tToastComponentProps('toast.options.fade')} />
+                <OptionRow label="header?: ReactNode" value={tToastComponentProps('toast.options.header')} />
+                <OptionRow
+                  label="headerProps?: ToastHeaderProps"
+                  value={tToastComponentProps('toast.options.headerProps')}
+                />
+                <OptionRow
+                  label="onChange?: (visible: boolean) => void"
+                  value={tToastComponentProps('toast.options.onChange')}
+                />
+                <OptionRow label="visible?: boolean" value={tToastComponentProps('toast.options.visible')} />
+              </div>
+            ),
           },
           {
+            attr: 'placement',
+            default: '',
+            desc: tToastComponentProps('toast.desc.placement'),
             type: (
               <div className="row">
                 <div className="col-auto">
@@ -657,30 +661,26 @@ export default function BadgePage() {
                 </div>
               </div>
             ),
-            desc: tToastComponentProps('toast.desc.placement'),
-            attr: 'placement',
-            default: '',
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">fixed | static</span>,
-            desc: tToastComponentProps('toast.desc.position'),
             attr: 'position',
             default: '',
+            desc: tToastComponentProps('toast.desc.position'),
+            type: <span className="badge text-bg-secondary ms-1">fixed | static</span>,
           },
           {
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-            desc: tToastComponentProps('toast.desc.visible'),
             attr: 'visible',
             default: '',
+            desc: tToastComponentProps('toast.desc.visible'),
+            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },
         ]}
-        hash="toastComponentProps"
-        t={tToastComponentProps}
-        state={state}
         props
+        state={state}
+        t={tToastComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

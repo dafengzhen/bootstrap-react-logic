@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PaginationSpanProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const PaginationSpan = function PaginationSpan<T extends ElementType = 'span'>(props: PaginationSpanProps<T>) {
-  const { as: Component = 'span' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'span' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'page-link', className);

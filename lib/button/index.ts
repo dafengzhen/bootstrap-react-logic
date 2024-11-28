@@ -1,12 +1,12 @@
-import CloseButton from './close-button.tsx';
 import Button from './button';
+import CloseButton from './close-button.tsx';
 
 // types
-export type { CloseButtonProps, ButtonProps } from './types.ts';
+export type { ButtonProps, CloseButtonProps } from './types.ts';
 
 // hooks
 
 // context
 
 // component
-export { CloseButton as CloseButton, Button as Button };
+export { Button as Button, CloseButton as CloseButton };

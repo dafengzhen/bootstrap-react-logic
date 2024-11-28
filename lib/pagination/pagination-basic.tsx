@@ -1,12 +1,12 @@
-import { type ElementType, useState, useMemo } from 'react';
+import { type ElementType, useMemo, useState } from 'react';
 
 import type { PaginationBasicProps, PaginationOption } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import PaginationItem from './pagination-item.tsx';
 import PaginationLink from './pagination-link.tsx';
-import PaginationSpan from './pagination-span.tsx';
 import PaginationNav from './pagination-nav.tsx';
+import PaginationSpan from './pagination-span.tsx';
 
 interface IOption extends PaginationOption {
   id: number | string;
@@ -20,15 +20,15 @@ const generateInitialOptions = (options: PaginationOption[] = []): IOption[] =>
 
 const PaginationBasic = function PaginationBasic<T extends ElementType = 'ul'>(props: PaginationBasicProps<T>) {
   const {
-    as: Component = 'ul' as ElementType,
-    options: defaultOptions,
-    dropOldClass,
     alignment,
+    as: Component = 'ul' as ElementType,
     className,
-    variables,
+    dropOldClass,
     navProps,
-    style,
+    options: defaultOptions,
     size,
+    style,
+    variables,
     ...rest
   } = props;
   const [options] = useState<IOption[]>(generateInitialOptions(defaultOptions));
@@ -53,7 +53,7 @@ const PaginationBasic = function PaginationBasic<T extends ElementType = 'ul'>(p
       <Component {...rest} {...renderOptions}>
         {options.map((item) => {
           return (
-            <PaginationItem {...item.itemProps} disabled={item.disabled} active={item.active} key={item.id}>
+            <PaginationItem {...item.itemProps} active={item.active} disabled={item.disabled} key={item.id}>
               <PaginationLink href={item.href} {...item.linkProps}>
                 {item.link}
               </PaginationLink>

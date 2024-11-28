@@ -2,17 +2,17 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TooltipInnerProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const TooltipInner = function TooltipInner<T extends ElementType = 'div'>(props: TooltipInnerProps<T>) {
   const {
     as: Component = 'div' as ElementType,
-    dropOldClass,
-    className,
-    variables,
     children,
-    style,
+    className,
+    dropOldClass,
     html,
+    style,
+    variables,
     ...rest
   } = props;
 

@@ -1,18 +1,18 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Label } from '@lib/label';
 import { Radio } from '@lib/radio';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/radio/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -28,119 +28,119 @@ export default function RadioPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tRadioPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tRadioPage}>
         <div className="form-check">
-          <Radio name="flexRadioDefault" id="flexRadioDefault1"></Radio>
-          <Label htmlFor="flexRadioDefault1" formCheckLabel>
+          <Radio id="flexRadioDefault1" name="flexRadioDefault"></Radio>
+          <Label formCheckLabel htmlFor="flexRadioDefault1">
             Default radio
           </Label>
         </div>
 
-        <Radio name="flexRadioDefault" id="flexRadioDefault2" defaultChecked>
+        <Radio defaultChecked id="flexRadioDefault2" name="flexRadioDefault">
           Default checked radio
         </Radio>
       </Example>
 
-      <Example hash="disabled" t={tRadioPage} state={state}>
-        <Radio name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+      <Example hash="disabled" state={state} t={tRadioPage}>
+        <Radio disabled id="flexRadioDisabled" name="flexRadioDisabled">
           Disabled radio
         </Radio>
 
         <div className="form-check">
-          <Radio id="flexRadioCheckedDisabled" name="flexRadioDisabled" defaultChecked disabled></Radio>
-          <Label htmlFor="flexRadioCheckedDisabled" formCheckLabel>
+          <Radio defaultChecked disabled id="flexRadioCheckedDisabled" name="flexRadioDisabled"></Radio>
+          <Label formCheckLabel htmlFor="flexRadioCheckedDisabled">
             Disabled checked radio
           </Label>
         </div>
       </Example>
 
-      <Example t={tRadioPage} hash="inline" state={state}>
+      <Example hash="inline" state={state} t={tRadioPage}>
         <div>
-          <Radio name="inlineRadioOptions" id="inlineRadio1" value="option1" inline>
+          <Radio id="inlineRadio1" inline name="inlineRadioOptions" value="option1">
             1
           </Radio>
 
           <div className="form-check form-check-inline">
-            <Radio name="inlineRadioOptions" id="inlineRadio2" value="option2"></Radio>
-            <Label htmlFor="inlineRadio2" formCheckLabel>
+            <Radio id="inlineRadio2" name="inlineRadioOptions" value="option2"></Radio>
+            <Label formCheckLabel htmlFor="inlineRadio2">
               2
             </Label>
           </div>
 
           <div className="form-check form-check-inline">
-            <Radio name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled></Radio>
-            <Label htmlFor="inlineRadio3" formCheckLabel>
+            <Radio disabled id="inlineRadio3" name="inlineRadioOptions" value="option3"></Radio>
+            <Label formCheckLabel htmlFor="inlineRadio3">
               3 (disabled)
             </Label>
           </div>
         </div>
       </Example>
 
-      <Example hash="withoutLabels" t={tRadioPage} state={state}>
+      <Example hash="withoutLabels" state={state} t={tRadioPage}>
         <Radio />
       </Example>
 
-      <Example hash="toggleButtons" t={tRadioPage} overflowXAuto state={state} textNowrap row>
+      <Example hash="toggleButtons" overflowXAuto row state={state} t={tRadioPage} textNowrap>
         <div>
           <Radio
-            className="btn-check"
             autoComplete="off"
+            className="btn-check"
             defaultChecked
-            name="options"
             dropOldClass
             id="option1"
+            name="options"
           ></Radio>
-          <Label className="btn btn-secondary" htmlFor="option1" dropOldClass>
+          <Label className="btn btn-secondary" dropOldClass htmlFor="option1">
             Checked
           </Label>
         </div>
 
         <div>
-          <Radio className="btn-check" autoComplete="off" name="options" dropOldClass id="option2"></Radio>
-          <Label className="btn btn-secondary" htmlFor="option2" dropOldClass>
+          <Radio autoComplete="off" className="btn-check" dropOldClass id="option2" name="options"></Radio>
+          <Label className="btn btn-secondary" dropOldClass htmlFor="option2">
             Radio
           </Label>
         </div>
 
         <div>
-          <Radio className="btn-check" autoComplete="off" name="options" dropOldClass id="option3" disabled></Radio>
-          <Label className="btn btn-secondary" htmlFor="option3" dropOldClass>
+          <Radio autoComplete="off" className="btn-check" disabled dropOldClass id="option3" name="options"></Radio>
+          <Label className="btn btn-secondary" dropOldClass htmlFor="option3">
             Disabled
           </Label>
         </div>
 
         <div>
-          <Radio className="btn-check" autoComplete="off" name="options" dropOldClass id="option4"></Radio>
-          <Label className="btn btn-secondary" htmlFor="option4" dropOldClass>
+          <Radio autoComplete="off" className="btn-check" dropOldClass id="option4" name="options"></Radio>
+          <Label className="btn btn-secondary" dropOldClass htmlFor="option4">
             Radio
           </Label>
         </div>
       </Example>
 
-      <Example hash="outlinedStyles" t={tRadioPage} overflowXAuto state={state} textNowrap row>
+      <Example hash="outlinedStyles" overflowXAuto row state={state} t={tRadioPage} textNowrap>
         <div>
           <Radio
-            name="options-outlined"
-            className="btn-check"
-            id="success-outlined"
             autoComplete="off"
+            className="btn-check"
             defaultChecked
             dropOldClass
+            id="success-outlined"
+            name="options-outlined"
           ></Radio>
-          <Label className="btn btn-outline-success" htmlFor="success-outlined" dropOldClass>
+          <Label className="btn btn-outline-success" dropOldClass htmlFor="success-outlined">
             Checked success radio
           </Label>
         </div>
 
         <div>
           <Radio
-            name="options-outlined"
-            className="btn-check"
-            id="danger-outlined"
             autoComplete="off"
+            className="btn-check"
             dropOldClass
+            id="danger-outlined"
+            name="options-outlined"
           ></Radio>
-          <Label className="btn btn-outline-danger" htmlFor="danger-outlined" dropOldClass>
+          <Label className="btn btn-outline-danger" dropOldClass htmlFor="danger-outlined">
             Danger radio
           </Label>
         </div>
@@ -149,14 +149,18 @@ export default function RadioPage() {
       <PropsIndicator />
 
       <Example
+        hash="radioComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('radio.desc.disabled'),
             attr: 'disabled',
             default: '',
+            desc: tRadioComponentProps('radio.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            attr: 'contentClasses',
+            default: '',
+            desc: tRadioComponentProps('radio.desc.contentClasses'),
             type: (
               <div className="d-flex flex-column gap-2">
                 <div>
@@ -169,48 +173,44 @@ export default function RadioPage() {
                 </div>
               </div>
             ),
-            desc: tRadioComponentProps('radio.desc.contentClasses'),
-            attr: 'contentClasses',
-            default: '',
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('radio.desc.switch'),
             attr: 'switch',
             default: '',
+            desc: tRadioComponentProps('radio.desc.switch'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('radio.desc.inline'),
             attr: 'inline',
             default: '',
+            desc: tRadioComponentProps('radio.desc.inline'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('radio.desc.reverse'),
             attr: 'reverse',
             default: '',
+            desc: tRadioComponentProps('radio.desc.reverse'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('radio.desc.isValid'),
             attr: 'isValid',
             default: '',
+            desc: tRadioComponentProps('radio.desc.isValid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tRadioComponentProps('radio.desc.isInvalid'),
             attr: 'isInvalid',
             default: '',
+            desc: tRadioComponentProps('radio.desc.isInvalid'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="radioComponentProps"
-        t={tRadioComponentProps}
-        state={state}
         props
+        state={state}
+        t={tRadioComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

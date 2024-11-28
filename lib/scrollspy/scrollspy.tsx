@@ -1,28 +1,28 @@
-import { type ElementType, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ScrollspyProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import scrollspyStyles from './scrollspy.module.scss';
 
 const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: ScrollspyProps<T>) {
   const {
-    onActiveChange: onActiveChangeByDefault,
     as: Component = 'div' as ElementType,
+    children,
+    className,
+    dropOldClass,
+    onActiveChange: onActiveChangeByDefault,
     rootMargin = '0px 0px -25%',
     sectionIds = [],
-    threshold = 0.5,
-    dropOldClass,
     smoothScroll,
-    className,
-    variables,
-    children,
     style,
+    threshold = 0.5,
+    variables,
     ...rest
   } = props;
 
   const element = useRef<HTMLDivElement | null>(null);
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<null | string>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', smoothScroll && scrollspyStyles.brlScrollSmooth, className);

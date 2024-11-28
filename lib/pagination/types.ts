@@ -1,33 +1,16 @@
 import type { ElementType, ReactNode } from 'react';
 
 import type {
+  BaseProps,
+  OmittedPropsWithoutRef,
   PaginationBasicVariablesType,
   PaginationItemVariablesType,
   PaginationLinkVariablesType,
-  PaginationSpanVariablesType,
   PaginationNavVariablesType,
+  PaginationSpanVariablesType,
   PaginationVariablesType,
-  OmittedPropsWithoutRef,
   PropsWithoutRef,
-  BaseProps,
 } from '../tools';
-
-export interface PaginationOption {
-  itemProps?: PaginationItemProps<ElementType>;
-  linkProps?: PaginationLinkProps<ElementType>;
-  id?: number | string;
-  disabled?: boolean;
-  active?: boolean;
-  link?: ReactNode;
-  href?: string;
-}
-
-export type PaginationProps<T extends ElementType> = OmittedPropsWithoutRef<
-  Props<T>,
-  T,
-  PaginationVariablesType,
-  'onChange'
->;
 
 export type PaginationBasicProps<T extends ElementType> = PropsWithoutRef<
   BasicProps<T>,
@@ -39,33 +22,32 @@ export type PaginationItemProps<T extends ElementType> = PropsWithoutRef<ItemPro
 
 export type PaginationLinkProps<T extends ElementType> = PropsWithoutRef<LinkProps<T>, T, PaginationLinkVariablesType>;
 
-export type PaginationSpanProps<T extends ElementType> = PropsWithoutRef<SpanProps<T>, T, PaginationSpanVariablesType>;
-
 export type PaginationNavProps<T extends ElementType> = PropsWithoutRef<NavProps<T>, T, PaginationNavVariablesType>;
 
-type Props<T extends ElementType> = {
-  /**
-   * option.
-   */
-  option?: {
-    spanProps?: PaginationSpanProps<ElementType>;
-    clickableActive?: boolean;
-  } & Omit<PaginationOption, 'disabled' | 'active' | 'href' | 'link' | 'id'>;
+export interface PaginationOption {
+  active?: boolean;
+  disabled?: boolean;
+  href?: string;
+  id?: number | string;
+  itemProps?: PaginationItemProps<ElementType>;
+  link?: ReactNode;
+  linkProps?: PaginationLinkProps<ElementType>;
+}
 
-  /**
-   * onChange.
-   */
-  onChange?: (page: number, type: 'previous' | 'next' | 'page' | '<' | '>') => void;
+export type PaginationProps<T extends ElementType> = OmittedPropsWithoutRef<
+  Props<T>,
+  T,
+  PaginationVariablesType,
+  'onChange'
+>;
 
-  /**
-   * previousOption.
-   */
-  previousOption?: Omit<PaginationOption, 'active' | 'id'>;
+export type PaginationSpanProps<T extends ElementType> = PropsWithoutRef<SpanProps<T>, T, PaginationSpanVariablesType>;
 
+type BasicProps<T extends ElementType> = BaseProps<T, PaginationBasicVariablesType> & {
   /**
-   * nextOption.
+   * alignment.
    */
-  nextOption?: Omit<PaginationOption, 'active' | 'id'>;
+  alignment?: 'center' | 'end' | 'start';
 
   /**
    * navProps.
@@ -73,9 +55,37 @@ type Props<T extends ElementType> = {
   navProps?: PaginationNavProps<ElementType>;
 
   /**
+   * options.
+   */
+  options?: PaginationOption[];
+
+  /**
+   * size.
+   */
+  size?: 'lg' | 'sm';
+};
+
+type ItemProps<T extends ElementType> = BaseProps<T, PaginationItemVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+
+  /**
+   * disabled.
+   */
+  disabled?: boolean;
+};
+
+type LinkProps<T extends ElementType> = BaseProps<T, PaginationLinkVariablesType> & {};
+
+type NavProps<T extends ElementType> = BaseProps<T, PaginationNavVariablesType> & {};
+
+type Props<T extends ElementType> = BaseProps<T, PaginationVariablesType> & {
+  /**
    * alignment.
    */
-  alignment?: 'center' | 'start' | 'end';
+  alignment?: 'center' | 'end' | 'start';
 
   /**
    * alwaysShowEllipsis.
@@ -88,14 +98,9 @@ type Props<T extends ElementType> = {
   maxVisible?: number;
 
   /**
-   * previous.
+   * navProps.
    */
-  previous?: boolean;
-
-  /**
-   * size.
-   */
-  size?: 'lg' | 'sm';
+  navProps?: PaginationNavProps<ElementType>;
 
   /**
    * next.
@@ -103,52 +108,47 @@ type Props<T extends ElementType> = {
   next?: boolean;
 
   /**
-   * total.
+   * nextOption.
    */
-  total?: number;
+  nextOption?: Omit<PaginationOption, 'active' | 'id'>;
+
+  /**
+   * onChange.
+   */
+  onChange?: (page: number, type: '<' | '>' | 'next' | 'page' | 'previous') => void;
+
+  /**
+   * option.
+   */
+  option?: Omit<PaginationOption, 'active' | 'disabled' | 'href' | 'id' | 'link'> & {
+    clickableActive?: boolean;
+    spanProps?: PaginationSpanProps<ElementType>;
+  };
 
   /**
    * page.
    */
   page?: number;
-} & BaseProps<T, PaginationVariablesType>;
-
-type BasicProps<T extends ElementType> = {
-  /**
-   * navProps.
-   */
-  navProps?: PaginationNavProps<ElementType>;
 
   /**
-   * alignment.
+   * previous.
    */
-  alignment?: 'center' | 'start' | 'end';
+  previous?: boolean;
 
   /**
-   * options.
+   * previousOption.
    */
-  options?: PaginationOption[];
+  previousOption?: Omit<PaginationOption, 'active' | 'id'>;
 
   /**
    * size.
    */
   size?: 'lg' | 'sm';
-} & BaseProps<T, PaginationBasicVariablesType>;
-
-type ItemProps<T extends ElementType> = {
-  /**
-   * disabled.
-   */
-  disabled?: boolean;
 
   /**
-   * active.
+   * total.
    */
-  active?: boolean;
-} & BaseProps<T, PaginationItemVariablesType>;
-
-type LinkProps<T extends ElementType> = BaseProps<T, PaginationLinkVariablesType> & {};
+  total?: number;
+};
 
 type SpanProps<T extends ElementType> = BaseProps<T, PaginationSpanVariablesType> & {};
-
-type NavProps<T extends ElementType> = BaseProps<T, PaginationNavVariablesType> & {};

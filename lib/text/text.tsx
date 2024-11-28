@@ -2,20 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TextProps } from './types.ts';
 
-import { convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, findTruthyClass, stylex } from '../tools';
 
 const Text = function Text<T extends ElementType = 'div'>(props: TextProps<T>) {
   const {
     as: Component = 'div' as ElementType,
+    children,
+    className,
+    dropOldClass,
     invalidFeedback,
     invalidTooltip,
-    validFeedback,
-    dropOldClass,
-    validTooltip,
-    className,
-    variables,
-    children,
     style,
+    validFeedback,
+    validTooltip,
+    variables,
     ...rest
   } = props;
 

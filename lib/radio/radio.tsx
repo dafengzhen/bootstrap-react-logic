@@ -2,23 +2,23 @@ import { type ElementType, useMemo } from 'react';
 
 import type { RadioProps } from './types.ts';
 
-import { processSlotClasses, convertBsKeyToVar, clsxWithOptions, clsxUnique, stylex } from '../tools';
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
+import { clsxUnique, clsxWithOptions, convertBsKeyToVar, processSlotClasses, stylex } from '../tools';
 
 const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<T>) {
   const {
     as: Component = 'input' as ElementType,
-    switch: formSwitch,
+    children,
+    className,
     contentClasses,
     dropOldClass,
-    className,
-    variables,
-    children,
-    reverse,
-    inline,
-    style,
     id,
+    inline,
+    reverse,
+    style,
+    switch: formSwitch,
+    variables,
     ...rest
   } = props;
 
@@ -34,6 +34,7 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
 
   if (children) {
     const slotClassName = processSlotClasses(contentClasses, {
+      component: 'form-check-input',
       container: clsxWithOptions(
         null,
         'form-check',
@@ -41,7 +42,6 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
         inline && 'form-check-inline',
         reverse && 'form-check-reverse',
       ),
-      component: 'form-check-input',
       label: 'form-check-label',
     });
 
@@ -50,21 +50,21 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
         <Input
           {...rest}
           {...renderOptions}
+          as={Component}
           className={slotClassName.component}
           data-slot-component=""
-          as={Component}
           dropOldClass
-          type="radio"
           id={id}
+          type="radio"
         />
-        <Label htmlFor={id as undefined | string} className={slotClassName.label} data-slot-label="" dropOldClass>
+        <Label className={slotClassName.label} data-slot-label="" dropOldClass htmlFor={id as string | undefined}>
           {children}
         </Label>
       </div>
     );
   }
 
-  return <Input {...rest} {...renderOptions} as={Component} type="radio" id={id} />;
+  return <Input {...rest} {...renderOptions} as={Component} id={id} type="radio" />;
 };
 
 Radio.displayName = 'BRL.Radio';

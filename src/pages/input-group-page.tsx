@@ -1,23 +1,23 @@
-import { InputGroupText, InputGroup } from '@lib/input-group';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
-import { Textarea } from '@lib/textarea';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Button } from '@lib/button';
 import { Input } from '@lib/input';
+import { InputGroup, InputGroupText } from '@lib/input-group';
 import { Label } from '@lib/label';
+import { Textarea } from '@lib/textarea';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 import Text from '../../lib/text/text.tsx';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/input-group/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -33,17 +33,17 @@ export default function InputGroupPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tInputGroupPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tInputGroupPage}>
         <InputGroup>
           <InputGroupText id="basic-addon1">@</InputGroupText>
-          <Input aria-describedby="basic-addon1" placeholder="Username" aria-label="Username" type="text" />
+          <Input aria-describedby="basic-addon1" aria-label="Username" placeholder="Username" type="text" />
         </InputGroup>
 
         <InputGroup>
           <Input
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
             aria-describedby="basic-addon2"
+            aria-label="Recipient's username"
+            placeholder="Recipient's username"
             type="text"
           />
           <InputGroupText id="basic-addon2">@example.com</InputGroupText>
@@ -67,9 +67,9 @@ export default function InputGroupPage() {
         </InputGroup>
 
         <InputGroup>
-          <Input placeholder="Username" aria-label="Username" type="text" />
+          <Input aria-label="Username" placeholder="Username" type="text" />
           <InputGroupText>@</InputGroupText>
-          <Input placeholder="Server" aria-label="Server" type="text" />
+          <Input aria-label="Server" placeholder="Server" type="text" />
         </InputGroup>
 
         <InputGroup>
@@ -78,16 +78,16 @@ export default function InputGroupPage() {
         </InputGroup>
       </Example>
 
-      <Example t={tInputGroupPage} hash="nowrap" state={state}>
+      <Example hash="nowrap" state={state} t={tInputGroupPage}>
         <div className="d-flex flex-column gap-2">
           <InputGroup nowrap>
             <InputGroupText id="addon-wrapping">@</InputGroupText>
-            <Input aria-describedby="addon-wrapping" placeholder="Username" aria-label="Username" type="text" />
+            <Input aria-describedby="addon-wrapping" aria-label="Username" placeholder="Username" type="text" />
           </InputGroup>
         </div>
       </Example>
 
-      <Example t={tInputGroupPage} state={state} hash="size">
+      <Example hash="size" state={state} t={tInputGroupPage}>
         <InputGroup size="sm">
           <InputGroupText id="inputGroup-sizing-sm">Small</InputGroupText>
           <Input aria-describedby="inputGroup-sizing-sm" aria-label="Sizing example input" type="text" />
@@ -104,14 +104,14 @@ export default function InputGroupPage() {
         </InputGroup>
       </Example>
 
-      <Example hash="checkboxAndRadio" t={tInputGroupPage} state={state}>
+      <Example hash="checkboxAndRadio" state={state} t={tInputGroupPage}>
         <InputGroup>
           <InputGroupText as="div">
             <Input
               aria-label="Checkbox for following text input"
               className="form-check-input mt-0"
-              type="checkbox"
               readOnly
+              type="checkbox"
             />
           </InputGroupText>
           <Input aria-label="Text input with checkbox" type="text" />
@@ -122,23 +122,23 @@ export default function InputGroupPage() {
             <Input
               aria-label="Radio button for following text input"
               className="form-check-input mt-0"
-              type="radio"
               readOnly
+              type="radio"
             />
           </InputGroupText>
           <Input aria-label="Text input with radio button" type="text" />
         </InputGroup>
       </Example>
 
-      <Example hash="multipleInput" t={tInputGroupPage} state={state}>
+      <Example hash="multipleInput" state={state} t={tInputGroupPage}>
         <InputGroup>
           <InputGroupText className="!tw-w-full sm:!tw-w-auto">First and last name</InputGroupText>
-          <Input className="!tw-w-full sm:!tw-w-auto" aria-label="First name" type="text" />
-          <Input className="!tw-w-full sm:!tw-w-auto" aria-label="Last name" type="text" />
+          <Input aria-label="First name" className="!tw-w-full sm:!tw-w-auto" type="text" />
+          <Input aria-label="Last name" className="!tw-w-full sm:!tw-w-auto" type="text" />
         </InputGroup>
       </Example>
 
-      <Example hash="multipleAddons" t={tInputGroupPage} state={state}>
+      <Example hash="multipleAddons" state={state} t={tInputGroupPage}>
         <InputGroup>
           <InputGroupText>$</InputGroupText>
           <InputGroupText>0.00</InputGroupText>
@@ -152,14 +152,14 @@ export default function InputGroupPage() {
         </InputGroup>
       </Example>
 
-      <Example hash="buttonAddons" t={tInputGroupPage} state={state}>
+      <Example hash="buttonAddons" state={state} t={tInputGroupPage}>
         <InputGroup>
-          <Button outline="secondary" id="button-addon1" type="button">
+          <Button id="button-addon1" outline="secondary" type="button">
             Button
           </Button>
           <Input
-            aria-label="Example text with button addon"
             aria-describedby="button-addon1"
+            aria-label="Example text with button addon"
             placeholder=""
             type="text"
           />
@@ -167,12 +167,12 @@ export default function InputGroupPage() {
 
         <InputGroup>
           <Input
-            placeholder="Recipient's username"
-            aria-label="Recipient's username"
             aria-describedby="button-addon2"
+            aria-label="Recipient's username"
+            placeholder="Recipient's username"
             type="text"
           />
-          <Button outline="secondary" id="button-addon2" type="button">
+          <Button id="button-addon2" outline="secondary" type="button">
             Button
           </Button>
         </InputGroup>
@@ -202,7 +202,7 @@ export default function InputGroupPage() {
         </InputGroup>
       </Example>
 
-      <Example hash="customSelect" t={tInputGroupPage} state={state}>
+      <Example hash="customSelect" state={state} t={tInputGroupPage}>
         <InputGroup>
           <Label htmlFor="inputGroupSelect01" inputGroupText>
             Options
@@ -252,7 +252,7 @@ export default function InputGroupPage() {
         </InputGroup>
       </Example>
 
-      <Example hash="customFileInput" t={tInputGroupPage} state={state}>
+      <Example hash="customFileInput" state={state} t={tInputGroupPage}>
         <InputGroup>
           <Label htmlFor="inputGroupFile01" inputGroupText>
             Upload
@@ -271,11 +271,11 @@ export default function InputGroupPage() {
           <Button id="inputGroupFileAddon03" outline="secondary" type="button">
             Button
           </Button>
-          <Input aria-describedby="inputGroupFileAddon03" id="inputGroupFile03" aria-label="Upload" type="file" />
+          <Input aria-describedby="inputGroupFileAddon03" aria-label="Upload" id="inputGroupFile03" type="file" />
         </InputGroup>
 
         <InputGroup>
-          <Input aria-describedby="inputGroupFileAddon04" id="inputGroupFile04" aria-label="Upload" type="file" />
+          <Input aria-describedby="inputGroupFileAddon04" aria-label="Upload" id="inputGroupFile04" type="file" />
           <Button id="inputGroupFileAddon04" outline="secondary" type="button">
             Button
           </Button>
@@ -285,48 +285,48 @@ export default function InputGroupPage() {
       <PropsIndicator />
 
       <Example
+        hash="inputGroupComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tInputGroupComponentProps('inputGroup.desc.nowrap'),
             attr: 'nowrap',
             default: '-',
+            desc: tInputGroupComponentProps('inputGroup.desc.nowrap'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">lg | sm</span>,
-            desc: tInputGroupComponentProps('inputGroup.desc.size'),
             attr: 'size',
             default: '-',
+            desc: tInputGroupComponentProps('inputGroup.desc.size'),
+            type: <span className="badge text-bg-secondary">lg | sm</span>,
           },
           {
-            desc: tInputGroupComponentProps('inputGroup.desc.hasValidation'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
             attr: 'hasValidation',
             default: '-',
+            desc: tInputGroupComponentProps('inputGroup.desc.hasValidation'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="inputGroupComponentProps"
-        t={tInputGroupComponentProps}
-        state={state}
         props
+        state={state}
+        t={tInputGroupComponentProps}
       ></Example>
 
       <Example
+        hash="inputGroupTextComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">div | span</span>,
-            desc: tInputGroupComponentProps('inputGroupText.desc.as'),
-            default: 'span',
             attr: 'as',
+            default: 'span',
+            desc: tInputGroupComponentProps('inputGroupText.desc.as'),
+            type: <span className="badge text-bg-secondary">div | span</span>,
           },
         ]}
-        hash="inputGroupTextComponentProps"
-        t={tInputGroupComponentProps}
-        state={state}
         props
+        state={state}
+        t={tInputGroupComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

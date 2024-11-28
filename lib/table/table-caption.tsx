@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableCaptionProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const TableCaption = function TableCaption<T extends ElementType = 'caption'>(props: TableCaptionProps<T>) {
-  const { as: Component = 'caption' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'caption' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && '', className);

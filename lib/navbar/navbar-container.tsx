@@ -2,12 +2,12 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarContainerProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
-const NavbarContainer = function NavbarContainer<T extends ElementType = 'form' | 'div'>(
+const NavbarContainer = function NavbarContainer<T extends ElementType = 'div' | 'form'>(
   props: NavbarContainerProps<T>,
 ) {
-  const { as: Component = 'div' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && !className?.includes('container') && 'container-fluid', className);

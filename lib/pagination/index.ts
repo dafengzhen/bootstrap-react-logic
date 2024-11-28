@@ -5,10 +5,10 @@ export type {
   PaginationBasicProps,
   PaginationItemProps,
   PaginationLinkProps,
-  PaginationSpanProps,
   PaginationNavProps,
   PaginationOption,
   PaginationProps,
+  PaginationSpanProps,
 } from './types.ts';
 
 // hooks

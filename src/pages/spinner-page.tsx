@@ -1,17 +1,17 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Spinner } from '@lib/spinner';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/spinner/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -27,95 +27,95 @@ export default function SpinnerPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tSpinnerPage} state={state} hash="basic">
+      <Example hash="basic" state={state} t={tSpinnerPage}>
         <Spinner role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       </Example>
 
-      <Example t={tSpinnerPage} hash="colors" state={state} row>
-        <Spinner variant="primary" role="status">
+      <Example hash="colors" row state={state} t={tSpinnerPage}>
+        <Spinner role="status" variant="primary">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="secondary" role="status">
+        <Spinner role="status" variant="secondary">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="success" role="status">
+        <Spinner role="status" variant="success">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="danger" role="status">
+        <Spinner role="status" variant="danger">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="warning" role="status">
+        <Spinner role="status" variant="warning">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="info" role="status">
+        <Spinner role="status" variant="info">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="light" role="status">
+        <Spinner role="status" variant="light">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
 
-        <Spinner variant="dark" role="status">
+        <Spinner role="status" variant="dark">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       </Example>
 
-      <Example hash="growingSpinner" t={tSpinnerPage} state={state}>
+      <Example hash="growingSpinner" state={state} t={tSpinnerPage}>
         <div>
-          <Spinner role="status" grow>
+          <Spinner grow role="status">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         </div>
 
         <div className="d-flex flex-wrap gap-2">
-          <Spinner variant="primary" role="status" grow>
+          <Spinner grow role="status" variant="primary">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="secondary" role="status" grow>
+          <Spinner grow role="status" variant="secondary">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="success" role="status" grow>
+          <Spinner grow role="status" variant="success">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="danger" role="status" grow>
+          <Spinner grow role="status" variant="danger">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="warning" role="status" grow>
+          <Spinner grow role="status" variant="warning">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="info" role="status" grow>
+          <Spinner grow role="status" variant="info">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="light" role="status" grow>
+          <Spinner grow role="status" variant="light">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner variant="dark" role="status" grow>
+          <Spinner grow role="status" variant="dark">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         </div>
       </Example>
 
-      <Example t={tSpinnerPage} hash="margin" state={state}>
+      <Example hash="margin" state={state} t={tSpinnerPage}>
         <Spinner className="m-5" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       </Example>
 
-      <Example t={tSpinnerPage} state={state} hash="flex">
+      <Example hash="flex" state={state} t={tSpinnerPage}>
         <div className="d-flex justify-content-center">
           <Spinner role="status">
             <span className="visually-hidden">Loading...</span>
@@ -124,11 +124,11 @@ export default function SpinnerPage() {
 
         <div className="d-flex align-items-center">
           <strong role="status">Loading...</strong>
-          <Spinner className="ms-auto" aria-hidden="true" />
+          <Spinner aria-hidden="true" className="ms-auto" />
         </div>
       </Example>
 
-      <Example t={tSpinnerPage} hash="floats" state={state}>
+      <Example hash="floats" state={state} t={tSpinnerPage}>
         <div className="clearfix">
           <Spinner className="float-end" role="status">
             <span className="visually-hidden">Loading...</span>
@@ -136,7 +136,7 @@ export default function SpinnerPage() {
         </div>
       </Example>
 
-      <Example hash="textAlign" t={tSpinnerPage} state={state}>
+      <Example hash="textAlign" state={state} t={tSpinnerPage}>
         <div className="text-center">
           <Spinner role="status">
             <span className="visually-hidden">Loading...</span>
@@ -144,51 +144,51 @@ export default function SpinnerPage() {
         </div>
       </Example>
 
-      <Example t={tSpinnerPage} state={state} hash="size">
+      <Example hash="size" state={state} t={tSpinnerPage}>
         <div className="d-flex gap-2">
           <Spinner role="status" size="sm">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner role="status" size="sm" grow>
+          <Spinner grow role="status" size="sm">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         </div>
 
         <div className="d-flex gap-2">
-          <Spinner style={{ height: '3rem', width: '3rem' }} role="status">
+          <Spinner role="status" style={{ height: '3rem', width: '3rem' }}>
             <span className="visually-hidden">Loading...</span>
           </Spinner>
 
-          <Spinner style={{ height: '3rem', width: '3rem' }} role="status" grow>
+          <Spinner grow role="status" style={{ height: '3rem', width: '3rem' }}>
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         </div>
       </Example>
 
-      <Example t={tSpinnerPage} hash="buttons" state={state}>
+      <Example hash="buttons" state={state} t={tSpinnerPage}>
         <div className="d-flex gap-2">
-          <button className="btn btn-primary" type="button" disabled>
+          <button className="btn btn-primary" disabled type="button">
             <Spinner aria-hidden="true" as="span" size="sm" />
             <span className="visually-hidden" role="status">
               Loading...
             </span>
           </button>
-          <button className="btn btn-primary" type="button" disabled>
-            <Spinner aria-hidden="true" className="me-1" as="span" size="sm" />
+          <button className="btn btn-primary" disabled type="button">
+            <Spinner aria-hidden="true" as="span" className="me-1" size="sm" />
             <span role="status">Loading...</span>
           </button>
         </div>
 
         <div className="d-flex gap-2">
-          <button className="btn btn-primary" type="button" disabled>
-            <Spinner aria-hidden="true" as="span" size="sm" grow />
+          <button className="btn btn-primary" disabled type="button">
+            <Spinner aria-hidden="true" as="span" grow size="sm" />
             <span className="visually-hidden" role="status">
               Loading...
             </span>
           </button>
-          <button className="btn btn-primary" type="button" disabled>
-            <Spinner aria-hidden="true" className="me-1" as="span" size="sm" grow />
+          <button className="btn btn-primary" disabled type="button">
+            <Spinner aria-hidden="true" as="span" className="me-1" grow size="sm" />
             <span role="status">Loading...</span>
           </button>
         </div>
@@ -197,20 +197,24 @@ export default function SpinnerPage() {
       <PropsIndicator />
 
       <Example
+        hash="spinnerComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tSpinnerComponentProps('spinner.desc.grow'),
             attr: 'grow',
             default: '',
+            desc: tSpinnerComponentProps('spinner.desc.grow'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">sm</span>,
-            desc: tSpinnerComponentProps('spinner.desc.size'),
             attr: 'size',
             default: '',
+            desc: tSpinnerComponentProps('spinner.desc.size'),
+            type: <span className="badge text-bg-secondary">sm</span>,
           },
           {
+            attr: 'variant',
+            default: '',
+            desc: tSpinnerComponentProps('spinner.desc.variant'),
             type: (
               <div className="row">
                 <div className="col-auto">
@@ -239,18 +243,14 @@ export default function SpinnerPage() {
                 </div>
               </div>
             ),
-            desc: tSpinnerComponentProps('spinner.desc.variant'),
-            attr: 'variant',
-            default: '',
           },
         ]}
-        hash="spinnerComponentProps"
-        t={tSpinnerComponentProps}
-        state={state}
         props
+        state={state}
+        t={tSpinnerComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

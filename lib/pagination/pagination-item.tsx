@@ -2,17 +2,17 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PaginationItemProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const PaginationItem = function PaginationItem<T extends ElementType = 'li'>(props: PaginationItemProps<T>) {
   const {
-    as: Component = 'li' as ElementType,
-    dropOldClass,
-    className,
-    variables,
-    disabled,
     active,
+    as: Component = 'li' as ElementType,
+    className,
+    disabled,
+    dropOldClass,
     style,
+    variables,
     ...rest
   } = props;
 

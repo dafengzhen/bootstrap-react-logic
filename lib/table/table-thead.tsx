@@ -2,17 +2,17 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableTheadProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const TableThead = function TableThead<T extends ElementType = 'thead'>(props: TableTheadProps<T>) {
   const {
     as: Component = 'thead' as ElementType,
-    dropOldClass,
     className,
-    variables,
     divider,
-    variant,
+    dropOldClass,
     style,
+    variables,
+    variant,
     ...rest
   } = props;
 

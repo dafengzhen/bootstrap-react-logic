@@ -1,3 +1,3 @@
-import type { MutableRefObject, RefObject, Ref } from 'react';
+import type { MutableRefObject, Ref, RefObject } from 'react';
 
-export type ReactRef<T> = MutableRefObject<T> | RefObject<T> | Ref<T>;
+export type ReactRef<T> = MutableRefObject<T> | Ref<T> | RefObject<T>;

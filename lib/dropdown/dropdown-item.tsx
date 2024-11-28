@@ -2,18 +2,18 @@ import { type ElementType, useMemo } from 'react';
 
 import type { DropdownItemProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
 import Button from '../button/button.tsx';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const DropdownItem = function DropdownItem<T extends ElementType = 'a'>(props: DropdownItemProps<T>) {
   const {
-    as: Component = 'a' as ElementType,
-    dropOldClass,
-    className,
-    variables,
-    children,
     active,
+    as: Component = 'a' as ElementType,
+    children,
+    className,
+    dropOldClass,
     style,
+    variables,
     ...rest
   } = props;
 

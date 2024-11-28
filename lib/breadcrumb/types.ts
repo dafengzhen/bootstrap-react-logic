@@ -1,11 +1,11 @@
 import type { ElementType, MouseEvent, ReactNode } from 'react';
 
 import type {
+  BaseProps,
   BreadcrumbBasicVariablesType,
   BreadcrumbItemVariablesType,
   BreadcrumbVariablesType,
   PropsWithoutRef,
-  BaseProps,
 } from '../tools';
 
 export type BreadcrumbBasicProps<T extends ElementType> = PropsWithoutRef<
@@ -16,15 +16,24 @@ export type BreadcrumbBasicProps<T extends ElementType> = PropsWithoutRef<
 
 export type BreadcrumbItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, BreadcrumbItemVariablesType>;
 
-export type BreadcrumbProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, BreadcrumbVariablesType>;
-
 export interface BreadcrumbOption {
+  active?: boolean;
   id?: number | string;
   title?: ReactNode;
-  active?: boolean;
 }
 
-type Props<T extends ElementType> = {
+export type BreadcrumbProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, BreadcrumbVariablesType>;
+
+type BasicProps<T extends ElementType> = BaseProps<T, BreadcrumbBasicVariablesType> & {};
+
+type ItemProps<T extends ElementType> = BaseProps<T, BreadcrumbItemVariablesType> & {
+  /**
+   * active.
+   */
+  active?: boolean;
+};
+
+type Props<T extends ElementType> = BaseProps<T, BreadcrumbVariablesType> & {
   /**
    * onClick.
    */
@@ -34,13 +43,4 @@ type Props<T extends ElementType> = {
    * options.
    */
   options?: BreadcrumbOption[];
-} & BaseProps<T, BreadcrumbVariablesType>;
-
-type ItemProps<T extends ElementType> = {
-  /**
-   * active.
-   */
-  active?: boolean;
-} & BaseProps<T, BreadcrumbItemVariablesType>;
-
-type BasicProps<T extends ElementType> = BaseProps<T, BreadcrumbBasicVariablesType> & {};
+};

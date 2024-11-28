@@ -2,29 +2,29 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ButtonProps } from './types.ts';
 
-import { resolveRoundedClass, convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, findTruthyClass, resolveRoundedClass, stylex } from '../tools';
 
 const Button = function Button<T extends ElementType = 'button'>(props: ButtonProps<T>) {
   const {
+    active,
     as: Component = 'button' as ElementType,
-    type = 'button',
-    dropOldClass,
-    startContent,
-    endContent,
-    className,
-    isLoading,
-    variables,
     btnClose,
     children,
+    className,
     disabled,
+    dropOldClass,
+    endContent,
+    isLoading,
+    onRef,
     outline,
     rounded,
-    variant,
-    active,
-    onRef,
-    style,
     show,
     size,
+    startContent,
+    style,
+    type = 'button',
+    variables,
+    variant,
     ...rest
   } = props;
 
@@ -43,8 +43,8 @@ const Button = function Button<T extends ElementType = 'button'>(props: ButtonPr
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
-      disabled: disabled && Component === 'button',
       className: finalClass,
+      disabled: disabled && Component === 'button',
       style: finalStyle,
     };
   }, [
@@ -67,7 +67,7 @@ const Button = function Button<T extends ElementType = 'button'>(props: ButtonPr
     <Component type={type} {...rest} {...renderOptions} ref={onRef}>
       {isLoading && !startContent && (
         <>
-          <span className="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+          <span aria-hidden="true" className="spinner-border spinner-border-sm me-1"></span>
           <span className="visually-hidden" role="status">
             Loading...
           </span>

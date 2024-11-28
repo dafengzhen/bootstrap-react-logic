@@ -2,17 +2,17 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableTdProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const TableTd = function TableTd<T extends ElementType = 'td'>(props: TableTdProps<T>) {
   const {
+    active,
     as: Component = 'td' as ElementType,
-    dropOldClass,
     className,
+    dropOldClass,
+    style,
     variables,
     variant,
-    active,
-    style,
     ...rest
   } = props;
 

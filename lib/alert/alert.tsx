@@ -1,10 +1,10 @@
-import { type ElementType, type MouseEvent, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { AlertProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, mergeProps, stylex } from '../tools';
-import AlertHeading from './alert-heading.tsx';
 import Button from '../button/button.tsx';
+import { clsxUnique, convertBsKeyToVar, mergeProps, stylex } from '../tools';
+import AlertHeading from './alert-heading.tsx';
 import AlertLink from './alert-link.tsx';
 
 const DEFAULTS = {
@@ -12,13 +12,13 @@ const DEFAULTS = {
 };
 
 const useAlertVisibility = (props: {
-  onVisibleChange?: (visible: boolean) => void;
   clickToClose?: boolean;
   dismissible?: boolean;
-  visible?: boolean;
   fade?: boolean;
+  onVisibleChange?: (visible: boolean) => void;
+  visible?: boolean;
 }) => {
-  const { onVisibleChange, clickToClose, dismissible, visible, fade } = props;
+  const { clickToClose, dismissible, fade, onVisibleChange, visible } = props;
   const [isVisible, setIsVisible] = useState(!fade && typeof visible === 'boolean' ? visible : true);
   const [isShowing, setIsShowing] = useState(false);
   const alertElement = useRef<HTMLDivElement | null>(null);
@@ -96,28 +96,28 @@ const useAlertVisibility = (props: {
 
 const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>) {
   const {
-    clickToClose = DEFAULTS.clickToClose,
     as: Component = 'div' as ElementType,
-    closeButtonProps,
-    onVisibleChange,
-    dropOldClass,
-    closeButton,
-    dismissible,
     className,
+    clickToClose = DEFAULTS.clickToClose,
+    closeButton,
+    closeButtonProps,
+    dismissible,
+    dropOldClass,
+    fade,
+    onVisibleChange,
+    style,
     variables,
     variant,
     visible,
-    style,
-    fade,
     ...rest
   } = props;
 
   const { alertElement, handleClose, isShowing, isVisible } = useAlertVisibility({
-    onVisibleChange,
     clickToClose,
     dismissible,
-    visible,
     fade,
+    onVisibleChange,
+    visible,
   });
 
   const onClick = useCallback(

@@ -1,18 +1,18 @@
-import EventsIndicator from '@components/events-indicator.tsx';
-import PropsIndicator from '@components/props-indicator.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import EventsIndicator from '@components/events-indicator.tsx';
+import Example from '@components/example.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { CloseButton } from '@lib/button';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/close-button/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -28,15 +28,15 @@ export default function CloseButtonPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tCloseButtonPage} state={state} hash="basic" row>
+      <Example hash="basic" row state={state} t={tCloseButtonPage}>
         <CloseButton />
       </Example>
 
-      <Example hash="disabledState" t={tCloseButtonPage} state={state} row>
+      <Example hash="disabledState" row state={state} t={tCloseButtonPage}>
         <CloseButton disabled />
       </Example>
 
-      <Example t={tCloseButtonPage} hash="darkVariant" state={state} dark>
+      <Example dark hash="darkVariant" state={state} t={tCloseButtonPage}>
         <div className="d-flex gap-2" data-bs-theme="dark">
           <CloseButton />
           <CloseButton disabled />
@@ -46,38 +46,38 @@ export default function CloseButtonPage() {
       <PropsIndicator />
 
       <Example
+        hash="closeButtonComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tCloseButtonComponentProps('closeButton.desc.disabled'),
             attr: 'disabled',
             default: '',
+            desc: tCloseButtonComponentProps('closeButton.desc.disabled'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="closeButtonComponentProps"
-        t={tCloseButtonComponentProps}
-        state={state}
         props
+        state={state}
+        t={tCloseButtonComponentProps}
       />
 
       <EventsIndicator />
 
       <Example
+        events
+        hash="closeButtonComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">Function</span>,
-            desc: tCloseButtonComponentProps('closeButton.desc.onClick'),
             attr: 'onClick',
             default: '',
+            desc: tCloseButtonComponentProps('closeButton.desc.onClick'),
+            type: <span className="badge text-bg-secondary">Function</span>,
           },
         ]}
-        hash="closeButtonComponentProps"
-        t={tCloseButtonComponentProps}
         state={state}
-        events
+        t={tCloseButtonComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

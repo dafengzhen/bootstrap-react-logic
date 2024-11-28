@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PopoverBodyProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const PopoverBody = function PopoverBody<T extends ElementType = 'div'>(props: PopoverBodyProps<T>) {
-  const { as: Component = 'div' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'popover-body', className);

@@ -6,7 +6,7 @@ export default function IndexPage() {
           <div className="d-flex align-items-center justify-content-between">
             <div>Bootstrap React Logic</div>
             <div className="d-flex gap-2">
-              <a href="https://github.com/dafengzhen/bootstrap-react-logic" className="link-dark" target="_blank">
+              <a className="link-dark" href="https://github.com/dafengzhen/bootstrap-react-logic" target="_blank">
                 <i className="bi bi-github tw-cursor-pointer"></i>
               </a>
             </div>

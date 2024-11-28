@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SelectOptionProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const SelectOption = function SelectOption<T extends ElementType = 'option'>(props: SelectOptionProps<T>) {
-  const { as: Component = 'option' as ElementType, className, variables, children, style, ...rest } = props;
+  const { as: Component = 'option' as ElementType, children, className, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(className);

@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarTogglerProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const NavbarTogglerIcon = function NavbarTogglerIcon<T extends ElementType = 'span'>(props: NavbarTogglerProps<T>) {
-  const { as: Component = 'span' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'span' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'navbar-toggler-icon', className);

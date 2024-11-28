@@ -1,18 +1,18 @@
-import PropsIndicator from '@components/props-indicator.tsx';
-import OptionRow from '@components/option-row.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
-import { useState } from 'react';
+import Example from '@components/example.tsx';
+import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Nav } from '@lib/nav';
+import { transformCodeObj } from '@src/tools';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/nav/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -28,204 +28,204 @@ export default function NavPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example state={state} hash="basic" t={tNavPage}>
+      <Example hash="basic" state={state} t={tNavPage}>
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
         />
 
         <Nav
+          as="nav"
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
-          as="nav"
           skipItem
         />
       </Example>
 
       <Example hash="horizontalAlignment" state={state} t={tNavPage}>
         <Nav
+          horizontal="center"
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
-          horizontal="center"
         />
 
         <Nav
+          horizontal="end"
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
-          horizontal="end"
         />
       </Example>
 
-      <Example hash="vertical" state={state} t={tNavPage} row>
+      <Example hash="vertical" row state={state} t={tNavPage}>
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
           vertical
         />
 
         <Nav
+          as="nav"
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
-          as="nav"
           skipItem
           vertical
         />
       </Example>
 
-      <Example state={state} t={tNavPage} hash="tabs" row>
+      <Example hash="tabs" row state={state} t={tNavPage}>
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
           tabs
         />
       </Example>
 
-      <Example state={state} hash="pills" t={tNavPage} row>
+      <Example hash="pills" row state={state} t={tNavPage}>
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
           pills
@@ -236,22 +236,22 @@ export default function NavPage() {
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
-              link: 'Link',
               href: '#',
-            },
-            {
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
+              href: '#',
+              link: 'Link',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
           underline
@@ -260,149 +260,149 @@ export default function NavPage() {
 
       <Example hash="fillAndJustify" state={state} t={tNavPage}>
         <Nav
-          options={[
-            {
-              link: 'Active',
-              active: true,
-              href: '#',
-            },
-            {
-              link: 'Much longer nav link',
-              href: '#',
-            },
-            {
-              link: 'Link',
-              href: '#',
-            },
-            {
-              link: 'Disabled',
-              disabled: true,
-              href: '#',
-            },
-          ]}
-          pills
           fill
+          options={[
+            {
+              active: true,
+              href: '#',
+              link: 'Active',
+            },
+            {
+              href: '#',
+              link: 'Much longer nav link',
+            },
+            {
+              href: '#',
+              link: 'Link',
+            },
+            {
+              disabled: true,
+              href: '#',
+              link: 'Disabled',
+            },
+          ]}
+          pills
         />
 
         <Nav
-          options={[
-            {
-              link: 'Active',
-              active: true,
-              href: '#',
-            },
-            {
-              link: 'Much longer nav link',
-              href: '#',
-            },
-            {
-              link: 'Link',
-              href: '#',
-            },
-            {
-              link: 'Disabled',
-              disabled: true,
-              href: '#',
-            },
-          ]}
           as="nav"
-          skipItem
-          pills
           fill
-        />
-
-        <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
+              href: '#',
               link: 'Much longer nav link',
-              href: '#',
             },
             {
+              href: '#',
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
-          justified
           pills
-        />
-
-        <Nav
-          options={[
-            {
-              link: 'Active',
-              active: true,
-              href: '#',
-            },
-            {
-              link: 'Much longer nav link',
-              href: '#',
-            },
-            {
-              link: 'Link',
-              href: '#',
-            },
-            {
-              link: 'Disabled',
-              disabled: true,
-              href: '#',
-            },
-          ]}
-          justified
-          as="nav"
           skipItem
+        />
+
+        <Nav
+          justified
+          options={[
+            {
+              active: true,
+              href: '#',
+              link: 'Active',
+            },
+            {
+              href: '#',
+              link: 'Much longer nav link',
+            },
+            {
+              href: '#',
+              link: 'Link',
+            },
+            {
+              disabled: true,
+              href: '#',
+              link: 'Disabled',
+            },
+          ]}
           pills
+        />
+
+        <Nav
+          as="nav"
+          justified
+          options={[
+            {
+              active: true,
+              href: '#',
+              link: 'Active',
+            },
+            {
+              href: '#',
+              link: 'Much longer nav link',
+            },
+            {
+              href: '#',
+              link: 'Link',
+            },
+            {
+              disabled: true,
+              href: '#',
+              link: 'Disabled',
+            },
+          ]}
+          pills
+          skipItem
         />
       </Example>
 
       <Example hash="workingWithFlexUtilities" state={state} t={tNavPage}>
         <Nav
+          as="nav"
+          className="flex-sm-row"
           options={[
             {
-              linkProps: {
-                className: 'flex-sm-fill text-sm-center',
-              },
-              link: 'Active',
               active: true,
               href: '#',
-            },
-            {
+              link: 'Active',
               linkProps: {
                 className: 'flex-sm-fill text-sm-center',
               },
+            },
+            {
+              href: '#',
               link: 'Longer nav link',
-              href: '#',
-            },
-            {
               linkProps: {
                 className: 'flex-sm-fill text-sm-center',
               },
+            },
+            {
+              href: '#',
               link: 'Link',
-              href: '#',
-            },
-            {
               linkProps: {
                 className: 'flex-sm-fill text-sm-center',
               },
-              link: 'Disabled',
+            },
+            {
               disabled: true,
               href: '#',
+              link: 'Disabled',
+              linkProps: {
+                className: 'flex-sm-fill text-sm-center',
+              },
             },
           ]}
-          className="flex-sm-row"
-          as="nav"
+          pills
           skipItem
           vertical
-          pills
         />
       </Example>
 
@@ -410,11 +410,12 @@ export default function NavPage() {
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
+              href: '#',
               item: (
                 <ul className="dropdown-menu">
                   <li>
@@ -442,23 +443,22 @@ export default function NavPage() {
                   </li>
                 </ul>
               ),
-              linkProps: {
-                className: 'dropdown-toggle',
-              },
               itemProps: {
                 className: 'dropdown',
               },
               link: 'Dropdown',
-              href: '#',
+              linkProps: {
+                className: 'dropdown-toggle',
+              },
             },
             {
+              href: '#',
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
           tabs
@@ -469,11 +469,12 @@ export default function NavPage() {
         <Nav
           options={[
             {
-              link: 'Active',
               active: true,
               href: '#',
+              link: 'Active',
             },
             {
+              href: '#',
               item: (
                 <ul className="dropdown-menu">
                   <li>
@@ -501,23 +502,22 @@ export default function NavPage() {
                   </li>
                 </ul>
               ),
-              linkProps: {
-                className: 'dropdown-toggle',
-              },
               itemProps: {
                 className: 'dropdown',
               },
               link: 'Dropdown',
-              href: '#',
+              linkProps: {
+                className: 'dropdown-toggle',
+              },
             },
             {
+              href: '#',
               link: 'Link',
-              href: '#',
             },
             {
-              link: 'Disabled',
               disabled: true,
               href: '#',
+              link: 'Disabled',
             },
           ]}
           pills
@@ -528,6 +528,11 @@ export default function NavPage() {
         <Nav
           options={[
             {
+              active: true,
+              link: 'Home',
+              linkProps: {
+                as: 'button',
+              },
               pane: (
                 <p>
                   This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another
@@ -536,13 +541,12 @@ export default function NavPage() {
                   -powered navigation.
                 </p>
               ),
+            },
+            {
+              link: 'Profile',
               linkProps: {
                 as: 'button',
               },
-              active: true,
-              link: 'Home',
-            },
-            {
               pane: (
                 <p>
                   This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking
@@ -551,12 +555,12 @@ export default function NavPage() {
                   <code>.nav</code>-powered navigation.
                 </p>
               ),
+            },
+            {
+              link: 'Contact',
               linkProps: {
                 as: 'button',
               },
-              link: 'Profile',
-            },
-            {
               pane: (
                 <p>
                   This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking
@@ -565,25 +569,27 @@ export default function NavPage() {
                   <code>.nav</code>-powered navigation.
                 </p>
               ),
-              linkProps: {
-                as: 'button',
-              },
-              link: 'Contact',
             },
             {
+              disabled: true,
+              link: 'Disabled',
               linkProps: {
                 as: 'button',
               },
-              link: 'Disabled',
-              disabled: true,
             },
           ]}
           tabs
         />
 
         <Nav
+          as="nav"
           options={[
             {
+              active: true,
+              link: 'Home',
+              linkProps: {
+                as: 'button',
+              },
               pane: (
                 <p>
                   This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another
@@ -592,13 +598,12 @@ export default function NavPage() {
                   -powered navigation.
                 </p>
               ),
+            },
+            {
+              link: 'Profile',
               linkProps: {
                 as: 'button',
               },
-              active: true,
-              link: 'Home',
-            },
-            {
               pane: (
                 <p>
                   This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking
@@ -607,12 +612,12 @@ export default function NavPage() {
                   <code>.nav</code>-powered navigation.
                 </p>
               ),
+            },
+            {
+              link: 'Contact',
               linkProps: {
                 as: 'button',
               },
-              link: 'Profile',
-            },
-            {
               pane: (
                 <p>
                   This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking
@@ -621,20 +626,15 @@ export default function NavPage() {
                   <code>.nav</code>-powered navigation.
                 </p>
               ),
-              linkProps: {
-                as: 'button',
-              },
-              link: 'Contact',
             },
             {
+              disabled: true,
+              link: 'Disabled',
               linkProps: {
                 as: 'button',
               },
-              link: 'Disabled',
-              disabled: true,
             },
           ]}
-          as="nav"
           skipItem
           tabs
         />
@@ -642,6 +642,11 @@ export default function NavPage() {
         <Nav
           options={[
             {
+              active: true,
+              link: 'Home',
+              linkProps: {
+                as: 'button',
+              },
               pane: (
                 <p>
                   This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another
@@ -650,13 +655,12 @@ export default function NavPage() {
                   -powered navigation.
                 </p>
               ),
+            },
+            {
+              link: 'Profile',
               linkProps: {
                 as: 'button',
               },
-              active: true,
-              link: 'Home',
-            },
-            {
               pane: (
                 <p>
                   This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking
@@ -665,12 +669,12 @@ export default function NavPage() {
                   <code>.nav</code>-powered navigation.
                 </p>
               ),
+            },
+            {
+              link: 'Contact',
               linkProps: {
                 as: 'button',
               },
-              link: 'Profile',
-            },
-            {
               pane: (
                 <p>
                   This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking
@@ -679,17 +683,13 @@ export default function NavPage() {
                   <code>.nav</code>-powered navigation.
                 </p>
               ),
-              linkProps: {
-                as: 'button',
-              },
-              link: 'Contact',
             },
             {
+              disabled: true,
+              link: 'Disabled',
               linkProps: {
                 as: 'button',
               },
-              link: 'Disabled',
-              disabled: true,
             },
           ]}
           pills
@@ -697,8 +697,15 @@ export default function NavPage() {
 
         <div className="d-flex align-items-start">
           <Nav
+            as="nav"
+            className="me-3"
             options={[
               {
+                active: true,
+                link: 'Home',
+                linkProps: {
+                  as: 'button',
+                },
                 pane: (
                   <p>
                     This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking
@@ -708,13 +715,12 @@ export default function NavPage() {
                     -powered navigation.
                   </p>
                 ),
+              },
+              {
+                link: 'Profile',
                 linkProps: {
                   as: 'button',
                 },
-                active: true,
-                link: 'Home',
-              },
-              {
                 pane: (
                   <p>
                     This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking
@@ -723,12 +729,12 @@ export default function NavPage() {
                     <code>.nav</code>-powered navigation.
                   </p>
                 ),
+              },
+              {
+                link: 'Contact',
                 linkProps: {
                   as: 'button',
                 },
-                link: 'Profile',
-              },
-              {
                 pane: (
                   <p>
                     This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking
@@ -737,24 +743,18 @@ export default function NavPage() {
                     <code>.nav</code>-powered navigation.
                   </p>
                 ),
-                linkProps: {
-                  as: 'button',
-                },
-                link: 'Contact',
               },
               {
+                disabled: true,
+                link: 'Disabled',
                 linkProps: {
                   as: 'button',
                 },
-                link: 'Disabled',
-                disabled: true,
               },
             ]}
-            className="me-3"
-            as="nav"
+            pills
             skipItem
             vertical
-            pills
           />
         </div>
       </Example>
@@ -762,99 +762,99 @@ export default function NavPage() {
       <PropsIndicator />
 
       <Example
+        hash="navComponentProps"
         items={[
           {
-            type: <span className="badge text-bg-secondary">NavTabContentProps&lt;div&gt;</span>,
-            desc: tNavComponentProps('nav.desc.contentProps'),
             attr: 'contentProps',
             default: '',
+            desc: tNavComponentProps('nav.desc.contentProps'),
+            type: <span className="badge text-bg-secondary">NavTabContentProps&lt;div&gt;</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.fill'),
             attr: 'fill',
             default: '',
+            desc: tNavComponentProps('nav.desc.fill'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">center | end | start</span>,
-            desc: tNavComponentProps('nav.desc.horizontal'),
             attr: 'horizontal',
             default: '',
+            desc: tNavComponentProps('nav.desc.horizontal'),
+            type: <span className="badge text-bg-secondary">center | end | start</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.justified'),
             attr: 'justified',
             default: '',
+            desc: tNavComponentProps('nav.desc.justified'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            attr: 'onChange',
+            default: '',
+            desc: tNavComponentProps('nav.desc.onChange'),
             type: (
               <span className="badge text-bg-secondary">
                 (id: number | string, event: MouseEvent&lt;HTMLElement&gt;) =&gt; void
               </span>
             ),
-            desc: tNavComponentProps('nav.desc.onChange'),
-            attr: 'onChange',
-            default: '',
           },
           {
-            type: (
-              <div className="d-flex flex-column gap-1">
-                <OptionRow value={tNavComponentProps('nav.options.active')} label="active?: boolean" />
-                <OptionRow value={tNavComponentProps('nav.options.disabled')} label="disabled?: boolean" />
-                <OptionRow value={tNavComponentProps('nav.options.fade')} label="fade?: boolean" />
-                <OptionRow value={tNavComponentProps('nav.options.href')} label="href?: string" />
-                <OptionRow value={tNavComponentProps('nav.options.id')} label="id?: number | string" />
-                <OptionRow value={tNavComponentProps('nav.options.item')} label="item?: ReactNode" />
-                <OptionRow value={tNavComponentProps('nav.options.itemProps')} label="itemProps?: NavItemProps<li>" />
-                <OptionRow value={tNavComponentProps('nav.options.link')} label="link?: ReactNode" />
-                <OptionRow value={tNavComponentProps('nav.options.linkProps')} label="linkProps?: NavLinkProps<a>" />
-                <OptionRow value={tNavComponentProps('nav.options.pane')} label="pane?: ReactNode" />
-                <OptionRow value={tNavComponentProps('nav.options.paneProps')} label="paneProps?: NavTabPaneProps<a>" />
-              </div>
-            ),
-            desc: tNavComponentProps('nav.desc.options'),
             attr: 'options',
             default: '',
+            desc: tNavComponentProps('nav.desc.options'),
+            type: (
+              <div className="d-flex flex-column gap-1">
+                <OptionRow label="active?: boolean" value={tNavComponentProps('nav.options.active')} />
+                <OptionRow label="disabled?: boolean" value={tNavComponentProps('nav.options.disabled')} />
+                <OptionRow label="fade?: boolean" value={tNavComponentProps('nav.options.fade')} />
+                <OptionRow label="href?: string" value={tNavComponentProps('nav.options.href')} />
+                <OptionRow label="id?: number | string" value={tNavComponentProps('nav.options.id')} />
+                <OptionRow label="item?: ReactNode" value={tNavComponentProps('nav.options.item')} />
+                <OptionRow label="itemProps?: NavItemProps<li>" value={tNavComponentProps('nav.options.itemProps')} />
+                <OptionRow label="link?: ReactNode" value={tNavComponentProps('nav.options.link')} />
+                <OptionRow label="linkProps?: NavLinkProps<a>" value={tNavComponentProps('nav.options.linkProps')} />
+                <OptionRow label="pane?: ReactNode" value={tNavComponentProps('nav.options.pane')} />
+                <OptionRow label="paneProps?: NavTabPaneProps<a>" value={tNavComponentProps('nav.options.paneProps')} />
+              </div>
+            ),
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.pills'),
             attr: 'pills',
             default: '',
+            desc: tNavComponentProps('nav.desc.pills'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.skipItem'),
             attr: 'skipItem',
             default: '',
+            desc: tNavComponentProps('nav.desc.skipItem'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.tabs'),
             attr: 'tabs',
             default: '',
+            desc: tNavComponentProps('nav.desc.tabs'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.underline'),
             attr: 'underline',
             default: '',
+            desc: tNavComponentProps('nav.desc.underline'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tNavComponentProps('nav.desc.vertical'),
             attr: 'vertical',
             default: '',
+            desc: tNavComponentProps('nav.desc.vertical'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="navComponentProps"
-        t={tNavComponentProps}
-        state={state}
         props
+        state={state}
+        t={tNavComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

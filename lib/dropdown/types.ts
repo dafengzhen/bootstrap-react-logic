@@ -1,35 +1,17 @@
-import type { ElementType, RefCallback, ElementRef, ReactNode } from 'react';
+import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
 
+import type { ButtonProps } from '../button';
 import type {
-  DropdownItemTextVariablesType,
+  BaseProps,
   DropdownDividerVariablesType,
   DropdownHeaderVariablesType,
-  DropdownToggleVariablesType,
+  DropdownItemTextVariablesType,
   DropdownItemVariablesType,
   DropdownMenuVariablesType,
+  DropdownToggleVariablesType,
   DropdownVariablesType,
   PropsWithoutRef,
-  BaseProps,
 } from '../tools';
-import type { ButtonProps } from '../button';
-
-export interface DropdownOption {
-  id?: number | string;
-  itemText?: ReactNode;
-  as?: 'button' | 'a';
-  disabled?: boolean;
-  header?: ReactNode;
-  divider?: boolean;
-  active?: boolean;
-  item?: ReactNode;
-  href?: string;
-}
-
-export type DropdownItemTextProps<T extends ElementType> = PropsWithoutRef<
-  ItemTextProps<T>,
-  T,
-  DropdownItemTextVariablesType
->;
 
 export type DropdownDividerProps<T extends ElementType> = PropsWithoutRef<
   DividerProps<T>,
@@ -43,112 +25,55 @@ export type DropdownHeaderProps<T extends ElementType> = PropsWithoutRef<
   DropdownHeaderVariablesType
 >;
 
+export type DropdownItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, DropdownItemVariablesType>;
+
+export type DropdownItemTextProps<T extends ElementType> = PropsWithoutRef<
+  ItemTextProps<T>,
+  T,
+  DropdownItemTextVariablesType
+>;
+
+export type DropdownMenuProps<T extends ElementType> = PropsWithoutRef<MenuProps<T>, T, DropdownMenuVariablesType>;
+
+export interface DropdownOption {
+  active?: boolean;
+  as?: 'a' | 'button';
+  disabled?: boolean;
+  divider?: boolean;
+  header?: ReactNode;
+  href?: string;
+  id?: number | string;
+  item?: ReactNode;
+  itemText?: ReactNode;
+}
+
+export type DropdownProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, DropdownVariablesType>;
+
 export type DropdownToggleProps<T extends ElementType> = PropsWithoutRef<
   ToggleProps<T>,
   T,
   DropdownToggleVariablesType
 >;
 
-export type DropdownItemProps<T extends ElementType> = PropsWithoutRef<ItemProps<T>, T, DropdownItemVariablesType>;
+type DividerProps<T extends ElementType> = BaseProps<T, DropdownDividerVariablesType> & {};
 
-export type DropdownMenuProps<T extends ElementType> = PropsWithoutRef<MenuProps<T>, T, DropdownMenuVariablesType>;
+type HeaderProps<T extends ElementType> = BaseProps<T, DropdownHeaderVariablesType> & {};
 
-export type DropdownProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, DropdownVariablesType>;
-
-type Props<T extends ElementType> = {
+type ItemProps<T extends ElementType> = BaseProps<T, DropdownItemVariablesType> & {
   /**
-   * offset.
+   * active.
    */
-  offset?:
-    | {
-        alignmentAxis?: number | null;
-        crossAxis?: number;
-        mainAxis?: number;
-      }
-    | number;
+  active?: boolean;
 
   /**
-   * autoClose.
+   * disabled.
    */
-  autoClose?: 'outside' | 'inside' | boolean;
+  disabled?: boolean;
+};
 
-  /**
-   * menuProps.
-   */
-  menuProps?: DropdownMenuProps<ElementType>;
+type ItemTextProps<T extends ElementType> = BaseProps<T, DropdownItemTextVariablesType> & {};
 
-  /**
-   * buttonProps.
-   */
-  buttonProps?: ButtonProps<ElementType>;
-
-  /**
-   * toggleProps.
-   */
-  toggleProps?: ButtonProps<ElementType>;
-
-  /**
-   * strategy.
-   */
-  strategy?: 'absolute' | 'fixed';
-
-  /**
-   * options.
-   */
-  options?: DropdownOption[];
-
-  /**
-   * dropupCenter.
-   */
-  dropupCenter?: boolean;
-
-  /**
-   * customMenu.
-   */
-  customMenu?: boolean;
-
-  /**
-   * dropstart.
-   */
-  dropstart?: boolean;
-
-  /**
-   * btnGroup.
-   */
-  btnGroup?: boolean;
-
-  /**
-   * toggle.
-   */
-  toggle?: ReactNode;
-
-  /**
-   * dropend.
-   */
-  dropend?: boolean;
-
-  /**
-   * visible.
-   */
-  visible?: boolean;
-
-  /**
-   * center.
-   */
-  center?: boolean;
-
-  /**
-   * dropup.
-   */
-  dropup?: boolean;
-
-  /**
-   * split.
-   */
-  split?: boolean;
-} & BaseProps<T, DropdownVariablesType>;
-
-type MenuProps<T extends ElementType> = {
+type MenuProps<T extends ElementType> = BaseProps<T, DropdownMenuVariablesType> & {
   /**
    * onRef.
    */
@@ -158,29 +83,104 @@ type MenuProps<T extends ElementType> = {
    * show.
    */
   show?: boolean;
-} & BaseProps<T, DropdownMenuVariablesType>;
+};
 
-type ItemProps<T extends ElementType> = {
+type Props<T extends ElementType> = BaseProps<T, DropdownVariablesType> & {
   /**
-   * disabled.
+   * autoClose.
    */
-  disabled?: boolean;
+  autoClose?: 'inside' | 'outside' | boolean;
 
   /**
-   * active.
+   * btnGroup.
    */
-  active?: boolean;
-} & BaseProps<T, DropdownItemVariablesType>;
+  btnGroup?: boolean;
 
-type ToggleProps<T extends ElementType> = {
+  /**
+   * buttonProps.
+   */
+  buttonProps?: ButtonProps<ElementType>;
+
+  /**
+   * center.
+   */
+  center?: boolean;
+
+  /**
+   * customMenu.
+   */
+  customMenu?: boolean;
+
+  /**
+   * dropend.
+   */
+  dropend?: boolean;
+
+  /**
+   * dropstart.
+   */
+  dropstart?: boolean;
+
+  /**
+   * dropup.
+   */
+  dropup?: boolean;
+
+  /**
+   * dropupCenter.
+   */
+  dropupCenter?: boolean;
+
+  /**
+   * menuProps.
+   */
+  menuProps?: DropdownMenuProps<ElementType>;
+
+  /**
+   * offset.
+   */
+  offset?:
+    | number
+    | {
+        alignmentAxis?: null | number;
+        crossAxis?: number;
+        mainAxis?: number;
+      };
+
+  /**
+   * options.
+   */
+  options?: DropdownOption[];
+
+  /**
+   * split.
+   */
+  split?: boolean;
+
+  /**
+   * strategy.
+   */
+  strategy?: 'absolute' | 'fixed';
+
+  /**
+   * toggle.
+   */
+  toggle?: ReactNode;
+
+  /**
+   * toggleProps.
+   */
+  toggleProps?: ButtonProps<ElementType>;
+
+  /**
+   * visible.
+   */
+  visible?: boolean;
+};
+
+type ToggleProps<T extends ElementType> = BaseProps<T, DropdownToggleVariablesType> & {
   /**
    * onRef.
    */
   onRef?: RefCallback<ElementRef<T>>;
-} & BaseProps<T, DropdownToggleVariablesType>;
-
-type ItemTextProps<T extends ElementType> = BaseProps<T, DropdownItemTextVariablesType> & {};
-
-type DividerProps<T extends ElementType> = BaseProps<T, DropdownDividerVariablesType> & {};
-
-type HeaderProps<T extends ElementType> = BaseProps<T, DropdownHeaderVariablesType> & {};
+};

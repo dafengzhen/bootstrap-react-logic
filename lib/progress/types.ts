@@ -1,21 +1,25 @@
 import type { ElementType } from 'react';
 
 import type {
-  ProgressStackedVariablesType,
+  BaseProps,
   ProgressBarVariablesType,
+  ProgressStackedVariablesType,
   ProgressVariablesType,
   PropsWithoutRef,
-  BaseProps,
 } from '../tools';
 
+export type ProgressBarProps<T extends ElementType> = PropsWithoutRef<BarProps<T>, T, ProgressBarVariablesType>;
+
+export type ProgressProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ProgressVariablesType>;
+
 export interface ProgressStackedOption {
-  bg?: 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
-  barProps?: ProgressBarProps<ElementType>;
-  props?: ProgressProps<ElementType>;
-  id?: number | string;
   animated?: boolean;
-  striped?: boolean;
+  barProps?: ProgressBarProps<ElementType>;
+  bg?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
+  id?: number | string;
   now?: number;
+  props?: ProgressProps<ElementType>;
+  striped?: boolean;
 }
 
 export type ProgressStackedProps<T extends ElementType> = PropsWithoutRef<
@@ -24,20 +28,33 @@ export type ProgressStackedProps<T extends ElementType> = PropsWithoutRef<
   ProgressStackedVariablesType
 >;
 
-export type ProgressBarProps<T extends ElementType> = PropsWithoutRef<BarProps<T>, T, ProgressBarVariablesType>;
+type BarProps<T extends ElementType> = BaseProps<T, ProgressBarVariablesType> & {
+  /**
+   * animated.
+   */
+  animated?: boolean;
 
-export type ProgressProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ProgressVariablesType>;
-
-type Props<T extends ElementType> = {
   /**
    * bg.
    */
-  bg?: 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
+  bg?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
 
   /**
-   * stackedProps.
+   * now.
    */
-  stackedProps?: ProgressStackedProps<ElementType>;
+  now?: number;
+
+  /**
+   * striped.
+   */
+  striped?: boolean;
+};
+
+type Props<T extends ElementType> = BaseProps<T, ProgressVariablesType> & {
+  /**
+   * animated.
+   */
+  animated?: boolean;
 
   /**
    * barProps.
@@ -45,14 +62,19 @@ type Props<T extends ElementType> = {
   barProps?: ProgressBarProps<ElementType>;
 
   /**
+   * bg.
+   */
+  bg?: 'danger' | 'dark' | 'info' | 'light' | 'primary' | 'secondary' | 'success' | 'warning';
+
+  /**
+   * now.
+   */
+  now?: number;
+
+  /**
    * options.
    */
   options?: ProgressStackedOption[];
-
-  /**
-   * animated.
-   */
-  animated?: boolean;
 
   /**
    * stacked.
@@ -60,36 +82,14 @@ type Props<T extends ElementType> = {
   stacked?: boolean;
 
   /**
-   * striped.
+   * stackedProps.
    */
-  striped?: boolean;
-
-  /**
-   * now.
-   */
-  now?: number;
-} & BaseProps<T, ProgressVariablesType>;
-
-type BarProps<T extends ElementType> = {
-  /**
-   * bg.
-   */
-  bg?: 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'info';
-
-  /**
-   * animated.
-   */
-  animated?: boolean;
+  stackedProps?: ProgressStackedProps<ElementType>;
 
   /**
    * striped.
    */
   striped?: boolean;
-
-  /**
-   * now.
-   */
-  now?: number;
-} & BaseProps<T, ProgressBarVariablesType>;
+};
 
 type StackedProps<T extends ElementType> = BaseProps<T, ProgressStackedVariablesType> & {};

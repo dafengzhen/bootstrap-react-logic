@@ -1,62 +1,62 @@
-import { kebabToCamelCaseLowerFirst, kebabToCamelCase, getStateByHash, updateState } from '@src/tools';
-import ExampleGeneralPropsCard from '@components/example-general-props-card.tsx';
 import ExampleDynamicCard from '@components/example-dynamic-card.tsx';
+import ExampleGeneralPropsCard from '@components/example-general-props-card.tsx';
 import ExamplePropsCard from '@components/example-props-card.tsx';
-import { type ReactNode } from 'react';
+import { getStateByHash, kebabToCamelCase, kebabToCamelCaseLowerFirst, updateState } from '@src/tools';
 import clsx from 'clsx';
+import { type ReactNode } from 'react';
 
 export default function Example({
   alignItemsCenter,
-  parentClassName,
+  bg,
   bodyClassName,
-  overflowXAuto,
-  codeLanguage,
-  textNowrap,
-  contentId,
   children,
-  inline,
-  events,
-  items,
-  mw400,
-  props,
-  types,
-  state,
+  codeLanguage,
+  contentId,
   dark,
+  events,
   gap3,
   hash,
-  wrap,
+  inline,
+  items,
+  mw400,
+  overflowXAuto,
+  parentClassName,
+  props,
   row,
-  bg,
+  state,
   t,
+  textNowrap,
+  types,
+  wrap,
 }: {
+  alignItemsCenter?: boolean;
+  bg?: boolean | string;
+  bodyClassName?: string;
+  children?: ReactNode;
+  codeLanguage?: 'html' | 'javascript' | 'tsx' | 'typescript' | string;
+  contentId?: string;
+  dark?: boolean;
+  events?: boolean;
+  gap3?: boolean;
+  hash: string;
+  inline?: boolean;
   items?: {
     attr: ReactNode | string;
     default?: ReactNode;
     desc?: ReactNode;
     type?: ReactNode;
   }[];
-  codeLanguage?: 'javascript' | 'typescript' | 'html' | string | 'tsx';
-  alignItemsCenter?: boolean;
-  parentClassName?: string;
-  overflowXAuto?: boolean;
-  bodyClassName?: string;
-  bg?: boolean | string;
-  children?: ReactNode;
-  textNowrap?: boolean;
-  contentId?: string;
-  showCode?: boolean;
-  inline?: boolean;
-  events?: boolean;
   mw400?: boolean;
+  overflowXAuto?: boolean;
+  parentClassName?: string;
   props?: boolean;
-  types?: boolean;
-  dark?: boolean;
-  gap3?: boolean;
-  wrap?: boolean;
   row?: boolean;
-  hash: string;
+  showCode?: boolean;
   state: any;
   t?: any;
+  textNowrap?: boolean;
+  types?: boolean;
+  wrap?: boolean;
 }) {
   const [getState, setState] = state;
   const stateByHash = getStateByHash(hash, getState);
@@ -77,12 +77,12 @@ export default function Example({
     if (hash === 'commonComponentProps') {
       return (
         <ExampleGeneralPropsCard
-          codeLanguage={codeLanguage || 'typescript'}
-          toggleCode={toggleCode}
-          showCode={false}
-          isOpen={isOpen}
           code={code}
+          codeLanguage={codeLanguage || 'typescript'}
           hash={hash}
+          isOpen={isOpen}
+          showCode={false}
+          toggleCode={toggleCode}
         >
           {children}
         </ExampleGeneralPropsCard>
@@ -94,14 +94,14 @@ export default function Example({
 
     return (
       <ExamplePropsCard
-        hash={props ? hash : events ? _hash + 'ComponentEvents' : types ? _hash + 'ComponentTypes' : hash}
-        codeLanguage={codeLanguage || 'typescript'}
-        toggleCode={toggleCode}
-        showCode={false}
-        isOpen={isOpen}
-        title={_tHash}
-        items={items}
         code={code}
+        codeLanguage={codeLanguage || 'typescript'}
+        hash={props ? hash : events ? _hash + 'ComponentEvents' : types ? _hash + 'ComponentTypes' : hash}
+        isOpen={isOpen}
+        items={items}
+        showCode={false}
+        title={_tHash}
+        toggleCode={toggleCode}
       >
         {children}
       </ExamplePropsCard>
@@ -110,15 +110,15 @@ export default function Example({
 
   return (
     <ExampleDynamicCard
+      bg={bg}
       bodyClassName={bodyClassName}
-      codeLanguage={codeLanguage}
-      toggleCode={toggleCode}
-      isOpen={isOpen}
-      title={t(hash)}
       code={code}
+      codeLanguage={codeLanguage}
       dark={dark}
       hash={hash}
-      bg={bg}
+      isOpen={isOpen}
+      title={t(hash)}
+      toggleCode={toggleCode}
     >
       <div
         className={clsx(

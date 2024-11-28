@@ -2,8 +2,8 @@ import type { Resource } from 'i18next';
 
 import { kebabToCamelCase } from '@src/tools';
 
-const enFiles = import.meta.glob('./en/**/*.json', { import: 'default', eager: true });
-const zhFiles = import.meta.glob('./zh/**/*.json', { import: 'default', eager: true });
+const enFiles = import.meta.glob('./en/**/*.json', { eager: true, import: 'default' });
+const zhFiles = import.meta.glob('./zh/**/*.json', { eager: true, import: 'default' });
 
 const parseFiles = (files: Record<string, unknown>) => {
   const resources: Record<string, unknown> = {};

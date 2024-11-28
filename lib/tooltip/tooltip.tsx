@@ -1,52 +1,52 @@
 import {
-  type ShiftOptions,
-  type FlipOptions,
-  type SizeOptions,
-  type Placement,
-  useFloating,
-  autoUpdate,
-  offset,
   arrow,
-  shift,
+  autoUpdate,
   flip,
+  type FlipOptions,
+  offset,
+  type Placement,
+  shift,
+  type ShiftOptions,
   size,
+  type SizeOptions,
+  useFloating,
 } from '@floating-ui/react';
-import { type ElementType, type HTMLProps, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, type HTMLProps, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import type { TooltipProps } from './types.ts';
 
-import { findTruthyClassOrDefault, convertBsKeyToVar, clsxUnique, mergeProps, isArray, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, findTruthyClassOrDefault, isArray, mergeProps, stylex } from '../tools';
 import TooltipArrow from './tooltip-arrow.tsx';
 import TooltipInner from './tooltip-inner.tsx';
 
 const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipProps<T>) {
   const {
+    arrowProps,
     as: Component = 'div' as ElementType,
+    className,
     container: containerByDefault,
-    onChange: onChangeByDefault,
-    visible: visibleByDefault,
-    offset: offsetByDefault,
-    triggerType = 'hover',
-    placement = 'top',
-    triggerWrapper,
     dropOldClass,
     fade = true,
-    arrowProps,
-    innerProps,
-    className,
-    variables,
-    trigger,
-    inner,
-    style,
     html,
+    inner,
+    innerProps,
+    offset: offsetByDefault,
+    onChange: onChangeByDefault,
+    placement = 'top',
+    style,
+    trigger,
+    triggerType = 'hover',
+    triggerWrapper,
+    variables,
+    visible: visibleByDefault,
     ...rest
   } = props;
 
   const [visible, setVisible] = useState(false);
   const [show, setShow] = useState(false);
   const arrowElement = useRef<HTMLDivElement | null>(null);
-  const [container, setContainer] = useState<HTMLElement | undefined | null>(
+  const [container, setContainer] = useState<HTMLElement | null | undefined>(
     typeof containerByDefault !== 'string' ? containerByDefault : null,
   );
   const [mouseEnter, setMouseEnter] = useState(false);
@@ -81,6 +81,8 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
         [show],
       ),
     ],
+    onOpenChange: setShow,
+    open: show,
     placement: findTruthyClassOrDefault(
       [
         ['bottom', placement === 'bottom'],
@@ -91,8 +93,6 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
       'right',
     ) as Placement,
     whileElementsMounted: autoUpdate,
-    onOpenChange: setShow,
-    open: show,
   });
 
   const handleChange = useCallback(
@@ -108,9 +108,9 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
       fade && 'fade',
       show && 'show',
       placement && {
-        'bs-tooltip-start': placement === 'start' || placement === 'left',
-        'bs-tooltip-end': placement === 'end' || placement === 'right',
         'bs-tooltip-bottom': placement === 'bottom',
+        'bs-tooltip-end': placement === 'end' || placement === 'right',
+        'bs-tooltip-start': placement === 'start' || placement === 'left',
         'bs-tooltip-top': placement === 'top',
       },
       className,
@@ -182,11 +182,11 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
     const onMouseLeave = onMouseLeaveFn.current;
     const currentHoverContainerElement = hoverContainerElement.current;
 
-    const newTriggerTypes: { type: 'mouseenter' | 'mouseleave' | 'focus' | 'hover'; fn: () => void }[] = [];
+    const newTriggerTypes: { fn: () => void; type: 'focus' | 'hover' | 'mouseenter' | 'mouseleave' }[] = [];
     if (triggerTypes.includes('focus')) {
       newTriggerTypes.push({
-        type: 'focus',
         fn: onFocus,
+        type: 'focus',
       });
     }
 
@@ -201,12 +201,12 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
       });
     } else {
       newTriggerTypes.push({
-        type: 'mouseenter',
         fn: onMouseEnter,
+        type: 'mouseenter',
       });
       newTriggerTypes.push({
-        type: 'mouseleave',
         fn: onMouseLeave,
+        type: 'mouseleave',
       });
     }
 
@@ -226,14 +226,14 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
       document.body.addEventListener('click', onClick);
 
       if (currentElement) {
-        newTriggerTypes.forEach(({ type, fn }) => currentElement.addEventListener(type, fn));
+        newTriggerTypes.forEach(({ fn, type }) => currentElement.addEventListener(type, fn));
       }
 
       return () => {
         document.body.removeEventListener('click', onClick);
 
         if (currentElement) {
-          newTriggerTypes.forEach(({ type, fn }) => currentElement.removeEventListener(type, fn));
+          newTriggerTypes.forEach(({ fn, type }) => currentElement.removeEventListener(type, fn));
         }
       };
     }
@@ -243,7 +243,7 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
     <>
       {trigger &&
         (triggerWrapper ? (
-          <span ref={hoverContainerElement} className="d-inline-block" tabIndex={0}>
+          <span className="d-inline-block" ref={hoverContainerElement} tabIndex={0}>
             {trigger(refs.setReference, getReferenceProps)}
           </span>
         ) : (
@@ -254,8 +254,8 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
           <Component
             {...rest}
             {...renderOptions}
-            style={{ ...renderOptions.style, ...floatingStyles }}
             ref={refs.setFloating}
+            style={{ ...renderOptions.style, ...floatingStyles }}
           >
             <TooltipArrow
               {...mergeProps(arrowProps, {

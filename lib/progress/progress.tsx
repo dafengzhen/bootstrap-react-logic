@@ -1,10 +1,10 @@
-import { type ElementType, useState, useMemo } from 'react';
+import { type ElementType, useMemo, useState } from 'react';
 
-import type { ProgressStackedOption, ProgressProps } from './types.ts';
+import type { ProgressProps, ProgressStackedOption } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
-import ProgressStacked from './progress-stacked.tsx';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import ProgressBar from './progress-bar.tsx';
+import ProgressStacked from './progress-stacked.tsx';
 
 interface IOption extends ProgressStackedOption {
   id: number | string;
@@ -12,20 +12,20 @@ interface IOption extends ProgressStackedOption {
 
 const Progress = function Progress<T extends ElementType = 'div'>(props: ProgressProps<T>) {
   const {
-    as: Component = 'div' as ElementType,
-    options: defaultOptions,
-    dropOldClass,
-    stackedProps,
-    className,
-    variables,
     animated,
+    as: Component = 'div' as ElementType,
     barProps,
+    bg,
     children,
+    className,
+    dropOldClass,
+    now,
+    options: defaultOptions,
     stacked,
+    stackedProps,
     striped,
     style,
-    now,
-    bg,
+    variables,
     ...rest
   } = props;
   const initialOptions = (defaultOptions ?? []).map((item, index) => ({
@@ -56,7 +56,7 @@ const Progress = function Progress<T extends ElementType = 'div'>(props: Progres
 
             return (
               <Component {...rest} {...renderOptions} {...item.props} key={item.id} style={style}>
-                <ProgressBar {...item.barProps} animated={item.animated} striped={item.striped} bg={item.bg}>
+                <ProgressBar {...item.barProps} animated={item.animated} bg={item.bg} striped={item.striped}>
                   {children}
                 </ProgressBar>
               </Component>
@@ -65,7 +65,7 @@ const Progress = function Progress<T extends ElementType = 'div'>(props: Progres
         </ProgressStacked>
       ) : (
         <Component {...rest} {...renderOptions}>
-          <ProgressBar {...barProps} animated={animated} striped={striped} now={now} bg={bg}>
+          <ProgressBar {...barProps} animated={animated} bg={bg} now={now} striped={striped}>
             {children}
           </ProgressBar>
         </Component>

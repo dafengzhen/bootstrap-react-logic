@@ -2,19 +2,19 @@ import { type ElementType, useMemo } from 'react';
 
 import type { LabelProps } from './types.ts';
 
-import { convertBsKeyToVar, findTruthyClass, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, findTruthyClass, stylex } from '../tools';
 
 const Label = function Label<T extends ElementType = 'label'>(props: LabelProps<T>) {
   const {
     as: Component = 'label' as ElementType,
-    formCheckLabel,
-    inputGroupText,
+    children,
+    className,
     colFormLabel,
     dropOldClass,
-    className,
-    variables,
-    children,
+    formCheckLabel,
+    inputGroupText,
     style,
+    variables,
     ...rest
   } = props;
 

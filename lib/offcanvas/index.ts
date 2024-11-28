@@ -3,10 +3,10 @@ import Offcanvas from './offcanvas.tsx';
 // types
 export type {
   OffcanvasBackdropProps,
-  OffcanvasHeaderProps,
-  OffcanvasTitleProps,
   OffcanvasBodyProps,
+  OffcanvasHeaderProps,
   OffcanvasProps,
+  OffcanvasTitleProps,
 } from './types.ts';
 
 // hooks

@@ -2,20 +2,20 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavLinkProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
-const NavLink = function NavLink<T extends ElementType = 'button' | 'a'>(props: NavLinkProps<T>) {
+const NavLink = function NavLink<T extends ElementType = 'a' | 'button'>(props: NavLinkProps<T>) {
   const {
-    as: Component = 'a' as ElementType,
-    'aria-disabled': ariaDisabled,
-    'aria-current': ariaCurrent,
-    dropOldClass,
-    className,
-    variables,
-    disabled,
     active,
+    'aria-current': ariaCurrent,
+    'aria-disabled': ariaDisabled,
+    as: Component = 'a' as ElementType,
+    className,
+    disabled,
+    dropOldClass,
     style,
     type,
+    variables,
     ...rest
   } = props;
 
@@ -29,12 +29,12 @@ const NavLink = function NavLink<T extends ElementType = 'button' | 'a'>(props: 
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
-      'aria-disabled': ariaDisabled ?? (disabled ? 'true' : undefined),
-      disabled: disabled && Component === 'button' ? true : undefined,
-      type: type ?? (Component === 'button' ? 'button' : undefined),
       'aria-current': ariaCurrent ?? (active ? 'page' : undefined),
+      'aria-disabled': ariaDisabled ?? (disabled ? 'true' : undefined),
       className: finalClass,
+      disabled: disabled && Component === 'button' ? true : undefined,
       style: finalStyle,
+      type: type ?? (Component === 'button' ? 'button' : undefined),
     };
   }, [Component, active, ariaCurrent, ariaDisabled, className, disabled, dropOldClass, style, type, variables]);
 

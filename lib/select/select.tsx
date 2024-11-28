@@ -2,21 +2,21 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SelectProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 import SelectOption from './select-option.tsx';
 
 const Select = function Select<T extends ElementType = 'select'>(props: SelectProps<T>) {
   const {
     as: Component = 'select' as ElementType,
-    dropOldClass,
-    nativeSize,
-    className,
-    isInvalid,
-    variables,
     children,
+    className,
+    dropOldClass,
+    isInvalid,
     isValid,
-    style,
+    nativeSize,
     size,
+    style,
+    variables,
     ...rest
   } = props;
 
@@ -32,8 +32,8 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
 
     return {
       className: finalClass,
-      style: finalStyle,
       size: nativeSize,
+      style: finalStyle,
     };
   }, [className, dropOldClass, isInvalid, isValid, nativeSize, size, style, variables]);
 

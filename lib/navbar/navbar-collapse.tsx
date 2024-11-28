@@ -2,10 +2,10 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarCollapseProps } from './types.ts';
 
-import { convertBsKeyToVar, clsxUnique, stylex } from '../tools';
+import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
 
 const NavbarCollapse = function NavbarCollapse<T extends ElementType = 'div'>(props: NavbarCollapseProps<T>) {
-  const { as: Component = 'div' as ElementType, dropOldClass, className, variables, style, ...rest } = props;
+  const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = clsxUnique(!dropOldClass && 'collapse navbar-collapse', className);

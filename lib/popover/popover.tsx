@@ -1,54 +1,54 @@
 import {
-  type ShiftOptions,
-  type FlipOptions,
-  type SizeOptions,
-  type Placement,
-  useFloating,
-  autoUpdate,
-  offset,
   arrow,
-  shift,
+  autoUpdate,
   flip,
+  type FlipOptions,
+  offset,
+  type Placement,
+  shift,
+  type ShiftOptions,
   size,
+  type SizeOptions,
+  useFloating,
 } from '@floating-ui/react';
-import { type ElementType, type HTMLProps, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { type ElementType, type HTMLProps, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import type { PopoverProps } from './types.ts';
 
-import { findTruthyClassOrDefault, convertBsKeyToVar, clsxUnique, mergeProps, isArray, stylex } from '../tools';
-import PopoverHeader from './popover-header.tsx';
+import { clsxUnique, convertBsKeyToVar, findTruthyClassOrDefault, isArray, mergeProps, stylex } from '../tools';
 import PopoverArrow from './popover-arrow.tsx';
 import PopoverBody from './popover-body.tsx';
+import PopoverHeader from './popover-header.tsx';
 
 const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverProps<T>) {
   const {
-    as: Component = 'div' as ElementType,
-    visible: visibleByDefault = false,
-    container: containerByDefault,
-    onChange: onChangeByDefault,
-    offset: offsetByDefault,
-    placement = 'end',
-    triggerWrapper,
-    dropOldClass,
-    fade = true,
-    headerProps,
-    triggerType,
     arrowProps,
+    as: Component = 'div' as ElementType,
+    body,
     bodyProps,
     className,
-    variables,
-    trigger,
+    container: containerByDefault,
+    dropOldClass,
+    fade = true,
     header,
+    headerProps,
+    offset: offsetByDefault,
+    onChange: onChangeByDefault,
+    placement = 'end',
     style,
-    body,
+    trigger,
+    triggerType,
+    triggerWrapper,
+    variables,
+    visible: visibleByDefault = false,
     ...rest
   } = props;
 
   const [visible, setVisible] = useState(false);
   const [show, setShow] = useState(false);
   const arrowElement = useRef<HTMLDivElement | null>(null);
-  const [container, setContainer] = useState<HTMLElement | undefined | null>(
+  const [container, setContainer] = useState<HTMLElement | null | undefined>(
     typeof containerByDefault !== 'string' ? containerByDefault : null,
   );
   const [mouseEnter, setMouseEnter] = useState(false);
@@ -83,6 +83,8 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
         [show],
       ),
     ],
+    onOpenChange: setShow,
+    open: show,
     placement: findTruthyClassOrDefault(
       [
         ['bottom', placement === 'bottom'],
@@ -93,8 +95,6 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
       'right',
     ) as Placement,
     whileElementsMounted: autoUpdate,
-    onOpenChange: setShow,
-    open: show,
   });
 
   const handleChange = useCallback(
@@ -111,9 +111,9 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
       fade && 'fade',
       show && 'show',
       placement && {
-        'bs-popover-start': placement === 'start' || placement === 'left',
-        'bs-popover-end': placement === 'end' || placement === 'right',
         'bs-popover-bottom': placement === 'bottom',
+        'bs-popover-end': placement === 'end' || placement === 'right',
+        'bs-popover-start': placement === 'start' || placement === 'left',
         'bs-popover-top': placement === 'top',
       },
       className,
@@ -184,11 +184,11 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
     const onMouseLeave = onMouseLeaveFn.current;
     const currentHoverContainerElement = hoverContainerElement.current;
 
-    const newTriggerTypes: { type: 'mouseenter' | 'mouseleave' | 'focus' | 'hover'; fn: () => void }[] = [];
+    const newTriggerTypes: { fn: () => void; type: 'focus' | 'hover' | 'mouseenter' | 'mouseleave' }[] = [];
     if (triggerTypes.includes('focus')) {
       newTriggerTypes.push({
-        type: 'focus',
         fn: onFocus,
+        type: 'focus',
       });
     }
 
@@ -203,12 +203,12 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
       });
     } else {
       newTriggerTypes.push({
-        type: 'mouseenter',
         fn: onMouseEnter,
+        type: 'mouseenter',
       });
       newTriggerTypes.push({
-        type: 'mouseleave',
         fn: onMouseLeave,
+        type: 'mouseleave',
       });
     }
 
@@ -228,14 +228,14 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
       document.body.addEventListener('click', onClick);
 
       if (currentElement) {
-        newTriggerTypes.forEach(({ type, fn }) => currentElement.addEventListener(type, fn));
+        newTriggerTypes.forEach(({ fn, type }) => currentElement.addEventListener(type, fn));
       }
 
       return () => {
         document.body.removeEventListener('click', onClick);
 
         if (currentElement) {
-          newTriggerTypes.forEach(({ type, fn }) => currentElement.removeEventListener(type, fn));
+          newTriggerTypes.forEach(({ fn, type }) => currentElement.removeEventListener(type, fn));
         }
       };
     }
@@ -245,7 +245,7 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
     <>
       {trigger &&
         (triggerWrapper ? (
-          <span ref={hoverContainerElement} className="d-inline-block" tabIndex={0}>
+          <span className="d-inline-block" ref={hoverContainerElement} tabIndex={0}>
             {trigger(refs.setReference, getReferenceProps)}
           </span>
         ) : (
@@ -256,8 +256,8 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
           <Component
             {...rest}
             {...renderOptions}
-            style={{ ...renderOptions.style, ...floatingStyles }}
             ref={refs.setFloating}
+            style={{ ...renderOptions.style, ...floatingStyles }}
           >
             <PopoverArrow
               {...mergeProps(arrowProps, {

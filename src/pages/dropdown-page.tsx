@@ -1,22 +1,22 @@
 import type { ButtonProps } from '@lib/button';
 
-import PropsIndicator from '@components/props-indicator.tsx';
-import OptionRow from '@components/option-row.tsx';
-import { useNavigation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Example from '@components/example.tsx';
-import { transformCodeObj } from '@src/tools';
 import About from '@components/about.tsx';
+import Example from '@components/example.tsx';
+import OptionRow from '@components/option-row.tsx';
+import PropsIndicator from '@components/props-indicator.tsx';
 import { Dropdown } from '@lib/dropdown';
+import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'react-router-dom';
 
-type Type = 'secondary' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
+type Type = 'danger' | 'info' | 'primary' | 'secondary' | 'success' | 'warning';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/dropdown/*.md', '../assets/codes/common/*.md'], {
+    eager: true,
     import: 'default',
     query: '?raw',
-    eager: true,
   }),
 );
 
@@ -37,294 +37,294 @@ export default function DropdownPage() {
 
   return (
     <div className="d-flex flex-column gap-3">
-      <Example t={tDropdownPage} state={state} hash="basic" inline>
+      <Example hash="basic" inline state={state} t={tDropdownPage}>
         <Dropdown
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
           ]}
+          toggle="Dropdown button"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dropdown button"
         />
 
         <Dropdown
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
           ]}
+          toggle="Dropdown button"
           toggleProps={
             {
-              variant: 'secondary',
-              href: '#',
               as: 'a',
+              href: '#',
+              variant: 'secondary',
             } as ButtonProps<'a'>
           }
-          toggle="Dropdown button"
         />
 
         <div className="d-inline-flex flex-wrap gap-2">
           {(['primary', 'secondary', 'success', 'info', 'warning', 'danger'] as Type[]).map((type) => {
             return (
               <Dropdown
+                btnGroup
+                key={type}
                 options={[
                   {
+                    href: '#',
                     item: 'Action',
-                    href: '#',
                   },
                   {
+                    href: '#',
                     item: 'Another action',
-                    href: '#',
                   },
                   {
-                    item: 'Something else here',
                     href: '#',
+                    item: 'Something else here',
                   },
                   {
                     divider: true,
                   },
                   {
-                    item: 'Separated link',
                     href: '#',
+                    item: 'Separated link',
                   },
                 ]}
+                toggle={capitalizeFirstLetter(type)}
                 toggleProps={{
                   variant: type,
                 }}
-                toggle={capitalizeFirstLetter(type)}
-                key={type}
-                btnGroup
               />
             );
           })}
         </div>
       </Example>
 
-      <Example hash="splitButton" t={tDropdownPage} state={state} inline>
+      <Example hash="splitButton" inline state={state} t={tDropdownPage}>
         <div className="d-flex flex-wrap gap-2">
           {(['primary', 'secondary', 'success', 'info', 'warning', 'danger'] as Type[]).map((type) => {
             return (
               <Dropdown
+                buttonProps={{
+                  variant: type,
+                }}
+                key={type}
                 options={[
                   {
+                    href: '#',
                     item: 'Action',
-                    href: '#',
                   },
                   {
+                    href: '#',
                     item: 'Another action',
-                    href: '#',
                   },
                   {
-                    item: 'Something else here',
                     href: '#',
+                    item: 'Something else here',
                   },
                   {
                     divider: true,
                   },
                   {
-                    item: 'Separated link',
                     href: '#',
+                    item: 'Separated link',
                   },
                 ]}
-                buttonProps={{
-                  variant: type,
-                }}
+                split
+                toggle={capitalizeFirstLetter(type)}
                 toggleProps={{
                   variant: type,
                 }}
-                toggle={capitalizeFirstLetter(type)}
-                key={type}
-                split
               />
             );
           })}
         </div>
       </Example>
 
-      <Example t={tDropdownPage} hash="sizing" state={state} inline>
+      <Example hash="sizing" inline state={state} t={tDropdownPage}>
         <div className="d-flex flex-wrap gap-2">
           <Dropdown
+            btnGroup
             options={[
               {
+                href: '#',
                 item: 'Action',
-                href: '#',
               },
               {
+                href: '#',
                 item: 'Another action',
-                href: '#',
               },
               {
-                item: 'Something else here',
                 href: '#',
+                item: 'Something else here',
               },
               {
                 divider: true,
               },
               {
-                item: 'Separated link',
                 href: '#',
+                item: 'Separated link',
               },
             ]}
-            toggleProps={{
-              variant: 'secondary',
-              className: 'btn-lg',
-            }}
             toggle="Large button"
-            btnGroup
+            toggleProps={{
+              className: 'btn-lg',
+              variant: 'secondary',
+            }}
           />
 
           <Dropdown
+            buttonProps={{
+              className: 'btn-lg',
+              variant: 'secondary',
+            }}
             options={[
               {
+                href: '#',
                 item: 'Action',
-                href: '#',
               },
               {
+                href: '#',
                 item: 'Another action',
-                href: '#',
               },
               {
-                item: 'Something else here',
                 href: '#',
+                item: 'Something else here',
               },
               {
                 divider: true,
               },
               {
-                item: 'Separated link',
                 href: '#',
+                item: 'Separated link',
               },
             ]}
-            buttonProps={{
-              variant: 'secondary',
-              className: 'btn-lg',
-            }}
-            toggleProps={{
-              variant: 'secondary',
-              className: 'btn-lg',
-            }}
-            toggle="Large split button"
             split
+            toggle="Large split button"
+            toggleProps={{
+              className: 'btn-lg',
+              variant: 'secondary',
+            }}
           />
         </div>
 
         <div className="d-flex flex-wrap gap-2">
           <Dropdown
+            btnGroup
             options={[
               {
+                href: '#',
                 item: 'Action',
-                href: '#',
               },
               {
+                href: '#',
                 item: 'Another action',
-                href: '#',
               },
               {
-                item: 'Something else here',
                 href: '#',
+                item: 'Something else here',
               },
               {
                 divider: true,
               },
               {
-                item: 'Separated link',
                 href: '#',
+                item: 'Separated link',
               },
             ]}
-            toggleProps={{
-              variant: 'secondary',
-              className: 'btn-sm',
-            }}
             toggle="Small button"
-            btnGroup
+            toggleProps={{
+              className: 'btn-sm',
+              variant: 'secondary',
+            }}
           />
 
           <Dropdown
+            buttonProps={{
+              className: 'btn-sm',
+              variant: 'secondary',
+            }}
             options={[
               {
+                href: '#',
                 item: 'Action',
-                href: '#',
               },
               {
+                href: '#',
                 item: 'Another action',
-                href: '#',
               },
               {
-                item: 'Something else here',
                 href: '#',
+                item: 'Something else here',
               },
               {
                 divider: true,
               },
               {
-                item: 'Separated link',
                 href: '#',
+                item: 'Separated link',
               },
             ]}
-            buttonProps={{
-              variant: 'secondary',
-              className: 'btn-sm',
-            }}
-            toggleProps={{
-              variant: 'secondary',
-              className: 'btn-sm',
-            }}
-            toggle="Small split button"
             split
+            toggle="Small split button"
+            toggleProps={{
+              className: 'btn-sm',
+              variant: 'secondary',
+            }}
           />
         </div>
       </Example>
 
-      <Example hash="darkDropdowns" t={tDropdownPage} state={state}>
+      <Example hash="darkDropdowns" state={state} t={tDropdownPage}>
         <Dropdown
+          data-bs-theme="dark"
           options={[
             {
-              item: 'Action',
               active: true,
               href: '#',
+              item: 'Action',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
+          toggle="Dropdown button"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dropdown button"
-          data-bs-theme="dark"
         />
 
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -333,12 +333,12 @@ export default function DropdownPage() {
               Navbar
             </a>
             <button
-              data-bs-target="#navbarNavDarkDropdown"
               aria-controls="navbarNavDarkDropdown"
+              aria-expanded="false"
               aria-label="Toggle navigation"
               className="navbar-toggler"
+              data-bs-target="#navbarNavDarkDropdown"
               data-bs-toggle="collapse"
-              aria-expanded="false"
               type="button"
             >
               <span className="navbar-toggler-icon"></span>
@@ -346,27 +346,27 @@ export default function DropdownPage() {
             <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
               <ul className="navbar-nav">
                 <Dropdown
+                  as="li"
+                  className="nav-item"
+                  data-bs-theme="dark"
                   options={[
                     {
+                      href: '#',
                       item: 'Action',
-                      href: '#',
                     },
                     {
+                      href: '#',
                       item: 'Another action',
-                      href: '#',
                     },
                     {
-                      item: 'Something else here',
                       href: '#',
+                      item: 'Something else here',
                     },
                   ]}
+                  toggle="Dropdown button"
                   toggleProps={{
                     variant: 'dark',
                   }}
-                  toggle="Dropdown button"
-                  className="nav-item"
-                  data-bs-theme="dark"
-                  as="li"
                 />
               </ul>
             </div>
@@ -374,280 +374,280 @@ export default function DropdownPage() {
         </nav>
       </Example>
 
-      <Example t={tDropdownPage} hash="centered" state={state}>
+      <Example hash="centered" state={state} t={tDropdownPage}>
         <Dropdown
-          options={[
-            {
-              item: 'Action',
-              href: '#',
-            },
-            {
-              item: 'Action two',
-              href: '#',
-            },
-            {
-              item: 'Action three',
-              href: '#',
-            },
-          ]}
-          toggleProps={{
-            variant: 'secondary',
-          }}
-          toggle="Centered dropdown"
           center
+          options={[
+            {
+              href: '#',
+              item: 'Action',
+            },
+            {
+              href: '#',
+              item: 'Action two',
+            },
+            {
+              href: '#',
+              item: 'Action three',
+            },
+          ]}
+          toggle="Centered dropdown"
+          toggleProps={{
+            variant: 'secondary',
+          }}
         />
       </Example>
 
-      <Example t={tDropdownPage} hash="dropup" state={state} row>
+      <Example hash="dropup" row state={state} t={tDropdownPage}>
         <Dropdown
+          dropup
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
-          toggleProps={{
-            variant: 'secondary',
-          }}
           toggle="Dropup"
-          dropup
+          toggleProps={{
+            variant: 'secondary',
+          }}
         />
 
         <Dropdown
+          buttonProps={{
+            variant: 'secondary',
+          }}
+          dropup
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
-          buttonProps={{
-            variant: 'secondary',
-          }}
-          toggleProps={{
-            variant: 'secondary',
-          }}
+          split
           toggle="Split dropup"
-          dropup
-          split
-        />
-      </Example>
-
-      <Example hash="dropupCentered" t={tDropdownPage} state={state}>
-        <Dropdown
-          options={[
-            {
-              item: 'Action',
-              href: '#',
-            },
-            {
-              item: 'Another action',
-              href: '#',
-            },
-            {
-              item: 'Something else here',
-              href: '#',
-            },
-            {
-              divider: true,
-            },
-            {
-              item: 'Separated link',
-              href: '#',
-            },
-          ]}
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Centered dropup"
+        />
+      </Example>
+
+      <Example hash="dropupCentered" state={state} t={tDropdownPage}>
+        <Dropdown
+          dropup
           dropupCenter
-          dropup
-        />
-      </Example>
-
-      <Example t={tDropdownPage} hash="dropend" state={state} row>
-        <Dropdown
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
+          toggle="Centered dropup"
           toggleProps={{
             variant: 'secondary',
           }}
+        />
+      </Example>
+
+      <Example hash="dropend" row state={state} t={tDropdownPage}>
+        <Dropdown
+          btnGroup
+          dropend
+          options={[
+            {
+              href: '#',
+              item: 'Action',
+            },
+            {
+              href: '#',
+              item: 'Another action',
+            },
+            {
+              href: '#',
+              item: 'Something else here',
+            },
+            {
+              divider: true,
+            },
+            {
+              href: '#',
+              item: 'Separated link',
+            },
+          ]}
           toggle="Dropend"
-          btnGroup
-          dropend
+          toggleProps={{
+            variant: 'secondary',
+          }}
         />
 
         <Dropdown
-          options={[
-            {
-              item: 'Action',
-              href: '#',
-            },
-            {
-              item: 'Another action',
-              href: '#',
-            },
-            {
-              item: 'Something else here',
-              href: '#',
-            },
-            {
-              divider: true,
-            },
-            {
-              item: 'Separated link',
-              href: '#',
-            },
-          ]}
+          btnGroup
           buttonProps={{
             variant: 'secondary',
           }}
-          toggleProps={{
-            variant: 'secondary',
-          }}
-          toggle="Split dropend"
-          btnGroup
           dropend
-          split
-        />
-      </Example>
-
-      <Example t={tDropdownPage} hash="dropstart" state={state} row>
-        <Dropdown
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
+          split
+          toggle="Split dropend"
           toggleProps={{
             variant: 'secondary',
           }}
+        />
+      </Example>
+
+      <Example hash="dropstart" row state={state} t={tDropdownPage}>
+        <Dropdown
+          btnGroup
+          dropstart
+          options={[
+            {
+              href: '#',
+              item: 'Action',
+            },
+            {
+              href: '#',
+              item: 'Another action',
+            },
+            {
+              href: '#',
+              item: 'Something else here',
+            },
+            {
+              divider: true,
+            },
+            {
+              href: '#',
+              item: 'Separated link',
+            },
+          ]}
+          strategy="fixed"
           toggle="Dropstart"
-          strategy="fixed"
-          dropstart
-          btnGroup
+          toggleProps={{
+            variant: 'secondary',
+          }}
         />
 
         <Dropdown
+          btnGroup
+          buttonProps={{
+            variant: 'secondary',
+          }}
+          dropstart
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
-          buttonProps={{
-            variant: 'secondary',
-          }}
+          split
+          strategy="fixed"
+          toggle="Split dropend"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Split dropend"
-          strategy="fixed"
-          dropstart
-          btnGroup
-          split
         />
       </Example>
 
-      <Example t={tDropdownPage} hash="menuItems" state={state} inline>
+      <Example hash="menuItems" inline state={state} t={tDropdownPage}>
         <Dropdown
           options={[
             {
+              as: 'button',
               item: 'Action',
-              as: 'button',
             },
             {
+              as: 'button',
               item: 'Another action',
-              as: 'button',
             },
             {
-              item: 'Something else here',
               as: 'button',
+              item: 'Something else here',
             },
           ]}
+          toggle="Dropdown"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dropdown"
         />
 
         <Dropdown
@@ -656,431 +656,431 @@ export default function DropdownPage() {
               itemText: 'Dropdown item text',
             },
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
           ]}
+          toggle="Dropdown item text"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dropdown item text"
         />
       </Example>
 
-      <Example t={tDropdownPage} hash="active" state={state} inline>
+      <Example hash="active" inline state={state} t={tDropdownPage}>
         <Dropdown
           options={[
             {
-              item: 'Regular link',
               href: '#',
+              item: 'Regular link',
             },
             {
-              item: 'Active link',
               active: true,
               href: '#',
+              item: 'Active link',
             },
             {
-              item: 'Another link',
               href: '#',
+              item: 'Another link',
             },
           ]}
+          toggle="Dropdown"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dropdown"
         />
       </Example>
 
-      <Example t={tDropdownPage} hash="disabled" state={state} inline>
+      <Example hash="disabled" inline state={state} t={tDropdownPage}>
         <Dropdown
           options={[
             {
-              item: 'Regular link',
               href: '#',
+              item: 'Regular link',
             },
             {
-              item: 'Disabled link',
               disabled: true,
               href: '#',
+              item: 'Disabled link',
             },
             {
-              item: 'Another link',
               href: '#',
+              item: 'Another link',
             },
           ]}
+          toggle="Dropdown"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dropdown"
         />
       </Example>
 
-      <Example hash="menuAlignment" t={tDropdownPage} state={state} inline>
+      <Example hash="menuAlignment" inline state={state} t={tDropdownPage}>
         <Dropdown
-          options={[
-            {
-              item: 'Action',
-              as: 'button',
-            },
-            {
-              item: 'Another action',
-              as: 'button',
-            },
-            {
-              item: 'Something else here',
-              as: 'button',
-            },
-          ]}
           menuProps={{
             className: 'dropdown-menu-end',
           }}
+          options={[
+            {
+              as: 'button',
+              item: 'Action',
+            },
+            {
+              as: 'button',
+              item: 'Another action',
+            },
+            {
+              as: 'button',
+              item: 'Something else here',
+            },
+          ]}
+          toggle="Right-aligned menu example"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Right-aligned menu example"
         />
       </Example>
 
-      <Example hash="responsiveAlignment" t={tDropdownPage} state={state} inline>
+      <Example hash="responsiveAlignment" inline state={state} t={tDropdownPage}>
         <Dropdown
-          options={[
-            {
-              item: 'Action',
-              as: 'button',
-            },
-            {
-              item: 'Another action',
-              as: 'button',
-            },
-            {
-              item: 'Something else here',
-              as: 'button',
-            },
-          ]}
+          btnGroup
           menuProps={{
             className: 'dropdown-menu-lg-end',
           }}
+          options={[
+            {
+              as: 'button',
+              item: 'Action',
+            },
+            {
+              as: 'button',
+              item: 'Another action',
+            },
+            {
+              as: 'button',
+              item: 'Something else here',
+            },
+          ]}
+          toggle="Left-aligned but right aligned when large screen"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Left-aligned but right aligned when large screen"
-          btnGroup
         />
 
         <Dropdown
-          options={[
-            {
-              item: 'Action',
-              as: 'button',
-            },
-            {
-              item: 'Another action',
-              as: 'button',
-            },
-            {
-              item: 'Something else here',
-              as: 'button',
-            },
-          ]}
+          btnGroup
           menuProps={{
             className: 'dropdown-menu-end dropdown-menu-lg-start',
           }}
+          options={[
+            {
+              as: 'button',
+              item: 'Action',
+            },
+            {
+              as: 'button',
+              item: 'Another action',
+            },
+            {
+              as: 'button',
+              item: 'Something else here',
+            },
+          ]}
+          toggle="Right-aligned but left aligned when large screen"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Right-aligned but left aligned when large screen"
-          btnGroup
         />
       </Example>
 
-      <Example hash="alignmentOptions" t={tDropdownPage} state={state}>
+      <Example hash="alignmentOptions" state={state} t={tDropdownPage}>
         <div className="d-flex gap-2">
           <Dropdown
+            btnGroup
             options={[
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
             ]}
+            toggle="Dropdown"
             toggleProps={{
               variant: 'secondary',
             }}
-            toggle="Dropdown"
-            btnGroup
           />
 
           <Dropdown
-            options={[
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-            ]}
+            btnGroup
             menuProps={{
               className: 'dropdown-menu-end',
             }}
+            options={[
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+            ]}
+            toggle="Right-aligned menu"
             toggleProps={{
               variant: 'secondary',
             }}
-            toggle="Right-aligned menu"
-            btnGroup
           />
 
           <Dropdown
-            options={[
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-            ]}
+            btnGroup
             menuProps={{
               className: 'dropdown-menu-lg-end',
             }}
+            options={[
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+            ]}
+            toggle="Left-aligned, right-aligned lg"
             toggleProps={{
               variant: 'secondary',
             }}
-            toggle="Left-aligned, right-aligned lg"
-            btnGroup
           />
         </div>
 
         <div className="d-flex gap-2">
           <Dropdown
-            options={[
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-            ]}
+            btnGroup
             menuProps={{
               className: 'dropdown-menu-end dropdown-menu-lg-start',
             }}
-            toggleProps={{
-              variant: 'secondary',
-            }}
+            options={[
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+            ]}
             toggle="Right-aligned, left-aligned lg"
-            btnGroup
-          />
-
-          <Dropdown
-            options={[
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-              {
-                item: 'Menu item',
-                href: '#',
-              },
-            ]}
             toggleProps={{
               variant: 'secondary',
             }}
-            toggle="Dropstart"
+          />
+
+          <Dropdown
+            btnGroup
             dropstart
-            btnGroup
-          />
-
-          <Dropdown
             options={[
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
             ]}
+            toggle="Dropstart"
             toggleProps={{
               variant: 'secondary',
             }}
-            toggle="Dropend"
+          />
+
+          <Dropdown
             btnGroup
             dropend
-          />
-
-          <Dropdown
             options={[
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
               {
-                item: 'Menu item',
                 href: '#',
+                item: 'Menu item',
               },
             ]}
+            toggle="Dropend"
             toggleProps={{
               variant: 'secondary',
             }}
-            toggle="Dropup"
+          />
+
+          <Dropdown
             btnGroup
             dropup
+            options={[
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+              {
+                href: '#',
+                item: 'Menu item',
+              },
+            ]}
+            toggle="Dropup"
+            toggleProps={{
+              variant: 'secondary',
+            }}
           />
         </div>
       </Example>
 
-      <Example t={tDropdownPage} hash="headers" state={state} inline>
+      <Example hash="headers" inline state={state} t={tDropdownPage}>
         <Dropdown
           options={[
             {
               header: 'Dropdown header',
             },
             {
-              item: 'Dropdown header',
               href: '#',
+              item: 'Dropdown header',
             },
             {
-              item: 'Another action',
               href: '#',
+              item: 'Another action',
             },
           ]}
+          toggle="Headers"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Headers"
         />
       </Example>
 
-      <Example t={tDropdownPage} hash="dividers" state={state} inline>
+      <Example hash="dividers" inline state={state} t={tDropdownPage}>
         <Dropdown
           options={[
             {
+              href: '#',
               item: 'Action',
-              href: '#',
             },
             {
+              href: '#',
               item: 'Another action',
-              href: '#',
             },
             {
-              item: 'Something else here',
               href: '#',
+              item: 'Something else here',
             },
             {
               divider: true,
             },
             {
-              item: 'Separated link',
               href: '#',
+              item: 'Separated link',
             },
           ]}
+          toggle="Dividers"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Dividers"
         />
       </Example>
 
-      <Example t={tDropdownPage} state={state} hash="text" inline>
+      <Example hash="text" inline state={state} t={tDropdownPage}>
         <Dropdown
+          customMenu
           menuProps={{
             className: 'p-4 text-body-secondary',
             style: { maxWidth: 200, width: 200 },
           }}
+          toggle="Text"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Text"
-          customMenu
         >
           <p>Some example text that's free-flowing within the dropdown menu.</p>
           <p className="mb-0">And this is more example text.</p>
         </Dropdown>
       </Example>
 
-      <Example t={tDropdownPage} state={state} hash="forms" inline>
+      <Example hash="forms" inline state={state} t={tDropdownPage}>
         <Dropdown
+          customMenu
           menuProps={{
             className: 'tw-w-[50vw]',
           }}
+          toggle="Forms"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Forms"
-          customMenu
         >
           <form className="px-4 py-3">
             <div className="mb-3">
-              <label htmlFor="exampleDropdownFormEmail1" className="form-label">
+              <label className="form-label" htmlFor="exampleDropdownFormEmail1">
                 Email address
               </label>
               <input
-                placeholder="email@example.com"
-                id="exampleDropdownFormEmail1"
                 className="form-control"
+                id="exampleDropdownFormEmail1"
+                placeholder="email@example.com"
                 type="email"
               />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="exampleDropdownFormPassword1" className="form-label">
+              <label className="form-label" htmlFor="exampleDropdownFormPassword1">
                 Password
               </label>
               <input
-                defaultValue="hiddenUsername"
                 autoComplete="username"
                 className="d-none"
+                defaultValue="hiddenUsername"
                 name="username"
                 type="text"
               />
               <input
-                id="exampleDropdownFormPassword1"
-                className="form-control"
                 autoComplete="password"
+                className="form-control"
+                id="exampleDropdownFormPassword1"
                 placeholder="Password"
                 type="password"
               />
@@ -1112,43 +1112,43 @@ export default function DropdownPage() {
         </Dropdown>
 
         <Dropdown
+          customMenu
           menuProps={{
             className: 'tw-w-[20vw] p-4',
           }}
+          toggle="Dropdown form"
           toggleProps={{
             variant: 'primary',
           }}
-          toggle="Dropdown form"
-          customMenu
         >
           <form>
             <div className="mb-3">
-              <label htmlFor="exampleDropdownFormEmail2" className="form-label">
+              <label className="form-label" htmlFor="exampleDropdownFormEmail2">
                 Email address
               </label>
               <input
-                placeholder="email@example.com"
-                id="exampleDropdownFormEmail2"
                 className="form-control"
+                id="exampleDropdownFormEmail2"
+                placeholder="email@example.com"
                 type="email"
               />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="exampleDropdownFormPassword2" className="form-label">
+              <label className="form-label" htmlFor="exampleDropdownFormPassword2">
                 Password
               </label>
               <input
-                defaultValue="hiddenUsername"
                 autoComplete="username"
                 className="d-none"
+                defaultValue="hiddenUsername"
                 name="username"
                 type="text"
               />
               <input
-                id="exampleDropdownFormPassword2"
-                className="form-control"
                 autoComplete="password"
+                className="form-control"
+                id="exampleDropdownFormPassword2"
                 placeholder="Password"
                 type="password"
               />
@@ -1170,123 +1170,123 @@ export default function DropdownPage() {
         </Dropdown>
       </Example>
 
-      <Example hash="dropdownOptions" t={tDropdownPage} state={state} inline>
+      <Example hash="dropdownOptions" inline state={state} t={tDropdownPage}>
         <Dropdown
-          options={[
-            {
-              item: 'Action',
-              href: '#',
-            },
-            {
-              item: 'Another action',
-              href: '#',
-            },
-            {
-              item: 'Something else here',
-              href: '#',
-            },
-          ]}
           offset={{
             crossAxis: 20,
             mainAxis: 10,
           }}
+          options={[
+            {
+              href: '#',
+              item: 'Action',
+            },
+            {
+              href: '#',
+              item: 'Another action',
+            },
+            {
+              href: '#',
+              item: 'Something else here',
+            },
+          ]}
+          toggle="Offset"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Offset"
         />
       </Example>
 
-      <Example hash="autoCloseBehavior" t={tDropdownPage} state={state} row>
+      <Example hash="autoCloseBehavior" row state={state} t={tDropdownPage}>
         <Dropdown
-          options={[
-            {
-              item: 'Menu item',
-              href: '#',
-            },
-            {
-              item: 'Menu item',
-              href: '#',
-            },
-            {
-              item: 'Menu item',
-              href: '#',
-            },
-          ]}
-          toggleProps={{
-            variant: 'secondary',
-          }}
-          toggle="Default dropdown"
           autoClose
-        />
-
-        <Dropdown
           options={[
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
           ]}
+          toggle="Default dropdown"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Clickable inside"
+        />
+
+        <Dropdown
           autoClose="inside"
-        />
-
-        <Dropdown
           options={[
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
           ]}
+          toggle="Clickable inside"
           toggleProps={{
             variant: 'secondary',
           }}
-          toggle="Manual close"
-          autoClose="outside"
         />
 
         <Dropdown
+          autoClose="outside"
           options={[
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
             {
-              item: 'Menu item',
               href: '#',
+              item: 'Menu item',
             },
           ]}
+          toggle="Manual close"
+          toggleProps={{
+            variant: 'secondary',
+          }}
+        />
+
+        <Dropdown
+          autoClose={false}
+          options={[
+            {
+              href: '#',
+              item: 'Menu item',
+            },
+            {
+              href: '#',
+              item: 'Menu item',
+            },
+            {
+              href: '#',
+              item: 'Menu item',
+            },
+          ]}
+          toggle="Manual close"
           toggleProps={{
             onClick: () => {
               setVisible(!visible);
             },
             variant: 'secondary',
           }}
-          toggle="Manual close"
-          autoClose={false}
           visible={visible}
         />
       </Example>
@@ -1294,104 +1294,108 @@ export default function DropdownPage() {
       <PropsIndicator />
 
       <Example
+        hash="dropdownComponentProps"
         items={[
           {
-            type: (
-              <div className="d-flex flex-column gap-1">
-                <OptionRow value={tDropdownComponentProps('dropdown.options.id')} label="id?: string | number" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.item')} label="item?: ReactNode" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.itemText')} label="itemText?: ReactNode" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.href')} label="href?: string" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.divider')} label="divider?: boolean" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.active')} label="active?: boolean" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.as')} label="as?: button | a" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.disabled')} label="disabled?: boolean" />
-                <OptionRow value={tDropdownComponentProps('dropdown.options.header')} label="header?: ReactNode" />
-              </div>
-            ),
-            desc: tDropdownComponentProps('dropdown.desc.options'),
             attr: 'options',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.options'),
+            type: (
+              <div className="d-flex flex-column gap-1">
+                <OptionRow label="id?: string | number" value={tDropdownComponentProps('dropdown.options.id')} />
+                <OptionRow label="item?: ReactNode" value={tDropdownComponentProps('dropdown.options.item')} />
+                <OptionRow label="itemText?: ReactNode" value={tDropdownComponentProps('dropdown.options.itemText')} />
+                <OptionRow label="href?: string" value={tDropdownComponentProps('dropdown.options.href')} />
+                <OptionRow label="divider?: boolean" value={tDropdownComponentProps('dropdown.options.divider')} />
+                <OptionRow label="active?: boolean" value={tDropdownComponentProps('dropdown.options.active')} />
+                <OptionRow label="as?: button | a" value={tDropdownComponentProps('dropdown.options.as')} />
+                <OptionRow label="disabled?: boolean" value={tDropdownComponentProps('dropdown.options.disabled')} />
+                <OptionRow label="header?: ReactNode" value={tDropdownComponentProps('dropdown.options.header')} />
+              </div>
+            ),
           },
           {
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-            desc: tDropdownComponentProps('dropdown.desc.toggle'),
             attr: 'toggle',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.toggle'),
+            type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ButtonProps&lt;button | a&gt;</span>,
-            desc: tDropdownComponentProps('dropdown.desc.toggleProps'),
             attr: 'toggleProps',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.toggleProps'),
+            type: <span className="badge text-bg-secondary">ButtonProps&lt;button | a&gt;</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">ButtonProps&lt;button | a&gt;</span>,
-            desc: tDropdownComponentProps('dropdown.desc.buttonProps'),
             attr: 'buttonProps',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.buttonProps'),
+            type: <span className="badge text-bg-secondary">ButtonProps&lt;button | a&gt;</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.split'),
             attr: 'split',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.split'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.btnGroup'),
             attr: 'btnGroup',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.btnGroup'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.center'),
             attr: 'center',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.center'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.dropup'),
             attr: 'dropup',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.dropup'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.dropupCenter'),
             attr: 'dropupCenter',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.dropupCenter'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.dropend'),
             attr: 'dropend',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.dropend'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.dropstart'),
             attr: 'dropstart',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.dropstart'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">fixed | absolute</span>,
-            desc: tDropdownComponentProps('dropdown.desc.strategy'),
-            default: 'absolute',
             attr: 'strategy',
+            default: 'absolute',
+            desc: tDropdownComponentProps('dropdown.desc.strategy'),
+            type: <span className="badge text-bg-secondary">fixed | absolute</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">DropdownMenuProps&lt;ul&gt;</span>,
-            desc: tDropdownComponentProps('dropdown.desc.menuProps'),
             attr: 'menuProps',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.menuProps'),
+            type: <span className="badge text-bg-secondary">DropdownMenuProps&lt;ul&gt;</span>,
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.customMenu'),
             attr: 'customMenu',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.customMenu'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
+            attr: 'offset',
+            default: '',
+            desc: tDropdownComponentProps('dropdown.desc.offset'),
             type: (
               <div className="d-flex gap-2">
                 <div>
@@ -1408,35 +1412,31 @@ export default function DropdownPage() {
                 </div>
               </div>
             ),
-            desc: tDropdownComponentProps('dropdown.desc.offset'),
-            attr: 'offset',
-            default: '',
           },
           {
+            attr: 'autoClose',
+            default: 'true',
+            desc: tDropdownComponentProps('dropdown.desc.autoClose'),
             type: (
               <div className="d-flex gap-2">
                 <span className="badge text-bg-secondary">boolean</span>
                 <span className="badge text-bg-secondary">inside | outside</span>
               </div>
             ),
-            desc: tDropdownComponentProps('dropdown.desc.autoClose'),
-            attr: 'autoClose',
-            default: 'true',
           },
           {
-            type: <span className="badge text-bg-secondary">boolean</span>,
-            desc: tDropdownComponentProps('dropdown.desc.visible'),
             attr: 'visible',
             default: '',
+            desc: tDropdownComponentProps('dropdown.desc.visible'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
           },
         ]}
-        hash="dropdownComponentProps"
-        t={tDropdownComponentProps}
-        state={state}
         props
+        state={state}
+        t={tDropdownComponentProps}
       />
 
-      <Example hash="commonComponentProps" state={state} props />
+      <Example hash="commonComponentProps" props state={state} />
 
       <About />
     </div>

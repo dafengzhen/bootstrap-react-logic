@@ -2,9 +2,9 @@ import Toast from './toast.tsx';
 
 // types
 export type {
+  ToastBodyProps,
   ToastContainerProps,
   ToastHeaderProps,
-  ToastBodyProps,
   ToastItemProps,
   ToastOption,
   ToastProps,
