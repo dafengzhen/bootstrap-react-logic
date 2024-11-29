@@ -6,7 +6,8 @@
       "alwaysOpen": "始终打开",
       "options": "选项",
       "onChange": "变化时触发",
-      "collapsing": "类 (.collapsing)"
+      "collapsing": "类 (.collapsing)",
+      "iOption": "选项"
     },
     "options": {
       "id": "标识符",

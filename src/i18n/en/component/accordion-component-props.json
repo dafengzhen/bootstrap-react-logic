@@ -6,7 +6,8 @@
       "alwaysOpen": "Always open",
       "options": "Options",
       "onChange": "On change",
-      "collapsing": "Class (.collapsing)"
+      "collapsing": "Class (.collapsing)",
+      "iOption": "Option"
     },
     "options": {
       "id": "ID",

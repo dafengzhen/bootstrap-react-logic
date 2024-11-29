@@ -1,12 +1,14 @@
 import About from '@components/about.tsx';
+import EventsIndicator from '@components/events-indicator.tsx';
 import Example from '@components/example.tsx';
 import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import TypesIndicator from '@components/types-indicator.tsx';
 import { Accordion } from '@lib/accordion';
 import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/accordion/*.md', '../assets/codes/common/*.md'], {
@@ -189,6 +191,53 @@ export default function AccordionPage() {
             default: '',
             desc: tAccordionComponentProps('accordion.desc.options'),
             type: (
+              <Link to="#accordionComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  IOption[]
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
+            ),
+          },
+          {
+            attr: 'collapsing',
+            default: 'true',
+            desc: tAccordionComponentProps('accordion.desc.collapsing'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
+        ]}
+        props
+        state={state}
+        t={tAccordionComponentProps}
+      />
+
+      <EventsIndicator />
+
+      <Example
+        events
+        hash="accordionComponentProps"
+        items={[
+          {
+            attr: 'onChange',
+            default: '',
+            desc: tAccordionComponentProps('accordion.desc.onChange'),
+            type: <span className="badge text-bg-secondary">(id: string | number, visible: boolean) =&gt; void</span>,
+          },
+        ]}
+        state={state}
+        t={tAccordionComponentProps}
+      />
+
+      <TypesIndicator />
+
+      <Example
+        hash="accordionComponentProps"
+        items={[
+          {
+            attr: 'IOption',
+            default: '',
+            desc: tAccordionComponentProps('accordion.desc.iOption'),
+            type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tAccordionComponentProps('accordion.options.id')} />
                 <OptionRow label="header?: string" value={tAccordionComponentProps('accordion.options.header')} />
@@ -201,22 +250,10 @@ export default function AccordionPage() {
               </div>
             ),
           },
-          {
-            attr: 'onChange',
-            default: '',
-            desc: tAccordionComponentProps('accordion.desc.onChange'),
-            type: <span className="badge text-bg-secondary">(id: string | number, visible: boolean) =&gt; void</span>,
-          },
-          {
-            attr: 'collapsing',
-            default: 'true',
-            desc: tAccordionComponentProps('accordion.desc.collapsing'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
-          },
         ]}
-        props
         state={state}
         t={tAccordionComponentProps}
+        types
       />
 
       <Example hash="commonComponentProps" props state={state} />
