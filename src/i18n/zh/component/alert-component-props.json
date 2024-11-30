@@ -9,7 +9,8 @@
       "fade": "类 (.fade)",
       "closeButton": "关闭按钮",
       "closeButtonProps": "关闭按钮属性",
-      "visible": "可见"
+      "visible": "可见",
+      "buttonProps": "按钮属性"
     }
   },
   "alertLink": {

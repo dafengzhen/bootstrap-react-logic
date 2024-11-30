@@ -9,7 +9,8 @@
       "fade": "Class (.fade)",
       "closeButton": "Close Button",
       "closeButtonProps": "Close Button Props",
-      "visible": "Visible"
+      "visible": "Visible",
+      "buttonProps": "Button Props"
     }
   },
   "alertLink": {

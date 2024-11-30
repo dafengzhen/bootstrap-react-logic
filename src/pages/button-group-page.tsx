@@ -221,27 +221,29 @@ export default function ButtonGroupPage() {
           <Button variant="primary">Button</Button>
         </ButtonGroup>
 
-        <ButtonGroup vertical>
-          <input
-            autoComplete="off"
-            className="btn-check"
-            defaultChecked
-            id="vbtn-radio1"
-            name="vbtn-radio"
-            type="radio"
-          />
-          <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
-            Radio 1
-          </label>
-          <input autoComplete="off" className="btn-check" id="vbtn-radio2" name="vbtn-radio" type="radio" />
-          <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
-            Radio 2
-          </label>
-          <input autoComplete="off" className="btn-check" id="vbtn-radio3" name="vbtn-radio" type="radio" />
-          <label className="btn btn-outline-danger" htmlFor="vbtn-radio3">
-            Radio 3
-          </label>
-        </ButtonGroup>
+        <div>
+          <ButtonGroup vertical>
+            <input
+              autoComplete="off"
+              className="btn-check"
+              defaultChecked
+              id="vbtn-radio1"
+              name="vbtn-radio"
+              type="radio"
+            />
+            <label className="btn btn-outline-danger" htmlFor="vbtn-radio1">
+              Radio 1
+            </label>
+            <input autoComplete="off" className="btn-check" id="vbtn-radio2" name="vbtn-radio" type="radio" />
+            <label className="btn btn-outline-danger" htmlFor="vbtn-radio2">
+              Radio 2
+            </label>
+            <input autoComplete="off" className="btn-check" id="vbtn-radio3" name="vbtn-radio" type="radio" />
+            <label className="btn btn-outline-danger" htmlFor="vbtn-radio3">
+              Radio 3
+            </label>
+          </ButtonGroup>
+        </div>
       </Example>
 
       <Example hash="example" overflowXAuto row state={state} t={tButtonGroupPage} textNowrap wrap>

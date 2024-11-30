@@ -1,6 +1,8 @@
 import About from '@components/about.tsx';
+import EventsIndicator from '@components/events-indicator.tsx';
 import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import TypesIndicator from '@components/types-indicator.tsx';
 import { Alert } from '@lib/alert';
 import AlertHeading from '@lib/alert/alert-heading.tsx';
 import AlertLink from '@lib/alert/alert-link.tsx';
@@ -8,7 +10,7 @@ import { Button } from '@lib/button';
 import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/alert/*.md', '../assets/codes/common/*.md'], {
@@ -214,22 +216,13 @@ export default function AlertPage() {
             default: '',
             desc: tAlertComponentProps('alert.desc.variant'),
             type: (
-              <div className="d-flex flex-column">
-                {['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'].map((item) => {
-                  return (
-                    <div key={item}>
-                      <span className="badge text-bg-secondary">{item}</span>
-                    </div>
-                  );
-                })}
-              </div>
+              <Link to="#alertComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  Variant
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
             ),
-          },
-          {
-            attr: 'onVisibleChange',
-            default: '',
-            desc: tAlertComponentProps('alert.desc.onVisibleChange'),
-            type: <span className="badge text-bg-secondary">{'onVisibleChange: (visible: boolean) => void'}</span>,
           },
           {
             attr: 'clickToClose',
@@ -259,7 +252,14 @@ export default function AlertPage() {
             attr: 'closeButtonProps',
             default: '',
             desc: tAlertComponentProps('alert.desc.closeButtonProps'),
-            type: <span className="badge text-bg-secondary">ButtonProps</span>,
+            type: (
+              <Link to="#alertComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  ButtonProps
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
+            ),
           },
           {
             attr: 'visible',
@@ -301,6 +301,76 @@ export default function AlertPage() {
         props
         state={state}
         t={tAlertComponentProps}
+      />
+
+      <EventsIndicator />
+
+      <Example
+        events
+        hash="alertComponentProps"
+        items={[
+          {
+            attr: 'onVisibleChange',
+            default: '',
+            desc: tAlertComponentProps('alert.desc.onVisibleChange'),
+            type: <span className="badge text-bg-secondary">{'onVisibleChange: (visible: boolean) => void'}</span>,
+          },
+        ]}
+        state={state}
+        t={tAlertComponentProps}
+      />
+
+      <TypesIndicator />
+
+      <Example
+        hash="alertComponentProps"
+        items={[
+          {
+            attr: 'Variant',
+            default: '',
+            desc: tAlertComponentProps('alert.desc.variant'),
+            type: (
+              <div className="row row-cols-auto g-1">
+                <div className="col">
+                  <span className="badge text-bg-secondary">secondary</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">primary</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">success</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">warning</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">danger</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">light</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">dark</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">info</span>
+                </div>
+                <div className="col">
+                  <span className="badge text-bg-secondary">link</span>
+                </div>
+              </div>
+            ),
+          },
+          {
+            attr: 'ButtonProps',
+            default: '',
+            desc: tAlertComponentProps('alert.desc.buttonProps'),
+            type: <span className="badge text-bg-secondary">{'{ className: string, style: CSSProperties }'}</span>,
+          },
+        ]}
+        state={state}
+        t={tAlertComponentProps}
+        types
       />
 
       <Example hash="commonComponentProps" props state={state} />
