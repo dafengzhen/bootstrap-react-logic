@@ -10,7 +10,8 @@
       "onChange": "On change",
       "ride": "Ride",
       "pause": "Pause",
-      "touch": "Touch"
+      "touch": "Touch",
+      "iOption": "IOption"
     },
     "options": {
       "id": "ID",

@@ -1,13 +1,15 @@
 import About from '@components/about.tsx';
+import EventsIndicator from '@components/events-indicator.tsx';
 import Example from '@components/example.tsx';
 import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import TypesIndicator from '@components/types-indicator.tsx';
 import { Carousel } from '@lib/carousel';
 import { transformCodeObj } from '@src/tools';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/carousel/*.md', '../assets/codes/common/*.md'], {
@@ -331,13 +333,12 @@ export default function CarouselPage() {
             default: '',
             desc: tCarouselComponentProps('carousel.desc.options'),
             type: (
-              <div className="d-flex flex-column gap-1">
-                <OptionRow label="id?: string | number" value={tCarouselComponentProps('carousel.options.id')} />
-                <OptionRow label="item?: ReactNode" value={tCarouselComponentProps('carousel.options.item')} />
-                <OptionRow label="caption?: ReactNode" value={tCarouselComponentProps('carousel.options.caption')} />
-                <OptionRow label="active?: boolean" value={tCarouselComponentProps('carousel.options.active')} />
-                <OptionRow label="interval?: number" value={tCarouselComponentProps('carousel.options.interval')} />
-              </div>
+              <Link to="#carouselComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  IOption[]
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
             ),
           },
           {
@@ -351,26 +352,6 @@ export default function CarouselPage() {
             default: '',
             desc: tCarouselComponentProps('carousel.desc.indicators'),
             type: <span className="badge text-bg-secondary">boolean</span>,
-          },
-          {
-            attr: 'onChange',
-            default: '',
-            desc: tCarouselComponentProps('carousel.desc.onChange'),
-            type: (
-              <div className="d-flex flex-column">
-                <div>
-                  <span className="badge text-bg-secondary">@Param id : string | number;</span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">
-                    @Param type : 'prev' | 'next' | 'nextIndicator' | 'prevIndicator'
-                  </span>
-                </div>
-                <div>
-                  <span className="badge text-bg-secondary">(id, type) =&gt; void</span>
-                </div>
-              </div>
-            ),
           },
           {
             attr: 'ride',
@@ -394,6 +375,48 @@ export default function CarouselPage() {
         props
         state={state}
         t={tCarouselComponentProps}
+      />
+
+      <EventsIndicator />
+
+      <Example
+        events
+        hash="carouselComponentProps"
+        items={[
+          {
+            attr: 'onChange',
+            default: '',
+            desc: tCarouselComponentProps('carousel.desc.onChange'),
+            type: <span className="badge text-bg-secondary">{'(id, type) => void'}</span>,
+          },
+        ]}
+        state={state}
+        t={tCarouselComponentProps}
+      />
+
+      <TypesIndicator />
+
+      <Example
+        hash="carouselComponentProps"
+        items={[
+          {
+            attr: 'IOption',
+            default: '',
+            desc: tCarouselComponentProps('carousel.desc.iOption'),
+            type: (
+              <div className="d-flex flex-column gap-1">
+                <OptionRow label="id?: string | number" value={tCarouselComponentProps('carousel.options.id')} />
+                <OptionRow label="item?: ReactNode" value={tCarouselComponentProps('carousel.options.item')} />
+                <OptionRow label="caption?: ReactNode" value={tCarouselComponentProps('carousel.options.caption')} />
+                <OptionRow label="active?: boolean" value={tCarouselComponentProps('carousel.options.active')} />
+                <OptionRow label="interval?: number" value={tCarouselComponentProps('carousel.options.interval')} />
+              </div>
+            ),
+          },
+        ]}
+        state={state}
+        t={tCarouselComponentProps}
+        types
       />
 
       <Example hash="commonComponentProps" props state={state} />

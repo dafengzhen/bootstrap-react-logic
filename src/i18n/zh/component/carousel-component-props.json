@@ -10,7 +10,8 @@
       "onChange": "变化时触发",
       "ride": "轮播方式",
       "pause": "暂停",
-      "touch": "触摸"
+      "touch": "触摸",
+      "iOption": "选项"
     },
     "options": {
       "id": "标识符",
