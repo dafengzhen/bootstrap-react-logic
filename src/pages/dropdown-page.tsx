@@ -1397,17 +1397,13 @@ export default function DropdownPage() {
             default: '',
             desc: tDropdownComponentProps('dropdown.desc.offset'),
             type: (
-              <div className="d-flex gap-2">
+              <div className="d-flex flex-column">
                 <div>
                   <span className="badge text-bg-secondary">number</span>
                 </div>
                 <div>
                   <span className="badge text-bg-secondary">
-                    <pre className="mb-0 text-start p-1">{`{
-  mainAxis?: number
-  crossAxis?: number
-  alignmentAxis?: number | null
-}`}</pre>
+                    {`{mainAxis?: number, crossAxis?: number, alignmentAxis?: number}`}
                   </span>
                 </div>
               </div>

@@ -219,7 +219,7 @@ export default function CheckboxPage() {
             default: '',
             desc: tCheckboxComponentProps('checkbox.desc.contentClasses'),
             type: (
-              <div className="d-flex flex-column gap-2">
+              <div className="d-flex flex-column">
                 <div>
                   <span className="badge text-bg-secondary">Key : container | component | label</span>
                 </div>
