@@ -137,12 +137,6 @@ export default function BadgePage() {
         hash="badgeComponentProps"
         items={[
           {
-            attr: 'as',
-            default: 'span',
-            desc: tBadgeComponentProps('badge.desc.as'),
-            type: <span className="badge text-bg-secondary">span</span>,
-          },
-          {
             attr: 'variant',
             default: '',
             desc: tBadgeComponentProps('badge.desc.variant'),

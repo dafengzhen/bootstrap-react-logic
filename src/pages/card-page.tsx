@@ -1485,12 +1485,6 @@ export default function CardPage() {
         hash="cardImgComponentProps"
         items={[
           {
-            attr: 'as',
-            default: 'img',
-            desc: tCardComponentProps('cardImg.desc.as'),
-            type: <span className="badge text-bg-secondary">img | div</span>,
-          },
-          {
             attr: 'top',
             default: '',
             desc: tCardComponentProps('cardImg.desc.top'),
@@ -1548,10 +1542,10 @@ export default function CardPage() {
         hash="cardLinkComponentProps"
         items={[
           {
-            attr: 'as',
-            default: 'a',
-            desc: tCardComponentProps('cardLink.desc.as'),
-            type: <span className="badge text-bg-secondary">a</span>,
+            attr: '-',
+            default: '-',
+            desc: '-',
+            type: '-',
           },
         ]}
         props

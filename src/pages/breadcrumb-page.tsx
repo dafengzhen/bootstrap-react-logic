@@ -148,7 +148,7 @@ export default function BreadcrumbPage() {
             attr: 'onClick',
             default: '',
             desc: tBreadcrumbComponentProps('breadcrumb.desc.onClick'),
-            type: <span className="badge text-bg-secondary">{'onClick?: (id: number | string) => void'}</span>,
+            type: <span className="badge text-bg-secondary">{'onClick: (id: number | string) => void'}</span>,
           },
         ]}
         state={state}
