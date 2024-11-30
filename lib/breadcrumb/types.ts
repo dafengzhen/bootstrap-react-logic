@@ -1,4 +1,4 @@
-import type { ElementType, MouseEvent, ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 
 import type {
   BaseProps,
@@ -37,7 +37,7 @@ type Props<T extends ElementType> = BaseProps<T, BreadcrumbVariablesType> & {
   /**
    * onClick.
    */
-  onClick?: (id: number | string, event: MouseEvent<HTMLLIElement>) => void;
+  onClick?: (id: number | string) => void;
 
   /**
    * options.

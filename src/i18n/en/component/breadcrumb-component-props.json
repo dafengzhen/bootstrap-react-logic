@@ -3,7 +3,8 @@
     "name": "Breadcrumb",
     "desc": {
       "options": "Options",
-      "onClick": "On click"
+      "onClick": "On click",
+      "iOption": "IOption"
     },
     "options": {
       "id": "ID",

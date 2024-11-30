@@ -3,7 +3,8 @@
     "name": "Breadcrumb",
     "desc": {
       "options": "选项",
-      "onClick": "点击时"
+      "onClick": "点击时",
+      "iOption": "选项"
     },
     "options": {
       "id": "标识符",

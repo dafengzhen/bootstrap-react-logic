@@ -1,12 +1,14 @@
 import About from '@components/about.tsx';
+import EventsIndicator from '@components/events-indicator.tsx';
 import Example from '@components/example.tsx';
 import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
+import TypesIndicator from '@components/types-indicator.tsx';
 import { Breadcrumb } from '@lib/breadcrumb';
 import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 
 const codes = transformCodeObj(
   import.meta.glob(['../assets/codes/breadcrumb/*.md', '../assets/codes/common/*.md'], {
@@ -122,6 +124,47 @@ export default function BreadcrumbPage() {
             default: '',
             desc: tBreadcrumbComponentProps('breadcrumb.desc.options'),
             type: (
+              <Link to="#breadcrumbComponentTypes">
+                <span className="badge text-bg-secondary d-inline">
+                  IOption[]
+                  <i className="bi bi-link ms-1"></i>
+                </span>
+              </Link>
+            ),
+          },
+        ]}
+        props
+        state={state}
+        t={tBreadcrumbComponentProps}
+      />
+
+      <EventsIndicator />
+
+      <Example
+        events
+        hash="breadcrumbComponentProps"
+        items={[
+          {
+            attr: 'onClick',
+            default: '',
+            desc: tBreadcrumbComponentProps('breadcrumb.desc.onClick'),
+            type: <span className="badge text-bg-secondary">{'onClick?: (id: number | string) => void'}</span>,
+          },
+        ]}
+        state={state}
+        t={tBreadcrumbComponentProps}
+      />
+
+      <TypesIndicator />
+
+      <Example
+        hash="breadcrumbComponentProps"
+        items={[
+          {
+            attr: 'IOption',
+            default: '',
+            desc: tBreadcrumbComponentProps('breadcrumb.desc.iOption'),
+            type: (
               <div className="d-flex flex-column gap-1">
                 <OptionRow label="id?: string | number" value={tBreadcrumbComponentProps('breadcrumb.options.id')} />
                 <OptionRow label="title?: ReactNode" value={tBreadcrumbComponentProps('breadcrumb.options.title')} />
@@ -129,18 +172,10 @@ export default function BreadcrumbPage() {
               </div>
             ),
           },
-          {
-            attr: 'onClick',
-            default: '',
-            desc: tBreadcrumbComponentProps('breadcrumb.desc.onClick'),
-            type: (
-              <span className="badge text-bg-secondary">(id: string | number, event: HTMLLIElement) =&gt; void</span>
-            ),
-          },
         ]}
-        props
         state={state}
         t={tBreadcrumbComponentProps}
+        types
       />
 
       <Example hash="commonComponentProps" props state={state} />
