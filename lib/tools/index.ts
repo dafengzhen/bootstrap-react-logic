@@ -15,7 +15,15 @@ export type {
 
 export { RoundedClassEnum } from './enums';
 
-export { BiChevronDoubleLeft, BiChevronDoubleRight, BiThreeDots } from './icons.tsx';
+export {
+  BiChevronDoubleLeft,
+  BiChevronDoubleRight,
+  BiChevronDown,
+  BiChevronLeft,
+  BiChevronRight,
+  BiChevronUp,
+  BiThreeDots,
+} from './icons.tsx';
 
 export type { ReactRef } from './refs';
 
@@ -24,9 +32,8 @@ export {
   camelToKebab,
   capitalizeFirstLetter,
   checkObjectProperties,
-  clsxStyle,
-  clsxUnique,
-  clsxWithOptions,
+  classx,
+  classxWithOptions,
   convertBsKeyToVar,
   deepMerge,
   filterAndTransformProperties,
@@ -34,6 +41,7 @@ export {
   filterTransformAndExcludeProperties,
   findTruthyClass,
   findTruthyClassOrDefault,
+  generateNodeMap,
   generatePagination,
   generateRandomId,
   getLoopIndexDirection,
@@ -60,6 +68,7 @@ export {
   toCamelCase,
   toKebabCase,
   toPascalCase,
+  type TreeNodeBase,
 } from './tools';
 
 export type {
@@ -177,5 +186,7 @@ export type {
   TooltipArrowVariablesType,
   TooltipInnerVariablesType,
   TooltipVariablesType,
+  TreeNodeVariablesType,
+  TreeVariablesType,
   VariantType,
 } from './types.ts';

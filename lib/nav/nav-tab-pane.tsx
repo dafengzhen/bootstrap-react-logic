@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { NavTabPaneProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const NavTabPane = function NavTabPane<T extends ElementType = 'div'>(props: NavTabPaneProps<T>) {
   const {
@@ -21,7 +21,7 @@ const NavTabPane = function NavTabPane<T extends ElementType = 'div'>(props: Nav
   const element = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'tab-pane',
       fade && 'fade',
       active && 'active',

@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PaginationItemProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const PaginationItem = function PaginationItem<T extends ElementType = 'li'>(props: PaginationItemProps<T>) {
   const {
@@ -17,7 +17,7 @@ const PaginationItem = function PaginationItem<T extends ElementType = 'li'>(pro
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'page-item', disabled && 'disabled', active && 'active', className);
+    const finalClass = classx(!dropOldClass && 'page-item', disabled && 'disabled', active && 'active', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

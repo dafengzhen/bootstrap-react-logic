@@ -1120,6 +1120,10 @@ type TooltipVariablesType = {
   tooltipPaddingY?: string;
 };
 
+type TreeNodeVariablesType = TreeVariablesType;
+
+type TreeVariablesType = object;
+
 type VariantType = {
   danger?: string;
   dark?: string;
@@ -1247,5 +1251,7 @@ export type {
   TooltipArrowVariablesType,
   TooltipInnerVariablesType,
   TooltipVariablesType,
+  TreeNodeVariablesType,
+  TreeVariablesType,
   VariantType,
 };

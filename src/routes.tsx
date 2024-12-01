@@ -32,6 +32,7 @@ import SpinnerPage from '@pages/spinner-page.tsx';
 import TablePage from '@pages/table-page.tsx';
 import ToastPage from '@pages/toast-page.tsx';
 import TooltipPage from '@pages/tooltip-page.tsx';
+import TreePage from '@pages/tree-page.tsx';
 import App from '@src/App.tsx';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -71,6 +72,7 @@ export enum MenuEnum {
   Table = '/pages/table',
   Toast = '/pages/toast',
   Tooltip = '/pages/tooltip',
+  Tree = '/pages/tree',
 }
 
 /**
@@ -210,6 +212,10 @@ const router = createBrowserRouter(
             {
               element: <TablePage />,
               path: 'pages/table',
+            },
+            {
+              element: <TreePage />,
+              path: 'pages/tree',
             },
           ],
           errorElement: <ErrorPage />,

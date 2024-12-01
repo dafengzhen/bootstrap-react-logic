@@ -2,7 +2,7 @@ import { type ElementType, useCallback, useMemo, useState } from 'react';
 
 import type { BreadcrumbOption, BreadcrumbProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import BreadcrumbBasic from './breadcrumb-basic.tsx';
 import BreadcrumbItem from './breadcrumb-item.tsx';
 
@@ -31,7 +31,7 @@ const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: Bre
   const [options] = useState<IOption[]>(generateInitialOptions(defaultOptions));
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', className);
+    const finalClass = classx(!dropOldClass && '', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CardProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import CardBody from './card-body.tsx';
 import CardFooter from './card-footer.tsx';
 import CardHeader from './card-header.tsx';
@@ -16,7 +16,7 @@ const Card = function Card<T extends ElementType = 'div'>(props: CardProps<T>) {
   const { as: Component = 'div' as ElementType, cardBody, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'card', cardBody && '.card-body', className);
+    const finalClass = classx(!dropOldClass && 'card', cardBody && '.card-body', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

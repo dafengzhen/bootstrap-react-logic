@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PlaceholderProps } from './types.ts';
 
-import { clsxUnique, clsxWithOptions, convertBsKeyToVar, stylex } from '../tools';
+import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(props: PlaceholderProps<T>) {
   const {
@@ -20,7 +20,7 @@ const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(p
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'placeholder',
       col && `col-${col}`,
       bg && `bg-${bg}`,
@@ -38,7 +38,7 @@ const Placeholder = function Placeholder<T extends ElementType = 'a' | 'span'>(p
   return (
     <>
       {animation ? (
-        <span className={clsxWithOptions(null, animation && `placeholder-${animation}`)}>
+        <span className={classxWithOptions(null, animation && `placeholder-${animation}`)}>
           <Component {...rest} {...renderOptions}>
             {children}
           </Component>

@@ -30,6 +30,17 @@ type MaybeFunction<T> = (() => T) | T;
 type MergeFn = <T, U>(obj1: T, obj2: U, shouldAssign?: (path: string, value1: any, value2: any) => boolean) => T & U;
 
 /**
+ * Represents a base tree node structure.
+ *
+ * @template T - The type of data associated with the node (defaults to object).
+ */
+type TreeNodeBase<T extends object = object> = T & {
+  children?: TreeNodeBase<T>[];
+  id: number | string;
+  metadata?: object;
+};
+
+/**
  * Checks if a value is a plain object.
  *
  * A plain object is defined as an object created by the Object constructor
@@ -486,7 +497,7 @@ const isDefined = <T>(value: T, checkEmptyString: boolean = false): value is Exc
  * @param {ClassValue[]} inputs - Class values such as strings, arrays, or objects.
  * @returns {string | undefined} - A space-separated string of unique class names, or `undefined` if no valid class names.
  */
-const clsxUnique = (...inputs: ClassValue[]): string | undefined => {
+const classx = (...inputs: ClassValue[]): string | undefined => {
   const classNames = clsx(...inputs);
   if (!classNames) {
     return;
@@ -502,7 +513,7 @@ const clsxUnique = (...inputs: ClassValue[]): string | undefined => {
  * A utility function that wraps the `clsx` function to process class names,
  * and ensures the resulting class names are unique or not based on the provided options.
  *
- * @param {Object | null | undefined} [options] - Optional configuration options for class name processing.
+ * @param {Object | null} [options] - Optional configuration options for class name processing.
  * @param {boolean} [options.dedupe=false] - If true, duplicate class names will be removed. Defaults to false.
  * @param {ClassValue[]} inputs - An array of class values that can include strings,
  * arrays, objects, or any valid input that `clsx` accepts.
@@ -510,12 +521,9 @@ const clsxUnique = (...inputs: ClassValue[]): string | undefined => {
  * @returns {string | undefined} - A string of class names separated by a space, with duplicates removed
  *   if `dedupe` is true, or `undefined` if no valid class names are provided.
  */
-const clsxWithOptions = (
-  options?: null | undefined | { dedupe?: boolean },
-  ...inputs: ClassValue[]
-): string | undefined => {
+const classxWithOptions = (options?: null | { dedupe?: boolean }, ...inputs: ClassValue[]): string | undefined => {
   const dedupe = options?.dedupe ?? false;
-  return dedupe ? clsxUnique(...inputs) : clsx(...inputs) || undefined;
+  return dedupe ? classx(...inputs) : clsx(...inputs) || undefined;
 };
 
 /**
@@ -876,83 +884,6 @@ const stylex = (
 };
 
 /**
- * Conditionally applies styles based on a given set of conditions and optional transformation logic.
- *
- * @param {Record<string, any>} [style={}] - An optional object where the keys represent style properties and the values represent style values.
- * Defaults to an empty object if not provided.
- * @param {Record<string, boolean | undefined> | boolean} [conditions] - An optional object mapping style property keys to booleans
- * indicating whether they should be included. If a boolean is provided, `true` will include all keys, while `false` excludes all.
- * @param {(value: any, key: string, style: Record<string, any>) => { include?: boolean; transformedKey: string } | string | boolean | undefined} [transformer] - An optional
- * function that allows for custom logic to transform or filter style keys. The function should return either:
- *   - `true`, `undefined` or an object with `include: true` to include the style.
- *   - `false` or an object with `include: false` to exclude the style.
- *   - A `string`, which will be treated as a new key for the style.
- *   - An object with `transformedKey` to rename the key and an optional `include` flag to determine whether to include it.
- *
- * @returns {Record<string, any>} - A new object containing the filtered and/or transformed styles.
- *
- * @example
- * const style = { color: 'red', fontSize: '12px' };
- * const conditions = { color: true, fontSize: false };
- * const transformedStyles = clsxStyle(style, conditions);
- * // Result: { color: 'red' }
- *
- * @example
- * const style = { color: 'blue', fontSize: '16px' };
- * const transformer = (value, key, style) => key === 'color' ? 'textColor' : undefined;
- * const transformedStyles = clsxStyle(style, true, transformer);
- * // Result: { textColor: 'blue' }
- */
-const clsxStyle = (
-  style: Record<string, any> = {},
-  conditions?: boolean | Record<string, boolean | undefined>,
-  transformer?: (
-    value: any,
-    key: string,
-    style: Record<string, any>,
-  ) =>
-    | boolean
-    | string
-    | undefined
-    | {
-        include?: boolean;
-        transformedKey?: string;
-      },
-): Record<string, any> => {
-  const finalStyle: Record<string, any> = {};
-
-  const conditionKeys =
-    typeof conditions === 'boolean'
-      ? conditions
-        ? Object.keys(style)
-        : []
-      : conditions
-        ? Object.keys(conditions).filter((key) => conditions[key])
-        : Object.keys(style);
-
-  conditionKeys.forEach((key) => {
-    const value = style[key];
-    const transformed = transformer ? transformer(value, key, style) : { include: true, transformedKey: key };
-
-    if (typeof transformed === 'string') {
-      finalStyle[transformed] = value;
-    } else if (transformed === undefined || transformed === true) {
-      finalStyle[key] = value;
-    } else if (typeof transformed === 'boolean' && transformed) {
-      finalStyle[key] = value;
-    } else if (
-      typeof transformed === 'object' &&
-      (transformed.include === undefined || transformed.include) &&
-      transformed.transformedKey
-    ) {
-      finalStyle[transformed.transformedKey] = value;
-    }
-  });
-
-  return finalStyle;
-};
-
-/**
  * Converts a Bootstrap key to a corresponding CSS variable.
  *
  * @param key The Bootstrap key to convert
@@ -1163,14 +1094,70 @@ const generatePagination = (
   return pagination;
 };
 
+/**
+ * Generates a Map of tree nodes with metadata, including parent ID and path.
+ * This function recursively traverses a tree structure, starting from the root nodes,
+ * and for each node, it adds an entry to the returned Map. Each entry's key is a unique
+ * path string that represents the node's position in the tree, and the value is the node
+ * object extended with metadata properties: `parentId`, `path`, and an `update` method.
+ *
+ * The `parentId` indicates the ID of the node's parent, or null if it's a root node.
+ * The `path` is a string that uniquely identifies the node within the tree.
+ * The `update` method allows for updating the node's data and returns the updated array of nodes.
+ *
+ * @param data - An array of tree nodes, where each node is an object that extends TreeNodeBase.
+ *               It's expected that each node may have a 'children' property containing its sub-nodes.
+ * @param parentId - The ID of the parent node, or null if the nodes are at the root level.
+ * @param path - The current path to this node in the tree, used for unique identification.
+ * @returns A Map where keys are unique path strings and values are the original node objects
+ *          augmented with metadata.
+ */
+const generateNodeMap = <T extends TreeNodeBase>(
+  data: T[],
+  parentId: null | number | string = null,
+  path: string = '',
+): Map<string, T & { metadata: { parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }> => {
+  const map = new Map<
+    string,
+    T & { metadata: { parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }
+  >();
+  const traverse = (nodes: T[], parent: null | number | string, currentPath: string) => {
+    nodes.forEach((node) => {
+      const nodePath = currentPath ? `${currentPath}-${node.id}` : `${node.id}`;
+      const nodeWithMetadata: T & {
+        metadata: { parentId?: null | number | string; path: string; update: (newNode?: T) => T[] };
+      } = {
+        ...node,
+        metadata: {
+          path: nodePath,
+          ...(parent !== null ? { parentId: parent } : {}),
+          update: (newNode?: T) => {
+            if (newNode && node.id === newNode.id) {
+              Object.assign(node, newNode);
+            }
+            return [...data];
+          },
+        },
+      };
+
+      map.set(nodePath, nodeWithMetadata);
+      if (node.children && node.children.length > 0) {
+        traverse(node.children as T[], node.id, nodePath);
+      }
+    });
+  };
+
+  traverse(data, parentId, path);
+  return map;
+};
+
 export {
   calculateLoopIndex,
   camelToKebab,
   capitalizeFirstLetter,
   checkObjectProperties,
-  clsxStyle,
-  clsxUnique,
-  clsxWithOptions,
+  classx,
+  classxWithOptions,
   convertBsKeyToVar,
   deepMerge,
   filterAndTransformProperties,
@@ -1178,6 +1165,7 @@ export {
   filterTransformAndExcludeProperties,
   findTruthyClass,
   findTruthyClassOrDefault,
+  generateNodeMap,
   generatePagination,
   generateRandomId,
   getLoopIndexDirection,
@@ -1205,3 +1193,5 @@ export {
   toKebabCase,
   toPascalCase,
 };
+
+export type { TreeNodeBase };

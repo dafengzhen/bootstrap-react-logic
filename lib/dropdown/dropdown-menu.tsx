@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { DropdownMenuProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const DropdownMenu = function DropdownMenu<T extends ElementType = 'ul'>(props: DropdownMenuProps<T>) {
   const {
@@ -17,7 +17,7 @@ const DropdownMenu = function DropdownMenu<T extends ElementType = 'ul'>(props: 
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'dropdown-menu', show && 'show', className);
+    const finalClass = classx(!dropOldClass && 'dropdown-menu', show && 'show', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

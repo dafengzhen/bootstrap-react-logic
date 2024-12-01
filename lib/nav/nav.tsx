@@ -2,7 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useMemo, useState } fro
 
 import type { NavOption, NavProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import NavItem from './nav-item.tsx';
 import NavLink from './nav-link.tsx';
 import NavTabContent from './nav-tab-content.tsx';
@@ -42,7 +42,7 @@ const Nav = function Nav<T extends ElementType = 'nav' | 'ul'>(props: NavProps<T
   const existTabPane = useMemo(() => options.some((item) => item.pane), [options]);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'nav',
       horizontal && `justify-content-${horizontal}`,
       vertical && 'flex-column',

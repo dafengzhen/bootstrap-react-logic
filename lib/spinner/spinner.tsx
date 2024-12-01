@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SpinnerProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const Spinner = function Spinner<T extends ElementType = 'div'>(props: SpinnerProps<T>) {
   const {
@@ -18,7 +18,7 @@ const Spinner = function Spinner<T extends ElementType = 'div'>(props: SpinnerPr
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && (grow ? 'spinner-grow' : 'spinner-border'),
       variant && `text-${variant}`,
       size && (grow ? 'spinner-grow-sm' : 'spinner-border-sm'),

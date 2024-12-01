@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { SelectProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import SelectOption from './select-option.tsx';
 
 const Select = function Select<T extends ElementType = 'select'>(props: SelectProps<T>) {
@@ -21,7 +21,7 @@ const Select = function Select<T extends ElementType = 'select'>(props: SelectPr
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'form-select',
       isValid && 'is-valid',
       isInvalid && 'is-invalid',

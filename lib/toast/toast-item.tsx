@@ -2,7 +2,7 @@ import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } f
 
 import type { ToastItemProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import ToastBody from './toast-body.tsx';
 import ToastContainer from './toast-container.tsx';
 import ToastHeader from './toast-header.tsx';
@@ -31,7 +31,7 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
   const element = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'toast',
       fade && 'fade',
       show && 'show',

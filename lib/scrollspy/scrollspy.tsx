@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ScrollspyProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import scrollspyStyles from './scrollspy.module.scss';
 
 const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: ScrollspyProps<T>) {
@@ -25,7 +25,7 @@ const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: Scrol
   const [activeId, setActiveId] = useState<null | string>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && '', smoothScroll && scrollspyStyles.brlScrollSmooth, className);
+    const finalClass = classx(!dropOldClass && '', smoothScroll && scrollspyStyles.brlScrollSmooth, className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

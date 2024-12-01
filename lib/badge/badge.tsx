@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { BadgeProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, resolveRoundedClass, stylex } from '../tools';
+import { classx, convertBsKeyToVar, resolveRoundedClass, stylex } from '../tools';
 
 const Badge = function Badge<T extends ElementType = 'span'>(props: BadgeProps<T>) {
   const {
@@ -18,7 +18,7 @@ const Badge = function Badge<T extends ElementType = 'span'>(props: BadgeProps<T
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'badge',
       variant && (variantType === 'bg' ? `bg-${variant}` : `text-bg-${variant}`),
       rounded && resolveRoundedClass(rounded),

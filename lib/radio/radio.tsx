@@ -4,7 +4,7 @@ import type { RadioProps } from './types.ts';
 
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
-import { clsxUnique, clsxWithOptions, convertBsKeyToVar, processSlotClasses, stylex } from '../tools';
+import { classx, classxWithOptions, convertBsKeyToVar, processSlotClasses, stylex } from '../tools';
 
 const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<T>) {
   const {
@@ -23,7 +23,7 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-check-input', className);
+    const finalClass = classx(!dropOldClass && 'form-check-input', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
@@ -35,7 +35,7 @@ const Radio = function Radio<T extends ElementType = 'input'>(props: RadioProps<
   if (children) {
     const slotClassName = processSlotClasses(contentClasses, {
       component: 'form-check-input',
-      container: clsxWithOptions(
+      container: classxWithOptions(
         null,
         'form-check',
         formSwitch && 'form-switch',

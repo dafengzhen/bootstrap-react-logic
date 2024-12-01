@@ -3,7 +3,7 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, use
 import type { AlertProps } from './types.ts';
 
 import Button from '../button/button.tsx';
-import { clsxUnique, convertBsKeyToVar, mergeProps, stylex } from '../tools';
+import { classx, convertBsKeyToVar, mergeProps, stylex } from '../tools';
 import AlertHeading from './alert-heading.tsx';
 import AlertLink from './alert-link.tsx';
 
@@ -129,7 +129,7 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
   );
 
   const renderOptions = useMemo(() => {
-    const finalClassName = clsxUnique(
+    const finalClassName = classx(
       !dropOldClass && 'alert',
       variant && `alert-${variant}`,
       dismissible && 'alert-dismissible',

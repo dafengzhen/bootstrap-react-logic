@@ -13,7 +13,7 @@ import {
 import type { InputOtpProps } from './types.ts';
 
 import { Input } from '../input';
-import { clsxUnique, convertBsKeyToVar, generateRandomId, isArray, mergeProps, stylex } from '../tools';
+import { classx, convertBsKeyToVar, generateRandomId, isArray, mergeProps, stylex } from '../tools';
 
 interface IOtp {
   id: string;
@@ -57,7 +57,7 @@ const InputOtp = function InputOtp<T extends ElementType = 'input'>(props: Input
   }, []);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'd-flex gap-4', className);
+    const finalClass = classx(!dropOldClass && 'd-flex gap-4', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return { className: finalClass, style: finalStyle };

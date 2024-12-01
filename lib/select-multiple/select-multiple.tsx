@@ -12,8 +12,8 @@ import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState }
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 
 import {
-  clsxUnique,
-  clsxWithOptions,
+  classx,
+  classxWithOptions,
   convertBsKeyToVar,
   groupByProperty,
   isDefined,
@@ -111,7 +111,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   );
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && `form-select ${selectMultipleStyles.brlMinH38px}`,
       disabled && 'bg-body-secondary',
       className,
@@ -126,21 +126,21 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   }, [className, disabled, dropOldClass, style, variables]);
 
   const slotClassName = processSlotClasses(noParamContentClasses, {
-    activeOption: clsxWithOptions(
+    activeOption: classxWithOptions(
       null,
       'd-flex align-items-center badge text-bg-secondary',
       selectMultipleStyles.brlCursorDefault,
     ),
     bottomDivider: 'dropdown-divider',
-    clearIcon: clsxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
-    countDisplay: clsxWithOptions(
+    clearIcon: classxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
+    countDisplay: classxWithOptions(
       null,
       'align-self-center flex-shrink-0 text-secondary',
       selectMultipleStyles.brlScale75,
     ),
     floatingMenu: 'overflow-y-auto dropdown-menu rounded-3 shadow show',
     header: 'dropdown-header',
-    mainContainer: clsxWithOptions(
+    mainContainer: classxWithOptions(
       null,
       typeof selectableCount === 'number' && 'd-flex flex-wrap justify-content-between gap-2',
     ),
@@ -211,8 +211,8 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
                   {getOptionsByHeader.groupedData[key].map(({ index, item }) => {
                     const paramSlotClassName = processSlotClasses(paramContentClasses, {
-                      optionItem: clsxWithOptions(null, item.active && hideActiveOptions && 'visually-hidden'),
-                      selectButton: clsxWithOptions(
+                      optionItem: classxWithOptions(null, item.active && hideActiveOptions && 'visually-hidden'),
+                      selectButton: classxWithOptions(
                         null,
                         'dropdown-item',
                         item.active && 'active',

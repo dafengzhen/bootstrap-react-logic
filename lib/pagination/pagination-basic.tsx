@@ -2,7 +2,7 @@ import { type ElementType, useMemo, useState } from 'react';
 
 import type { PaginationBasicProps, PaginationOption } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import PaginationItem from './pagination-item.tsx';
 import PaginationLink from './pagination-link.tsx';
 import PaginationNav from './pagination-nav.tsx';
@@ -34,7 +34,7 @@ const PaginationBasic = function PaginationBasic<T extends ElementType = 'ul'>(p
   const [options] = useState<IOption[]>(generateInitialOptions(defaultOptions));
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'pagination',
       size && `pagination-${size}`,
       alignment && `justify-content-${alignment}`,

@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { AccordionBodyProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const useAccordionBody = (showByDefault: boolean, isCollapsing: boolean, onChange?: (onChange: boolean) => void) => {
   const [show, setShow] = useState(showByDefault);
@@ -106,7 +106,7 @@ const AccordionBody = function AccordionBody<T extends ElementType = 'div'>(prop
   );
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'accordion-collapse',
       collapsing && 'collapsing',
       isCollapsing && collapse && 'collapse',

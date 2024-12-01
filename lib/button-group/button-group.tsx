@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ButtonGroupProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: ButtonGroupProps<T>) {
   const {
@@ -19,7 +19,7 @@ const ButtonGroup = function ButtonGroup<T extends ElementType = 'div'>(props: B
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && (vertical ? 'btn-group-vertical' : toolbar ? 'btn-toolbar' : 'btn-group'),
       size && `btn-group-${size}`,
       className,

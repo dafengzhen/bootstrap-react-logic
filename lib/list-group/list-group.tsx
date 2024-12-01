@@ -2,7 +2,7 @@ import { type ElementType, useMemo, useState } from 'react';
 
 import type { ListGroupOption, ListGroupProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import ListGroupItem from './list-group-item.tsx';
 
 interface IOption extends ListGroupOption {
@@ -31,7 +31,7 @@ const ListGroup = function ListGroup<T extends ElementType = 'div' | 'ol' | 'ul'
   const [options] = useState<(IOption & { id: number | string })[]>(initialOptions);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'list-group',
       flush && 'list-group-flush',
       numbered && 'list-group-numbered',

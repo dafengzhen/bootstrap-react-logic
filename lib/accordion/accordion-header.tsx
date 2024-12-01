@@ -3,7 +3,7 @@ import { type ElementType, useMemo } from 'react';
 import type { AccordionHeaderProps } from './types.ts';
 
 import Button from '../button/button.tsx';
-import { clsxUnique, clsxWithOptions, convertBsKeyToVar, mergeProps, stylex } from '../tools';
+import { classx, classxWithOptions, convertBsKeyToVar, mergeProps, stylex } from '../tools';
 
 const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(props: AccordionHeaderProps<T>) {
   const {
@@ -19,7 +19,7 @@ const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'accordion-header h2', className);
+    const finalClass = classx(!dropOldClass && 'accordion-header h2', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
@@ -33,7 +33,7 @@ const AccordionHeader = function AccordionHeader<T extends ElementType = 'div'>(
       <Button
         aria-expanded={collapsed ? 'false' : 'true'}
         {...mergeProps(buttonProps, {
-          className: clsxWithOptions(null, buttonProps?.className, 'accordion-button', collapsed && 'collapsed'),
+          className: classxWithOptions(null, buttonProps?.className, 'accordion-button', collapsed && 'collapsed'),
         })}
       >
         {children}

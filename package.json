@@ -59,7 +59,8 @@
   "dependencies": {
     "@floating-ui/react": "^0.26.28",
     "clsx": "^2.1.1",
-    "cssmix": "^0.1.3"
+    "cssmix": "^0.1.3",
+    "motion": "^11.12.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",

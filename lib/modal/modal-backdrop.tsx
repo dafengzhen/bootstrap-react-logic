@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ModalBackdropProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, getScrollbarWidth, stylex } from '../tools';
+import { classx, convertBsKeyToVar, getScrollbarWidth, stylex } from '../tools';
 
 const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(props: ModalBackdropProps<T>) {
   const {
@@ -22,7 +22,7 @@ const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(prop
   const element = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'modal-backdrop', fade && 'fade', show && 'show', className);
+    const finalClass = classx(!dropOldClass && 'modal-backdrop', fade && 'fade', show && 'show', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

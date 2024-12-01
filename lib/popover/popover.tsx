@@ -16,7 +16,7 @@ import { createPortal } from 'react-dom';
 
 import type { PopoverProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, findTruthyClassOrDefault, isArray, mergeProps, stylex } from '../tools';
+import { classx, convertBsKeyToVar, findTruthyClassOrDefault, isArray, mergeProps, stylex } from '../tools';
 import PopoverArrow from './popover-arrow.tsx';
 import PopoverBody from './popover-body.tsx';
 import PopoverHeader from './popover-header.tsx';
@@ -106,7 +106,7 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
 
   const triggerTypes = useMemo(() => (isArray(triggerType) ? triggerType : [triggerType]), [triggerType]);
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'popover',
       fade && 'fade',
       show && 'show',

@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ToastContainerProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const ToastContainer = function ToastContainer<T extends ElementType = 'div'>(props: ToastContainerProps<T>) {
   const {
@@ -17,7 +17,7 @@ const ToastContainer = function ToastContainer<T extends ElementType = 'div'>(pr
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'toast-container',
       position && `position-${position}`,
       placement && {

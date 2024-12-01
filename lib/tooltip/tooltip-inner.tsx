@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TooltipInnerProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const TooltipInner = function TooltipInner<T extends ElementType = 'div'>(props: TooltipInnerProps<T>) {
   const {
@@ -17,7 +17,7 @@ const TooltipInner = function TooltipInner<T extends ElementType = 'div'>(props:
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'tooltip-inner', className);
+    const finalClass = classx(!dropOldClass && 'tooltip-inner', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

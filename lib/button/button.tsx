@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ButtonProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, findTruthyClass, resolveRoundedClass, stylex } from '../tools';
+import { classx, convertBsKeyToVar, findTruthyClass, resolveRoundedClass, stylex } from '../tools';
 
 const Button = function Button<T extends ElementType = 'button'>(props: ButtonProps<T>) {
   const {
@@ -29,7 +29,7 @@ const Button = function Button<T extends ElementType = 'button'>(props: ButtonPr
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && findTruthyClass(['btn-close', btnClose], ['btn', true]),
       active && 'active',
       show && 'show',

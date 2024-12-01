@@ -3,7 +3,7 @@ import { type ElementType, useMemo } from 'react';
 import type { DropdownItemProps } from './types.ts';
 
 import Button from '../button/button.tsx';
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const DropdownItem = function DropdownItem<T extends ElementType = 'a'>(props: DropdownItemProps<T>) {
   const {
@@ -18,7 +18,7 @@ const DropdownItem = function DropdownItem<T extends ElementType = 'a'>(props: D
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'dropdown-item', active && 'active', className);
+    const finalClass = classx(!dropOldClass && 'dropdown-item', active && 'active', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

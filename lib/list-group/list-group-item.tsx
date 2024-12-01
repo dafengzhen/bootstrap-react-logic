@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ListGroupItemProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, filterOptions, isValueValid, stylex } from '../tools';
+import { classx, convertBsKeyToVar, filterOptions, isValueValid, stylex } from '../tools';
 
 const ListGroupItem = function ListGroupItem<T extends ElementType = 'a' | 'button' | 'li'>(
   props: ListGroupItemProps<T>,
@@ -22,7 +22,7 @@ const ListGroupItem = function ListGroupItem<T extends ElementType = 'a' | 'butt
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'list-group-item',
       (active || itemAction) && 'list-group-item-action',
       active && 'active',

@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { FloatingLabelProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const FloatingLabel = function FloatingLabel<T extends ElementType = 'div'>(props: FloatingLabelProps<T>) {
   const {
@@ -17,7 +17,7 @@ const FloatingLabel = function FloatingLabel<T extends ElementType = 'div'>(prop
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'form-floating',
       isValid && 'is-valid',
       isInvalid && 'is-invalid',

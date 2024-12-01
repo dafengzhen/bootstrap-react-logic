@@ -2,13 +2,13 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PopoverArrowProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const PopoverArrow = function PopoverArrow<T extends ElementType = 'div'>(props: PopoverArrowProps<T>) {
   const { as: Component = 'div' as ElementType, className, dropOldClass, onRef, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'popover-arrow position-absolute', className);
+    const finalClass = classx(!dropOldClass && 'popover-arrow position-absolute', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

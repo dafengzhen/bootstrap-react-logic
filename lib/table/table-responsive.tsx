@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableResponsiveProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const TableResponsive = function TableResponsive<T extends ElementType = 'div'>(props: TableResponsiveProps<T>) {
   const {
@@ -16,7 +16,7 @@ const TableResponsive = function TableResponsive<T extends ElementType = 'div'>(
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass &&
         responsive &&
         (typeof responsive === 'boolean' ? 'table-responsive' : `table-responsive-${responsive}`),

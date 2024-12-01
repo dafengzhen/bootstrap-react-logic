@@ -2,13 +2,13 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavTabContentProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const NavTabContent = function NavTabContent<T extends ElementType = 'div'>(props: NavTabContentProps<T>) {
   const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'tab-content', className);
+    const finalClass = classx(!dropOldClass && 'tab-content', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

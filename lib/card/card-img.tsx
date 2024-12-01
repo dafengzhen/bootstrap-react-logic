@@ -2,14 +2,14 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CardImgProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, findTruthyClass, stylex } from '../tools';
+import { classx, convertBsKeyToVar, findTruthyClass, stylex } from '../tools';
 
 const CardImg = function CardImg<T extends ElementType = 'img'>(props: CardImgProps<T>) {
   const { as, bottom, className, dropOldClass, overlay, style, top, variables, ...rest } = props;
   const Component = (as ? as : overlay ? 'div' : 'img') as ElementType;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass &&
         findTruthyClass(
           ['card-img-bottom', bottom],

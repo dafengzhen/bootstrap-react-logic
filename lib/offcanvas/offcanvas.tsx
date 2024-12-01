@@ -2,7 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, use
 
 import type { OffcanvasProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import OffcanvasBackdrop from './offcanvas-backdrop.tsx';
 import OffcanvasBody from './offcanvas-body.tsx';
 import OffcanvasHeader from './offcanvas-header.tsx';
@@ -38,7 +38,7 @@ const Offcanvas = function Offcanvas<T extends ElementType = 'div'>(props: Offca
   const [show, setShow] = useState(false);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && (responsive ? `offcanvas-${responsive}` : 'offcanvas'),
       placement && `offcanvas-${placement}`,
       showing && 'showing',

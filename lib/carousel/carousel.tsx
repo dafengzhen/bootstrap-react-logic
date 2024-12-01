@@ -5,8 +5,8 @@ import type { CarouselOption, CarouselProps } from './types.ts';
 import Button from '../button/button.tsx';
 import {
   calculateLoopIndex,
-  clsxUnique,
-  clsxWithOptions,
+  classx,
+  classxWithOptions,
   convertBsKeyToVar,
   getLoopIndexDirection,
   stylex,
@@ -54,7 +54,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
   const [touchStartX, setTouchStartX] = useState<null | number>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'carousel', slide && 'slide', fade && 'carousel-fade', className);
+    const finalClass = classx(!dropOldClass && 'carousel', slide && 'slide', fade && 'carousel-fade', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return { className: finalClass, style: finalStyle };
@@ -192,7 +192,7 @@ const Carousel = function Carousel<T extends ElementType = 'div'>(props: Carouse
               <Button
                 aria-current={index === carouselItemIndex ? 'true' : 'false'}
                 aria-label={`Slide ${index + 1}`}
-                className={clsxWithOptions(null, index === carouselItemIndex && 'active')}
+                className={classxWithOptions(null, index === carouselItemIndex && 'active')}
                 data-bs-target=""
                 dropOldClass
                 key={item.id}

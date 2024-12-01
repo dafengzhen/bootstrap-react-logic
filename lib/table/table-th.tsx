@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableThProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const TableTh = function TableTh<T extends ElementType = 'th'>(props: TableThProps<T>) {
   const {
@@ -17,12 +17,7 @@ const TableTh = function TableTh<T extends ElementType = 'th'>(props: TableThPro
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
-      !dropOldClass && '',
-      variant && `table-${variant}`,
-      active && 'table-active',
-      className,
-    );
+    const finalClass = classx(!dropOldClass && '', variant && `table-${variant}`, active && 'table-active', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

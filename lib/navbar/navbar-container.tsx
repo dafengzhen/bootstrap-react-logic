@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarContainerProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const NavbarContainer = function NavbarContainer<T extends ElementType = 'div' | 'form'>(
   props: NavbarContainerProps<T>,
@@ -10,7 +10,7 @@ const NavbarContainer = function NavbarContainer<T extends ElementType = 'div' |
   const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && !className?.includes('container') && 'container-fluid', className);
+    const finalClass = classx(!dropOldClass && !className?.includes('container') && 'container-fluid', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

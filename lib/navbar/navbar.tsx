@@ -2,7 +2,7 @@ import { type ElementType, useMemo, useState } from 'react';
 
 import type { NavbarOption, NavbarProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import NavbarBrand from './navbar-brand.tsx';
 import NavbarCollapse from './navbar-collapse.tsx';
 import NavbarContainer from './navbar-container.tsx';
@@ -54,7 +54,7 @@ const Navbar = function Navbar<T extends ElementType = 'nav'>(props: NavbarProps
   const [options] = useState<IOption[]>(initialOptions);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'navbar',
       expand && (typeof expand === 'boolean' ? 'navbar-expand' : `navbar-expand-${expand}`),
       fixed && `fixed-${fixed}`,

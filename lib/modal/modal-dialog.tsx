@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ModalDialogProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const ModalDialog = function ModalDialog<T extends ElementType = 'div'>(props: ModalDialogProps<T>) {
   const {
@@ -19,7 +19,7 @@ const ModalDialog = function ModalDialog<T extends ElementType = 'div'>(props: M
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'modal-dialog',
       scrollable && 'modal-dialog-scrollable',
       centered && 'modal-dialog-centered',

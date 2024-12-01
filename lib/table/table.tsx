@@ -9,7 +9,7 @@ import type {
   TableProps,
 } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, isPlainObject, stylex } from '../tools';
+import { classx, convertBsKeyToVar, isPlainObject, stylex } from '../tools';
 import TableCaption from './table-caption.tsx';
 import TableResponsive from './table-responsive.tsx';
 import TableTbody from './table-tbody.tsx';
@@ -139,7 +139,7 @@ const Table = function Table<T extends ElementType = 'table'>(props: TableProps<
   const [bodyOptions] = useState<AugmentedBodyOption[]>(createOptionsWithId(bodyByDefault));
 
   const computedProps = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'table',
       variant && `table-${variant}`,
       striped && 'table-striped',

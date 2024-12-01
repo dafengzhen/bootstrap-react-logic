@@ -2,13 +2,13 @@ import { type ElementType, useMemo } from 'react';
 
 import type { PopoverHeaderProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const PopoverHeader = function PopoverHeader<T extends ElementType = 'div'>(props: PopoverHeaderProps<T>) {
   const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'popover-header h3', className);
+    const finalClass = classx(!dropOldClass && 'popover-header h3', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

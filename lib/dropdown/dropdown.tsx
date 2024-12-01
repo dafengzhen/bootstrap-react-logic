@@ -15,7 +15,7 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, use
 import type { DropdownOption, DropdownProps } from './types.ts';
 
 import {
-  clsxUnique,
+  classx,
   convertBsKeyToVar,
   findTruthyClass,
   findTruthyClassOrDefault,
@@ -99,7 +99,7 @@ const Dropdown = function Dropdown<T extends ElementType = 'div'>(props: Dropdow
   });
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass &&
         findTruthyClass(
           ['btn-group', split || btnGroup],

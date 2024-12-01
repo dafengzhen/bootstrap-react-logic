@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import type { ModalProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import ModalBackdrop from './modal-backdrop.tsx';
 import ModalBody from './modal-body.tsx';
 import ModalContent from './modal-content.tsx';
@@ -55,7 +55,7 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
   const element = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'modal',
       fade && !container && 'fade',
       show && 'show',

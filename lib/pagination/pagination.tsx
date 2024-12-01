@@ -6,7 +6,7 @@ import {
   BiChevronDoubleLeft,
   BiChevronDoubleRight,
   BiThreeDots,
-  clsxUnique,
+  classx,
   convertBsKeyToVar,
   generatePagination,
   mergeProps,
@@ -68,7 +68,7 @@ const Pagination = function Pagination<T extends ElementType = 'ul'>(props: Pagi
   );
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'pagination',
       size && `pagination-${size}`,
       alignment && `justify-content-${alignment}`,

@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { ProgressBarProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const ProgressBar = function ProgressBar<T extends ElementType = 'div'>(props: ProgressBarProps<T>) {
   const {
@@ -19,7 +19,7 @@ const ProgressBar = function ProgressBar<T extends ElementType = 'div'>(props: P
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'progress-bar',
       bg && `bg-${bg}`,
       striped && 'progress-bar-striped',

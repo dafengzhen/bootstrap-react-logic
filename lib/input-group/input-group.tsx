@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { InputGroupProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import InputGroupText from './input-group-text.tsx';
 
 const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: InputGroupProps<T>) {
@@ -20,7 +20,7 @@ const InputGroup = function InputGroup<T extends ElementType = 'div'>(props: Inp
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'input-group',
       nowrap && 'flex-nowrap',
       size && `input-group-${size}`,

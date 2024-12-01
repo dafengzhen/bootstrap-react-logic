@@ -2,7 +2,7 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { CollapseProps } from './types.ts';
 
-import { capitalizeFirstLetter, clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { capitalizeFirstLetter, classx, convertBsKeyToVar, stylex } from '../tools';
 
 const calculateCollapseDimension = (
   element: HTMLDivElement,
@@ -24,6 +24,7 @@ const calculateCollapseDimension = (
 
   return `${offsetDimension}${unit}`;
 };
+
 const Collapse = function Collapse<T extends ElementType = 'div'>(props: CollapseProps<T>) {
   const {
     as: Component = 'div' as ElementType,
@@ -41,7 +42,7 @@ const Collapse = function Collapse<T extends ElementType = 'div'>(props: Collaps
   const collapseElement = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'collapse',
       horizontal && 'collapse-horizontal',
       show && 'show',

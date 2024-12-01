@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { NavbarNavLinkProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const NavbarNavLink = function NavbarNavLink<T extends ElementType = 'a' | 'button'>(props: NavbarNavLinkProps<T>) {
   const {
@@ -20,7 +20,7 @@ const NavbarNavLink = function NavbarNavLink<T extends ElementType = 'a' | 'butt
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'nav-link',
       active && 'active',
       disabled && Component === 'a' && 'disabled',

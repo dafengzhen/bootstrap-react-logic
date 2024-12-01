@@ -2,13 +2,13 @@ import { type ElementType, useMemo } from 'react';
 
 import type { DropdownDividerProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const DropdownHeader = function DropdownHeader<T extends ElementType = 'div'>(props: DropdownDividerProps<T>) {
   const { as: Component = 'div' as ElementType, children, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'dropdown-header h6', className);
+    const finalClass = classx(!dropOldClass && 'dropdown-header h6', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

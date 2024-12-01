@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { AccordionBasicProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 import AccordionBody from './accordion-body.tsx';
 import AccordionHeader from './accordion-header.tsx';
 import AccordionItem from './accordion-item.tsx';
@@ -11,7 +11,7 @@ const AccordionBasic = function AccordionBasic<T extends ElementType = 'div'>(pr
   const { as: Component = 'div', className, dropOldClass, flush, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'accordion', flush && 'accordion-flush', className);
+    const finalClass = classx(!dropOldClass && 'accordion', flush && 'accordion-flush', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

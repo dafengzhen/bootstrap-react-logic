@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TextareaProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: TextareaProps<T>) {
   const {
@@ -19,7 +19,7 @@ const Textarea = function Textarea<T extends ElementType = 'textarea'>(props: Te
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'form-control',
       isValid && 'is-valid',
       isInvalid && 'is-invalid',

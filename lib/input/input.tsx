@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { InputProps } from './types.ts';
 
-import { clsxUnique, clsxWithOptions, convertBsKeyToVar, findTruthyClass, processSlotClasses, stylex } from '../tools';
+import { classx, classxWithOptions, convertBsKeyToVar, findTruthyClass, processSlotClasses, stylex } from '../tools';
 import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(props: InputProps<T>) {
@@ -29,7 +29,7 @@ const Input = function Input<T extends ElementType = 'input'>(props: InputProps<
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass &&
         findTruthyClass(
           ['form-check-input', type === 'checkbox' || type === 'radio'],
@@ -69,7 +69,7 @@ const Input = function Input<T extends ElementType = 'input'>(props: InputProps<
 
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {
-      component: clsxWithOptions(
+      component: classxWithOptions(
         null,
         renderOptions.className,
         startContent && inputStyles.brlPs9,

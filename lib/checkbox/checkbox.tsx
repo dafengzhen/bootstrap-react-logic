@@ -4,7 +4,7 @@ import type { CheckboxProps } from './types.ts';
 
 import Input from '../input/input.tsx';
 import Label from '../label/label.tsx';
-import { clsxUnique, clsxWithOptions, convertBsKeyToVar, processSlotClasses, stylex } from '../tools';
+import { classx, classxWithOptions, convertBsKeyToVar, processSlotClasses, stylex } from '../tools';
 
 const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: CheckboxProps<T>) {
   const {
@@ -35,7 +35,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
   const setInstance = useCallback((instance: HTMLInputElement | null) => (checkboxElement.current = instance), []);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'form-check-input', className);
+    const finalClass = classx(!dropOldClass && 'form-check-input', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
@@ -47,7 +47,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
   if (children) {
     const slotClassName = processSlotClasses(contentClasses, {
       component: 'form-check-input',
-      container: clsxWithOptions(
+      container: classxWithOptions(
         null,
         'form-check',
         formSwitch && 'form-switch',

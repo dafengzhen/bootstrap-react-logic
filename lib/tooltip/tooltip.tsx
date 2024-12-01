@@ -16,7 +16,7 @@ import { createPortal } from 'react-dom';
 
 import type { TooltipProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, findTruthyClassOrDefault, isArray, mergeProps, stylex } from '../tools';
+import { classx, convertBsKeyToVar, findTruthyClassOrDefault, isArray, mergeProps, stylex } from '../tools';
 import TooltipArrow from './tooltip-arrow.tsx';
 import TooltipInner from './tooltip-inner.tsx';
 
@@ -103,7 +103,7 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
   );
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && 'tooltip',
       fade && 'fade',
       show && 'show',

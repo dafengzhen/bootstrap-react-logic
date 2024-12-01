@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { TableTheadProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, stylex } from '../tools';
+import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const TableThead = function TableThead<T extends ElementType = 'thead'>(props: TableTheadProps<T>) {
   const {
@@ -17,7 +17,7 @@ const TableThead = function TableThead<T extends ElementType = 'thead'>(props: T
   } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(
+    const finalClass = classx(
       !dropOldClass && '',
       divider && 'table-group-divider',
       variant && `table-${variant}`,

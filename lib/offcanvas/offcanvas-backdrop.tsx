@@ -2,7 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useEffect, useMemo, use
 
 import type { OffcanvasBackdropProps } from './types.ts';
 
-import { clsxUnique, convertBsKeyToVar, getScrollbarWidth, stylex } from '../tools';
+import { classx, convertBsKeyToVar, getScrollbarWidth, stylex } from '../tools';
 
 const OffcanvasBackdrop = function OffcanvasBackdrop<T extends ElementType = 'div'>(props: OffcanvasBackdropProps<T>) {
   const {
@@ -24,7 +24,7 @@ const OffcanvasBackdrop = function OffcanvasBackdrop<T extends ElementType = 'di
   const element = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = clsxUnique(!dropOldClass && 'offcanvas-backdrop', fade && 'fade', show && 'show', className);
+    const finalClass = classx(!dropOldClass && 'offcanvas-backdrop', fade && 'fade', show && 'show', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
