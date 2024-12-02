@@ -22,9 +22,12 @@ const generateInitialOptions = (options: TreeOption[] = [], optionId?: number | 
 const Tree = function Tree<T extends ElementType = 'div'>(props: TreeProps<T>) {
   const {
     as: Component = 'div' as ElementType,
+    checkbox,
+    checkMode,
     className,
     dropOldClass,
     label: labelByDefault,
+    onCheck: onCheckByDefault,
     onOptionChange: onOptionChangeByDefault,
     onSelect: onSelectByDefault,
     onToggle: onToggleByDefault,
@@ -55,10 +58,13 @@ const Tree = function Tree<T extends ElementType = 'div'>(props: TreeProps<T>) {
 
         return (
           <TreeNode
+            checkbox={checkbox}
+            checkMode={checkMode}
             key={item.id}
             label={labelByDefault}
             level={0}
             nodeKey={nodeKey}
+            onCheck={onCheckByDefault}
             onOptionChange={onOptionChangeByDefault}
             onSelect={onSelectByDefault}
             onToggle={onToggleByDefault}

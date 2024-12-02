@@ -17,6 +17,7 @@ export type TreeActionHandler = (params: {
 
 export interface TreeBaseOption {
   metadata?: {
+    node: TreeOption;
     nodeKey: string;
     parentId?: null | number | string;
     parentKey?: string;
@@ -37,9 +38,11 @@ export type TreeNodeProps<T extends ElementType> = OmittedPropsWithoutRef<
 >;
 
 export interface TreeOption {
+  checked?: boolean;
   children?: TreeOption[];
   expanded?: boolean;
   id?: number | string;
+  indeterminate?: boolean;
   label?: string;
   selectable?: boolean;
 }
@@ -49,6 +52,16 @@ export type TreeProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, 
 type Metadata = { nodeKey: string; parentKey?: string };
 
 type NodeProps<T extends ElementType> = BaseProps<T, TreeNodeVariablesType> & {
+  /**
+   * checkbox.
+   */
+  checkbox?: boolean;
+
+  /**
+   * checkMode.
+   */
+  checkMode?: 'all' | 'child' | 'childFirst' | 'parent' | 'parentFirst';
+
   /**
    * label.
    */
@@ -63,6 +76,11 @@ type NodeProps<T extends ElementType> = BaseProps<T, TreeNodeVariablesType> & {
    * nodeKey.
    */
   nodeKey: string;
+
+  /**
+   * onCheck.
+   */
+  onCheck?: TreeActionHandler;
 
   /**
    * onOptionChange.
@@ -97,9 +115,24 @@ type NodeProps<T extends ElementType> = BaseProps<T, TreeNodeVariablesType> & {
 
 type Props<T extends ElementType> = BaseProps<T, TreeVariablesType> & {
   /**
+   * checkbox.
+   */
+  checkbox?: boolean;
+
+  /**
+   * checkMode.
+   */
+  checkMode?: 'all' | 'child' | 'childFirst' | 'parent' | 'parentFirst';
+
+  /**
    * label.
    */
   label?: (option: TreeOption) => ReactNode;
+
+  /**
+   * onCheck.
+   */
+  onCheck?: TreeActionHandler;
 
   /**
    * onOptionChange.

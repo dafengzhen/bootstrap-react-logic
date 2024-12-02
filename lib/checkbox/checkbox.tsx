@@ -30,7 +30,7 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
     if (indeterminate && current) {
       current.indeterminate = true;
     }
-  }, [indeterminate, checkboxElement]);
+  }, [indeterminate]);
 
   const setInstance = useCallback((instance: HTMLInputElement | null) => (checkboxElement.current = instance), []);
 

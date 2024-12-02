@@ -1116,19 +1116,23 @@ const generateNodeMap = <T extends TreeNodeBase>(
   data: T[],
   parentId: null | number | string = null,
   path: string = '',
-): Map<string, T & { metadata: { parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }> => {
+): Map<
+  string,
+  T & { metadata: { node: T; parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }
+> => {
   const map = new Map<
     string,
-    T & { metadata: { parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }
+    T & { metadata: { node: T; parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }
   >();
   const traverse = (nodes: T[], parent: null | number | string, currentPath: string) => {
     nodes.forEach((node) => {
       const nodePath = currentPath ? `${currentPath}-${node.id}` : `${node.id}`;
       const nodeWithMetadata: T & {
-        metadata: { parentId?: null | number | string; path: string; update: (newNode?: T) => T[] };
+        metadata: { node: T; parentId?: null | number | string; path: string; update: (newNode?: T) => T[] };
       } = {
         ...node,
         metadata: {
+          node,
           path: nodePath,
           ...(parent !== null ? { parentId: parent } : {}),
           update: (newNode?: T) => {
@@ -1149,6 +1153,158 @@ const generateNodeMap = <T extends TreeNodeBase>(
 
   traverse(data, parentId, path);
   return map;
+};
+
+/**
+ * Updates the parent nodes of a given tree node and returns the list of updated parent nodes.
+ *
+ * This function traverses through the `treeMap` using the node's `path`, updating each parent node found along the path.
+ * It calls the provided `update` function on each parent node and collects them in the `updatedNodes` array.
+ * The array of updated parent nodes is returned after processing all parent nodes.
+ *
+ * @param nodeKey - The key of the node whose parents will be updated.
+ * @param treeMap - A Map that stores nodes, where each node is identified by a unique key (`nodeKey`).
+ *                 Each entry includes the node's metadata, which contains the node's path and an update method.
+ * @param update - A callback function that is called for each parent node, allowing the node to be updated.
+ *
+ * @returns An array of updated parent nodes. If no parent nodes are found (i.e., the node has no parents), an empty array is returned.
+ */
+const updateParentNodes = <T extends TreeNodeBase>(
+  nodeKey: string,
+  treeMap: Map<
+    string,
+    T & { metadata: { node: T; parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }
+  >,
+  update: (node: T) => void,
+): T[] => {
+  const path = treeMap.get(nodeKey)?.metadata?.path;
+  if (!path) {
+    return [];
+  }
+
+  const pathParts = path.split('-');
+  const updatedNodes: T[] = [];
+
+  for (let i = pathParts.length - 2; i >= 0; i--) {
+    const parentKey = pathParts.slice(0, i + 1).join('-');
+    const parentNode = treeMap.get(parentKey);
+    if (parentNode) {
+      const node = parentNode.metadata.node;
+      update(node);
+      updatedNodes.push(node);
+    }
+  }
+
+  return updatedNodes;
+};
+
+/**
+ * Updates the child nodes of a given tree node and returns the list of updated child nodes.
+ *
+ * This function traverses through the `treeMap` using the node's `path`, updating each child node found under the node's path.
+ * It calls the provided `update` function on each child node and collects them in the `updatedNodes` array.
+ * The array of updated child nodes is returned after processing all child nodes.
+ *
+ * @param nodeKey - The key of the node whose children will be updated.
+ * @param treeMap - A Map that stores nodes, where each node is identified by a unique key (`nodeKey`).
+ *                 Each entry includes the node's metadata, which contains the node's path and an update method.
+ * @param update - A callback function that is called for each child node, allowing the node to be updated.
+ *
+ * @returns An array of updated child nodes. If no child nodes are found (i.e., the node has no children), an empty array is returned.
+ */
+const updateChildNodes = <T extends TreeNodeBase>(
+  nodeKey: string,
+  treeMap: Map<
+    string,
+    T & { metadata: { node: T; parentId?: null | number | string; path: string; update: (newNode?: T) => T[] } }
+  >,
+  update: (node: T) => void,
+): T[] => {
+  const path = treeMap.get(nodeKey)?.metadata?.path;
+  if (!path) {
+    return [];
+  }
+
+  const updatedNodes: T[] = [];
+
+  treeMap.forEach((nodeEntry, key) => {
+    if (key === nodeKey) {
+      return;
+    }
+
+    const nodePath = nodeEntry.metadata.path;
+    if (nodePath.startsWith(path)) {
+      const node = nodeEntry.metadata.node;
+      update(node);
+      updatedNodes.push(node);
+    }
+  });
+
+  return updatedNodes;
+};
+
+/**
+ * Updates the indeterminate status of parent nodes in a hierarchical tree structure.
+ *
+ * This function is designed to recursively update the indeterminate status
+ * of parent nodes based on the checked status of their child nodes.
+ *
+ * @template T - Represents the type of tree nodes extending `TreeNodeBase`.
+ *
+ * @param checked - The current checked status of the node being updated.
+ * @param nodeKey - The unique key identifying the current node in the tree.
+ * @param treeMap - A map containing all tree nodes and their metadata. Each node includes:
+ *   - `metadata.node`: The node itself, which can have an optional `indeterminate` property.
+ *   - `metadata.parentId`: The ID of the parent node (if any).
+ *   - `metadata.path`: The path of the node in the tree (e.g., "1-2-3").
+ *   - `metadata.update`: A function to update the node and its children.
+ *
+ * The function determines whether a parent node should be:
+ * - **Checked**: When all its children are checked.
+ * - **Indeterminate**: When only some of its children are checked.
+ * - **Unchecked**: When none of its children are checked.
+ *
+ * It uses the `path` of the current node to identify parent nodes and applies
+ * updates recursively until no parent exists or conditions for further updates are met.
+ */
+const updateParentNodeIndeterminateStatus = <T extends TreeNodeBase>(
+  checked: boolean | null,
+  nodeKey: string,
+  treeMap: Map<
+    string,
+    T & {
+      metadata: {
+        node: T & { indeterminate?: boolean };
+        parentId?: null | number | string;
+        path: string;
+        update: (newNode?: T) => T[];
+      };
+    }
+  >,
+): void => {
+  let recursionDepth = 0;
+
+  function updateIndeterminateStatus(path: string) {
+    const parentPath = path.split('-').slice(0, -1).join('-');
+    const parent = treeMap.get(parentPath);
+    if (!parent || !parent.children) {
+      return;
+    }
+
+    const allChecked = parent.children.every((child: any) => child.checked);
+    const someChecked = parent.children.some((child: any) => child.checked);
+    const result = !(allChecked || !someChecked);
+
+    parent.metadata.node.indeterminate =
+      recursionDepth === 0 && typeof checked === 'boolean' ? [checked, !result].some((item) => item) : result;
+    recursionDepth++;
+
+    if (parentPath) {
+      updateIndeterminateStatus(parentPath);
+    }
+  }
+
+  updateIndeterminateStatus(nodeKey);
 };
 
 export {
@@ -1192,6 +1348,9 @@ export {
   toCamelCase,
   toKebabCase,
   toPascalCase,
+  updateChildNodes,
+  updateParentNodeIndeterminateStatus,
+  updateParentNodes,
 };
 
 export type { TreeNodeBase };

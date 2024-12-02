@@ -69,6 +69,9 @@ export {
   toKebabCase,
   toPascalCase,
   type TreeNodeBase,
+  updateChildNodes,
+  updateParentNodeIndeterminateStatus,
+  updateParentNodes,
 } from './tools';
 
 export type {
