@@ -1,11 +1,12 @@
-import { type ElementType, useMemo, useState } from 'react';
+import { type ElementType, useMemo } from 'react';
 
-import type { TreeBaseOption, TreeMap, TreeOption, TreeProps } from './types.ts';
+import type { TreeOption, TreeProps } from './types.ts';
 
-import { classx, convertBsKeyToVar, generateNodeMap, stylex, type TreeNodeBase } from '../tools';
+import { classx, convertBsKeyToVar, generateTreeNodeMap, stylex } from '../tools';
 import TreeNode from './tree-node.tsx';
 
-interface IOption extends TreeNodeBase<TreeBaseOption & TreeOption> {
+interface IOption extends TreeOption {
+  children?: IOption[];
   id: number | string;
 }
 
@@ -37,9 +38,6 @@ const Tree = function Tree<T extends ElementType = 'div'>(props: TreeProps<T>) {
     ...rest
   } = props;
 
-  const [options] = useState<IOption[]>(generateInitialOptions(optionsByDefault));
-  const [treeMap] = useState<TreeMap>(generateNodeMap<IOption>(options));
-
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && '', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
@@ -49,6 +47,10 @@ const Tree = function Tree<T extends ElementType = 'div'>(props: TreeProps<T>) {
       style: finalStyle,
     };
   }, [className, dropOldClass, style, variables]);
+
+  const options = useMemo<IOption[]>(() => generateInitialOptions(optionsByDefault), [optionsByDefault]);
+
+  const treeMap = useMemo(() => generateTreeNodeMap<IOption>(options), [options]);
 
   return (
     <Component {...rest} {...renderOptions}>
@@ -69,6 +71,7 @@ const Tree = function Tree<T extends ElementType = 'div'>(props: TreeProps<T>) {
             onSelect={onSelectByDefault}
             onToggle={onToggleByDefault}
             option={item}
+            options={options}
             parentKey={nodeKey}
             treeMap={treeMap}
           />

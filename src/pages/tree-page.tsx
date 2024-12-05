@@ -50,6 +50,26 @@ const getTreeData2 = () => [
   },
 ];
 
+const getTreeData3 = () => [
+  {
+    checked: false,
+    children: [
+      {
+        checked: false,
+        children: [
+          { checked: false, disabled: true, label: 'Grandchild 1' },
+          { checked: false, label: 'Grandchild 2' },
+        ],
+        expanded: true,
+        label: 'Child 1',
+      },
+      { checked: true, disabled: true, label: 'Child 2' },
+    ],
+    expanded: true,
+    label: 'Root',
+  },
+];
+
 export default function BadgePage() {
   const navigation = useNavigation();
   const { t: tTreeComponentProps } = useTranslation(['treeComponentProps']);
@@ -61,6 +81,7 @@ export default function BadgePage() {
   const [treeData3, setTreeData3] = useState<TreeOption[]>(getTreeData2());
   const [treeData4, setTreeData4] = useState<TreeOption[]>(getTreeData2());
   const [treeData5, setTreeData5] = useState<TreeOption[]>(getTreeData2());
+  const [treeData6, setTreeData6] = useState<TreeOption[]>(getTreeData3());
 
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
@@ -86,7 +107,7 @@ export default function BadgePage() {
             )}
             onToggle={({ option, toggleNode }) => {
               option.expanded = !option.expanded;
-              setTreeData2(toggleNode(option));
+              setTreeData2(toggleNode());
             }}
             options={treeData2}
           />
@@ -113,11 +134,11 @@ export default function BadgePage() {
             )}
             onCheck={({ option, toggleNode }) => {
               option.checked = !option.checked;
-              setTreeData4(toggleNode(option));
+              setTreeData4(toggleNode());
             }}
             onToggle={({ option, toggleNode }) => {
               option.expanded = !option.expanded;
-              setTreeData4(toggleNode(option));
+              setTreeData4(toggleNode());
             }}
             options={treeData4}
           />
@@ -132,6 +153,19 @@ export default function BadgePage() {
             )}
             onOptionChange={setTreeData5}
             options={treeData5}
+          />
+        </div>
+      </Example>
+
+      <Example gap3 hash="disabled" state={state} t={tTreePage}>
+        <div>
+          <Tree
+            checkbox
+            label={(item) => (
+              <span className={`text-primary ${item.expanded ? 'fw-bold' : 'fw-normal'}`}>{item.label}</span>
+            )}
+            onOptionChange={setTreeData6}
+            options={treeData6}
           />
         </div>
       </Example>

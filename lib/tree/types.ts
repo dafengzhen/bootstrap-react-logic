@@ -1,12 +1,6 @@
 import type { ElementType, ReactNode } from 'react';
 
-import type {
-  BaseProps,
-  OmittedPropsWithoutRef,
-  TreeNodeBase,
-  TreeNodeVariablesType,
-  TreeVariablesType,
-} from '../tools';
+import type { BaseProps, OmittedPropsWithoutRef, TreeNodeVariablesType, TreeVariablesType } from '../tools';
 
 export type TreeActionHandler = (params: {
   metadata: Metadata;
@@ -16,17 +10,14 @@ export type TreeActionHandler = (params: {
 }) => void;
 
 export interface TreeBaseOption {
-  metadata?: {
-    node: TreeOption;
-    nodeKey: string;
+  _metadata?: {
+    id: number | string;
     parentId?: null | number | string;
-    parentKey?: string;
     path: string;
-    update: (option?: Partial<TreeBaseOption & TreeNodeOption>) => any[];
   };
 }
 
-export type TreeMap = Map<string, TreeNodeBase<TreeBaseOption & TreeNodeOption>>;
+export type TreeMap = Map<string, TreeBaseOption & TreeNodeOption>;
 
 export type TreeNodeOption = TreeOption;
 
@@ -40,6 +31,7 @@ export type TreeNodeProps<T extends ElementType> = OmittedPropsWithoutRef<
 export interface TreeOption {
   checked?: boolean;
   children?: TreeOption[];
+  disabled?: boolean;
   expanded?: boolean;
   id?: number | string;
   indeterminate?: boolean;
@@ -103,6 +95,11 @@ type NodeProps<T extends ElementType> = BaseProps<T, TreeNodeVariablesType> & {
   option: TreeBaseOption & TreeNodeOption;
 
   /**
+   * options.
+   */
+  options: TreeOption[];
+
+  /**
    * parentKey.
    */
   parentKey?: string;
@@ -155,4 +152,4 @@ type Props<T extends ElementType> = BaseProps<T, TreeVariablesType> & {
   options: TreeOption[];
 };
 
-type ToggleNode = (option: Partial<TreeOption>) => any[];
+type ToggleNode = () => TreeOption[];

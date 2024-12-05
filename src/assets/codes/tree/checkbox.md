@@ -39,11 +39,11 @@ const [treeData5, setTreeData5] = useState<TreeOption[]>(getTreeData2());
   )}
   onCheck={({ option, toggleNode }) => {
     option.checked = !option.checked;
-    setTreeData4(toggleNode(option));
+    setTreeData4(toggleNode());
   }}
   onToggle={({ option, toggleNode }) => {
     option.expanded = !option.expanded;
-    setTreeData4(toggleNode(option));
+    setTreeData4(toggleNode());
   }}
   options={treeData4}
 />

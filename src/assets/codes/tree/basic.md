@@ -31,7 +31,7 @@ const [treeData2, setTreeData2] = useState<TreeOption[]>(getTreeData());
   )}
   onToggle={({ option, toggleNode }) => {
     option.expanded = !option.expanded;
-    setTreeData2(toggleNode(option));
+    setTreeData2(toggleNode());
   }}
   options={treeData2}
 />

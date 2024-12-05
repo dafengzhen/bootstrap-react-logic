@@ -9,10 +9,13 @@ import {
   classx,
   classxWithOptions,
   convertBsKeyToVar,
+  findTreeNodeChildKeys,
+  findTreeNodeParentKeys,
   stylex,
-  updateChildNodes,
-  updateParentNodeIndeterminateStatus,
-  updateParentNodes,
+  updateTreeNodeIndeterminateStatus,
+  updateTreeNodeStatus,
+  updateTreeNodesUsingMap,
+  updateTreeNodeUsingMap,
 } from '../tools';
 import treeStyles from './tree.module.scss';
 
@@ -31,6 +34,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
     onSelect: onSelectByDefault,
     onToggle: onToggleByDefault,
     option: optionByDefault,
+    options,
     parentKey,
     style,
     treeMap,
@@ -38,7 +42,14 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
     ...rest
   } = props;
 
-  const { checked = false, children: options, expanded = false, selectable = true } = optionByDefault;
+  const {
+    checked = false,
+    children,
+    disabled = false,
+    expanded = false,
+    indeterminate,
+    selectable = true,
+  } = optionByDefault;
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && '', className);
@@ -49,6 +60,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
 
   const handleAction = useCallback(
     (action: 'check' | 'select' | 'toggle') => {
+      const option = { ...optionByDefault };
       const metadata =
         nodeKey === parentKey
           ? { nodeKey: parentKey }
@@ -57,20 +69,51 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
               parentKey,
             };
 
-      const updateNodeCheckStatus = (checked: boolean) => {
-        const update = (node: TreeOption) => (node.checked = checked);
-        const updateParent = () => updateParentNodes(metadata.nodeKey, treeMap, update);
-        const updateChild = () => updateChildNodes(metadata.nodeKey, treeMap, update);
+      let _options = options;
+
+      const updateNode = () => {
+        _options = updateTreeNodeUsingMap(_options, treeMap, metadata.nodeKey, (n) => {
+          Object.assign(n, option);
+          return n;
+        });
+      };
+
+      const updateNodes = (keys?: string[]) => {
+        _options = updateTreeNodesUsingMap(_options, treeMap, keys ?? Array.from(treeMap.keys()), (n) => n);
+      };
+
+      const updateNodeCheckStatus = () => {
+        const checked = !option.checked;
+        const update = (node: TreeOption) => {
+          node.checked = checked;
+          return node;
+        };
+        const updateParentChild = () => {
+          const keys = [
+            metadata.nodeKey,
+            ...findTreeNodeParentKeys(metadata.nodeKey, treeMap),
+            ...findTreeNodeChildKeys(metadata.nodeKey, treeMap),
+          ];
+          _options = updateTreeNodesUsingMap(_options, treeMap, keys, update);
+          updateTreeNodeIndeterminateStatus(_options);
+          updateNodes(keys);
+        };
+        const updateParent = () => {
+          const keys = [metadata.nodeKey, ...findTreeNodeParentKeys(metadata.nodeKey, treeMap)];
+          _options = updateTreeNodesUsingMap(_options, treeMap, keys, update);
+          updateTreeNodeIndeterminateStatus(_options);
+          updateNodes(keys);
+        };
+        const updateChild = () => {
+          const keys = [metadata.nodeKey, ...findTreeNodeChildKeys(metadata.nodeKey, treeMap)];
+          _options = updateTreeNodesUsingMap(_options, treeMap, keys, update);
+          updateNodes(keys);
+        };
 
         switch (checkMode) {
           case 'all':
-            if (checked) {
-              updateParent();
-              updateChild();
-            } else {
-              updateParent();
-              updateChild();
-            }
+          case 'parentFirst':
+            updateParentChild();
             break;
           case 'child':
             if (checked) {
@@ -95,63 +138,54 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
               updateChild();
             }
             break;
-          case 'parentFirst':
-            if (checked) {
-              updateParent();
-              updateChild();
-            } else {
-              updateChild();
-              updateParent();
-            }
+          default:
             break;
         }
       };
 
-      const item = treeMap.get(metadata.nodeKey);
-      const option = { ...optionByDefault };
       const actionMap: Record<'check' | 'select' | 'toggle', TreeActionHandler | undefined> = {
         check: onCheckByDefault,
         select: onSelectByDefault,
         toggle: onToggleByDefault,
       };
 
-      let data;
+      let toggleNode = false;
       actionMap[action]?.({
         metadata,
         option,
-        toggleNode: (node) => {
-          Object.assign(option, node);
+        toggleNode: () => {
+          toggleNode = true;
+          updateNode();
 
           if (checkMode) {
-            const checked = !!(node.checked ?? option.checked);
-            updateNodeCheckStatus(checked);
-            updateParentNodeIndeterminateStatus(checked, metadata.nodeKey, treeMap);
+            updateNodeCheckStatus();
           }
 
-          return (data = item?.metadata?.update(option) ?? []);
+          return _options;
         },
         treeMap,
       });
 
-      if (typeof onOptionChangeByDefault === 'function') {
-        if (!data) {
-          if (action === 'toggle') {
-            option.expanded = !option.expanded;
-          } else if (action === 'check') {
-            const checked = !option.checked;
-            option.checked = checked;
+      if (toggleNode) {
+        return;
+      }
 
-            if (checkMode) {
-              updateNodeCheckStatus(checked);
-              updateParentNodeIndeterminateStatus(checked, metadata.nodeKey, treeMap);
-            }
+      if (typeof onOptionChangeByDefault === 'function') {
+        if (action === 'toggle') {
+          option.expanded = !option.expanded;
+          updateNode();
+        } else if (action === 'check') {
+          if (checkMode) {
+            updateNodeCheckStatus();
+          } else {
+            option.checked = !option.checked;
+            updateTreeNodeStatus(_options, option);
+            updateNodes();
           }
         }
 
-        onOptionChangeByDefault(data || (item?.metadata?.update(option) ?? []));
+        onOptionChangeByDefault(_options);
       }
-
-      data = null;
     },
     [
       checkMode,
@@ -161,6 +195,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
       onSelectByDefault,
       onToggleByDefault,
       optionByDefault,
+      options,
       parentKey,
       treeMap,
     ],
@@ -174,29 +209,42 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
 
   return (
     <Component {...rest} {...renderOptions}>
-      <div
-        className={classxWithOptions(
-          null,
-          'form-check form-check-inline',
-          checkbox ? 'form-check-reverse pe-3' : 'ps-0 me-2',
-        )}
-      >
-        <span
-          className={classxWithOptions(null, treeStyles.brlCursorPointer, 'user-select-none')}
+      <div className="d-inline-flex align-items-center align-middle gap-2 mb-1">
+        <div
+          className={classxWithOptions(null, treeStyles.brlCursorPointer, 'user-select-none d-inline-flex')}
           onClick={handleToggle}
         >
           {expanded ? <BiChevronDown /> : <BiChevronRight />}
-        </span>
+        </div>
 
-        {checkbox && <input checked={checked} className="form-check-input" onChange={handleCheck} type="checkbox" />}
+        {checkbox && (
+          <div className="d-inline-block">
+            <input
+              checked={checked}
+              className="form-check-input"
+              disabled={disabled}
+              onChange={handleCheck}
+              ref={(instance) => {
+                if (instance && typeof indeterminate === 'boolean') {
+                  instance.indeterminate = indeterminate;
+                }
+              }}
+              type="checkbox"
+            />
+          </div>
+        )}
+
+        <div
+          className={classxWithOptions(
+            null,
+            selectable ? treeStyles.brlCursorPointer : treeStyles.brlCursorNotAllowed,
+            disabled && `${treeStyles.brlCursorDefault} opacity-50`,
+          )}
+          onClick={handleSelect}
+        >
+          {typeof label === 'function' ? label({ ...optionByDefault }) : label}
+        </div>
       </div>
-
-      <span
-        className={classxWithOptions(null, selectable ? treeStyles.brlCursorPointer : treeStyles.brlCursorNotAllowed)}
-        onClick={handleSelect}
-      >
-        {typeof label === 'function' ? label({ ...optionByDefault }) : label}
-      </span>
 
       <AnimatePresence>
         {expanded && (
@@ -207,7 +255,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
             initial={{ height: 0 }}
             transition={{ duration: 0.35 }}
           >
-            {options?.map((item) => {
+            {children?.map((item) => {
               const _nodeKey = parentKey ? `${parentKey}-${item.id}` : `${item.id}`;
               return (
                 <TreeNode
@@ -223,6 +271,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
                   onSelect={onSelectByDefault}
                   onToggle={onToggleByDefault}
                   option={item}
+                  options={options}
                   parentKey={nodeKey}
                   treeMap={treeMap}
                 />
