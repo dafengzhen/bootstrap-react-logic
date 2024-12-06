@@ -125,7 +125,7 @@ export default function ExamplePropsCard({
                     <tr key={typeof item.attr === 'string' ? item.attr : index}>
                       <td>{item.attr}</td>
                       <td>{item.type}</td>
-                      <td className="text-truncate" title={item.desc || '-'}>
+                      <td className="text-truncate text-secondary" title={item.desc || '-'}>
                         {item.desc}
                       </td>
                       <td>{item.default || '-'}</td>

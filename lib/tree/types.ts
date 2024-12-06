@@ -33,6 +33,8 @@ export interface TreeOption {
   children?: TreeOption[];
   disabled?: boolean;
   expanded?: boolean;
+  hidden?: boolean;
+  highlighted?: boolean;
   id?: number | string;
   indeterminate?: boolean;
   label?: string;
@@ -108,6 +110,11 @@ type NodeProps<T extends ElementType> = BaseProps<T, TreeNodeVariablesType> & {
    * treeMap.
    */
   treeMap: TreeMap;
+
+  /**
+   * useCustomSearch.
+   */
+  useCustomSearch?: boolean;
 };
 
 type Props<T extends ElementType> = BaseProps<T, TreeVariablesType> & {
@@ -137,6 +144,11 @@ type Props<T extends ElementType> = BaseProps<T, TreeVariablesType> & {
   onOptionChange?: (options: TreeOption[]) => void;
 
   /**
+   * onSearch.
+   */
+  onSearch?: (options: TreeOption[], searchTerm: string) => TreeOption[];
+
+  /**
    * onSelect.
    */
   onSelect?: TreeActionHandler;
@@ -150,6 +162,16 @@ type Props<T extends ElementType> = BaseProps<T, TreeVariablesType> & {
    * options.
    */
   options: TreeOption[];
+
+  /**
+   * searchTerm.
+   */
+  searchTerm?: string;
+
+  /**
+   * useCustomSearch.
+   */
+  useCustomSearch?: boolean;
 };
 
 type ToggleNode = () => TreeOption[];

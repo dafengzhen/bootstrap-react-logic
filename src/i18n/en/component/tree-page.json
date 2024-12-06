@@ -1,7 +1,6 @@
 {
   "basic": "Basic",
-  "buttons": "Buttons",
-  "positioned": "Positioned",
-  "backgroundColors": "Background Colors",
-  "pillBadges": "Pill Badges"
+  "checkbox": "Checkbox",
+  "disabled": "Disabled",
+  "search": "Search"
 }

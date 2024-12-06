@@ -2,10 +2,30 @@
   "tree": {
     "name": "Tree",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "checkbox": "Checkbox",
+      "checkMode": "Check Mode",
+      "label": "Label",
+      "onCheck": "Check Callback",
+      "onOptionChange": "Option Change Callback",
+      "onSearch": "Search Callback",
+      "onSelect": "Select Callback",
+      "onToggle": "Toggle Callback",
+      "options": "Options",
+      "searchTerm": "Search Term",
+      "useCustomSearch": "Use Custom Search",
+      "treeOption": "Tree Option"
+    },
+    "options": {
+      "checked": "Checked",
+      "children": "Children",
+      "disabled": "Disabled",
+      "expanded": "Expanded",
+      "hidden": "Hidden",
+      "highlighted": "Highlighted",
+      "id": "ID",
+      "indeterminate": "Indeterminate",
+      "label": "Label",
+      "selectable": "Selectable"
     }
   }
 }

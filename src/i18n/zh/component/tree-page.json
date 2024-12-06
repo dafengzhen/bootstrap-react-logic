@@ -1,7 +1,6 @@
 {
-  "basic": "Basic",
-  "buttons": "Buttons",
-  "positioned": "Positioned",
-  "backgroundColors": "Background Colors",
-  "pillBadges": "Pill Badges"
+  "basic": "基础",
+  "checkbox": "复选框",
+  "disabled": "禁用",
+  "search": "搜索"
 }

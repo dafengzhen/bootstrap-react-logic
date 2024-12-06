@@ -38,6 +38,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
     parentKey,
     style,
     treeMap,
+    useCustomSearch,
     variables,
     ...rest
   } = props;
@@ -47,6 +48,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
     children,
     disabled = false,
     expanded = false,
+    highlighted = false,
     indeterminate,
     selectable = true,
   } = optionByDefault;
@@ -239,6 +241,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
             null,
             selectable ? treeStyles.brlCursorPointer : treeStyles.brlCursorNotAllowed,
             disabled && `${treeStyles.brlCursorDefault} opacity-50`,
+            !useCustomSearch && highlighted && 'px-1 text-bg-warning rounded',
           )}
           onClick={handleSelect}
         >
@@ -255,28 +258,30 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
             initial={{ height: 0 }}
             transition={{ duration: 0.35 }}
           >
-            {children?.map((item) => {
-              const _nodeKey = parentKey ? `${parentKey}-${item.id}` : `${item.id}`;
-              return (
-                <TreeNode
-                  checkbox={checkbox}
-                  checkMode={checkMode}
-                  className="ms-3"
-                  key={item.id}
-                  label={label}
-                  level={level + 1}
-                  nodeKey={_nodeKey}
-                  onCheck={onCheckByDefault}
-                  onOptionChange={onOptionChangeByDefault}
-                  onSelect={onSelectByDefault}
-                  onToggle={onToggleByDefault}
-                  option={item}
-                  options={options}
-                  parentKey={nodeKey}
-                  treeMap={treeMap}
-                />
-              );
-            })}
+            {children
+              ?.filter((item) => !item.hidden)
+              .map((item) => {
+                const _nodeKey = parentKey ? `${parentKey}-${item.id}` : `${item.id}`;
+                return (
+                  <TreeNode
+                    checkbox={checkbox}
+                    checkMode={checkMode}
+                    className="ms-3"
+                    key={item.id}
+                    label={label}
+                    level={level + 1}
+                    nodeKey={_nodeKey}
+                    onCheck={onCheckByDefault}
+                    onOptionChange={onOptionChangeByDefault}
+                    onSelect={onSelectByDefault}
+                    onToggle={onToggleByDefault}
+                    option={item}
+                    options={options}
+                    parentKey={nodeKey}
+                    treeMap={treeMap}
+                  />
+                );
+              })}
           </motion.div>
         )}
       </AnimatePresence>
