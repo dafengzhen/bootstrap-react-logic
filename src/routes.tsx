@@ -4,6 +4,7 @@ import BadgePage from '@pages/badge-page';
 import BreadcrumbPage from '@pages/breadcrumb-page.tsx';
 import ButtonGroupPage from '@pages/button-group-page.tsx';
 import ButtonPage from '@pages/button-page.tsx';
+import CalendarPage from '@pages/calendar-page.tsx';
 import CardPage from '@pages/card-page.tsx';
 import CarouselPage from '@pages/carousel-page.tsx';
 import CheckboxPage from '@pages/checkbox-page.tsx';
@@ -46,6 +47,7 @@ export enum MenuEnum {
   Breadcrumb = '/pages/breadcrumb',
   Button = '/pages/button',
   ButtonGroup = '/pages/button-group',
+  Calendar = '/pages/calendar',
   Card = '/pages/card',
   Carousel = '/pages/carousel',
   Checkbox = '/pages/checkbox',
@@ -216,6 +218,10 @@ const router = createBrowserRouter(
             {
               element: <TreePage />,
               path: 'pages/tree',
+            },
+            {
+              element: <CalendarPage />,
+              path: 'pages/calendar',
             },
           ],
           errorElement: <ErrorPage />,

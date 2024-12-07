@@ -133,6 +133,8 @@ type ButtonVariableType = {
   btnWhiteSpace?: string;
 };
 
+type CalendarVariablesType = object;
+
 type CardBodyVariablesType = {
   cardBg?: string;
   cardBorderColor?: string;
@@ -1151,6 +1153,7 @@ export type {
   BreadcrumbVariablesType,
   ButtonGroupVariablesType,
   ButtonVariableType,
+  CalendarVariablesType,
   CardBodyVariablesType,
   CardFooterVariablesType,
   CardGroupVariablesType,

@@ -1,0 +1,30 @@
+{
+  "calendar": {
+    "name": "Calendar",
+    "desc": {
+      "bottomContent": "Bottom Content",
+      "disabled": "Disabled",
+      "events": "Events",
+      "forceRows": "Force Rows",
+      "initialMonth": "Initial Month",
+      "initialYear": "Initial Year",
+      "locale": "Locale",
+      "onDateClick": "Date Click Callback",
+      "onMonthChange": "Month Change Callback",
+      "readOnly": "Read-Only",
+      "selectedDate": "Selected Date",
+      "topContent": "Top Content",
+      "weekDays": "Week Days",
+      "weekStartsOn": "Week Starts On",
+      "calendarEvent": "Calendar Event"
+    },
+    "events": {
+      "allDay": "All Day",
+      "description": "Description",
+      "endTime": "End Time",
+      "id": "Event ID",
+      "startTime": "Start Time",
+      "title": "Title"
+    }
+  }
+}

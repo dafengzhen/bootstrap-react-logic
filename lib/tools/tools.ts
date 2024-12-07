@@ -1,5 +1,20 @@
 import clsx, { type ClassValue } from 'clsx';
 import cssmix, { type StyleInput } from 'cssmix';
+import {
+  addDays,
+  eachDayOfInterval,
+  endOfMonth,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  isToday,
+  type Locale,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
+
+import type { CalendarData, CalendarDate, CalendarEvent } from '../calendar';
 
 import { BS_PREFIX, EMPTY_GROUP_FLAG, VARIABLE_BS_PREFIX } from './constants.ts';
 import { RoundedClassEnum } from './enums.ts';
@@ -1415,6 +1430,158 @@ const cloneDeep = <T>(value: T): T => {
   return _cloneDeep(value);
 };
 
+/**
+ * Generates a calendar for a specified month and year.
+ *
+ * @param {number} year - The year for the calendar.
+ * @param {number} month - The zero-based month for the calendar (0 = January, 11 = December).
+ * @param {CalendarEvent[]} events - An optional array of events to be included in the calendar.
+ * @param {5 | 6} forceRows - The number of rows (weeks) to force in the calendar, default is 6.
+ * @param {0 | 1} weekStartsOn - The day the week starts on: 0 for Sunday, 1 for Monday, default is 1.
+ * @param {string[]} weekDays - Optional custom labels for the week days. Defaults to ['S', 'M', 'T', 'W', 'T', 'F', 'S'].
+ * @param {Date | null} selectedDate - An optional selected date for highlighting in the calendar.
+ * @param locale
+ * @returns {CalendarData} - The generated calendar data, including days, rows, and week headers.
+ *
+ * The returned `CalendarData` includes:
+ * - `days`: An array of calendar day objects, each containing details about the date, events, and its state.
+ * - `rows`: A 2D array representing the calendar structure, including the week header and rows of days.
+ * - `weekHeader`: An array of week day labels adjusted to match `weekStartsOn`.
+ * - `year`: The provided year.
+ * - `month`: The provided month.
+ *
+ * This function ensures consistency in calendar structure by:
+ * - Filling in missing days at the start and end of the month with adjacent month's days if `forceRows` is used.
+ * - Aligning week day labels to match the starting day of the week.
+ * - Associating events to their respective days based on the event start time.
+ */
+const generateCalendar = (
+  year: number,
+  month: number,
+  events: CalendarEvent[] = [],
+  forceRows: 5 | 6 = 6,
+  weekStartsOn: 0 | 1 = 1,
+  weekDays: string[] = [],
+  selectedDate: Date | null = null,
+  locale: Locale | undefined = undefined,
+): CalendarData => {
+  const firstDayOfMonth = startOfMonth(new Date(year, month));
+  const lastDayOfMonth = endOfMonth(firstDayOfMonth);
+
+  let startDate = startOfWeek(firstDayOfMonth, { weekStartsOn });
+  let endDate = endOfWeek(lastDayOfMonth, { weekStartsOn });
+
+  if (forceRows) {
+    const totalDays = forceRows * 7;
+    startDate = startOfWeek(firstDayOfMonth, { weekStartsOn });
+    endDate = addDays(startDate, totalDays - 1);
+  }
+
+  let _isSelected = false;
+
+  const days: CalendarDate[] = eachDayOfInterval({ end: endDate, start: startDate }).map((date) => {
+    const formattedDate = format(date, 'yyyy-MM-dd');
+    const dayEvents = events.filter((event) =>
+      event.startTime ? format(new Date(event.startTime), 'yyyy-MM-dd') === formattedDate : false,
+    );
+
+    const today = isToday(date);
+    const isSelected = !!(selectedDate && isSameDay(date, selectedDate));
+    let active = today;
+
+    if (_isSelected && active) {
+      active = false;
+    } else if (isSelected) {
+      _isSelected = true;
+      active = true;
+    }
+
+    return {
+      active,
+      date,
+      events: dayEvents,
+      isCurrentMonth: isSameMonth(date, firstDayOfMonth),
+      isSelected,
+      isToday: today,
+    };
+  });
+
+  const rows = splitIntoRows(days, forceRows || days.length / 7, 7);
+  const _weekDays =
+    weekDays.length > 0
+      ? weekDays
+      : Array.from({ length: 7 }, (_, i) =>
+          format(new Date(1970, 0, i + 4), 'EEEEE', {
+            locale,
+          }),
+        );
+  const weekHeader = _weekDays.slice(weekStartsOn).concat(_weekDays.slice(0, weekStartsOn));
+  rows.unshift(weekHeader as any);
+
+  return {
+    days,
+    month,
+    rows,
+    weekHeader,
+    year,
+  };
+};
+
+/**
+ * Updates the active state of the calendar by comparing the current date with each day in the calendar data.
+ * The function marks the day matching the current date as active and keeps other days inactive.
+ * It updates both the `days` and `rows` in the calendar data structure.
+ *
+ * @param {CalendarDate} currentItem - The current date item used to determine the active date.
+ * @param {CalendarData} calendarData - The calendar data to be updated, which includes both `days` and `rows`.
+ * @returns {CalendarData} The updated calendar data with the active date marked.
+ */
+const updateCalendarActiveState = (currentItem: CalendarDate, calendarData: CalendarData): CalendarData => {
+  const currentDateISO = currentItem.date.toISOString();
+  const markActive = (day: CalendarDate) => ({
+    ...day,
+    active: day.date.toISOString() === currentDateISO,
+  });
+
+  return {
+    ...calendarData,
+    days: calendarData.days.map(markActive),
+    rows: calendarData.rows.map((week, index) => (index === 0 ? week : week.map(markActive))),
+  };
+};
+
+/**
+ * Splits an array of data into a 2D array with a specified number of rows and columns.
+ * If the data array has fewer items than the total number of cells (rowsCount * colsCount),
+ * the function will optionally fill the missing cells with a provided placeholder value.
+ *
+ * @param data - The array of data to be split into rows. The type of elements is generic (T[]).
+ * @param rowsCount - The number of rows to create in the resulting 2D array.
+ * @param colsCount - The number of columns in each row of the resulting 2D array.
+ * @param placeholder - An optional value used to fill the missing cells if the data array is shorter than the total number of cells.
+ *
+ * @returns A 2D array representing the data split into rows and columns.
+ *          Each row will contain `colsCount` elements, and the number of rows will be `rowsCount`.
+ *          If `placeholder` is provided, it will be used to fill any missing cells.
+ */
+const splitIntoRows = <T>(data: T[], rowsCount: number, colsCount: number, placeholder?: T): T[][] => {
+  const rows: T[][] = [];
+  const totalCells = rowsCount * colsCount;
+  const dataCopy = [...data];
+
+  if (placeholder) {
+    while (dataCopy.length < totalCells) {
+      dataCopy.push(placeholder);
+    }
+  }
+
+  for (let i = 0; i < rowsCount; i++) {
+    rows.push(dataCopy.slice(i * colsCount, (i + 1) * colsCount));
+  }
+
+  return rows;
+};
+
 export {
   calculateLoopIndex,
   camelToKebab,
@@ -1432,6 +1599,7 @@ export {
   findTreeNodeParentKeys,
   findTruthyClass,
   findTruthyClassOrDefault,
+  generateCalendar,
   generatePagination,
   generateRandomId,
   generateTreeNodeMap,
@@ -1455,10 +1623,12 @@ export {
   processSlotClasses,
   removeClasses,
   resolveRoundedClass,
+  splitIntoRows,
   stylex,
   toCamelCase,
   toKebabCase,
   toPascalCase,
+  updateCalendarActiveState,
   updateTreeNode,
   updateTreeNodeIndeterminateStatus,
   updateTreeNodeStatus,

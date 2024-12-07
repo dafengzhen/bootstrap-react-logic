@@ -1,0 +1,30 @@
+{
+  "calendar": {
+    "name": "Calendar",
+    "desc": {
+      "bottomContent": "底部内容",
+      "disabled": "禁用",
+      "events": "事件",
+      "forceRows": "强制行数",
+      "initialMonth": "初始月份",
+      "initialYear": "初始年份",
+      "locale": "语言环境",
+      "onDateClick": "日期点击回调",
+      "onMonthChange": "月份变更回调",
+      "readOnly": "只读",
+      "selectedDate": "选中的日期",
+      "topContent": "顶部内容",
+      "weekDays": "星期",
+      "weekStartsOn": "星期起始日",
+      "calendarEvent": "日历事件"
+    },
+    "events": {
+      "allDay": "全天",
+      "description": "描述",
+      "endTime": "结束时间",
+      "id": "事件ID",
+      "startTime": "开始时间",
+      "title": "标题"
+    }
+  }
+}
