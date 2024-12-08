@@ -1478,8 +1478,10 @@ const generateCalendar = (
   }
 
   let _isSelected = false;
+  let _todayIndex = -1;
+  let _todayFlag = false;
 
-  const days: CalendarDate[] = eachDayOfInterval({ end: endDate, start: startDate }).map((date) => {
+  const days: CalendarDate[] = eachDayOfInterval({ end: endDate, start: startDate }).map((date, index) => {
     const formattedDate = format(date, 'yyyy-MM-dd');
     const dayEvents = events.filter((event) =>
       event.startTime ? format(new Date(event.startTime), 'yyyy-MM-dd') === formattedDate : false,
@@ -1489,11 +1491,19 @@ const generateCalendar = (
     const isSelected = !!(selectedDate && isSameDay(date, selectedDate));
     let active = today;
 
+    if (today) {
+      _todayIndex = index;
+    }
+
     if (_isSelected && active) {
       active = false;
     } else if (isSelected) {
       _isSelected = true;
       active = true;
+
+      if (_todayIndex !== -1) {
+        _todayFlag = true;
+      }
     }
 
     return {
@@ -1505,6 +1515,10 @@ const generateCalendar = (
       isToday: today,
     };
   });
+
+  if (_todayFlag && _todayIndex !== -1) {
+    days[_todayIndex].active = false;
+  }
 
   const rows = splitIntoRows(days, forceRows || days.length / 7, 7);
   const _weekDays =
