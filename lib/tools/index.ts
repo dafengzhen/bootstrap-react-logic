@@ -16,12 +16,15 @@ export type {
 export { RoundedClassEnum } from './enums';
 
 export {
+  BiCalendar,
+  BiCalendar2,
   BiChevronDoubleLeft,
   BiChevronDoubleRight,
   BiChevronDown,
   BiChevronLeft,
   BiChevronRight,
   BiChevronUp,
+  BiClock,
   BiThreeDots,
 } from './icons.tsx';
 
@@ -44,6 +47,7 @@ export {
   findTreeNodeParentKeys,
   findTruthyClass,
   findTruthyClassOrDefault,
+  formatDateByPickerType,
   generateCalendar,
   generatePagination,
   generateRandomId,
@@ -74,6 +78,8 @@ export {
   toKebabCase,
   toPascalCase,
   updateCalendarActiveState,
+  updateCalendarDataTypeActiveState,
+  updateCalendarWeekActiveState,
   updateTreeNode,
   updateTreeNodeIndeterminateStatus,
   updateTreeNodeStatus,
@@ -113,6 +119,14 @@ export type {
   CheckboxVariablesType,
   CloseButtonVariableType,
   CollapseVariablesType,
+  DatePickerDatetimeVariablesType,
+  DatePickerDateVariablesType,
+  DatePickerMonthVariablesType,
+  DatePickerQuarterVariablesType,
+  DatePickerTimeVariablesType,
+  DatePickerVariablesType,
+  DatePickerWeekVariablesType,
+  DatePickerYearVariablesType,
   DropdownDividerVariablesType,
   DropdownHeaderVariablesType,
   DropdownItemTextVariablesType,

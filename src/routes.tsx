@@ -10,6 +10,7 @@ import CarouselPage from '@pages/carousel-page.tsx';
 import CheckboxPage from '@pages/checkbox-page.tsx';
 import CloseButtonPage from '@pages/close-button-page.tsx';
 import CollapsePage from '@pages/collapse-page.tsx';
+import DatePickerPage from '@pages/date-picker-page.tsx';
 import DropdownPage from '@pages/dropdown-page.tsx';
 import ErrorPage from '@pages/error-page.tsx';
 import FloatingLabelPage from '@pages/floating-label-page.tsx';
@@ -53,6 +54,7 @@ export enum MenuEnum {
   Checkbox = '/pages/checkbox',
   CloseButton = '/pages/close-button',
   Collapse = '/pages/collapse',
+  DatePicker = '/pages/date-picker',
   Dropdown = '/pages/dropdown',
   FloatingLabel = '/pages/floating-label',
   Input = '/pages/input',
@@ -222,6 +224,10 @@ const router = createBrowserRouter(
             {
               element: <CalendarPage />,
               path: 'pages/calendar',
+            },
+            {
+              element: <DatePickerPage />,
+              path: 'pages/date-picker',
             },
           ],
           errorElement: <ErrorPage />,

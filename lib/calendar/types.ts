@@ -12,12 +12,14 @@ export interface CalendarData {
 }
 
 export interface CalendarDate {
-  active: boolean;
-  date: Date;
+  active?: boolean;
+  date?: Date;
   events?: CalendarEvent[];
-  isCurrentMonth: boolean;
+  isCurrentMonth?: boolean;
   isSelected?: boolean;
-  isToday: boolean;
+  isToday?: boolean;
+  type?: 'header' | 'month' | 'quarter' | 'year';
+  value?: string;
 }
 
 export interface CalendarEvent {

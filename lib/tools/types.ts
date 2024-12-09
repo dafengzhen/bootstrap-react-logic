@@ -446,6 +446,22 @@ type CloseButtonVariableType = {
 
 type CollapseVariablesType = object;
 
+type DatePickerDatetimeVariablesType = DatePickerVariablesType;
+
+type DatePickerDateVariablesType = DatePickerVariablesType;
+
+type DatePickerMonthVariablesType = DatePickerVariablesType;
+
+type DatePickerQuarterVariablesType = DatePickerVariablesType;
+
+type DatePickerTimeVariablesType = DatePickerVariablesType;
+
+type DatePickerVariablesType = object;
+
+type DatePickerWeekVariablesType = DatePickerVariablesType;
+
+type DatePickerYearVariablesType = DatePickerVariablesType;
+
 type DropdownDividerVariablesType = DropdownVariablesType;
 
 type DropdownHeaderVariablesType = DropdownVariablesType;
@@ -1170,6 +1186,14 @@ export type {
   CheckboxVariablesType,
   CloseButtonVariableType,
   CollapseVariablesType,
+  DatePickerDatetimeVariablesType,
+  DatePickerDateVariablesType,
+  DatePickerMonthVariablesType,
+  DatePickerQuarterVariablesType,
+  DatePickerTimeVariablesType,
+  DatePickerVariablesType,
+  DatePickerWeekVariablesType,
+  DatePickerYearVariablesType,
   DropdownDividerVariablesType,
   DropdownHeaderVariablesType,
   DropdownItemTextVariablesType,

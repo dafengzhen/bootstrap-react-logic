@@ -58,39 +58,25 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
     };
   }, [className, dropOldClass, style, variables]);
 
-  const handlePreviousMonth = useCallback(() => {
-    if (disabled) {
-      return;
-    }
+  const handleMonthChange = useCallback(
+    (offset: number) => {
+      if (disabled) {
+        return;
+      }
 
-    setCurrentItem(null);
-    const newDate = new Date(currentYear, currentMonth - 1);
-    setCurrentYear(newDate.getFullYear());
-    setCurrentMonth(newDate.getMonth());
+      setCurrentItem(null);
+      const newDate = new Date(currentYear, currentMonth + offset);
+      setCurrentYear(newDate.getFullYear());
+      setCurrentMonth(newDate.getMonth());
 
-    if (readOnly) {
-      return;
-    }
+      if (readOnly) {
+        return;
+      }
 
-    onMonthChangeByDefault?.(newDate.getFullYear(), newDate.getMonth());
-  }, [currentMonth, currentYear, disabled, onMonthChangeByDefault, readOnly]);
-
-  const handleNextMonth = useCallback(() => {
-    if (disabled) {
-      return;
-    }
-
-    setCurrentItem(null);
-    const newDate = new Date(currentYear, currentMonth + 1);
-    setCurrentYear(newDate.getFullYear());
-    setCurrentMonth(newDate.getMonth());
-
-    if (readOnly) {
-      return;
-    }
-
-    onMonthChangeByDefault?.(newDate.getFullYear(), newDate.getMonth());
-  }, [currentMonth, currentYear, disabled, onMonthChangeByDefault, readOnly]);
+      onMonthChangeByDefault?.(newDate.getFullYear(), newDate.getMonth());
+    },
+    [currentMonth, currentYear, disabled, onMonthChangeByDefault, readOnly],
+  );
 
   const onDateClick = useCallback(
     (item: CalendarDate) => {
@@ -99,8 +85,8 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
       }
 
       const _item = { ...item, active: true };
-      setCurrentItem(currentItem && currentItem.date.toISOString() === _item.date.toISOString() ? null : _item);
-      setCalendarData(updateCalendarActiveState(_item, calendarData));
+      setCurrentItem(currentItem && currentItem.date!.toISOString() === _item.date!.toISOString() ? null : _item);
+      setCalendarData((prevState) => updateCalendarActiveState(_item, prevState));
 
       if (readOnly) {
         return;
@@ -108,7 +94,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
 
       onDateClickByDefault?.(_item);
     },
-    [calendarData, currentItem, disabled, onDateClickByDefault, readOnly],
+    [currentItem, disabled, onDateClickByDefault, readOnly],
   );
 
   useEffect(() => {
@@ -123,7 +109,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
 
       <div className="list-group border-0 row-gap-1 px-3">
         <div className="row align-items-center position-relative text-center mb-2">
-          <div className="col px-1" onClick={handlePreviousMonth}>
+          <div className="col px-1" onClick={() => handleMonthChange(-1)}>
             <div
               className={classxWithOptions(
                 null,
@@ -139,7 +125,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
           <div className="col px-1"></div>
           <div className="col px-1"></div>
           <div className="col px-1"></div>
-          <div className="col px-1" onClick={handleNextMonth}>
+          <div className="col px-1" onClick={() => handleMonthChange(1)}>
             <div
               className={classxWithOptions(
                 null,
@@ -162,18 +148,18 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
             {row.map((item, index) => {
               if (rowIndex === 0) {
                 return (
-                  <div className="col px-1" key={`${item}${index}` as any}>
-                    <div className="list-group-item border-0 px-0 py-1 rounded text-body-secondary">{item as any}</div>
+                  <div className="col px-1" key={`${item.value}${index}`}>
+                    <div className="list-group-item border-0 px-0 py-1 rounded text-body-secondary">{item.value}</div>
                   </div>
                 );
               }
 
               return (
-                <div className="col px-1" key={item.date.toISOString()} onClick={() => onDateClick(item)}>
+                <div className="col px-1" key={item.date!.toISOString()} onClick={() => onDateClick(item)}>
                   <div
                     className={classxWithOptions(
                       null,
-                      'position-relative list-group-item list-group-item-action px-0 py-1 rounded',
+                      'list-group-item list-group-item-action px-0 py-1 rounded',
                       disabled ? 'disabled' : calendarStyles.brlCursorPointer,
                       !item.isCurrentMonth && !item.active && 'text-body-tertiary',
                       item.active && 'active',
@@ -186,7 +172,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
                           : 'border-0',
                     )}
                   >
-                    {format(item.date, 'd', { locale })}
+                    {format(item.date!, 'd', { locale })}
                     {item.active && item.events && item.events.length > 0 && <span className="text-danger">•</span>}
                   </div>
                 </div>
@@ -210,7 +196,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
               return (
                 <li
                   className="list-group-item d-flex justify-content-between align-items-start border-bottom-0"
-                  key={`${item.id ?? index}-${currentItem.date.toISOString()}`}
+                  key={`${item.id ?? index}-${currentItem.date!.toISOString()}`}
                 >
                   <div className="ms-2 me-auto">
                     <div className="fw-bold">{item.title}</div>

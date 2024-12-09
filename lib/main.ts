@@ -9,6 +9,7 @@ export * from './card';
 export * from './carousel';
 export * from './checkbox';
 export * from './collapse';
+export * from './date-picker';
 export * from './dropdown';
 export * from './floating-label';
 export * from './input';
