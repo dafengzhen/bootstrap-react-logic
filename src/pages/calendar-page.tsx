@@ -85,11 +85,11 @@ export default function CalendarPage() {
   const [selectedDate2, setSelectedDate2] = useState<Date>(new Date());
 
   const handleDateClick = (day: CalendarDate) => {
-    console.log('Clicked date:', day.date.toLocaleDateString());
+    console.log('Clicked date:', day.date!.toLocaleDateString());
   };
 
   const handleDateClick2 = (day: CalendarDate) => {
-    setSelectedDate2(day.date);
+    setSelectedDate2(day.date!);
   };
 
   const handleMonthChange = (year: number, month: number) => {
