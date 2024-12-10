@@ -2,10 +2,15 @@
   "datePicker": {
     "name": "DatePicker",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "disabled": "Disabled",
+      "locale": "Locale",
+      "onChange": "Change Callback",
+      "onInputValueAvailable": "Input Value Available Callback",
+      "pickerType": "Picker Type",
+      "placeholder": "Placeholder",
+      "readOnly": "Read-Only",
+      "value": "Value",
+      "datePickerType": "Picker Type"
     }
   }
 }

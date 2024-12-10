@@ -48,7 +48,7 @@ const DatePickerYear = function DatePickerYear<T extends ElementType = 'div'>(pr
 
   const handleMonthChange = useCallback(
     (offset: number) => {
-      const newDate = new Date(currentYear, currentMonth + offset);
+      const newDate = new Date(currentYear + offset, currentMonth);
       setCurrentYear(newDate.getFullYear());
       setCurrentMonth(newDate.getMonth());
     },
@@ -99,7 +99,7 @@ const DatePickerYear = function DatePickerYear<T extends ElementType = 'div'>(pr
             </div>
           </div>
           <div className="position-absolute top-50 start-50 translate-middle w-auto text-nowrap">
-            {format(new Date(currentYear, currentMonth), 'MMMM yyyy', {
+            {format(new Date(currentYear, currentMonth), 'yyyy', {
               locale,
             })}
           </div>

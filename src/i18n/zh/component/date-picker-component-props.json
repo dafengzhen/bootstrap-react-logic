@@ -2,10 +2,15 @@
   "datePicker": {
     "name": "DatePicker",
     "desc": {
-      "as": "Type",
-      "variant": "Variant",
-      "variantType": "Variant Type",
-      "rounded": "Rounded"
+      "disabled": "禁用",
+      "locale": "语言环境",
+      "onChange": "更改回调",
+      "onInputValueAvailable": "输入值可用回调",
+      "pickerType": "选择器类型",
+      "placeholder": "占位符",
+      "readOnly": "只读",
+      "value": "值",
+      "datePickerType": "选择器类型"
     }
   }
 }

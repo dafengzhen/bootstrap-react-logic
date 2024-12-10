@@ -169,8 +169,8 @@ const DatePickerDatetime = function DatePickerDatetime<T extends ElementType = '
 
       <div className="input-group mt-4 mb-1">
         <span className="input-group-text text-primary-emphasis">
-          <span className="pe-1">Time</span>
           <BiClock />
+          <span className="ps-1">Time</span>
         </span>
         <input className="form-control" onChange={handleHoursChange} placeholder="HH" type="text" value={hours} />
         <span className="input-group-text text-secondary">:</span>

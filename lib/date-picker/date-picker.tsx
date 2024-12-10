@@ -35,6 +35,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
     onInputValueAvailable: onInputValueAvailableByDefault,
     pickerType = 'date',
     placeholder: placeholderByDefault,
+    readOnly,
     style,
     value: valueByDefault,
     variables,
@@ -70,7 +71,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   });
 
   const click = useClick(context, {
-    enabled: !disabled,
+    enabled: !(disabled || readOnly),
     toggle: false,
   });
   const dismiss = useDismiss(context);
@@ -95,9 +96,13 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   }, []);
 
   const onClickIcon = useCallback(() => {
+    if (disabled || readOnly) {
+      return;
+    }
+
     onInputFocus();
     setIsOpen((prevState) => !prevState);
-  }, [onInputFocus]);
+  }, [disabled, onInputFocus, readOnly]);
 
   const handleValueChange = useCallback(
     (value?: string, type?: DatePickerType) => {
@@ -356,8 +361,10 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
       <Component {...rest} {...renderOptions} {...getReferenceProps()} ref={refs.setReference}>
         <input
           className={classxWithOptions(null, 'form-control', datePickerStyles.brlPe9)}
+          disabled={disabled}
           onChange={onInputChange}
           placeholder={placeholder}
+          readOnly={readOnly}
           ref={inputElement}
           type="text"
           value={inputValue}
@@ -367,7 +374,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
             null,
             'position-absolute top-50 translate-middle-y d-inline-flex',
             datePickerStyles.brlEnd3,
-            datePickerStyles.brlCursorPointer,
+            disabled || readOnly ? 'text-secondary' : datePickerStyles.brlCursorPointer,
           )}
           onClick={onClickIcon}
         >

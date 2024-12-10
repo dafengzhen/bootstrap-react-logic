@@ -133,6 +133,11 @@ type Props<T extends ElementType> = BaseProps<T, DatePickerVariablesType> & {
   placeholder?: string;
 
   /**
+   * readOnly.
+   */
+  readOnly?: boolean;
+
+  /**
    * value.
    */
   value?: string;
