@@ -17,6 +17,8 @@ import { BiClock, classx, convertBsKeyToVar, stylex } from '../tools';
 
 const currentDate = new Date();
 
+const padTime = (value: number): string => value.toString().padStart(2, '0');
+
 const DatePickerTime = function DatePickerTime<T extends ElementType = 'div'>(props: DatePickerTimeProps<T>) {
   const {
     as: Component = 'div' as ElementType,
@@ -29,13 +31,10 @@ const DatePickerTime = function DatePickerTime<T extends ElementType = 'div'>(pr
     ...rest
   } = props;
 
-  const [hours, setHours] = useState(`${(selectedDate ?? currentDate)?.getHours().toString().padStart(2, '0') ?? ''}`);
-  const [minutes, setMinutes] = useState(
-    `${(selectedDate ?? currentDate)?.getMinutes().toString().padStart(2, '0') ?? ''}`,
-  );
-  const [seconds, setSeconds] = useState(
-    `${(selectedDate ?? currentDate)?.getSeconds().toString().padStart(2, '0') ?? ''}`,
-  );
+  const effectiveDate = selectedDate ?? currentDate;
+  const [hours, setHours] = useState(padTime(effectiveDate.getHours()));
+  const [minutes, setMinutes] = useState(padTime(effectiveDate.getMinutes()));
+  const [seconds, setSeconds] = useState(padTime(effectiveDate.getSeconds()));
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'card card-body border-0 p-0', className);
@@ -75,10 +74,10 @@ const DatePickerTime = function DatePickerTime<T extends ElementType = 'div'>(pr
   };
 
   useEffect(() => {
-    setHours(`${(selectedDate ?? currentDate).getHours().toString().padStart(2, '0')}`);
-    setMinutes(`${(selectedDate ?? currentDate).getMinutes().toString().padStart(2, '0')}`);
-    setSeconds(`${(selectedDate ?? currentDate).getSeconds().toString().padStart(2, '0')}`);
-  }, [selectedDate]);
+    setHours(padTime(effectiveDate.getHours()));
+    setMinutes(padTime(effectiveDate.getMinutes()));
+    setSeconds(padTime(effectiveDate.getSeconds()));
+  }, [effectiveDate]);
 
   return (
     <Component {...rest} {...renderOptions}>

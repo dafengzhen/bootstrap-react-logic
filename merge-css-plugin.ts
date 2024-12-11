@@ -16,7 +16,7 @@ const mergeCssPlugin = (): Plugin => {
         (file): file is OutputAsset => file.type === 'asset' && file.fileName.endsWith('.css'),
       );
 
-      if (cssFiles.length > 1) {
+      if (cssFiles.length > 0) {
         const mergedCss = mergeCssSources(cssFiles);
         const result = await processCssWithPostcss(mergedCss);
         result.css += `\n/*# sourceMappingURL=bootstrap-react-logic.css.map */`;

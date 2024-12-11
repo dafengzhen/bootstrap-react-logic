@@ -3,6 +3,7 @@ import { type ChangeEvent, type ElementType, useCallback, useEffect, useMemo, us
 
 import type { DatePickerDatetimeProps } from './types.ts';
 
+import datePickerStyles from '../global.module.scss';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -14,9 +15,10 @@ import {
   stylex,
   updateCalendarActiveState,
 } from '../tools';
-import datePickerStyles from './date-picker.module.scss';
 
 const currentDate = new Date();
+
+const padTime = (value: number): string => value.toString().padStart(2, '0');
 
 const DatePickerDatetime = function DatePickerDatetime<T extends ElementType = 'div'>(
   props: DatePickerDatetimeProps<T>,
@@ -33,18 +35,15 @@ const DatePickerDatetime = function DatePickerDatetime<T extends ElementType = '
     ...rest
   } = props;
 
+  const effectiveDate = selectedDate ?? currentDate;
   const [currentYear, setCurrentYear] = useState<number>(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(currentDate.getMonth());
   const [calendarData, setCalendarData] = useState(
     generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale),
   );
-  const [hours, setHours] = useState(`${(selectedDate ?? currentDate)?.getHours().toString().padStart(2, '0') ?? ''}`);
-  const [minutes, setMinutes] = useState(
-    `${(selectedDate ?? currentDate)?.getMinutes().toString().padStart(2, '0') ?? ''}`,
-  );
-  const [seconds, setSeconds] = useState(
-    `${(selectedDate ?? currentDate)?.getSeconds().toString().padStart(2, '0') ?? ''}`,
-  );
+  const [hours, setHours] = useState(padTime(effectiveDate.getHours()));
+  const [minutes, setMinutes] = useState(padTime(effectiveDate.getMinutes()));
+  const [seconds, setSeconds] = useState(padTime(effectiveDate.getSeconds()));
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'card card-body border-0 p-0', className);
@@ -92,10 +91,10 @@ const DatePickerDatetime = function DatePickerDatetime<T extends ElementType = '
 
   useEffect(() => {
     setCalendarData(generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale));
-    setHours(`${(selectedDate ?? currentDate).getHours().toString().padStart(2, '0')}`);
-    setMinutes(`${(selectedDate ?? currentDate).getMinutes().toString().padStart(2, '0')}`);
-    setSeconds(`${(selectedDate ?? currentDate).getSeconds().toString().padStart(2, '0')}`);
-  }, [currentMonth, currentYear, locale, selectedDate]);
+    setHours(padTime(effectiveDate.getHours()));
+    setMinutes(padTime(effectiveDate.getMinutes()));
+    setSeconds(padTime(effectiveDate.getSeconds()));
+  }, [currentMonth, currentYear, effectiveDate, locale, selectedDate]);
 
   return (
     <Component {...rest} {...renderOptions}>

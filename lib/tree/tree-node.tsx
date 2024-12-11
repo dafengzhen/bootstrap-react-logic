@@ -3,6 +3,7 @@ import { type ElementType, useCallback, useMemo } from 'react';
 
 import type { TreeActionHandler, TreeNodeProps, TreeOption } from './types.ts';
 
+import treeStyles from '../global.module.scss';
 import {
   BiChevronDown,
   BiChevronRight,
@@ -17,7 +18,6 @@ import {
   updateTreeNodesUsingMap,
   updateTreeNodeUsingMap,
 } from '../tools';
-import treeStyles from './tree.module.scss';
 
 const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNodeProps<T>) {
   const {

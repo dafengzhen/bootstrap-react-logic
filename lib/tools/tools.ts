@@ -7,6 +7,7 @@ import {
   endOfMonth,
   endOfWeek,
   format,
+  isAfter,
   isSameDay,
   isSameMonth,
   isToday,
@@ -1437,36 +1438,21 @@ const cloneDeep = <T>(value: T): T => {
 };
 
 /**
- * Generates a calendar for a specified month and year.
+ * Generates a structured calendar data object based on the provided parameters.
  *
  * @param {number} year - The year for the calendar.
- * @param {number} month - The zero-based month for the calendar (0 = January, 11 = December).
- * @param {CalendarEvent[]} events - An optional array of events to be included in the calendar. Each event should have a `startTime` property to match with specific days.
- * @param {5 | 6} forceRows - The number of rows (weeks) to force in the calendar. Defaults to 6. If provided, will extend the calendar to the required number of rows, filling in missing days from adjacent months.
- * @param {0 | 1} weekStartsOn - The day the week starts on: 0 for Sunday, 1 for Monday. Defaults to 1 (Monday).
- * @param {string[]} weekDays - Optional custom labels for the week days. Defaults to ['S', 'M', 'T', 'W', 'T', 'F', 'S'].
- * @param {Date | null} selectedDate - An optional selected date for highlighting in the calendar. If provided, the selected date will be marked in the calendar.
- * @param {Locale} locale - Optional locale to format the week days. Defaults to `undefined`.
- * @param {boolean} setSelectedWeekActive - If `true`, all the dates in the week of the `selectedDate` will be marked as active. Defaults to `false`.
- * @param {string} dataType - Specifies whether to generate a 'month', 'quarter', or 'year' view.
- * @returns {CalendarData} - The generated calendar data, including days, rows, and week headers.
+ * @param {number} month - The month (0-based index) for the calendar.
+ * @param {CalendarEvent[]} [events=[]] - An array of calendar events with start times.
+ * @param {5 | 6} [forceRows=6] - The number of rows to enforce in the calendar display (5 or 6).
+ * @param {0 | 1} [weekStartsOn=1] - The day the week starts on (0 = Sunday, 1 = Monday).
+ * @param {string[]} [weekDays=[]] - Custom week day labels; defaults to localized day initials.
+ * @param {Date | Date[] | null} [selectedDate=null] - A single selected date or an array of selected dates.
+ * @param {Locale | undefined} [locale=undefined] - Locale settings for date formatting.
+ * @param {boolean} [setSelectedWeekActive=false] - Whether to highlight the week containing the selected date(s).
+ * @param {'month' | 'quarter' | 'year' | undefined} [dataType=undefined] - The data type for the calendar view
+ *  (e.g., 'month' for months, 'quarter' for quarters, or 'year' for years).
  *
- * The returned `CalendarData` includes:
- * - `days`: An array of calendar day objects, each containing details about the date, events, and its state.
- * - `rows`: A 2D array representing the calendar structure, including the week header and rows of days.
- * - `weekHeader`: An array of week day labels adjusted to match `weekStartsOn`.
- * - `year`: The provided year.
- * - `month`: The provided month.
- *
- * This function ensures consistency in calendar structure by:
- * - Filling in missing days at the start and end of the month with adjacent month's days if `forceRows` is used.
- * - Aligning week day labels to match the starting day of the week (either Sunday or Monday).
- * - Associating events to their respective days based on the event `startTime`.
- * - Highlighting the selected date if provided and optionally marking the whole week of the selected date as active if `setSelectedWeekActive` is `true`.
- * - Handling selected dates for `month`, `quarter`, and `year` views:
- *   - For `month` view, marks the selected month as active.
- *   - For `quarter` view, marks the selected quarter as active if the `selectedDate` falls within the quarter's months.
- *   - For `year` view, marks the selected year as active if it matches the `selectedDate`.
+ * @returns {CalendarData} - An object containing the days, week headers, rows, and other calendar data.
  */
 const generateCalendar = (
   year: number,
@@ -1475,7 +1461,7 @@ const generateCalendar = (
   forceRows: 5 | 6 = 6,
   weekStartsOn: 0 | 1 = 1,
   weekDays: string[] = [],
-  selectedDate: Date | null = null,
+  selectedDate: Date | Date[] | null = null,
   locale: Locale | undefined = undefined,
   setSelectedWeekActive: boolean = false,
   dataType: 'month' | 'quarter' | 'year' | undefined = undefined,
@@ -1492,7 +1478,9 @@ const generateCalendar = (
     endDate = addDays(startDate, totalDays - 1);
   }
 
-  let _isSelected = false;
+  const selectedDatesArray = Array.isArray(selectedDate) ? selectedDate : selectedDate ? [selectedDate] : [];
+  const selectedDateSet = new Set(selectedDatesArray.map((date) => format(date, 'yyyy-MM-dd')));
+
   let _todayIndex = -1;
   let _todayFlag = false;
 
@@ -1503,17 +1491,14 @@ const generateCalendar = (
     );
 
     const today = isToday(date);
-    const isSelected = !!(selectedDate && isSameDay(date, selectedDate));
+    const isSelected = selectedDateSet.has(formattedDate);
     let active = today;
 
     if (today) {
       _todayIndex = index;
     }
 
-    if (_isSelected && active) {
-      active = false;
-    } else if (isSelected) {
-      _isSelected = true;
+    if (isSelected) {
       active = true;
 
       if (_todayIndex !== -1) {
@@ -1535,13 +1520,15 @@ const generateCalendar = (
     days[_todayIndex].active = false;
   }
 
-  if (setSelectedWeekActive && selectedDate) {
-    const startOfWeekForSelectedDate = startOfWeek(selectedDate, { weekStartsOn });
-    const endOfWeekForSelectedDate = endOfWeek(selectedDate, { weekStartsOn });
-    days.forEach((day) => {
-      if (isWithinInterval(day.date!, { end: endOfWeekForSelectedDate, start: startOfWeekForSelectedDate })) {
-        day.active = true;
-      }
+  if (setSelectedWeekActive && selectedDatesArray.length > 0) {
+    selectedDatesArray.forEach((selectedDate) => {
+      const startOfWeekForSelectedDate = startOfWeek(selectedDate, { weekStartsOn });
+      const endOfWeekForSelectedDate = endOfWeek(selectedDate, { weekStartsOn });
+      days.forEach((day) => {
+        if (isWithinInterval(day.date!, { end: endOfWeekForSelectedDate, start: startOfWeekForSelectedDate })) {
+          day.active = true;
+        }
+      });
     });
   }
 
@@ -1560,7 +1547,7 @@ const generateCalendar = (
     const months: CalendarDate[] = Array.from({ length: 12 }, (_, i) => {
       const date = new Date(year, i);
       const value = format(date, 'LL', { locale });
-      const isSelectedMonth = !!(selectedDate && selectedDate.getMonth() === i);
+      const isSelectedMonth = selectedDatesArray.some((selectedDate) => selectedDate.getMonth() === i);
       return {
         active: isSelectedMonth,
         date,
@@ -1575,10 +1562,8 @@ const generateCalendar = (
       const value = format(date, 'QQ', { locale });
       const quarterStartMonth = i * 3;
       const quarterEndMonth = quarterStartMonth + 2;
-      const isSelectedQuarter = !!(
-        selectedDate &&
-        selectedDate.getMonth() >= quarterStartMonth &&
-        selectedDate.getMonth() <= quarterEndMonth
+      const isSelectedQuarter = selectedDatesArray.some(
+        (selectedDate) => selectedDate.getMonth() >= quarterStartMonth && selectedDate.getMonth() <= quarterEndMonth,
       );
       return {
         active: isSelectedQuarter,
@@ -1596,7 +1581,9 @@ const generateCalendar = (
       const offset = i - beforeYears;
       const date = addYears(new Date(year, 0), offset);
       const value = format(date, 'yyyy', { locale });
-      const isSelectedYear = !!(selectedDate && selectedDate.getFullYear() === parseInt(value, 10));
+      const isSelectedYear = selectedDatesArray.some(
+        (selectedDate) => selectedDate.getFullYear() === parseInt(value, 10),
+      );
       return {
         active: isSelectedYear,
         date,
@@ -1625,19 +1612,19 @@ const generateCalendar = (
 };
 
 /**
- * Updates the active state of each day in the calendar based on the provided current date.
- * It marks the day that matches the current date as active, while keeping other days inactive.
- * Both `days` and `rows` in the calendar data structure are updated.
+ * Updates the calendar's active state by marking the specified date as active.
+ * The function compares only the date portion (ignoring the time) to determine the active day.
+ * It ensures that the `days` array and the `rows` array in the calendar data are updated consistently.
  *
- * @param {CalendarDate} currentItem - The current date used to mark the active day.
- * @param {CalendarData} calendarData - The calendar data to be updated, which includes `days` and `rows`.
- * @returns {CalendarData} The updated calendar data with the active date marked.
+ * @param {CalendarDate} currentItem - The date object representing the current date to be marked as active.
+ * @param {CalendarData} calendarData - The calendar data containing `days` (flat list of dates) and `rows` (organized weekly).
+ * @returns {CalendarData} A new calendar data object with the active state updated.
  */
 const updateCalendarActiveState = (currentItem: CalendarDate, calendarData: CalendarData): CalendarData => {
-  const currentDateISO = currentItem.date!.toISOString();
+  const currentDate = currentItem.date!;
   const markActive = (day: CalendarDate) => ({
     ...day,
-    active: (day.date as Date).toISOString() === currentDateISO,
+    active: isSameDay(day.date!, currentDate),
   });
 
   return {
@@ -1648,18 +1635,18 @@ const updateCalendarActiveState = (currentItem: CalendarDate, calendarData: Cale
 };
 
 /**
- * Updates the active state for the week containing the current date.
- * The week containing the current date will be marked as active, while other weeks remain inactive.
+ * Updates the active state for the week containing the specified date.
+ * The week containing the specified date will be marked as active, while other weeks remain inactive.
  * Only the `rows` in the calendar data are updated.
  *
- * @param {CalendarDate} currentItem - The current date used to determine the active week.
+ * @param {CalendarDate} currentItem - The date object used to determine the active week.
  * @param {CalendarData} calendarData - The calendar data to be updated, which includes `rows`.
- * @returns {CalendarData} The updated calendar data with the active week marked.
+ * @returns {CalendarData} A new calendar data object with the active week marked.
  */
 const updateCalendarWeekActiveState = (currentItem: CalendarDate, calendarData: CalendarData): CalendarData => {
-  const currentDateISO = currentItem.date!.toISOString();
+  const currentDate = currentItem.date!;
   const targetRowIndex = calendarData.rows.findIndex(
-    (week, index) => index !== 0 && week.some((day) => day.date!.toISOString() === currentDateISO),
+    (week, index) => index !== 0 && week.some((day) => isSameDay(day.date!, currentDate)),
   );
 
   return {
@@ -1751,72 +1738,97 @@ const splitIntoRows = <T>(data: T[], rowsCount: number, colsCount: number, place
  *   console.log(result.computedDate);   // Mon Dec 09 2024 ...
  * }
  */
+
+/**
+ * Formats and processes a date value based on the specified picker type.
+ *
+ * @param value - The input date value (string, Date, or an array of Dates) to be processed.
+ * @param type - The type of picker to determine the formatting logic.
+ *                     Supported values: 'date', 'datetime', 'month', 'quarter', 'time', 'week', 'year'.
+ * @returns An object containing:
+ *          - formattedValue: A string array representation of the formatted date(s).
+ *          - computedDate: An array of processed Date objects.
+ *          Returns null if the input value is invalid or unsupported.
+ *
+ * @example
+ * const result = formatDateByPickerType(['2024-12-09', '2024-12-10'], 'date');
+ * if (result) {
+ *   console.log(result.formattedValue); // ['2024-12-09', '2024-12-10']
+ *   console.log(result.computedDate);   // [Mon Dec 09 2024 ..., Tue Dec 10 2024 ...]
+ * }
+ */
 const formatDateByPickerType = (
-  value: Date | null | string | undefined,
+  value: Date | Date[] | null | string | string[] | undefined,
   type: 'date' | 'datetime' | 'month' | 'quarter' | 'time' | 'week' | 'year',
-): null | { computedDate: Date; formattedValue: string } => {
-  const parseToDate = (value: any): Date | null => {
+): null | { computedDate: Date[]; formattedValue: string[] } => {
+  const normalizeToDateArray = (value: any): Date[] => {
     if (!value) {
-      return null;
+      return [];
     }
 
-    const date = typeof value === 'string' ? parseISO(value) : new Date(value);
-    return isValid(date) ? date : null;
+    const values = Array.isArray(value) ? value : [value];
+    return values.map((v) => (typeof v === 'string' ? parseISO(v) : new Date(v))).filter(isValid);
   };
 
-  const parsedDate = parseToDate(value);
-  if (!parsedDate) {
+  const dateArray = normalizeToDateArray(value);
+  if (dateArray.length === 0) {
     return null;
   }
 
-  switch (type) {
-    case 'date':
-      return {
-        computedDate: parsedDate,
-        formattedValue: format(parsedDate, 'yyyy-MM-dd'),
-      };
-    case 'datetime':
-      return {
-        computedDate: parsedDate,
-        formattedValue: format(parsedDate, 'yyyy-MM-dd HH:mm:ss'),
-      };
-    case 'month': {
-      const monthStart = startOfMonth(parsedDate);
-      return {
-        computedDate: monthStart,
-        formattedValue: format(monthStart, 'yyyy-MM'),
-      };
+  const formatSingleDate = (date: Date): { computedDate: Date; formattedValue: string } => {
+    switch (type) {
+      case 'date':
+        return { computedDate: date, formattedValue: format(date, 'yyyy-MM-dd') };
+      case 'datetime':
+        return { computedDate: date, formattedValue: format(date, 'yyyy-MM-dd HH:mm:ss') };
+      case 'month': {
+        const monthStart = startOfMonth(date);
+        return { computedDate: monthStart, formattedValue: format(monthStart, 'yyyy-MM') };
+      }
+      case 'quarter': {
+        const quarterStart = startOfQuarter(date);
+        return {
+          computedDate: quarterStart,
+          formattedValue: `${format(quarterStart, 'yyyy')} Q${Math.ceil((quarterStart.getMonth() + 1) / 3)}`,
+        };
+      }
+      case 'time':
+        return { computedDate: date, formattedValue: format(date, 'HH:mm:ss') };
+      case 'week': {
+        const weekStart = startOfWeek(date, { weekStartsOn: 1 });
+        const weekEnd = new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000);
+        return {
+          computedDate: weekStart,
+          formattedValue: `${format(weekStart, 'yyyy-MM-dd')} ~ ${format(weekEnd, 'yyyy-MM-dd')}`,
+        };
+      }
+      case 'year': {
+        const yearStart = startOfYear(date);
+        return { computedDate: yearStart, formattedValue: format(yearStart, 'yyyy') };
+      }
+      default:
+        return { computedDate: date, formattedValue: '' };
     }
-    case 'quarter': {
-      const quarterStart = startOfQuarter(parsedDate);
-      return {
-        computedDate: quarterStart,
-        formattedValue: `${format(quarterStart, 'yyyy')} Q${Math.ceil((quarterStart.getMonth() + 1) / 3)}`,
-      };
-    }
-    case 'time':
-      return {
-        computedDate: parsedDate,
-        formattedValue: format(parsedDate, 'HH:mm:ss'),
-      };
-    case 'week': {
-      const weekStart = startOfWeek(parsedDate, { weekStartsOn: 1 });
-      const weekEnd = new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000);
-      return {
-        computedDate: weekStart,
-        formattedValue: `${format(weekStart, 'yyyy-MM-dd')} ~ ${format(weekEnd, 'yyyy-MM-dd')}`,
-      };
-    }
-    case 'year': {
-      const yearStart = startOfYear(parsedDate);
-      return {
-        computedDate: yearStart,
-        formattedValue: format(yearStart, 'yyyy'),
-      };
-    }
-    default:
-      return null;
-  }
+  };
+
+  const results = dateArray.map(formatSingleDate);
+
+  return {
+    computedDate: results.map((res) => res.computedDate),
+    formattedValue: results.map((res) => res.formattedValue),
+  };
+};
+
+/**
+ * Sorts two dates and returns them in ascending order.
+ * @param date1 - The first date (string or Date object).
+ * @param date2 - The second date (string or Date object).
+ * @returns A tuple [earlierDate, laterDate] sorted by ascending order.
+ */
+const sortDates = (date1: Date | string, date2: Date | string): [Date, Date] => {
+  const d1 = typeof date1 === 'string' ? parseISO(date1) : date1;
+  const d2 = typeof date2 === 'string' ? parseISO(date2) : date2;
+  return isAfter(d1, d2) ? [d2, d1] : [d1, d2];
 };
 
 export {
@@ -1861,6 +1873,7 @@ export {
   processSlotClasses,
   removeClasses,
   resolveRoundedClass,
+  sortDates,
   splitIntoRows,
   stylex,
   toCamelCase,

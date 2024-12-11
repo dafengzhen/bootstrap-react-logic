@@ -3,6 +3,7 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { DatePickerMonthProps } from './types.ts';
 
+import datePickerStyles from '../global.module.scss';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -13,7 +14,6 @@ import {
   stylex,
   updateCalendarDataTypeActiveState,
 } from '../tools';
-import datePickerStyles from './date-picker.module.scss';
 
 const currentDate = new Date();
 

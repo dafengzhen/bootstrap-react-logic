@@ -11,6 +11,7 @@ import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState }
 
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 
+import selectMultipleStyles from '../global.module.scss';
 import {
   classx,
   classxWithOptions,
@@ -21,7 +22,6 @@ import {
   processSlotClasses,
   stylex,
 } from '../tools';
-import selectMultipleStyles from './select-multiple.module.scss';
 
 const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(props: SelectMultipleProps<T>) {
   const {

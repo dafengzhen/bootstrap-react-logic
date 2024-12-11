@@ -10,21 +10,29 @@ import {
 import { format } from 'date-fns';
 import { type ChangeEvent, type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import type { DatePickerProps, DatePickerType } from './types.ts';
+import type { DateRangePickerProps, DateRangePickerType } from './types.ts';
 
 import datePickerStyles from '../global.module.scss';
-import { BiCalendar, classx, classxWithOptions, convertBsKeyToVar, formatDateByPickerType, stylex } from '../tools';
-import DatePickerDate from './date-picker-date.tsx';
-import DatePickerDatetime from './date-picker-datetime.tsx';
-import DatePickerMonth from './date-picker-month.tsx';
-import DatePickerQuarter from './date-picker-quarter.tsx';
-import DatePickerTime from './date-picker-time.tsx';
-import DatePickerWeek from './date-picker-week.tsx';
-import DatePickerYear from './date-picker-year.tsx';
+import {
+  BiCalendar,
+  classx,
+  classxWithOptions,
+  convertBsKeyToVar,
+  formatDateByPickerType,
+  sortDates,
+  stylex,
+} from '../tools';
+import DateRangePickerDate from './date-range-picker-date.tsx';
+import DateRangePickerDatetime from './date-range-picker-datetime.tsx';
+import DateRangePickerMonth from './date-range-picker-month.tsx';
+import DateRangePickerQuarter from './date-range-picker-quarter.tsx';
+import DateRangePickerTime from './date-range-picker-time.tsx';
+import DateRangePickerWeek from './date-range-picker-week.tsx';
+import DateRangePickerYear from './date-range-picker-year.tsx';
 
 const currentDate = new Date();
 
-const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: DatePickerProps<T>) {
+const DateRangePicker = function DateRangePicker<T extends ElementType = 'div'>(props: DateRangePickerProps<T>) {
   const {
     as: Component = 'div' as ElementType,
     className,
@@ -45,13 +53,13 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   const inputElement = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date>();
-  const [selectedWeek, setSelectedWeek] = useState<Date>();
-  const [selectedMonth, setSelectedMonth] = useState<Date>();
-  const [selectedQuarter, setSelectedQuarter] = useState<Date>();
-  const [selectedYear, setSelectedYear] = useState<Date>();
-  const [selectedDatetime, setSelectedDatetime] = useState<Date>();
-  const [selectedTime, setSelectedTime] = useState<Date>();
+  const [selectedDate, setSelectedDate] = useState<Date[]>([]);
+  const [selectedWeek, setSelectedWeek] = useState<Date[]>([]);
+  const [selectedMonth, setSelectedMonth] = useState<Date[]>([]);
+  const [selectedQuarter, setSelectedQuarter] = useState<Date[]>([]);
+  const [selectedYear, setSelectedYear] = useState<Date[]>([]);
+  const [selectedDatetime, setSelectedDatetime] = useState<Date[]>([]);
+  const [selectedTime, setSelectedTime] = useState<Date[]>([]);
   const placeholder = placeholderByDefault ?? `Please select a ${pickerType}`;
 
   const { context, floatingStyles, refs } = useFloating({
@@ -105,19 +113,20 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   }, [disabled, onInputFocus, readOnly]);
 
   const handleValueChange = useCallback(
-    (value?: string, type?: DatePickerType) => {
+    (value?: string[], type?: DateRangePickerType) => {
       const _pickerType = type ?? pickerType;
-      const result = formatDateByPickerType(value ?? valueByDefault, _pickerType);
+      const _value = value ?? valueByDefault ?? [];
+      const result = formatDateByPickerType(sortDates(_value[0], _value[1]), _pickerType);
       if (result) {
-        const formattedValue = result.formattedValue[0];
-        const computedDate = result.computedDate[0];
+        const formattedValue = result.formattedValue;
+        const computedDate = result.computedDate;
         const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, _pickerType);
         if (typeof available === 'boolean' && !available) {
           setInputValue('');
           return;
         }
 
-        setInputValue(formattedValue);
+        setInputValue(formattedValue.join(' ~ '));
         if (_pickerType === 'date') {
           setSelectedDate(computedDate);
         } else if (_pickerType === 'week') {
@@ -134,7 +143,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
           setSelectedTime(computedDate);
         }
       } else if (value) {
-        setInputValue(value);
+        setInputValue(value.join(' ~ '));
       }
     },
     [onInputValueAvailableByDefault, pickerType, valueByDefault],
@@ -144,41 +153,43 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value.trim();
       if (value) {
-        let type: DatePickerType | null = null;
-        let val = null;
+        let type: DateRangePickerType | null = null;
+        let val: null | string[] = null;
 
-        const matchDate = /^\d{4}-\d{2}-\d{2}$/.test(value); // Matches yyyy-MM-dd (date)
-        const matchDatetime = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(value); // Matches yyyy-MM-dd HH:mm:ss (datetime)
-        const matchMonth = /^\d{4}-\d{2}$/.test(value); // Matches yyyy-MM (month)
-        const matchQuarter = /^\d{4} Q[1-4]$/.test(value); // Matches yyyy Q1, yyyy Q2, etc. (quarter)
-        const matchTime = /^\d{2}:\d{2}:\d{2}$/.test(value); // Matches HH:mm:ss (time)
-        const matchWeek = /^\d{4}-\d{2}-\d{2} ~ \d{4}-\d{2}-\d{2}$/.test(value); // Matches yyyy-MM-dd ~ yyyy-MM-dd (week)
-        const matchYear = /^\d{4}$/.test(value); // Matches yyyy (year)
+        const matchDateRange = /^\d{4}-\d{2}-\d{2} ~ \d{4}-\d{2}-\d{2}$/.test(value); // Matches yyyy-MM-dd ~ yyyy-MM-dd (date range)
+        const matchDatetimeRange = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} ~ \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(
+          value,
+        ); // Matches datetime range
+        const matchMonthRange = /^\d{4}-\d{2} ~ \d{4}-\d{2}$/.test(value); // Matches month range
+        const matchQuarterRange = /^\d{4} Q[1-4] ~ \d{4} Q[1-4]$/.test(value); // Matches quarter range
+        const matchTimeRange = /^\d{2}:\d{2}:\d{2} ~ \d{2}:\d{2}:\d{2}$/.test(value); // Matches time range
+        const matchWeekRange = /^\d{4}-\d{2}-\d{2} ~ \d{4}-\d{2}-\d{2}$/.test(value); // Matches week range
+        const matchYearRange = /^\d{4} ~ \d{4}$/.test(value); // Matches year range
 
-        if (matchDate) {
-          val = value;
+        if (matchDateRange) {
+          val = value.split(' ~ ');
           type = 'date';
-        } else if (matchDatetime) {
-          val = value;
+        } else if (matchDatetimeRange) {
+          val = value.split(' ~ ');
           type = 'datetime';
-        } else if (matchMonth) {
-          val = value + '-01';
+        } else if (matchMonthRange) {
+          val = value.split(' ~ ').map((month) => `${month}-01`);
           type = 'month';
-        } else if (matchQuarter) {
-          const year = value.split(' ')[0];
-          const quarter = parseInt(value.split(' ')[1].replace('Q', ''), 10);
-          const startMonth = (quarter - 1) * 3 + 1;
-          val = `${year}-${String(startMonth).padStart(2, '0')}-01`;
+        } else if (matchQuarterRange) {
+          val = value.split(' ~ ').map((quarter) => {
+            const [year, quarterStr] = quarter.split(' ');
+            const startMonth = (parseInt(quarterStr.replace('Q', ''), 10) - 1) * 3 + 1;
+            return `${year}-${String(startMonth).padStart(2, '0')}-01`;
+          });
           type = 'quarter';
-        } else if (matchTime) {
-          val = format(currentDate, 'yyyy-MM-dd') + ' ' + value;
+        } else if (matchTimeRange) {
+          val = value.split(' ~ ').map((time) => format(currentDate, 'yyyy-MM-dd') + ' ' + time);
           type = 'time';
-        } else if (matchWeek) {
-          const [startDateStr] = value.split(' ~ ');
-          val = startDateStr;
+        } else if (matchWeekRange) {
+          val = value.split(' ~ ');
           type = 'week';
-        } else if (matchYear) {
-          val = `${value}-01-01`;
+        } else if (matchYearRange) {
+          val = value.split(' ~ ').map((year) => `${year}-01-01`);
           type = 'year';
         }
 
@@ -194,14 +205,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onDateClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'date');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'date');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -209,7 +220,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedDate(date);
       setIsOpen(false);
       onInputBlur();
@@ -219,14 +230,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onWeekClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'week');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'week');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -234,7 +245,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedWeek(date);
       setIsOpen(false);
       onInputBlur();
@@ -244,14 +255,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onMonthClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'month');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'month');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -259,7 +270,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedMonth(date);
       setIsOpen(false);
       onInputBlur();
@@ -269,14 +280,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onQuarterClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'quarter');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'quarter');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -284,7 +295,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedQuarter(date);
       setIsOpen(false);
       onInputBlur();
@@ -294,14 +305,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onYearClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'year');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'year');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -309,7 +320,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedQuarter(date);
       setIsOpen(false);
       onInputBlur();
@@ -319,14 +330,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onDatetimeClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'datetime');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'datetime');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -334,7 +345,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedDatetime(date);
       setIsOpen(false);
       onInputBlur();
@@ -344,14 +355,14 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 
   const onTimeClick = useCallback(
-    (item: { date: Date }) => {
+    (item: { date: Date[] }) => {
       const result = formatDateByPickerType(item.date, 'time');
       if (!result) {
         return;
       }
 
-      const formattedValue = result.formattedValue[0];
-      const computedDate = result.computedDate[0];
+      const formattedValue = result.formattedValue;
+      const computedDate = result.computedDate;
       const available = onInputValueAvailableByDefault?.(formattedValue, computedDate, 'time');
       if (typeof available === 'boolean' && !available) {
         return;
@@ -359,7 +370,7 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
 
       const value = formattedValue;
       const date = computedDate;
-      setInputValue(value);
+      setInputValue(value.join(' ~ '));
       setSelectedTime(date);
       setIsOpen(false);
       onInputBlur();
@@ -402,24 +413,24 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
         <FloatingPortal>
           <div className="card card-body shadow" {...getFloatingProps()} ref={refs.setFloating} style={floatingStyles}>
             {pickerType === 'date' && (
-              <DatePickerDate locale={locale} onDateClick={onDateClick} selectedDate={selectedDate} />
+              <DateRangePickerDate locale={locale} onDateClick={onDateClick} selectedDate={selectedDate} />
             )}
             {pickerType === 'week' && (
-              <DatePickerWeek locale={locale} onDateClick={onWeekClick} selectedDate={selectedWeek} />
+              <DateRangePickerWeek locale={locale} onDateClick={onWeekClick} selectedDate={selectedWeek} />
             )}
             {pickerType === 'month' && (
-              <DatePickerMonth locale={locale} onDateClick={onMonthClick} selectedDate={selectedMonth} />
+              <DateRangePickerMonth locale={locale} onDateClick={onMonthClick} selectedDate={selectedMonth} />
             )}
             {pickerType === 'quarter' && (
-              <DatePickerQuarter locale={locale} onDateClick={onQuarterClick} selectedDate={selectedQuarter} />
+              <DateRangePickerQuarter locale={locale} onDateClick={onQuarterClick} selectedDate={selectedQuarter} />
             )}
             {pickerType === 'year' && (
-              <DatePickerYear locale={locale} onDateClick={onYearClick} selectedDate={selectedYear} />
+              <DateRangePickerYear locale={locale} onDateClick={onYearClick} selectedDate={selectedYear} />
             )}
             {pickerType === 'datetime' && (
-              <DatePickerDatetime locale={locale} onDateClick={onDatetimeClick} selectedDate={selectedDatetime} />
+              <DateRangePickerDatetime locale={locale} onDateClick={onDatetimeClick} selectedDate={selectedDatetime} />
             )}
-            {pickerType === 'time' && <DatePickerTime onDateClick={onTimeClick} selectedDate={selectedTime} />}
+            {pickerType === 'time' && <DateRangePickerTime onDateClick={onTimeClick} selectedDate={selectedTime} />}
           </div>
         </FloatingPortal>
       )}
@@ -427,20 +438,20 @@ const DatePicker = function DatePicker<T extends ElementType = 'div'>(props: Dat
   );
 };
 
-DatePicker.Date = DatePickerDate;
+DateRangePicker.Date = DateRangePickerDate;
 
-DatePicker.Week = DatePickerWeek;
+DateRangePicker.Week = DateRangePickerWeek;
 
-DatePicker.Month = DatePickerMonth;
+DateRangePicker.Month = DateRangePickerMonth;
 
-DatePicker.Quarter = DatePickerQuarter;
+DateRangePicker.Quarter = DateRangePickerQuarter;
 
-DatePicker.Year = DatePickerYear;
+DateRangePicker.Year = DateRangePickerYear;
 
-DatePicker.Time = DatePickerTime;
+DateRangePicker.Time = DateRangePickerTime;
 
-DatePicker.Datetime = DatePickerDatetime;
+DateRangePicker.Datetime = DateRangePickerDatetime;
 
-DatePicker.displayName = 'BRL.DatePicker';
+DateRangePicker.displayName = 'BRL.DateRangePicker';
 
-export default DatePicker;
+export default DateRangePicker;

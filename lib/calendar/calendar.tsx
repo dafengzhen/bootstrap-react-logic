@@ -3,6 +3,7 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { CalendarDate, CalendarProps } from './types.ts';
 
+import calendarStyles from '../global.module.scss';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -13,7 +14,6 @@ import {
   stylex,
   updateCalendarActiveState,
 } from '../tools';
-import calendarStyles from './calendar.module.scss';
 
 const currentDate = new Date();
 

@@ -2,8 +2,8 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ScrollspyProps } from './types.ts';
 
+import scrollspyStyles from '../global.module.scss';
 import { classx, convertBsKeyToVar, stylex } from '../tools';
-import scrollspyStyles from './scrollspy.module.scss';
 
 const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: ScrollspyProps<T>) {
   const {

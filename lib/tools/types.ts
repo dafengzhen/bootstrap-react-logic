@@ -462,6 +462,22 @@ type DatePickerWeekVariablesType = DatePickerVariablesType;
 
 type DatePickerYearVariablesType = DatePickerVariablesType;
 
+type DateRangePickerDatetimeVariablesType = DateRangePickerVariablesType;
+
+type DateRangePickerDateVariablesType = DateRangePickerVariablesType;
+
+type DateRangePickerMonthVariablesType = DateRangePickerVariablesType;
+
+type DateRangePickerQuarterVariablesType = DateRangePickerVariablesType;
+
+type DateRangePickerTimeVariablesType = DateRangePickerVariablesType;
+
+type DateRangePickerVariablesType = object;
+
+type DateRangePickerWeekVariablesType = DateRangePickerVariablesType;
+
+type DateRangePickerYearVariablesType = DateRangePickerVariablesType;
+
 type DropdownDividerVariablesType = DropdownVariablesType;
 
 type DropdownHeaderVariablesType = DropdownVariablesType;
@@ -1194,6 +1210,14 @@ export type {
   DatePickerVariablesType,
   DatePickerWeekVariablesType,
   DatePickerYearVariablesType,
+  DateRangePickerDatetimeVariablesType,
+  DateRangePickerDateVariablesType,
+  DateRangePickerMonthVariablesType,
+  DateRangePickerQuarterVariablesType,
+  DateRangePickerTimeVariablesType,
+  DateRangePickerVariablesType,
+  DateRangePickerWeekVariablesType,
+  DateRangePickerYearVariablesType,
   DropdownDividerVariablesType,
   DropdownHeaderVariablesType,
   DropdownItemTextVariablesType,

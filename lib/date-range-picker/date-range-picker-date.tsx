@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { type ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { DatePickerDateProps } from './types.ts';
+import type { DateRangePickerDateProps } from './types.ts';
 
 import datePickerStyles from '../global.module.scss';
 import {
@@ -11,13 +11,16 @@ import {
   classxWithOptions,
   convertBsKeyToVar,
   generateCalendar,
+  sortDates,
   stylex,
   updateCalendarActiveState,
 } from '../tools';
 
 const currentDate = new Date();
 
-const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(props: DatePickerDateProps<T>) {
+const DateRangePickerDate = function DateRangePickerDate<T extends ElementType = 'div'>(
+  props: DateRangePickerDateProps<T>,
+) {
   const {
     as: Component = 'div' as ElementType,
     className,
@@ -35,6 +38,7 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   const [calendarData, setCalendarData] = useState(
     generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale),
   );
+  const [startClick, setStartClick] = useState<Date | null>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'card card-body border-0 p-0', className);
@@ -59,9 +63,15 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
     (item: any) => {
       const _item = { ...item, active: true };
       setCalendarData((prevState) => updateCalendarActiveState(_item, prevState));
-      onDateClickByDefault?.(_item);
+
+      if (startClick) {
+        onDateClickByDefault?.({ date: sortDates(startClick, _item.date) });
+        setStartClick(null);
+      } else {
+        setStartClick(_item.date);
+      }
     },
-    [onDateClickByDefault],
+    [onDateClickByDefault, startClick],
   );
 
   useEffect(() => {
@@ -141,6 +151,6 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   );
 };
 
-DatePickerDate.displayName = 'BRL.DatePickerDate';
+DateRangePickerDate.displayName = 'BRL.DateRangePickerDate';
 
-export default DatePickerDate;
+export default DateRangePickerDate;

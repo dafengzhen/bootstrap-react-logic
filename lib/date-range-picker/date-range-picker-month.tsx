@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { type ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { DatePickerDateProps } from './types.ts';
+import type { DateRangePickerMonthProps } from './types.ts';
 
 import datePickerStyles from '../global.module.scss';
 import {
@@ -11,13 +11,16 @@ import {
   classxWithOptions,
   convertBsKeyToVar,
   generateCalendar,
+  sortDates,
   stylex,
-  updateCalendarActiveState,
+  updateCalendarDataTypeActiveState,
 } from '../tools';
 
 const currentDate = new Date();
 
-const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(props: DatePickerDateProps<T>) {
+const DateRangePickerMonth = function DatePickerMonth<T extends ElementType = 'div'>(
+  props: DateRangePickerMonthProps<T>,
+) {
   const {
     as: Component = 'div' as ElementType,
     className,
@@ -33,8 +36,9 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   const [currentYear, setCurrentYear] = useState<number>(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(currentDate.getMonth());
   const [calendarData, setCalendarData] = useState(
-    generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale),
+    generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale, false, 'month'),
   );
+  const [startClick, setStartClick] = useState<Date | null>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'card card-body border-0 p-0', className);
@@ -48,7 +52,7 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
 
   const handleMonthChange = useCallback(
     (offset: number) => {
-      const newDate = new Date(currentYear, currentMonth + offset);
+      const newDate = new Date(currentYear + offset, currentMonth);
       setCurrentYear(newDate.getFullYear());
       setCurrentMonth(newDate.getMonth());
     },
@@ -56,16 +60,24 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   );
 
   const onDateClick = useCallback(
-    (item: any) => {
-      const _item = { ...item, active: true };
-      setCalendarData((prevState) => updateCalendarActiveState(_item, prevState));
-      onDateClickByDefault?.(_item);
+    (item: any, rowIndex: number, index: number) => {
+      const updatedItem = { ...item, active: true };
+      setCalendarData((prevState) => updateCalendarDataTypeActiveState(updatedItem, rowIndex, index, prevState));
+
+      if (startClick) {
+        onDateClickByDefault?.({ date: sortDates(startClick, updatedItem.date) });
+        setStartClick(null);
+      } else {
+        setStartClick(updatedItem.date);
+      }
     },
-    [onDateClickByDefault],
+    [onDateClickByDefault, startClick],
   );
 
   useEffect(() => {
-    setCalendarData(generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale));
+    setCalendarData(
+      generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale, false, 'month'),
+    );
   }, [currentMonth, currentYear, locale, selectedDate]);
 
   return (
@@ -85,9 +97,6 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
           </div>
           <div className="col px-1"></div>
           <div className="col px-1"></div>
-          <div className="col px-1"></div>
-          <div className="col px-1"></div>
-          <div className="col px-1"></div>
           <div className="col px-1" onClick={() => handleMonthChange(1)}>
             <div
               className={classxWithOptions(
@@ -100,7 +109,7 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
             </div>
           </div>
           <div className="position-absolute top-50 start-50 translate-middle w-auto text-nowrap">
-            {format(new Date(currentYear, currentMonth), 'MMMM yyyy', {
+            {format(new Date(currentYear, currentMonth), 'yyyy', {
               locale,
             })}
           </div>
@@ -109,27 +118,17 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
         {calendarData.rows.map((row, rowIndex) => (
           <div className="row text-center" key={rowIndex}>
             {row.map((item, index) => {
-              if (rowIndex === 0) {
-                return (
-                  <div className="col px-1" key={`${item.value}${index}`}>
-                    <div className="list-group-item border-0 px-0 py-1 rounded text-body-secondary">{item.value}</div>
-                  </div>
-                );
-              }
-
               return (
-                <div className="col px-1" key={item.date!.toISOString()} onClick={() => onDateClick(item)}>
+                <div className="col px-1" key={item.value} onClick={() => onDateClick(item, rowIndex, index)}>
                   <div
                     className={classxWithOptions(
                       null,
-                      'list-group-item list-group-item-action px-0 py-1 rounded',
+                      'position-relative list-group-item list-group-item-action px-0 py-1 rounded border-0',
                       datePickerStyles.brlCursorPointer,
-                      !item.isCurrentMonth && !item.active && 'text-body-tertiary',
                       item.active && 'active',
-                      item.isToday ? 'border-secondary-subtle' : 'border-0',
                     )}
                   >
-                    {format(item.date!, 'd', { locale })}
+                    {item.value}
                   </div>
                 </div>
               );
@@ -141,6 +140,6 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   );
 };
 
-DatePickerDate.displayName = 'BRL.DatePickerDate';
+DateRangePickerMonth.displayName = 'BRL.DateRangePickerMonth';
 
-export default DatePickerDate;
+export default DateRangePickerMonth;

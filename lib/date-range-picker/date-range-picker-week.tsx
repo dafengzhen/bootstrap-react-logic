@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { type ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { DatePickerDateProps } from './types.ts';
+import type { DateRangePickerWeekProps } from './types.ts';
 
 import datePickerStyles from '../global.module.scss';
 import {
@@ -11,13 +11,14 @@ import {
   classxWithOptions,
   convertBsKeyToVar,
   generateCalendar,
+  sortDates,
   stylex,
-  updateCalendarActiveState,
+  updateCalendarWeekActiveState,
 } from '../tools';
 
 const currentDate = new Date();
 
-const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(props: DatePickerDateProps<T>) {
+const DateRangePickerWeek = function DatePickerWeek<T extends ElementType = 'div'>(props: DateRangePickerWeekProps<T>) {
   const {
     as: Component = 'div' as ElementType,
     className,
@@ -33,8 +34,9 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   const [currentYear, setCurrentYear] = useState<number>(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(currentDate.getMonth());
   const [calendarData, setCalendarData] = useState(
-    generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale),
+    generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale, true),
   );
+  const [startClick, setStartClick] = useState<Date | null>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'card card-body border-0 p-0', className);
@@ -58,20 +60,26 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
   const onDateClick = useCallback(
     (item: any) => {
       const _item = { ...item, active: true };
-      setCalendarData((prevState) => updateCalendarActiveState(_item, prevState));
-      onDateClickByDefault?.(_item);
+      setCalendarData((prevState) => updateCalendarWeekActiveState(_item, prevState));
+
+      if (startClick) {
+        onDateClickByDefault?.({ date: sortDates(startClick, _item.date) });
+        setStartClick(null);
+      } else {
+        setStartClick(_item.date);
+      }
     },
-    [onDateClickByDefault],
+    [onDateClickByDefault, startClick],
   );
 
   useEffect(() => {
-    setCalendarData(generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale));
+    setCalendarData(generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale, true));
   }, [currentMonth, currentYear, locale, selectedDate]);
 
   return (
     <Component {...rest} {...renderOptions}>
       <div className="list-group border-0 row-gap-1 px-3">
-        <div className="row align-items-center position-relative text-center mb-2">
+        <div className="row align-items-center position-relative text-center w-100 mb-2">
           <div className="col px-1" onClick={() => handleMonthChange(-1)}>
             <div
               className={classxWithOptions(
@@ -106,41 +114,50 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
           </div>
         </div>
 
-        {calendarData.rows.map((row, rowIndex) => (
-          <div className="row text-center" key={rowIndex}>
-            {row.map((item, index) => {
-              if (rowIndex === 0) {
+        {calendarData.rows.map((row, rowIndex) => {
+          const isActive = rowIndex !== 0 && row.every((item) => item.active);
+          return (
+            <div
+              className={classxWithOptions(
+                null,
+                'row text-center d-flex list-group-item rounded p-0 border-0',
+                rowIndex === 0 ? 'w-100' : `list-group-item-action ${datePickerStyles.brlCursorPointer}`,
+                isActive && 'active',
+              )}
+              key={rowIndex}
+            >
+              {row.map((item, index) => {
+                if (rowIndex === 0) {
+                  return (
+                    <div className="col px-1" key={`${item.value}${index}`}>
+                      <div className="px-0 py-1 rounded text-body-secondary">{item.value}</div>
+                    </div>
+                  );
+                }
+
                 return (
-                  <div className="col px-1" key={`${item.value}${index}`}>
-                    <div className="list-group-item border-0 px-0 py-1 rounded text-body-secondary">{item.value}</div>
+                  <div className="col px-1" key={item.date!.toISOString()} onClick={() => onDateClick(item)}>
+                    <div
+                      className={classxWithOptions(
+                        null,
+                        'px-0 py-1 rounded',
+                        !item.isCurrentMonth && !item.active && 'text-body-tertiary',
+                        item.isToday ? 'border border-secondary-subtle' : 'border-0',
+                      )}
+                    >
+                      {format(item.date!, 'd', { locale })}
+                    </div>
                   </div>
                 );
-              }
-
-              return (
-                <div className="col px-1" key={item.date!.toISOString()} onClick={() => onDateClick(item)}>
-                  <div
-                    className={classxWithOptions(
-                      null,
-                      'list-group-item list-group-item-action px-0 py-1 rounded',
-                      datePickerStyles.brlCursorPointer,
-                      !item.isCurrentMonth && !item.active && 'text-body-tertiary',
-                      item.active && 'active',
-                      item.isToday ? 'border-secondary-subtle' : 'border-0',
-                    )}
-                  >
-                    {format(item.date!, 'd', { locale })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ))}
+              })}
+            </div>
+          );
+        })}
       </div>
     </Component>
   );
 };
 
-DatePickerDate.displayName = 'BRL.DatePickerDate';
+DateRangePickerWeek.displayName = 'BRL.DateRangePickerWeek';
 
-export default DatePickerDate;
+export default DateRangePickerWeek;

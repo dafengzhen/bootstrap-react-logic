@@ -1,23 +1,30 @@
-import { format } from 'date-fns';
-import { type ElementType, useCallback, useEffect, useMemo, useState } from 'react';
+import { format, setHours as updateHours, setMinutes as updateMinutes, setSeconds as updateSeconds } from 'date-fns';
+import { type ChangeEvent, type ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 
-import type { DatePickerDateProps } from './types.ts';
+import type { DateRangePickerDatetimeProps } from './types.ts';
 
 import datePickerStyles from '../global.module.scss';
 import {
   BiChevronLeft,
   BiChevronRight,
+  BiClock,
   classx,
   classxWithOptions,
   convertBsKeyToVar,
   generateCalendar,
+  sortDates,
   stylex,
   updateCalendarActiveState,
 } from '../tools';
 
 const currentDate = new Date();
+const currentDates = [new Date(), new Date()];
 
-const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(props: DatePickerDateProps<T>) {
+const padTime = (value: number): string => value.toString().padStart(2, '0');
+
+const DateRangePickerDatetime = function DatePickerDatetime<T extends ElementType = 'div'>(
+  props: DateRangePickerDatetimeProps<T>,
+) {
   const {
     as: Component = 'div' as ElementType,
     className,
@@ -30,11 +37,16 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
     ...rest
   } = props;
 
+  const effectiveDate = selectedDate && selectedDate.length > 0 ? selectedDate : currentDates;
   const [currentYear, setCurrentYear] = useState<number>(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(currentDate.getMonth());
   const [calendarData, setCalendarData] = useState(
     generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale),
   );
+  const [hours, setHours] = useState<string[]>(effectiveDate.map((date) => padTime(date.getHours())));
+  const [minutes, setMinutes] = useState<string[]>(effectiveDate.map((date) => padTime(date.getMinutes())));
+  const [seconds, setSeconds] = useState<string[]>(effectiveDate.map((date) => padTime(date.getSeconds())));
+  const [startClick, setStartClick] = useState<Date | null>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'card card-body border-0 p-0', className);
@@ -57,16 +69,51 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
 
   const onDateClick = useCallback(
     (item: any) => {
-      const _item = { ...item, active: true };
+      const getCombinedDate = (date: Date, index: number) => {
+        const hoursInt = parseInt(hours[index], 10) || 0;
+        const minutesInt = parseInt(minutes[index], 10) || 0;
+        const secondsInt = parseInt(seconds[index], 10) || 0;
+        return updateSeconds(updateMinutes(updateHours(date, hoursInt), minutesInt), secondsInt);
+      };
+
+      const combinedDate = getCombinedDate(item.date, startClick ? 1 : 0);
+      const _item = { ...item, active: true, date: combinedDate };
       setCalendarData((prevState) => updateCalendarActiveState(_item, prevState));
-      onDateClickByDefault?.(_item);
+
+      if (startClick) {
+        onDateClickByDefault?.({ date: sortDates(startClick, _item.date) });
+        setStartClick(null);
+      } else {
+        setStartClick(_item.date);
+      }
     },
-    [onDateClickByDefault],
+    [hours, minutes, onDateClickByDefault, seconds, startClick],
   );
+
+  const handleHoursChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const updatedHours = [...hours];
+    updatedHours[index] = e.target.value.trim();
+    setHours(updatedHours);
+  };
+
+  const handleMinutesChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const updatedMinutes = [...minutes];
+    updatedMinutes[index] = e.target.value.trim();
+    setMinutes(updatedMinutes);
+  };
+
+  const handleSecondsChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const updatedSeconds = [...seconds];
+    updatedSeconds[index] = e.target.value.trim();
+    setSeconds(updatedSeconds);
+  };
 
   useEffect(() => {
     setCalendarData(generateCalendar(currentYear, currentMonth, [], 6, 1, undefined, selectedDate, locale));
-  }, [currentMonth, currentYear, locale, selectedDate]);
+    setHours(effectiveDate.map((date) => padTime(date.getHours())));
+    setMinutes(effectiveDate.map((date) => padTime(date.getMinutes())));
+    setSeconds(effectiveDate.map((date) => padTime(date.getSeconds())));
+  }, [currentMonth, currentYear, effectiveDate, locale, selectedDate]);
 
   return (
     <Component {...rest} {...renderOptions}>
@@ -137,10 +184,46 @@ const DatePickerDate = function DatePickerDate<T extends ElementType = 'div'>(pr
           </div>
         ))}
       </div>
+
+      <div className="d-flex flex-column gap-2 mt-4 mb-1">
+        {['Start', 'End'].map((item, index) => {
+          return (
+            <div className="input-group" key={index}>
+              <span className="input-group-text text-primary-emphasis">
+                <BiClock />
+                <span className="ps-1">{item}Time</span>
+              </span>
+              <input
+                className="form-control"
+                onChange={(e) => handleHoursChange(e, index)}
+                placeholder="HH"
+                type="text"
+                value={hours[index]}
+              />
+              <span className="input-group-text text-secondary">:</span>
+              <input
+                className="form-control"
+                onChange={(e) => handleMinutesChange(e, index)}
+                placeholder="MM"
+                type="text"
+                value={minutes[index]}
+              />
+              <span className="input-group-text text-secondary">:</span>
+              <input
+                className="form-control"
+                onChange={(e) => handleSecondsChange(e, index)}
+                placeholder="SS"
+                type="text"
+                value={seconds[index]}
+              />
+            </div>
+          );
+        })}
+      </div>
     </Component>
   );
 };
 
-DatePickerDate.displayName = 'BRL.DatePickerDate';
+DateRangePickerDatetime.displayName = 'BRL.DateRangePickerDatetime';
 
-export default DatePickerDate;
+export default DateRangePickerDatetime;

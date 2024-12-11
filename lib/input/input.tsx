@@ -2,8 +2,8 @@ import { type ElementType, useMemo } from 'react';
 
 import type { InputProps } from './types.ts';
 
+import inputStyles from '../global.module.scss';
 import { classx, classxWithOptions, convertBsKeyToVar, findTruthyClass, processSlotClasses, stylex } from '../tools';
-import inputStyles from './input.module.scss';
 
 const Input = function Input<T extends ElementType = 'input'>(props: InputProps<T>) {
   const {
