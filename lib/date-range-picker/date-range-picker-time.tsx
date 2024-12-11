@@ -90,7 +90,7 @@ const DateRangePickerTime = function DatePickerTime<T extends ElementType = 'div
 
   return (
     <Component {...rest} {...renderOptions}>
-      <div className="d-flex flex-column gap-2 mt-4 mb-1">
+      <div className="d-flex flex-column gap-2">
         {['Start', 'End'].map((item, index) => {
           return (
             <div className="input-group" key={index}>
