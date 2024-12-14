@@ -1038,6 +1038,8 @@ type SpinnerVariablesType = {
   spinnerWidthSm?: string;
 };
 
+type StepsVariablesType = object;
+
 type TableCaptionVariablesType = TableVariablesType;
 
 type TableResponsiveVariablesType = TableVariablesType;
@@ -1283,6 +1285,7 @@ export type {
   SelectOptionVariablesType,
   SelectVariablesType,
   SpinnerVariablesType,
+  StepsVariablesType,
   TableCaptionVariablesType,
   TableResponsiveVariablesType,
   TableTbodyVariablesType,

@@ -6,6 +6,10 @@
   @apply tw-cursor-default;
 }
 
+.brl-cursor-default-imp {
+  @apply tw-cursor-default !important;
+}
+
 .brl-cursor-not-allowed {
   @apply tw-cursor-not-allowed;
 }
@@ -36,4 +40,36 @@
 
 .brl-scale-75 {
   @apply tw-scale-75;
+}
+
+.brl-w-8 {
+  @apply tw-w-8;
+}
+
+.brl-h-8 {
+  @apply tw-h-8;
+}
+
+.brl-w-05 {
+  @apply tw-w-0.5;
+}
+
+.brl-h-05 {
+  @apply tw-h-0.5;
+}
+
+.brl-ml-10 {
+  @apply tw-ml-10;
+}
+
+.brl-leading-8 {
+  @apply tw-leading-8;
+}
+
+.brl-mb-16 {
+  @apply tw-mb-16;
+}
+
+.brl-min-h-8 {
+  @apply tw-min-h-8;
 }

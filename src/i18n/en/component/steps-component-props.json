@@ -1,0 +1,20 @@
+{
+  "steps": {
+    "name": "Steps",
+    "desc": {
+      "center": "Center",
+      "current": "Current Step",
+      "onClick": "Click Callback",
+      "options": "Options",
+      "vertical": "Vertical Layout",
+      "iOption": "IOption"
+    },
+    "options": {
+      "description": "Description",
+      "icon": "Icon",
+      "id": "ID",
+      "status": "Status",
+      "title": "Title"
+    }
+  }
+}

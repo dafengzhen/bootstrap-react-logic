@@ -1,0 +1,20 @@
+{
+  "steps": {
+    "name": "Steps",
+    "desc": {
+      "center": "居中",
+      "current": "当前步骤",
+      "onClick": "点击回调",
+      "options": "选项",
+      "vertical": "垂直布局",
+      "iOption": "选项"
+    },
+    "options": {
+      "description": "描述",
+      "icon": "图标",
+      "id": "ID",
+      "status": "状态",
+      "title": "标题"
+    }
+  }
+}

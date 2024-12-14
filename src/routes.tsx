@@ -32,6 +32,7 @@ import RangePage from '@pages/range-page.tsx';
 import ScrollspyPage from '@pages/scrollspy-page.tsx';
 import SelectPage from '@pages/select-page.tsx';
 import SpinnerPage from '@pages/spinner-page.tsx';
+import StepsPage from '@pages/steps-page.tsx';
 import TablePage from '@pages/table-page.tsx';
 import ToastPage from '@pages/toast-page.tsx';
 import TooltipPage from '@pages/tooltip-page.tsx';
@@ -75,6 +76,7 @@ export enum MenuEnum {
   Scrollspy = '/pages/scrollspy',
   Select = '/pages/select',
   Spinner = '/pages/spinner',
+  Steps = '/pages/steps',
   Table = '/pages/table',
   Toast = '/pages/toast',
   Tooltip = '/pages/tooltip',
@@ -234,6 +236,10 @@ const router = createBrowserRouter(
             {
               element: <DateRangePickerPage />,
               path: 'pages/date-range-picker',
+            },
+            {
+              element: <StepsPage />,
+              path: 'pages/steps',
             },
           ],
           errorElement: <ErrorPage />,

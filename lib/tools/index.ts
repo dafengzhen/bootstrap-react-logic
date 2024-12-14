@@ -202,6 +202,7 @@ export type {
   SelectOptionVariablesType,
   SelectVariablesType,
   SpinnerVariablesType,
+  StepsVariablesType,
   TableCaptionVariablesType,
   TableResponsiveVariablesType,
   TableTbodyVariablesType,
