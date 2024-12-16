@@ -31,6 +31,7 @@ export * from './range';
 export * from './scrollspy';
 export * from './select';
 export * from './select-multiple';
+export * from './sidebar';
 export * from './spinner';
 export * from './steps';
 export * from './table';
