@@ -1,0 +1,29 @@
+{
+  "sidebar": {
+    "name": "Sidebar",
+    "desc": {
+      "body": "Body",
+      "collapsible": "Collapsible",
+      "dark": "Dark",
+      "footer": "Footer",
+      "header": "Header",
+      "onCollapse": "On Collapse",
+      "onOptionChange": "On Option Change",
+      "options": "Options",
+      "iOption": "IOption",
+      "sidebarHeader": "Sidebar Header"
+    },
+    "options": {
+      "active": "Active",
+      "children": "Children",
+      "disabled": "Disabled",
+      "href": "Href",
+      "icon": "Icon",
+      "id": "ID",
+      "isLeaf": "Is Leaf",
+      "name": "Name",
+      "onClick": "On Click",
+      "parentId": "Parent ID"
+    }
+  }
+}

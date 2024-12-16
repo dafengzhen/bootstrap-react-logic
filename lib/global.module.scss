@@ -1,3 +1,5 @@
+/// tw
+
 .brl-cursor-pointer {
   @apply tw-cursor-pointer;
 }
@@ -72,4 +74,35 @@
 
 .brl-min-h-8 {
   @apply tw-min-h-8;
+}
+
+.brl-h-full {
+  @apply tw-h-full;
+}
+
+.brl-max-h-screen {
+  @apply tw-max-h-screen;
+}
+
+/// bs
+
+:root {
+  --brl-custom-hover-bg: var(--bs-tertiary-bg);
+  --brl-custom-hover-bg-dark: #2b3035;
+}
+
+[data-bs-theme='dark'] {
+  --brl-custom-hover-bg: var(--bs-tertiary-bg);
+}
+
+/// brl
+
+.brl-nav-toggle a:hover,
+.brl-nav-toggle a:focus {
+  background-color: var(--brl-custom-hover-bg);
+}
+
+.brl-nav-toggle-dark a:hover,
+.brl-nav-toggle-dark a:focus {
+  background-color: var(--brl-custom-hover-bg-dark);
 }

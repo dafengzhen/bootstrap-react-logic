@@ -201,6 +201,8 @@ export type {
   SelectMultipleVariablesType,
   SelectOptionVariablesType,
   SelectVariablesType,
+  SidebarItemVariablesType,
+  SidebarVariablesType,
   SpinnerVariablesType,
   StepsVariablesType,
   TableCaptionVariablesType,

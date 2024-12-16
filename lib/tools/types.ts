@@ -1027,6 +1027,10 @@ type SelectVariablesType = {
   formValidColorDark?: string;
 };
 
+type SidebarItemVariablesType = SidebarVariablesType;
+
+type SidebarVariablesType = object;
+
 type SpinnerVariablesType = {
   spinnerAnimationSpeed?: string;
   spinnerBorderWidth?: string;
@@ -1284,6 +1288,8 @@ export type {
   SelectMultipleVariablesType,
   SelectOptionVariablesType,
   SelectVariablesType,
+  SidebarItemVariablesType,
+  SidebarVariablesType,
   SpinnerVariablesType,
   StepsVariablesType,
   TableCaptionVariablesType,

@@ -1,0 +1,29 @@
+{
+  "sidebar": {
+    "name": "Sidebar",
+    "desc": {
+      "body": "内容",
+      "collapsible": "可折叠",
+      "dark": "深色模式",
+      "footer": "底部",
+      "header": "头部",
+      "onCollapse": "折叠时",
+      "onOptionChange": "选项变化时",
+      "options": "选项",
+      "iOption": "选项",
+      "sidebarHeader": "侧边栏头部"
+    },
+    "options": {
+      "active": "激活",
+      "children": "子项",
+      "disabled": "禁用",
+      "href": "链接",
+      "icon": "图标",
+      "id": "ID",
+      "isLeaf": "是否是叶子节点",
+      "name": "名称",
+      "onClick": "点击时",
+      "parentId": "父级ID"
+    }
+  }
+}
