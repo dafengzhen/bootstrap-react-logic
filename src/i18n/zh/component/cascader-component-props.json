@@ -1,0 +1,22 @@
+{
+  "cascader": {
+    "name": "Cascader",
+    "desc": {
+      "disabled": "禁用",
+      "onChange": "变化时",
+      "onClear": "清除时",
+      "options": "选项",
+      "placeholder": "占位符",
+      "iOption": "选项"
+    },
+    "options": {
+      "active": "激活",
+      "children": "子项",
+      "disabled": "禁用",
+      "id": "ID",
+      "level": "级别",
+      "parentId": "父级ID",
+      "text": "文本"
+    }
+  }
+}

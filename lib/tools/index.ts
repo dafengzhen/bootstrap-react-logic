@@ -118,6 +118,8 @@ export type {
   CarouselCaptionVariablesType,
   CarouselItemVariablesType,
   CarouselVariablesType,
+  CascaderItemVariablesType,
+  CascaderVariablesType,
   CheckboxVariablesType,
   CloseButtonVariableType,
   CollapseVariablesType,

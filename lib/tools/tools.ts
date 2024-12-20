@@ -1130,7 +1130,7 @@ const generateTreeNodeMap = <
     string,
     T & { _metadata: { id: number | string; parentId?: null | number | string; path: string } }
   >();
-  const traverse = (nodes: T[], parent: null | number | string, currentPath: string) => {
+  const traverse = (nodes: T[], parentId: null | number | string, currentPath: string) => {
     nodes.forEach((node) => {
       const nodePath = currentPath ? `${currentPath}-${node.id}` : `${node.id}`;
       map.set(nodePath, {
@@ -1138,7 +1138,7 @@ const generateTreeNodeMap = <
         _metadata: {
           id: node.id,
           path: nodePath,
-          ...(parent !== null ? { parentId: parent } : {}),
+          ...(parentId !== undefined && parentId !== null ? { parentId } : {}),
         },
       });
       if (node.children && node.children.length > 0) {

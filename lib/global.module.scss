@@ -36,7 +36,7 @@
   @apply tw-scroll-smooth;
 }
 
-.brl-min-h-38px {
+.brl-min-h-38-px {
   @apply tw-min-h-[38px];
 }
 
@@ -105,4 +105,8 @@
 .brl-nav-toggle-dark a:hover,
 .brl-nav-toggle-dark a:focus {
   background-color: var(--brl-custom-hover-bg-dark);
+}
+
+.brl-vr-border-color {
+  color: var(--bs-border-color);
 }

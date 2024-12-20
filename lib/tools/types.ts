@@ -384,6 +384,10 @@ type CarouselVariablesType = {
   carouselTransitionDuration?: string;
 };
 
+type CascaderItemVariablesType = CascaderVariablesType;
+
+type CascaderVariablesType = object;
+
 type CheckboxVariablesType = {
   formCheckBtnCheckDisabledOpacity?: string;
   formCheckInlineMarginEnd?: string;
@@ -1205,6 +1209,8 @@ export type {
   CarouselCaptionVariablesType,
   CarouselItemVariablesType,
   CarouselVariablesType,
+  CascaderItemVariablesType,
+  CascaderVariablesType,
   CheckboxVariablesType,
   CloseButtonVariableType,
   CollapseVariablesType,

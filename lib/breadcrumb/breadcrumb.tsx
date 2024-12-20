@@ -22,13 +22,13 @@ const Breadcrumb = function Breadcrumb<T extends ElementType = 'nav'>(props: Bre
     className,
     dropOldClass,
     onClick: onClickByDefault,
-    options: defaultOptions,
+    options: optionsByDefault,
     style,
     variables,
     ...rest
   } = props;
 
-  const [options] = useState<IOption[]>(generateInitialOptions(defaultOptions));
+  const [options] = useState<IOption[]>(generateInitialOptions(optionsByDefault));
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && '', className);

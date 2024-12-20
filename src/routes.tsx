@@ -7,6 +7,7 @@ import ButtonPage from '@pages/button-page.tsx';
 import CalendarPage from '@pages/calendar-page.tsx';
 import CardPage from '@pages/card-page.tsx';
 import CarouselPage from '@pages/carousel-page.tsx';
+import CascaderPage from '@pages/cascader-page.tsx';
 import CheckboxPage from '@pages/checkbox-page.tsx';
 import CloseButtonPage from '@pages/close-button-page.tsx';
 import CollapsePage from '@pages/collapse-page.tsx';
@@ -54,6 +55,7 @@ export enum MenuEnum {
   Calendar = '/pages/calendar',
   Card = '/pages/card',
   Carousel = '/pages/carousel',
+  Cascader = '/pages/cascader',
   Checkbox = '/pages/checkbox',
   CloseButton = '/pages/close-button',
   Collapse = '/pages/collapse',
@@ -246,6 +248,10 @@ const router = createBrowserRouter(
             {
               element: <SidebarPage />,
               path: 'pages/sidebar',
+            },
+            {
+              element: <CascaderPage />,
+              path: 'pages/cascader',
             },
           ],
           errorElement: <ErrorPage />,

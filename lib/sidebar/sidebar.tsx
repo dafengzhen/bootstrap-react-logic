@@ -1,4 +1,13 @@
-import { type ElementType, isValidElement, type MouseEvent, useCallback, useMemo, useState } from 'react';
+import {
+  type ElementType,
+  isValidElement,
+  type MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import type { SidebarHeader, SidebarHeaderObject, SidebarOption, SidebarProps } from './types.ts';
 
@@ -12,7 +21,7 @@ interface IOption extends SidebarOption {
 
 const generateInitialOptions = (options: SidebarOption[] = [], parentId?: number | string): IOption[] =>
   options.map((item, index) => {
-    const id = item.id ?? (parentId !== undefined && parentId !== null ? `${parentId}-${index}` : index);
+    const id = item.id ?? (parentId !== undefined ? `${parentId}${index}` : `${index}`);
     const isFirstLevel = parentId === undefined || parentId === null;
     const isLeaf = !isFirstLevel && (!item.children || item.children.length === 0);
 
@@ -50,6 +59,7 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
   } = props;
 
   const [hasVerticalScrollbar, setHasVerticalScrollbar] = useState(false);
+  const sidebar = useRef<HTMLUListElement>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(
@@ -75,6 +85,22 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
     },
     [onCollapseByDefault],
   );
+
+  useEffect(() => {
+    const element = sidebar.current;
+    if (!element) {
+      return;
+    }
+
+    const handleResize = () => {
+      setHasVerticalScrollbar(element.scrollHeight > element.clientHeight);
+    };
+
+    element.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => element.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <Component {...rest} {...renderOptions}>
@@ -123,11 +149,7 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
                 collapsible && 'text-center',
                 dark ? globalStyles.brlNavToggleDark : globalStyles.brlNavToggle,
               )}
-              ref={(instance) => {
-                if (instance) {
-                  setHasVerticalScrollbar(instance.scrollHeight > instance.clientHeight);
-                }
-              }}
+              ref={sidebar}
             >
               {options.map((item) => (
                 <SidebarItem

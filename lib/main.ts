@@ -7,6 +7,7 @@ export * from './button-group';
 export * from './calendar';
 export * from './card';
 export * from './carousel';
+export * from './cascader';
 export * from './checkbox';
 export * from './collapse';
 export * from './date-picker';

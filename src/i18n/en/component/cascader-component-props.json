@@ -1,0 +1,22 @@
+{
+  "cascader": {
+    "name": "Cascader",
+    "desc": {
+      "disabled": "Disabled",
+      "onChange": "On Change",
+      "onClear": "On Clear",
+      "options": "Options",
+      "placeholder": "Placeholder",
+      "iOption": "IOption"
+    },
+    "options": {
+      "active": "Active",
+      "children": "Children",
+      "disabled": "Disabled",
+      "id": "ID",
+      "level": "Level",
+      "parentId": "Parent ID",
+      "text": "Text"
+    }
+  }
+}

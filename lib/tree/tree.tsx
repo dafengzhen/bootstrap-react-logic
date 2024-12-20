@@ -10,9 +10,9 @@ interface IOption extends TreeOption {
   id: number | string;
 }
 
-const generateInitialOptions = (options: TreeOption[] = [], optionId?: number | string): IOption[] =>
+const generateInitialOptions = (options: TreeOption[] = [], parentId?: number | string): IOption[] =>
   options.map((item, index) => {
-    const id = item.id !== undefined ? item.id : optionId !== undefined ? `${optionId}${index}` : `${index}`;
+    const id = item.id !== undefined ? item.id : parentId !== undefined ? `${parentId}${index}` : `${index}`;
     return {
       ...item,
       children: item.children ? generateInitialOptions(item.children, id) : undefined,

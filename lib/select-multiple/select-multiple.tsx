@@ -11,7 +11,7 @@ import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState }
 
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 
-import selectMultipleStyles from '../global.module.scss';
+import globalStyles from '../global.module.scss';
 import {
   classx,
   classxWithOptions,
@@ -23,6 +23,16 @@ import {
   stylex,
 } from '../tools';
 
+interface IOption extends SelectMultipleOption {
+  id: number | string;
+}
+
+const generateInitialOptions = (options: SelectMultipleOption[] = []): IOption[] =>
+  options.map((item, index) => ({
+    ...item,
+    id: item.id ?? index,
+  }));
+
 const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(props: SelectMultipleProps<T>) {
   const {
     as: Component = 'div' as ElementType,
@@ -32,7 +42,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     dropOldClass,
     hideActiveOptions,
     onChange,
-    options: defaultOptions,
+    options: optionsByDefault,
     placeholder,
     selectableCount,
     single,
@@ -41,10 +51,8 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     ...rest
   } = props;
 
-  const initialOptions = (defaultOptions ?? []).map((item, index) => ({
-    ...item,
-    id: item.id ?? index,
-  }));
+  const [options, setOptions] = useState<IOption[]>(generateInitialOptions(optionsByDefault));
+  const [isOpen, setIsOpen] = useState(false);
   const noParamContentClasses = pickObjectProperties(contentClasses, ['optionItem', 'selectButton'], true) as Omit<
     keyof typeof contentClasses,
     'optionItem' | 'selectButton'
@@ -53,8 +61,6 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     keyof typeof contentClasses,
     'optionItem' | 'selectButton'
   >;
-  const [isOpen, setIsOpen] = useState(false);
-  const [options, setOptions] = useState<SelectMultipleOption[]>(initialOptions);
 
   const { context, floatingStyles, refs } = useFloating({
     middleware: [
@@ -94,7 +100,13 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
       setOptions((prevOptions) => {
         return prevOptions.map((optionItem, idx) => ({
           ...optionItem,
-          active: single ? idx === index : idx === index ? !optionItem.active : optionItem.active,
+          active: single
+            ? idx === index
+              ? !optionItem.active
+              : idx === index
+            : idx === index
+              ? !optionItem.active
+              : optionItem.active,
         }));
       });
     },
@@ -112,7 +124,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(
-      !dropOldClass && `form-select ${selectMultipleStyles.brlMinH38px}`,
+      !dropOldClass && `form-select ${globalStyles.brlMinH38Px}`,
       disabled && 'bg-body-secondary',
       className,
     );
@@ -129,16 +141,12 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
     activeOption: classxWithOptions(
       null,
       'd-flex align-items-center badge text-bg-secondary',
-      selectMultipleStyles.brlCursorDefault,
+      globalStyles.brlCursorDefault,
     ),
     bottomDivider: 'dropdown-divider',
-    clearIcon: classxWithOptions(null, 'bi bi-x', selectMultipleStyles.brlCursorPointer),
-    countDisplay: classxWithOptions(
-      null,
-      'align-self-center flex-shrink-0 text-secondary',
-      selectMultipleStyles.brlScale75,
-    ),
-    floatingMenu: 'overflow-y-auto dropdown-menu rounded-3 shadow show',
+    clearIcon: classxWithOptions(null, 'bi bi-x', globalStyles.brlCursorPointer),
+    countDisplay: classxWithOptions(null, 'align-self-center flex-shrink-0 text-secondary', globalStyles.brlScale75),
+    floatingMenu: 'overflow-y-auto dropdown-menu shadow show',
     header: 'dropdown-header',
     mainContainer: classxWithOptions(
       null,
@@ -154,48 +162,50 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   }, [getActiveOptions, onChange]);
 
   return (
-    <Component {...getReferenceProps()} {...rest} {...renderOptions} ref={refs.setReference}>
-      <div className={slotClassName.mainContainer} data-slot-main-container="">
-        <div className={slotClassName.optionsContainer} data-slot-options-container="">
-          {placeholder && getActiveOptions.length === 0 ? (
-            <div className={slotClassName.placeholder} data-slot-placeholder="">
-              {placeholder}
-            </div>
-          ) : (
-            getActiveOptions.map((item) => {
-              return (
-                <div className={slotClassName.activeOption} data-slot-active-option="" key={item.id}>
-                  {item.text}
-                  <i
-                    className={slotClassName.clearIcon}
-                    data-slot-clear-icon=""
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onClickClearOption(item);
-                    }}
-                    tabIndex={-1}
-                  ></i>
-                </div>
-              );
-            })
+    <>
+      <Component {...rest} {...renderOptions} {...getReferenceProps()} ref={refs.setReference}>
+        <div className={slotClassName.mainContainer} data-slot-main-container="">
+          <div className={slotClassName.optionsContainer} data-slot-options-container="">
+            {placeholder && getActiveOptions.length === 0 ? (
+              <div className={slotClassName.placeholder} data-slot-placeholder="">
+                {placeholder}
+              </div>
+            ) : (
+              getActiveOptions.map((item) => {
+                return (
+                  <div className={slotClassName.activeOption} data-slot-active-option="" key={item.id}>
+                    {item.text}
+                    <i
+                      className={slotClassName.clearIcon}
+                      data-slot-clear-icon=""
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onClickClearOption(item);
+                      }}
+                      tabIndex={-1}
+                    ></i>
+                  </div>
+                );
+              })
+            )}
+          </div>
+
+          {typeof selectableCount === 'number' && (
+            <div
+              className={slotClassName.countDisplay}
+              data-slot-count-display=""
+            >{`${getActiveOptionsLength} / ${selectableCount}`}</div>
           )}
         </div>
-
-        {typeof selectableCount === 'number' && (
-          <div
-            className={slotClassName.countDisplay}
-            data-slot-count-display=""
-          >{`${getActiveOptionsLength} / ${selectableCount}`}</div>
-        )}
-      </div>
+      </Component>
 
       {isOpen && (
         <FloatingPortal>
           <ul
+            className={slotClassName.floatingMenu}
+            {...getFloatingProps()}
             data-slot-floating-menu=""
             ref={refs.setFloating}
-            {...getFloatingProps()}
-            className={slotClassName.floatingMenu}
             style={floatingStyles}
           >
             {getOptionsByHeader.keys.map((key) => {
@@ -256,7 +266,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
           </ul>
         </FloatingPortal>
       )}
-    </Component>
+    </>
   );
 };
 
