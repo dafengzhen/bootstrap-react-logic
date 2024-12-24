@@ -209,6 +209,7 @@ export type {
   StepsVariablesType,
   TableCaptionVariablesType,
   TableResponsiveVariablesType,
+  WatermarkVariablesType,
   TableTbodyVariablesType,
   TableTdVariablesType,
   TableTfootVariablesType,

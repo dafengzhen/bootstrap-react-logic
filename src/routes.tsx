@@ -39,6 +39,7 @@ import TablePage from '@pages/table-page.tsx';
 import ToastPage from '@pages/toast-page.tsx';
 import TooltipPage from '@pages/tooltip-page.tsx';
 import TreePage from '@pages/tree-page.tsx';
+import WatermarkPage from '@pages/watermark-page.tsx';
 import App from '@src/App.tsx';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -85,6 +86,7 @@ export enum MenuEnum {
   Toast = '/pages/toast',
   Tooltip = '/pages/tooltip',
   Tree = '/pages/tree',
+  Watermark = '/pages/watermark',
 }
 
 /**
@@ -252,6 +254,10 @@ const router = createBrowserRouter(
             {
               element: <CascaderPage />,
               path: 'pages/cascader',
+            },
+            {
+              element: <WatermarkPage />,
+              path: 'pages/watermark',
             },
           ],
           errorElement: <ErrorPage />,

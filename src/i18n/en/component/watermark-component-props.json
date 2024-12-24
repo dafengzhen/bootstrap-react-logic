@@ -1,0 +1,19 @@
+{
+  "watermark": {
+    "name": "Watermark",
+    "desc": {
+      "angle": "Angle",
+      "fontColor": "Font Color",
+      "fontSize": "Font Size",
+      "gapX": "Horizontal Gap",
+      "gapY": "Vertical Gap",
+      "imageUrl": "Image URL",
+      "isDarkMode": "Is Dark Mode",
+      "offsetX": "Horizontal Offset",
+      "offsetY": "Vertical Offset",
+      "opacity": "Opacity",
+      "text": "Text",
+      "zIndex": "Z-Index"
+    }
+  }
+}

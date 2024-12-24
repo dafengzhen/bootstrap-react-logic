@@ -1,0 +1,19 @@
+{
+  "watermark": {
+    "name": "Watermark",
+    "desc": {
+      "angle": "角度",
+      "fontColor": "字体颜色",
+      "fontSize": "字体大小",
+      "gapX": "水平间距",
+      "gapY": "垂直间距",
+      "imageUrl": "图片 URL",
+      "isDarkMode": "是否深色模式",
+      "offsetX": "水平偏移",
+      "offsetY": "垂直偏移",
+      "opacity": "不透明度",
+      "text": "文本",
+      "zIndex": "索引"
+    }
+  }
+}
