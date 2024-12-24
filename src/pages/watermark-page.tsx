@@ -83,7 +83,7 @@ export default function WatermarkPage() {
       </Example>
 
       <Example hash="image" state={state} t={tWatermarkPage}>
-        <Watermark imageUrl="/favicon/android-chrome-192x192.png">
+        <Watermark imageUrl={`${__APP_PUBLIC_BASE_HREF__}/favicon/android-chrome-192x192.png`}>
           <div className="card" style={{ height: 330 }}>
             <div className="card-body"></div>
           </div>
