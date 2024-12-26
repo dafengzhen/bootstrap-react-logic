@@ -11,6 +11,7 @@
   "main": "dist-lib/bootstrap-react-logic.cjs",
   "style": "dist-lib/bootstrap-react-logic.css",
   "module": "dist-lib/bootstrap-react-logic.js",
+  "types": "dist-lib/main.d.ts",
   "engines": {
     "node": ">=20",
     "npm": ">=10"
