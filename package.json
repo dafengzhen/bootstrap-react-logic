@@ -8,18 +8,9 @@
   "files": [
     "dist-lib"
   ],
-  "main": "./dist-lib/bootstrap-react-logic.cjs",
-  "style": "./dist-lib/bootstrap-react-logic.css",
-  "module": "./dist-lib/bootstrap-react-logic.js",
-  "types": "./dist-lib/main.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist-lib/main.d.ts",
-      "import": "./dist-lib/bootstrap-react-logic.js",
-      "require": "./dist-lib/bootstrap-react-logic.cjs"
-    },
-    "./bootstrap-react-logic.css": "./dist-lib/bootstrap-react-logic.css"
-  },
+  "main": "dist-lib/bootstrap-react-logic.cjs",
+  "style": "dist-lib/bootstrap-react-logic.css",
+  "module": "dist-lib/bootstrap-react-logic.js",
   "engines": {
     "node": ">=20",
     "npm": ">=10"
@@ -79,12 +70,11 @@
     "cross-env": "^7.0.3",
     "cssnano": "^7.0.6",
     "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-perfectionist": "^4.4.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
-    "highlight.js": "^11.11.0",
+    "highlight.js": "^11.11.1",
     "htmlnano": "^2.1.1",
     "husky": "^9.1.7",
     "i18next": "^24.2.0",
@@ -103,7 +93,7 @@
     "terser": "^5.37.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5",
+    "vite": "^6.0.6",
     "vite-plugin-dts": "^4.4.0"
   },
   "packageManager": "npm@11.0.0",

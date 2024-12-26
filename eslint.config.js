@@ -1,5 +1,4 @@
 import js from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier';
 import perfectionist from 'eslint-plugin-perfectionist';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -28,5 +27,4 @@ export default config(
     },
   },
   perfectionist.configs['recommended-natural'],
-  eslintConfigPrettier,
 );
