@@ -16,7 +16,7 @@ const Card = function Card<T extends ElementType = 'div'>(props: CardProps<T>) {
   const { as: Component = 'div' as ElementType, cardBody, className, dropOldClass, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
-    const finalClass = classx(!dropOldClass && 'card', cardBody && '.card-body', className);
+    const finalClass = classx(!dropOldClass && 'card', cardBody && 'card-body', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
