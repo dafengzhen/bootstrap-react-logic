@@ -22,7 +22,9 @@ export default config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
+      curly: 'error',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
