@@ -50,12 +50,6 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
 
   const handleClick = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
-      // setOpen((prev) => !prev);
-      if (typeof onClickByDefault === 'function') {
-        onClickByDefault(e);
-        return;
-      }
-
       if (!href || href === '#') {
         e.preventDefault();
       }
@@ -66,6 +60,7 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
 
       const newOptions = toggleSidebarOptionActiveById(optionsByDefault, option.id!);
       onOptionChangeByDefault?.(newOptions);
+      onClickByDefault?.(e);
     },
     [href, onClickByDefault, onOptionChangeByDefault, option.active, option.id, optionsByDefault],
   );
