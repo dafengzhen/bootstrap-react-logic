@@ -8,7 +8,7 @@ import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 const toggleSidebarOptionActiveById = (options: SidebarOption[] = [], id: number | string): SidebarOption[] =>
   options.map((option) => ({
     ...option,
-    active: option.id === id,
+    active: option.id === id ? !option.active : false,
     children: option.children ? toggleSidebarOptionActiveById(option.children, id) : option.children,
   }));
 
@@ -22,6 +22,7 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
     onOptionChange: onOptionChangeByDefault,
     option,
     options: optionsByDefault,
+    preventToggleActive,
     style,
     variables,
     ...rest
@@ -54,7 +55,7 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
         e.preventDefault();
       }
 
-      if (option.active) {
+      if (!preventToggleActive && option.active) {
         return;
       }
 
@@ -62,7 +63,7 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
       onOptionChangeByDefault?.(newOptions);
       onClickByDefault?.(e);
     },
-    [href, onClickByDefault, onOptionChangeByDefault, option.active, option.id, optionsByDefault],
+    [href, onClickByDefault, onOptionChangeByDefault, option.active, option.id, optionsByDefault, preventToggleActive],
   );
 
   return (
@@ -104,6 +105,7 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
               onOptionChange={onOptionChangeByDefault}
               option={item}
               options={optionsByDefault}
+              preventToggleActive={preventToggleActive}
             />
           ))}
         </ul>

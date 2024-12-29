@@ -11,7 +11,8 @@
       "onOptionChange": "On Option Change",
       "options": "Options",
       "iOption": "IOption",
-      "sidebarHeader": "Sidebar Header"
+      "sidebarHeader": "Sidebar Header",
+      "preventToggleActive": "Prevent Toggle Active"
     },
     "options": {
       "active": "Active",

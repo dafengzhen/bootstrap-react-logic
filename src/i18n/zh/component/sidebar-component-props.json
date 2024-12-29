@@ -11,7 +11,8 @@
       "onOptionChange": "选项变化时",
       "options": "选项",
       "iOption": "选项",
-      "sidebarHeader": "侧边栏头部"
+      "sidebarHeader": "侧边栏头部",
+      "preventToggleActive": "防止切换激活状态"
     },
     "options": {
       "active": "激活",

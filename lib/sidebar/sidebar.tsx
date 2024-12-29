@@ -53,6 +53,7 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
     onCollapse: onCollapseByDefault,
     onOptionChange,
     options: optionsByDefault,
+    preventToggleActive,
     style,
     variables,
     ...rest
@@ -159,6 +160,7 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
                   onOptionChange={onOptionChange}
                   option={item}
                   options={options}
+                  preventToggleActive={preventToggleActive}
                 />
               ))}
             </ul>

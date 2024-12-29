@@ -52,6 +52,11 @@ type ItemProps<T extends ElementType> = BaseProps<T, SidebarItemVariablesType> &
    * options.
    */
   options?: SidebarOption[];
+
+  /**
+   * preventToggleActive.
+   */
+  preventToggleActive?: boolean;
 };
 
 type Props<T extends ElementType> = BaseProps<T, SidebarVariablesType> & {
@@ -94,4 +99,9 @@ type Props<T extends ElementType> = BaseProps<T, SidebarVariablesType> & {
    * options.
    */
   options?: SidebarOption[];
+
+  /**
+   * preventToggleActive.
+   */
+  preventToggleActive?: boolean;
 };

@@ -448,6 +448,12 @@ export default function SidebarPage() {
               </Link>
             ),
           },
+          {
+            attr: 'preventToggleActive',
+            default: '',
+            desc: tSidebarComponentProps('sidebar.desc.preventToggleActive'),
+            type: <span className="badge text-bg-secondary">boolean</span>,
+          },
         ]}
         props
         state={state}
