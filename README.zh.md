@@ -40,7 +40,7 @@ import { Button } from 'bootstrap-react-logic';
 
 ## 演示项目
 
-在项目使用 BRL 示例：[prepforge](https://prepforge-ten.vercel.app)
+在项目使用 BRL 的示例：[prepforge](https://prep-forge.vercel.app)
 
 ## License
 

@@ -44,7 +44,7 @@ the [documentation](https://dafengzhen.github.io/bootstrap-react-logic).
 
 ## Demo Project
 
-See an example of using BRL in the project: [prepforge](https://prepforge-ten.vercel.app)
+See an example of using BRL in the project: [prepforge](https://prep-forge.vercel.app)
 
 ## License
 
