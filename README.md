@@ -42,6 +42,10 @@ import { Button } from 'bootstrap-react-logic';
 For more examples and complete component documentation, please refer to
 the [documentation](https://dafengzhen.github.io/bootstrap-react-logic).
 
+## Demo Project
+
+See an example of using BRL in the project: [prepforge](https://prepforge-ten.vercel.app)
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

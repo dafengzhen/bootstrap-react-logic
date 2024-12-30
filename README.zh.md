@@ -38,6 +38,10 @@ import { Button } from 'bootstrap-react-logic';
 
 更多示例和完整组件文档，请[参考文档](https://dafengzhen.github.io/bootstrap-react-logic)
 
+## 演示项目
+
+在项目使用 BRL 示例：[prepforge](https://prepforge-ten.vercel.app)
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
