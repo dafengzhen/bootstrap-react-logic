@@ -53,11 +53,6 @@ type BasicProps<T extends ElementType> = BaseProps<T, AccordionBasicVariablesTyp
 
 type BodyProps<T extends ElementType> = BaseProps<T, AccordionBodyVariablesType> & {
   /**
-   * collapsing.
-   */
-  collapsing?: boolean;
-
-  /**
    * onChange.
    */
   onChange?: (visible: boolean) => void;
@@ -87,11 +82,6 @@ type Props<T extends ElementType> = BaseProps<T, AccordionVariablesType> & {
    * alwaysOpen.
    */
   alwaysOpen?: boolean;
-
-  /**
-   * collapsing.
-   */
-  collapsing?: boolean;
 
   /**
    * flush.

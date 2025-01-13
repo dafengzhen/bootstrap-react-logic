@@ -1,4 +1,4 @@
-import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
+import type { ComponentRef, ElementType, ReactNode, RefCallback } from 'react';
 
 import type { BaseProps, InputVariablesType, OmittedPropsWithoutRef, SlotValue } from '../tools';
 
@@ -43,7 +43,7 @@ type Props<T extends ElementType> = BaseProps<T, InputVariablesType> & {
   /**
    * onRef.
    */
-  onRef?: RefCallback<ElementRef<T>>;
+  onRef?: RefCallback<ComponentRef<T>>;
 
   /**
    * readonlyPlainText.

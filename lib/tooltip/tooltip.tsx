@@ -265,7 +265,9 @@ const Tooltip = function Tooltip<T extends ElementType = 'div'>(props: TooltipPr
                   top: middlewareData.arrow?.y,
                 },
               })}
-              onRef={(instance: HTMLDivElement | null) => (arrowElement.current = instance)}
+              onRef={(instance: HTMLDivElement | null) => {
+                arrowElement.current = instance;
+              }}
             ></TooltipArrow>
             {(inner || html) && (
               <TooltipInner {...innerProps} html={html}>

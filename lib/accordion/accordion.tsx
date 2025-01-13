@@ -10,8 +10,7 @@ import AccordionItem from './accordion-item.tsx';
 const Accordion = function Accordion<T extends ElementType = 'div'>(props: AccordionProps<T>) {
   const {
     alwaysOpen,
-    as: Component = 'div',
-    collapsing,
+    as: Component = 'div' as ElementType,
     onChange: onChangeByDefault,
     options: defaultOptions,
     ...rest
@@ -73,7 +72,7 @@ const Accordion = function Accordion<T extends ElementType = 'div'>(props: Accor
   );
 
   return (
-    <AccordionBasic as={Component as 'div'} {...rest}>
+    <AccordionBasic as={Component} {...rest}>
       {options.map((item, index) => {
         return (
           <AccordionItem key={item.id}>
@@ -88,7 +87,7 @@ const Accordion = function Accordion<T extends ElementType = 'div'>(props: Accor
             >
               {item.header}
             </AccordionHeader>
-            <AccordionBody collapsing={collapsing} onChange={onChange} show={item.show}>
+            <AccordionBody onChange={onChange} show={item.show}>
               {item.body}
             </AccordionBody>
           </AccordionItem>

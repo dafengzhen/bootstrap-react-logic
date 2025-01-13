@@ -25,7 +25,7 @@ export type TreeNodeProps<T extends ElementType> = OmittedPropsWithoutRef<
   NodeProps<T>,
   T,
   TreeNodeVariablesType,
-  'onSelect'
+  'onSelect' | 'onToggle'
 >;
 
 export interface TreeOption {
@@ -41,7 +41,12 @@ export interface TreeOption {
   selectable?: boolean;
 }
 
-export type TreeProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, TreeVariablesType, 'onSelect'>;
+export type TreeProps<T extends ElementType> = OmittedPropsWithoutRef<
+  Props<T>,
+  T,
+  TreeVariablesType,
+  'onSelect' | 'onToggle'
+>;
 
 type Metadata = { nodeKey: string; parentKey?: string };
 

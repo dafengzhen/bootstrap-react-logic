@@ -1,4 +1,4 @@
-import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
+import type { ComponentRef, ElementType, ReactNode, RefCallback } from 'react';
 
 import type {
   BaseProps,
@@ -50,7 +50,7 @@ type Props<T extends ElementType> = BaseProps<T, ButtonVariableType> & {
   /**
    * onRef.
    */
-  onRef?: RefCallback<ElementRef<T>>;
+  onRef?: RefCallback<ComponentRef<T>>;
 
   /**
    * outline.

@@ -1,4 +1,4 @@
-import type { ElementRef, ElementType, ReactNode, RefCallback } from 'react';
+import type { ComponentRef, ElementType, ReactNode, RefCallback } from 'react';
 
 import type { ButtonProps } from '../button';
 import type {
@@ -77,7 +77,7 @@ type MenuProps<T extends ElementType> = BaseProps<T, DropdownMenuVariablesType> 
   /**
    * onRef.
    */
-  onRef?: RefCallback<ElementRef<T>>;
+  onRef?: RefCallback<ComponentRef<T>>;
 
   /**
    * show.
@@ -182,5 +182,5 @@ type ToggleProps<T extends ElementType> = BaseProps<T, DropdownToggleVariablesTy
   /**
    * onRef.
    */
-  onRef?: RefCallback<ElementRef<T>>;
+  onRef?: RefCallback<ComponentRef<T>>;
 };

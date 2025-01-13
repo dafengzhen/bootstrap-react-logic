@@ -8,7 +8,7 @@ import AccordionHeader from './accordion-header.tsx';
 import AccordionItem from './accordion-item.tsx';
 
 const AccordionBasic = function AccordionBasic<T extends ElementType = 'div'>(props: AccordionBasicProps<T>) {
-  const { as: Component = 'div', className, dropOldClass, flush, style, variables, ...rest } = props;
+  const { as: Component = 'div' as ElementType, className, dropOldClass, flush, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'accordion', flush && 'accordion-flush', className);

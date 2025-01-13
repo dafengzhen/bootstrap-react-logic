@@ -32,7 +32,9 @@ const Checkbox = function Checkbox<T extends ElementType = 'input'>(props: Check
     }
   }, [indeterminate]);
 
-  const setInstance = useCallback((instance: HTMLInputElement | null) => (checkboxElement.current = instance), []);
+  const setInstance = useCallback((instance: HTMLInputElement | null) => {
+    checkboxElement.current = instance;
+  }, []);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'form-check-input', className);

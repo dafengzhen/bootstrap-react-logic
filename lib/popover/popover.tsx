@@ -267,7 +267,9 @@ const Popover = function Popover<T extends ElementType = 'div'>(props: PopoverPr
                   top: middlewareData.arrow?.y,
                 },
               })}
-              onRef={(instance: HTMLDivElement | null) => (arrowElement.current = instance)}
+              onRef={(instance: HTMLDivElement | null) => {
+                arrowElement.current = instance;
+              }}
             ></PopoverArrow>
             <PopoverHeader {...headerProps}>{header}</PopoverHeader>
             <PopoverBody {...bodyProps}>{body}</PopoverBody>

@@ -29,8 +29,6 @@ export {
   BiThreeDots,
 } from './icons.tsx';
 
-export type { ReactRef } from './refs';
-
 export {
   calculateLoopIndex,
   camelToKebab,
@@ -209,7 +207,6 @@ export type {
   StepsVariablesType,
   TableCaptionVariablesType,
   TableResponsiveVariablesType,
-  WatermarkVariablesType,
   TableTbodyVariablesType,
   TableTdVariablesType,
   TableTfootVariablesType,
@@ -230,4 +227,5 @@ export type {
   TreeNodeVariablesType,
   TreeVariablesType,
   VariantType,
+  WatermarkVariablesType,
 } from './types.ts';

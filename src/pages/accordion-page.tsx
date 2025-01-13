@@ -199,12 +199,6 @@ export default function AccordionPage() {
               </Link>
             ),
           },
-          {
-            attr: 'collapsing',
-            default: 'true',
-            desc: tAccordionComponentProps('accordion.desc.collapsing'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
-          },
         ]}
         props
         state={state}
