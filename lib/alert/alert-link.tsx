@@ -17,7 +17,7 @@ const AlertLink = function AlertLink<T extends ElementType = 'a'>(props: AlertLi
     };
   }, [className, dropOldClass, style, variables]);
 
-  return <Component {...rest} {...renderOptions}></Component>;
+  return <Component {...rest} {...renderOptions} />;
 };
 
 AlertLink.displayName = 'BRL.AlertLink';

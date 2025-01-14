@@ -17,7 +17,7 @@ const AlertHeading = function AlertHeading<T extends ElementType = 'div'>(props:
     };
   }, [className, dropOldClass, style, variables]);
 
-  return <Component {...rest} {...renderOptions}></Component>;
+  return <Component {...rest} {...renderOptions} />;
 };
 
 AlertHeading.displayName = 'BRL.AlertHeading';

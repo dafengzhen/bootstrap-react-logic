@@ -83,7 +83,6 @@ export default function AlertPage() {
             <Alert
               clickToClose={false}
               dismissible
-              fade
               key={item.id}
               onVisibleChange={(visible) =>
                 setAlerts((prevState) => [
@@ -182,7 +181,7 @@ export default function AlertPage() {
       </Example>
 
       <Example hash="dismissing" state={state} t={tAlertPage}>
-        <Alert dismissible fade role="alert" variant="warning">
+        <Alert dismissible role="alert" variant="warning">
           <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </Alert>
 
@@ -197,7 +196,6 @@ export default function AlertPage() {
             />
           }
           dismissible
-          fade
           role="alert"
           variant="warning"
           visible={visible}
@@ -234,12 +232,6 @@ export default function AlertPage() {
             attr: 'dismissible',
             default: '',
             desc: tAlertComponentProps('alert.desc.dismissible'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
-          },
-          {
-            attr: 'fade',
-            default: '',
-            desc: tAlertComponentProps('alert.desc.fade'),
             type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {

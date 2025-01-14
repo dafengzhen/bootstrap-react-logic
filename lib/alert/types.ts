@@ -41,11 +41,6 @@ type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
   dismissible?: boolean;
 
   /**
-   * fade.
-   */
-  fade?: boolean;
-
-  /**
    * onVisibleChange.
    */
   onVisibleChange?: (visible: boolean) => void;
