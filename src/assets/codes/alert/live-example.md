@@ -12,24 +12,31 @@ function onClickShowLiveAlertTest() {
 
 {
   alerts.map((item, index) => {
+    const onVisibleChange = (visible: boolean) => {
+      setAlerts((prevState) => [
+        ...prevState.slice(0, index),
+        { ...prevState[index], visible },
+        ...prevState.slice(index + 1),
+      ]);
+    };
+
     return (
       <Alert
-        onVisibleChange={(visible) =>
-          setAlerts((prevState) => [
-            ...prevState.slice(0, index),
-            { ...prevState[index], visible },
-            ...prevState.slice(index + 1),
-          ])
-        }
-        visible={item.visible}
-        clickToClose={false}
-        variant="success"
-        key={item.id}
-        role="alert"
         dismissible
-        fade
+        key={item.id}
+        onVisibleChange={onVisibleChange}
+        role="alert"
+        variant="success"
+        visible={item.visible}
       >
         <div>A simple primary alert—check it out!</div>
+        <button
+          aria-label="Close"
+          className="btn-close"
+          data-bs-dismiss="alert"
+          onClick={() => onVisibleChange(!item.visible)}
+          type="button"
+        />
       </Alert>
     );
   });

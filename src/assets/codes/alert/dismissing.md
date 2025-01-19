@@ -1,26 +1,14 @@
 ```jsx
 const [visible, setVisible] = useState(true);
 
-<Alert variant="warning" fade dismissible role="alert">
+<Alert dismissible onVisibleChange={setVisible} role="alert" variant="warning" visible={visible}>
   <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</Alert>
-
-<Alert
-  closeButton={
-    <button
-      onClick={() => setVisible(!visible)}
-      data-bs-dismiss="alert"
-      className="btn-close"
-      aria-label="Close"
-      type="button"
-    />
-  }
-  visible={visible}
-  variant="warning"
-  role="alert"
-  dismissible
-  fade
->
-  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</Alert>
+  <button
+    aria-label="Close"
+    className="btn-close"
+    data-bs-dismiss="alert"
+    onClick={() => setVisible(!visible)}
+    type="button"
+  />
+</Alert>;
 ```

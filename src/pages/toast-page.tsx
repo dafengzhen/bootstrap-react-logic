@@ -279,6 +279,7 @@ export default function BadgePage() {
             {
               'aria-atomic': 'true',
               'aria-live': 'assertive',
+              autohide: false,
               body: 'Heads up, toasts will stack automatically',
               header: (
                 <>

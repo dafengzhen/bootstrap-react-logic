@@ -1,6 +1,5 @@
-import type { ElementType, ReactNode } from 'react';
+import type { ElementType } from 'react';
 
-import type { ButtonProps } from '../button';
 import type {
   AlertHeadingVariablesType,
   AlertLinkVariablesType,
@@ -20,21 +19,6 @@ type HeadingProps<T extends ElementType> = BaseProps<T, AlertHeadingVariablesTyp
 type LinkProps<T extends ElementType> = BaseProps<T, AlertLinkVariablesType> & {};
 
 type Props<T extends ElementType> = BaseProps<T, AlertVariablesType> & {
-  /**
-   * clickToClose.
-   */
-  clickToClose?: boolean;
-
-  /**
-   * closeButton.
-   */
-  closeButton?: ReactNode;
-
-  /**
-   * closeButtonProps.
-   */
-  closeButtonProps?: ButtonProps<ElementType>;
-
   /**
    * dismissible.
    */

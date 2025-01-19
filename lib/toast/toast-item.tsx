@@ -40,12 +40,19 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
     };
   }, [className, dropOldClass, fade, showing, style, variables]);
 
+  const handleVisibilityChange = useCallback(
+    (isVisible = false) => {
+      setVisible(isVisible);
+      onVisibleChangeByDefault?.(isVisible);
+    },
+    [onVisibleChangeByDefault],
+  );
+
   const onTransitionEnd = useCallback(() => {
     if ((autohide && showing) || !visibleByDefault) {
-      setVisible(false);
-      onVisibleChangeByDefault?.(false);
+      handleVisibilityChange();
     }
-  }, [autohide, onVisibleChangeByDefault, showing, visibleByDefault]);
+  }, [autohide, handleVisibilityChange, showing, visibleByDefault]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | number | string | undefined;
@@ -63,14 +70,20 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
   }, [autohide, delay, showing]);
 
   useEffect(() => {
-    setShowing(!visibleByDefault);
+    if (visibleByDefault && !visible && !autohide) {
+      setVisible(true);
+    }
 
-    return () => {
-      if (!visibleByDefault) {
-        setVisible(false);
-      }
-    };
-  }, [visibleByDefault]);
+    if (visible) {
+      setShowing(!visibleByDefault);
+
+      return () => {
+        if (!visibleByDefault) {
+          handleVisibilityChange();
+        }
+      };
+    }
+  }, [autohide, handleVisibilityChange, visible, visibleByDefault]);
 
   return (
     visible && (

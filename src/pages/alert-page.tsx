@@ -79,23 +79,31 @@ export default function AlertPage() {
 
       <Example hash="liveExample" state={state} t={tAlertPage}>
         {alerts.map((item, index) => {
+          const onVisibleChange = (visible: boolean) => {
+            setAlerts((prevState) => [
+              ...prevState.slice(0, index),
+              { ...prevState[index], visible },
+              ...prevState.slice(index + 1),
+            ]);
+          };
+
           return (
             <Alert
-              clickToClose={false}
               dismissible
               key={item.id}
-              onVisibleChange={(visible) =>
-                setAlerts((prevState) => [
-                  ...prevState.slice(0, index),
-                  { ...prevState[index], visible },
-                  ...prevState.slice(index + 1),
-                ])
-              }
+              onVisibleChange={onVisibleChange}
               role="alert"
               variant="success"
               visible={item.visible}
             >
               <div>A simple primary alert—check it out!</div>
+              <button
+                aria-label="Close"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                onClick={() => onVisibleChange(!item.visible)}
+                type="button"
+              />
             </Alert>
           );
         })}
@@ -181,26 +189,15 @@ export default function AlertPage() {
       </Example>
 
       <Example hash="dismissing" state={state} t={tAlertPage}>
-        <Alert dismissible role="alert" variant="warning">
+        <Alert dismissible onVisibleChange={setVisible} role="alert" variant="warning" visible={visible}>
           <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        </Alert>
-
-        <Alert
-          closeButton={
-            <button
-              aria-label="Close"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              onClick={() => setVisible(!visible)}
-              type="button"
-            />
-          }
-          dismissible
-          role="alert"
-          variant="warning"
-          visible={visible}
-        >
-          <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+          <button
+            aria-label="Close"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            onClick={() => setVisible(!visible)}
+            type="button"
+          />
         </Alert>
       </Example>
 
@@ -223,35 +220,10 @@ export default function AlertPage() {
             ),
           },
           {
-            attr: 'clickToClose',
-            default: 'true',
-            desc: tAlertComponentProps('alert.desc.clickToClose'),
-            type: <span className="badge text-bg-secondary">boolean</span>,
-          },
-          {
             attr: 'dismissible',
             default: '',
             desc: tAlertComponentProps('alert.desc.dismissible'),
             type: <span className="badge text-bg-secondary">boolean</span>,
-          },
-          {
-            attr: 'closeButton',
-            default: '',
-            desc: tAlertComponentProps('alert.desc.closeButton'),
-            type: <span className="badge text-bg-secondary">ReactNode</span>,
-          },
-          {
-            attr: 'closeButtonProps',
-            default: '',
-            desc: tAlertComponentProps('alert.desc.closeButtonProps'),
-            type: (
-              <Link to="#alertComponentTypes">
-                <span className="badge text-bg-secondary d-inline">
-                  ButtonProps
-                  <i className="bi bi-link ms-1"></i>
-                </span>
-              </Link>
-            ),
           },
           {
             attr: 'visible',
