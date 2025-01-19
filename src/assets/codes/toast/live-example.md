@@ -17,7 +17,7 @@ function onClickShowLiveToastTest() {
 <Toast
   container
   containerProps={{
-    className: 'bottom-0 end-0 p-3 overflow-y-auto vh-100 tw-pointer-events-auto',
+    className: 'bottom-0 end-0 p-3 overflow-y-auto tw-max-h-screen tw-pointer-events-auto',
   }}
   options={toasts.map((item, index) => {
     const onVisibleChange = (visible: boolean) => {
