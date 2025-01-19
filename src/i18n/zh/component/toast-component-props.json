@@ -12,7 +12,7 @@
       "fade": "渐隐效果",
       "header": "标题",
       "headerProps": "标题属性",
-      "onChange": "状态变更回调",
+      "onVisibleChange": "状态变更回调",
       "options": "可选项",
       "placement": "放置位置",
       "position": "位置",
@@ -28,7 +28,7 @@
       "fade": "渐隐效果",
       "header": "标题",
       "headerProps": "标题属性",
-      "onChange": "状态变更回调",
+      "onVisibleChange": "状态变更回调",
       "visible": "是否可见"
     }
   }

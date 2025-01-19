@@ -12,7 +12,7 @@
       "fade": "Fade Effect",
       "header": "Header",
       "headerProps": "Header Properties",
-      "onChange": "State Change Callback",
+      "onVisibleChange": "State Change Callback",
       "options": "Options",
       "placement": "Placement",
       "position": "Position",
@@ -28,7 +28,7 @@
       "fade": "Fade Effect",
       "header": "Header",
       "headerProps": "Header Properties",
-      "onChange": "State Change Callback",
+      "onVisibleChange": "State Change Callback",
       "visible": "Visibility"
     }
   }

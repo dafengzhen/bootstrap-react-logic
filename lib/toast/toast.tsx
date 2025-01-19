@@ -1,4 +1,4 @@
-import { type ElementType, useMemo } from 'react';
+import { type ElementType } from 'react';
 
 import type { ToastOption as IToastOption, ToastProps } from './types.ts';
 
@@ -18,22 +18,24 @@ const generateInitialOptions = (options: IToastOption[] = []): IOption[] =>
 const Toast = <T extends ElementType = 'div'>({
   container,
   containerProps,
-  options: defaultOptions = [],
+  options: optionsByDefault = [],
   placement,
   position,
   ...rest
 }: ToastProps<T>) => {
-  const options = useMemo(() => generateInitialOptions(defaultOptions), [defaultOptions]);
+  if (container) {
+    const options = generateInitialOptions(optionsByDefault);
 
-  return container ? (
-    <ToastContainer {...containerProps} placement={placement} position={position}>
-      {options.map(({ id, ...restProps }) => (
-        <ToastItem key={id} {...(restProps as any)} />
-      ))}
-    </ToastContainer>
-  ) : (
-    <ToastItem {...(rest as any)} />
-  );
+    return (
+      <ToastContainer {...containerProps} placement={placement} position={position}>
+        {options.map(({ id, ...restProps }) => (
+          <ToastItem key={id} {...restProps} />
+        ))}
+      </ToastContainer>
+    );
+  }
+
+  return <ToastItem {...(rest as any)} />;
 };
 
 Toast.displayName = 'BRL.Toast';

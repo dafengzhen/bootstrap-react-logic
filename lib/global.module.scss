@@ -84,6 +84,10 @@
   @apply tw-max-h-screen;
 }
 
+.brl-pointer-events-auto {
+  @apply tw-pointer-events-auto;
+}
+
 /// bs
 
 :root {

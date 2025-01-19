@@ -1,8 +1,7 @@
-import type { ElementType, MouseEvent, ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 
 import type {
   BaseProps,
-  OmittedPropsWithoutRef,
   PropsWithoutRef,
   ToastBodyVariablesType,
   ToastContainerVariablesType,
@@ -28,7 +27,7 @@ export interface ToastOption
   id?: number | string;
 }
 
-export type ToastProps<T extends ElementType> = OmittedPropsWithoutRef<Props<T>, T, ToastVariablesType, 'onChange'>;
+export type ToastProps<T extends ElementType> = PropsWithoutRef<Props<T>, T, ToastVariablesType>;
 
 type BodyProps<T extends ElementType> = BaseProps<T, ToastBodyVariablesType> & {};
 
@@ -94,11 +93,6 @@ type Props<T extends ElementType> = BaseProps<T, ToastVariablesType> & {
   delay?: number;
 
   /**
-   * fade.
-   */
-  fade?: boolean;
-
-  /**
    * header.
    */
   header?: ReactNode;
@@ -109,9 +103,9 @@ type Props<T extends ElementType> = BaseProps<T, ToastVariablesType> & {
   headerProps?: ToastHeaderProps<ElementType>;
 
   /**
-   * onChange.
+   * onVisibleChange.
    */
-  onChange?: (visible: boolean, event?: MouseEvent<HTMLElement>) => void;
+  onVisibleChange?: (visible: boolean) => void;
 
   /**
    * options.

@@ -39,7 +39,6 @@ export default function BadgePage() {
   const state = useState(codes);
 
   const [visible, setVisible] = useState(true);
-  const [visible2, setVisible2] = useState(false);
   const [visible3, setVisible3] = useState(true);
   const [visible4, setVisible4] = useState(true);
   const [visible5, setVisible5] = useState(true);
@@ -54,12 +53,15 @@ export default function BadgePage() {
 
   const [placement, setPlacement] = useState<any>();
 
+  const [toasts, setToasts] = useState<
+    {
+      id: number;
+      visible: boolean;
+    }[]
+  >([]);
+
   function onClickVisible() {
     setVisible(!visible);
-  }
-
-  function onClickVisible2() {
-    setVisible2(!visible2);
   }
 
   function onClickVisible3() {
@@ -139,6 +141,10 @@ export default function BadgePage() {
     }
   }
 
+  function onClickShowLiveToastTest() {
+    setToasts((prevState) => [...prevState, { id: (prevState.at(-1)?.id ?? 0) + 1, visible: true }]);
+  }
+
   if (navigation.state === 'loading') {
     return <div className="h2 text-secondary">Loading...</div>;
   }
@@ -172,7 +178,7 @@ export default function BadgePage() {
 
       <Example hash="liveExample" state={state} t={tToastPage}>
         <div>
-          <button className="btn btn-primary" onClick={onClickVisible2} type="button">
+          <button className="btn btn-primary" onClick={onClickShowLiveToastTest} type="button">
             Show live toast
           </button>
         </div>
@@ -180,10 +186,18 @@ export default function BadgePage() {
         <Toast
           container
           containerProps={{
-            className: 'bottom-0 end-0 p-3',
+            className: 'bottom-0 end-0 p-3 overflow-y-auto vh-100 tw-pointer-events-auto',
           }}
-          options={[
-            {
+          options={toasts.map((item, index) => {
+            const onVisibleChange = (visible: boolean) => {
+              setToasts((prevState) => [
+                ...prevState.slice(0, index),
+                { ...prevState[index], visible },
+                ...prevState.slice(index + 1),
+              ]);
+            };
+
+            return {
               'aria-atomic': 'true',
               'aria-live': 'assertive',
               body: 'Hello, world! This is a toast message.',
@@ -194,18 +208,19 @@ export default function BadgePage() {
                   <small>11 mins ago</small>
                   <button
                     aria-label="Close"
-                    className="btn-close"
+                    className="btn-close tw-pointer-events-auto"
                     data-bs-dismiss="toast"
-                    onClick={onClickVisible2}
+                    onClick={() => onVisibleChange(!item.visible)}
                     type="button"
                   ></button>
                 </>
               ),
-              onChange: setVisible2,
+              id: item.id,
+              onVisibleChange,
               role: 'alert',
-              visible: visible2,
-            },
-          ]}
+              visible: item.visible,
+            };
+          })}
           position="fixed"
         />
       </Example>
@@ -576,12 +591,6 @@ export default function BadgePage() {
             type: <span className="badge text-bg-secondary ms-1">number</span>,
           },
           {
-            attr: 'fade',
-            default: '',
-            desc: tToastComponentProps('toast.desc.fade'),
-            type: <span className="badge text-bg-secondary ms-1">boolean</span>,
-          },
-          {
             attr: 'header',
             default: '',
             desc: tToastComponentProps('toast.desc.header'),
@@ -594,12 +603,10 @@ export default function BadgePage() {
             type: <span className="badge text-bg-secondary ms-1">ToastHeaderProps</span>,
           },
           {
-            attr: 'onChange',
+            attr: 'onVisibleChange',
             default: '',
-            desc: tToastComponentProps('toast.desc.onChange'),
-            type: (
-              <span className="badge text-bg-secondary ms-1">(visible: boolean, event?: MouseEvent) =&gt; void</span>
-            ),
+            desc: tToastComponentProps('toast.desc.onVisibleChange'),
+            type: <span className="badge text-bg-secondary ms-1">(visible: boolean) =&gt; void</span>,
           },
           {
             attr: 'options',
@@ -612,15 +619,14 @@ export default function BadgePage() {
                 <OptionRow label="body?: ReactNode" value={tToastComponentProps('toast.options.body')} />
                 <OptionRow label="bodyProps?: ToastBodyProps" value={tToastComponentProps('toast.options.bodyProps')} />
                 <OptionRow label="delay?: number" value={tToastComponentProps('toast.options.delay')} />
-                <OptionRow label="fade?: boolean" value={tToastComponentProps('toast.options.fade')} />
                 <OptionRow label="header?: ReactNode" value={tToastComponentProps('toast.options.header')} />
                 <OptionRow
                   label="headerProps?: ToastHeaderProps"
                   value={tToastComponentProps('toast.options.headerProps')}
                 />
                 <OptionRow
-                  label="onChange?: (visible: boolean) => void"
-                  value={tToastComponentProps('toast.options.onChange')}
+                  label="onVisibleChange?: (visible: boolean) => void"
+                  value={tToastComponentProps('toast.options.onVisibleChange')}
                 />
                 <OptionRow label="visible?: boolean" value={tToastComponentProps('toast.options.visible')} />
               </div>
@@ -670,7 +676,7 @@ export default function BadgePage() {
           },
           {
             attr: 'visible',
-            default: '',
+            default: 'true',
             desc: tToastComponentProps('toast.desc.visible'),
             type: <span className="badge text-bg-secondary ms-1">boolean</span>,
           },

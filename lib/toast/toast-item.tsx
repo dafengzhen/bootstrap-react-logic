@@ -1,4 +1,4 @@
-import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 
 import type { ToastItemProps } from './types.ts';
 
@@ -17,47 +17,41 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
     customContent,
     delay = 5000,
     dropOldClass,
-    fade = true,
     header,
     headerProps,
-    onChange: onChangeByDefault,
+    onVisibleChange: onVisibleChangeByDefault,
     style,
     variables,
-    visible: visibleByDefault = false,
+    visible: visibleByDefault = true,
     ...rest
   } = props;
-  const [show, setShow] = useState(false);
-  const [showing, setShowing] = useState(false);
-  const element = useRef<HTMLDivElement | null>(null);
+
+  const [fade] = useState(true);
+  const [showing, setShowing] = useState(true);
+  const [visible, setVisible] = useState(true);
 
   const renderOptions = useMemo(() => {
-    const finalClass = classx(
-      !dropOldClass && 'toast',
-      fade && 'fade',
-      show && 'show',
-      showing && 'showing',
-      className,
-    );
+    const finalClass = classx(!dropOldClass && 'toast show', fade && 'fade', showing && 'showing', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
       className: finalClass,
       style: finalStyle,
     };
-  }, [className, dropOldClass, fade, show, showing, style, variables]);
+  }, [className, dropOldClass, fade, showing, style, variables]);
 
-  const onChange = useCallback(
-    (value: boolean) => {
-      onChangeByDefault?.(value);
-    },
-    [onChangeByDefault],
-  );
+  const onTransitionEnd = useCallback(() => {
+    if ((autohide && showing) || !visibleByDefault) {
+      setVisible(false);
+      onVisibleChangeByDefault?.(false);
+    }
+  }, [autohide, onVisibleChangeByDefault, showing, visibleByDefault]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | number | string | undefined;
-    if (autohide && show) {
+    if (autohide && !showing) {
       timeout = setTimeout(() => {
-        onChange(false);
+        setShowing(true);
       }, delay);
     }
 
@@ -66,60 +60,31 @@ const ToastItem = function ToastItem<T extends ElementType = 'div'>(props: Toast
         clearTimeout(timeout);
       }
     };
-  }, [autohide, delay, onChange, show]);
+  }, [autohide, delay, showing]);
 
   useEffect(() => {
-    if (!fade) {
-      setShow(visibleByDefault);
-      return;
-    }
-
-    const currentElement = element.current;
-    if (!currentElement) {
-      return;
-    }
-
-    const onTransitionend = () => {
-      if (visibleByDefault) {
-        setShowing(false);
-      } else {
-        setShowing(false);
-        setShow(false);
-      }
-    };
-
-    currentElement.addEventListener('transitionend', onTransitionend);
-
-    let frame: number;
-    if (visibleByDefault) {
-      setShow(true);
-      setShowing(true);
-      frame = requestAnimationFrame(() => setShowing(false));
-    } else if (show) {
-      setShow(true);
-      setShowing(true);
-    }
+    setShowing(!visibleByDefault);
 
     return () => {
-      currentElement.removeEventListener('transitionend', onTransitionend);
-
-      if (frame) {
-        cancelAnimationFrame(frame);
+      if (!visibleByDefault) {
+        setVisible(false);
       }
     };
-  }, [fade, show, visibleByDefault]);
+  }, [visibleByDefault]);
 
   return (
-    <Component {...rest} {...renderOptions} ref={element}>
-      {customContent ? (
-        customContent
-      ) : (
-        <>
-          {header && <ToastHeader {...headerProps}>{header}</ToastHeader>}
-          {body && <ToastBody {...bodyProps}>{body}</ToastBody>}
-        </>
-      )}
-    </Component>
+    visible && (
+      <Component {...rest} {...renderOptions} onTransitionEnd={onTransitionEnd}>
+        {customContent ? (
+          customContent
+        ) : (
+          <>
+            {header && <ToastHeader {...headerProps}>{header}</ToastHeader>}
+            {body && <ToastBody {...bodyProps}>{body}</ToastBody>}
+          </>
+        )}
+      </Component>
+    )
   );
 };
 

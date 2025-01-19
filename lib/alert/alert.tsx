@@ -31,7 +31,7 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
   const [isMounted, setIsMounted] = useState(true);
 
   const renderOptions = useMemo(() => {
-    const finalClassName = classx(
+    const finalClass = classx(
       !dropOldClass && 'alert',
       variant && `alert-${variant}`,
       dismissible && 'alert-dismissible',
@@ -42,7 +42,7 @@ const Alert = function Alert<T extends ElementType = 'div'>(props: AlertProps<T>
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {
-      className: finalClassName,
+      className: finalClass,
       style: finalStyle,
     };
   }, [className, dismissible, dropOldClass, fade, show, style, variables, variant]);
