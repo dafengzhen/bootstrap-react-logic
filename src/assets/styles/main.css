@@ -1,30 +1,11 @@
-/// === test ===
+@reference "./tailwind.css";
 
-$transition-fade: opacity 0.4s linear;
-
-$carousel-transition-duration: 0.6s;
-
-/// === bootstrap ===
 @import 'bootstrap';
-
-/// === bootstrap icons ===
-$bootstrap-icons-font-dir: '../fonts/icons';
-
 @import 'bootstrap-icons';
+@import 'highlight.js/styles/github.css';
 
-/// === tailwindcss ===
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
-
-/// === highlight js ===
-
-@import 'highlight.js/scss/github';
-
-@include color-mode(dark) {
-  @import 'highlight.js/scss/github-dark';
+[data-bs-theme='dark'] {
+  @import 'highlight.js/styles/github-dark.css';
 }
 
 pre code.hljs {
@@ -35,7 +16,7 @@ pre code.hljs {
   background: transparent;
 }
 
-/// === fonts ===
+/* === fonts ===*/
 
 /* raleway-100 - latin_latin-ext */
 @font-face {
@@ -182,7 +163,7 @@ pre code.hljs {
   src: url('../fonts/raleway/raleway-v34-latin_latin-ext-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/// === custom ===
+/* === custom ===*/
 
 * {
   --bd-violet: #712cf9;
@@ -191,7 +172,6 @@ pre code.hljs {
   --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
 
   font-size: 16px;
-  // font-family: 'Raleway', serif;
 }
 
 .bd-placeholder-img {
@@ -269,4 +249,44 @@ pre code.hljs {
 .custom-tooltip {
   --bs-tooltip-bg: var(--bd-violet-bg);
   --bs-tooltip-color: var(--bs-white);
+}
+
+.sm-w-full-pe-1rem {
+  @apply sm:w-full sm:pe-[1.375rem];
+}
+
+.cursor-pointer {
+  @apply cursor-pointer;
+}
+
+.cursor-default {
+  @apply cursor-default;
+}
+
+.table-fixed {
+  @apply table-fixed;
+}
+
+.w-full {
+  @apply w-full;
+}
+
+.w-auto {
+  @apply w-auto;
+}
+
+.pe-3-25rem {
+  @apply !pe-[3.25rem];
+}
+
+.text-3xl {
+  @apply text-3xl;
+}
+
+.pointer-events-auto {
+  @apply pointer-events-auto;
+}
+
+.max-h-screen {
+  @apply max-h-screen;
 }

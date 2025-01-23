@@ -92,7 +92,7 @@ const [options4, setOptions4] = useState<SidebarOption[]>([
     ...header,
     end: (
       <i
-        className="bi bi-chevron-left d-inline-flex tw-cursor-pointer"
+        className="bi bi-chevron-left d-inline-flex cursor-pointer"
         onClick={() => setCollapsible3(!collapsible3)}
       ></i>
     ),

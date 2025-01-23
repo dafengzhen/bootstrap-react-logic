@@ -11,7 +11,7 @@ import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState }
 
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 
-import globalStyles from '../global.module.scss';
+import globalStyles from '../bootstrap-react-logic.module.css';
 import {
   classx,
   classxWithOptions,

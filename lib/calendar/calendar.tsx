@@ -3,7 +3,7 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { CalendarDate, CalendarProps } from './types.ts';
 
-import calendarStyles from '../global.module.scss';
+import calendarStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,

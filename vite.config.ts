@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -15,7 +16,7 @@ export default defineConfig(({ command }) => {
   return {
     base,
     build: {
-      chunkSizeWarningLimit: 1024,
+      chunkSizeWarningLimit: 1256,
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
@@ -33,18 +34,10 @@ export default defineConfig(({ command }) => {
           },
         },
       },
-      sourcemap: true,
     },
     css: {
-      devSourcemap: true,
       modules: {
         localsConvention: 'camelCase',
-      },
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
-        },
       },
     },
     define: {
@@ -52,6 +45,7 @@ export default defineConfig(({ command }) => {
       __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
     },
     plugins: [
+      tailwindcss(),
       react(),
       outputVisualizer &&
         visualizer({

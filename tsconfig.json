@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "moduleResolution": "node16",
+    "allowImportingTsExtensions": true
   },
   "files": [],
   "references": [
     {
       "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
     },
     {
       "path": "./tsconfig.lib.json"

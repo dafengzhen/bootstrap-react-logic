@@ -217,7 +217,7 @@ export default function InputPage() {
         <Input placeholder="Username" startContent={<i className="bi bi-person"></i>} />
         <Input endContent={<i className="bi bi-eye"></i>} placeholder="Password" />
         <Input
-          className="!tw-pe-[3.25rem]"
+          className="pe-3-25rem"
           endContent={
             <>
               <i className="bi bi-x"></i>
@@ -229,15 +229,15 @@ export default function InputPage() {
       </Example>
 
       <Example hash="otp" state={state} t={tInputPage}>
-        <div className="tw-w-full sm:tw-w-1/4">
+        <div className="w-full sm:w-1/4">
           <InputOtp defaultValue={['1', '2', '3', '4']}></InputOtp>
         </div>
 
-        <div className="tw-w-full sm:tw-w-1/4">
+        <div className="w-full sm:w-1/4">
           <InputOtp></InputOtp>
         </div>
 
-        <div className="tw-w-full sm:tw-w-1/4">
+        <div className="w-full sm:w-1/4">
           <InputOtp
             inputProps={{
               disabled: true,

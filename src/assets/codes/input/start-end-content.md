@@ -10,7 +10,7 @@
       <i className="bi bi-eye ms-1"></i>
     </>
   }
-  className="!tw-pe-[3.25rem]"
+  className="!pe-[3.25rem]"
   placeholder="Password"
 />
 ```

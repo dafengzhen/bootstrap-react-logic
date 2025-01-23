@@ -11,7 +11,7 @@ import {
 
 import type { SidebarHeader, SidebarHeaderObject, SidebarOption, SidebarProps } from './types.ts';
 
-import globalStyles from '../global.module.scss';
+import globalStyles from '../bootstrap-react-logic.module.css';
 import { BiChevronRight, classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 import SidebarItem from './sidebar-item.tsx';
 

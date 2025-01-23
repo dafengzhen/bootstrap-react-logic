@@ -96,7 +96,7 @@ export default function ExamplePropsCard({
           </div>
           <div className={clsx('card-body', codeDisplayMode === 'direct' && isOpen && 'd-none')}>
             <div className="table-responsive">
-              <table className="table tw-table-fixed table-borderless">
+              <table className="table table-fixed table-borderless">
                 <colgroup>
                   <col style={_colgroup.attr} />
                   <col style={_colgroup.type} />

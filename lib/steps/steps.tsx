@@ -2,7 +2,7 @@ import { type ElementType, useCallback, useMemo, useState } from 'react';
 
 import type { StepOption, StepsProps } from './types.ts';
 
-import stepsStyles from '../global.module.scss';
+import stepsStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 interface IOption extends StepOption {

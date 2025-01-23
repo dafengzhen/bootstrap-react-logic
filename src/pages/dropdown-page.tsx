@@ -1046,7 +1046,9 @@ export default function DropdownPage() {
         <Dropdown
           customMenu
           menuProps={{
-            className: 'tw-w-[50vw]',
+            style: {
+              width: 330,
+            },
           }}
           toggle="Forms"
           toggleProps={{
@@ -1114,7 +1116,10 @@ export default function DropdownPage() {
         <Dropdown
           customMenu
           menuProps={{
-            className: 'tw-w-[20vw] p-4',
+            className: 'p-4',
+            style: {
+              width: 330,
+            },
           }}
           toggle="Dropdown form"
           toggleProps={{

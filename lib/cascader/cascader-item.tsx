@@ -2,7 +2,7 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CascaderItemProps } from './types.ts';
 
-import globalStyles from '../global.module.scss';
+import globalStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 const CascaderItem = function CascaderItem<T extends ElementType = 'ul'>(props: CascaderItemProps<T>) {

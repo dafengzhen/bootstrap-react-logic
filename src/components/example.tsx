@@ -130,7 +130,7 @@ export default function Example({
           textNowrap && 'text-nowrap',
           alignItemsCenter && 'align-items-center',
           gap3 ? 'gap-3' : 'gap-2',
-          mw400 && 'tw-w-[400px]',
+          mw400 && 'w-[400px]',
         )}
         id={contentId}
       >

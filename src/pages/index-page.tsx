@@ -7,7 +7,7 @@ export default function IndexPage() {
             <div>Bootstrap React Logic</div>
             <div className="d-flex gap-2">
               <a className="link-dark" href="https://github.com/dafengzhen/bootstrap-react-logic" target="_blank">
-                <i className="bi bi-github tw-cursor-pointer"></i>
+                <i className="bi bi-github cursor-pointer"></i>
               </a>
             </div>
           </div>

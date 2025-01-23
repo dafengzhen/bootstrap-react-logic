@@ -3,7 +3,7 @@ import { type ElementType, useCallback, useMemo } from 'react';
 
 import type { TreeActionHandler, TreeNodeProps, TreeOption } from './types.ts';
 
-import treeStyles from '../global.module.scss';
+import treeStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronDown,
   BiChevronRight,

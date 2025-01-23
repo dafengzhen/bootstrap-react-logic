@@ -12,7 +12,7 @@ import { type ChangeEvent, type ElementType, useCallback, useEffect, useMemo, us
 
 import type { DatePickerProps, DatePickerType } from './types.ts';
 
-import datePickerStyles from '../global.module.scss';
+import datePickerStyles from '../bootstrap-react-logic.module.css';
 import { BiCalendar, classx, classxWithOptions, convertBsKeyToVar, formatDateByPickerType, stylex } from '../tools';
 import DatePickerDate from './date-picker-date.tsx';
 import DatePickerDatetime from './date-picker-datetime.tsx';

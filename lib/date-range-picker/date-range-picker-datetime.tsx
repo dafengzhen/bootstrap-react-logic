@@ -3,7 +3,7 @@ import { type ChangeEvent, type ElementType, useCallback, useEffect, useMemo, us
 
 import type { DateRangePickerDatetimeProps } from './types.ts';
 
-import datePickerStyles from '../global.module.scss';
+import datePickerStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,

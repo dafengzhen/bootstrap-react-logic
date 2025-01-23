@@ -1,4 +1,4 @@
-import '@assets/styles/main.scss';
+import '@assets/styles/main.css';
 import '@src/i18n';
 import router from '@src/routes.tsx';
 import { StrictMode } from 'react';

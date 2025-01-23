@@ -3,7 +3,7 @@
   toggle="Forms"
   customMenu
   menuProps={{
-    className: 'tw-w-[50vw]',
+    className: 'w-[50vw]',
   }}
   toggleProps={{
     variant: 'secondary',
@@ -71,7 +71,7 @@
   toggle="Dropdown form"
   customMenu
   menuProps={{
-    className: 'tw-w-[20vw] p-4',
+    className: 'w-[20vw] p-4',
   }}
   toggleProps={{
     variant: 'primary',

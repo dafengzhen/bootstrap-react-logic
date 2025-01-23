@@ -17,7 +17,7 @@ function onClickShowLiveToastTest() {
 <Toast
   container
   containerProps={{
-    className: 'bottom-0 end-0 p-3 overflow-y-auto tw-max-h-screen tw-pointer-events-auto',
+    className: 'bottom-0 end-0 p-3 overflow-y-auto max-h-screen pointer-events-auto',
   }}
   options={toasts.map((item, index) => {
     const onVisibleChange = (visible: boolean) => {
@@ -39,7 +39,7 @@ function onClickShowLiveToastTest() {
           <small>11 mins ago</small>
           <button
             aria-label="Close"
-            className="btn-close tw-pointer-events-auto"
+            className="btn-close pointer-events-auto"
             data-bs-dismiss="toast"
             onClick={() => onVisibleChange(!item.visible)}
             type="button"

@@ -11,7 +11,7 @@ import { type ElementType, Fragment, type MouseEvent, useCallback, useMemo, useS
 
 import type { CascaderOption, CascaderProps } from './types.ts';
 
-import globalStyles from '../global.module.scss';
+import globalStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 import CascaderItem from './cascader-item.tsx';
 

@@ -132,9 +132,9 @@ export default function InputGroupPage() {
 
       <Example hash="multipleInput" state={state} t={tInputGroupPage}>
         <InputGroup>
-          <InputGroupText className="!tw-w-full sm:!tw-w-auto">First and last name</InputGroupText>
-          <Input aria-label="First name" className="!tw-w-full sm:!tw-w-auto" type="text" />
-          <Input aria-label="Last name" className="!tw-w-full sm:!tw-w-auto" type="text" />
+          <InputGroupText className="!w-full sm:!w-auto">First and last name</InputGroupText>
+          <Input aria-label="First name" className="!w-full sm:!w-auto" type="text" />
+          <Input aria-label="Last name" className="!w-full sm:!w-auto" type="text" />
         </InputGroup>
       </Example>
 

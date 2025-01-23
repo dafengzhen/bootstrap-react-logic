@@ -1,105 +1,106 @@
-/// tw
+/* tw */
+@reference "../src/assets/styles/main.css";
 
-.brl-cursor-pointer {
-  @apply tw-cursor-pointer;
-}
+@theme {
+  --spacing: 0.25rem;
 
-.brl-cursor-default {
-  @apply tw-cursor-default;
-}
-
-.brl-cursor-default-imp {
-  @apply tw-cursor-default !important;
-}
-
-.brl-cursor-not-allowed {
-  @apply tw-cursor-not-allowed;
-}
-
-.brl-ps-9 {
-  @apply tw-ps-9;
-}
-
-.brl-pe-9 {
-  @apply tw-pe-9;
-}
-
-.brl-start-3 {
-  @apply tw-start-3;
-}
-
-.brl-end-3 {
-  @apply tw-end-3;
-}
-
-.brl-scroll-smooth {
-  @apply tw-scroll-smooth;
-}
-
-.brl-min-h-38-px {
-  @apply tw-min-h-[38px];
-}
-
-.brl-scale-75 {
-  @apply tw-scale-75;
-}
-
-.brl-w-8 {
-  @apply tw-w-8;
-}
-
-.brl-h-8 {
-  @apply tw-h-8;
-}
-
-.brl-w-05 {
-  @apply tw-w-0.5;
-}
-
-.brl-h-05 {
-  @apply tw-h-0.5;
-}
-
-.brl-ml-10 {
-  @apply tw-ml-10;
-}
-
-.brl-leading-8 {
-  @apply tw-leading-8;
-}
-
-.brl-mb-16 {
-  @apply tw-mb-16;
-}
-
-.brl-min-h-8 {
-  @apply tw-min-h-8;
-}
-
-.brl-h-full {
-  @apply tw-h-full;
-}
-
-.brl-max-h-screen {
-  @apply tw-max-h-screen;
-}
-
-.brl-pointer-events-auto {
-  @apply tw-pointer-events-auto;
-}
-
-/// bs
-
-:root {
   --brl-custom-hover-bg: var(--bs-tertiary-bg);
   --brl-custom-hover-bg-dark: #2b3035;
 }
 
+.brl-cursor-pointer {
+  @apply cursor-pointer;
+}
+
+.brl-cursor-default {
+  @apply cursor-default;
+}
+
+.brl-cursor-default-imp {
+  @apply !cursor-default;
+}
+
+.brl-cursor-not-allowed {
+  @apply cursor-not-allowed;
+}
+
+.brl-ps-9 {
+  @apply ps-9;
+}
+
+.brl-pe-9 {
+  @apply pe-9;
+}
+
+.brl-start-3 {
+  @apply start-3;
+}
+
+.brl-end-3 {
+  @apply end-3;
+}
+
+.brl-scroll-smooth {
+  @apply scroll-smooth;
+}
+
+.brl-min-h-38-px {
+  @apply min-h-[38px];
+}
+
+.brl-scale-75 {
+  @apply scale-75;
+}
+
+.brl-w-8 {
+  @apply w-8;
+}
+
+.brl-h-8 {
+  @apply h-8;
+}
+
+.brl-w-05 {
+  @apply w-0.5;
+}
+
+.brl-h-05 {
+  @apply h-0.5;
+}
+
+.brl-ml-10 {
+  @apply ml-10;
+}
+
+.brl-leading-8 {
+  @apply leading-8;
+}
+
+.brl-mb-16 {
+  @apply mb-16;
+}
+
+.brl-min-h-8 {
+  @apply min-h-8;
+}
+
+.brl-h-full {
+  @apply h-full;
+}
+
+.brl-max-h-screen {
+  @apply max-h-screen;
+}
+
+.brl-pointer-events-auto {
+  @apply pointer-events-auto;
+}
+
+/* brl */
+
 [data-bs-theme='dark'] {
   --brl-custom-hover-bg: var(--bs-tertiary-bg);
 }
-
-/// brl
 
 .brl-nav-toggle a:hover,
 .brl-nav-toggle a:focus {

@@ -1,11 +1,10 @@
 import type { OutputOptions } from 'rollup';
 
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-
-import mergeCssPlugin from './merge-css-plugin';
 
 // lite tools
 const lightweightTools = ['clsx', 'cssmix', 'date-fns'];
@@ -48,21 +47,13 @@ export default defineConfig({
         },
       })) as OutputOptions[],
     },
-    sourcemap: true,
   },
   css: {
-    devSourcemap: true,
     modules: {
       localsConvention: 'camelCase',
     },
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-        silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import', 'legacy-js-api'],
-      },
-    },
   },
-  plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), mergeCssPlugin()],
+  plugins: [tailwindcss(), react(), dts({ tsconfigPath: './tsconfig.lib.json' })],
   resolve: {
     alias: {
       '@assets': resolve(__dirname, 'lib/assets'),

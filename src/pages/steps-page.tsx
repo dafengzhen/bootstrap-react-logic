@@ -50,7 +50,7 @@ export default function StepsPage() {
   ]);
   const [options6] = useState<StepOption[]>(
     Array(3).fill({
-      icon: <i className="bi bi-check-circle tw-text-3xl"></i>,
+      icon: <i className="bi bi-check-circle text-3xl"></i>,
       title: 'Step',
     }),
   );

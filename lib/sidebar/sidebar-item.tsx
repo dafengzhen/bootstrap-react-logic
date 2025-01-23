@@ -2,7 +2,7 @@ import { type ElementType, type MouseEvent, useCallback, useMemo } from 'react';
 
 import type { SidebarItemProps, SidebarOption } from './types.ts';
 
-import globalStyles from '../global.module.scss';
+import globalStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 const toggleSidebarOptionActiveById = (options: SidebarOption[] = [], id: number | string): SidebarOption[] =>

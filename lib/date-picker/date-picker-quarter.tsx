@@ -3,7 +3,7 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { DatePickerQuarterProps } from './types.ts';
 
-import datePickerStyles from '../global.module.scss';
+import datePickerStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,

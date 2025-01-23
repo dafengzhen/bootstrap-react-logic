@@ -117,7 +117,7 @@ function App() {
         <div className="row g-2 g-sm-4">
           {!isFullscreen && (
             <div className="col-4 col-sm-2">
-              <div className={clsx('position-fixed g-2 g-sm-4 ps-0 sm:tw-w-full sm:tw-pe-[1.375rem]')}>
+              <div className={clsx('position-fixed g-2 g-sm-4 ps-0 sm-w-full-pe-1rem')}>
                 <div className={clsx('row', isCenter && 'container')}>
                   <div className="col-10 col-sm-2">
                     <div

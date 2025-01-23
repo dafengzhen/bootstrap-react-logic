@@ -37,25 +37,25 @@ export const ActionIcons = ({
       {showCode && (
         <>
           <i
-            className={clsx('bi tw-cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
+            className={clsx('bi cursor-pointer', isOpen ? 'bi-code-slash text-primary' : 'bi-code')}
             onClick={onClickCode}
             title="Code"
           ></i>
-          <i className="bi bi-clipboard2 tw-cursor-pointer" onClick={() => handleClipboard(code)} title="Clipboard"></i>
+          <i className="bi bi-clipboard2 cursor-pointer" onClick={() => handleClipboard(code)} title="Clipboard"></i>
         </>
       )}
       <i
-        className={clsx('bi tw-cursor-pointer', fullscreen ? 'bi-fullscreen-exit text-primary' : 'bi-fullscreen')}
+        className={clsx('bi cursor-pointer', fullscreen ? 'bi-fullscreen-exit text-primary' : 'bi-fullscreen')}
         onClick={() => handleToggleState(fullscreenState, 'options_fullscreen', 'true', 'false')}
         title="Full / Full Exit"
       ></i>
       <i
-        className={clsx('bi tw-cursor-pointer', center ? 'bi-fullscreen-exit text-primary' : 'bi-arrows-fullscreen')}
+        className={clsx('bi cursor-pointer', center ? 'bi-fullscreen-exit text-primary' : 'bi-arrows-fullscreen')}
         onClick={() => handleToggleLayout(layoutState)}
         title="Center / Full"
       ></i>
       <i
-        className={clsx('bi tw-cursor-pointer', dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high')}
+        className={clsx('bi cursor-pointer', dark ? 'bi-moon-stars-fill text-primary' : 'bi-brightness-high')}
         onClick={() => handleToggleTheme(themeState)}
         title="Light / Dark"
       ></i>
