@@ -5,7 +5,7 @@ import type { ModalContentProps } from './types.ts';
 import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const ModalContent = function ModalContent<T extends ElementType = 'div'>(props: ModalContentProps<T>) {
-  const { as: Component = 'div' as ElementType, className, dropOldClass, style, variables, ...rest } = props;
+  const { as: Component = 'div' as ElementType, className, dropOldClass, onRef, style, variables, ...rest } = props;
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'modal-content', className);
@@ -17,7 +17,7 @@ const ModalContent = function ModalContent<T extends ElementType = 'div'>(props:
     };
   }, [className, dropOldClass, style, variables]);
 
-  return <Component {...rest} {...renderOptions} />;
+  return <Component {...rest} {...renderOptions} ref={onRef} />;
 };
 
 ModalContent.displayName = 'BRL.ModalContent';

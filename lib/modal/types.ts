@@ -1,4 +1,4 @@
-import type { ElementType, ReactNode } from 'react';
+import type { ComponentRef, ElementType, ReactNode, RefCallback } from 'react';
 
 import type {
   BaseProps,
@@ -35,11 +35,6 @@ export type ModalTitleProps<T extends ElementType> = PropsWithoutRef<TitleProps<
 
 type BackdropProps<T extends ElementType> = BaseProps<T, ModalBackdropVariablesType> & {
   /**
-   * fade.
-   */
-  fade?: boolean;
-
-  /**
    * toggle.
    */
   toggle?: boolean;
@@ -52,7 +47,12 @@ type BackdropProps<T extends ElementType> = BaseProps<T, ModalBackdropVariablesT
 
 type BodyProps<T extends ElementType> = BaseProps<T, ModalBodyVariablesType> & {};
 
-type ContentProps<T extends ElementType> = BaseProps<T, ModalContentVariablesType> & {};
+type ContentProps<T extends ElementType> = BaseProps<T, ModalContentVariablesType> & {
+  /**
+   * onRef.
+   */
+  onRef?: RefCallback<ComponentRef<T>>;
+};
 
 type DialogProps<T extends ElementType> = BaseProps<T, ModalDialogVariablesType> & {
   /**
@@ -81,6 +81,11 @@ type FooterProps<T extends ElementType> = BaseProps<T, ModalFooterVariablesType>
 type HeaderProps<T extends ElementType> = BaseProps<T, ModalHeaderVariablesType> & {};
 
 type Props<T extends ElementType> = BaseProps<T, ModalVariablesType> & {
+  /**
+   * backdrop.
+   */
+  backdrop?: boolean;
+
   /**
    * backdropProps.
    */
@@ -115,11 +120,6 @@ type Props<T extends ElementType> = BaseProps<T, ModalVariablesType> & {
    * dialogProps.
    */
   dialogProps?: ModalDialogProps<ElementType>;
-
-  /**
-   * fade.
-   */
-  fade?: boolean;
 
   /**
    * footer.

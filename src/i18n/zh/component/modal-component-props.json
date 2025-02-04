@@ -7,6 +7,7 @@
       "title": "标题",
       "body": "主体",
       "fade": "渐隐效果",
+      "backdrop": "背景",
       "visible": "可见",
       "container": "容器",
       "static": "静态",

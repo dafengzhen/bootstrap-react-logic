@@ -994,15 +994,15 @@ const capitalizeFirstLetter = (str: string) => {
  *                            a number or a string with the specified unit.
  */
 const getScrollbarWidth = (unit?: string): number | string => {
-  let width = window.innerWidth - document.body.clientWidth + '';
+  let width = window.innerWidth - document.body.clientWidth;
 
-  if (width === '0') {
+  if (width === 0) {
     const lastScrollbarWidth = document.body.dataset.lastScrollbarWidth;
     if (lastScrollbarWidth) {
-      width = lastScrollbarWidth;
+      width = parseInt(lastScrollbarWidth);
     }
   } else {
-    document.body.dataset.lastScrollbarWidth = width;
+    document.body.dataset.lastScrollbarWidth = width + '';
   }
 
   return unit ? width + unit : width;

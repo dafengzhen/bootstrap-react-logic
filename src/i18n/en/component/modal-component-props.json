@@ -7,6 +7,7 @@
       "title": "Title",
       "body": "Body",
       "fade": "Fade",
+      "backdrop": "Backdrop",
       "visible": "Visible",
       "container": "Container",
       "static": "Static",

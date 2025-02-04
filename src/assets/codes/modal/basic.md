@@ -1,20 +1,22 @@
 ```jsx
 <Modal
-  container="#custom-container"
-  tabIndex={-1}
-  className="position-static d-block z-0"
-  title="Modal title"
-  header={<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>}
+  backdrop={false}
   body={<p>Modal body text goes here.</p>}
+  className="position-static z-0"
+  container="#custom-container"
   footer={
     <>
-      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+      <button className="btn btn-secondary" data-bs-dismiss="modal" type="button">
         Close
       </button>
-      <button type="button" className="btn btn-primary">
+      <button className="btn btn-primary" type="button">
         Save changes
       </button>
     </>
   }
+  header={<button aria-label="Close" className="btn-close" data-bs-dismiss="modal" type="button"></button>}
+  tabIndex={-1}
+  title="Modal title"
+  visible
 />
 ```

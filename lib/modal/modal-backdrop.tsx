@@ -1,4 +1,4 @@
-import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
+import { type ElementType, useEffect, useMemo, useState } from 'react';
 
 import type { ModalBackdropProps } from './types.ts';
 
@@ -9,17 +9,15 @@ const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(prop
     as: Component = 'div' as ElementType,
     className,
     dropOldClass,
-    fade,
     style,
     toggle,
     variables,
-    visible: visibleByDefault,
+    visible: visibleByDefault = false,
     ...rest
   } = props;
 
+  const [fade] = useState(true);
   const [show, setShow] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const element = useRef<HTMLDivElement | null>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(!dropOldClass && 'modal-backdrop', fade && 'fade', show && 'show', className);
@@ -32,48 +30,37 @@ const ModalBackdrop = function ModalBackdrop<T extends ElementType = 'div'>(prop
   }, [className, dropOldClass, fade, show, style, variables]);
 
   useEffect(() => {
-    if (visibleByDefault && !visible) {
-      setVisible(true);
-      return;
-    }
-
-    const currentElement = element.current;
-    if (!currentElement) {
-      return;
-    }
-
-    const onTransitionend = () => {
-      if (!visibleByDefault) {
-        if (!toggle) {
-          document.body.classList.remove('overflow-hidden');
-          document.body.style.removeProperty('padding-right');
-        }
-
-        setVisible(false);
-      }
-    };
-
-    currentElement.addEventListener('transitionend', onTransitionend);
-
-    let frame: number;
     if (visibleByDefault) {
       document.body.style.setProperty('padding-right', getScrollbarWidth('px') as string);
       document.body.classList.add('overflow-hidden');
-      frame = requestAnimationFrame(() => setShow(true));
-    } else {
-      setShow(false);
     }
 
-    return () => {
-      currentElement.removeEventListener('transitionend', onTransitionend);
+    setShow(visibleByDefault);
 
-      if (frame) {
-        cancelAnimationFrame(frame);
+    return () => {
+      if (!toggle) {
+        document.body.classList.remove('overflow-hidden');
+        document.body.style.removeProperty('padding-right');
       }
     };
-  }, [toggle, visible, visibleByDefault]);
+  }, [toggle, visibleByDefault]);
 
-  return visible && <Component {...rest} {...renderOptions} ref={element} />;
+  return (
+    <Component
+      {...rest}
+      {...renderOptions}
+      onTransitionEnd={() => {
+        if (!visibleByDefault) {
+          if (!toggle) {
+            document.body.classList.remove('overflow-hidden');
+            document.body.style.removeProperty('padding-right');
+          }
+
+          setShow(false);
+        }
+      }}
+    />
+  );
 };
 
 ModalBackdrop.displayName = 'BRL.ModalBackdrop';

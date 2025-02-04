@@ -1,3 +1,5 @@
+import type { MouseEvent } from 'react';
+
 import { type ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -15,6 +17,7 @@ import ModalTitle from './modal-title.tsx';
 const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>) {
   const {
     as: Component = 'div' as ElementType,
+    backdrop: backdropByDefault = true,
     backdropProps,
     body,
     bodyProps,
@@ -24,7 +27,6 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
     contentProps,
     dialogProps,
     dropOldClass,
-    fade = true,
     footer,
     footerProps,
     fullscreen,
@@ -43,23 +45,18 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
     ...rest
   } = props;
 
-  const [block, setBlock] = useState(false);
+  const [fade] = useState(true);
   const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [modalStatic, setModalStatic] = useState(false);
-  const [visibleModal, setVisibleModal] = useState(visibleByDefault);
-  const [visibleModalBackdrop, setVisibleModalBackdrop] = useState(visibleByDefault);
-  const [mouseEnterModalContent, setMouseEnterModalContent] = useState(false);
-  const [container, setContainer] = useState<HTMLElement | null | undefined>(
-    typeof containerByDefault !== 'string' ? containerByDefault : null,
-  );
-  const element = useRef<HTMLDivElement | null>(null);
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+  const modalContentElement = useRef<HTMLDivElement>(null);
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(
-      !dropOldClass && 'modal',
+      !dropOldClass && 'modal d-block',
       fade && !container && 'fade',
       show && 'show',
-      block && 'd-block',
       modalStatic && 'modal-static',
       className,
     );
@@ -69,71 +66,46 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
       className: finalClass,
       style: finalStyle,
     };
-  }, [block, className, container, dropOldClass, fade, modalStatic, show, style, variables]);
+  }, [className, container, dropOldClass, fade, modalStatic, show, style, variables]);
 
-  const onClickModal = useCallback(() => {
-    if (mouseEnterModalContent) {
-      return;
-    }
-
-    if (staticByDefault) {
-      setModalStatic(true);
-      return;
-    }
-
-    setVisibleModal(false);
-    setVisibleModalBackdrop(false);
-    onVisibleChange?.(false);
-  }, [mouseEnterModalContent, onVisibleChange, staticByDefault]);
-  const onMouseEnterModalContent = useCallback(() => {
-    setMouseEnterModalContent(true);
-  }, []);
-  const onMouseLeaveModalContent = useCallback(() => {
-    setMouseEnterModalContent(false);
-  }, []);
-
-  useEffect(() => {
-    if (visibleModal && !block) {
-      setBlock(true);
-      return;
-    }
-
-    const currentElement = element.current;
-    if (!currentElement) {
-      return;
-    }
-
-    const onTransitionend = () => {
-      if (!visibleModal) {
-        setBlock(false);
+  const onClickModal = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      const modalContent = modalContentElement.current;
+      if (modalContent && modalContent.contains(e.target as Node)) {
+        return;
       }
 
       if (staticByDefault) {
-        setModalStatic(false);
+        setModalStatic(true);
+        return;
       }
-    };
 
-    currentElement.addEventListener('transitionend', onTransitionend);
-
-    let frame: number;
-    if (visibleModal) {
-      frame = requestAnimationFrame(() => setShow(true));
-    } else {
       setShow(false);
+      onVisibleChange?.(false);
+    },
+    [onVisibleChange, staticByDefault],
+  );
+
+  const onTransitionEnd = useCallback(() => {
+    if (!visibleByDefault) {
+      setVisible(false);
     }
 
-    return () => {
-      currentElement.removeEventListener('transitionend', onTransitionend);
+    if (staticByDefault) {
+      setModalStatic(false);
+    }
+  }, [staticByDefault, visibleByDefault]);
 
-      if (frame) {
-        cancelAnimationFrame(frame);
-      }
-    };
-  }, [block, staticByDefault, visibleModal]);
   useEffect(() => {
-    setVisibleModal(visibleByDefault);
-    setVisibleModalBackdrop(visibleByDefault);
-  }, [visibleByDefault]);
+    if (visibleByDefault && !visible) {
+      setVisible(true);
+    }
+
+    if (visible) {
+      setShow(visibleByDefault);
+    }
+  }, [visible, visibleByDefault]);
+
   useEffect(() => {
     if (typeof containerByDefault === 'string') {
       const selector: HTMLElement | null = containerByDefault.startsWith('#')
@@ -142,60 +114,57 @@ const Modal = function Modal<T extends ElementType = 'div'>(props: ModalProps<T>
 
       setContainer(selector);
     } else {
-      setContainer(containerByDefault);
+      setContainer(containerByDefault || null);
     }
   }, [containerByDefault]);
 
   return (
-    <>
-      {document !== undefined && (
-        <>
-          {createPortal(
-            <Component {...rest} {...renderOptions} onClick={onClickModal} ref={element}>
-              <ModalDialog
-                {...dialogProps}
-                centered={centered}
-                fullscreen={fullscreen}
-                scrollable={scrollable}
-                size={size}
+    visible && (
+      <>
+        {createPortal(
+          <Component {...rest} {...renderOptions} onClick={onClickModal} onTransitionEnd={onTransitionEnd}>
+            <ModalDialog
+              {...dialogProps}
+              centered={centered}
+              fullscreen={fullscreen}
+              scrollable={scrollable}
+              size={size}
+            >
+              <ModalContent
+                {...contentProps}
+                onRef={(instance: HTMLDivElement | null) => {
+                  modalContentElement.current = instance;
+                }}
               >
-                <ModalContent
-                  {...contentProps}
-                  onMouseEnter={onMouseEnterModalContent}
-                  onMouseLeave={onMouseLeaveModalContent}
-                >
-                  {header ? (
-                    <ModalHeader {...headerProps}>
-                      {title && <ModalTitle {...titleProps}>{title}</ModalTitle>}
-                      {header}
-                    </ModalHeader>
-                  ) : (
-                    <ModalHeader {...headerProps}>
-                      {title && <ModalTitle {...titleProps}>{title}</ModalTitle>}
-                    </ModalHeader>
-                  )}
+                {header ? (
+                  <ModalHeader {...headerProps}>
+                    {title && <ModalTitle {...titleProps}>{title}</ModalTitle>}
+                    {header}
+                  </ModalHeader>
+                ) : (
+                  <ModalHeader {...headerProps}>
+                    {title && <ModalTitle {...titleProps}>{title}</ModalTitle>}
+                  </ModalHeader>
+                )}
 
-                  {body && <ModalBody {...bodyProps}>{body}</ModalBody>}
+                {body && <ModalBody {...bodyProps}>{body}</ModalBody>}
 
-                  {footer && <ModalFooter {...footerProps}>{footer}</ModalFooter>}
-                </ModalContent>
-              </ModalDialog>
-            </Component>,
-            container ? container : document.body,
-          )}
+                {footer && <ModalFooter {...footerProps}>{footer}</ModalFooter>}
+              </ModalContent>
+            </ModalDialog>
+          </Component>,
+          container ? container : document.body,
+        )}
 
-          {createPortal(
-            <ModalBackdrop
-              {...backdropProps}
-              fade={fade}
-              toggle={toggle}
-              visible={visibleModalBackdrop}
-            ></ModalBackdrop>,
-            container ? container : document.body,
-          )}
+        <>
+          {backdropByDefault &&
+            createPortal(
+              <ModalBackdrop {...backdropProps} toggle={toggle} visible={visible} />,
+              container ? container : document.body,
+            )}
         </>
-      )}
-    </>
+      </>
+    )
   );
 };
 

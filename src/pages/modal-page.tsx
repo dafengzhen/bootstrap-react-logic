@@ -99,8 +99,9 @@ export default function ModalPage() {
     <div className="d-flex flex-column gap-3">
       <Example bg contentId="custom-container" hash="basic" state={state} t={tModalPage}>
         <Modal
+          backdrop={false}
           body={<p>Modal body text goes here.</p>}
-          className="position-static d-block z-0"
+          className="position-static z-0"
           container="#custom-container"
           footer={
             <>
@@ -115,6 +116,7 @@ export default function ModalPage() {
           header={<button aria-label="Close" className="btn-close" data-bs-dismiss="modal" type="button"></button>}
           tabIndex={-1}
           title="Modal title"
+          visible
         />
       </Example>
 
@@ -126,7 +128,6 @@ export default function ModalPage() {
         <Modal
           aria-labelledby="exampleModalLabel"
           body
-          fade
           footer={
             <>
               <button className="btn btn-secondary" onClick={onClickVisible} type="button">
@@ -153,7 +154,6 @@ export default function ModalPage() {
         <Modal
           aria-labelledby="exampleModalLabel"
           body
-          fade
           footer={
             <>
               <button className="btn btn-secondary" onClick={onClickVisible2} type="button">
@@ -196,7 +196,6 @@ export default function ModalPage() {
             bodyProps={{
               style: { minHeight: 1500 },
             }}
-            fade
             footer={
               <>
                 <button className="btn btn-secondary" onClick={onClickVisible3} type="button">
@@ -275,7 +274,6 @@ export default function ModalPage() {
                 </div>
               </>
             }
-            fade
             footer={
               <>
                 <button className="btn btn-secondary" onClick={onClickVisible4} type="button">
@@ -306,7 +304,6 @@ export default function ModalPage() {
             aria-labelledby="exampleModalLabel"
             body={<p>This is a vertically centered modal.</p>}
             centered
-            fade
             footer={
               <>
                 <button className="btn btn-secondary" onClick={onClickVisible5} type="button">
@@ -355,7 +352,6 @@ export default function ModalPage() {
               </>
             }
             centered
-            fade
             footer={
               <>
                 <button className="btn btn-secondary" onClick={onClickVisible6} type="button">
@@ -412,7 +408,6 @@ export default function ModalPage() {
               </p>
             </>
           }
-          fade
           footer={
             <>
               <button className="btn btn-secondary" onClick={onClickVisible7} type="button">
@@ -462,7 +457,6 @@ export default function ModalPage() {
               </div>
             </div>
           }
-          fade
           footer={
             <>
               <button className="btn btn-secondary" onClick={onClickVisible8} type="button">
@@ -533,7 +527,6 @@ export default function ModalPage() {
               </div>
             </form>
           }
-          fade
           footer={
             <>
               <button className="btn btn-secondary" onClick={onClickVisible9} type="button">
@@ -565,7 +558,6 @@ export default function ModalPage() {
           aria-labelledby="exampleModalLabel"
           body="Show a second modal and hide this one with the button below."
           centered
-          fade
           footer={
             <button
               className="btn btn-primary"
@@ -604,7 +596,6 @@ export default function ModalPage() {
           aria-labelledby="exampleModalLabel"
           body="Hide this modal and show the first with the button below."
           centered
-          fade
           footer={
             <button
               className="btn btn-primary"
@@ -677,7 +668,6 @@ export default function ModalPage() {
         <Modal
           aria-labelledby="exampleModalLabel"
           body
-          fade
           footer={
             <>
               <button className="btn btn-secondary" onClick={onClickVisible12} type="button">
@@ -772,7 +762,6 @@ export default function ModalPage() {
         <Modal
           aria-labelledby="exampleModalLabel"
           body
-          fade
           footer={
             <button className="btn btn-secondary" onClick={onClickVisible13} type="button">
               Close
@@ -829,9 +818,9 @@ export default function ModalPage() {
             type: <span className="badge text-bg-secondary">ReactNode</span>,
           },
           {
-            attr: 'fade',
+            attr: 'backdrop',
             default: 'true',
-            desc: tModalComponentProps('modal.desc.fade'),
+            desc: tModalComponentProps('modal.desc.backdrop'),
             type: <span className="badge text-bg-secondary">boolean</span>,
           },
           {
