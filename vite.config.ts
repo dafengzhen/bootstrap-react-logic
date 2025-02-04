@@ -35,11 +35,6 @@ export default defineConfig(({ command }) => {
         },
       },
     },
-    css: {
-      modules: {
-        localsConvention: 'camelCase',
-      },
-    },
     define: {
       __APP_PUBLIC_BASE_HREF__: JSON.stringify(href),
       __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),

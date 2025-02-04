@@ -11,7 +11,6 @@ import {
 
 import type { SidebarHeader, SidebarHeaderObject, SidebarOption, SidebarProps } from './types.ts';
 
-import globalStyles from '../bootstrap-react-logic.module.css';
 import { BiChevronRight, classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 import SidebarItem from './sidebar-item.tsx';
 
@@ -64,7 +63,7 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(
-      !dropOldClass && `d-flex flex-column flex-shrink-0 ${globalStyles.brlHFull} ${globalStyles.brlMaxHScreen}`,
+      !dropOldClass && `d-flex flex-column flex-shrink-0 brl-h-full brl-max-h-screen`,
       dark && 'text-bg-dark',
       collapsible ? 'py-3' : !body && 'p-3',
       className,
@@ -148,7 +147,7 @@ const Sidebar = function Sidebar<T extends ElementType = 'div'>(props: SidebarPr
                 null,
                 'nav nav-pills flex-column mb-auto flex-nowrap overflow-y-auto',
                 collapsible && 'text-center',
-                dark ? globalStyles.brlNavToggleDark : globalStyles.brlNavToggle,
+                dark ? 'brl-nav-toggle-dark' : 'brl-nav-toggle',
               )}
               ref={sidebar}
             >

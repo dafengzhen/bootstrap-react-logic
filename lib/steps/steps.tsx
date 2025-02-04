@@ -2,7 +2,6 @@ import { type ElementType, useCallback, useMemo, useState } from 'react';
 
 import type { StepOption, StepsProps } from './types.ts';
 
-import stepsStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 interface IOption extends StepOption {
@@ -110,7 +109,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                         isCurrent,
                         `d-flex align-items-center justify-content-center`,
                       ),
-                      isClickable && stepsStyles.brlCursorPointer,
+                      isClickable && 'brl-cursor-pointer',
                     )}
                     onClick={() => onClick(index)}
                     ref={(instance) => {
@@ -126,13 +125,8 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                   <button
                     className={classxWithOptions(
                       null,
-                      getStatusClassName(
-                        item.status,
-                        isComplete,
-                        isCurrent,
-                        `btn btn-sm rounded-pill ${stepsStyles.brlW8} ${stepsStyles.brlH8}`,
-                      ),
-                      !isClickable && stepsStyles.brlCursorDefaultImp,
+                      getStatusClassName(item.status, isComplete, isCurrent, `btn btn-sm rounded-pill brl-w-8 brl-h-8`),
+                      !isClickable && 'brl-cursor-default-imp',
                     )}
                     onClick={() => onClick(index)}
                     ref={(instance) => {
@@ -152,7 +146,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                     className={classxWithOptions(
                       null,
                       'flex-grow-1 position-relative',
-                      vertical ? `my-2 ${stepsStyles.brlMinH8}` : 'mx-2',
+                      vertical ? `my-2 brl-min-h-8` : 'mx-2',
                     )}
                   >
                     <div
@@ -160,8 +154,8 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                         null,
                         `progress`,
                         vertical
-                          ? `flex-column position-absolute top-0 start-50 translate-middle-x h-100 ${stepsStyles.brlW05}`
-                          : `position-absolute top-50 start-0 w-100 ${stepsStyles.brlH05}`,
+                          ? `flex-column position-absolute top-0 start-50 translate-middle-x h-100 brl-w-05`
+                          : `position-absolute top-50 start-0 w-100 brl-h-05`,
                       )}
                       role="progressbar"
                     >
@@ -216,7 +210,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                             isCurrent,
                             `d-flex align-items-center justify-content-center`,
                           ),
-                          isClickable && stepsStyles.brlCursorPointer,
+                          isClickable && 'brl-cursor-pointer',
                         )}
                         onClick={() => onClick(index)}
                         ref={(instance) => {
@@ -236,9 +230,9 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                             item.status,
                             isComplete,
                             isCurrent,
-                            `btn btn-sm rounded-pill ${stepsStyles.brlW8} ${stepsStyles.brlH8}`,
+                            `btn btn-sm rounded-pill brl-w-8 brl-h-8`,
                           ),
-                          !isClickable && stepsStyles.brlCursorDefaultImp,
+                          !isClickable && 'brl-cursor-default-imp',
                         )}
                         onClick={() => onClick(index)}
                         ref={(instance) => {
@@ -258,7 +252,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                         className={classxWithOptions(
                           null,
                           'flex-grow-1 position-relative',
-                          vertical ? `my-2 ${stepsStyles.brlMinH8}` : 'mx-2',
+                          vertical ? `my-2 brl-min-h-8` : 'mx-2',
                         )}
                       >
                         <div
@@ -266,8 +260,8 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                             null,
                             `progress`,
                             vertical
-                              ? `flex-column position-absolute top-0 start-50 translate-middle-x h-100 ${stepsStyles.brlW05}`
-                              : `position-absolute top-50 start-0 w-100 ${stepsStyles.brlH05}`,
+                              ? `flex-column position-absolute top-0 start-50 translate-middle-x h-100 brl-w-05`
+                              : `position-absolute top-50 start-0 w-100 brl-h-05`,
                           )}
                           role="progressbar"
                         >
@@ -289,7 +283,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                     <div className="ms-2">
                       {item.title && (
                         <div
-                          className={classxWithOptions(null, isClickable && stepsStyles.brlCursorPointer)}
+                          className={classxWithOptions(null, isClickable && 'brl-cursor-pointer')}
                           onClick={() => onClick(index)}
                           style={{
                             lineHeight: `${iconHeight / 16}rem`,
@@ -304,7 +298,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                           className={classxWithOptions(
                             null,
                             getStatusClassName(item.status, isComplete, isCurrent, '', 'text'),
-                            isClickable && stepsStyles.brlCursorDefault,
+                            isClickable && 'brl-cursor-default',
                           )}
                           onClick={() => onClick(index)}
                           style={{ marginLeft: vertical ? 0 : `${iconWidth / 16 + 0.5}rem` }}
@@ -318,7 +312,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
 
                 {!vertical && item.title && (
                   <div
-                    className={classxWithOptions(null, 'ms-2', isClickable && stepsStyles.brlCursorPointer)}
+                    className={classxWithOptions(null, 'ms-2', isClickable && 'brl-cursor-pointer')}
                     onClick={() => onClick(index)}
                   >
                     {item.title}
@@ -330,7 +324,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                     className={classxWithOptions(
                       null,
                       'flex-grow-1 position-relative',
-                      vertical ? `my-2 ${stepsStyles.brlMinH8}` : 'mx-2',
+                      vertical ? `my-2 brl-min-h-8` : 'mx-2',
                     )}
                   >
                     <div
@@ -338,8 +332,8 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                         null,
                         `progress`,
                         vertical
-                          ? `flex-column position-absolute top-0 start-50 translate-middle-x h-100 ${stepsStyles.brlW05}`
-                          : `position-absolute top-50 start-0 w-100 ${stepsStyles.brlH05}`,
+                          ? `flex-column position-absolute top-0 start-50 translate-middle-x h-100 brl-w-05`
+                          : `position-absolute top-50 start-0 w-100 brl-h-05`,
                       )}
                       role="progressbar"
                     >
@@ -362,7 +356,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                   className={classxWithOptions(
                     null,
                     getStatusClassName(item.status, isComplete, isCurrent, '', 'text'),
-                    isClickable && stepsStyles.brlCursorDefault,
+                    isClickable && 'brl-cursor-default',
                   )}
                   onClick={() => onClick(index)}
                   style={{ marginLeft: vertical ? 0 : `${iconWidth / 16 + 0.5}rem` }}
@@ -402,10 +396,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
               <div className="w-100 d-flex justify-content-center position-relative">
                 {index !== 0 && (
                   <div
-                    className={classxWithOptions(
-                      null,
-                      `progress position-absolute top-50 start-0 ${stepsStyles.brlH05}`,
-                    )}
+                    className={classxWithOptions(null, `progress position-absolute top-50 start-0 brl-h-05`)}
                     role="progressbar"
                     style={{ width: `calc(50% - ${iconWidth / 2}px - 0.5rem)` }}
                   >
@@ -431,7 +422,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                         isCurrent,
                         `d-flex align-items-center justify-content-center`,
                       ),
-                      isClickable && stepsStyles.brlCursorPointer,
+                      isClickable && 'brl-cursor-pointer',
                     )}
                     onClick={() => onClick(index)}
                     ref={(instance) => {
@@ -447,13 +438,8 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                   <button
                     className={classxWithOptions(
                       null,
-                      getStatusClassName(
-                        item.status,
-                        isComplete,
-                        isCurrent,
-                        `btn btn-sm rounded-pill ${stepsStyles.brlW8} ${stepsStyles.brlH8}`,
-                      ),
-                      !isClickable && stepsStyles.brlCursorDefaultImp,
+                      getStatusClassName(item.status, isComplete, isCurrent, `btn btn-sm rounded-pill brl-w-8 brl-h-8`),
+                      !isClickable && 'brl-cursor-default-imp',
                     )}
                     onClick={() => onClick(index)}
                     ref={(instance) => {
@@ -470,7 +456,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
 
                 {isNotLast && (
                   <div
-                    className={classxWithOptions(null, `progress position-absolute top-50 w-50 ${stepsStyles.brlH05}`)}
+                    className={classxWithOptions(null, `progress position-absolute top-50 w-50 brl-h-05`)}
                     role="progressbar"
                     style={{ left: `calc(50% + ${iconWidth / 2}px + 0.5rem)` }}
                   >
@@ -492,7 +478,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                   className={classxWithOptions(
                     null,
                     getStatusClassName(item.status, isComplete, isCurrent, '', 'text'),
-                    isClickable && stepsStyles.brlCursorPointer,
+                    isClickable && 'brl-cursor-pointer',
                   )}
                   onClick={() => onClick(index)}
                 >
@@ -505,7 +491,7 @@ const Steps = function Steps<T extends ElementType = 'div'>(props: StepsProps<T>
                   className={classxWithOptions(
                     null,
                     getStatusClassName(item.status, isComplete, isCurrent, '', 'text'),
-                    isClickable && stepsStyles.brlCursorPointer,
+                    isClickable && 'brl-cursor-pointer',
                   )}
                   onClick={() => onClick(index)}
                 >

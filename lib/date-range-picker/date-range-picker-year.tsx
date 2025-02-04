@@ -3,7 +3,6 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { DateRangePickerYearProps } from './types.ts';
 
-import datePickerStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -87,7 +86,7 @@ const DateRangePickerYear = function DatePickerYear<T extends ElementType = 'div
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                datePickerStyles.brlCursorPointer,
+                'brl-cursor-pointer',
               )}
             >
               <BiChevronLeft />
@@ -100,7 +99,7 @@ const DateRangePickerYear = function DatePickerYear<T extends ElementType = 'div
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                datePickerStyles.brlCursorPointer,
+                'brl-cursor-pointer',
               )}
             >
               <BiChevronRight />
@@ -122,7 +121,7 @@ const DateRangePickerYear = function DatePickerYear<T extends ElementType = 'div
                     className={classxWithOptions(
                       null,
                       'position-relative list-group-item list-group-item-action px-0 py-1 rounded border-0',
-                      datePickerStyles.brlCursorPointer,
+                      'brl-cursor-pointer',
                       item.active && 'active',
                     )}
                   >

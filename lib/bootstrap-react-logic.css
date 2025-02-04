@@ -1,5 +1,4 @@
 /* tw */
-@reference "../src/assets/styles/main.css";
 
 @theme {
   --spacing: 0.25rem;
@@ -90,10 +89,6 @@
 
 .brl-max-h-screen {
   @apply max-h-screen;
-}
-
-.brl-pointer-events-auto {
-  @apply pointer-events-auto;
 }
 
 /* brl */

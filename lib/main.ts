@@ -1,6 +1,7 @@
 export * from './accordion';
 export * from './alert';
 export * from './badge';
+export * from './bootstrap-react-logic.css';
 export * from './breadcrumb';
 export * from './button';
 export * from './button-group';

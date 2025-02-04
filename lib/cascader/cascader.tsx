@@ -11,7 +11,6 @@ import { type ElementType, Fragment, type MouseEvent, useCallback, useMemo, useS
 
 import type { CascaderOption, CascaderProps } from './types.ts';
 
-import globalStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 import CascaderItem from './cascader-item.tsx';
 
@@ -219,7 +218,7 @@ const Cascader = function Cascader<T extends ElementType = 'div'>(props: Cascade
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(
-      !dropOldClass && `form-select ${globalStyles.brlMinH38Px}`,
+      !dropOldClass && `form-select brl-min-h-38-px`,
       disabled && 'bg-body-secondary',
       className,
     );
@@ -277,9 +276,9 @@ const Cascader = function Cascader<T extends ElementType = 'div'>(props: Cascade
     <>
       <Component {...rest} {...renderOptions} {...getReferenceProps()} ref={refs.setReference}>
         {placeholder && !text ? (
-          <div className={classxWithOptions(null, 'text-secondary', globalStyles.brlCursorPointer)}>{placeholder}</div>
+          <div className={classxWithOptions(null, 'text-secondary', 'brl-cursor-pointer')}>{placeholder}</div>
         ) : (
-          <div className={classxWithOptions(null, disabled ? 'text-secondary' : globalStyles.brlCursorPointer)}>
+          <div className={classxWithOptions(null, disabled ? 'text-secondary' : 'brl-cursor-pointer')}>
             {text}
             <i className="bi bi-x" onClick={handleClickX} tabIndex={-1}></i>
           </div>
@@ -301,7 +300,7 @@ const Cascader = function Cascader<T extends ElementType = 'div'>(props: Cascade
                 return (
                   <Fragment key={level}>
                     <CascaderItem onClick={handleClick} options={levelOptions} />
-                    {hasActive && <div className={classxWithOptions(null, 'vr', globalStyles.brlVrBorderColor)}></div>}
+                    {hasActive && <div className={classxWithOptions(null, 'vr', 'brl-vr-border-color')}></div>}
                   </Fragment>
                 );
               })}

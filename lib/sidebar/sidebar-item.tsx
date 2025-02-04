@@ -2,7 +2,6 @@ import { type ElementType, type MouseEvent, useCallback, useMemo } from 'react';
 
 import type { SidebarItemProps, SidebarOption } from './types.ts';
 
-import globalStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 const toggleSidebarOptionActiveById = (options: SidebarOption[] = [], id: number | string): SidebarOption[] =>
@@ -94,7 +93,7 @@ const SidebarItem = function SidebarItem<T extends ElementType = 'li'>(props: Si
             null,
             'nav nav-pills flex-column mb-auto flex-nowrap overflow-y-auto',
             collapsible && 'text-center',
-            dark ? globalStyles.brlNavToggleDark : globalStyles.brlNavToggle,
+            dark ? 'brl-nav-toggle-dark' : 'brl-nav-toggle',
           )}
         >
           {childrenByDefault.map((item) => (

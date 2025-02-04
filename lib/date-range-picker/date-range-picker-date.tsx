@@ -3,7 +3,6 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { DateRangePickerDateProps } from './types.ts';
 
-import datePickerStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -87,7 +86,7 @@ const DateRangePickerDate = function DateRangePickerDate<T extends ElementType =
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                datePickerStyles.brlCursorPointer,
+                'brl-cursor-pointer',
               )}
             >
               <BiChevronLeft />
@@ -103,7 +102,7 @@ const DateRangePickerDate = function DateRangePickerDate<T extends ElementType =
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                datePickerStyles.brlCursorPointer,
+                'brl-cursor-pointer',
               )}
             >
               <BiChevronRight />
@@ -133,7 +132,7 @@ const DateRangePickerDate = function DateRangePickerDate<T extends ElementType =
                     className={classxWithOptions(
                       null,
                       'list-group-item list-group-item-action px-0 py-1 rounded',
-                      datePickerStyles.brlCursorPointer,
+                      'brl-cursor-pointer',
                       !item.isCurrentMonth && !item.active && 'text-body-tertiary',
                       item.active && 'active',
                       item.isToday ? 'border-secondary-subtle' : 'border-0',

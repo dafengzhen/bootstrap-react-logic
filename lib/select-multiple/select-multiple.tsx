@@ -11,7 +11,6 @@ import { type ElementType, Fragment, useCallback, useEffect, useMemo, useState }
 
 import type { SelectMultipleOption, SelectMultipleProps } from './types.ts';
 
-import globalStyles from '../bootstrap-react-logic.module.css';
 import {
   classx,
   classxWithOptions,
@@ -124,7 +123,7 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
 
   const renderOptions = useMemo(() => {
     const finalClass = classx(
-      !dropOldClass && `form-select ${globalStyles.brlMinH38Px}`,
+      !dropOldClass && `form-select brl-min-h-38-px`,
       disabled && 'bg-body-secondary',
       className,
     );
@@ -138,14 +137,10 @@ const SelectMultiple = function SelectMultiple<T extends ElementType = 'div'>(pr
   }, [className, disabled, dropOldClass, style, variables]);
 
   const slotClassName = processSlotClasses(noParamContentClasses, {
-    activeOption: classxWithOptions(
-      null,
-      'd-flex align-items-center badge text-bg-secondary',
-      globalStyles.brlCursorDefault,
-    ),
+    activeOption: classxWithOptions(null, 'd-flex align-items-center badge text-bg-secondary', 'brl-cursor-default'),
     bottomDivider: 'dropdown-divider',
-    clearIcon: classxWithOptions(null, 'bi bi-x', globalStyles.brlCursorPointer),
-    countDisplay: classxWithOptions(null, 'align-self-center flex-shrink-0 text-secondary', globalStyles.brlScale75),
+    clearIcon: classxWithOptions(null, 'bi bi-x', 'brl-cursor-pointer'),
+    countDisplay: classxWithOptions(null, 'align-self-center flex-shrink-0 text-secondary', 'brl-scale-75'),
     floatingMenu: 'overflow-y-auto dropdown-menu shadow show',
     header: 'dropdown-header',
     mainContainer: classxWithOptions(

@@ -2,7 +2,6 @@ import { type ElementType, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { ScrollspyProps } from './types.ts';
 
-import scrollspyStyles from '../bootstrap-react-logic.module.css';
 import { classx, convertBsKeyToVar, stylex } from '../tools';
 
 const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: ScrollspyProps<T>) {
@@ -25,7 +24,7 @@ const Scrollspy = function Scrollspy<T extends ElementType = 'div'>(props: Scrol
   const [activeId, setActiveId] = useState<null | string>(null);
 
   const renderOptions = useMemo(() => {
-    const finalClass = classx(!dropOldClass && '', smoothScroll && scrollspyStyles.brlScrollSmooth, className);
+    const finalClass = classx(!dropOldClass && '', smoothScroll && 'brl-scroll-smooth', className);
     const finalStyle = stylex((_, key) => ({ tKey: convertBsKeyToVar(key) }), variables, style);
 
     return {

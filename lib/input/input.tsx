@@ -2,7 +2,6 @@ import { type ElementType, useMemo } from 'react';
 
 import type { InputProps } from './types.ts';
 
-import inputStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, findTruthyClass, processSlotClasses, stylex } from '../tools';
 
 const Input = function Input<T extends ElementType = 'input'>(props: InputProps<T>) {
@@ -69,15 +68,10 @@ const Input = function Input<T extends ElementType = 'input'>(props: InputProps<
 
   if (startContent || endContent) {
     const slotClassName = processSlotClasses(startEndContentClasses, {
-      component: classxWithOptions(
-        null,
-        renderOptions.className,
-        startContent && inputStyles.brlPs9,
-        endContent && inputStyles.brlPe9,
-      ),
+      component: classxWithOptions(null, renderOptions.className, startContent && 'brl-ps-9', endContent && 'brl-pe-9'),
       container: 'd-inline-flex align-items-center position-relative',
-      end: `position-absolute top-50 translate-middle-y ${inputStyles.brlEnd3}`,
-      start: `position-absolute top-50 translate-middle-y ${inputStyles.brlStart3}`,
+      end: `position-absolute top-50 translate-middle-y brl-end-3`,
+      start: `position-absolute top-50 translate-middle-y brl-start-3`,
     });
 
     return (

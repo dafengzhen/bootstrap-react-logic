@@ -3,7 +3,6 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { DateRangePickerWeekProps } from './types.ts';
 
-import datePickerStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -85,7 +84,7 @@ const DateRangePickerWeek = function DatePickerWeek<T extends ElementType = 'div
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                datePickerStyles.brlCursorPointer,
+                'brl-cursor-pointer',
               )}
             >
               <BiChevronLeft />
@@ -101,7 +100,7 @@ const DateRangePickerWeek = function DatePickerWeek<T extends ElementType = 'div
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                datePickerStyles.brlCursorPointer,
+                'brl-cursor-pointer',
               )}
             >
               <BiChevronRight />
@@ -121,7 +120,7 @@ const DateRangePickerWeek = function DatePickerWeek<T extends ElementType = 'div
               className={classxWithOptions(
                 null,
                 'row text-center d-flex list-group-item rounded p-0 border-0',
-                rowIndex === 0 ? 'w-100' : `list-group-item-action ${datePickerStyles.brlCursorPointer}`,
+                rowIndex === 0 ? 'w-100' : `list-group-item-action brl-cursor-pointer`,
                 isActive && 'active',
               )}
               key={rowIndex}

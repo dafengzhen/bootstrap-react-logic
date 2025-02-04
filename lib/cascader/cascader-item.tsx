@@ -2,7 +2,6 @@ import { type ElementType, useMemo } from 'react';
 
 import type { CascaderItemProps } from './types.ts';
 
-import globalStyles from '../bootstrap-react-logic.module.css';
 import { classx, classxWithOptions, convertBsKeyToVar, stylex } from '../tools';
 
 const CascaderItem = function CascaderItem<T extends ElementType = 'ul'>(props: CascaderItemProps<T>) {
@@ -34,7 +33,7 @@ const CascaderItem = function CascaderItem<T extends ElementType = 'ul'>(props: 
           className={classxWithOptions(
             null,
             'list-group-item list-group-item-action rounded',
-            globalStyles.brlCursorPointer,
+            'brl-cursor-pointer',
             item.disabled && 'disabled',
             item.active && 'active',
           )}

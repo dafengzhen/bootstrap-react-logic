@@ -12,7 +12,6 @@ import { type ChangeEvent, type ElementType, useCallback, useEffect, useMemo, us
 
 import type { DateRangePickerProps, DateRangePickerType } from './types.ts';
 
-import datePickerStyles from '../bootstrap-react-logic.module.css';
 import {
   BiCalendar,
   classx,
@@ -387,7 +386,7 @@ const DateRangePicker = function DateRangePicker<T extends ElementType = 'div'>(
     <>
       <Component {...rest} {...renderOptions} {...getReferenceProps()} ref={refs.setReference}>
         <input
-          className={classxWithOptions(null, 'form-control', datePickerStyles.brlPe9)}
+          className={classxWithOptions(null, 'form-control', 'brl-pe-9')}
           disabled={disabled}
           onChange={onInputChange}
           placeholder={placeholder}
@@ -400,8 +399,8 @@ const DateRangePicker = function DateRangePicker<T extends ElementType = 'div'>(
           className={classxWithOptions(
             null,
             'position-absolute top-50 translate-middle-y d-inline-flex',
-            datePickerStyles.brlEnd3,
-            disabled || readOnly ? 'text-secondary' : datePickerStyles.brlCursorPointer,
+            'brl-end-3',
+            disabled || readOnly ? 'text-secondary' : 'brl-cursor-pointer',
           )}
           onClick={onClickIcon}
         >

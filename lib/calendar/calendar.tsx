@@ -3,7 +3,6 @@ import { type ElementType, useCallback, useEffect, useMemo, useState } from 'rea
 
 import type { CalendarDate, CalendarProps } from './types.ts';
 
-import calendarStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronLeft,
   BiChevronRight,
@@ -114,7 +113,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                disabled ? 'disabled' : calendarStyles.brlCursorPointer,
+                disabled ? 'disabled' : 'brl-cursor-pointer',
               )}
             >
               <BiChevronLeft />
@@ -130,7 +129,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
               className={classxWithOptions(
                 null,
                 'user-select-none list-group-item list-group-item-action border-0 px-0 py-1 rounded text-secondary',
-                disabled ? 'disabled' : calendarStyles.brlCursorPointer,
+                disabled ? 'disabled' : 'brl-cursor-pointer',
               )}
             >
               <BiChevronRight />
@@ -160,7 +159,7 @@ const Calendar = function Calendar<T extends ElementType = 'div'>(props: Calenda
                     className={classxWithOptions(
                       null,
                       'list-group-item list-group-item-action px-0 py-1 rounded',
-                      disabled ? 'disabled' : calendarStyles.brlCursorPointer,
+                      disabled ? 'disabled' : 'brl-cursor-pointer',
                       !item.isCurrentMonth && !item.active && 'text-body-tertiary',
                       item.active && 'active',
                       item.isToday

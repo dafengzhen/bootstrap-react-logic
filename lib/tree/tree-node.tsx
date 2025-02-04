@@ -3,7 +3,6 @@ import { type ElementType, useCallback, useMemo } from 'react';
 
 import type { TreeActionHandler, TreeNodeProps, TreeOption } from './types.ts';
 
-import treeStyles from '../bootstrap-react-logic.module.css';
 import {
   BiChevronDown,
   BiChevronRight,
@@ -213,7 +212,7 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
     <Component {...rest} {...renderOptions}>
       <div className="d-inline-flex align-items-center align-middle gap-2 mb-1">
         <div
-          className={classxWithOptions(null, treeStyles.brlCursorPointer, 'user-select-none d-inline-flex')}
+          className={classxWithOptions(null, 'brl-cursor-pointer', 'user-select-none d-inline-flex')}
           onClick={handleToggle}
         >
           {expanded ? <BiChevronDown /> : <BiChevronRight />}
@@ -239,8 +238,8 @@ const TreeNode = function TreeNode<T extends ElementType = 'div'>(props: TreeNod
         <div
           className={classxWithOptions(
             null,
-            selectable ? treeStyles.brlCursorPointer : treeStyles.brlCursorNotAllowed,
-            disabled && `${treeStyles.brlCursorDefault} opacity-50`,
+            selectable ? 'brl-cursor-pointer' : 'brl-cursor-not-allowed',
+            disabled && `brl-cursor-default opacity-50`,
             !useCustomSearch && highlighted && 'px-1 text-bg-warning rounded',
           )}
           onClick={handleSelect}
