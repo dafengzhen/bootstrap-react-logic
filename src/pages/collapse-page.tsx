@@ -1,9 +1,11 @@
+import type { MouseEvent } from 'react';
+
 import About from '@components/about.tsx';
 import Example from '@components/example.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
 import { Collapse } from '@lib/collapse';
 import { transformCodeObj } from '@src/tools';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from 'react-router-dom';
 

@@ -1,9 +1,11 @@
+import type { ListGroupOption } from '@lib/list-group';
+import type { VariantType } from '@lib/tools';
+
 import About from '@components/about.tsx';
 import Example from '@components/example.tsx';
 import OptionRow from '@components/option-row.tsx';
 import PropsIndicator from '@components/props-indicator.tsx';
-import { ListGroup, ListGroupOption } from '@lib/list-group';
-import { VariantType } from '@lib/tools';
+import { ListGroup } from '@lib/list-group';
 import { transformCodeObj } from '@src/tools';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

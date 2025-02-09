@@ -1168,8 +1168,6 @@ type TreeNodeVariablesType = TreeVariablesType;
 
 type TreeVariablesType = object;
 
-type WatermarkVariablesType = object;
-
 type VariantType = {
   danger?: string;
   dark?: string;
@@ -1182,8 +1180,9 @@ type VariantType = {
   warning?: string;
 };
 
+type WatermarkVariablesType = object;
+
 export type {
-  WatermarkVariablesType,
   AccordionBasicVariablesType,
   AccordionBodyVariablesType,
   AccordionHeaderVariablesType,
@@ -1323,4 +1322,5 @@ export type {
   TreeNodeVariablesType,
   TreeVariablesType,
   VariantType,
+  WatermarkVariablesType,
 };

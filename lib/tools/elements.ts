@@ -1,5 +1,5 @@
-import type { ComponentPropsWithoutRef, ComponentPropsWithRef, CSSProperties, ElementType } from 'react';
 import type * as React from 'react';
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef, CSSProperties, ElementType } from 'react';
 
 export type AddPrefixToKeys<T extends object, Prefix extends string> = {
   [K in keyof T as `${Prefix}${Capitalize<K & string>}`]: T[K];
@@ -24,8 +24,8 @@ export type BaseProps<T extends ElementType, V extends object> = {
 
 export type IntrinsicElements = React.JSX.IntrinsicElements;
 
-export type OmittedPropsWithAs<P, T extends ElementType, V extends object, O extends keyof any> = P &
-  (OmittedPropsWithoutRef<P, T, V, O> | OmittedPropsWithRef<P, T, V, O>);
+export type OmittedPropsWithAs<I, T extends ElementType, V extends object, O extends keyof any> = I &
+  (OmittedPropsWithoutRef<I, T, V, O> | OmittedPropsWithRef<I, T, V, O>);
 
 export type OmittedPropsWithoutRef<P, T extends ElementType, V extends object, O extends keyof any> = Omit<
   Omit<ComponentPropsWithoutRef<T>, O>,
