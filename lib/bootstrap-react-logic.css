@@ -1,97 +1,93 @@
-/* tw */
-
-@theme {
+:root,
+:host {
   --spacing: 0.25rem;
-
   --brl-custom-hover-bg: var(--bs-tertiary-bg);
   --brl-custom-hover-bg-dark: #2b3035;
 }
 
 .brl-cursor-pointer {
-  @apply cursor-pointer;
+  cursor: pointer;
 }
 
 .brl-cursor-default {
-  @apply cursor-default;
+  cursor: default;
 }
 
 .brl-cursor-default-imp {
-  @apply !cursor-default;
+  cursor: default !important;
 }
 
 .brl-cursor-not-allowed {
-  @apply cursor-not-allowed;
+  cursor: not-allowed;
 }
 
 .brl-ps-9 {
-  @apply ps-9;
+  padding-inline-start: calc(var(--spacing) * 9);
 }
 
 .brl-pe-9 {
-  @apply pe-9;
+  padding-inline-end: calc(var(--spacing) * 9);
 }
 
 .brl-start-3 {
-  @apply start-3;
+  inset-inline-start: calc(var(--spacing) * 3);
 }
 
 .brl-end-3 {
-  @apply end-3;
+  inset-inline-end: calc(var(--spacing) * 3);
 }
 
 .brl-scroll-smooth {
-  @apply scroll-smooth;
+  scroll-behavior: smooth;
 }
 
 .brl-min-h-38-px {
-  @apply min-h-[38px];
+  min-height: 38px;
 }
 
 .brl-scale-75 {
-  @apply scale-75;
+  scale: 75% 75%;
 }
 
 .brl-w-8 {
-  @apply w-8;
+  width: calc(var(--spacing) * 8);
 }
 
 .brl-h-8 {
-  @apply h-8;
+  height: calc(var(--spacing) * 8);
 }
 
 .brl-w-05 {
-  @apply w-0.5;
+  width: calc(var(--spacing) * 0.5);
 }
 
 .brl-h-05 {
-  @apply h-0.5;
+  height: calc(var(--spacing) * 0.5);
 }
 
 .brl-ml-10 {
-  @apply ml-10;
+  margin-left: calc(var(--spacing) * 10);
 }
 
 .brl-leading-8 {
-  @apply leading-8;
+  line-height: calc(var(--spacing) * 8);
 }
 
 .brl-mb-16 {
-  @apply mb-16;
+  margin-bottom: calc(var(--spacing) * 16);
 }
 
 .brl-min-h-8 {
-  @apply min-h-8;
+  min-height: calc(var(--spacing) * 8);
 }
 
 .brl-h-full {
-  @apply h-full;
+  height: 100%;
 }
 
 .brl-max-h-screen {
-  @apply max-h-screen;
+  max-height: 100vh;
 }
-
-/* brl */
 
 [data-bs-theme='dark'] {
   --brl-custom-hover-bg: var(--bs-tertiary-bg);

@@ -1,6 +1,5 @@
 import type { OutputOptions } from 'rollup';
 
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
@@ -53,7 +52,7 @@ export default defineConfig({
       localsConvention: 'camelCase',
     },
   },
-  plugins: [tailwindcss(), react(), dts({ tsconfigPath: './tsconfig.lib.json' })],
+  plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' })],
   resolve: {
     alias: {
       '@assets': resolve(__dirname, 'lib/assets'),

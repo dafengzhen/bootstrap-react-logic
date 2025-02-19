@@ -1,4 +1,3 @@
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -40,7 +39,6 @@ export default defineConfig(({ command }) => {
       __APP_PUBLIC_BASE_PATH__: JSON.stringify(base),
     },
     plugins: [
-      tailwindcss(),
       react(),
       outputVisualizer &&
         visualizer({
