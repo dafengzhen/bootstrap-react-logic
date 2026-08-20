@@ -1,4 +1,10 @@
-# Bootstrap React Logic
+> **项目状态说明**
+> 
+> 本项目因历史遗留问题较多，且架构难以适配后续更新，目前已**停止维护**
+> 
+> 如果有需要建议迁移至重构的项目 **[react-bootstrap](https://github.com/dafengzhen/react-bootstrap)** 以继续使用
+
+## Bootstrap React Logic
 
 BRL 是一个与 [Bootstrap](https://getbootstrap.com) 集成的 React
 组件库，提供了一系列组件和工具，帮助开发者在 [React](https://react.dev) 应用中构建用户界面，提升开发效率
