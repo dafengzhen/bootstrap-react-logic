@@ -2,7 +2,7 @@
 > 
 > 本项目因历史遗留问题较多，且架构难以适配后续更新，目前已**停止维护**
 > 
-> 如果有需要建议迁移至重构的项目 **[react-bootstrap](https://github.com/dafengzhen/react-bootstrap)** 以继续使用
+> 如果有需要建议迁移至重构的项目 **[@dafengzhen/react-bootstrap](https://github.com/dafengzhen/react-bootstrap)** 以继续使用
 
 ## Bootstrap React Logic
 
