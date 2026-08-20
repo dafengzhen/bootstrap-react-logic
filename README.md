@@ -1,4 +1,10 @@
-# Bootstrap React Logic
+> **Project Status Notice**
+>
+> Due to numerous historical issues and an architecture that is difficult to adapt to future updates, this project is **no longer maintained**.
+>
+> If needed, we recommend migrating to the refactored project **[@dafengzhen/react-bootstrap](https://github.com/dafengzhen/react-bootstrap)** for continued use.
+
+## Bootstrap React Logic
 
 BRL is a React component library integrated with [Bootstrap](https://getbootstrap.com), offering a set of components and
 utilities to help developers build user interfaces in [React](https://react.dev) applications, enhancing development
